@@ -28,7 +28,7 @@ jobs:
                              -scheme PrimePickApp \
                              -sdk iphoneos \
                              -configuration Release \
-                             -archivePath MainApp.xcarchive \
+                             -archivePath PrimePickApp.xcarchive \
                              CODE_SIGNING_ALLOWED=NO
 
       - name: Create ExportOptions.plist
