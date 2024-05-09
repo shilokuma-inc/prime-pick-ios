@@ -18,7 +18,7 @@
 		4F0C82812BC8247500E1480E /* prime-pick-ios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = prime-pick-ios.swift; sourceTree = "<group>"; };
 		4F0C82832BC8247500E1480E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4F0C82852BC8247600E1480E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4F0C82872BC8247600E1480E /* iOS_App_Template.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iOS_App_Template.entitlements; sourceTree = "<group>"; };
+		4F0C82872BC8247600E1480E /* prime-pick-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = prime-pick-ios.entitlements; sourceTree = "<group>"; };
 		4F0C82892BC8247600E1480E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -55,7 +55,7 @@
 				4F0C82812BC8247500E1480E /* prime-pick-ios.swift */,
 				4F0C82832BC8247500E1480E /* ContentView.swift */,
 				4F0C82852BC8247600E1480E /* Assets.xcassets */,
-				4F0C82872BC8247600E1480E /* iOS_App_Template.entitlements */,
+				4F0C82872BC8247600E1480E /* prime-pick-ios.entitlements */,
 				4F0C82882BC8247600E1480E /* Preview Content */,
 			);
 			path = "prime-pick-ios";
@@ -266,7 +266,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "prime-pick-ios/iOS_App_Template.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "prime-pick-ios/prime-pick-ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"prime-pick-ios/Preview Content\"";
@@ -302,7 +302,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "prime-pick-ios/iOS_App_Template.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "prime-pick-ios/prime-pick-ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"prime-pick-ios/Preview Content\"";
