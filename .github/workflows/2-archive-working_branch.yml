@@ -43,7 +43,7 @@ jobs:
       - name: Export IPA
         run: |   
           xcodebuild -exportArchive \
-                     -archivePath MainApp.xcarchive \
+                     -archivePath PrimePickApp.xcarchive \
                      -exportOptionsPlist ExportOptions.plist \
                      -exportPath app.ipa \
                      -allowProvisioningUpdates \
