@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F0C82822BC8247500E1480E /* iOS_App_TemplateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82812BC8247500E1480E /* iOS_App_TemplateApp.swift */; };
+		4F0C82822BC8247500E1480E /* prime-pick-ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82812BC8247500E1480E /* prime-pick-ios.swift */; };
 		4F0C82842BC8247500E1480E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82832BC8247500E1480E /* ContentView.swift */; };
 		4F0C82862BC8247600E1480E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F0C82852BC8247600E1480E /* Assets.xcassets */; };
 		4F0C828A2BC8247600E1480E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F0C82892BC8247600E1480E /* Preview Assets.xcassets */; };
@@ -15,7 +15,7 @@
 
 /* Begin PBXFileReference section */
 		4F0C827E2BC8247500E1480E /* prime-pick-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "prime-pick-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F0C82812BC8247500E1480E /* iOS_App_TemplateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_App_TemplateApp.swift; sourceTree = "<group>"; };
+		4F0C82812BC8247500E1480E /* prime-pick-ios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = prime-pick-ios.swift; sourceTree = "<group>"; };
 		4F0C82832BC8247500E1480E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4F0C82852BC8247600E1480E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F0C82872BC8247600E1480E /* iOS_App_Template.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iOS_App_Template.entitlements; sourceTree = "<group>"; };
@@ -52,7 +52,7 @@
 		4F0C82802BC8247500E1480E /* prime-pick-ios */ = {
 			isa = PBXGroup;
 			children = (
-				4F0C82812BC8247500E1480E /* iOS_App_TemplateApp.swift */,
+				4F0C82812BC8247500E1480E /* prime-pick-ios.swift */,
 				4F0C82832BC8247500E1480E /* ContentView.swift */,
 				4F0C82852BC8247600E1480E /* Assets.xcassets */,
 				4F0C82872BC8247600E1480E /* iOS_App_Template.entitlements */,
@@ -140,7 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F0C82842BC8247500E1480E /* ContentView.swift in Sources */,
-				4F0C82822BC8247500E1480E /* iOS_App_TemplateApp.swift in Sources */,
+				4F0C82822BC8247500E1480E /* prime-pick-ios.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
