@@ -1,2 +1,2 @@
-# iOS-App-Template
+# prime-pick-ios
 iOS Application Template (SwiftUI)
