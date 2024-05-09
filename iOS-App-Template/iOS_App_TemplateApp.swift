@@ -1,6 +1,6 @@
 //
 //  iOS_App_TemplateApp.swift
-//  iOS-App-Template
+//  prime-pick-ios
 //
 //  Created by 村石 拓海 on 2024/04/11.
 //
