@@ -8,7 +8,7 @@ on:
 
 jobs:          
   build:
-    name: Archive | working branch
+    name: Archive | working
     runs-on: macos-latest
 
     steps:
