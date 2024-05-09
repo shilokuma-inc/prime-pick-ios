@@ -24,7 +24,7 @@ jobs:
 
       - name: Archive Project
         run: |                        
-          xcodebuild archive -project prime-pick-ios/PrimePickApp.xcodeproj \
+          xcodebuild archive -project PrimePickApp.xcodeproj \
                              -scheme PrimePickApp \
                              -sdk iphoneos \
                              -configuration Release \
