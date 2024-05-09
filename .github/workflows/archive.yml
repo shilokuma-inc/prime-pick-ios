@@ -1,7 +1,7 @@
 name: PrimePickApp
 
 on:
-  push
+  push:
     branches:
       - '**'
       - '!main'
