@@ -7,18 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F0C82822BC8247500E1480E /* prime-pick-ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82812BC8247500E1480E /* prime-pick-ios.swift */; };
+		4F0C82822BC8247500E1480E /* PrimePickApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82812BC8247500E1480E /* PrimePickApp.swift */; };
 		4F0C82842BC8247500E1480E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82832BC8247500E1480E /* ContentView.swift */; };
 		4F0C82862BC8247600E1480E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F0C82852BC8247600E1480E /* Assets.xcassets */; };
 		4F0C828A2BC8247600E1480E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F0C82892BC8247600E1480E /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4F0C827E2BC8247500E1480E /* prime-pick-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "prime-pick-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F0C82812BC8247500E1480E /* prime-pick-ios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = prime-pick-ios.swift; sourceTree = "<group>"; };
+		4F0C827E2BC8247500E1480E /* PrimePickApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PrimePickApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F0C82812BC8247500E1480E /* PrimePickApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimePickApp.swift; sourceTree = "<group>"; };
 		4F0C82832BC8247500E1480E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4F0C82852BC8247600E1480E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4F0C82872BC8247600E1480E /* prime-pick-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = prime-pick-ios.entitlements; sourceTree = "<group>"; };
+		4F0C82872BC8247600E1480E /* PrimePickApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrimePickApp.entitlements; sourceTree = "<group>"; };
 		4F0C82892BC8247600E1480E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -36,7 +36,7 @@
 		4F0C82752BC8247500E1480E = {
 			isa = PBXGroup;
 			children = (
-				4F0C82802BC8247500E1480E /* prime-pick-ios */,
+				4F0C82802BC8247500E1480E /* PrimePickApp */,
 				4F0C827F2BC8247500E1480E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -44,21 +44,21 @@
 		4F0C827F2BC8247500E1480E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4F0C827E2BC8247500E1480E /* prime-pick-ios.app */,
+				4F0C827E2BC8247500E1480E /* PrimePickApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4F0C82802BC8247500E1480E /* prime-pick-ios */ = {
+		4F0C82802BC8247500E1480E /* PrimePickApp */ = {
 			isa = PBXGroup;
 			children = (
-				4F0C82812BC8247500E1480E /* prime-pick-ios.swift */,
+				4F0C82812BC8247500E1480E /* PrimePickApp.swift */,
 				4F0C82832BC8247500E1480E /* ContentView.swift */,
 				4F0C82852BC8247600E1480E /* Assets.xcassets */,
-				4F0C82872BC8247600E1480E /* prime-pick-ios.entitlements */,
+				4F0C82872BC8247600E1480E /* PrimePickApp.entitlements */,
 				4F0C82882BC8247600E1480E /* Preview Content */,
 			);
-			path = "prime-pick-ios";
+			path = "PrimePickApp";
 			sourceTree = "<group>";
 		};
 		4F0C82882BC8247600E1480E /* Preview Content */ = {
@@ -72,9 +72,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4F0C827D2BC8247500E1480E /* prime-pick-ios */ = {
+		4F0C827D2BC8247500E1480E /* PrimePickApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4F0C828D2BC8247600E1480E /* Build configuration list for PBXNativeTarget "prime-pick-ios" */;
+			buildConfigurationList = 4F0C828D2BC8247600E1480E /* Build configuration list for PBXNativeTarget "PrimePickApp" */;
 			buildPhases = (
 				4F0C827A2BC8247500E1480E /* Sources */,
 				4F0C827B2BC8247500E1480E /* Frameworks */,
@@ -84,9 +84,9 @@
 			);
 			dependencies = (
 			);
-			name = "prime-pick-ios";
-			productName = "prime-pick-ios";
-			productReference = 4F0C827E2BC8247500E1480E /* prime-pick-ios.app */;
+			name = "PrimePickApp";
+			productName = "PrimePickApp";
+			productReference = 4F0C827E2BC8247500E1480E /* PrimePickApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -104,7 +104,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4F0C82792BC8247500E1480E /* Build configuration list for PBXProject "prime-pick-ios" */;
+			buildConfigurationList = 4F0C82792BC8247500E1480E /* Build configuration list for PBXProject "PrimePickApp" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -117,7 +117,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4F0C827D2BC8247500E1480E /* prime-pick-ios */,
+				4F0C827D2BC8247500E1480E /* PrimePickApp */,
 			);
 		};
 /* End PBXProject section */
@@ -140,7 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F0C82842BC8247500E1480E /* ContentView.swift in Sources */,
-				4F0C82822BC8247500E1480E /* prime-pick-ios.swift in Sources */,
+				4F0C82822BC8247500E1480E /* PrimePickApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,10 +266,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "prime-pick-ios/prime-pick-ios.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "PrimePickApp/PrimePickApp.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"prime-pick-ios/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"PrimePickApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -287,7 +287,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "ml.mrs1669.prime-pick-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "ml.mrs1669.PrimePickApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -302,10 +302,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "prime-pick-ios/prime-pick-ios.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "PrimePickApp/PrimePickApp.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"prime-pick-ios/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"PrimePickApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -323,7 +323,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "ml.mrs1669.prime-pick-ios";
+				PRODUCT_BUNDLE_IDENTIFIER = "ml.mrs1669.PrimePickApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -336,7 +336,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4F0C82792BC8247500E1480E /* Build configuration list for PBXProject "prime-pick-ios" */ = {
+		4F0C82792BC8247500E1480E /* Build configuration list for PBXProject "PrimePickApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4F0C828B2BC8247600E1480E /* Debug */,
@@ -345,7 +345,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4F0C828D2BC8247600E1480E /* Build configuration list for PBXNativeTarget "prime-pick-ios" */ = {
+		4F0C828D2BC8247600E1480E /* Build configuration list for PBXNativeTarget "PrimePickApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4F0C828E2BC8247600E1480E /* Debug */,
