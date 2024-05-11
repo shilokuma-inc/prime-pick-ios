@@ -2,7 +2,7 @@ name: PrimePickApp
 
 on:
   push:
-    branches: main
+    # branches: main
 
 jobs:          
   build:
