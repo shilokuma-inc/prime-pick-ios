@@ -20,6 +20,7 @@
 		4F0C82852BC8247600E1480E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F0C82872BC8247600E1480E /* PrimePickApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrimePickApp.entitlements; sourceTree = "<group>"; };
 		4F0C82892BC8247600E1480E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4FC177B82BEEAB2C00447A06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +53,7 @@
 		4F0C82802BC8247500E1480E /* PrimePickApp */ = {
 			isa = PBXGroup;
 			children = (
+				4FC177B82BEEAB2C00447A06 /* Info.plist */,
 				4F0C82812BC8247500E1480E /* PrimePickApp.swift */,
 				4F0C82832BC8247500E1480E /* ContentView.swift */,
 				4F0C82852BC8247600E1480E /* Assets.xcassets */,
@@ -272,6 +274,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PrimePickApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PrimePickApp/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -308,6 +311,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PrimePickApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PrimePickApp/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
