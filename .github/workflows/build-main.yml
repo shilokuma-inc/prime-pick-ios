@@ -1,14 +1,12 @@
-name: iOS starter workflow
+name: PrimePickApp
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: main
 
 jobs:
   build:
-    name: Build and Test default scheme using any available iPhone simulator
+    name: Build | main
     runs-on: macos-latest
 
     steps:
