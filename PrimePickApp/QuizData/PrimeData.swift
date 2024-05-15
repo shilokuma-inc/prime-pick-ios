@@ -8,9 +8,11 @@
 import Foundation
 
 final class PrimeData {
-    func generateOneOrTwoDigitPrimes() -> [Int] {
+    init() {}
+    
+    public func generateOneOrTwoDigitPrimes() -> [Int] {
         var twoDigitPrimes = [Int]()
-        outerLoop: for num in 1..<100 {
+        outerLoop: for num in 3..<100 {
             for i in 2..<num {
                 if num % i == 0 {
                     continue outerLoop

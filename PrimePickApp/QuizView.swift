@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct QuizView: View {
+    let primeData = PrimeData()
+    var primes: [Int]
+    init() {
+        primes = primeData.generateOneOrTwoDigitPrimes()
+    }
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(primes, id: \.self) { prime in
+            Text("\(prime)")
+        }
+        .navigationTitle("Primes")
     }
 }
 
