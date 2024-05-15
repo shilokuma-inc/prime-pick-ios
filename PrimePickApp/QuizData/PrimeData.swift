@@ -22,4 +22,56 @@ final class PrimeData {
         }
         return twoDigitPrimes
     }
+    
+    public func generateThreeDigitPrimes() -> [Int] {
+        var twoDigitPrimes = [Int]()
+        outerLoop: for num in 100..<1000 {
+            for i in 2..<num {
+                if num % i == 0 {
+                    continue outerLoop
+                }
+            }
+            twoDigitPrimes.append(num)
+        }
+        return twoDigitPrimes
+    }
+    
+    public func generateFourDigitPrimes() -> [Int] {
+        var twoDigitPrimes = [Int]()
+        outerLoop: for num in 1000..<10000 {
+            for i in 2..<num {
+                if num % i == 0 {
+                    continue outerLoop
+                }
+            }
+            twoDigitPrimes.append(num)
+        }
+        return twoDigitPrimes
+    }
+    
+    public func generateThreeOrFourDigitPrimes() -> [Int] {
+        var twoDigitPrimes = [Int]()
+        outerLoop: for num in 100..<10000 {
+            for i in 2..<num {
+                if num % i == 0 {
+                    continue outerLoop
+                }
+            }
+            twoDigitPrimes.append(num)
+        }
+        return twoDigitPrimes
+    }
+    
+    public func generateFiveOrSixDigitPrimes() -> [Int] {
+        var twoDigitPrimes = [Int]()
+        outerLoop: for num in 10000..<1000000 {
+            for i in 2..<num {
+                if num % i == 0 {
+                    continue outerLoop
+                }
+            }
+            twoDigitPrimes.append(num)
+        }
+        return twoDigitPrimes
+    }
 }
