@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 Text("PrimePick")
                     .font(.custom("Helvetica Neue", size: 40))
@@ -49,9 +49,7 @@ struct MainView: View {
                 .padding(.horizontal, 50)
                 .padding(.bottom, 10)
                 
-                Button(action: {
-                    // Easyボタンのアクション
-                }) {
+                NavigationLink(destination: QuizView()) {
                     Text("Easy")
                         .padding()
                         .frame(maxWidth: .infinity)
