@@ -35,4 +35,17 @@ final class PrimeData {
         }
         return twoDigitPrimes
     }
+    
+    public func generateFiveOrSixDigitPrimes() -> [Int] {
+        var twoDigitPrimes = [Int]()
+        outerLoop: for num in 10000..<1000000 {
+            for i in 2..<num {
+                if num % i == 0 {
+                    continue outerLoop
+                }
+            }
+            twoDigitPrimes.append(num)
+        }
+        return twoDigitPrimes
+    }
 }
