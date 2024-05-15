@@ -23,9 +23,7 @@ struct MainView: View {
                     .font(.headline)
                     .padding()
                 
-                Button(action: {
-                    // Hardボタンのアクション
-                }) {
+                NavigationLink(destination: QuizView()) {
                     Text("Hard")
                         .padding()
                         .frame(maxWidth: .infinity)
@@ -36,9 +34,7 @@ struct MainView: View {
                 .padding(.horizontal, 50)
                 .padding(.bottom, 10)
                 
-                Button(action: {
-                    // Normalボタンのアクション
-                }) {
+                NavigationLink(destination: QuizView()) {
                     Text("Normal")
                         .padding()
                         .frame(maxWidth: .infinity)
