@@ -14,7 +14,15 @@ struct QuizView: View {
     
     init(difficulty: String) {
         self.difficulty = difficulty
-        primes = primeData.generateOneOrTwoDigitPrimes()
+        if self.difficulty == "Easy" {
+            primes = primeData.generateOneOrTwoDigitPrimes()
+        } else if self.difficulty == "Normal" {
+            primes = primeData.generateThreeDigitPrimes()
+        } else if self.difficulty == "Hard" {
+            primes = primeData.generateFourDigitPrimes()
+        } else {
+            primes = []
+        }
     }
 
     var body: some View {
