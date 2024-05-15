@@ -10,7 +10,10 @@ import SwiftUI
 struct QuizView: View {
     let primeData = PrimeData()
     var primes: [Int]
-    init() {
+    let difficulty: String
+    
+    init(difficulty: String) {
+        self.difficulty = difficulty
         primes = primeData.generateOneOrTwoDigitPrimes()
     }
 
@@ -23,5 +26,5 @@ struct QuizView: View {
 }
 
 #Preview {
-    QuizView()
+    QuizView(difficulty: "Easy")
 }
