@@ -11,7 +11,7 @@ struct QuizView: View {
     let primeData = PrimeData()
     var primes: [Int]
     let difficulty: String
-    var quizData: [PrimeQuizEntity] = []
+    let quizData = QuizData()
     
     init(difficulty: String) {
         self.difficulty = difficulty
@@ -24,11 +24,6 @@ struct QuizView: View {
         } else {
             primes = []
         }
-        for i in 1...10 {
-            let randomInt = Int.random(in: 10...99)
-            let primeQuizEntity = PrimeQuizEntity(quizId: i, number: randomInt, isCorrect: true)
-            quizData.append(primeQuizEntity)
-        }
     }
 
     var body: some View {
@@ -36,7 +31,9 @@ struct QuizView: View {
             Text("\(prime)")
         }
         .navigationTitle("Primes")
-        Text(quizData.description)
+        .onAppear {
+            print(quizData.makeQuizData())
+        }
     }
 }
 
