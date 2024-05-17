@@ -25,6 +25,7 @@ struct QuizNumberView: View {
             
             Text(quizData[quizNumber].number.description)
                 .font(.custom("ArialRoundedMTBold", size: 180))
+                .foregroundStyle(Color.gray)
         }
     }
 }

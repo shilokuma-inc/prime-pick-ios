@@ -28,7 +28,7 @@ struct QuizView: View {
                 quizData: quizData
             )
             .frame(height: UIScreen.main.bounds.height / 3)
-            .foregroundStyle(Color.gray)
+
             HStack {
                 if quizNumber < 9 {
                     Button {
