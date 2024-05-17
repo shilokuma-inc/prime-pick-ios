@@ -13,6 +13,7 @@ struct QuizNumberView: View {
     
     var body: some View {
         Text(quizData[quizNumber].number.description)
+            .font(.custom("ArialRoundedMTBold", size: 180))
     }
 }
 
