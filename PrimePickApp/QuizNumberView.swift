@@ -12,8 +12,12 @@ struct QuizNumberView: View {
     let quizData: [PrimeQuizEntity]
     
     var body: some View {
-        Text(quizData[quizNumber].number.description)
-            .font(.custom("ArialRoundedMTBold", size: 180))
+        ZStack {
+            Color.cyan
+            
+            Text(quizData[quizNumber].number.description)
+                .font(.custom("ArialRoundedMTBold", size: 180))
+        }
     }
 }
 
