@@ -23,10 +23,12 @@ struct QuizView: View {
 
     var body: some View {
         VStack {
-            QuizNumberView()
-                .frame(height: UIScreen.main.bounds.height / 3)
-                .foregroundStyle(Color.gray)
-            Text(quizData[quizNumber].number.description)
+            QuizNumberView(
+                quizNumber: $quizNumber,
+                quizData: quizData
+            )
+            .frame(height: UIScreen.main.bounds.height / 3)
+            .foregroundStyle(Color.gray)
             HStack {
                 if quizNumber < 9 {
                     Button {
