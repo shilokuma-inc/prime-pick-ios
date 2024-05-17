@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F02A57D2BF62F61003DF310 /* PrimeQuizEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02A57C2BF62F61003DF310 /* PrimeQuizEntity.swift */; };
+		4F02A57F2BF63A43003DF310 /* QuizDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02A57E2BF63A43003DF310 /* QuizDataManager.swift */; };
 		4F0C82822BC8247500E1480E /* PrimePickApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82812BC8247500E1480E /* PrimePickApp.swift */; };
 		4F0C82842BC8247500E1480E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82832BC8247500E1480E /* MainView.swift */; };
 		4F0C82862BC8247600E1480E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F0C82852BC8247600E1480E /* Assets.xcassets */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F02A57C2BF62F61003DF310 /* PrimeQuizEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeQuizEntity.swift; sourceTree = "<group>"; };
+		4F02A57E2BF63A43003DF310 /* QuizDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDataManager.swift; sourceTree = "<group>"; };
 		4F0C827E2BC8247500E1480E /* PrimePickApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrimePickApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0C82812BC8247500E1480E /* PrimePickApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimePickApp.swift; sourceTree = "<group>"; };
 		4F0C82832BC8247500E1480E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -81,6 +85,8 @@
 			isa = PBXGroup;
 			children = (
 				4F8BE16B2BF4FFB000D7CF0E /* PrimeData.swift */,
+				4F02A57E2BF63A43003DF310 /* QuizDataManager.swift */,
+				4F02A57C2BF62F61003DF310 /* PrimeQuizEntity.swift */,
 			);
 			path = QuizData;
 			sourceTree = "<group>";
@@ -155,9 +161,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F02A57D2BF62F61003DF310 /* PrimeQuizEntity.swift in Sources */,
 				4F0C82842BC8247500E1480E /* MainView.swift in Sources */,
 				4F8BE16E2BF504BB00D7CF0E /* QuizView.swift in Sources */,
 				4F0C82822BC8247500E1480E /* PrimePickApp.swift in Sources */,
+				4F02A57F2BF63A43003DF310 /* QuizDataManager.swift in Sources */,
 				4F8BE16C2BF4FFB000D7CF0E /* PrimeData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

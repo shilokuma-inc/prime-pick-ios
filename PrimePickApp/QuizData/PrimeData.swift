@@ -11,7 +11,7 @@ final class PrimeData {
     init() {}
     
     public func generateOneOrTwoDigitPrimes() -> [Int] {
-        var twoDigitPrimes = [Int]()
+        var twoDigitPrimes: [Int] = [2]
         outerLoop: for num in 3..<100 {
             for i in 2..<num {
                 if num % i == 0 {
