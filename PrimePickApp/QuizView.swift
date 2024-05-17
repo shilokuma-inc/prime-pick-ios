@@ -9,13 +9,12 @@ import SwiftUI
 
 struct QuizView: View {
     @Environment(\.dismiss) private var dismiss
+    @State private var quizNumber: Int = 0
     
     let primeData = PrimeData()
     let difficulty: String
     let manager = QuizDataManager()
     let quizData: [PrimeQuizEntity]
-
-    @State private var quizNumber: Int = 0
     
     init(difficulty: String) {
         self.difficulty = difficulty
@@ -24,6 +23,8 @@ struct QuizView: View {
 
     var body: some View {
         VStack {
+            Color.yellow
+                .frame(height: UIScreen.main.bounds.height / 3)
             Text(quizData[quizNumber].number.description)
             HStack {
                 if quizNumber < 9 {
@@ -52,6 +53,7 @@ struct QuizView: View {
                     Text("終わり")
                 }
             }
+            Spacer()
         }
         .onAppear {
             print(quizData)
