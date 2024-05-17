@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct QuizView: View {
+    @Environment(\.dismiss) private var dismiss
+    
     let primeData = PrimeData()
     var primes: [Int]
     let difficulty: String
     let manager = QuizDataManager()
     let quizData: [PrimeQuizEntity]
 
-    @State private var quizNumber: Int = 1
+    @State private var quizNumber: Int = 0
     
     init(difficulty: String) {
         self.difficulty = difficulty
@@ -32,18 +34,32 @@ struct QuizView: View {
 
     var body: some View {
         VStack {
-            Text(quizData.first?.number.description ?? "nodata")
+            Text(quizData[quizNumber].number.description)
             HStack {
-                Button {
-                    print("正解")
-                } label: {
-                    Text("正解")
-                }
-                
-                Button {
-                    print("不正解")
-                } label: {
-                    Text("不正解")
+                if quizNumber < 9 {
+                    Button {
+                        print("正解")
+                        if quizNumber < 9 {
+                            quizNumber += 1
+                        } else {
+//                            dismiss()
+                        }
+                    } label: {
+                        Text("正解")
+                    }
+                    
+                    Button {
+                        print("不正解")
+                        if quizNumber < 9 {
+                            quizNumber += 1
+                        } else {
+//                            dismiss()
+                        }
+                    } label: {
+                        Text("不正解")
+                    }
+                } else {
+                    Text("終わり")
                 }
             }
         }
