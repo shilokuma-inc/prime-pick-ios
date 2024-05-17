@@ -11,7 +11,6 @@ struct QuizView: View {
     @Environment(\.dismiss) private var dismiss
     
     let primeData = PrimeData()
-    var primes: [Int]
     let difficulty: String
     let manager = QuizDataManager()
     let quizData: [PrimeQuizEntity]
@@ -20,15 +19,6 @@ struct QuizView: View {
     
     init(difficulty: String) {
         self.difficulty = difficulty
-        if self.difficulty == "Easy" {
-            primes = primeData.generateOneOrTwoDigitPrimes()
-        } else if self.difficulty == "Normal" {
-            primes = primeData.generateThreeDigitPrimes()
-        } else if self.difficulty == "Hard" {
-            primes = primeData.generateFourDigitPrimes()
-        } else {
-            primes = []
-        }
         quizData = manager.makeQuizData()
     }
 
