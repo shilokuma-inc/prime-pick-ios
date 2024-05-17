@@ -11,7 +11,10 @@ struct QuizView: View {
     let primeData = PrimeData()
     var primes: [Int]
     let difficulty: String
-    let quizData = QuizData()
+    let manager = QuizDataManager()
+    let quizData: [PrimeQuizEntity]
+
+    @State private var quizNumber: Int = 1
     
     init(difficulty: String) {
         self.difficulty = difficulty
@@ -24,15 +27,28 @@ struct QuizView: View {
         } else {
             primes = []
         }
+        quizData = manager.makeQuizData()
     }
 
     var body: some View {
-        List(primes, id: \.self) { prime in
-            Text("\(prime)")
+        VStack {
+            Text(quizData.first?.number.description ?? "nodata")
+            HStack {
+                Button {
+                    print("正解")
+                } label: {
+                    Text("正解")
+                }
+                
+                Button {
+                    print("不正解")
+                } label: {
+                    Text("不正解")
+                }
+            }
         }
-        .navigationTitle("Primes")
         .onAppear {
-            print(quizData.makeQuizData())
+            print(quizData)
         }
     }
 }
