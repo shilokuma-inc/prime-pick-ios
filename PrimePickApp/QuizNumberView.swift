@@ -13,7 +13,7 @@ struct QuizNumberView: View {
     
     var body: some View {
         ZStack {
-            Color.cyan
+            Color("appGreen")
             
             Text(quizData[quizNumber].number.description)
                 .font(.custom("ArialRoundedMTBold", size: 180))
