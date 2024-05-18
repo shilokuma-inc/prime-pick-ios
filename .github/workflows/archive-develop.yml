@@ -2,11 +2,11 @@ name: Archive
 
 on:
   push:
-    branches: main
+    branches: develop
 
 jobs:          
   build:
-    name: main
+    name: develop
     runs-on: macos-latest
 
     steps:
