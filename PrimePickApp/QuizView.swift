@@ -22,12 +22,15 @@ struct QuizView: View {
     }
 
     var body: some View {
-        VStack {
+        VStack(spacing: .zero) {
             QuizNumberView(
                 quizNumber: $quizNumber,
                 quizData: quizData
             )
             .frame(height: UIScreen.main.bounds.height / 3)
+            
+            QuizTimeLimitVIew()
+                .frame(height: UIScreen.main.bounds.height / 12)
 
             HStack {
                 if quizNumber < 9 {
