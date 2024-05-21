@@ -22,13 +22,13 @@ struct QuizTimeLimitVIew: View {
                 .padding(.horizontal, 20)
             
             ZStack {
-                Text("No Timelimit")
+                Text("No Timelimit!")
                     .font(.largeTitle)
                     .fontWeight(.heavy)
                     .foregroundColor(.black)
                     .offset(x: 2, y: 2)
 
-                Text("No Timelimit")
+                Text("No Timelimit!")
                     .font(.largeTitle)
                     .fontWeight(.heavy)
                     .foregroundColor(.white)
