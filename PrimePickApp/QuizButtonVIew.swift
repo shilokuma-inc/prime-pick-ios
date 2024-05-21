@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct QuizButtonVIew: View {
+    var quizData: [PrimeQuizEntity]
+    @Binding var quizNumber: Int
+
     var body: some View {
-        
         ZStack {
             Color.gray
             
             Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            
+            Text(quizData.first?.number.description ?? "")
         }
     }
-}
-
-#Preview {
-    QuizButtonVIew()
 }
