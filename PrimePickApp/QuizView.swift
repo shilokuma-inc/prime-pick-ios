@@ -59,6 +59,11 @@ struct QuizView: View {
                     Text("終わり")
                 }
             }
+            
+            QuizButtonVIew()
+                .frame(height: UIScreen.main.bounds.height / 3)
+            
+            
             Spacer()
         }
         .onAppear {
