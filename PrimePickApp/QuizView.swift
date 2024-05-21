@@ -33,34 +33,6 @@ struct QuizView: View {
                 .frame(height: UIScreen.main.bounds.height / 12)
             
             Spacer()
-
-            HStack {
-                if quizNumber < 9 {
-                    Button {
-                        print("正解")
-                        if quizNumber < 9 {
-                            quizNumber += 1
-                        } else {
-//                            dismiss()
-                        }
-                    } label: {
-                        Text("正解")
-                    }
-                    
-                    Button {
-                        print("不正解")
-                        if quizNumber < 9 {
-                            quizNumber += 1
-                        } else {
-//                            dismiss()
-                        }
-                    } label: {
-                        Text("不正解")
-                    }
-                } else {
-                    Text("終わり")
-                }
-            }
             
             QuizButtonView(quizData: quizData, quizNumber: $quizNumber)
                 .frame(height: UIScreen.main.bounds.height / 3)
