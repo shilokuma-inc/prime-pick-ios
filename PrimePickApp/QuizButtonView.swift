@@ -1,5 +1,5 @@
 //
-//  QuizButtonVIew.swift
+//  QuizButtonView.swift
 //  PrimePickApp
 //
 //  Created by 村石 拓海 on 2024/05/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct QuizButtonVIew: View {
+struct QuizButtonView: View {
     var quizData: [PrimeQuizEntity]
     @Binding var quizNumber: Int
 
