@@ -37,6 +37,11 @@ struct QuizButtonView: View {
                 }
                 .onTapGesture {
                     print("❌")
+                    if !quizData[quizNumber].isCorrect {
+                        print("正解")
+                    } else {
+                        print("不正解")
+                    }
                     if quizNumber < 9 {
                         if quizNumber < 9 {
                             quizNumber += 1
@@ -58,6 +63,11 @@ struct QuizButtonView: View {
                 }
                 .onTapGesture {
                     print("✅")
+                    if quizData[quizNumber].isCorrect {
+                        print("正解")
+                    } else {
+                        print("不正解")
+                    }
                     if quizNumber < 9 {
                         if quizNumber < 9 {
                             quizNumber += 1
