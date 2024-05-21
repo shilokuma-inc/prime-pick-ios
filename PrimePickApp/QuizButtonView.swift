@@ -25,6 +25,26 @@ struct QuizButtonView: View {
                 
                 Text(quizData[quizNumber].isCorrect.description)
             }
+            
+            HStack {
+                Spacer()
+                
+                RoundedRectangle(cornerRadius: 25)
+                    .stroke(Color.blue, lineWidth: 5)
+                    .background(RoundedRectangle(cornerRadius: 25).fill(Color.white))
+                    .frame(width: UIScreen.main.bounds.width * 2 / 5, height: UIScreen.main.bounds.height / 4)
+                    .shadow(radius: 10)
+                
+                Spacer()
+                
+                RoundedRectangle(cornerRadius: 25)
+                    .stroke(Color.red, lineWidth: 5)
+                    .background(RoundedRectangle(cornerRadius: 25).fill(Color.white))
+                    .frame(width: UIScreen.main.bounds.width * 2 / 5, height: UIScreen.main.bounds.height / 4)
+                    .shadow(radius: 10)
+                
+                Spacer()
+            }
         }
     }
 }
