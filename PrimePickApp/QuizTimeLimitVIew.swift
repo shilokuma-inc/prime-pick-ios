@@ -26,7 +26,25 @@ struct QuizTimeLimitVIew: View {
                     .font(.largeTitle)
                     .fontWeight(.heavy)
                     .foregroundColor(.black)
-                    .offset(x: 2, y: 2)
+                    .offset(x: 1, y: 1)
+                
+                Text("No Timelimit!")
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                    .foregroundColor(.black)
+                    .offset(x: 1, y: -1)
+                
+                Text("No Timelimit!")
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                    .foregroundColor(.black)
+                    .offset(x: -1, y: 1)
+                
+                Text("No Timelimit!")
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                    .foregroundColor(.black)
+                    .offset(x: -1, y: -1)
 
                 Text("No Timelimit!")
                     .font(.largeTitle)
