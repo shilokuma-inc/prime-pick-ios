@@ -31,6 +31,8 @@ struct QuizView: View {
             
             QuizTimeLimitVIew()
                 .frame(height: UIScreen.main.bounds.height / 12)
+            
+            Spacer()
 
             HStack {
                 if quizNumber < 9 {
@@ -62,7 +64,6 @@ struct QuizView: View {
             
             QuizButtonVIew()
                 .frame(height: UIScreen.main.bounds.height / 3)
-            
             
             Spacer()
         }
