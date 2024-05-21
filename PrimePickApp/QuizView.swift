@@ -22,7 +22,7 @@ struct QuizView: View {
     }
 
     var body: some View {
-        VStack {
+        VStack(spacing: .zero) {
             QuizNumberView(
                 quizNumber: $quizNumber,
                 quizData: quizData
