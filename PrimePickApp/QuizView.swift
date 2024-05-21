@@ -28,6 +28,9 @@ struct QuizView: View {
                 quizData: quizData
             )
             .frame(height: UIScreen.main.bounds.height / 3)
+            
+            QuizTimeLimitVIew()
+                .frame(height: UIScreen.main.bounds.height / 12)
 
             HStack {
                 if quizNumber < 9 {
