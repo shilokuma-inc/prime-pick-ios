@@ -25,35 +25,45 @@ struct QuizButtonView: View {
             HStack {
                 Spacer()
                 
-                RoundedRectangle(cornerRadius: 25)
-                    .stroke(Color.pink, lineWidth: 5)
-                    .background(RoundedRectangle(cornerRadius: 25).fill(Color.white))
-                    .frame(width: UIScreen.main.bounds.width * 2 / 5, height: UIScreen.main.bounds.height / 4)
-                    .shadow(radius: 10)
-                    .onTapGesture {
-                        print("❌")
+                ZStack {
+                    RoundedRectangle(cornerRadius: 25)
+                        .stroke(Color.pink, lineWidth: 5)
+                        .background(RoundedRectangle(cornerRadius: 25).fill(Color.white))
+                        .frame(width: UIScreen.main.bounds.width * 2 / 5, height: UIScreen.main.bounds.height / 4)
+                        .shadow(radius: 10)
+                    
+                    Text("❌")
+                        .font(.custom("ArialRoundedMTBold", size: 80))
+                }
+                .onTapGesture {
+                    print("❌")
+                    if quizNumber < 9 {
                         if quizNumber < 9 {
-                            if quizNumber < 9 {
-                                quizNumber += 1
-                            }
+                            quizNumber += 1
                         }
                     }
+                }
                 
                 Spacer()
                 
-                RoundedRectangle(cornerRadius: 25)
-                    .stroke(Color.cyan, lineWidth: 5)
-                    .background(RoundedRectangle(cornerRadius: 25).fill(Color.white))
-                    .frame(width: UIScreen.main.bounds.width * 2 / 5, height: UIScreen.main.bounds.height / 4)
-                    .shadow(radius: 10)
-                    .onTapGesture {
-                        print("✅")
+                ZStack {
+                    RoundedRectangle(cornerRadius: 25)
+                        .stroke(Color.cyan, lineWidth: 5)
+                        .background(RoundedRectangle(cornerRadius: 25).fill(Color.white))
+                        .frame(width: UIScreen.main.bounds.width * 2 / 5, height: UIScreen.main.bounds.height / 4)
+                        .shadow(radius: 10)
+                    
+                    Text("✅")
+                        .font(.custom("ArialRoundedMTBold", size: 80))
+                }
+                .onTapGesture {
+                    print("✅")
+                    if quizNumber < 9 {
                         if quizNumber < 9 {
-                            if quizNumber < 9 {
-                                quizNumber += 1
-                            }
+                            quizNumber += 1
                         }
                     }
+                }
                 
                 Spacer()
             }
