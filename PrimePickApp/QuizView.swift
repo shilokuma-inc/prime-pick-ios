@@ -23,7 +23,7 @@ struct QuizView: View {
 
     var body: some View {
         VStack(spacing: .zero) {
-            QuizIndexView()
+            QuizIndexView(quizNumber: $quizNumber)
                 .frame(height: UIScreen.main.bounds.height / 12)
             
             QuizNumberView(
