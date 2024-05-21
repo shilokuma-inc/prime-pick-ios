@@ -15,9 +15,16 @@ struct QuizButtonView: View {
         ZStack {
             Color.gray
             
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            
-            Text(quizData.first?.number.description ?? "")
+            VStack {
+                
+                Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+                
+                Text(quizData[quizNumber].quizId.description)
+                
+                Text(quizData[quizNumber].number.description)
+                
+                Text(quizData[quizNumber].isCorrect.description)
+            }
         }
     }
 }
