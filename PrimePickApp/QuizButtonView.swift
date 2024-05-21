@@ -36,6 +36,11 @@ struct QuizButtonView: View {
                     .shadow(radius: 10)
                     .onTapGesture {
                         print("❌")
+                        if quizNumber < 9 {
+                            if quizNumber < 9 {
+                                quizNumber += 1
+                            }
+                        }
                     }
                 
                 Spacer()
@@ -47,6 +52,11 @@ struct QuizButtonView: View {
                     .shadow(radius: 10)
                     .onTapGesture {
                         print("✅")
+                        if quizNumber < 9 {
+                            if quizNumber < 9 {
+                                quizNumber += 1
+                            }
+                        }
                     }
                 
                 Spacer()
