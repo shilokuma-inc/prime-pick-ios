@@ -9,7 +9,12 @@ import SwiftUI
 
 struct QuizTimeLimitVIew: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Color.gray
+                .opacity(0.5)
+            
+            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        }
     }
 }
 
