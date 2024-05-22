@@ -22,11 +22,25 @@ class QuizDataManager {
                 randomInt = Int.random(in: 1...99, using: &generator)
                 let primeNumbers = primeData.generateOneOrTwoDigitPrimes()
                 isCorrect = primeNumbers.contains(randomInt)
+            } else if difficulty == "Normal" {
+                randomInt = Int.random(in: 100...999, using: &generator)
+                let primeNumbers = primeData.generateThreeDigitPrimes()
+                isCorrect = primeNumbers.contains(randomInt)
+            } else if difficulty == "Hard" {
+                repeat {
+                    randomInt = Int.random(in: 100...999, using: &generator)
+                } while isMultipleOf235(randomInt)
+                let primeNumbers = primeData.generateThreeDigitPrimes()
+                isCorrect = primeNumbers.contains(randomInt)
             }
             let primeQuizEntity = PrimeQuizEntity(quizId: i, number: randomInt, isCorrect: isCorrect)
             quizData.append(primeQuizEntity)
         }
         return quizData
+    }
+    
+    func isMultipleOf235(_ number: Int) -> Bool {
+        return number % 2 == 0 || number % 3 == 0 || number % 5 == 0
     }
 }
 
