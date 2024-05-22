@@ -12,6 +12,7 @@ struct QuizButtonView: View {
     @State private var correctQuizNumber: Int = 0
     @Binding var quizNumber: Int
     @State private var showAlert = false
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         ZStack {
@@ -80,7 +81,9 @@ struct QuizButtonView: View {
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text("You Score is \(correctQuizNumber) points!"),
-                dismissButton: .default(Text("OK"))
+                dismissButton: .default(Text("OK!")) {
+                    dismiss()
+                }
             )
         }
     }
