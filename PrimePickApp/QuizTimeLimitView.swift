@@ -8,13 +8,24 @@
 import SwiftUI
 
 struct QuizTimeLimitView: View {
+    let difficulty: String
     @State private var progress: Double = 0.01
     
     var body: some View {
         ZStack {
-            Color.appGreen
-                .opacity(0.5)
-                .edgesIgnoringSafeArea(.all)
+            if difficulty == "Easy" {
+                Color.appGreen
+                    .opacity(0.5)
+                    .edgesIgnoringSafeArea(.all)
+            } else if difficulty == "Normal" {
+                Color.blue
+                    .opacity(0.5)
+                    .edgesIgnoringSafeArea(.all)
+            } else if difficulty == "Hard" {
+                Color.red
+                    .opacity(0.5)
+                    .edgesIgnoringSafeArea(.all)
+            }
             
             ProgressView(value: progress)
                 .progressViewStyle(LinearProgressViewStyle(tint: .gray))
@@ -58,5 +69,5 @@ struct QuizTimeLimitView: View {
 }
 
 #Preview {
-    QuizTimeLimitView()
+    QuizTimeLimitView(difficulty: "Easy")
 }

@@ -14,15 +14,37 @@ struct QuizNumberView: View {
     
     var body: some View {
         ZStack {
-            Color("appGreen")
-                .opacity(0.5)
-                .edgesIgnoringSafeArea(.all)
-            
-            RoundedRectangle(cornerRadius: 25)
-                .stroke(Color.green, lineWidth: 5) // 緑色の枠線と角丸
-                .background(RoundedRectangle(cornerRadius: 25).fill(Color.white)) // 背景を白にする
-                .frame(width: 300, height: 200) // フレームサイズを指定
-                .shadow(radius: 10) // シャドウを追加して立体感を出す
+            if difficulty == "Easy" {
+                Color("appGreen")
+                    .opacity(0.5)
+                    .edgesIgnoringSafeArea(.all)
+                
+                RoundedRectangle(cornerRadius: 25)
+                    .stroke(Color.green, lineWidth: 5) // 緑色の枠線と角丸
+                    .background(RoundedRectangle(cornerRadius: 25).fill(Color.white)) // 背景を白にする
+                    .frame(width: 300, height: 200) // フレームサイズを指定
+                    .shadow(radius: 10) // シャドウを追加して立体感を出す
+            } else if difficulty == "Normal" {
+                Color.blue
+                    .opacity(0.5)
+                    .edgesIgnoringSafeArea(.all)
+                
+                RoundedRectangle(cornerRadius: 25)
+                    .stroke(Color.blue, lineWidth: 5) // 緑色の枠線と角丸
+                    .background(RoundedRectangle(cornerRadius: 25).fill(Color.white)) // 背景を白にする
+                    .frame(width: 300, height: 200) // フレームサイズを指定
+                    .shadow(radius: 10) // シャドウを追加して立体感を出す
+            } else if difficulty == "Hard" {
+                Color.red
+                    .opacity(0.5)
+                    .edgesIgnoringSafeArea(.all)
+                
+                RoundedRectangle(cornerRadius: 25)
+                    .stroke(Color.red, lineWidth: 5) // 緑色の枠線と角丸
+                    .background(RoundedRectangle(cornerRadius: 25).fill(Color.white)) // 背景を白にする
+                    .frame(width: 300, height: 200) // フレームサイズを指定
+                    .shadow(radius: 10) // シャドウを追加して立体感を出す
+            }
             
             if difficulty == "Easy" {
                 Text(quizData[quizNumber].number.description)

@@ -27,7 +27,7 @@ struct QuizView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: .zero) {
-                QuizIndexView(quizNumber: $quizNumber)
+                QuizIndexView(difficulty: difficulty, quizNumber: $quizNumber)
                     .frame(height: UIScreen.main.bounds.height / 12)
                 
                 QuizNumberView(
@@ -37,7 +37,7 @@ struct QuizView: View {
                 )
                 .frame(height: UIScreen.main.bounds.height / 3)
                 
-                QuizTimeLimitView()
+                QuizTimeLimitView(difficulty: difficulty)
                     .frame(height: UIScreen.main.bounds.height / 12)
                     .border(Color.appGreen, width: 5.0)
                 
