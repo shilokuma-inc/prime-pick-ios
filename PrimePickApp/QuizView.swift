@@ -22,47 +22,34 @@ struct QuizView: View {
     }
 
     var body: some View {
-        VStack(spacing: .zero) {
-            QuizNumberView(
-                quizNumber: $quizNumber,
-                quizData: quizData
-            )
-            .frame(height: UIScreen.main.bounds.height / 3)
+        ZStack {
+            Color("appBlue")
+                .ignoresSafeArea()
             
-            QuizTimeLimitVIew()
-                .frame(height: UIScreen.main.bounds.height / 12)
-
-            HStack {
-                if quizNumber < 9 {
-                    Button {
-                        print("正解")
-                        if quizNumber < 9 {
-                            quizNumber += 1
-                        } else {
-//                            dismiss()
-                        }
-                    } label: {
-                        Text("正解")
-                    }
-                    
-                    Button {
-                        print("不正解")
-                        if quizNumber < 9 {
-                            quizNumber += 1
-                        } else {
-//                            dismiss()
-                        }
-                    } label: {
-                        Text("不正解")
-                    }
-                } else {
-                    Text("終わり")
-                }
+            VStack(spacing: .zero) {
+                QuizIndexView(quizNumber: $quizNumber)
+                    .frame(height: UIScreen.main.bounds.height / 12)
+                
+                QuizNumberView(
+                    quizNumber: $quizNumber,
+                    quizData: quizData
+                )
+                .frame(height: UIScreen.main.bounds.height / 3)
+                
+                QuizTimeLimitView()
+                    .frame(height: UIScreen.main.bounds.height / 12)
+                    .border(Color.appGreen, width: 5.0)
+                
+                Spacer()
+                
+                QuizButtonView(quizData: quizData, quizNumber: $quizNumber)
+                    .frame(height: UIScreen.main.bounds.height / 3)
+                
+                Spacer()
             }
-            Spacer()
-        }
-        .onAppear {
-            print(quizData)
+            .onAppear {
+                print(quizData)
+            }
         }
     }
 }

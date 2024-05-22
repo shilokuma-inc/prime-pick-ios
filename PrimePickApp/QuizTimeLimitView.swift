@@ -1,5 +1,5 @@
 //
-//  QuizTimeLimitVIew.swift
+//  QuizTimeLimitView.swift
 //  PrimePickApp
 //
 //  Created by 村石 拓海 on 2024/05/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct QuizTimeLimitVIew: View {
+struct QuizTimeLimitView: View {
     @State private var progress: Double = 0.01
     
     var body: some View {
@@ -26,7 +26,25 @@ struct QuizTimeLimitVIew: View {
                     .font(.largeTitle)
                     .fontWeight(.heavy)
                     .foregroundColor(.black)
-                    .offset(x: 2, y: 2)
+                    .offset(x: 1, y: 1)
+                
+                Text("No Timelimit!")
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                    .foregroundColor(.black)
+                    .offset(x: 1, y: -1)
+                
+                Text("No Timelimit!")
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                    .foregroundColor(.black)
+                    .offset(x: -1, y: 1)
+                
+                Text("No Timelimit!")
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                    .foregroundColor(.black)
+                    .offset(x: -1, y: -1)
 
                 Text("No Timelimit!")
                     .font(.largeTitle)
@@ -40,5 +58,5 @@ struct QuizTimeLimitVIew: View {
 }
 
 #Preview {
-    QuizTimeLimitVIew()
+    QuizTimeLimitView()
 }
