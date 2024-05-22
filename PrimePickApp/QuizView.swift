@@ -36,7 +36,7 @@ struct QuizView: View {
                 )
                 .frame(height: UIScreen.main.bounds.height / 3)
                 
-                QuizTimeLimitVIew()
+                QuizTimeLimitView()
                     .frame(height: UIScreen.main.bounds.height / 12)
                     .border(Color.appGreen, width: 5.0)
                 
