@@ -9,7 +9,10 @@ import SwiftUI
 
 struct QuizButtonView: View {
     var quizData: [PrimeQuizEntity]
+    @State private var correctQuizNumber: Int = 0
     @Binding var quizNumber: Int
+    @State private var showAlert = false
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         ZStack {
@@ -30,6 +33,7 @@ struct QuizButtonView: View {
                     print("❌")
                     if !quizData[quizNumber].isCorrect {
                         print("正解")
+                        correctQuizNumber += 1
                     } else {
                         print("不正解")
                     }
@@ -37,6 +41,8 @@ struct QuizButtonView: View {
                         if quizNumber < 9 {
                             quizNumber += 1
                         }
+                    } else {
+                        showAlert = true
                     }
                 }
                 
@@ -56,6 +62,7 @@ struct QuizButtonView: View {
                     print("✅")
                     if quizData[quizNumber].isCorrect {
                         print("正解")
+                        correctQuizNumber += 1
                     } else {
                         print("不正解")
                     }
@@ -63,11 +70,21 @@ struct QuizButtonView: View {
                         if quizNumber < 9 {
                             quizNumber += 1
                         }
+                    } else {
+                        showAlert = true
                     }
                 }
                 
                 Spacer()
             }
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("You Score is \(correctQuizNumber) points!"),
+                dismissButton: .default(Text("OK!")) {
+                    dismiss()
+                }
+            )
         }
     }
 }
