@@ -23,10 +23,6 @@ struct MainView: View {
                     
                     Spacer()
                     
-                    Text("Select Difficulty")
-                        .font(.headline)
-                        .padding()
-                    
                     NavigationLink(destination: LazyView(QuizView(difficulty: "Hard"))) {
                         Text("Hard")
                             .font(.system(size: 24, weight: .bold, design: .rounded))
