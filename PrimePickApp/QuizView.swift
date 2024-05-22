@@ -22,28 +22,33 @@ struct QuizView: View {
     }
 
     var body: some View {
-        VStack(spacing: .zero) {
-            QuizIndexView(quizNumber: $quizNumber)
-                .frame(height: UIScreen.main.bounds.height / 12)
+        ZStack {
+            Color("appBlue")
+                .ignoresSafeArea()
             
-            QuizNumberView(
-                quizNumber: $quizNumber,
-                quizData: quizData
-            )
-            .frame(height: UIScreen.main.bounds.height / 3)
-            
-            QuizTimeLimitVIew()
-                .frame(height: UIScreen.main.bounds.height / 12)
-            
-            Spacer()
-            
-            QuizButtonView(quizData: quizData, quizNumber: $quizNumber)
+            VStack(spacing: .zero) {
+                QuizIndexView(quizNumber: $quizNumber)
+                    .frame(height: UIScreen.main.bounds.height / 12)
+                
+                QuizNumberView(
+                    quizNumber: $quizNumber,
+                    quizData: quizData
+                )
                 .frame(height: UIScreen.main.bounds.height / 3)
-            
-            Spacer()
-        }
-        .onAppear {
-            print(quizData)
+                
+                QuizTimeLimitVIew()
+                    .frame(height: UIScreen.main.bounds.height / 12)
+                
+                Spacer()
+                
+                QuizButtonView(quizData: quizData, quizNumber: $quizNumber)
+                    .frame(height: UIScreen.main.bounds.height / 3)
+                
+                Spacer()
+            }
+            .onAppear {
+                print(quizData)
+            }
         }
     }
 }
