@@ -10,6 +10,7 @@ import SwiftUI
 struct QuizButtonView: View {
     var quizData: [PrimeQuizEntity]
     @Binding var quizNumber: Int
+    @State private var showAlert = false
 
     var body: some View {
         ZStack {
@@ -37,6 +38,8 @@ struct QuizButtonView: View {
                         if quizNumber < 9 {
                             quizNumber += 1
                         }
+                    } else {
+                        showAlert = true
                     }
                 }
                 
@@ -63,11 +66,19 @@ struct QuizButtonView: View {
                         if quizNumber < 9 {
                             quizNumber += 1
                         }
+                    } else {
+                        showAlert = true
                     }
                 }
                 
                 Spacer()
             }
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("アラート"),
+                dismissButton: .default(Text("OK"))
+            )
         }
     }
 }
