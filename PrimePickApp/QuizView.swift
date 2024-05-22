@@ -18,7 +18,7 @@ struct QuizView: View {
     
     init(difficulty: String) {
         self.difficulty = difficulty
-        quizData = manager.makeQuizData()
+        quizData = manager.makeQuizData(difficulty: difficulty)
     }
 
     var body: some View {
@@ -32,6 +32,7 @@ struct QuizView: View {
                 
                 QuizNumberView(
                     quizNumber: $quizNumber,
+                    difficulty: difficulty,
                     quizData: quizData
                 )
                 .frame(height: UIScreen.main.bounds.height / 3)
