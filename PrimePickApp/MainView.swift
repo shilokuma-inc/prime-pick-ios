@@ -27,7 +27,7 @@ struct MainView: View {
                         .font(.headline)
                         .padding()
                     
-                    NavigationLink(destination: QuizView(difficulty: "Hard")) {
+                    NavigationLink(destination: LazyView(QuizView(difficulty: "Hard"))) {
                         Text("Hard")
                             .padding()
                             .frame(maxWidth: .infinity)
@@ -38,7 +38,7 @@ struct MainView: View {
                     .padding(.horizontal, 50)
                     .padding(.bottom, 10)
                     
-                    NavigationLink(destination: QuizView(difficulty: "Normal")) {
+                    NavigationLink(destination: LazyView(QuizView(difficulty: "Normal"))) {
                         Text("Normal")
                             .padding()
                             .frame(maxWidth: .infinity)
@@ -49,7 +49,7 @@ struct MainView: View {
                     .padding(.horizontal, 50)
                     .padding(.bottom, 10)
                     
-                    NavigationLink(destination: QuizView(difficulty: "Easy")) {
+                    NavigationLink(destination: LazyView(QuizView(difficulty: "Easy"))) {
                         Text("Easy")
                             .padding()
                             .frame(maxWidth: .infinity)
@@ -64,6 +64,18 @@ struct MainView: View {
             }
         }
     }
+}
+                                   
+struct LazyView<Content: View>: View {
+   let content: () -> Content
+   
+   init(_ content: @autoclosure @escaping () -> Content) {
+       self.content = content
+   }
+   
+   var body: Content {
+       content()
+   }
 }
 
 #Preview {
