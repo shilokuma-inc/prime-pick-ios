@@ -18,7 +18,7 @@ struct QuizView: View {
     
     init(difficulty: String) {
         self.difficulty = difficulty
-        quizData = manager.makeQuizData()
+        quizData = manager.makeQuizData(difficulty: difficulty)
     }
 
     var body: some View {

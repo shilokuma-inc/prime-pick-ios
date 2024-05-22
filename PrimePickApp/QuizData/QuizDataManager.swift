@@ -9,16 +9,20 @@ import Foundation
 import GameplayKit
 
 class QuizDataManager {
-    func makeQuizData() -> [PrimeQuizEntity] {
+    func makeQuizData(difficulty: String) -> [PrimeQuizEntity] {
         let primeData = PrimeData()
         var quizData: [PrimeQuizEntity] = []
-        let primeNumbers = primeData.generateOneOrTwoDigitPrimes()
         let timestamp = UInt64(Date().timeIntervalSince1970 * 1000)
         var generator = SeededGenerator(seed: timestamp)
 
         for i in 1...10 {
-            let randomInt = Int.random(in: 1...99, using: &generator)
-            let isCorrect = primeNumbers.contains(randomInt)
+            var isCorrect: Bool = false
+            var randomInt: Int = 0
+            if difficulty == "Easy" {
+                randomInt = Int.random(in: 1...99, using: &generator)
+                let primeNumbers = primeData.generateOneOrTwoDigitPrimes()
+                isCorrect = primeNumbers.contains(randomInt)
+            }
             let primeQuizEntity = PrimeQuizEntity(quizId: i, number: randomInt, isCorrect: isCorrect)
             quizData.append(primeQuizEntity)
         }
