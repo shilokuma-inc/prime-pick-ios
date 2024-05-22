@@ -32,6 +32,7 @@ struct QuizView: View {
                 
                 QuizNumberView(
                     quizNumber: $quizNumber,
+                    difficulty: difficulty,
                     quizData: quizData
                 )
                 .frame(height: UIScreen.main.bounds.height / 3)

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct QuizNumberView: View {
     @Binding var quizNumber: Int
+    let difficulty: String
     let quizData: [PrimeQuizEntity]
     
     var body: some View {
@@ -23,9 +24,15 @@ struct QuizNumberView: View {
                 .frame(width: 300, height: 200) // フレームサイズを指定
                 .shadow(radius: 10) // シャドウを追加して立体感を出す
             
-            Text(quizData[quizNumber].number.description)
-                .font(.custom("ArialRoundedMTBold", size: 180))
-                .foregroundStyle(Color.gray)
+            if difficulty == "Easy" {
+                Text(quizData[quizNumber].number.description)
+                    .font(.custom("ArialRoundedMTBold", size: 180))
+                    .foregroundStyle(Color.gray)
+            } else {
+                Text(quizData[quizNumber].number.description)
+                    .font(.custom("ArialRoundedMTBold", size: 120))
+                    .foregroundStyle(Color.gray)
+            }
         }
     }
 }
@@ -34,6 +41,6 @@ struct QuizNumberView_Previews: PreviewProvider {
     @State static var quizNumber = 3
     
     static var previews: some View {
-        QuizNumberView(quizNumber: $quizNumber, quizData: [PrimeQuizEntity(quizId: 0, number: 3, isCorrect: true)])
+        QuizNumberView(quizNumber: $quizNumber, difficulty: "Easy", quizData: [PrimeQuizEntity(quizId: 0, number: 3, isCorrect: true)])
     }
 }
