@@ -9,6 +9,7 @@ import SwiftUI
 
 struct QuizButtonView: View {
     var quizData: [PrimeQuizEntity]
+    @State private var correctQuizNumber: Int = 0
     @Binding var quizNumber: Int
     @State private var showAlert = false
 
@@ -31,6 +32,7 @@ struct QuizButtonView: View {
                     print("❌")
                     if !quizData[quizNumber].isCorrect {
                         print("正解")
+                        correctQuizNumber += 1
                     } else {
                         print("不正解")
                     }
@@ -59,6 +61,7 @@ struct QuizButtonView: View {
                     print("✅")
                     if quizData[quizNumber].isCorrect {
                         print("正解")
+                        correctQuizNumber += 1
                     } else {
                         print("不正解")
                     }
@@ -76,7 +79,7 @@ struct QuizButtonView: View {
         }
         .alert(isPresented: $showAlert) {
             Alert(
-                title: Text("アラート"),
+                title: Text("You Score is \(correctQuizNumber) points!"),
                 dismissButton: .default(Text("OK"))
             )
         }
