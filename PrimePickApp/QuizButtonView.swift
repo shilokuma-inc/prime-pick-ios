@@ -13,15 +13,6 @@ struct QuizButtonView: View {
 
     var body: some View {
         ZStack {
-            VStack {
-                
-                Text(quizData[quizNumber].quizId.description)
-                
-                Text(quizData[quizNumber].number.description)
-                
-                Text(quizData[quizNumber].isCorrect.description)
-            }
-            
             HStack {
                 Spacer()
                 
