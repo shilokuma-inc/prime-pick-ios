@@ -9,6 +9,17 @@ import SwiftUI
 
 struct QuizTimeLimitView: View {
     let difficulty: String
+    var borderColor: Color {
+        switch difficulty {
+        case "Easy":
+            return Color.green // Color.appGreen の代わりに Color.green を使っています
+        case "Normal":
+            return Color.blue
+        default:
+            return Color.red
+        }
+    }
+    
     @State private var progress: Double = 0.01
     
     var body: some View {
@@ -65,6 +76,7 @@ struct QuizTimeLimitView: View {
             .padding()
             
         }
+        .border(borderColor, width: 5.0)
     }
 }
 
