@@ -23,7 +23,7 @@ iOS Application Template (SwiftUI)
           </a>
         </td>
         <td style="border:2px double #000080;text-align:center;">
-          <a href="https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/release-develop.yml">
+          <a href="https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/release-main.yml">
             <img src="https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/release-main.yml/badge.svg" alt="IOSTemplateApp">
           </a>
         </td>
