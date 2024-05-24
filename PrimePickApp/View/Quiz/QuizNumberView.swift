@@ -65,6 +65,10 @@ struct QuizNumberView_Previews: PreviewProvider {
     @State static var quizNumber = 3
     
     static var previews: some View {
-        QuizNumberView(quizNumber: $quizNumber, difficulty: .easy, quizData: [PrimeQuizEntity(quizId: 0, number: 3, isCorrect: true)])
+        QuizNumberView(
+            quizNumber: $quizNumber,
+            difficulty: .easy,
+            quizData: [PrimeQuizEntity(quizId: 0, number: 3, isCorrect: true)]
+        )
     }
 }
