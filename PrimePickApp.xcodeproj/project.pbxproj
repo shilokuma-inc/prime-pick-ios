@@ -82,6 +82,7 @@
 				4FC177B82BEEAB2C00447A06 /* Info.plist */,
 				4F0C82812BC8247500E1480E /* PrimePickApp.swift */,
 				4F0C82832BC8247500E1480E /* MainView.swift */,
+				4FEC65B52C01234C00A8B731 /* View */,
 				4FEC65B02C01164800A8B731 /* SelectDifficultyButtonView.swift */,
 				4F8BE16D2BF504BB00D7CF0E /* QuizView.swift */,
 				4F2239212BFC9DEB004C71A6 /* QuizTimeLimitView.swift */,
@@ -129,6 +130,13 @@
 				4FEC65B32C01184E00A8B731 /* Text+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		4FEC65B52C01234C00A8B731 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

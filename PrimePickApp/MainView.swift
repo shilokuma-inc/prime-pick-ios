@@ -61,22 +61,6 @@ struct LazyView<Content: View>: View {
    }
 }
 
-struct RainbowTextModifier: AnimatableModifier {
-    var hue: Double
-    @State private var value: Bool = false
-
-    var animatableData: Double {
-        get { hue }
-        set { hue = newValue }
-    }
-
-    func body(content: Content) -> some View {
-        content
-            .foregroundColor(Color(hue: hue, saturation: 1, brightness: 1))
-            .animation(Animation.linear(duration: 2).repeatForever(autoreverses: false), value: value)
-    }
-}
-
 #Preview {
     MainView()
 }
