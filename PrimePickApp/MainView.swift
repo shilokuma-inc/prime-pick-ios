@@ -20,32 +20,10 @@ struct MainView: View {
                     Spacer()
                     
                     Text("Prime Pick")
+                        .gamingText()
                         .font(.custom("Helvetica Neue", size: 60))
-                        .foregroundStyle(.black)
                         .fontWeight(.bold)
-                        .offset(x: 2, y: 2)
-                        .foregroundColor(Color.white) // 文字自体を白に設定
-                        .overlay(
-                            LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color.red, Color.orange, Color.yellow, Color.green,
-                                    Color.blue, Color.purple, Color.red
-                                ]),
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                            .mask(
-                                Text("Prime Pick")
-                                    .font(.custom("Helvetica Neue", size: 60))
-                                    .fontWeight(.bold)
-                            )
-                            .hueRotation(Angle(degrees: hue))
-                        )
-                        .onAppear {
-                            withAnimation(Animation.linear(duration: 1).repeatForever(autoreverses: false)) {
-                                hue = 360
-                            }
-                        }
+                    
                     
                     Spacer()
                     
