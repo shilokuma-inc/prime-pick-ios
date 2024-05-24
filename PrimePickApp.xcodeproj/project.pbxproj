@@ -81,7 +81,6 @@
 				4FEC65B22C0117FC00A8B731 /* Extension */,
 				4FEC65B52C01234C00A8B731 /* View */,
 				4F0C82812BC8247500E1480E /* PrimePickApp.swift */,
-				4FEC65B02C01164800A8B731 /* SelectDifficultyButtonView.swift */,
 				4F8BE1682BF4FB8E00D7CF0E /* QuizData */,
 				4F0C82852BC8247600E1480E /* Assets.xcassets */,
 				4F42C7A52BF7756200F92FBB /* ColorAssets.xcassets */,
@@ -130,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				4F0C82832BC8247500E1480E /* MainView.swift */,
+				4FEC65B02C01164800A8B731 /* SelectDifficultyButtonView.swift */,
 				4FEC65B62C01252800A8B731 /* Quiz */,
 			);
 			path = View;
