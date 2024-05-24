@@ -71,6 +71,7 @@
 		4F0C82802BC8247500E1480E /* PrimePickApp */ = {
 			isa = PBXGroup;
 			children = (
+				4F65A3972C0100FD00065A53 /* Enum */,
 				4FC177B82BEEAB2C00447A06 /* Info.plist */,
 				4F0C82812BC8247500E1480E /* PrimePickApp.swift */,
 				4F0C82832BC8247500E1480E /* MainView.swift */,
@@ -94,6 +95,13 @@
 				4F0C82892BC8247600E1480E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4F65A3972C0100FD00065A53 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		4F8BE1682BF4FB8E00D7CF0E /* QuizData */ = {
