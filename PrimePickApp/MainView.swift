@@ -50,7 +50,7 @@ struct MainView: View {
                     Spacer()
                     
                     NavigationLink(destination: LazyView(QuizView(difficulty: .hard))) {
-                        Text("Hard")
+                        Text(Difficulty.hard.rawValue)
                             .font(.system(size: 24, weight: .bold, design: .rounded))
                             .padding()
                             .frame(maxWidth: .infinity)
@@ -71,7 +71,7 @@ struct MainView: View {
                     .padding(.bottom, 10)
                     
                     NavigationLink(destination: LazyView(QuizView(difficulty: .normal))) {
-                        Text("Normal")
+                        Text(Difficulty.normal.rawValue)
                             .font(.system(size: 24, weight: .bold, design: .rounded))
                             .padding()
                             .frame(maxWidth: .infinity)
@@ -92,7 +92,7 @@ struct MainView: View {
                     .padding(.bottom, 10)
                     
                     NavigationLink(destination: LazyView(QuizView(difficulty: .easy))) {
-                        Text("Easy")
+                        Text(Difficulty.easy.rawValue)
                             .font(.system(size: 24, weight: .bold, design: .rounded))
                             .padding()
                             .frame(maxWidth: .infinity)
