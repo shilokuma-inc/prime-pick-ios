@@ -18,6 +18,7 @@
 		4F2239262BFD0873004C71A6 /* QuizIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2239252BFD0873004C71A6 /* QuizIndexView.swift */; };
 		4F42C7A42BF76E7700F92FBB /* QuizNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F42C7A32BF76E7700F92FBB /* QuizNumberView.swift */; };
 		4F42C7A62BF7756200F92FBB /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F42C7A52BF7756200F92FBB /* ColorAssets.xcassets */; };
+		4F65A3992C01019000065A53 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F65A3982C01019000065A53 /* Difficulty.swift */; };
 		4F8BE16C2BF4FFB000D7CF0E /* PrimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8BE16B2BF4FFB000D7CF0E /* PrimeData.swift */; };
 		4F8BE16E2BF504BB00D7CF0E /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8BE16D2BF504BB00D7CF0E /* QuizView.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		4F2239252BFD0873004C71A6 /* QuizIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizIndexView.swift; sourceTree = "<group>"; };
 		4F42C7A32BF76E7700F92FBB /* QuizNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizNumberView.swift; sourceTree = "<group>"; };
 		4F42C7A52BF7756200F92FBB /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
+		4F65A3982C01019000065A53 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
 		4F8BE16B2BF4FFB000D7CF0E /* PrimeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeData.swift; sourceTree = "<group>"; };
 		4F8BE16D2BF504BB00D7CF0E /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		4FC177B82BEEAB2C00447A06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 		4F0C82802BC8247500E1480E /* PrimePickApp */ = {
 			isa = PBXGroup;
 			children = (
+				4F65A3972C0100FD00065A53 /* Enum */,
 				4FC177B82BEEAB2C00447A06 /* Info.plist */,
 				4F0C82812BC8247500E1480E /* PrimePickApp.swift */,
 				4F0C82832BC8247500E1480E /* MainView.swift */,
@@ -94,6 +97,14 @@
 				4F0C82892BC8247600E1480E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4F65A3972C0100FD00065A53 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				4F65A3982C01019000065A53 /* Difficulty.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		4F8BE1682BF4FB8E00D7CF0E /* QuizData */ = {
@@ -181,6 +192,7 @@
 				4F2239242BFCEEF0004C71A6 /* QuizButtonView.swift in Sources */,
 				4F2239262BFD0873004C71A6 /* QuizIndexView.swift in Sources */,
 				4F02A57D2BF62F61003DF310 /* PrimeQuizEntity.swift in Sources */,
+				4F65A3992C01019000065A53 /* Difficulty.swift in Sources */,
 				4F0C82842BC8247500E1480E /* MainView.swift in Sources */,
 				4F8BE16E2BF504BB00D7CF0E /* QuizView.swift in Sources */,
 				4F2239222BFC9DEB004C71A6 /* QuizTimeLimitView.swift in Sources */,

@@ -8,20 +8,21 @@
 import SwiftUI
 
 struct QuizIndexView: View {
-    let difficulty: String
+    let difficulty: Difficulty
     @Binding var quizNumber: Int
     
     var body: some View {
         ZStack(alignment: .leading) {
-            if difficulty == "Easy" {
+            switch difficulty {
+            case .easy:
                 Color("appGreen")
                     .opacity(0.5)
                     .edgesIgnoringSafeArea(.all)
-            } else if difficulty == "Normal" {
+            case .normal:
                 Color.blue
                     .opacity(0.5)
                     .edgesIgnoringSafeArea(.all)
-            } else if difficulty == "Hard" {
+            case .hard:
                 Color.red
                     .opacity(0.5)
                     .edgesIgnoringSafeArea(.all)
