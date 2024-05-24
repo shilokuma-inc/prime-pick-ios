@@ -12,11 +12,11 @@ struct QuizView: View {
     @State private var quizNumber: Int = 0
     
     let primeData = PrimeData()
-    let difficulty: String
+    let difficulty: Difficulty
     let manager = QuizDataManager()
     let quizData: [PrimeQuizEntity]
     
-    init(difficulty: String) {
+    init(difficulty: Difficulty) {
         self.difficulty = difficulty
         quizData = manager.makeQuizData(difficulty: difficulty)
     }
@@ -55,5 +55,5 @@ struct QuizView: View {
 }
 
 #Preview {
-    QuizView(difficulty: "Easy")
+    QuizView(difficulty: .easy)
 }

@@ -9,7 +9,7 @@ import Foundation
 import GameplayKit
 
 class QuizDataManager {
-    func makeQuizData(difficulty: String) -> [PrimeQuizEntity] {
+    func makeQuizData(difficulty: Difficulty) -> [PrimeQuizEntity] {
         let primeData = PrimeData()
         var quizData: [PrimeQuizEntity] = []
         let timestamp = UInt64(Date().timeIntervalSince1970 * 1000)
@@ -18,15 +18,16 @@ class QuizDataManager {
         for i in 1...10 {
             var isCorrect: Bool = false
             var randomInt: Int = 0
-            if difficulty == "Easy" {
+            switch difficulty {
+            case .easy:
                 randomInt = Int.random(in: 1...99, using: &generator)
                 let primeNumbers = primeData.generateOneOrTwoDigitPrimes()
                 isCorrect = primeNumbers.contains(randomInt)
-            } else if difficulty == "Normal" {
+            case .normal:
                 randomInt = Int.random(in: 100...999, using: &generator)
                 let primeNumbers = primeData.generateThreeDigitPrimes()
                 isCorrect = primeNumbers.contains(randomInt)
-            } else if difficulty == "Hard" {
+            case .hard:
                 repeat {
                     randomInt = Int.random(in: 100...999, using: &generator)
                 } while isMultipleOf235(randomInt)

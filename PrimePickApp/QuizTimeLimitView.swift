@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct QuizTimeLimitView: View {
-    let difficulty: String
+    let difficulty: Difficulty
     var borderColor: Color {
         switch difficulty {
-        case "Easy":
-            return Color.green // Color.appGreen の代わりに Color.green を使っています
-        case "Normal":
+        case .easy:
+            return Color.green
+        case .normal:
             return Color.blue
-        default:
+        case .hard:
             return Color.red
         }
     }
@@ -24,15 +24,16 @@ struct QuizTimeLimitView: View {
     
     var body: some View {
         ZStack {
-            if difficulty == "Easy" {
+            switch difficulty {
+            case .easy:
                 Color.appGreen
                     .opacity(0.5)
                     .edgesIgnoringSafeArea(.all)
-            } else if difficulty == "Normal" {
+            case .normal:
                 Color.blue
                     .opacity(0.5)
                     .edgesIgnoringSafeArea(.all)
-            } else if difficulty == "Hard" {
+            case .hard:
                 Color.red
                     .opacity(0.5)
                     .edgesIgnoringSafeArea(.all)
@@ -81,5 +82,5 @@ struct QuizTimeLimitView: View {
 }
 
 #Preview {
-    QuizTimeLimitView(difficulty: "Easy")
+    QuizTimeLimitView(difficulty: .easy)
 }
