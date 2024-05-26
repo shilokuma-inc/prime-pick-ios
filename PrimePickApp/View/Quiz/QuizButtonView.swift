@@ -50,8 +50,8 @@ struct QuizButtonView: View {
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 25)
-                        .stroke(Color.cyan, lineWidth: 5)
-                        .background(RoundedRectangle(cornerRadius: 25).fill(Color.white))
+                        .stroke(Color.quizCorrectButton, lineWidth: 5)
+                        .background(RoundedRectangle(cornerRadius: 25).fill(Color.quizCorrectButton.opacity(0.1)))
                         .frame(width: UIScreen.main.bounds.width * 2 / 5, height: UIScreen.main.bounds.height / 4)
                         .shadow(radius: 10)
                     
