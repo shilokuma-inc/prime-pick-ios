@@ -13,7 +13,7 @@ struct MainView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("appBackground")
+                Color.appBackground
                     .ignoresSafeArea()
                 
                 VStack {
