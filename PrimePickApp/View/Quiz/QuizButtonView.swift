@@ -21,8 +21,8 @@ struct QuizButtonView: View {
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 25)
-                        .stroke(Color.pink, lineWidth: 5)
-                        .background(RoundedRectangle(cornerRadius: 25).fill(Color.white))
+                        .stroke(Color.quizIncorrectButton, lineWidth: 5)
+                        .background(RoundedRectangle(cornerRadius: 25).fill(Color.quizIncorrectButton.opacity(0.1)))
                         .frame(width: UIScreen.main.bounds.width * 2 / 5, height: UIScreen.main.bounds.height / 4)
                         .shadow(radius: 10)
                     
@@ -48,16 +48,7 @@ struct QuizButtonView: View {
                 
                 Spacer()
                 
-                ZStack {
-                    RoundedRectangle(cornerRadius: 25)
-                        .stroke(Color.cyan, lineWidth: 5)
-                        .background(RoundedRectangle(cornerRadius: 25).fill(Color.white))
-                        .frame(width: UIScreen.main.bounds.width * 2 / 5, height: UIScreen.main.bounds.height / 4)
-                        .shadow(radius: 10)
-                    
-                    Text("✅")
-                        .font(.custom("ArialRoundedMTBold", size: 80))
-                }
+                quizButton(option: "Correct")
                 .onTapGesture {
                     print("✅")
                     if quizData[quizNumber].isCorrect {
@@ -85,6 +76,24 @@ struct QuizButtonView: View {
                     dismiss()
                 }
             )
+        }
+    }
+}
+
+private func quizButton(option: String) -> some View {
+    ZStack {
+        RoundedRectangle(cornerRadius: 25)
+            .stroke(option == "Correct" ? Color.quizCorrectButton : Color.quizIncorrectButton, lineWidth: 5)
+            .background(RoundedRectangle(cornerRadius: 25).fill(option == "Correct" ? Color.quizCorrectButton.opacity(0.1) : Color.quizIncorrectButton.opacity(0.1)))
+            .frame(width: UIScreen.main.bounds.width * 2 / 5, height: UIScreen.main.bounds.height / 4)
+            .shadow(radius: 10)
+        
+        if option == "Correct" {
+            Text("✅")
+                .font(.custom("ArialRoundedMTBold", size: 80))
+        } else {
+            Text("❌")
+                .font(.custom("ArialRoundedMTBold", size: 80))
         }
     }
 }

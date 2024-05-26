@@ -23,7 +23,7 @@ struct QuizView: View {
 
     var body: some View {
         ZStack {
-            Color("appBlue")
+            Color.appBackground
                 .ignoresSafeArea()
             
             VStack(spacing: .zero) {
