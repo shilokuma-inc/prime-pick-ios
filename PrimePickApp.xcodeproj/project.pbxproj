@@ -13,10 +13,16 @@
 		4F0C82842BC8247500E1480E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82832BC8247500E1480E /* MainView.swift */; };
 		4F0C82862BC8247600E1480E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F0C82852BC8247600E1480E /* Assets.xcassets */; };
 		4F0C828A2BC8247600E1480E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F0C82892BC8247600E1480E /* Preview Assets.xcassets */; };
+		4F2239222BFC9DEB004C71A6 /* QuizTimeLimitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2239212BFC9DEB004C71A6 /* QuizTimeLimitView.swift */; };
+		4F2239242BFCEEF0004C71A6 /* QuizButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2239232BFCEEF0004C71A6 /* QuizButtonView.swift */; };
+		4F2239262BFD0873004C71A6 /* QuizIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2239252BFD0873004C71A6 /* QuizIndexView.swift */; };
 		4F42C7A42BF76E7700F92FBB /* QuizNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F42C7A32BF76E7700F92FBB /* QuizNumberView.swift */; };
 		4F42C7A62BF7756200F92FBB /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F42C7A52BF7756200F92FBB /* ColorAssets.xcassets */; };
+		4F65A3992C01019000065A53 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F65A3982C01019000065A53 /* Difficulty.swift */; };
 		4F8BE16C2BF4FFB000D7CF0E /* PrimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8BE16B2BF4FFB000D7CF0E /* PrimeData.swift */; };
 		4F8BE16E2BF504BB00D7CF0E /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8BE16D2BF504BB00D7CF0E /* QuizView.swift */; };
+		4FEC65B12C01164800A8B731 /* SelectDifficultyButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEC65B02C01164800A8B731 /* SelectDifficultyButtonView.swift */; };
+		4FEC65B42C01184E00A8B731 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEC65B32C01184E00A8B731 /* Text+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,11 +34,17 @@
 		4F0C82852BC8247600E1480E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F0C82872BC8247600E1480E /* PrimePickApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrimePickApp.entitlements; sourceTree = "<group>"; };
 		4F0C82892BC8247600E1480E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4F2239212BFC9DEB004C71A6 /* QuizTimeLimitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTimeLimitView.swift; sourceTree = "<group>"; };
+		4F2239232BFCEEF0004C71A6 /* QuizButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizButtonView.swift; sourceTree = "<group>"; };
+		4F2239252BFD0873004C71A6 /* QuizIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizIndexView.swift; sourceTree = "<group>"; };
 		4F42C7A32BF76E7700F92FBB /* QuizNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizNumberView.swift; sourceTree = "<group>"; };
 		4F42C7A52BF7756200F92FBB /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
+		4F65A3982C01019000065A53 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
 		4F8BE16B2BF4FFB000D7CF0E /* PrimeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeData.swift; sourceTree = "<group>"; };
 		4F8BE16D2BF504BB00D7CF0E /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		4FC177B82BEEAB2C00447A06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4FEC65B02C01164800A8B731 /* SelectDifficultyButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDifficultyButtonView.swift; sourceTree = "<group>"; };
+		4FEC65B32C01184E00A8B731 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,14 +77,14 @@
 		4F0C82802BC8247500E1480E /* PrimePickApp */ = {
 			isa = PBXGroup;
 			children = (
-				4FC177B82BEEAB2C00447A06 /* Info.plist */,
+				4F65A3972C0100FD00065A53 /* Enum */,
+				4FEC65B22C0117FC00A8B731 /* Extension */,
+				4FEC65B52C01234C00A8B731 /* View */,
 				4F0C82812BC8247500E1480E /* PrimePickApp.swift */,
-				4F0C82832BC8247500E1480E /* MainView.swift */,
-				4F8BE16D2BF504BB00D7CF0E /* QuizView.swift */,
-				4F42C7A32BF76E7700F92FBB /* QuizNumberView.swift */,
 				4F8BE1682BF4FB8E00D7CF0E /* QuizData */,
 				4F0C82852BC8247600E1480E /* Assets.xcassets */,
 				4F42C7A52BF7756200F92FBB /* ColorAssets.xcassets */,
+				4FC177B82BEEAB2C00447A06 /* Info.plist */,
 				4F0C82872BC8247600E1480E /* PrimePickApp.entitlements */,
 				4F0C82882BC8247600E1480E /* Preview Content */,
 			);
@@ -87,6 +99,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		4F65A3972C0100FD00065A53 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				4F65A3982C01019000065A53 /* Difficulty.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		4F8BE1682BF4FB8E00D7CF0E /* QuizData */ = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +115,36 @@
 				4F02A57C2BF62F61003DF310 /* PrimeQuizEntity.swift */,
 			);
 			path = QuizData;
+			sourceTree = "<group>";
+		};
+		4FEC65B22C0117FC00A8B731 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				4FEC65B32C01184E00A8B731 /* Text+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		4FEC65B52C01234C00A8B731 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4F0C82832BC8247500E1480E /* MainView.swift */,
+				4FEC65B02C01164800A8B731 /* SelectDifficultyButtonView.swift */,
+				4FEC65B62C01252800A8B731 /* Quiz */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4FEC65B62C01252800A8B731 /* Quiz */ = {
+			isa = PBXGroup;
+			children = (
+				4F8BE16D2BF504BB00D7CF0E /* QuizView.swift */,
+				4F2239252BFD0873004C71A6 /* QuizIndexView.swift */,
+				4F42C7A32BF76E7700F92FBB /* QuizNumberView.swift */,
+				4F2239212BFC9DEB004C71A6 /* QuizTimeLimitView.swift */,
+				4F2239232BFCEEF0004C71A6 /* QuizButtonView.swift */,
+			);
+			path = Quiz;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,12 +219,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F42C7A42BF76E7700F92FBB /* QuizNumberView.swift in Sources */,
+				4F2239242BFCEEF0004C71A6 /* QuizButtonView.swift in Sources */,
+				4F2239262BFD0873004C71A6 /* QuizIndexView.swift in Sources */,
 				4F02A57D2BF62F61003DF310 /* PrimeQuizEntity.swift in Sources */,
+				4F65A3992C01019000065A53 /* Difficulty.swift in Sources */,
 				4F0C82842BC8247500E1480E /* MainView.swift in Sources */,
+				4FEC65B12C01164800A8B731 /* SelectDifficultyButtonView.swift in Sources */,
 				4F8BE16E2BF504BB00D7CF0E /* QuizView.swift in Sources */,
+				4F2239222BFC9DEB004C71A6 /* QuizTimeLimitView.swift in Sources */,
 				4F0C82822BC8247500E1480E /* PrimePickApp.swift in Sources */,
 				4F02A57F2BF63A43003DF310 /* QuizDataManager.swift in Sources */,
 				4F8BE16C2BF4FFB000D7CF0E /* PrimeData.swift in Sources */,
+				4FEC65B42C01184E00A8B731 /* Text+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +367,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PrimePickApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Prime Pick";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -325,7 +382,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.2;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ml.mrs1669.PrimePickApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -350,6 +407,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PrimePickApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Prime Pick";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -364,7 +422,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.2;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ml.mrs1669.PrimePickApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
