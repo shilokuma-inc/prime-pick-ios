@@ -125,6 +125,9 @@
 			isa = PBXGroup;
 			children = (
 				4F8DC1862C08F56000247F62 /* QuizContentView.swift */,
+				4F2239252BFD0873004C71A6 /* QuizIndexView.swift */,
+				4F42C7A32BF76E7700F92FBB /* QuizNumberView.swift */,
+				4F2239212BFC9DEB004C71A6 /* QuizTimeLimitView.swift */,
 			);
 			path = QuizContent;
 			sourceTree = "<group>";
@@ -152,9 +155,6 @@
 			children = (
 				4F8BE16D2BF504BB00D7CF0E /* QuizView.swift */,
 				4F8DC1852C08F53D00247F62 /* QuizContent */,
-				4F2239252BFD0873004C71A6 /* QuizIndexView.swift */,
-				4F42C7A32BF76E7700F92FBB /* QuizNumberView.swift */,
-				4F2239212BFC9DEB004C71A6 /* QuizTimeLimitView.swift */,
 				4F2239232BFCEEF0004C71A6 /* QuizButtonView.swift */,
 				4F8DC1832C08D66200247F62 /* QuizResultView.swift */,
 			);
