@@ -20,16 +20,7 @@ struct QuizButtonView: View {
             HStack {
                 Spacer()
                 
-                ZStack {
-                    RoundedRectangle(cornerRadius: 25)
-                        .stroke(Color.quizIncorrectButton, lineWidth: 5)
-                        .background(RoundedRectangle(cornerRadius: 25).fill(Color.quizIncorrectButton.opacity(0.1)))
-                        .frame(width: UIScreen.main.bounds.width * 2 / 5, height: UIScreen.main.bounds.height / 4)
-                        .shadow(radius: 10)
-                    
-                    Text("❌")
-                        .font(.custom("ArialRoundedMTBold", size: 80))
-                }
+                quizButton(option: "Incorrect")
                 .onTapGesture {
                     print("❌")
                     if !quizData[quizIndex].isCorrect {
