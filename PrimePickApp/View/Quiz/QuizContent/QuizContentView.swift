@@ -15,15 +15,18 @@ struct QuizContentView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: .zero) {
+                QuizIndexView(difficulty: difficulty, quizNumber: $quizNumber)
+                    .frame(height: geometry.size.height / 6)
+                
                 QuizNumberView(
                     quizNumber: $quizNumber,
                     difficulty: difficulty,
                     quizData: quizData
                 )
-                .frame(height: geometry.size.height * 4 / 5)
+                .frame(height: geometry.size.height * 2 / 3)
                 
                 QuizTimeLimitView(difficulty: difficulty)
-                    .frame(height: geometry.size.height / 5)
+                    .frame(height: geometry.size.height / 6)
             }
         }
     }

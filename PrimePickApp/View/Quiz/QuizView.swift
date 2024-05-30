@@ -30,15 +30,12 @@ struct QuizView: View {
                     .ignoresSafeArea()
 
                 VStack(spacing: .zero) {
-                    QuizIndexView(difficulty: difficulty, quizNumber: $quizNumber)
-                        .frame(height: geometry.size.height / 12)
-                    
                     QuizContentView(
                         quizNumber: $quizNumber,
                         difficulty: difficulty,
                         quizData: quizData
                     )
-                    .frame(height: geometry.size.height * 5 / 12)
+                    .frame(height: geometry.size.height / 2)
                     
                     Spacer()
                     
