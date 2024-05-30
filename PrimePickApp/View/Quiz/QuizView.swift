@@ -42,7 +42,7 @@ struct QuizView: View {
                 
                 Spacer()
                 
-                QuizButtonView(quizData: quizData, quizNumber: $quizNumber)
+                QuizButtonView(quizData: quizData, quizIndex: $quizNumber)
                     .frame(height: UIScreen.main.bounds.height / 3)
                 
                 Spacer()

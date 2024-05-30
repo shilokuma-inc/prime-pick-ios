@@ -10,7 +10,7 @@ import SwiftUI
 struct QuizButtonView: View {
     var quizData: [PrimeQuizEntity]
     @State private var correctQuizNumber: Int = 0
-    @Binding var quizNumber: Int
+    @Binding var quizIndex: Int
     @State private var showAlert = false
     @Environment(\.dismiss) private var dismiss
 
@@ -31,15 +31,15 @@ struct QuizButtonView: View {
                 }
                 .onTapGesture {
                     print("❌")
-                    if !quizData[quizNumber].isCorrect {
+                    if !quizData[quizIndex].isCorrect {
                         print("正解")
                         correctQuizNumber += 1
                     } else {
                         print("不正解")
                     }
-                    if quizNumber < 9 {
-                        if quizNumber < 9 {
-                            quizNumber += 1
+                    if quizIndex < 9 {
+                        if quizIndex < 9 {
+                            quizIndex += 1
                         }
                     } else {
                         showAlert = true
@@ -51,15 +51,15 @@ struct QuizButtonView: View {
                 quizButton(option: "Correct")
                 .onTapGesture {
                     print("✅")
-                    if quizData[quizNumber].isCorrect {
+                    if quizData[quizIndex].isCorrect {
                         print("正解")
                         correctQuizNumber += 1
                     } else {
                         print("不正解")
                     }
-                    if quizNumber < 9 {
-                        if quizNumber < 9 {
-                            quizNumber += 1
+                    if quizIndex < 9 {
+                        if quizIndex < 9 {
+                            quizIndex += 1
                         }
                     } else {
                         showAlert = true
