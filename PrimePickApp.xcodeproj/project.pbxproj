@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4F02A57D2BF62F61003DF310 /* PrimeQuizEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02A57C2BF62F61003DF310 /* PrimeQuizEntity.swift */; };
+		4F02A57D2BF62F61003DF310 /* QuizEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02A57C2BF62F61003DF310 /* QuizEntity.swift */; };
 		4F02A57F2BF63A43003DF310 /* QuizDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02A57E2BF63A43003DF310 /* QuizDataManager.swift */; };
 		4F0C82822BC8247500E1480E /* PrimePickApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82812BC8247500E1480E /* PrimePickApp.swift */; };
 		4F0C82842BC8247500E1480E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82832BC8247500E1480E /* MainView.swift */; };
@@ -27,7 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4F02A57C2BF62F61003DF310 /* PrimeQuizEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimeQuizEntity.swift; sourceTree = "<group>"; };
+		4F02A57C2BF62F61003DF310 /* QuizEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizEntity.swift; sourceTree = "<group>"; };
 		4F02A57E2BF63A43003DF310 /* QuizDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDataManager.swift; sourceTree = "<group>"; };
 		4F0C827E2BC8247500E1480E /* PrimePickApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrimePickApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0C82812BC8247500E1480E /* PrimePickApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimePickApp.swift; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 			children = (
 				4F8BE16B2BF4FFB000D7CF0E /* PrimeData.swift */,
 				4F02A57E2BF63A43003DF310 /* QuizDataManager.swift */,
-				4F02A57C2BF62F61003DF310 /* PrimeQuizEntity.swift */,
+				4F02A57C2BF62F61003DF310 /* QuizEntity.swift */,
 			);
 			path = QuizData;
 			sourceTree = "<group>";
@@ -225,7 +225,7 @@
 				4F2239242BFCEEF0004C71A6 /* QuizButtonView.swift in Sources */,
 				4F8DC1842C08D66200247F62 /* QuizResultView.swift in Sources */,
 				4F2239262BFD0873004C71A6 /* QuizIndexView.swift in Sources */,
-				4F02A57D2BF62F61003DF310 /* PrimeQuizEntity.swift in Sources */,
+				4F02A57D2BF62F61003DF310 /* QuizEntity.swift in Sources */,
 				4F65A3992C01019000065A53 /* Difficulty.swift in Sources */,
 				4F0C82842BC8247500E1480E /* MainView.swift in Sources */,
 				4FEC65B12C01164800A8B731 /* SelectDifficultyButtonView.swift in Sources */,

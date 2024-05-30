@@ -10,7 +10,7 @@ import SwiftUI
 struct QuizNumberView: View {
     @Binding var quizNumber: Int
     let difficulty: Difficulty
-    let quizData: [PrimeQuizEntity]
+    let quizData: [QuizEntity]
     
     var body: some View {
         ZStack {
@@ -68,7 +68,7 @@ struct QuizNumberView_Previews: PreviewProvider {
         QuizNumberView(
             quizNumber: $quizNumber,
             difficulty: .easy,
-            quizData: [PrimeQuizEntity(quizId: 0, number: 3, isCorrect: true)]
+            quizData: [QuizEntity(quizId: 0, number: 3, isCorrect: true)]
         )
     }
 }

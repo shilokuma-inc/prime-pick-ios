@@ -16,7 +16,7 @@ struct QuizView: View {
     let primeData = PrimeData()
     let difficulty: Difficulty
     let manager = QuizDataManager()
-    let quizData: [PrimeQuizEntity]
+    let quizData: [QuizEntity]
     
     init(difficulty: Difficulty) {
         self.difficulty = difficulty
