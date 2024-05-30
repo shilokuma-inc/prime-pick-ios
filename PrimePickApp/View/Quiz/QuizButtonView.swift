@@ -9,7 +9,7 @@ import SwiftUI
 
 struct QuizButtonView: View {
     var quizData: [PrimeQuizEntity]
-    @State private var correctQuizNumber: Int = 0
+    @Binding var correctQuizNumber: Int
     @Binding var quizIndex: Int
     @Binding var isPresentedResult: Bool
     @State private var showAlert = false

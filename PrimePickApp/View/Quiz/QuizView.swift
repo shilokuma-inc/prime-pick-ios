@@ -11,6 +11,7 @@ struct QuizView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var quizNumber: Int = 0
     @State var isPresentedResult: Bool = false
+    @State var resultScore: Int = 0
     
     let primeData = PrimeData()
     let difficulty: Difficulty
@@ -45,6 +46,7 @@ struct QuizView: View {
                 
                 QuizButtonView(
                     quizData: quizData,
+                    correctQuizNumber: $resultScore,
                     quizIndex: $quizNumber,
                     isPresentedResult: $isPresentedResult
                 )
@@ -57,7 +59,7 @@ struct QuizView: View {
             }
             
             if isPresentedResult {
-                QuizResultView(score: 6)
+                QuizResultView(score: resultScore)
             }
         }
     }
