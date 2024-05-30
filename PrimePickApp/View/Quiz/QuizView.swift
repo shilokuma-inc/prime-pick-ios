@@ -40,7 +40,7 @@ struct QuizView: View {
                     )
                     .frame(height: geometry.size.height / 3)
                     
-                    QuizTimeLimitView(difficulty: difficulty)
+                    QuizContentView(difficulty: difficulty)
                         .frame(height: geometry.size.height / 12)
                     
                     Spacer()

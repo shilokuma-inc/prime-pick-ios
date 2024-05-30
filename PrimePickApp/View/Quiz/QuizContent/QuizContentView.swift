@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct QuizContentView: View {
+    let difficulty: Difficulty
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GeometryReader { geometry in
+            VStack(spacing: .zero) {
+                QuizTimeLimitView(difficulty: difficulty)
+                    .frame(height: geometry.size.height)
+            }
+        }
     }
 }
 
 #Preview {
-    QuizContentView()
+    QuizContentView(difficulty: .easy)
 }
