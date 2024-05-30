@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct QuizResultView: View {
+    @Environment(\.dismiss) private var dismiss
     let score: Int
     
     var body: some View {
