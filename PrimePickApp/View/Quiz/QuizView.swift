@@ -33,19 +33,12 @@ struct QuizView: View {
                     QuizIndexView(difficulty: difficulty, quizNumber: $quizNumber)
                         .frame(height: geometry.size.height / 12)
                     
-                    QuizNumberView(
-                        quizNumber: $quizNumber,
-                        difficulty: difficulty,
-                        quizData: quizData
-                    )
-                    .frame(height: geometry.size.height / 3)
-                    
                     QuizContentView(
                         quizNumber: $quizNumber,
                         difficulty: difficulty,
                         quizData: quizData
                     )
-                    .frame(height: geometry.size.height / 12)
+                    .frame(height: geometry.size.height * 5 / 12)
                     
                     Spacer()
                     
