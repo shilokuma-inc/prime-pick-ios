@@ -49,16 +49,16 @@ struct QuizResultView: View {
     }
     
     private func startColorAnimation() {
-            let colors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple]
-            var currentIndex = 0
+        let colors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple]
+        var currentIndex = 0
 
-            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
-                withAnimation {
-                    rainbowColor = colors[currentIndex]
-                }
-                currentIndex = (currentIndex + 1) % colors.count
+        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
+            withAnimation {
+                rainbowColor = colors[currentIndex]
             }
+            currentIndex = (currentIndex + 1) % colors.count
         }
+    }
 }
 
 #Preview {
