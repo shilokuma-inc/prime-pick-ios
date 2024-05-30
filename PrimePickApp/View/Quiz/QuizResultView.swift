@@ -57,6 +57,9 @@ struct QuizResultView: View {
                         Text("Return to Title")
                             .font(.custom("ArialRoundedMTBold", size: 24))
                     }
+                    .onTapGesture {
+                        dismiss()
+                    }
                 }
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
