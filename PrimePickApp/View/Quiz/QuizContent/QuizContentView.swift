@@ -30,7 +30,7 @@ struct QuizContentView: View {
 }
 
 struct QuizContentView_Previews: PreviewProvider {
-    @State static var quizNumber = 3
+    @State static var quizNumber = 0
     
     static var previews: some View {
         QuizContentView(
