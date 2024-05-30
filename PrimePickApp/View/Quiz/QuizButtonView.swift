@@ -29,9 +29,7 @@ struct QuizButtonView: View {
                         print("不正解")
                     }
                     if quizIndex < 9 {
-                        if quizIndex < 9 {
-                            quizIndex += 1
-                        }
+                        quizIndex += 1
                     } else {
                         isPresentedResult = true
                     }
@@ -49,9 +47,7 @@ struct QuizButtonView: View {
                         print("不正解")
                     }
                     if quizIndex < 9 {
-                        if quizIndex < 9 {
-                            quizIndex += 1
-                        }
+                        quizIndex += 1
                     } else {
                         isPresentedResult = true
                     }
