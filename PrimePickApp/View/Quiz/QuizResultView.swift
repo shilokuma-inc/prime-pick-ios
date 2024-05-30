@@ -12,7 +12,22 @@ struct QuizResultView: View {
     let score: Int
     
     var body: some View {
-        Text("You Score is \(score) points!")
+        GeometryReader { geometry in
+            ZStack {
+                Color.green
+                    .frame(
+                        width: geometry.size.width * 2 / 3,
+                        height: geometry.size.height / 2
+                    )
+                
+                Text("Your Score is \(score) points!")
+            }
+            .frame(
+                width: geometry.size.width,
+                height: geometry.size.height
+            )
+        }
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
