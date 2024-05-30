@@ -11,6 +11,7 @@ struct QuizButtonView: View {
     var quizData: [PrimeQuizEntity]
     @State private var correctQuizNumber: Int = 0
     @Binding var quizIndex: Int
+    @Binding var isPresentedResult: Bool
     @State private var showAlert = false
     @Environment(\.dismiss) private var dismiss
 
@@ -42,7 +43,8 @@ struct QuizButtonView: View {
                             quizIndex += 1
                         }
                     } else {
-                        showAlert = true
+//                        showAlert = true
+                        isPresentedResult = true
                     }
                 }
                 
@@ -62,7 +64,8 @@ struct QuizButtonView: View {
                             quizIndex += 1
                         }
                     } else {
-                        showAlert = true
+//                        showAlert = true
+                        isPresentedResult = true
                     }
                 }
                 

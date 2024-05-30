@@ -10,6 +10,7 @@ import SwiftUI
 struct QuizView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var quizNumber: Int = 0
+    @State var isPresentedResult: Bool = false
     
     let primeData = PrimeData()
     let difficulty: Difficulty
@@ -42,13 +43,21 @@ struct QuizView: View {
                 
                 Spacer()
                 
-                QuizButtonView(quizData: quizData, quizIndex: $quizNumber)
-                    .frame(height: UIScreen.main.bounds.height / 3)
+                QuizButtonView(
+                    quizData: quizData,
+                    quizIndex: $quizNumber,
+                    isPresentedResult: $isPresentedResult
+                )
+                .frame(height: UIScreen.main.bounds.height / 3)
                 
                 Spacer()
             }
             .onAppear {
                 print(quizData)
+            }
+            
+            if isPresentedResult {
+                QuizResultView(score: 6)
             }
         }
     }
