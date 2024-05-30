@@ -13,7 +13,6 @@ struct QuizButtonView: View {
     @Binding var quizIndex: Int
     @Binding var isPresentedResult: Bool
     @State private var showAlert = false
-    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         ZStack {
@@ -34,7 +33,6 @@ struct QuizButtonView: View {
                             quizIndex += 1
                         }
                     } else {
-//                        showAlert = true
                         isPresentedResult = true
                     }
                 }
@@ -55,21 +53,12 @@ struct QuizButtonView: View {
                             quizIndex += 1
                         }
                     } else {
-//                        showAlert = true
                         isPresentedResult = true
                     }
                 }
                 
                 Spacer()
             }
-        }
-        .alert(isPresented: $showAlert) {
-            Alert(
-                title: Text("You Score is \(correctQuizNumber) points!"),
-                dismissButton: .default(Text("OK!")) {
-                    dismiss()
-                }
-            )
         }
     }
 }
