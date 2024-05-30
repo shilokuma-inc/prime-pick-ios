@@ -32,13 +32,32 @@ struct QuizResultView: View {
                         }
                     }
                 
-                Text("Your Score is \(score) points!")
-                    .frame(
-                        width: geometry.size.width / 2,
-                        height: geometry.size.height / 2
-                    )
-                    .font(.title)
-                    .multilineTextAlignment(.center)
+                VStack {
+                    Text("Your Score is \(score) points!")
+                        .frame(
+                            width: geometry.size.width / 2,
+                            height: geometry.size.height / 4
+                        )
+                        .font(.title)
+                        .multilineTextAlignment(.center)
+                    
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 25)
+                            .stroke(Color.primary, lineWidth: 5)
+                            .frame(
+                                width: geometry.size.width / 2,
+                                height: 60
+                            )
+                            .background(
+                                RoundedRectangle(cornerRadius: 25)
+                                    .fill(Color.primary.opacity(0.1))
+                            )
+                            .shadow(radius: 10)
+                        
+                        Text("Return to Title")
+                            .font(.custom("ArialRoundedMTBold", size: 24))
+                    }
+                }
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
         }
