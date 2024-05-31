@@ -1,5 +1,5 @@
 //
-//  PrimeQuizEntity.swift
+//  QuizEntity.swift
 //  PrimePickApp
 //
 //  Created by 村石 拓海 on 2024/05/16.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PrimeQuizEntity {
+struct QuizEntity {
     var quizId: Int
     var number: Int
     var isCorrect: Bool
