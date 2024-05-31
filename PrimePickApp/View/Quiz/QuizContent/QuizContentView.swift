@@ -14,19 +14,36 @@ struct QuizContentView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack(spacing: .zero) {
-                QuizIndexView(difficulty: difficulty, quizNumber: $quizNumber)
-                    .frame(height: geometry.size.height / 6)
-                
-                QuizNumberView(
-                    quizNumber: $quizNumber,
-                    difficulty: difficulty,
-                    quizData: quizData
-                )
-                .frame(height: geometry.size.height * 2 / 3)
-                
-                QuizTimeLimitView(difficulty: difficulty)
-                    .frame(height: geometry.size.height / 6)
+            ZStack(alignment: .leading) {
+                switch difficulty {
+                case .easy:
+                    Color("appGreen")
+                        .opacity(0.5)
+                        .edgesIgnoringSafeArea(.all)
+                case .normal:
+                    Color.blue
+                        .opacity(0.5)
+                        .edgesIgnoringSafeArea(.all)
+                case .hard:
+                    Color.red
+                        .opacity(0.5)
+                        .edgesIgnoringSafeArea(.all)
+                }
+
+                VStack(spacing: .zero) {
+                    QuizIndexView(difficulty: difficulty, quizNumber: $quizNumber)
+                        .frame(height: geometry.size.height / 6)
+                    
+                    QuizNumberView(
+                        quizNumber: $quizNumber,
+                        difficulty: difficulty,
+                        quizData: quizData
+                    )
+                    .frame(height: geometry.size.height * 2 / 3)
+                    
+                    QuizTimeLimitView(difficulty: difficulty)
+                        .frame(height: geometry.size.height / 6)
+                }
             }
         }
     }
