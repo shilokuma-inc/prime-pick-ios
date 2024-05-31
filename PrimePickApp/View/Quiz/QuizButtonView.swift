@@ -22,11 +22,13 @@ struct QuizButtonView: View {
                 quizButton(option: "Incorrect")
                 .onTapGesture {
                     print("❌")
-                    if !quizData[quizIndex].isCorrect {
-                        print("正解")
-                        correctQuizNumber += 1
-                    } else {
-                        print("不正解")
+                    if !isPresentedResult {
+                        if !quizData[quizIndex].isCorrect {
+                            print("正解")
+                            correctQuizNumber += 1
+                        } else {
+                            print("不正解")
+                        }
                     }
                     if quizIndex < 9 {
                         quizIndex += 1
@@ -40,11 +42,13 @@ struct QuizButtonView: View {
                 quizButton(option: "Correct")
                 .onTapGesture {
                     print("✅")
-                    if quizData[quizIndex].isCorrect {
-                        print("正解")
-                        correctQuizNumber += 1
-                    } else {
-                        print("不正解")
+                    if !isPresentedResult {
+                        if quizData[quizIndex].isCorrect {
+                            print("正解")
+                            correctQuizNumber += 1
+                        } else {
+                            print("不正解")
+                        }
                     }
                     if quizIndex < 9 {
                         quizIndex += 1
