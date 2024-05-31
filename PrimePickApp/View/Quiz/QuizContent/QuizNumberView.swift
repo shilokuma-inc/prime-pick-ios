@@ -14,16 +14,7 @@ struct QuizNumberView: View {
     
     var body: some View {
         ZStack {
-            switch difficulty {
-            case .easy:
-                quizNumberBackgroundView(difficulty: .easy)
-
-            case .normal:
-                quizNumberBackgroundView(difficulty: .normal)
-
-            case .hard:
-                quizNumberBackgroundView(difficulty: .hard)
-            }
+            quizNumberBackgroundView(difficulty: difficulty)
             
             switch difficulty {
             case .easy:
