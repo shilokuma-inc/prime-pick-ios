@@ -16,30 +16,20 @@ struct QuizNumberView: View {
         ZStack {
             switch difficulty {
             case .easy:
-                Color("appGreen")
-                    .opacity(0.5)
-                    .edgesIgnoringSafeArea(.all)
-                
                 RoundedRectangle(cornerRadius: 25)
                     .stroke(Color.green, lineWidth: 5) // 緑色の枠線と角丸
                     .background(RoundedRectangle(cornerRadius: 25).fill(Color.white)) // 背景を白にする
                     .frame(width: 300, height: 200) // フレームサイズを指定
                     .shadow(radius: 10) // シャドウを追加して立体感を出す
+
             case .normal:
-                Color.blue
-                    .opacity(0.5)
-                    .edgesIgnoringSafeArea(.all)
-                
                 RoundedRectangle(cornerRadius: 25)
                     .stroke(Color.blue, lineWidth: 5) // 緑色の枠線と角丸
                     .background(RoundedRectangle(cornerRadius: 25).fill(Color.white)) // 背景を白にする
                     .frame(width: 300, height: 200) // フレームサイズを指定
                     .shadow(radius: 10) // シャドウを追加して立体感を出す
+
             case .hard:
-                Color.red
-                    .opacity(0.5)
-                    .edgesIgnoringSafeArea(.all)
-                
                 RoundedRectangle(cornerRadius: 25)
                     .stroke(Color.red, lineWidth: 5) // 緑色の枠線と角丸
                     .background(RoundedRectangle(cornerRadius: 25).fill(Color.white)) // 背景を白にする
