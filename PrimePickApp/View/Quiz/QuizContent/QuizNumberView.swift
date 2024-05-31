@@ -16,16 +16,11 @@ struct QuizNumberView: View {
         ZStack {
             quizNumberBackgroundView(difficulty: difficulty)
             
-            switch difficulty {
-            case .easy:
-                Text(quizData[quizNumber].number.description)
-                    .font(.custom("ArialRoundedMTBold", size: 180))
-                    .foregroundStyle(Color.gray)
-            case .normal, .hard:
-                Text(quizData[quizNumber].number.description)
-                    .font(.custom("ArialRoundedMTBold", size: 120))
-                    .foregroundStyle(Color.gray)
-            }
+            quizNumberText(
+                quizNumber: quizNumber,
+                difficulty: difficulty,
+                quizData: quizData
+            )
         }
     }
 }
@@ -46,6 +41,18 @@ private func quizNumberBackgroundView(difficulty: Difficulty) -> some View {
         .background(
             RoundedRectangle(cornerRadius: 25).fill(Color.white)
         )
+}
+
+private func quizNumberText(quizNumber: Int, difficulty: Difficulty, quizData: [QuizEntity]) -> some View {
+    let size: CGFloat = if difficulty == .easy {
+        180
+    } else {
+        120
+    }
+    
+    return Text(quizData[quizNumber].number.description)
+        .font(.custom("ArialRoundedMTBold", size: size))
+        .foregroundStyle(Color.gray)
 }
 
 struct QuizNumberView_Previews: PreviewProvider {
