@@ -17,24 +17,24 @@ struct QuizNumberView: View {
             switch difficulty {
             case .easy:
                 RoundedRectangle(cornerRadius: 25)
-                    .stroke(Color.green, lineWidth: 5) // 緑色の枠線と角丸
-                    .background(RoundedRectangle(cornerRadius: 25).fill(Color.white)) // 背景を白にする
-                    .frame(width: 300, height: 200) // フレームサイズを指定
-                    .shadow(radius: 10) // シャドウを追加して立体感を出す
+                    .stroke(Color.green, lineWidth: 5)
+                    .background(RoundedRectangle(cornerRadius: 25).fill(Color.white))
+                    .frame(width: 300, height: 200)
+                    .shadow(radius: 10)
 
             case .normal:
                 RoundedRectangle(cornerRadius: 25)
-                    .stroke(Color.blue, lineWidth: 5) // 緑色の枠線と角丸
-                    .background(RoundedRectangle(cornerRadius: 25).fill(Color.white)) // 背景を白にする
-                    .frame(width: 300, height: 200) // フレームサイズを指定
-                    .shadow(radius: 10) // シャドウを追加して立体感を出す
+                    .stroke(Color.blue, lineWidth: 5)
+                    .background(RoundedRectangle(cornerRadius: 25).fill(Color.white))
+                    .frame(width: 300, height: 200)
+                    .shadow(radius: 10)
 
             case .hard:
                 RoundedRectangle(cornerRadius: 25)
-                    .stroke(Color.red, lineWidth: 5) // 緑色の枠線と角丸
-                    .background(RoundedRectangle(cornerRadius: 25).fill(Color.white)) // 背景を白にする
-                    .frame(width: 300, height: 200) // フレームサイズを指定
-                    .shadow(radius: 10) // シャドウを追加して立体感を出す
+                    .stroke(Color.red, lineWidth: 5)
+                    .background(RoundedRectangle(cornerRadius: 25).fill(Color.white))
+                    .frame(width: 300, height: 200)
+                    .shadow(radius: 10)
             }
             
             switch difficulty {
