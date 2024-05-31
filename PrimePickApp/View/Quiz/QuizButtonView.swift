@@ -12,7 +12,6 @@ struct QuizButtonView: View {
     @Binding var correctQuizNumber: Int
     @Binding var quizIndex: Int
     @Binding var isPresentedResult: Bool
-    @State private var showAlert = false
 
     var body: some View {
         ZStack {
@@ -21,7 +20,6 @@ struct QuizButtonView: View {
                 
                 quizButton(option: "Incorrect")
                 .onTapGesture {
-                    print("❌")
                     if !isPresentedResult {
                         if !quizData[quizIndex].isCorrect {
                             print("正解")
@@ -41,7 +39,6 @@ struct QuizButtonView: View {
                 
                 quizButton(option: "Correct")
                 .onTapGesture {
-                    print("✅")
                     if !isPresentedResult {
                         if quizData[quizIndex].isCorrect {
                             print("正解")
