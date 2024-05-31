@@ -19,22 +19,10 @@ struct QuizNumberView: View {
                 quizNumberBackgroundView(difficulty: .easy)
 
             case .normal:
-                RoundedRectangle(cornerRadius: 25)
-                    .stroke(Color.blue, lineWidth: 5)
-                    .background(
-                        RoundedRectangle(cornerRadius: 25).fill(Color.white)
-                    )
-                    .frame(width: 300, height: 200)
-                    .shadow(radius: 10)
+                quizNumberBackgroundView(difficulty: .normal)
 
             case .hard:
-                RoundedRectangle(cornerRadius: 25)
-                    .stroke(Color.red, lineWidth: 5)
-                    .background(
-                        RoundedRectangle(cornerRadius: 25).fill(Color.white)
-                    )
-                    .frame(width: 300, height: 200)
-                    .shadow(radius: 10)
+                quizNumberBackgroundView(difficulty: .hard)
             }
             
             switch difficulty {
@@ -52,13 +40,34 @@ struct QuizNumberView: View {
 }
 
 private func quizNumberBackgroundView(difficulty: Difficulty) -> some View {
-    RoundedRectangle(cornerRadius: 25)
-        .stroke(Color.green, lineWidth: 5)
-        .background(
-            RoundedRectangle(cornerRadius: 25).fill(Color.white)
-        )
-        .frame(width: 300, height: 200)
-        .shadow(radius: 10)
+    switch difficulty {
+    case .easy:
+        RoundedRectangle(cornerRadius: 25)
+            .stroke(Color.green, lineWidth: 5)
+            .background(
+                RoundedRectangle(cornerRadius: 25).fill(Color.white)
+            )
+            .frame(width: 300, height: 200)
+            .shadow(radius: 10)
+        
+    case .normal:
+        RoundedRectangle(cornerRadius: 25)
+            .stroke(Color.blue, lineWidth: 5)
+            .background(
+                RoundedRectangle(cornerRadius: 25).fill(Color.white)
+            )
+            .frame(width: 300, height: 200)
+            .shadow(radius: 10)
+        
+    case .hard:
+        RoundedRectangle(cornerRadius: 25)
+            .stroke(Color.red, lineWidth: 5)
+            .background(
+                RoundedRectangle(cornerRadius: 25).fill(Color.white)
+            )
+            .frame(width: 300, height: 200)
+            .shadow(radius: 10)
+    }
 }
 
 struct QuizNumberView_Previews: PreviewProvider {
