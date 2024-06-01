@@ -16,7 +16,7 @@ struct QuizView: View {
     let primeData = PrimeData()
     let difficulty: Difficulty
     let manager = QuizDataManager()
-    let quizData: [PrimeQuizEntity]
+    let quizData: [QuizEntity]
     
     init(difficulty: Difficulty) {
         self.difficulty = difficulty
@@ -24,43 +24,40 @@ struct QuizView: View {
     }
 
     var body: some View {
-        ZStack {
-            Color.appBackground
-                .ignoresSafeArea()
-            
-            VStack(spacing: .zero) {
-                QuizIndexView(difficulty: difficulty, quizNumber: $quizNumber)
-                    .frame(height: UIScreen.main.bounds.height / 12)
+        GeometryReader { geometry in
+            ZStack {
+                Color.appBackground
+                    .ignoresSafeArea()
+
+                VStack(spacing: .zero) {
+                    QuizContentView(
+                        quizNumber: $quizNumber,
+                        difficulty: difficulty,
+                        quizData: quizData
+                    )
+                    .frame(height: geometry.size.height / 2)
+                    
+                    Spacer()
+                    
+                    QuizButtonView(
+                        quizData: quizData,
+                        correctQuizNumber: $resultScore,
+                        quizIndex: $quizNumber,
+                        isPresentedResult: $isPresentedResult
+                    )
+                    .frame(height: geometry.size.height / 3)
+                    
+                    Spacer()
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
                 
-                QuizNumberView(
-                    quizNumber: $quizNumber,
-                    difficulty: difficulty,
-                    quizData: quizData
-                )
-                .frame(height: UIScreen.main.bounds.height / 3)
-                
-                QuizTimeLimitView(difficulty: difficulty)
-                    .frame(height: UIScreen.main.bounds.height / 12)
-                
-                Spacer()
-                
-                QuizButtonView(
-                    quizData: quizData,
-                    correctQuizNumber: $resultScore,
-                    quizIndex: $quizNumber,
-                    isPresentedResult: $isPresentedResult
-                )
-                .frame(height: UIScreen.main.bounds.height / 3)
-                
-                Spacer()
+                if isPresentedResult {
+                    QuizResultView(score: resultScore)
+                }
             }
-            .onAppear {
-                print(quizData)
-            }
-            
-            if isPresentedResult {
-                QuizResultView(score: resultScore)
-            }
+        }
+        .onAppear {
+            print(quizData)
         }
     }
 }
