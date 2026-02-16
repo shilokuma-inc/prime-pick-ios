@@ -1,6 +1,10 @@
 # prime-pick-ios
-iOS Application Template (SwiftUI)
+素数クイズアプリ
 
+## Environment
+- Xcode 26.3
+
+## Status
 <div style="margin:0px;padding:0px;">
   <table width="98%" style="border-collapse: collapse;border:2px double #000080;text-align:center;margin:auto;">
     <tbody>
