@@ -24,6 +24,7 @@ struct HowToPlayView: View {
                     .padding(24)
                 }
             }
+            .sendAnalyticsScreen(.howToPlay)
             .navigationTitle("How to Play")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct PrimePickApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @AppStorage(AppTheme.userDefaultsKey) private var appTheme = AppTheme.system.rawValue
 
     var body: some Scene {
