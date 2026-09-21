@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: working
+    name: Build
     runs-on: macos-latest
 
     steps:
@@ -19,10 +19,11 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: ci_post_clone
         run: |
           defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
+          defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES
 
       - name: Set Default Scheme
         run: |
