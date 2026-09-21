@@ -22,7 +22,7 @@ struct SelectDifficultyButtonView: View {
 extension SelectDifficultyButtonView {
     func selectDifficultyButton(difficulty: Difficulty) -> some View {
         NavigationLink(destination: LazyView(QuizView(difficulty: difficulty))) {
-            Text(difficulty.rawValue)
+            Text(difficulty.localizedTitle)
                 .font(.system(size: 24, weight: .bold, design: .rounded))
                 .padding()
                 .frame(maxWidth: .infinity)

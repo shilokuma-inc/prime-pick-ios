@@ -78,7 +78,7 @@ private extension HowToPlayView {
 
     func difficultyRow(difficulty: Difficulty, description: LocalizedStringKey) -> some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(difficulty.rawValue)
+            Text(difficulty.localizedTitle)
                 .font(.system(size: 18, weight: .bold, design: .rounded))
                 .padding(.horizontal, 16)
                 .padding(.vertical, 6)
