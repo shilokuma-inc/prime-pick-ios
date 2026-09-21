@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @State private var hue: Double = 0
+    @State private var isHowToPlayPresented: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -29,9 +30,32 @@ struct MainView: View {
                     
                     SelectDifficultyButtonView()
                     
+                    howToPlayButton
+                    
                     Spacer()
                 }
             }
+            .sheet(isPresented: $isHowToPlayPresented) {
+                HowToPlayView()
+            }
+        }
+    }
+}
+
+private extension MainView {
+    var howToPlayButton: some View {
+        Button {
+            isHowToPlayPresented = true
+        } label: {
+            Label("How to Play", systemImage: "questionmark.circle")
+                .font(.system(size: 18, weight: .bold, design: .rounded))
+                .foregroundColor(.primary)
+                .padding(.vertical, 12)
+                .padding(.horizontal, 24)
+                .overlay(
+                    Capsule()
+                        .stroke(Color.primary.opacity(0.4), lineWidth: 2)
+                )
         }
     }
 }
