@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		193A97532DEDA1148EE0A2C9 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2E8881254652FCE64BDC5E49 /* FirebaseAnalytics */; };
+		8B5D8B28449149C522791BB4 /* AnalyticsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5151BA48ADFFD8185C89A868 /* AnalyticsScreen.swift */; };
+		624168433780D0B8FD63B8D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53375860F98A49A23F4CF3D /* AppDelegate.swift */; };
 		54D69EBDCDA4A3DBECB1740A /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36F4F283E4470B1B885ED0 /* AppTheme.swift */; };
+		9431A16ABA552A3DA82E34E8 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4689944114408D9DC263A40 /* FirebaseAnalytics.swift */; };
 		58D00C0E23DFBA64A9924780 /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348F9B9700F6A15141CCA545 /* HowToPlayView.swift */; };
 		86F1EE92CEDD8FEA6AF42A7F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2C18A59D04746477C50D4631 /* Localizable.xcstrings */; };
 		4F02A57D2BF62F61003DF310 /* QuizEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02A57C2BF62F61003DF310 /* QuizEntity.swift */; };
@@ -31,7 +35,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5151BA48ADFFD8185C89A868 /* AnalyticsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsScreen.swift; sourceTree = "<group>"; };
+		B53375860F98A49A23F4CF3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C36F4F283E4470B1B885ED0 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		A4689944114408D9DC263A40 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		348F9B9700F6A15141CCA545 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
 		2C18A59D04746477C50D4631 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		4F02A57C2BF62F61003DF310 /* QuizEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizEntity.swift; sourceTree = "<group>"; };
@@ -62,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				193A97532DEDA1148EE0A2C9 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +82,15 @@
 				4F0C82802BC8247500E1480E /* PrimePickApp */,
 				4F0C827F2BC8247500E1480E /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		668A1F0A85CAA2FFE8C27A59 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				5151BA48ADFFD8185C89A868 /* AnalyticsScreen.swift */,
+				A4689944114408D9DC263A40 /* FirebaseAnalytics.swift */,
+			);
+			path = Analytics;
 			sourceTree = "<group>";
 		};
 		71B3DBE9A647947501AB1E5D /* Model */ = {
@@ -95,6 +112,8 @@
 		4F0C82802BC8247500E1480E /* PrimePickApp */ = {
 			isa = PBXGroup;
 			children = (
+				668A1F0A85CAA2FFE8C27A59 /* Analytics */,
+				B53375860F98A49A23F4CF3D /* AppDelegate.swift */,
 				2C18A59D04746477C50D4631 /* Localizable.xcstrings */,
 				71B3DBE9A647947501AB1E5D /* Model */,
 				4F65A3972C0100FD00065A53 /* Enum */,
@@ -194,6 +213,9 @@
 			dependencies = (
 			);
 			name = PrimePickApp;
+			packageProductDependencies = (
+				2E8881254652FCE64BDC5E49 /* FirebaseAnalytics */,
+			);
 			productName = PrimePickApp;
 			productReference = 4F0C827E2BC8247500E1480E /* PrimePickApp.app */;
 			productType = "com.apple.product-type.application";
@@ -223,6 +245,9 @@
 				ja,
 			);
 			mainGroup = 4F0C82752BC8247500E1480E;
+			packageReferences = (
+				7BA07D0A663503931EA1B7A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 4F0C827F2BC8247500E1480E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -251,6 +276,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B5D8B28449149C522791BB4 /* AnalyticsScreen.swift in Sources */,
+				9431A16ABA552A3DA82E34E8 /* FirebaseAnalytics.swift in Sources */,
+				624168433780D0B8FD63B8D4 /* AppDelegate.swift in Sources */,
 				58D00C0E23DFBA64A9924780 /* HowToPlayView.swift in Sources */,
 				54D69EBDCDA4A3DBECB1740A /* AppTheme.swift in Sources */,
 				4F42C7A42BF76E7700F92FBB /* QuizNumberView.swift in Sources */,
@@ -471,6 +499,25 @@
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7BA07D0A663503931EA1B7A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2E8881254652FCE64BDC5E49 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BA07D0A663503931EA1B7A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCConfigurationList section */
 		4F0C82792BC8247500E1480E /* Build configuration list for PBXProject "PrimePickApp" */ = {

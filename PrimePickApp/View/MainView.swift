@@ -38,6 +38,7 @@ struct MainView: View {
             .sheet(isPresented: $isHowToPlayPresented) {
                 HowToPlayView()
             }
+            .sendAnalyticsScreen(.main)
         }
     }
 }
