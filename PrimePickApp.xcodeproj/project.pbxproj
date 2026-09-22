@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		16C23171CCD521732CE92529 /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92136DC358A2E7B8D9FACEB /* GameMode.swift */; };
 		193A97532DEDA1148EE0A2C9 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2E8881254652FCE64BDC5E49 /* FirebaseAnalytics */; };
 		4F02A57D2BF62F61003DF310 /* QuizEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02A57C2BF62F61003DF310 /* QuizEntity.swift */; };
 		4F02A57F2BF63A43003DF310 /* QuizDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02A57E2BF63A43003DF310 /* QuizDataManager.swift */; };
@@ -33,11 +32,15 @@
 		86F1EE92CEDD8FEA6AF42A7F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2C18A59D04746477C50D4631 /* Localizable.xcstrings */; };
 		8B5D8B28449149C522791BB4 /* AnalyticsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5151BA48ADFFD8185C89A868 /* AnalyticsScreen.swift */; };
 		9431A16ABA552A3DA82E34E8 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4689944114408D9DC263A40 /* FirebaseAnalytics.swift */; };
+		A594ABFDAC2E5927E39ACD15 /* PrimeFactorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69D0DED6D686DD9038FF63A /* PrimeFactorization.swift */; };
+		ACC087F9588A9C69154F5D34 /* QuizAnswerRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7CAF292996E14CCDF4426 /* QuizAnswerRecord.swift */; };
+		E5E94D7DC28600AD8C5D5F03 /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5E80C14F4079C354790AF9 /* GameMode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C18A59D04746477C50D4631 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		348F9B9700F6A15141CCA545 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
+		4D5E80C14F4079C354790AF9 /* GameMode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
 		4F02A57C2BF62F61003DF310 /* QuizEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizEntity.swift; sourceTree = "<group>"; };
 		4F02A57E2BF63A43003DF310 /* QuizDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDataManager.swift; sourceTree = "<group>"; };
 		4F0C827E2BC8247500E1480E /* PrimePickApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrimePickApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,10 +63,11 @@
 		4FEC65B02C01164800A8B731 /* SelectDifficultyButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDifficultyButtonView.swift; sourceTree = "<group>"; };
 		4FEC65B32C01184E00A8B731 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
 		5151BA48ADFFD8185C89A868 /* AnalyticsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsScreen.swift; sourceTree = "<group>"; };
+		72E7CAF292996E14CCDF4426 /* QuizAnswerRecord.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizAnswerRecord.swift; sourceTree = "<group>"; };
 		7C36F4F283E4470B1B885ED0 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		A4689944114408D9DC263A40 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		B53375860F98A49A23F4CF3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E92136DC358A2E7B8D9FACEB /* GameMode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
+		F69D0DED6D686DD9038FF63A /* PrimeFactorization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrimeFactorization.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,8 @@
 				4F8BE16B2BF4FFB000D7CF0E /* PrimeData.swift */,
 				4F02A57E2BF63A43003DF310 /* QuizDataManager.swift */,
 				4F02A57C2BF62F61003DF310 /* QuizEntity.swift */,
+				F69D0DED6D686DD9038FF63A /* PrimeFactorization.swift */,
+				72E7CAF292996E14CCDF4426 /* QuizAnswerRecord.swift */,
 			);
 			path = QuizData;
 			sourceTree = "<group>";
@@ -195,7 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				7C36F4F283E4470B1B885ED0 /* AppTheme.swift */,
-				E92136DC358A2E7B8D9FACEB /* GameMode.swift */,
+				4D5E80C14F4079C354790AF9 /* GameMode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -299,7 +305,9 @@
 				4F02A57F2BF63A43003DF310 /* QuizDataManager.swift in Sources */,
 				4F8BE16C2BF4FFB000D7CF0E /* PrimeData.swift in Sources */,
 				4FEC65B42C01184E00A8B731 /* Text+Extension.swift in Sources */,
-				16C23171CCD521732CE92529 /* GameMode.swift in Sources */,
+				A594ABFDAC2E5927E39ACD15 /* PrimeFactorization.swift in Sources */,
+				ACC087F9588A9C69154F5D34 /* QuizAnswerRecord.swift in Sources */,
+				E5E94D7DC28600AD8C5D5F03 /* GameMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,7 +455,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.2;
@@ -487,7 +495,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.2;

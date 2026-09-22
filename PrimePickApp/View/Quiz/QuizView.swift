@@ -15,11 +15,11 @@ struct QuizView: View {
     @State private var quizNumber: Int = 0
     @State var isPresentedResult: Bool = false
     @State var resultScore: Int = 0
+    @State private var answerRecords: [QuizAnswerRecord] = []
     @State private var quizData: [QuizEntity]
     @State private var remainingSeconds: Int
-    @State private var answeredQuizNumber: Int = 0
     @State private var timer: Timer?
-    
+
     let primeData = PrimeData()
     let difficulty: Difficulty
     let gameMode: GameMode
@@ -54,7 +54,8 @@ struct QuizView: View {
                         quizData: quizData,
                         correctQuizNumber: $resultScore,
                         quizIndex: $quizNumber,
-                        isPresentedResult: $isPresentedResult
+                        isPresentedResult: $isPresentedResult,
+                        answerRecords: $answerRecords
                     )
                     .frame(height: geometry.size.height / 3)
                     
@@ -65,8 +66,8 @@ struct QuizView: View {
                 if isPresentedResult {
                     QuizResultView(
                         score: resultScore,
-                        gameMode: gameMode,
-                        answeredQuizNumber: answeredQuizNumber
+                        answerRecords: answerRecords,
+                        gameMode: gameMode
                     )
                 }
             }
@@ -120,7 +121,6 @@ private extension QuizView {
     /// 時間切れでリザルトを表示する
     func finishByTimeUp() {
         stopTimer()
-        answeredQuizNumber = quizNumber
         isPresentedResult = true
     }
 

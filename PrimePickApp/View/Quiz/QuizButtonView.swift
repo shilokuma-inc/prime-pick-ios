@@ -12,48 +12,47 @@ struct QuizButtonView: View {
     @Binding var correctQuizNumber: Int
     @Binding var quizIndex: Int
     @Binding var isPresentedResult: Bool
+    @Binding var answerRecords: [QuizAnswerRecord]
 
     var body: some View {
         ZStack {
             HStack {
                 Spacer()
-                
+
                 quizButton(option: "Incorrect")
                 .onTapGesture {
-                    if !isPresentedResult {
-                        if !quizData[quizIndex].isCorrect {
-                            print("正解")
-                            correctQuizNumber += 1
-                        } else {
-                            print("不正解")
-                        }
-                        goToNextQuiz()
-                    }
+                    answer(answeredPrime: false)
                 }
-                
+
                 Spacer()
-                
+
                 quizButton(option: "Correct")
                 .onTapGesture {
-                    if !isPresentedResult {
-                        if quizData[quizIndex].isCorrect {
-                            print("正解")
-                            correctQuizNumber += 1
-                        } else {
-                            print("不正解")
-                        }
-                        goToNextQuiz()
-                    }
+                    answer(answeredPrime: true)
                 }
-                
+
                 Spacer()
             }
         }
     }
 
-    /// 次の問題へ進める。最後の問題まで解き終えていたらリザルトを表示する
-    /// （タイムアタックでは `QuizView` が問題を補充するため、通常ここでは終了しない）
-    private func goToNextQuiz() {
+    /// 解答を記録し、次の問題へ進める。最後の問題ならリザルトを表示する。
+    /// タイムアタックでは `QuizView` が問題を補充するため、通常ここでは終了しない。
+    private func answer(answeredPrime: Bool) {
+        // 時間切れでリザルトを表示したあとは、背後のボタンに触れても進めない
+        guard !isPresentedResult else { return }
+
+        let quiz = quizData[quizIndex]
+        let record = QuizAnswerRecord(
+            id: quiz.quizId,
+            number: quiz.number,
+            isPrime: quiz.isCorrect,
+            answeredPrime: answeredPrime
+        )
+        answerRecords.append(record)
+        if record.isAnswerCorrect {
+            correctQuizNumber += 1
+        }
         if quizIndex < quizData.count - 1 {
             quizIndex += 1
         } else {
