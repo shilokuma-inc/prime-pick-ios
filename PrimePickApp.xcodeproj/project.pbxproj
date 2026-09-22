@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		193A97532DEDA1148EE0A2C9 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2E8881254652FCE64BDC5E49 /* FirebaseAnalytics */; };
+		33B63ACA9549FEA627B67F14 /* SelectQuizSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF54F531362464503634144C /* SelectQuizSettingView.swift */; };
+		3C668A041A55ACB789202389 /* QuizQuestionCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153E6C2AB345D32DC6A35009 /* QuizQuestionCount.swift */; };
 		4F02A57D2BF62F61003DF310 /* QuizEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02A57C2BF62F61003DF310 /* QuizEntity.swift */; };
 		4F02A57F2BF63A43003DF310 /* QuizDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02A57E2BF63A43003DF310 /* QuizDataManager.swift */; };
 		4F0C82822BC8247500E1480E /* PrimePickApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82812BC8247500E1480E /* PrimePickApp.swift */; };
@@ -19,7 +21,6 @@
 		4F2239262BFD0873004C71A6 /* QuizIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2239252BFD0873004C71A6 /* QuizIndexView.swift */; };
 		4F42C7A42BF76E7700F92FBB /* QuizNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F42C7A32BF76E7700F92FBB /* QuizNumberView.swift */; };
 		4F42C7A62BF7756200F92FBB /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F42C7A52BF7756200F92FBB /* ColorAssets.xcassets */; };
-		4F4520A2B46AFD3D357F86A9 /* QuizQuestionCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83CA5759ECD0D763D8B64B7 /* QuizQuestionCount.swift */; };
 		4F65A3992C01019000065A53 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F65A3982C01019000065A53 /* Difficulty.swift */; };
 		4F8BE16C2BF4FFB000D7CF0E /* PrimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8BE16B2BF4FFB000D7CF0E /* PrimeData.swift */; };
 		4F8BE16E2BF504BB00D7CF0E /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8BE16D2BF504BB00D7CF0E /* QuizView.swift */; };
@@ -30,15 +31,16 @@
 		54D69EBDCDA4A3DBECB1740A /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36F4F283E4470B1B885ED0 /* AppTheme.swift */; };
 		58D00C0E23DFBA64A9924780 /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348F9B9700F6A15141CCA545 /* HowToPlayView.swift */; };
 		624168433780D0B8FD63B8D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53375860F98A49A23F4CF3D /* AppDelegate.swift */; };
-		67715989C5D2C122C3D68F55 /* QuizRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EE4659F8DF473C4D7E80DE /* QuizRange.swift */; };
 		86F1EE92CEDD8FEA6AF42A7F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2C18A59D04746477C50D4631 /* Localizable.xcstrings */; };
 		8B5D8B28449149C522791BB4 /* AnalyticsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5151BA48ADFFD8185C89A868 /* AnalyticsScreen.swift */; };
+		8BEF57DBE9BE7D2DC256F397 /* QuizRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7310089C67E8091CB924712C /* QuizRange.swift */; };
 		9431A16ABA552A3DA82E34E8 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4689944114408D9DC263A40 /* FirebaseAnalytics.swift */; };
-		E7EB640305DC76896868D231 /* SelectQuizSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1886007D2A51CA0AD6370F6A /* SelectQuizSettingView.swift */; };
+		A594ABFDAC2E5927E39ACD15 /* PrimeFactorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69D0DED6D686DD9038FF63A /* PrimeFactorization.swift */; };
+		ACC087F9588A9C69154F5D34 /* QuizAnswerRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7CAF292996E14CCDF4426 /* QuizAnswerRecord.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1886007D2A51CA0AD6370F6A /* SelectQuizSettingView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectQuizSettingView.swift; sourceTree = "<group>"; };
+		153E6C2AB345D32DC6A35009 /* QuizQuestionCount.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizQuestionCount.swift; sourceTree = "<group>"; };
 		2C18A59D04746477C50D4631 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		348F9B9700F6A15141CCA545 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
 		4F02A57C2BF62F61003DF310 /* QuizEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizEntity.swift; sourceTree = "<group>"; };
@@ -63,11 +65,13 @@
 		4FEC65B02C01164800A8B731 /* SelectDifficultyButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDifficultyButtonView.swift; sourceTree = "<group>"; };
 		4FEC65B32C01184E00A8B731 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
 		5151BA48ADFFD8185C89A868 /* AnalyticsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsScreen.swift; sourceTree = "<group>"; };
+		72E7CAF292996E14CCDF4426 /* QuizAnswerRecord.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizAnswerRecord.swift; sourceTree = "<group>"; };
+		7310089C67E8091CB924712C /* QuizRange.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizRange.swift; sourceTree = "<group>"; };
 		7C36F4F283E4470B1B885ED0 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
-		82EE4659F8DF473C4D7E80DE /* QuizRange.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizRange.swift; sourceTree = "<group>"; };
 		A4689944114408D9DC263A40 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
-		A83CA5759ECD0D763D8B64B7 /* QuizQuestionCount.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizQuestionCount.swift; sourceTree = "<group>"; };
 		B53375860F98A49A23F4CF3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DF54F531362464503634144C /* SelectQuizSettingView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectQuizSettingView.swift; sourceTree = "<group>"; };
+		F69D0DED6D686DD9038FF63A /* PrimeFactorization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrimeFactorization.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,8 +135,8 @@
 			isa = PBXGroup;
 			children = (
 				4F65A3982C01019000065A53 /* Difficulty.swift */,
-				82EE4659F8DF473C4D7E80DE /* QuizRange.swift */,
-				A83CA5759ECD0D763D8B64B7 /* QuizQuestionCount.swift */,
+				7310089C67E8091CB924712C /* QuizRange.swift */,
+				153E6C2AB345D32DC6A35009 /* QuizQuestionCount.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -143,6 +147,8 @@
 				4F8BE16B2BF4FFB000D7CF0E /* PrimeData.swift */,
 				4F02A57E2BF63A43003DF310 /* QuizDataManager.swift */,
 				4F02A57C2BF62F61003DF310 /* QuizEntity.swift */,
+				F69D0DED6D686DD9038FF63A /* PrimeFactorization.swift */,
+				72E7CAF292996E14CCDF4426 /* QuizAnswerRecord.swift */,
 			);
 			path = QuizData;
 			sourceTree = "<group>";
@@ -173,7 +179,7 @@
 				4F0C82832BC8247500E1480E /* MainView.swift */,
 				4FEC65B02C01164800A8B731 /* SelectDifficultyButtonView.swift */,
 				4FEC65B62C01252800A8B731 /* Quiz */,
-				1886007D2A51CA0AD6370F6A /* SelectQuizSettingView.swift */,
+				DF54F531362464503634144C /* SelectQuizSettingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -305,9 +311,11 @@
 				4F02A57F2BF63A43003DF310 /* QuizDataManager.swift in Sources */,
 				4F8BE16C2BF4FFB000D7CF0E /* PrimeData.swift in Sources */,
 				4FEC65B42C01184E00A8B731 /* Text+Extension.swift in Sources */,
-				67715989C5D2C122C3D68F55 /* QuizRange.swift in Sources */,
-				4F4520A2B46AFD3D357F86A9 /* QuizQuestionCount.swift in Sources */,
-				E7EB640305DC76896868D231 /* SelectQuizSettingView.swift in Sources */,
+				A594ABFDAC2E5927E39ACD15 /* PrimeFactorization.swift in Sources */,
+				ACC087F9588A9C69154F5D34 /* QuizAnswerRecord.swift in Sources */,
+				8BEF57DBE9BE7D2DC256F397 /* QuizRange.swift in Sources */,
+				3C668A041A55ACB789202389 /* QuizQuestionCount.swift in Sources */,
+				33B63ACA9549FEA627B67F14 /* SelectQuizSettingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,7 +463,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.2;
@@ -495,7 +503,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.2;

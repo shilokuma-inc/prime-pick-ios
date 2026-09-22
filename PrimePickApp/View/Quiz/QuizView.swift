@@ -12,7 +12,8 @@ struct QuizView: View {
     @State private var quizNumber: Int = 0
     @State var isPresentedResult: Bool = false
     @State var resultScore: Int = 0
-    
+    @State private var answerRecords: [QuizAnswerRecord] = []
+
     let difficulty: Difficulty
     let manager = QuizDataManager()
     let quizData: [QuizEntity]
@@ -50,7 +51,8 @@ struct QuizView: View {
                         quizData: quizData,
                         correctQuizNumber: $resultScore,
                         quizIndex: $quizNumber,
-                        isPresentedResult: $isPresentedResult
+                        isPresentedResult: $isPresentedResult,
+                        answerRecords: $answerRecords
                     )
                     .frame(height: geometry.size.height / 3)
                     
@@ -59,7 +61,7 @@ struct QuizView: View {
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 
                 if isPresentedResult {
-                    QuizResultView(score: resultScore)
+                    QuizResultView(score: resultScore, answerRecords: answerRecords)
                 }
             }
         }

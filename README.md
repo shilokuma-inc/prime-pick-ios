@@ -3,6 +3,7 @@
 
 ## Environment
 - Xcode 26.3
+- iOS 17.0+
 
 ## Status
 
