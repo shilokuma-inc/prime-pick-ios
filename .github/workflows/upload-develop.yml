@@ -78,6 +78,12 @@ jobs:
           EOF
           echo "SIGNING_XCCONFIG=$SIGNING_XCCONFIG" >> "$GITHUB_ENV"
 
+      # 手動署名にしたことで ExportOptions 経由のビルド番号自動採番が効かなくなった。
+      # pbxproj の CURRENT_PROJECT_VERSION は固定値なので、ここで毎回一意な値を決める。
+      - name: Determine Build Number
+        id: build_number
+        run: echo "value=$(date -u +%Y%m%d.%H%M%S)" >> "$GITHUB_OUTPUT"
+
       - name: Archive Project
         run: |
           # 署名は取り込み済みの証明書とプロファイルで固定し、自動生成を行わせない
@@ -87,7 +93,8 @@ jobs:
             -sdk iphoneos \
             -configuration Release \
             -archivePath PrimePickApp.xcarchive \
-            -xcconfig "$SIGNING_XCCONFIG"
+            -xcconfig "$SIGNING_XCCONFIG" \
+            CURRENT_PROJECT_VERSION=${{ steps.build_number.outputs.value }}
 
       # EXPORT_OPTIONS はリポジトリ secret（signingStyle: manual）。org secret の自動署名用を上書きしている
       - name: Create ExportOptions.plist
