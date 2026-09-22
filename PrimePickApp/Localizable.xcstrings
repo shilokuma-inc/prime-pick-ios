@@ -1,6 +1,38 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "%lld is a prime number": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld is a prime number"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld は素数"
+          }
+        }
+      }
+    },
+    "%lld is not a prime number": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld is not a prime number"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld は素数ではありません"
+          }
+        }
+      }
+    },
     "%lld.": {
       "localizations": {
         "en": {
@@ -145,6 +177,22 @@
         }
       }
     },
+    "Missed Questions": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Missed Questions"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "間違えた問題"
+          }
+        }
+      }
+    },
     "No Timelimit!": {
       "localizations": {
         "en": {
@@ -189,6 +237,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "ふつう"
+          }
+        }
+      }
+    },
+    "Perfect! All questions correct!": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perfect! All questions correct!"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全問正解！すばらしい！"
           }
         }
       }
