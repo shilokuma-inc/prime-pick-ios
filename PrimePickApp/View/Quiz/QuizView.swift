@@ -13,7 +13,6 @@ struct QuizView: View {
     @State var isPresentedResult: Bool = false
     @State var resultScore: Int = 0
     
-    let primeData = PrimeData()
     let difficulty: Difficulty
     let manager = QuizDataManager()
     let quizData: [QuizEntity]

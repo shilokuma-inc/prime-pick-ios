@@ -7,71 +7,27 @@
 
 import Foundation
 
-final class PrimeData {
-    init() {}
-    
-    public func generateOneOrTwoDigitPrimes() -> [Int] {
-        var twoDigitPrimes: [Int] = [2]
-        outerLoop: for num in 3..<100 {
-            for i in 2..<num {
-                if num % i == 0 {
-                    continue outerLoop
-                }
+/// 素数判定
+///
+/// 従来はレンジ内の素数を毎回全件生成していたが、4 桁まで広げると現実的な速度が出ないため、
+/// 与えられた 1 つの数だけを判定する純粋関数に置き換えている。
+/// View に依存しないため、そのまま単体テストできる。
+enum PrimeData {
+    /// `number` が素数かどうかを返す
+    ///
+    /// 2・3 で割り切れるかを先に見たうえで、6k ± 1 の候補だけを √number まで試し割りする。
+    static func isPrime(_ number: Int) -> Bool {
+        if number < 2 { return false }
+        if number < 4 { return true }          // 2, 3
+        if number % 2 == 0 || number % 3 == 0 { return false }
+
+        var divisor = 5
+        while divisor * divisor <= number {
+            if number % divisor == 0 || number % (divisor + 2) == 0 {
+                return false
             }
-            twoDigitPrimes.append(num)
+            divisor += 6
         }
-        return twoDigitPrimes
-    }
-    
-    public func generateThreeDigitPrimes() -> [Int] {
-        var twoDigitPrimes = [Int]()
-        outerLoop: for num in 100..<1000 {
-            for i in 2..<num {
-                if num % i == 0 {
-                    continue outerLoop
-                }
-            }
-            twoDigitPrimes.append(num)
-        }
-        return twoDigitPrimes
-    }
-    
-    public func generateFourDigitPrimes() -> [Int] {
-        var twoDigitPrimes = [Int]()
-        outerLoop: for num in 1000..<10000 {
-            for i in 2..<num {
-                if num % i == 0 {
-                    continue outerLoop
-                }
-            }
-            twoDigitPrimes.append(num)
-        }
-        return twoDigitPrimes
-    }
-    
-    public func generateThreeOrFourDigitPrimes() -> [Int] {
-        var twoDigitPrimes = [Int]()
-        outerLoop: for num in 100..<10000 {
-            for i in 2..<num {
-                if num % i == 0 {
-                    continue outerLoop
-                }
-            }
-            twoDigitPrimes.append(num)
-        }
-        return twoDigitPrimes
-    }
-    
-    public func generateFiveOrSixDigitPrimes() -> [Int] {
-        var twoDigitPrimes = [Int]()
-        outerLoop: for num in 10000..<1000000 {
-            for i in 2..<num {
-                if num % i == 0 {
-                    continue outerLoop
-                }
-            }
-            twoDigitPrimes.append(num)
-        }
-        return twoDigitPrimes
+        return true
     }
 }
