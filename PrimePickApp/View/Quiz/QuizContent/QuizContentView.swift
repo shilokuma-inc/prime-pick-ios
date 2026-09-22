@@ -10,9 +10,11 @@ import SwiftUI
 struct QuizContentView: View {
     @Binding var quizNumber: Int
     let difficulty: Difficulty
+    var gameMode: GameMode = .practice
+    var remainingSeconds: Int = 0
     let quizData: [QuizEntity]
     let currentCombo: Int
-
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
@@ -46,7 +48,11 @@ struct QuizContentView: View {
                     )
                     .frame(height: geometry.size.height * 2 / 3)
                     
-                    QuizTimeLimitView(difficulty: difficulty)
+                    QuizTimeLimitView(
+                        difficulty: difficulty,
+                        gameMode: gameMode,
+                        remainingSeconds: remainingSeconds
+                    )
                         .frame(height: geometry.size.height / 6)
                 }
             }

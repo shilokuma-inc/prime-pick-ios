@@ -41,7 +41,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EE2F7BC0BE36F94FBB8DB3C4"
+               BlueprintIdentifier = "73BB5E9E77CAACBAC7375AC1"
                BuildableName = "PrimePickAppTests.xctest"
                BlueprintName = "PrimePickAppTests"
                ReferencedContainer = "container:PrimePickApp.xcodeproj">

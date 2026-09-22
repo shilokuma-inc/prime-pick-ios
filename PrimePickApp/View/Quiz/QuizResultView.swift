@@ -14,6 +14,7 @@ struct QuizResultView: View {
     let correctCount: Int
     let maxCombo: Int
     let answerRecords: [QuizAnswerRecord]
+    var gameMode: GameMode = .practice
 
     /// 復習一覧に出すのは間違えた問題だけ
     private var missedRecords: [QuizAnswerRecord] {
@@ -61,13 +62,19 @@ struct QuizResultView: View {
         }
     }
 
-    /// 合計スコアの内訳（正解数 / 最大コンボ）
+    /// 合計スコアの内訳。タイムアタックは問題数が固定ではないため解答数も並べる
     private var summarySection: some View {
         HStack(spacing: 16) {
-            Text("Correct \(correctCount)")
+            if gameMode == .timeAttack {
+                Text("Correct \(correctCount) / Answered \(answerRecords.count)")
+            } else {
+                Text("Correct \(correctCount)")
+            }
+
             Text("Max Combo \(maxCombo)")
         }
         .font(.headline)
+        .multilineTextAlignment(.center)
         .lineLimit(1)
         .minimumScaleFactor(0.6)
     }

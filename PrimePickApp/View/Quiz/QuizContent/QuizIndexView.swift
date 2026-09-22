@@ -16,7 +16,7 @@ struct QuizIndexView: View {
     private var isComboVisible: Bool {
         currentCombo >= 2
     }
-
+    
     var body: some View {
         HStack {
             Text("No.\(quizNumber + 1)")

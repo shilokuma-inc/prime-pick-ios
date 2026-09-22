@@ -16,6 +16,9 @@ struct QuizButtonView: View {
     @Binding var quizIndex: Int
     @Binding var isPresentedResult: Bool
     @Binding var answerRecords: [QuizAnswerRecord]
+    @State private var incorrectButtonTrigger: AnswerFeedbackTrigger?
+    @State private var correctButtonTrigger: AnswerFeedbackTrigger?
+    @State private var feedbackSequence: Int = 0
 
     var body: some View {
         ZStack {
@@ -23,6 +26,10 @@ struct QuizButtonView: View {
                 Spacer()
 
                 quizButton(option: "Incorrect")
+                .answerFeedbackEffect(trigger: incorrectButtonTrigger)
+                .sensoryFeedback(trigger: incorrectButtonTrigger) { _, trigger in
+                    trigger?.result.sensoryFeedback
+                }
                 .onTapGesture {
                     answer(answeredPrime: false)
                 }
@@ -30,6 +37,10 @@ struct QuizButtonView: View {
                 Spacer()
 
                 quizButton(option: "Correct")
+                .answerFeedbackEffect(trigger: correctButtonTrigger)
+                .sensoryFeedback(trigger: correctButtonTrigger) { _, trigger in
+                    trigger?.result.sensoryFeedback
+                }
                 .onTapGesture {
                     answer(answeredPrime: true)
                 }
@@ -39,27 +50,57 @@ struct QuizButtonView: View {
         }
     }
 
-    /// 解答を記録してスコアに反映し、次の問題へ進める。最後の問題ならリザルトを表示する。
+    /// 解答を記録してスコアに反映し、フィードバックを再生して次の問題へ進める。最後の問題ならリザルトを表示する。
+    /// タイムアタックでは `QuizView` が問題を補充するため、通常ここでは終了しない。
     private func answer(answeredPrime: Bool) {
-        if !isPresentedResult {
-            let quiz = quizData[quizIndex]
-            let record = QuizAnswerRecord(
-                id: quiz.quizId,
-                number: quiz.number,
-                isPrime: quiz.isCorrect,
-                answeredPrime: answeredPrime
-            )
-            answerRecords.append(record)
-            scoreCalculator.submit(
-                isCorrect: record.isAnswerCorrect,
-                difficulty: difficulty,
-                elapsedTime: Date().timeIntervalSince(questionStartDate)
-            )
-        }
+        // 時間切れでリザルトを表示したあとは、背後のボタンに触れても解答・遷移させない
+        guard !isPresentedResult else { return }
+
+        let quiz = quizData[quizIndex]
+        let record = QuizAnswerRecord(
+            id: quiz.quizId,
+            number: quiz.number,
+            isPrime: quiz.isCorrect,
+            answeredPrime: answeredPrime
+        )
+        answerRecords.append(record)
+        scoreCalculator.submit(
+            isCorrect: record.isAnswerCorrect,
+            difficulty: difficulty,
+            elapsedTime: Date().timeIntervalSince(questionStartDate)
+        )
+        playFeedback(
+            record.isAnswerCorrect ? .correct : .incorrect,
+            on: answeredPrime ? .correct : .incorrect
+        )
         if quizIndex < quizData.count - 1 {
             quizIndex += 1
         } else {
             isPresentedResult = true
+        }
+    }
+
+    /// タップされたボタン
+    private enum TappedButton {
+        case correct
+        case incorrect
+    }
+
+    /// 効果音を鳴らし、タップされたボタンに触覚とアニメーションのきっかけを渡す
+    ///
+    /// 触覚は `sensoryFeedback` がこのきっかけの変化を検知して再生する。
+    /// 効果音・触覚とも再生完了を待たないため、この直後の次の問題への遷移をブロックしない。
+    private func playFeedback(_ result: AnswerFeedback, on button: TappedButton) {
+        SoundFeedback.play(result.sound)
+
+        // 同じ結果が続いても触覚とアニメーションが再生されるよう、解答ごとに異なる ID を発行する
+        feedbackSequence += 1
+        let trigger = AnswerFeedbackTrigger(id: feedbackSequence, result: result)
+        switch button {
+        case .correct:
+            correctButtonTrigger = trigger
+        case .incorrect:
+            incorrectButtonTrigger = trigger
         }
     }
 }
