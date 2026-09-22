@@ -26,7 +26,7 @@ struct AnswerFeedbackEffect: ViewModifier {
             .scaleEffect(scale)
             .offset(x: shakeOffset)
             .shadow(color: Color.quizCorrectButton.opacity(glowOpacity), radius: 24)
-            .onChange(of: trigger) { newTrigger in
+            .onChange(of: trigger) { _, newTrigger in
                 guard let newTrigger else { return }
                 latestTriggerID = newTrigger.id
 
