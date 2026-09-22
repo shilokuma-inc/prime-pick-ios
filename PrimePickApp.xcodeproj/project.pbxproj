@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		193A97532DEDA1148EE0A2C9 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2E8881254652FCE64BDC5E49 /* FirebaseAnalytics */; };
-		1D3D78B9A3E9490CC5C3C3A3 /* ScoreCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E9D8F49AFCAD8600628DE9 /* ScoreCalculatorTests.swift */; };
+		418CCDB0C13ECC1AC217AAA7 /* ScoreCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB318AB121732931D7C5C755 /* ScoreCalculator.swift */; };
 		4F02A57D2BF62F61003DF310 /* QuizEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02A57C2BF62F61003DF310 /* QuizEntity.swift */; };
 		4F02A57F2BF63A43003DF310 /* QuizDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02A57E2BF63A43003DF310 /* QuizDataManager.swift */; };
 		4F0C82822BC8247500E1480E /* PrimePickApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82812BC8247500E1480E /* PrimePickApp.swift */; };
@@ -29,16 +29,18 @@
 		4FEC65B42C01184E00A8B731 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEC65B32C01184E00A8B731 /* Text+Extension.swift */; };
 		54D69EBDCDA4A3DBECB1740A /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36F4F283E4470B1B885ED0 /* AppTheme.swift */; };
 		58D00C0E23DFBA64A9924780 /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348F9B9700F6A15141CCA545 /* HowToPlayView.swift */; };
+		5D66CBA0CBFDC7747EBD549D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2145FBDC09BBDC8F2EAC6EF6 /* Foundation.framework */; };
 		624168433780D0B8FD63B8D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53375860F98A49A23F4CF3D /* AppDelegate.swift */; };
 		86F1EE92CEDD8FEA6AF42A7F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2C18A59D04746477C50D4631 /* Localizable.xcstrings */; };
 		8B5D8B28449149C522791BB4 /* AnalyticsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5151BA48ADFFD8185C89A868 /* AnalyticsScreen.swift */; };
 		9431A16ABA552A3DA82E34E8 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4689944114408D9DC263A40 /* FirebaseAnalytics.swift */; };
-		C6EEBA01196E5D195CDB63D3 /* ScoreCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D5BD6212ADC80881F836F4 /* ScoreCalculator.swift */; };
-		EEEA4D851413815D91CBA9B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767411CF6BB01E7E529F8343 /* Foundation.framework */; };
+		A594ABFDAC2E5927E39ACD15 /* PrimeFactorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69D0DED6D686DD9038FF63A /* PrimeFactorization.swift */; };
+		ACC087F9588A9C69154F5D34 /* QuizAnswerRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7CAF292996E14CCDF4426 /* QuizAnswerRecord.swift */; };
+		B4F1B1C7F76C348F6F47A0E1 /* ScoreCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4B7A75EF1AFD3A28C5400A /* ScoreCalculatorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E532B8BEADA4E57BDFD97D58 /* PBXContainerItemProxy */ = {
+		7DE95C2212CFA7D02EE03276 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4F0C82762BC8247500E1480E /* Project object */;
 			proxyType = 1;
@@ -48,7 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		11E9D8F49AFCAD8600628DE9 /* ScoreCalculatorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScoreCalculatorTests.swift; sourceTree = "<group>"; };
+		2145FBDC09BBDC8F2EAC6EF6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		2C18A59D04746477C50D4631 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		348F9B9700F6A15141CCA545 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
 		4F02A57C2BF62F61003DF310 /* QuizEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizEntity.swift; sourceTree = "<group>"; };
@@ -73,20 +75,22 @@
 		4FEC65B02C01164800A8B731 /* SelectDifficultyButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDifficultyButtonView.swift; sourceTree = "<group>"; };
 		4FEC65B32C01184E00A8B731 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
 		5151BA48ADFFD8185C89A868 /* AnalyticsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsScreen.swift; sourceTree = "<group>"; };
-		663867349E8C0511A49BA90E /* PrimePickAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrimePickAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		74D5BD6212ADC80881F836F4 /* ScoreCalculator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScoreCalculator.swift; sourceTree = "<group>"; };
-		767411CF6BB01E7E529F8343 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		72E7CAF292996E14CCDF4426 /* QuizAnswerRecord.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizAnswerRecord.swift; sourceTree = "<group>"; };
 		7C36F4F283E4470B1B885ED0 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		8E18F156653638E860DDB789 /* PrimePickAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrimePickAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E4B7A75EF1AFD3A28C5400A /* ScoreCalculatorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScoreCalculatorTests.swift; sourceTree = "<group>"; };
 		A4689944114408D9DC263A40 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		B53375860F98A49A23F4CF3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CB318AB121732931D7C5C755 /* ScoreCalculator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScoreCalculator.swift; sourceTree = "<group>"; };
+		F69D0DED6D686DD9038FF63A /* PrimeFactorization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrimeFactorization.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		342AF921D4E90E4C62AC829F /* Frameworks */ = {
+		3043E0FF013D15D40CC6F553 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEEA4D851413815D91CBA9B2 /* Foundation.framework in Frameworks */,
+				5D66CBA0CBFDC7747EBD549D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,18 +105,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B4DB83311CBF9CB780B62E6 /* Frameworks */ = {
+		0C53C036DB80C1D818125812 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				44915B6CB836A619F1275DA3 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		44915B6CB836A619F1275DA3 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				767411CF6BB01E7E529F8343 /* Foundation.framework */,
+				2145FBDC09BBDC8F2EAC6EF6 /* Foundation.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -122,8 +118,8 @@
 			children = (
 				4F0C82802BC8247500E1480E /* PrimePickApp */,
 				4F0C827F2BC8247500E1480E /* Products */,
-				0B4DB83311CBF9CB780B62E6 /* Frameworks */,
-				9FAFBB326BB15E042425B358 /* PrimePickAppTests */,
+				8E90CBB8759BD995AC4EAC77 /* Frameworks */,
+				E6EEAFD1E3AB072EA8CA49D3 /* PrimePickAppTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,7 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				4F0C827E2BC8247500E1480E /* PrimePickApp.app */,
-				663867349E8C0511A49BA90E /* PrimePickAppTests.xctest */,
+				8E18F156653638E860DDB789 /* PrimePickAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -179,6 +175,8 @@
 				4F8BE16B2BF4FFB000D7CF0E /* PrimeData.swift */,
 				4F02A57E2BF63A43003DF310 /* QuizDataManager.swift */,
 				4F02A57C2BF62F61003DF310 /* QuizEntity.swift */,
+				F69D0DED6D686DD9038FF63A /* PrimeFactorization.swift */,
+				72E7CAF292996E14CCDF4426 /* QuizAnswerRecord.swift */,
 			);
 			path = QuizData;
 			sourceTree = "<group>";
@@ -237,15 +235,23 @@
 			isa = PBXGroup;
 			children = (
 				7C36F4F283E4470B1B885ED0 /* AppTheme.swift */,
-				74D5BD6212ADC80881F836F4 /* ScoreCalculator.swift */,
+				CB318AB121732931D7C5C755 /* ScoreCalculator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		9FAFBB326BB15E042425B358 /* PrimePickAppTests */ = {
+		8E90CBB8759BD995AC4EAC77 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				11E9D8F49AFCAD8600628DE9 /* ScoreCalculatorTests.swift */,
+				0C53C036DB80C1D818125812 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E6EEAFD1E3AB072EA8CA49D3 /* PrimePickAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				9E4B7A75EF1AFD3A28C5400A /* ScoreCalculatorTests.swift */,
 			);
 			name = PrimePickAppTests;
 			path = PrimePickAppTests;
@@ -274,22 +280,22 @@
 			productReference = 4F0C827E2BC8247500E1480E /* PrimePickApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		964EF0DF6716B6A284F82D53 /* PrimePickAppTests */ = {
+		EE2F7BC0BE36F94FBB8DB3C4 /* PrimePickAppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A9613522D9F03FC3F55697CE /* Build configuration list for PBXNativeTarget "PrimePickAppTests" */;
+			buildConfigurationList = 98A0350739941CF3C0DCA311 /* Build configuration list for PBXNativeTarget "PrimePickAppTests" */;
 			buildPhases = (
-				5C5A1C19B2137E07B641E62B /* Sources */,
-				342AF921D4E90E4C62AC829F /* Frameworks */,
-				372107595CCBF04D7C81A68F /* Resources */,
+				A7F4240A0BF29BF94133EC9B /* Sources */,
+				3043E0FF013D15D40CC6F553 /* Frameworks */,
+				A93B00BF2DC0BB485FCABDC1 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9E9D9ABC8D4CB2A3B9CCD9A4 /* PBXTargetDependency */,
+				8B9FB03D3337391E9F5B79E9 /* PBXTargetDependency */,
 			);
 			name = PrimePickAppTests;
 			productName = PrimePickAppTests;
-			productReference = 663867349E8C0511A49BA90E /* PrimePickAppTests.xctest */;
+			productReference = 8E18F156653638E860DDB789 /* PrimePickAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -325,19 +331,12 @@
 			projectRoot = "";
 			targets = (
 				4F0C827D2BC8247500E1480E /* PrimePickApp */,
-				964EF0DF6716B6A284F82D53 /* PrimePickAppTests */,
+				EE2F7BC0BE36F94FBB8DB3C4 /* PrimePickAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		372107595CCBF04D7C81A68F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		4F0C827C2BC8247500E1480E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -346,6 +345,13 @@
 				4F0C828A2BC8247600E1480E /* Preview Assets.xcassets in Resources */,
 				4F42C7A62BF7756200F92FBB /* ColorAssets.xcassets in Resources */,
 				4F0C82862BC8247600E1480E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A93B00BF2DC0BB485FCABDC1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,30 +382,73 @@
 				4F02A57F2BF63A43003DF310 /* QuizDataManager.swift in Sources */,
 				4F8BE16C2BF4FFB000D7CF0E /* PrimeData.swift in Sources */,
 				4FEC65B42C01184E00A8B731 /* Text+Extension.swift in Sources */,
-				C6EEBA01196E5D195CDB63D3 /* ScoreCalculator.swift in Sources */,
+				A594ABFDAC2E5927E39ACD15 /* PrimeFactorization.swift in Sources */,
+				ACC087F9588A9C69154F5D34 /* QuizAnswerRecord.swift in Sources */,
+				418CCDB0C13ECC1AC217AAA7 /* ScoreCalculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5C5A1C19B2137E07B641E62B /* Sources */ = {
+		A7F4240A0BF29BF94133EC9B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D3D78B9A3E9490CC5C3C3A3 /* ScoreCalculatorTests.swift in Sources */,
+				B4F1B1C7F76C348F6F47A0E1 /* ScoreCalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		9E9D9ABC8D4CB2A3B9CCD9A4 /* PBXTargetDependency */ = {
+		8B9FB03D3337391E9F5B79E9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PrimePickApp;
 			target = 4F0C827D2BC8247500E1480E /* PrimePickApp */;
-			targetProxy = E532B8BEADA4E57BDFD97D58 /* PBXContainerItemProxy */;
+			targetProxy = 7DE95C2212CFA7D02EE03276 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		33FD1F01855AA280C9F7121A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XU74X3434S;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ml.mrs1669.PrimePickAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrimePickApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PrimePickApp";
+				TEST_TARGET_NAME = PrimePickApp;
+			};
+			name = Debug;
+		};
+		4035B2B71343ABE87178AB17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XU74X3434S;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ml.mrs1669.PrimePickAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrimePickApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PrimePickApp";
+				TEST_TARGET_NAME = PrimePickApp;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		4F0C828B2BC8247600E1480E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -541,7 +590,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.2;
@@ -581,7 +630,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.2;
@@ -593,47 +642,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		9484062BD05B77970A8575B5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XU74X3434S;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ml.mrs1669.PrimePickAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrimePickApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PrimePickApp";
-				TEST_TARGET_NAME = PrimePickApp;
-			};
-			name = Debug;
-		};
-		C3ADFE1DB5AC38B24C407151 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XU74X3434S;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ml.mrs1669.PrimePickAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrimePickApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PrimePickApp";
-				TEST_TARGET_NAME = PrimePickApp;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -658,11 +666,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A9613522D9F03FC3F55697CE /* Build configuration list for PBXNativeTarget "PrimePickAppTests" */ = {
+		98A0350739941CF3C0DCA311 /* Build configuration list for PBXNativeTarget "PrimePickAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C3ADFE1DB5AC38B24C407151 /* Release */,
-				9484062BD05B77970A8575B5 /* Debug */,
+				4035B2B71343ABE87178AB17 /* Release */,
+				33FD1F01855AA280C9F7121A /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

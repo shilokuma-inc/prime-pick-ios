@@ -10,10 +10,12 @@ import SwiftUI
 struct QuizButtonView: View {
     var quizData: [QuizEntity]
     let difficulty: Difficulty
-    @Binding var scoreCalculator: ScoreCalculator
+    /// 現在の問題が表示された時刻。速度ボーナスの計測基準
     @Binding var questionStartDate: Date
+    @Binding var scoreCalculator: ScoreCalculator
     @Binding var quizIndex: Int
     @Binding var isPresentedResult: Bool
+    @Binding var answerRecords: [QuizAnswerRecord]
 
     var body: some View {
         ZStack {
@@ -22,14 +24,14 @@ struct QuizButtonView: View {
 
                 quizButton(option: "Incorrect")
                 .onTapGesture {
-                    answer(selectedIsPrime: false)
+                    answer(answeredPrime: false)
                 }
 
                 Spacer()
 
                 quizButton(option: "Correct")
                 .onTapGesture {
-                    answer(selectedIsPrime: true)
+                    answer(answeredPrime: true)
                 }
 
                 Spacer()
@@ -37,17 +39,24 @@ struct QuizButtonView: View {
         }
     }
 
-    /// 解答をスコアに反映し、次の問題へ進める
-    private func answer(selectedIsPrime: Bool) {
+    /// 解答を記録してスコアに反映し、次の問題へ進める。最後の問題ならリザルトを表示する。
+    private func answer(answeredPrime: Bool) {
         if !isPresentedResult {
-            let elapsedTime = Date().timeIntervalSince(questionStartDate)
+            let quiz = quizData[quizIndex]
+            let record = QuizAnswerRecord(
+                id: quiz.quizId,
+                number: quiz.number,
+                isPrime: quiz.isCorrect,
+                answeredPrime: answeredPrime
+            )
+            answerRecords.append(record)
             scoreCalculator.submit(
-                isCorrect: quizData[quizIndex].isCorrect == selectedIsPrime,
+                isCorrect: record.isAnswerCorrect,
                 difficulty: difficulty,
-                elapsedTime: elapsedTime
+                elapsedTime: Date().timeIntervalSince(questionStartDate)
             )
         }
-        if quizIndex < 9 {
+        if quizIndex < quizData.count - 1 {
             quizIndex += 1
             // 次の問題が表示された時点を経過時間の基準にする
             questionStartDate = Date()

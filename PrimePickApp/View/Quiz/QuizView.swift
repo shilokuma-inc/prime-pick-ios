@@ -12,6 +12,7 @@ struct QuizView: View {
     @State private var quizNumber: Int = 0
     @State var isPresentedResult: Bool = false
     @State private var scoreCalculator = ScoreCalculator()
+    @State private var answerRecords: [QuizAnswerRecord] = []
     /// 現在の問題が表示された時刻。速度ボーナスの計測基準
     @State private var questionStartDate: Date = Date()
 
@@ -45,10 +46,11 @@ struct QuizView: View {
                     QuizButtonView(
                         quizData: quizData,
                         difficulty: difficulty,
-                        scoreCalculator: $scoreCalculator,
                         questionStartDate: $questionStartDate,
+                        scoreCalculator: $scoreCalculator,
                         quizIndex: $quizNumber,
-                        isPresentedResult: $isPresentedResult
+                        isPresentedResult: $isPresentedResult,
+                        answerRecords: $answerRecords
                     )
                     .frame(height: geometry.size.height / 3)
 
@@ -60,13 +62,15 @@ struct QuizView: View {
                     QuizResultView(
                         score: scoreCalculator.totalScore,
                         correctCount: scoreCalculator.correctCount,
-                        maxCombo: scoreCalculator.maxCombo
+                        maxCombo: scoreCalculator.maxCombo,
+                        answerRecords: answerRecords
                     )
                 }
             }
         }
         .sendAnalyticsScreen(.quiz)
         .onAppear {
+            print(quizData)
             // 1 問目が表示された時点を経過時間の基準にする
             questionStartDate = Date()
         }
