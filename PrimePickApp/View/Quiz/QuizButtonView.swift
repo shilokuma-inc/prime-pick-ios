@@ -11,7 +11,7 @@ struct QuizButtonView: View {
     var quizData: [QuizEntity]
     let difficulty: Difficulty
     /// 現在の問題が表示された時刻。速度ボーナスの計測基準
-    @Binding var questionStartDate: Date
+    let questionStartDate: Date
     @Binding var scoreCalculator: ScoreCalculator
     @Binding var quizIndex: Int
     @Binding var isPresentedResult: Bool
@@ -58,8 +58,6 @@ struct QuizButtonView: View {
         }
         if quizIndex < quizData.count - 1 {
             quizIndex += 1
-            // 次の問題が表示された時点を経過時間の基準にする
-            questionStartDate = Date()
         } else {
             isPresentedResult = true
         }

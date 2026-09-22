@@ -46,7 +46,7 @@ struct QuizView: View {
                     QuizButtonView(
                         quizData: quizData,
                         difficulty: difficulty,
-                        questionStartDate: $questionStartDate,
+                        questionStartDate: questionStartDate,
                         scoreCalculator: $scoreCalculator,
                         quizIndex: $quizNumber,
                         isPresentedResult: $isPresentedResult,
@@ -72,6 +72,10 @@ struct QuizView: View {
         .onAppear {
             print(quizData)
             // 1 問目が表示された時点を経過時間の基準にする
+            questionStartDate = Date()
+        }
+        .onChange(of: quizNumber) { _, _ in
+            // 次の問題に切り替わった時点を経過時間の基準にする
             questionStartDate = Date()
         }
     }
