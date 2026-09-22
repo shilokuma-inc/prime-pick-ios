@@ -27,11 +27,7 @@ struct QuizButtonView: View {
                         } else {
                             print("不正解")
                         }
-                    }
-                    if quizIndex < 9 {
-                        quizIndex += 1
-                    } else {
-                        isPresentedResult = true
+                        goToNextQuiz()
                     }
                 }
                 
@@ -46,16 +42,22 @@ struct QuizButtonView: View {
                         } else {
                             print("不正解")
                         }
-                    }
-                    if quizIndex < 9 {
-                        quizIndex += 1
-                    } else {
-                        isPresentedResult = true
+                        goToNextQuiz()
                     }
                 }
                 
                 Spacer()
             }
+        }
+    }
+
+    /// 次の問題へ進める。最後の問題まで解き終えていたらリザルトを表示する
+    /// （タイムアタックでは `QuizView` が問題を補充するため、通常ここでは終了しない）
+    private func goToNextQuiz() {
+        if quizIndex < quizData.count - 1 {
+            quizIndex += 1
+        } else {
+            isPresentedResult = true
         }
     }
 }

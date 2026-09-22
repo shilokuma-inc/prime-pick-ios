@@ -12,6 +12,9 @@ struct QuizResultView: View {
     @State private var rainbowColor: Color = .red
     @State private var animationAngle: Double = 0
     let score: Int
+    var gameMode: GameMode = .practice
+    /// 時間切れまでに解答した問題数（タイムアタックのみ利用する）
+    var answeredQuizNumber: Int = 0
     
     var body: some View {
         GeometryReader { geometry in
@@ -40,6 +43,13 @@ struct QuizResultView: View {
                         )
                         .font(.title)
                         .multilineTextAlignment(.center)
+
+                    if gameMode == .timeAttack {
+                        Text("Correct \(score) / Answered \(answeredQuizNumber)")
+                            .font(.headline)
+                            .multilineTextAlignment(.center)
+                            .padding(.bottom, 16)
+                    }
                     
                     ZStack {
                         RoundedRectangle(cornerRadius: 25)
