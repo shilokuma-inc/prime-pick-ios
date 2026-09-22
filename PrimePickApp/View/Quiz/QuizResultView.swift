@@ -11,7 +11,10 @@ struct QuizResultView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var rainbowColor: Color = .red
     let score: Int
+    let correctCount: Int
+    let maxCombo: Int
     let answerRecords: [QuizAnswerRecord]
+    var gameMode: GameMode = .practice
 
     /// 復習一覧に出すのは間違えた問題だけ
     private var missedRecords: [QuizAnswerRecord] {
@@ -30,6 +33,8 @@ struct QuizResultView: View {
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
                         .minimumScaleFactor(0.6)
+
+                    summarySection
 
                     reviewSection
 
@@ -55,6 +60,23 @@ struct QuizResultView: View {
         .onAppear {
             startColorAnimation()
         }
+    }
+
+    /// 合計スコアの内訳。タイムアタックは問題数が固定ではないため解答数も並べる
+    private var summarySection: some View {
+        HStack(spacing: 16) {
+            if gameMode == .timeAttack {
+                Text("Correct \(correctCount) / Answered \(answerRecords.count)")
+            } else {
+                Text("Correct \(correctCount)")
+            }
+
+            Text("Max Combo \(maxCombo)")
+        }
+        .font(.headline)
+        .multilineTextAlignment(.center)
+        .lineLimit(1)
+        .minimumScaleFactor(0.6)
     }
 
     @ViewBuilder
@@ -147,7 +169,9 @@ struct QuizResultView: View {
 
 #Preview {
     QuizResultView(
-        score: 7,
+        score: 1_250,
+        correctCount: 6,
+        maxCombo: 4,
         answerRecords: [
             QuizAnswerRecord(id: 1, number: 391, isPrime: false, answeredPrime: true),
             QuizAnswerRecord(id: 2, number: 397, isPrime: true, answeredPrime: false),
