@@ -32,7 +32,7 @@ extension SelectDifficultyButtonView {
             }
         }
         .pickerStyle(.segmented)
-        .padding(.horizontal, 50)
+        .padding(.horizontal, 24)
         .padding(.bottom, 16)
     }
 

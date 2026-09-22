@@ -32,7 +32,7 @@ struct QuizResultView: View {
                         .lineLimit(2)
                         .minimumScaleFactor(0.6)
 
-                    if gameMode == .timeAttack {
+                    if gameMode.isTimeAttack {
                         Text("Correct \(score) / Answered \(answerRecords.count)")
                             .font(.headline)
                             .multilineTextAlignment(.center)

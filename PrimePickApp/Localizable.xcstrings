@@ -385,22 +385,6 @@
         }
       }
     },
-    "Time Attack": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time Attack"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "タイムアタック"
-          }
-        }
-      }
-    },
     "Game Mode": {
       "localizations": {
         "en": {
@@ -445,6 +429,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "正解 %lld 問 / 解答 %lld 問"
+          }
+        }
+      }
+    },
+    "%lld seconds": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld sec"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 秒"
           }
         }
       }
