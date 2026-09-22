@@ -12,17 +12,24 @@ struct QuizButtonView: View {
     @Binding var correctQuizNumber: Int
     @Binding var quizIndex: Int
     @Binding var isPresentedResult: Bool
+    @State private var incorrectButtonTrigger: AnswerFeedbackTrigger?
+    @State private var correctButtonTrigger: AnswerFeedbackTrigger?
+    @State private var feedbackSequence: Int = 0
 
     var body: some View {
         ZStack {
             HStack {
                 Spacer()
-                
+
                 quizButton(option: "Incorrect")
+                .answerFeedbackEffect(trigger: incorrectButtonTrigger)
                 .onTapGesture {
                     if !isPresentedResult {
                         if !quizData[quizIndex].isCorrect {
                             correctQuizNumber += 1
+                            playFeedback(.correct, on: .incorrect)
+                        } else {
+                            playFeedback(.incorrect, on: .incorrect)
                         }
                     }
                     if quizIndex < 9 {
@@ -31,14 +38,18 @@ struct QuizButtonView: View {
                         isPresentedResult = true
                     }
                 }
-                
+
                 Spacer()
-                
+
                 quizButton(option: "Correct")
+                .answerFeedbackEffect(trigger: correctButtonTrigger)
                 .onTapGesture {
                     if !isPresentedResult {
                         if quizData[quizIndex].isCorrect {
                             correctQuizNumber += 1
+                            playFeedback(.correct, on: .correct)
+                        } else {
+                            playFeedback(.incorrect, on: .correct)
                         }
                     }
                     if quizIndex < 9 {
@@ -47,9 +58,35 @@ struct QuizButtonView: View {
                         isPresentedResult = true
                     }
                 }
-                
+
                 Spacer()
             }
+        }
+        .onAppear {
+            AnswerFeedbackPlayer.prepare()
+        }
+    }
+
+    /// タップされたボタン
+    private enum TappedButton {
+        case correct
+        case incorrect
+    }
+
+    /// 触覚・効果音を再生し、タップされたボタンにアニメーションのきっかけを渡す
+    ///
+    /// いずれも再生完了を待たないため、この直後の次の問題への遷移をブロックしない。
+    private func playFeedback(_ result: AnswerFeedback, on button: TappedButton) {
+        AnswerFeedbackPlayer.play(result)
+
+        // 同じ結果が続いてもアニメーションが再生されるよう、解答ごとに異なる ID を発行する
+        feedbackSequence += 1
+        let trigger = AnswerFeedbackTrigger(id: feedbackSequence, result: result)
+        switch button {
+        case .correct:
+            correctButtonTrigger = trigger
+        case .incorrect:
+            incorrectButtonTrigger = trigger
         }
     }
 }
