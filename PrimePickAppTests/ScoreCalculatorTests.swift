@@ -176,6 +176,24 @@ final class ScoreCalculatorTests: XCTestCase {
         }
     }
 
+    func testLongStreakBeyondComboCapKeepsScoring() {
+        // タイムアタックは 10 問固定ではなく問題が追加生成されるため、
+        // コンボ上限を超えて解答が続いても破綻しないことを確認する
+        var calculator = ScoreCalculator()
+        var gains: [Int] = []
+        for _ in 1...60 {
+            gains.append(calculator.submit(isCorrect: true, difficulty: .hard, elapsedTime: 6.0))
+        }
+
+        // コンボ倍率が上限に達したあとは 1 問あたりの獲得点が一定になる
+        XCTAssertEqual(Set(gains.suffix(40)).count, 1)
+        XCTAssertEqual(calculator.currentCombo, 60)
+        XCTAssertEqual(calculator.maxCombo, 60)
+        XCTAssertEqual(calculator.correctCount, 60)
+        XCTAssertEqual(calculator.totalScore, gains.reduce(0, +))
+        XCTAssertGreaterThan(calculator.totalScore, 0)
+    }
+
     func testTotalScoreNeverGoesNegativeOrOverflows() {
         var calculator = ScoreCalculator()
         for index in 0..<2_000 {
