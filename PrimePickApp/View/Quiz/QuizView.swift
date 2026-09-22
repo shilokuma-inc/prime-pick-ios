@@ -11,13 +11,15 @@ struct QuizView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var quizNumber: Int = 0
     @State var isPresentedResult: Bool = false
-    @State var resultScore: Int = 0
-    
+    @State private var scoreCalculator = ScoreCalculator()
+    /// 現在の問題が表示された時刻。速度ボーナスの計測基準
+    @State private var questionStartDate: Date = Date()
+
     let primeData = PrimeData()
     let difficulty: Difficulty
     let manager = QuizDataManager()
     let quizData: [QuizEntity]
-    
+
     init(difficulty: Difficulty) {
         self.difficulty = difficulty
         quizData = manager.makeQuizData(difficulty: difficulty)
@@ -33,32 +35,40 @@ struct QuizView: View {
                     QuizContentView(
                         quizNumber: $quizNumber,
                         difficulty: difficulty,
-                        quizData: quizData
+                        quizData: quizData,
+                        currentCombo: scoreCalculator.currentCombo
                     )
                     .frame(height: geometry.size.height / 2)
-                    
+
                     Spacer()
-                    
+
                     QuizButtonView(
                         quizData: quizData,
-                        correctQuizNumber: $resultScore,
+                        difficulty: difficulty,
+                        scoreCalculator: $scoreCalculator,
+                        questionStartDate: $questionStartDate,
                         quizIndex: $quizNumber,
                         isPresentedResult: $isPresentedResult
                     )
                     .frame(height: geometry.size.height / 3)
-                    
+
                     Spacer()
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
-                
+
                 if isPresentedResult {
-                    QuizResultView(score: resultScore)
+                    QuizResultView(
+                        score: scoreCalculator.totalScore,
+                        correctCount: scoreCalculator.correctCount,
+                        maxCombo: scoreCalculator.maxCombo
+                    )
                 }
             }
         }
         .sendAnalyticsScreen(.quiz)
         .onAppear {
-            print(quizData)
+            // 1 問目が表示された時点を経過時間の基準にする
+            questionStartDate = Date()
         }
     }
 }

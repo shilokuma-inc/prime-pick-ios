@@ -11,7 +11,8 @@ struct QuizContentView: View {
     @Binding var quizNumber: Int
     let difficulty: Difficulty
     let quizData: [QuizEntity]
-    
+    let currentCombo: Int
+
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
@@ -31,8 +32,12 @@ struct QuizContentView: View {
                 }
 
                 VStack(spacing: .zero) {
-                    QuizIndexView(difficulty: difficulty, quizNumber: $quizNumber)
-                        .frame(height: geometry.size.height / 6)
+                    QuizIndexView(
+                        difficulty: difficulty,
+                        quizNumber: $quizNumber,
+                        currentCombo: currentCombo
+                    )
+                    .frame(height: geometry.size.height / 6)
                     
                     QuizNumberView(
                         quizNumber: $quizNumber,
@@ -56,7 +61,8 @@ struct QuizContentView_Previews: PreviewProvider {
         QuizContentView(
             quizNumber: $quizNumber,
             difficulty: .easy,
-            quizData: [QuizEntity(quizId: 0, number: 3, isCorrect: true)]
+            quizData: [QuizEntity(quizId: 0, number: 3, isCorrect: true)],
+            currentCombo: 3
         )
     }
 }

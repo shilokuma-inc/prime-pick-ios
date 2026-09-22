@@ -9,7 +9,9 @@ import SwiftUI
 
 struct QuizButtonView: View {
     var quizData: [QuizEntity]
-    @Binding var correctQuizNumber: Int
+    let difficulty: Difficulty
+    @Binding var scoreCalculator: ScoreCalculator
+    @Binding var questionStartDate: Date
     @Binding var quizIndex: Int
     @Binding var isPresentedResult: Bool
 
@@ -17,45 +19,40 @@ struct QuizButtonView: View {
         ZStack {
             HStack {
                 Spacer()
-                
+
                 quizButton(option: "Incorrect")
                 .onTapGesture {
-                    if !isPresentedResult {
-                        if !quizData[quizIndex].isCorrect {
-                            print("正解")
-                            correctQuizNumber += 1
-                        } else {
-                            print("不正解")
-                        }
-                    }
-                    if quizIndex < 9 {
-                        quizIndex += 1
-                    } else {
-                        isPresentedResult = true
-                    }
+                    answer(selectedIsPrime: false)
                 }
-                
+
                 Spacer()
-                
+
                 quizButton(option: "Correct")
                 .onTapGesture {
-                    if !isPresentedResult {
-                        if quizData[quizIndex].isCorrect {
-                            print("正解")
-                            correctQuizNumber += 1
-                        } else {
-                            print("不正解")
-                        }
-                    }
-                    if quizIndex < 9 {
-                        quizIndex += 1
-                    } else {
-                        isPresentedResult = true
-                    }
+                    answer(selectedIsPrime: true)
                 }
-                
+
                 Spacer()
             }
+        }
+    }
+
+    /// 解答をスコアに反映し、次の問題へ進める
+    private func answer(selectedIsPrime: Bool) {
+        if !isPresentedResult {
+            let elapsedTime = Date().timeIntervalSince(questionStartDate)
+            scoreCalculator.submit(
+                isCorrect: quizData[quizIndex].isCorrect == selectedIsPrime,
+                difficulty: difficulty,
+                elapsedTime: elapsedTime
+            )
+        }
+        if quizIndex < 9 {
+            quizIndex += 1
+            // 次の問題が表示された時点を経過時間の基準にする
+            questionStartDate = Date()
+        } else {
+            isPresentedResult = true
         }
     }
 }
@@ -67,7 +64,7 @@ private func quizButton(option: String) -> some View {
             .background(RoundedRectangle(cornerRadius: 25).fill(option == "Correct" ? Color.quizCorrectButton.opacity(0.1) : Color.quizIncorrectButton.opacity(0.1)))
             .frame(width: UIScreen.main.bounds.width * 2 / 5, height: UIScreen.main.bounds.height / 4)
             .shadow(radius: 10)
-        
+
         if option == "Correct" {
             Text("✅")
                 .font(.custom("ArialRoundedMTBold", size: 80))

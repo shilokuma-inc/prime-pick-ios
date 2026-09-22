@@ -12,7 +12,9 @@ struct QuizResultView: View {
     @State private var rainbowColor: Color = .red
     @State private var animationAngle: Double = 0
     let score: Int
-    
+    let correctCount: Int
+    let maxCombo: Int
+
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -33,14 +35,22 @@ struct QuizResultView: View {
                     }
                 
                 VStack {
-                    Text("Your Score is \(score) points!")
-                        .frame(
-                            width: geometry.size.width / 2,
-                            height: geometry.size.height / 4
-                        )
-                        .font(.title)
-                        .multilineTextAlignment(.center)
-                    
+                    VStack(spacing: 8) {
+                        Text("Your Score is \(score) points!")
+                            .font(.title)
+                            .multilineTextAlignment(.center)
+
+                        Text("Correct \(correctCount)")
+                            .font(.headline)
+
+                        Text("Max Combo \(maxCombo)")
+                            .font(.headline)
+                    }
+                    .frame(
+                        width: geometry.size.width / 2,
+                        height: geometry.size.height / 4
+                    )
+
                     ZStack {
                         RoundedRectangle(cornerRadius: 25)
                             .stroke(Color.primary, lineWidth: 5)
@@ -85,5 +95,5 @@ struct QuizResultView: View {
 }
 
 #Preview {
-    QuizResultView(score: 1)
+    QuizResultView(score: 1_250, correctCount: 8, maxCombo: 5)
 }
