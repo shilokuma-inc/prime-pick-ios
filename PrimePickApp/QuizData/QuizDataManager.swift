@@ -38,14 +38,24 @@ class QuizDataManager {
     }
 }
 
+/// シード値から決まった乱数列を作る `RandomNumberGenerator`。
+///
+/// `GKMersenneTwisterRandomSource` が一度に返すのは 32bit 分なので、2 回引いて 64bit に組み立てる。
+/// 以前は `nextUniform()` の戻り値（`Float`）に `Float(UInt64.max)` を掛けていたが、
+/// - `Float` の仮数部は 24bit しかなく、下位 40bit 前後が常に 0 になる
+/// - `Float(UInt64.max)` は 2^64 に丸まるため、`nextUniform()` が 1.0 を返すと積が
+///   `UInt64` の範囲を超えてクラッシュする（実測で約 428 万回に 1 回発生）
+/// という問題があったため、整数のまま扱っている。
 struct SeededGenerator: RandomNumberGenerator {
-    private var rng: GKMersenneTwisterRandomSource
+    private let source: GKMersenneTwisterRandomSource
 
     init(seed: UInt64) {
-        rng = GKMersenneTwisterRandomSource(seed: seed)
+        source = GKMersenneTwisterRandomSource(seed: seed)
     }
 
     mutating func next() -> UInt64 {
-        return UInt64(rng.nextUniform() * Float(UInt64.max))
+        let high = UInt64(UInt32(bitPattern: Int32(truncatingIfNeeded: source.nextInt())))
+        let low = UInt64(UInt32(bitPattern: Int32(truncatingIfNeeded: source.nextInt())))
+        return high << 32 | low
     }
 }
