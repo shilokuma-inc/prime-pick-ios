@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		193A97532DEDA1148EE0A2C9 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2E8881254652FCE64BDC5E49 /* FirebaseAnalytics */; };
+		1D3D78B9A3E9490CC5C3C3A3 /* ScoreCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E9D8F49AFCAD8600628DE9 /* ScoreCalculatorTests.swift */; };
 		4F02A57D2BF62F61003DF310 /* QuizEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02A57C2BF62F61003DF310 /* QuizEntity.swift */; };
 		4F02A57F2BF63A43003DF310 /* QuizDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02A57E2BF63A43003DF310 /* QuizDataManager.swift */; };
 		4F0C82822BC8247500E1480E /* PrimePickApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82812BC8247500E1480E /* PrimePickApp.swift */; };
@@ -33,9 +34,21 @@
 		8B5D8B28449149C522791BB4 /* AnalyticsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5151BA48ADFFD8185C89A868 /* AnalyticsScreen.swift */; };
 		9431A16ABA552A3DA82E34E8 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4689944114408D9DC263A40 /* FirebaseAnalytics.swift */; };
 		C6EEBA01196E5D195CDB63D3 /* ScoreCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D5BD6212ADC80881F836F4 /* ScoreCalculator.swift */; };
+		EEEA4D851413815D91CBA9B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767411CF6BB01E7E529F8343 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E532B8BEADA4E57BDFD97D58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4F0C82762BC8247500E1480E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4F0C827D2BC8247500E1480E;
+			remoteInfo = PrimePickApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		11E9D8F49AFCAD8600628DE9 /* ScoreCalculatorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScoreCalculatorTests.swift; sourceTree = "<group>"; };
 		2C18A59D04746477C50D4631 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		348F9B9700F6A15141CCA545 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
 		4F02A57C2BF62F61003DF310 /* QuizEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizEntity.swift; sourceTree = "<group>"; };
@@ -60,13 +73,23 @@
 		4FEC65B02C01164800A8B731 /* SelectDifficultyButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDifficultyButtonView.swift; sourceTree = "<group>"; };
 		4FEC65B32C01184E00A8B731 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
 		5151BA48ADFFD8185C89A868 /* AnalyticsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsScreen.swift; sourceTree = "<group>"; };
+		663867349E8C0511A49BA90E /* PrimePickAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrimePickAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		74D5BD6212ADC80881F836F4 /* ScoreCalculator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScoreCalculator.swift; sourceTree = "<group>"; };
+		767411CF6BB01E7E529F8343 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		7C36F4F283E4470B1B885ED0 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		A4689944114408D9DC263A40 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		B53375860F98A49A23F4CF3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		342AF921D4E90E4C62AC829F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EEEA4D851413815D91CBA9B2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4F0C827B2BC8247500E1480E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -78,11 +101,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B4DB83311CBF9CB780B62E6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				44915B6CB836A619F1275DA3 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		44915B6CB836A619F1275DA3 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				767411CF6BB01E7E529F8343 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 		4F0C82752BC8247500E1480E = {
 			isa = PBXGroup;
 			children = (
 				4F0C82802BC8247500E1480E /* PrimePickApp */,
 				4F0C827F2BC8247500E1480E /* Products */,
+				0B4DB83311CBF9CB780B62E6 /* Frameworks */,
+				9FAFBB326BB15E042425B358 /* PrimePickAppTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				4F0C827E2BC8247500E1480E /* PrimePickApp.app */,
+				663867349E8C0511A49BA90E /* PrimePickAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -200,6 +242,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		9FAFBB326BB15E042425B358 /* PrimePickAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				11E9D8F49AFCAD8600628DE9 /* ScoreCalculatorTests.swift */,
+			);
+			name = PrimePickAppTests;
+			path = PrimePickAppTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -222,6 +273,24 @@
 			productName = PrimePickApp;
 			productReference = 4F0C827E2BC8247500E1480E /* PrimePickApp.app */;
 			productType = "com.apple.product-type.application";
+		};
+		964EF0DF6716B6A284F82D53 /* PrimePickAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9613522D9F03FC3F55697CE /* Build configuration list for PBXNativeTarget "PrimePickAppTests" */;
+			buildPhases = (
+				5C5A1C19B2137E07B641E62B /* Sources */,
+				342AF921D4E90E4C62AC829F /* Frameworks */,
+				372107595CCBF04D7C81A68F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9E9D9ABC8D4CB2A3B9CCD9A4 /* PBXTargetDependency */,
+			);
+			name = PrimePickAppTests;
+			productName = PrimePickAppTests;
+			productReference = 663867349E8C0511A49BA90E /* PrimePickAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -256,11 +325,19 @@
 			projectRoot = "";
 			targets = (
 				4F0C827D2BC8247500E1480E /* PrimePickApp */,
+				964EF0DF6716B6A284F82D53 /* PrimePickAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		372107595CCBF04D7C81A68F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4F0C827C2BC8247500E1480E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -303,7 +380,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5C5A1C19B2137E07B641E62B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D3D78B9A3E9490CC5C3C3A3 /* ScoreCalculatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9E9D9ABC8D4CB2A3B9CCD9A4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PrimePickApp;
+			target = 4F0C827D2BC8247500E1480E /* PrimePickApp */;
+			targetProxy = E532B8BEADA4E57BDFD97D58 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4F0C828B2BC8247600E1480E /* Debug */ = {
@@ -502,6 +596,47 @@
 			};
 			name = Release;
 		};
+		9484062BD05B77970A8575B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XU74X3434S;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ml.mrs1669.PrimePickAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrimePickApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PrimePickApp";
+				TEST_TARGET_NAME = PrimePickApp;
+			};
+			name = Debug;
+		};
+		C3ADFE1DB5AC38B24C407151 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XU74X3434S;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ml.mrs1669.PrimePickAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PrimePickApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PrimePickApp";
+				TEST_TARGET_NAME = PrimePickApp;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -519,6 +654,15 @@
 			buildConfigurations = (
 				4F0C828E2BC8247600E1480E /* Debug */,
 				4F0C828F2BC8247600E1480E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9613522D9F03FC3F55697CE /* Build configuration list for PBXNativeTarget "PrimePickAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3ADFE1DB5AC38B24C407151 /* Release */,
+				9484062BD05B77970A8575B5 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
