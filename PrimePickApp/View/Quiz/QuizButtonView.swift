@@ -12,6 +12,7 @@ struct QuizButtonView: View {
     @Binding var correctQuizNumber: Int
     @Binding var quizIndex: Int
     @Binding var isPresentedResult: Bool
+    @Binding var answerRecords: [QuizAnswerRecord]
     @State private var incorrectButtonTrigger: AnswerFeedbackTrigger?
     @State private var correctButtonTrigger: AnswerFeedbackTrigger?
     @State private var feedbackSequence: Int = 0
@@ -24,19 +25,7 @@ struct QuizButtonView: View {
                 quizButton(option: "Incorrect")
                 .answerFeedbackEffect(trigger: incorrectButtonTrigger)
                 .onTapGesture {
-                    if !isPresentedResult {
-                        if !quizData[quizIndex].isCorrect {
-                            correctQuizNumber += 1
-                            playFeedback(.correct, on: .incorrect)
-                        } else {
-                            playFeedback(.incorrect, on: .incorrect)
-                        }
-                    }
-                    if quizIndex < 9 {
-                        quizIndex += 1
-                    } else {
-                        isPresentedResult = true
-                    }
+                    answer(answeredPrime: false)
                 }
 
                 Spacer()
@@ -44,19 +33,7 @@ struct QuizButtonView: View {
                 quizButton(option: "Correct")
                 .answerFeedbackEffect(trigger: correctButtonTrigger)
                 .onTapGesture {
-                    if !isPresentedResult {
-                        if quizData[quizIndex].isCorrect {
-                            correctQuizNumber += 1
-                            playFeedback(.correct, on: .correct)
-                        } else {
-                            playFeedback(.incorrect, on: .correct)
-                        }
-                    }
-                    if quizIndex < 9 {
-                        quizIndex += 1
-                    } else {
-                        isPresentedResult = true
-                    }
+                    answer(answeredPrime: true)
                 }
 
                 Spacer()
@@ -64,6 +41,32 @@ struct QuizButtonView: View {
         }
         .onAppear {
             AnswerFeedbackPlayer.prepare()
+        }
+    }
+
+    /// 解答を記録してフィードバックを再生し、次の問題へ進める。最後の問題ならリザルトを表示する。
+    private func answer(answeredPrime: Bool) {
+        if !isPresentedResult {
+            let quiz = quizData[quizIndex]
+            let record = QuizAnswerRecord(
+                id: quiz.quizId,
+                number: quiz.number,
+                isPrime: quiz.isCorrect,
+                answeredPrime: answeredPrime
+            )
+            answerRecords.append(record)
+            if record.isAnswerCorrect {
+                correctQuizNumber += 1
+            }
+            playFeedback(
+                record.isAnswerCorrect ? .correct : .incorrect,
+                on: answeredPrime ? .correct : .incorrect
+            )
+        }
+        if quizIndex < quizData.count - 1 {
+            quizIndex += 1
+        } else {
+            isPresentedResult = true
         }
     }
 
