@@ -67,6 +67,7 @@ struct QuizTimeLimitView: View {
 
 private extension QuizTimeLimitView {
     /// 縁取りを描くためのずらし幅
+    /// `CGSize` の `Hashable` 準拠は iOS 18 以降のため、タプルの配列で保持する
     static var outlineOffsets: [(x: CGFloat, y: CGFloat)] {
         [(1, 1), (1, -1), (-1, 1), (-1, -1)]
     }

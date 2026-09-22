@@ -79,10 +79,10 @@ struct QuizView: View {
         .onDisappear {
             stopTimer()
         }
-        .onChange(of: quizNumber) { newValue in
+        .onChange(of: quizNumber) { _, newValue in
             refillQuizDataIfNeeded(currentIndex: newValue)
         }
-        .onChange(of: isPresentedResult) { isPresented in
+        .onChange(of: isPresentedResult) { _, isPresented in
             // 10 問を解き終えた場合など、タイムアップ以外の終了でもタイマーを止める
             if isPresented {
                 stopTimer()
