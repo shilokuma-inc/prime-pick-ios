@@ -353,22 +353,6 @@
         }
       }
     },
-    "全 10 問に答えると、正解数がスコアとして表示されます。": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "After you answer all 10 questions, the number of correct answers is shown as your score."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "全 10 問に答えると、正解数がスコアとして表示されます。"
-          }
-        }
-      }
-    },
     "素数だと思ったら ✅、素数ではないと思ったら ❌ を選びます。": {
       "localizations": {
         "en": {
@@ -401,18 +385,146 @@
         }
       }
     },
-    "難易度を選ぶとクイズが始まります。": {
+    "Auto": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Choose a difficulty to start the quiz."
+            "value": "Auto"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "難易度を選ぶとクイズが始まります。"
+            "value": "おまかせ"
+          }
+        }
+      }
+    },
+    "Questions": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questions"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "問題数"
+          }
+        }
+      }
+    },
+    "Range": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Range"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "出題レンジ"
+          }
+        }
+      }
+    },
+    "出題レンジと問題数を選び、難易度を選ぶとクイズが始まります。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick a range and the number of questions, then choose a difficulty to start the quiz."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "出題レンジと問題数を選び、難易度を選ぶとクイズが始まります。"
+          }
+        }
+      }
+    },
+    "出題レンジで「おまかせ」以外を選ぶと、上記のレンジを上書きします。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choosing anything other than Auto for the range overrides the ranges above."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "出題レンジで「おまかせ」以外を選ぶと、上記のレンジを上書きします。"
+          }
+        }
+      }
+    },
+    "選んだ問題数に答えると、正解数がスコアとして表示されます。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Once you answer the chosen number of questions, your number of correct answers is shown as your score."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選んだ問題数に答えると、正解数がスコアとして表示されます。"
+          }
+        }
+      }
+    },
+    "1-99": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1-99"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1-99"
+          }
+        }
+      }
+    },
+    "100-999": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "100-999"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "100-999"
+          }
+        }
+      }
+    },
+    "1000-9999": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1000-9999"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1000-9999"
           }
         }
       }
@@ -493,6 +605,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "正解 %lld 問 / 解答 %lld 問"
+          }
+        }
+      }
+    },
+    "タイムアタックでは制限時間まで出題が続きます。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In Time Attack, questions keep coming until time runs out."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タイムアタックでは制限時間まで出題が続きます。"
           }
         }
       }
