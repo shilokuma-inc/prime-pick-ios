@@ -26,7 +26,7 @@ class QuizDataManager {
                     randomInt = Int.random(in: bounds, using: &generator)
                 }
             }
-            let isCorrect = PrimeData.isPrime(randomInt)
+            let isCorrect = PrimeFactorization.isPrime(randomInt)
             let primeQuizEntity = QuizEntity(quizId: i, number: randomInt, isCorrect: isCorrect)
             quizData.append(primeQuizEntity)
         }

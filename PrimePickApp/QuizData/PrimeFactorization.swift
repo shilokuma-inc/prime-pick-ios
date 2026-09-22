@@ -40,8 +40,22 @@ enum PrimeFactorization {
         return factors
     }
 
-    /// 素数かどうか。素因数が自分自身ひとつだけなら素数。
+    /// 素数かどうか。
+    ///
+    /// 2・3 で割り切れるかを先に見たうえで、6k ± 1 の候補だけを √number まで試し割りする。
+    /// 判定だけが目的なので `factors(of:)` は使わず、配列を作らずに早期 return する。
     static func isPrime(_ number: Int) -> Bool {
-        factors(of: number).count == 1
+        if number < 2 { return false }
+        if number < 4 { return true }          // 2, 3
+        if number % 2 == 0 || number % 3 == 0 { return false }
+
+        var divisor = 5
+        while divisor * divisor <= number {
+            if number % divisor == 0 || number % (divisor + 2) == 0 {
+                return false
+            }
+            divisor += 6
+        }
+        return true
     }
 }
