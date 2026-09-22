@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct SelectDifficultyButtonView: View {
+    /// `nil` は「おまかせ」＝ 難易度ごとの既定レンジを使う
+    var selectedRange: QuizRange?
+    var questionCount: QuizQuestionCount = .default
+
     var body: some View {
         VStack {
             selectDifficultyButton(difficulty: .hard)
@@ -21,7 +25,17 @@ struct SelectDifficultyButtonView: View {
 
 extension SelectDifficultyButtonView {
     func selectDifficultyButton(difficulty: Difficulty) -> some View {
-        NavigationLink(destination: LazyView(QuizView(difficulty: difficulty))) {
+        let range = selectedRange ?? difficulty.defaultRange
+
+        return NavigationLink(
+            destination: LazyView(
+                QuizView(
+                    difficulty: difficulty,
+                    range: range,
+                    questionCount: questionCount
+                )
+            )
+        ) {
             Text(difficulty.localizedTitle)
                 .font(.system(size: 24, weight: .bold, design: .rounded))
                 .padding()

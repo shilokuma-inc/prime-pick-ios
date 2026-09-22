@@ -16,10 +16,18 @@ struct QuizView: View {
     let difficulty: Difficulty
     let manager = QuizDataManager()
     let quizData: [QuizEntity]
-    
-    init(difficulty: Difficulty) {
+
+    init(
+        difficulty: Difficulty,
+        range: QuizRange,
+        questionCount: QuizQuestionCount
+    ) {
         self.difficulty = difficulty
-        quizData = manager.makeQuizData(difficulty: difficulty)
+        quizData = manager.makeQuizData(
+            difficulty: difficulty,
+            range: range,
+            questionCount: questionCount
+        )
     }
 
     var body: some View {
@@ -63,5 +71,5 @@ struct QuizView: View {
 }
 
 #Preview {
-    QuizView(difficulty: .easy)
+    QuizView(difficulty: .easy, range: .oneOrTwoDigits, questionCount: .default)
 }

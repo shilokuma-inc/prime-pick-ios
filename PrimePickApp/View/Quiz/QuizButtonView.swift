@@ -13,6 +13,11 @@ struct QuizButtonView: View {
     @Binding var quizIndex: Int
     @Binding var isPresentedResult: Bool
 
+    /// 最後の問題のインデックス。問題数は選択値に応じて変わるため `quizData` の件数から求める
+    private var lastQuizIndex: Int {
+        quizData.count - 1
+    }
+
     var body: some View {
         ZStack {
             HStack {
@@ -28,7 +33,7 @@ struct QuizButtonView: View {
                             print("不正解")
                         }
                     }
-                    if quizIndex < 9 {
+                    if quizIndex < lastQuizIndex {
                         quizIndex += 1
                     } else {
                         isPresentedResult = true
@@ -47,7 +52,7 @@ struct QuizButtonView: View {
                             print("不正解")
                         }
                     }
-                    if quizIndex < 9 {
+                    if quizIndex < lastQuizIndex {
                         quizIndex += 1
                     } else {
                         isPresentedResult = true

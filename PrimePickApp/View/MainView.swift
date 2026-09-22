@@ -10,7 +10,10 @@ import SwiftUI
 struct MainView: View {
     @State private var hue: Double = 0
     @State private var isHowToPlayPresented: Bool = false
-    
+    /// `nil` は「おまかせ」＝ 難易度ごとの既定レンジを使う
+    @State private var selectedRange: QuizRange?
+    @State private var selectedQuestionCount: QuizQuestionCount = .default
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -27,9 +30,17 @@ struct MainView: View {
                     
                     
                     Spacer()
-                    
-                    SelectDifficultyButtonView()
-                    
+
+                    SelectQuizSettingView(
+                        selectedRange: $selectedRange,
+                        selectedQuestionCount: $selectedQuestionCount
+                    )
+
+                    SelectDifficultyButtonView(
+                        selectedRange: selectedRange,
+                        questionCount: selectedQuestionCount
+                    )
+
                     howToPlayButton
                     
                     Spacer()
