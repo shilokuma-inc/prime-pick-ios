@@ -24,6 +24,9 @@ struct QuizButtonView: View {
 
                 quizButton(option: "Incorrect")
                 .answerFeedbackEffect(trigger: incorrectButtonTrigger)
+                .sensoryFeedback(trigger: incorrectButtonTrigger) { _, trigger in
+                    trigger?.result.sensoryFeedback
+                }
                 .onTapGesture {
                     answer(answeredPrime: false)
                 }
@@ -32,15 +35,15 @@ struct QuizButtonView: View {
 
                 quizButton(option: "Correct")
                 .answerFeedbackEffect(trigger: correctButtonTrigger)
+                .sensoryFeedback(trigger: correctButtonTrigger) { _, trigger in
+                    trigger?.result.sensoryFeedback
+                }
                 .onTapGesture {
                     answer(answeredPrime: true)
                 }
 
                 Spacer()
             }
-        }
-        .onAppear {
-            AnswerFeedbackPlayer.prepare()
         }
     }
 
@@ -76,13 +79,14 @@ struct QuizButtonView: View {
         case incorrect
     }
 
-    /// 触覚・効果音を再生し、タップされたボタンにアニメーションのきっかけを渡す
+    /// 効果音を鳴らし、タップされたボタンに触覚とアニメーションのきっかけを渡す
     ///
-    /// いずれも再生完了を待たないため、この直後の次の問題への遷移をブロックしない。
+    /// 触覚は `sensoryFeedback` がこのきっかけの変化を検知して再生する。
+    /// 効果音・触覚とも再生完了を待たないため、この直後の次の問題への遷移をブロックしない。
     private func playFeedback(_ result: AnswerFeedback, on button: TappedButton) {
-        AnswerFeedbackPlayer.play(result)
+        SoundFeedback.play(result.sound)
 
-        // 同じ結果が続いてもアニメーションが再生されるよう、解答ごとに異なる ID を発行する
+        // 同じ結果が続いても触覚とアニメーションが再生されるよう、解答ごとに異なる ID を発行する
         feedbackSequence += 1
         let trigger = AnswerFeedbackTrigger(id: feedbackSequence, result: result)
         switch button {

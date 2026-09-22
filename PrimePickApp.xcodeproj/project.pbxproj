@@ -30,7 +30,6 @@
 		4FEC65B42C01184E00A8B731 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEC65B32C01184E00A8B731 /* Text+Extension.swift */; };
 		54D69EBDCDA4A3DBECB1740A /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36F4F283E4470B1B885ED0 /* AppTheme.swift */; };
 		58D00C0E23DFBA64A9924780 /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348F9B9700F6A15141CCA545 /* HowToPlayView.swift */; };
-		5ED9BEA836800DE77189A528 /* HapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0688B1B562D6C5B7BC8B37BB /* HapticFeedback.swift */; };
 		624168433780D0B8FD63B8D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53375860F98A49A23F4CF3D /* AppDelegate.swift */; };
 		86F1EE92CEDD8FEA6AF42A7F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2C18A59D04746477C50D4631 /* Localizable.xcstrings */; };
 		8B5D8B28449149C522791BB4 /* AnalyticsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5151BA48ADFFD8185C89A868 /* AnalyticsScreen.swift */; };
@@ -41,7 +40,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0688B1B562D6C5B7BC8B37BB /* HapticFeedback.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HapticFeedback.swift; sourceTree = "<group>"; };
 		2C18A59D04746477C50D4631 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		33E203857ADC476B86DF92C1 /* AnswerFeedbackEffect.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerFeedbackEffect.swift; sourceTree = "<group>"; };
 		348F9B9700F6A15141CCA545 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
@@ -94,7 +92,6 @@
 				6DC127C55EF579E3557CC6E8 /* AnswerFeedback.swift */,
 				33E203857ADC476B86DF92C1 /* AnswerFeedbackEffect.swift */,
 				D76E55438543682B5C190F17 /* SoundFeedback.swift */,
-				0688B1B562D6C5B7BC8B37BB /* HapticFeedback.swift */,
 			);
 			name = Feedback;
 			path = Feedback;
@@ -328,7 +325,6 @@
 				0E2623A1589F58BCF0706E89 /* AnswerFeedback.swift in Sources */,
 				185D5F76D5812CA38E8E31AC /* AnswerFeedbackEffect.swift in Sources */,
 				A8191F214974F68FF5C5E60C /* SoundFeedback.swift in Sources */,
-				5ED9BEA836800DE77189A528 /* HapticFeedback.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
