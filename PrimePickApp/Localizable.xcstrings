@@ -113,6 +113,38 @@
         }
       }
     },
+    "Combo %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combo %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld コンボ"
+          }
+        }
+      }
+    },
+    "Correct %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Correct %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正解数 %lld"
+          }
+        }
+      }
+    },
     "Difficulty": {
       "localizations": {
         "en": {
@@ -173,6 +205,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "遊び方"
+          }
+        }
+      }
+    },
+    "Max Combo %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Max Combo %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最大コンボ %lld"
           }
         }
       }
@@ -477,6 +525,102 @@
           "stringUnit": {
             "state": "translated",
             "value": "1000-9999"
+          }
+        }
+      }
+    },
+    "Practice": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Practice"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "練習"
+          }
+        }
+      }
+    },
+    "Time Attack": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Attack"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タイムアタック"
+          }
+        }
+      }
+    },
+    "Game Mode": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Game Mode"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モード"
+          }
+        }
+      }
+    },
+    "%lld sec": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld sec"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "残り %lld 秒"
+          }
+        }
+      }
+    },
+    "Correct %lld / Answered %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Correct %lld / Answered %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正解 %lld 問 / 解答 %lld 問"
+          }
+        }
+      }
+    },
+    "タイムアタックでは制限時間まで出題が続きます。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In Time Attack, questions keep coming until time runs out."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タイムアタックでは制限時間まで出題が続きます。"
           }
         }
       }

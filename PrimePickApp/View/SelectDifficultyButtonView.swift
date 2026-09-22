@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct SelectDifficultyButtonView: View {
-    @State private var gameMode: GameMode = .practice
+    /// ゲームモード。選択 UI は `SelectQuizSettingView` にまとめている
+    var gameMode: GameMode = .practice
     /// `nil` は「おまかせ」＝ 難易度ごとの既定レンジを使う
     var selectedRange: QuizRange?
     var questionCount: QuizQuestionCount = .default
 
     var body: some View {
         VStack {
-            selectGameModePicker
-
             selectDifficultyButton(difficulty: .hard)
 
             selectDifficultyButton(difficulty: .normal)
@@ -27,18 +26,6 @@ struct SelectDifficultyButtonView: View {
 }
 
 extension SelectDifficultyButtonView {
-    var selectGameModePicker: some View {
-        Picker("Game Mode", selection: $gameMode) {
-            ForEach(GameMode.allCases) { gameMode in
-                Text(gameMode.localizedTitle)
-                    .tag(gameMode)
-            }
-        }
-        .pickerStyle(.segmented)
-        .padding(.horizontal, 50)
-        .padding(.bottom, 16)
-    }
-
     func selectDifficultyButton(difficulty: Difficulty) -> some View {
         NavigationLink(
             destination: LazyView(
