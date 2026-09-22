@@ -48,24 +48,26 @@ struct QuizButtonView: View {
     }
 
     /// 解答を記録してフィードバックを再生し、次の問題へ進める。最後の問題ならリザルトを表示する。
+    /// タイムアタックでは `QuizView` が問題を補充するため、通常ここでは終了しない。
     private func answer(answeredPrime: Bool) {
-        if !isPresentedResult {
-            let quiz = quizData[quizIndex]
-            let record = QuizAnswerRecord(
-                id: quiz.quizId,
-                number: quiz.number,
-                isPrime: quiz.isCorrect,
-                answeredPrime: answeredPrime
-            )
-            answerRecords.append(record)
-            if record.isAnswerCorrect {
-                correctQuizNumber += 1
-            }
-            playFeedback(
-                record.isAnswerCorrect ? .correct : .incorrect,
-                on: answeredPrime ? .correct : .incorrect
-            )
+        // 時間切れでリザルトを表示したあとは、背後のボタンに触れても解答・遷移させない
+        guard !isPresentedResult else { return }
+
+        let quiz = quizData[quizIndex]
+        let record = QuizAnswerRecord(
+            id: quiz.quizId,
+            number: quiz.number,
+            isPrime: quiz.isCorrect,
+            answeredPrime: answeredPrime
+        )
+        answerRecords.append(record)
+        if record.isAnswerCorrect {
+            correctQuizNumber += 1
         }
+        playFeedback(
+            record.isAnswerCorrect ? .correct : .incorrect,
+            on: answeredPrime ? .correct : .incorrect
+        )
         if quizIndex < quizData.count - 1 {
             quizIndex += 1
         } else {

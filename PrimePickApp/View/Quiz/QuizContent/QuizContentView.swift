@@ -10,6 +10,8 @@ import SwiftUI
 struct QuizContentView: View {
     @Binding var quizNumber: Int
     let difficulty: Difficulty
+    var gameMode: GameMode = .practice
+    var remainingSeconds: Int = 0
     let quizData: [QuizEntity]
     
     var body: some View {
@@ -41,7 +43,11 @@ struct QuizContentView: View {
                     )
                     .frame(height: geometry.size.height * 2 / 3)
                     
-                    QuizTimeLimitView(difficulty: difficulty)
+                    QuizTimeLimitView(
+                        difficulty: difficulty,
+                        gameMode: gameMode,
+                        remainingSeconds: remainingSeconds
+                    )
                         .frame(height: geometry.size.height / 6)
                 }
             }

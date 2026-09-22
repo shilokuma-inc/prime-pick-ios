@@ -12,6 +12,7 @@ struct QuizResultView: View {
     @State private var rainbowColor: Color = .red
     let score: Int
     let answerRecords: [QuizAnswerRecord]
+    var gameMode: GameMode = .practice
 
     /// 復習一覧に出すのは間違えた問題だけ
     private var missedRecords: [QuizAnswerRecord] {
@@ -30,6 +31,13 @@ struct QuizResultView: View {
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
                         .minimumScaleFactor(0.6)
+
+                    if gameMode == .timeAttack {
+                        Text("Correct \(score) / Answered \(answerRecords.count)")
+                            .font(.headline)
+                            .multilineTextAlignment(.center)
+                            .minimumScaleFactor(0.6)
+                    }
 
                     reviewSection
 

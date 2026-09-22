@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct SelectDifficultyButtonView: View {
+    @State private var gameMode: GameMode = .practice
+
     var body: some View {
         VStack {
+            selectGameModePicker
+
             selectDifficultyButton(difficulty: .hard)
             
             selectDifficultyButton(difficulty: .normal)
@@ -20,8 +24,20 @@ struct SelectDifficultyButtonView: View {
 }
 
 extension SelectDifficultyButtonView {
+    var selectGameModePicker: some View {
+        Picker("Game Mode", selection: $gameMode) {
+            ForEach(GameMode.allCases) { gameMode in
+                Text(gameMode.localizedTitle)
+                    .tag(gameMode)
+            }
+        }
+        .pickerStyle(.segmented)
+        .padding(.horizontal, 50)
+        .padding(.bottom, 16)
+    }
+
     func selectDifficultyButton(difficulty: Difficulty) -> some View {
-        NavigationLink(destination: LazyView(QuizView(difficulty: difficulty))) {
+        NavigationLink(destination: LazyView(QuizView(difficulty: difficulty, gameMode: gameMode))) {
             Text(difficulty.localizedTitle)
                 .font(.system(size: 24, weight: .bold, design: .rounded))
                 .padding()
