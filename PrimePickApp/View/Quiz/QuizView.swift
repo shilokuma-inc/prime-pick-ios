@@ -59,9 +59,6 @@ struct QuizView: View {
             }
         }
         .sendAnalyticsScreen(.quiz)
-        .onAppear {
-            print(quizData)
-        }
     }
 }
 
