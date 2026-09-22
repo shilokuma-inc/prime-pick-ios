@@ -9,37 +9,30 @@ import Foundation
 import GameplayKit
 
 class QuizDataManager {
-    func makeQuizData(difficulty: Difficulty) -> [QuizEntity] {
-        let primeData = PrimeData()
+    func makeQuizData(
+        difficulty: Difficulty,
+        range: QuizRange,
+        questionCount: QuizQuestionCount
+    ) -> [QuizEntity] {
         var quizData: [QuizEntity] = []
         let timestamp = UInt64(Date().timeIntervalSince1970 * 1000)
         var generator = SeededGenerator(seed: timestamp)
+        let bounds = range.bounds
 
-        for i in 1...10 {
-            var isCorrect: Bool = false
-            var randomInt: Int = 0
-            switch difficulty {
-            case .easy:
-                randomInt = Int.random(in: 1...99, using: &generator)
-                let primeNumbers = primeData.generateOneOrTwoDigitPrimes()
-                isCorrect = primeNumbers.contains(randomInt)
-            case .normal:
-                randomInt = Int.random(in: 100...999, using: &generator)
-                let primeNumbers = primeData.generateThreeDigitPrimes()
-                isCorrect = primeNumbers.contains(randomInt)
-            case .hard:
-                repeat {
-                    randomInt = Int.random(in: 100...999, using: &generator)
-                } while isMultipleOf235(randomInt)
-                let primeNumbers = primeData.generateThreeDigitPrimes()
-                isCorrect = primeNumbers.contains(randomInt)
+        for i in 1...questionCount.value {
+            var randomInt = Int.random(in: bounds, using: &generator)
+            if difficulty.excludesMultiplesOfTwoThreeFive {
+                while isMultipleOf235(randomInt) {
+                    randomInt = Int.random(in: bounds, using: &generator)
+                }
             }
+            let isCorrect = PrimeFactorization.isPrime(randomInt)
             let primeQuizEntity = QuizEntity(quizId: i, number: randomInt, isCorrect: isCorrect)
             quizData.append(primeQuizEntity)
         }
         return quizData
     }
-    
+
     func isMultipleOf235(_ number: Int) -> Bool {
         return number % 2 == 0 || number % 3 == 0 || number % 5 == 0
     }

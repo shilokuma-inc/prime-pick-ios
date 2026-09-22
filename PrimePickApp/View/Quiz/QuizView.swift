@@ -22,15 +22,30 @@ struct QuizView: View {
     /// 現在の問題が表示された時刻。速度ボーナスの計測基準
     @State private var questionStartDate: Date = Date()
 
-    let primeData = PrimeData()
     let difficulty: Difficulty
     let gameMode: GameMode
     let manager = QuizDataManager()
-    
-    init(difficulty: Difficulty, gameMode: GameMode = .practice) {
+    let range: QuizRange
+    let questionCount: QuizQuestionCount
+
+    init(
+        difficulty: Difficulty,
+        gameMode: GameMode = .practice,
+        range: QuizRange? = nil,
+        questionCount: QuizQuestionCount = .default
+    ) {
+        let resolvedRange = range ?? difficulty.defaultRange
         self.difficulty = difficulty
         self.gameMode = gameMode
-        _quizData = State(initialValue: manager.makeQuizData(difficulty: difficulty))
+        self.range = resolvedRange
+        self.questionCount = questionCount
+        _quizData = State(
+            initialValue: manager.makeQuizData(
+                difficulty: difficulty,
+                range: resolvedRange,
+                questionCount: questionCount
+            )
+        )
         _remainingSeconds = State(initialValue: gameMode.timeLimitSeconds ?? 0)
     }
 
@@ -139,10 +154,16 @@ private extension QuizView {
     func refillQuizDataIfNeeded(currentIndex: Int) {
         guard gameMode.isTimeAttack else { return }
         guard currentIndex >= quizData.count - Self.refillThreshold else { return }
-        quizData.append(contentsOf: manager.makeQuizData(difficulty: difficulty))
+        quizData.append(
+            contentsOf: manager.makeQuizData(
+                difficulty: difficulty,
+                range: range,
+                questionCount: questionCount
+            )
+        )
     }
 }
 
 #Preview {
-    QuizView(difficulty: .easy)
+    QuizView(difficulty: .easy, range: .oneOrTwoDigits, questionCount: .default)
 }

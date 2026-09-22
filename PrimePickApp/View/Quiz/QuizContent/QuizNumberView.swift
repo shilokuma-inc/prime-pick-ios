@@ -43,16 +43,32 @@ private func quizNumberBackgroundView(difficulty: Difficulty) -> some View {
         )
 }
 
+/// 枠（幅 300）に収まる余白を引いた、数字の描画に使える横幅
+private let quizNumberContentWidth: CGFloat = 260
+
 private func quizNumberText(quizNumber: Int, difficulty: Difficulty, quizData: [QuizEntity]) -> some View {
-    let size: CGFloat = if difficulty == .easy {
-        180
-    } else {
-        120
-    }
-    
-    return Text(quizData[quizNumber].number.description)
-        .font(.custom("ArialRoundedMTBold", size: size))
+    let text = quizData[quizNumber].number.description
+
+    return Text(text)
+        .font(.custom("ArialRoundedMTBold", size: quizNumberFontSize(digitCount: text.count)))
+        .lineLimit(1)
+        .minimumScaleFactor(0.5)
         .foregroundStyle(Color.gray)
+        .frame(width: quizNumberContentWidth)
+}
+
+/// 桁数に応じた文字サイズ
+///
+/// 難易度ではなく実際の桁数から決めることで、同じ難易度でもレンジが変われば追従する。
+private func quizNumberFontSize(digitCount: Int) -> CGFloat {
+    switch digitCount {
+    case ...2:
+        return 180
+    case 3:
+        return 130
+    default:
+        return 100
+    }
 }
 
 struct QuizNumberView_Previews: PreviewProvider {
