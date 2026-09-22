@@ -14,11 +14,13 @@ struct QuizView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var quizNumber: Int = 0
     @State var isPresentedResult: Bool = false
-    @State var resultScore: Int = 0
+    @State private var scoreCalculator = ScoreCalculator()
     @State private var answerRecords: [QuizAnswerRecord] = []
     @State private var quizData: [QuizEntity]
     @State private var remainingSeconds: Int
     @State private var timer: Timer?
+    /// 現在の問題が表示された時刻。速度ボーナスの計測基準
+    @State private var questionStartDate: Date = Date()
 
     let primeData = PrimeData()
     let difficulty: Difficulty
@@ -44,7 +46,8 @@ struct QuizView: View {
                         difficulty: difficulty,
                         gameMode: gameMode,
                         remainingSeconds: remainingSeconds,
-                        quizData: quizData
+                        quizData: quizData,
+                        currentCombo: scoreCalculator.currentCombo
                     )
                     .frame(height: geometry.size.height / 2)
                     
@@ -52,7 +55,9 @@ struct QuizView: View {
                     
                     QuizButtonView(
                         quizData: quizData,
-                        correctQuizNumber: $resultScore,
+                        difficulty: difficulty,
+                        questionStartDate: questionStartDate,
+                        scoreCalculator: $scoreCalculator,
                         quizIndex: $quizNumber,
                         isPresentedResult: $isPresentedResult,
                         answerRecords: $answerRecords
@@ -65,7 +70,9 @@ struct QuizView: View {
                 
                 if isPresentedResult {
                     QuizResultView(
-                        score: resultScore,
+                        score: scoreCalculator.totalScore,
+                        correctCount: scoreCalculator.correctCount,
+                        maxCombo: scoreCalculator.maxCombo,
                         answerRecords: answerRecords,
                         gameMode: gameMode
                     )
@@ -75,11 +82,15 @@ struct QuizView: View {
         .sendAnalyticsScreen(.quiz)
         .onAppear {
             startTimerIfNeeded()
+            // 1 問目が表示された時点を経過時間の基準にする
+            questionStartDate = Date()
         }
         .onDisappear {
             stopTimer()
         }
         .onChange(of: quizNumber) { _, newValue in
+            // 次の問題に切り替わった時点を経過時間の基準にする
+            questionStartDate = Date()
             refillQuizDataIfNeeded(currentIndex: newValue)
         }
         .onChange(of: isPresentedResult) { _, isPresented in

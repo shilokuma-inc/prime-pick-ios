@@ -113,6 +113,38 @@
         }
       }
     },
+    "Combo %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combo %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld コンボ"
+          }
+        }
+      }
+    },
+    "Correct %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Correct %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正解数 %lld"
+          }
+        }
+      }
+    },
     "Difficulty": {
       "localizations": {
         "en": {
@@ -173,6 +205,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "遊び方"
+          }
+        }
+      }
+    },
+    "Max Combo %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Max Combo %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最大コンボ %lld"
           }
         }
       }

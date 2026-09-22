@@ -9,7 +9,10 @@ import SwiftUI
 
 struct QuizButtonView: View {
     var quizData: [QuizEntity]
-    @Binding var correctQuizNumber: Int
+    let difficulty: Difficulty
+    /// 現在の問題が表示された時刻。速度ボーナスの計測基準
+    let questionStartDate: Date
+    @Binding var scoreCalculator: ScoreCalculator
     @Binding var quizIndex: Int
     @Binding var isPresentedResult: Bool
     @Binding var answerRecords: [QuizAnswerRecord]
@@ -47,7 +50,7 @@ struct QuizButtonView: View {
         }
     }
 
-    /// 解答を記録してフィードバックを再生し、次の問題へ進める。最後の問題ならリザルトを表示する。
+    /// 解答を記録してスコアに反映し、フィードバックを再生して次の問題へ進める。最後の問題ならリザルトを表示する。
     /// タイムアタックでは `QuizView` が問題を補充するため、通常ここでは終了しない。
     private func answer(answeredPrime: Bool) {
         // 時間切れでリザルトを表示したあとは、背後のボタンに触れても解答・遷移させない
@@ -61,9 +64,11 @@ struct QuizButtonView: View {
             answeredPrime: answeredPrime
         )
         answerRecords.append(record)
-        if record.isAnswerCorrect {
-            correctQuizNumber += 1
-        }
+        scoreCalculator.submit(
+            isCorrect: record.isAnswerCorrect,
+            difficulty: difficulty,
+            elapsedTime: Date().timeIntervalSince(questionStartDate)
+        )
         playFeedback(
             record.isAnswerCorrect ? .correct : .incorrect,
             on: answeredPrime ? .correct : .incorrect
