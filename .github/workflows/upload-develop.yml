@@ -22,11 +22,6 @@ jobs:
           defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
           defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES
 
-      - name: Create Private Key
-        run: |
-          mkdir private_keys
-          echo -n '${{ secrets.APPLE_API_KEY_BASE64 }}' | base64 --decode > ./private_keys/AuthKey_${{ secrets.APPLE_API_ISSUER_ID }}.p8
-
       - name: Install Distribution Certificate
         env:
           DISTRIBUTION_CERT_P12_BASE64: ${{ secrets.DISTRIBUTION_CERT_P12_BASE64 }}
@@ -59,36 +54,32 @@ jobs:
           set -euo pipefail
 
           if [ -z "$PROVISIONING_PROFILE_BASE64" ]; then
-            echo "::error::PROVISIONING_PROFILE_BASE64 が空です。Organization Secrets の参照設定を確認してください"
+            echo "::error::PROVISIONING_PROFILE_BASE64 が空です。リポジトリ Secrets の設定を確認してください"
             exit 1
           fi
 
-          PROFILE_PATH="$RUNNER_TEMP/profile.mobileprovision"
-          echo -n "$PROVISIONING_PROFILE_BASE64" | base64 --decode > "$PROFILE_PATH"
+          PROFILES_DIR="$HOME/Library/MobileDevice/Provisioning Profiles"
+          mkdir -p "$PROFILES_DIR"
+          echo -n "$PROVISIONING_PROFILE_BASE64" | tr -d '[:space:]' | base64 --decode > "$PROFILES_DIR/appstore.mobileprovision"
 
-          # Xcode 16 以降は UserData 配下を参照するため、新旧どちらの場所にも配置する
-          LEGACY_DIR="$HOME/Library/MobileDevice/Provisioning Profiles"
-          CURRENT_DIR="$HOME/Library/Developer/Xcode/UserData/Provisioning Profiles"
-          mkdir -p "$LEGACY_DIR" "$CURRENT_DIR"
+          # プロファイル名は secret を増やさずプロファイル自体から取り出す
+          PROFILE_NAME="$(security cms -D -i "$PROFILES_DIR/appstore.mobileprovision" | plutil -extract Name raw -)"
 
-          # ファイル名を UUID にしないと Xcode がプロファイルを解決できない
-          PROFILE_UUID=$(security cms -D -i "$PROFILE_PATH" | plutil -extract UUID raw -)
-          cp "$PROFILE_PATH" "$LEGACY_DIR/$PROFILE_UUID.mobileprovision"
-          cp "$PROFILE_PATH" "$CURRENT_DIR/$PROFILE_UUID.mobileprovision"
-
-          echo "installed provisioning profile: $PROFILE_UUID"
+          # 手動署名の設定は xcconfig にまとめ、プロファイル指定はアプリターゲットだけに当てる。
+          # コマンドライン引数で PROVISIONING_PROFILE_SPECIFIER を渡すと SPM のパッケージターゲットにも
+          # 波及し、"does not support provisioning profiles" で archive が落ちる。
+          SIGNING_XCCONFIG="$RUNNER_TEMP/ManualSigning.xcconfig"
+          cat > "$SIGNING_XCCONFIG" <<EOF
+          CODE_SIGN_STYLE = Manual
+          CODE_SIGN_IDENTITY = Apple Distribution
+          DEVELOPMENT_TEAM = XU74X3434S
+          PROVISIONING_PROFILE_SPECIFIER = \$(PROVISIONING_PROFILE_SPECIFIER_\$(PRODUCT_NAME))
+          PROVISIONING_PROFILE_SPECIFIER_PrimePickApp = $PROFILE_NAME
+          EOF
+          echo "SIGNING_XCCONFIG=$SIGNING_XCCONFIG" >> "$GITHUB_ENV"
 
       - name: Archive Project
-        env:
-          PROVISIONING_PROFILE_NAME: ${{ secrets.PROVISIONING_PROFILE_NAME }}
         run: |
-          set -euo pipefail
-
-          if [ -z "$PROVISIONING_PROFILE_NAME" ]; then
-            echo "::error::PROVISIONING_PROFILE_NAME が空です。Organization Secrets の参照設定を確認してください"
-            exit 1
-          fi
-
           # 署名は取り込み済みの証明書とプロファイルで固定し、自動生成を行わせない
           xcodebuild archive \
             -project PrimePickApp.xcodeproj \
@@ -96,10 +87,9 @@ jobs:
             -sdk iphoneos \
             -configuration Release \
             -archivePath PrimePickApp.xcarchive \
-            CODE_SIGN_STYLE=Manual \
-            CODE_SIGN_IDENTITY="Apple Distribution" \
-            PROVISIONING_PROFILE_SPECIFIER="$PROVISIONING_PROFILE_NAME"
+            -xcconfig "$SIGNING_XCCONFIG"
 
+      # EXPORT_OPTIONS はリポジトリ secret（signingStyle: manual）。org secret の自動署名用を上書きしている
       - name: Create ExportOptions.plist
         run: |
           echo '${{ secrets.EXPORT_OPTIONS }}' > ExportOptions.plist
@@ -109,11 +99,7 @@ jobs:
           xcodebuild -exportArchive \
             -archivePath PrimePickApp.xcarchive \
             -exportOptionsPlist ExportOptions.plist \
-            -exportPath app.ipa \
-            -allowProvisioningUpdates \
-            -authenticationKeyPath "$PWD/private_keys/AuthKey_${{ secrets.APPLE_API_ISSUER_ID }}.p8" \
-            -authenticationKeyID "${{ secrets.APPLE_API_KEY_ID }}" \
-            -authenticationKeyIssuerID "${{ secrets.APPLE_API_ISSUER_ID }}"
+            -exportPath app.ipa
 
       - name: Upload IPA to App Store Connect
         run: |
