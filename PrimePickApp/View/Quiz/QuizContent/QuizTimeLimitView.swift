@@ -103,6 +103,6 @@ private extension QuizTimeLimitView {
     VStack {
         QuizTimeLimitView(difficulty: .easy)
 
-        QuizTimeLimitView(difficulty: .hard, gameMode: .timeAttack, remainingSeconds: 42)
+        QuizTimeLimitView(difficulty: .hard, gameMode: .timeAttack(.sixtySeconds), remainingSeconds: 42)
     }
 }

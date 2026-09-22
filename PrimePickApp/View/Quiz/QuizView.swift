@@ -120,7 +120,7 @@ struct QuizView: View {
 private extension QuizView {
     /// タイムアタック時のみ 1 秒ごとのカウントダウンを開始する
     func startTimerIfNeeded() {
-        guard gameMode == .timeAttack, timer == nil, !isPresentedResult else { return }
+        guard gameMode.isTimeAttack, timer == nil, !isPresentedResult else { return }
         let scheduledTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             countDown()
         }
@@ -152,7 +152,7 @@ private extension QuizView {
 
     /// タイムアタックでは制限時間内に問題が尽きないよう、残りが少なくなったら追加生成する
     func refillQuizDataIfNeeded(currentIndex: Int) {
-        guard gameMode == .timeAttack else { return }
+        guard gameMode.isTimeAttack else { return }
         guard currentIndex >= quizData.count - Self.refillThreshold else { return }
         quizData.append(
             contentsOf: manager.makeQuizData(

@@ -545,22 +545,6 @@
         }
       }
     },
-    "Time Attack": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time Attack"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "タイムアタック"
-          }
-        }
-      }
-    },
     "Game Mode": {
       "localizations": {
         "en": {
@@ -621,6 +605,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "タイムアタックでは制限時間まで出題が続きます。"
+          }
+        }
+      }
+    },
+    "%lld seconds": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld sec"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 秒"
           }
         }
       }

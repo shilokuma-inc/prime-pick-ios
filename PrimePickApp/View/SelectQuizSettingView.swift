@@ -37,7 +37,7 @@ struct SelectQuizSettingView: View {
             }
 
             // タイムアタックは時間切れまで出題し続けるため、問題数の選択は意味を持たない
-            if gameMode == .timeAttack {
+            if gameMode.isTimeAttack {
                 Text("タイムアタックでは制限時間まで出題が続きます。")
                     .font(.footnote)
                     .foregroundColor(.secondary)
@@ -53,7 +53,7 @@ struct SelectQuizSettingView: View {
                 }
             }
         }
-        .padding(.horizontal, 50)
+        .padding(.horizontal, 24)
         .padding(.bottom, 16)
     }
 }

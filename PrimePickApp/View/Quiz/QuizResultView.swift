@@ -65,7 +65,7 @@ struct QuizResultView: View {
     /// 合計スコアの内訳。タイムアタックは問題数が固定ではないため解答数も並べる
     private var summarySection: some View {
         HStack(spacing: 16) {
-            if gameMode == .timeAttack {
+            if gameMode.isTimeAttack {
                 Text("Correct \(correctCount) / Answered \(answerRecords.count)")
             } else {
                 Text("Correct \(correctCount)")
