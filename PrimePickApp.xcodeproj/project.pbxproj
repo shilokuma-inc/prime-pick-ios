@@ -12,6 +12,7 @@
 		185D5F76D5812CA38E8E31AC /* AnswerFeedbackEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E203857ADC476B86DF92C1 /* AnswerFeedbackEffect.swift */; };
 		193A97532DEDA1148EE0A2C9 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2E8881254652FCE64BDC5E49 /* FirebaseAnalytics */; };
 		28F889B95D896AB273E500C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4999EB2C38AE3538FF3FBB0 /* Foundation.framework */; };
+		2FE99BB3CC809E27B4B0FCD9 /* GameModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C0E8EC6B6A4C521CD4F234 /* GameModeTests.swift */; };
 		323BE4CCFDD0906F666F8204 /* ScoreCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC15F88A46D15524FCE751A /* ScoreCalculatorTests.swift */; };
 		4F02A57D2BF62F61003DF310 /* QuizEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02A57C2BF62F61003DF310 /* QuizEntity.swift */; };
 		4F02A57F2BF63A43003DF310 /* QuizDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02A57E2BF63A43003DF310 /* QuizDataManager.swift */; };
@@ -88,6 +89,7 @@
 		8DFE58C285109A55C5F569C0 /* PrimePickAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrimePickAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4689944114408D9DC263A40 /* FirebaseAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalytics.swift; sourceTree = "<group>"; };
 		A4999EB2C38AE3538FF3FBB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		A7C0E8EC6B6A4C521CD4F234 /* GameModeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GameModeTests.swift; sourceTree = "<group>"; };
 		B53375860F98A49A23F4CF3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D76E55438543682B5C190F17 /* SoundFeedback.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SoundFeedback.swift; sourceTree = "<group>"; };
 		F69D0DED6D686DD9038FF63A /* PrimeFactorization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrimeFactorization.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				3BC15F88A46D15524FCE751A /* ScoreCalculatorTests.swift */,
+				A7C0E8EC6B6A4C521CD4F234 /* GameModeTests.swift */,
 			);
 			name = PrimePickAppTests;
 			path = PrimePickAppTests;
@@ -418,6 +421,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				323BE4CCFDD0906F666F8204 /* ScoreCalculatorTests.swift in Sources */,
+				2FE99BB3CC809E27B4B0FCD9 /* GameModeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
