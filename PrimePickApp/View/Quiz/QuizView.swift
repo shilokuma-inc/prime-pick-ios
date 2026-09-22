@@ -20,7 +20,7 @@ struct QuizView: View {
     let difficulty: Difficulty
     let manager = QuizDataManager()
     let quizData: [QuizEntity]
-
+    
     init(difficulty: Difficulty) {
         self.difficulty = difficulty
         quizData = manager.makeQuizData(difficulty: difficulty)
@@ -40,9 +40,9 @@ struct QuizView: View {
                         currentCombo: scoreCalculator.currentCombo
                     )
                     .frame(height: geometry.size.height / 2)
-
+                    
                     Spacer()
-
+                    
                     QuizButtonView(
                         quizData: quizData,
                         difficulty: difficulty,
@@ -53,11 +53,11 @@ struct QuizView: View {
                         answerRecords: $answerRecords
                     )
                     .frame(height: geometry.size.height / 3)
-
+                    
                     Spacer()
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
-
+                
                 if isPresentedResult {
                     QuizResultView(
                         score: scoreCalculator.totalScore,

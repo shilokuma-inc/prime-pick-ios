@@ -71,7 +71,7 @@ private func quizButton(option: String) -> some View {
             .background(RoundedRectangle(cornerRadius: 25).fill(option == "Correct" ? Color.quizCorrectButton.opacity(0.1) : Color.quizIncorrectButton.opacity(0.1)))
             .frame(width: UIScreen.main.bounds.width * 2 / 5, height: UIScreen.main.bounds.height / 4)
             .shadow(radius: 10)
-
+        
         if option == "Correct" {
             Text("✅")
                 .font(.custom("ArialRoundedMTBold", size: 80))
