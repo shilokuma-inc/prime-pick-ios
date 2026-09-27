@@ -11,15 +11,28 @@ import SwiftUI
 /// コンボが切れたとき、コンボ表示を左右に割って落とす
 ///
 /// `progress` が 0 で元の表示、1 で割れて落ちきった状態。`AnyTransition.modifier` の両端に使う。
-struct ComboBreakEffect: ViewModifier {
-    let progress: Double
+///
+/// 左右に割るためのマスクはレイアウト上の枠で切り取るため、`scaleEffect` などで枠からはみ出した部分まで消えてしまう。
+/// 割れていない間（`progress` が 0）はマスクを掛けずにそのまま表示する。
+/// そのために `Animatable` にして、アニメーション途中の値ごとに本文を組み立て直している。
+struct ComboBreakEffect: ViewModifier, Animatable {
+    var progress: Double
+
+    var animatableData: Double {
+        get { progress }
+        set { progress = newValue }
+    }
 
     func body(content: Content) -> some View {
-        ZStack {
-            half(content, isLeading: true)
-            half(content, isLeading: false)
+        if progress == 0 {
+            content
+        } else {
+            ZStack {
+                half(content, isLeading: true)
+                half(content, isLeading: false)
+            }
+            .opacity(1 - progress)
         }
-        .opacity(1 - progress)
     }
 
     private func half(_ content: Content, isLeading: Bool) -> some View {
