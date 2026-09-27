@@ -688,6 +688,22 @@
           }
         }
       }
+    },
+    "Is it prime?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Is it prime?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この数は素数？"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
