@@ -11,6 +11,7 @@
 		0EE0BB1AB88CC6D4826E576F /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC5CD22C7A2079467B43E12 /* GameMode.swift */; };
 		185D5F76D5812CA38E8E31AC /* AnswerFeedbackEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E203857ADC476B86DF92C1 /* AnswerFeedbackEffect.swift */; };
 		193A97532DEDA1148EE0A2C9 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2E8881254652FCE64BDC5E49 /* FirebaseAnalytics */; };
+		1F194D2C166FDC49EBB254E0 /* ScorePopupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B2CC849127DD0088DB2B6 /* ScorePopupTests.swift */; };
 		28F889B95D896AB273E500C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4999EB2C38AE3538FF3FBB0 /* Foundation.framework */; };
 		2ACEADDA8F8379CDB39B512D /* ScorePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706294ACDCB841247D16A4DA /* ScorePopupView.swift */; };
 		2FE99BB3CC809E27B4B0FCD9 /* GameModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C0E8EC6B6A4C521CD4F234 /* GameModeTests.swift */; };
@@ -111,6 +112,7 @@
 		A4999EB2C38AE3538FF3FBB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		A78976578BC5E117682B4EE5 /* PrimeFactorizationTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrimeFactorizationTests.swift; sourceTree = "<group>"; };
 		A7C0E8EC6B6A4C521CD4F234 /* GameModeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GameModeTests.swift; sourceTree = "<group>"; };
+		AB1B2CC849127DD0088DB2B6 /* ScorePopupTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScorePopupTests.swift; sourceTree = "<group>"; };
 		B53375860F98A49A23F4CF3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA57796E7BB0A77899DAC236 /* AnswerAnalyticsEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerAnalyticsEvent.swift; sourceTree = "<group>"; };
 		C2934842E5CEA44B854BB0F5 /* AnswerChoiceTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerChoiceTests.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				CC9BC4CC2E248572DA5CE9FC /* AnswerAnalyticsEventTests.swift */,
 				9CF36E91AC39E4667EE745BF /* NumberExplanationTests.swift */,
 				94C375B34482201149E95AC2 /* QuizIndexViewTests.swift */,
+				AB1B2CC849127DD0088DB2B6 /* ScorePopupTests.swift */,
 			);
 			name = PrimePickAppTests;
 			path = PrimePickAppTests;
@@ -474,6 +477,7 @@
 				77F00BDEBAF3F3EE5D0FE611 /* AnswerAnalyticsEventTests.swift in Sources */,
 				DA49F883A2C0CBB678FED56B /* NumberExplanationTests.swift in Sources */,
 				E903B1EA61B432B0232A68A0 /* QuizIndexViewTests.swift in Sources */,
+				1F194D2C166FDC49EBB254E0 /* ScorePopupTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
