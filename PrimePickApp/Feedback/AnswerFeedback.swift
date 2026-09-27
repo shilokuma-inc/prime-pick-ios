@@ -11,10 +11,13 @@ enum AnswerFeedback {
     case incorrect
 
     /// `sensoryFeedback` に渡す触覚パターン
-    var sensoryFeedback: SensoryFeedback {
+    ///
+    /// 正解はコンボ段階に応じて強くする（`ComboStage.correctFeedback`）。誤答は従来どおり `.error`。
+    /// - Parameter combo: この解答を反映した後の連続正解数
+    func sensoryFeedback(combo: Int) -> SensoryFeedback {
         switch self {
         case .correct:
-            return .success
+            return ComboStage.correctFeedback(combo: combo)
         case .incorrect:
             return .error
         }
@@ -36,4 +39,10 @@ enum AnswerFeedback {
 struct AnswerFeedbackTrigger: Equatable {
     let id: Int
     let result: AnswerFeedback
+    /// この解答を反映した後の連続正解数。振動の強さを決めるのに使う
+    var combo: Int = 0
+
+    var sensoryFeedback: SensoryFeedback {
+        result.sensoryFeedback(combo: combo)
+    }
 }
