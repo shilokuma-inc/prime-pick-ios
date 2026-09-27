@@ -17,6 +17,10 @@ struct QuizButtonView: View {
     ///
     /// 練習モードではミニ解説を読み終えてから次の問題を出し、解説を読む時間が次の問題の速度ボーナスを削らないようにする。
     var advanceDelay: TimeInterval = 0
+    /// 誤答後に入力を受け付けない時間。0 ならロックしない
+    ///
+    /// タイムアタックで誤答を連打して当てずっぽうに進めないよう、次の問題を出したうえで短時間だけボタンを止める。
+    var incorrectInputLockDuration: TimeInterval = 0
     @Binding var scoreCalculator: ScoreCalculator
     @Binding var quizIndex: Int
     @Binding var isPresentedResult: Bool
@@ -26,6 +30,8 @@ struct QuizButtonView: View {
     @State private var feedbackSequence: Int = 0
     /// 解答後、次の問題へ進むのを待っている間は true。その間の解答は受け付けない
     @State private var isWaitingToAdvance = false
+    /// 誤答後の入力ロック中は true。ボタンをグレーアウトし、解答を受け付けない
+    @State private var isInputLocked = false
     private let analytics = FirebaseAnalytics()
 
     var body: some View {
@@ -54,6 +60,9 @@ struct QuizButtonView: View {
 
     private func answerButton(_ choice: AnswerChoice, size: CGSize, trigger: AnswerFeedbackTrigger?) -> some View {
         quizButton(choice: choice, size: size)
+            .grayscale(isInputLocked ? 1 : 0)
+            .opacity(isInputLocked ? 0.4 : 1)
+            .animation(.easeInOut(duration: 0.1), value: isInputLocked)
             .answerFeedbackEffect(trigger: trigger)
             .sensoryFeedback(trigger: trigger) { _, trigger in
                 trigger?.result.sensoryFeedback
@@ -73,7 +82,7 @@ struct QuizButtonView: View {
     /// タイムアタックでは `QuizView` が問題を補充するため、通常ここでは終了しない。
     private func answer(_ choice: AnswerChoice) {
         // 時間切れでリザルトを表示したあとは、背後のボタンに触れても解答・遷移させない
-        guard !isPresentedResult, !isWaitingToAdvance else { return }
+        guard !isPresentedResult, !isWaitingToAdvance, !isInputLocked else { return }
 
         let quiz = quizData[quizIndex]
         let record = QuizAnswerRecord(
@@ -102,6 +111,9 @@ struct QuizButtonView: View {
             record.isAnswerCorrect ? .correct : .incorrect,
             on: choice
         )
+        if !record.isAnswerCorrect {
+            lockInputIfNeeded()
+        }
         guard advanceDelay > 0 else {
             advance()
             return
@@ -110,6 +122,15 @@ struct QuizButtonView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + advanceDelay) {
             isWaitingToAdvance = false
             advance()
+        }
+    }
+
+    /// 誤答後、`incorrectInputLockDuration` の間だけ解答を受け付けない
+    private func lockInputIfNeeded() {
+        guard incorrectInputLockDuration > 0 else { return }
+        isInputLocked = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + incorrectInputLockDuration) {
+            isInputLocked = false
         }
     }
 
