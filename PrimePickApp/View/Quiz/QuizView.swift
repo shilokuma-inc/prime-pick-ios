@@ -71,6 +71,7 @@ struct QuizView: View {
                     QuizButtonView(
                         quizData: quizData,
                         difficulty: difficulty,
+                        range: range,
                         questionStartDate: questionStartDate,
                         scoreCalculator: $scoreCalculator,
                         quizIndex: $quizNumber,

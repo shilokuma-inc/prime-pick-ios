@@ -37,6 +37,8 @@
 		54D69EBDCDA4A3DBECB1740A /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36F4F283E4470B1B885ED0 /* AppTheme.swift */; };
 		58D00C0E23DFBA64A9924780 /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348F9B9700F6A15141CCA545 /* HowToPlayView.swift */; };
 		624168433780D0B8FD63B8D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53375860F98A49A23F4CF3D /* AppDelegate.swift */; };
+		67303872FE1D62B6C6EBEE16 /* AnswerAnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57796E7BB0A77899DAC236 /* AnswerAnalyticsEvent.swift */; };
+		77F00BDEBAF3F3EE5D0FE611 /* AnswerAnalyticsEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9BC4CC2E248572DA5CE9FC /* AnswerAnalyticsEventTests.swift */; };
 		83D3EA8A9559063A4A7E29E4 /* AnswerChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C110C448B6383AE57DE1D0E /* AnswerChoice.swift */; };
 		86F1EE92CEDD8FEA6AF42A7F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2C18A59D04746477C50D4631 /* Localizable.xcstrings */; };
 		8B5D8B28449149C522791BB4 /* AnalyticsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5151BA48ADFFD8185C89A868 /* AnalyticsScreen.swift */; };
@@ -101,7 +103,9 @@
 		A78976578BC5E117682B4EE5 /* PrimeFactorizationTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrimeFactorizationTests.swift; sourceTree = "<group>"; };
 		A7C0E8EC6B6A4C521CD4F234 /* GameModeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GameModeTests.swift; sourceTree = "<group>"; };
 		B53375860F98A49A23F4CF3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BA57796E7BB0A77899DAC236 /* AnswerAnalyticsEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerAnalyticsEvent.swift; sourceTree = "<group>"; };
 		C2934842E5CEA44B854BB0F5 /* AnswerChoiceTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerChoiceTests.swift; sourceTree = "<group>"; };
+		CC9BC4CC2E248572DA5CE9FC /* AnswerAnalyticsEventTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerAnalyticsEventTests.swift; sourceTree = "<group>"; };
 		D76E55438543682B5C190F17 /* SoundFeedback.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SoundFeedback.swift; sourceTree = "<group>"; };
 		F69D0DED6D686DD9038FF63A /* PrimeFactorization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrimeFactorization.swift; sourceTree = "<group>"; };
 		F930AB2B5D1237FCE31F2CAD /* QuizDataManagerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizDataManagerTests.swift; sourceTree = "<group>"; };
@@ -264,6 +268,7 @@
 			children = (
 				5151BA48ADFFD8185C89A868 /* AnalyticsScreen.swift */,
 				A4689944114408D9DC263A40 /* FirebaseAnalytics.swift */,
+				BA57796E7BB0A77899DAC236 /* AnswerAnalyticsEvent.swift */,
 			);
 			path = Analytics;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 				A78976578BC5E117682B4EE5 /* PrimeFactorizationTests.swift */,
 				F930AB2B5D1237FCE31F2CAD /* QuizDataManagerTests.swift */,
 				C2934842E5CEA44B854BB0F5 /* AnswerChoiceTests.swift */,
+				CC9BC4CC2E248572DA5CE9FC /* AnswerAnalyticsEventTests.swift */,
 			);
 			name = PrimePickAppTests;
 			path = PrimePickAppTests;
@@ -434,6 +440,7 @@
 				4AAA2C561C89776B38328E85 /* QuizQuestionCount.swift in Sources */,
 				3C54996A77FAB4264847E0C5 /* SelectQuizSettingView.swift in Sources */,
 				83D3EA8A9559063A4A7E29E4 /* AnswerChoice.swift in Sources */,
+				67303872FE1D62B6C6EBEE16 /* AnswerAnalyticsEvent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +453,7 @@
 				8BE248D1FC202001C53B2F23 /* PrimeFactorizationTests.swift in Sources */,
 				A464F92BBE9E50D793410369 /* QuizDataManagerTests.swift in Sources */,
 				447262F0AEC9552EBF728481 /* AnswerChoiceTests.swift in Sources */,
+				77F00BDEBAF3F3EE5D0FE611 /* AnswerAnalyticsEventTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

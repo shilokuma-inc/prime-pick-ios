@@ -10,6 +10,7 @@ import SwiftUI
 struct QuizButtonView: View {
     var quizData: [QuizEntity]
     let difficulty: Difficulty
+    let range: QuizRange
     /// 現在の問題が表示された時刻。速度ボーナスの計測基準
     let questionStartDate: Date
     @Binding var scoreCalculator: ScoreCalculator
@@ -19,6 +20,7 @@ struct QuizButtonView: View {
     @State private var notPrimeButtonTrigger: AnswerFeedbackTrigger?
     @State private var primeButtonTrigger: AnswerFeedbackTrigger?
     @State private var feedbackSequence: Int = 0
+    private let analytics = FirebaseAnalytics()
 
     var body: some View {
         GeometryReader { geometry in
@@ -74,11 +76,21 @@ struct QuizButtonView: View {
             isPrime: quiz.isCorrect,
             answeredPrime: choice.isPrime
         )
+        let elapsedTime = Date().timeIntervalSince(questionStartDate)
         answerRecords.append(record)
         scoreCalculator.submit(
             isCorrect: record.isAnswerCorrect,
             difficulty: difficulty,
-            elapsedTime: Date().timeIntervalSince(questionStartDate)
+            elapsedTime: elapsedTime
+        )
+        analytics.sendAnswer(
+            AnswerAnalyticsEvent(
+                difficulty: difficulty,
+                range: range,
+                questionNumber: quizIndex + 1,
+                isCorrect: record.isAnswerCorrect,
+                elapsedSeconds: elapsedTime
+            )
         )
         playFeedback(
             record.isAnswerCorrect ? .correct : .incorrect,
