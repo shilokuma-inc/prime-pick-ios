@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05FD77E7B67946DC3D47BA84 /* correct_0.caf in Resources */ = {isa = PBXBuildFile; fileRef = 7CE8537A8423A0BDBFDB5608 /* correct_0.caf */; };
 		0E2623A1589F58BCF0706E89 /* AnswerFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC127C55EF579E3557CC6E8 /* AnswerFeedback.swift */; };
 		0EE0BB1AB88CC6D4826E576F /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC5CD22C7A2079467B43E12 /* GameMode.swift */; };
+		181E9FAD828642A92C85EA51 /* correct_5.caf in Resources */ = {isa = PBXBuildFile; fileRef = E6A2E75FE01B895750131D46 /* correct_5.caf */; };
 		185D5F76D5812CA38E8E31AC /* AnswerFeedbackEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E203857ADC476B86DF92C1 /* AnswerFeedbackEffect.swift */; };
 		193A97532DEDA1148EE0A2C9 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2E8881254652FCE64BDC5E49 /* FirebaseAnalytics */; };
 		1F194D2C166FDC49EBB254E0 /* ScorePopupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1B2CC849127DD0088DB2B6 /* ScorePopupTests.swift */; };
@@ -19,7 +21,9 @@
 		2CD2336581502C5671DABCA8 /* BestScoreStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAE6BD4FD4850412EAE2C2F /* BestScoreStore.swift */; };
 		2FE99BB3CC809E27B4B0FCD9 /* GameModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C0E8EC6B6A4C521CD4F234 /* GameModeTests.swift */; };
 		323BE4CCFDD0906F666F8204 /* ScoreCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC15F88A46D15524FCE751A /* ScoreCalculatorTests.swift */; };
+		3B08953A0C22F9FB696E70CD /* correct_6.caf in Resources */ = {isa = PBXBuildFile; fileRef = A835819C26975EA8BD8A1FD3 /* correct_6.caf */; };
 		3C54996A77FAB4264847E0C5 /* SelectQuizSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D21351F7D654F07CF96CC8 /* SelectQuizSettingView.swift */; };
+		4443CC227914420A89C05899 /* correct_7.caf in Resources */ = {isa = PBXBuildFile; fileRef = E2881EA7A56C0B0CBD21F993 /* correct_7.caf */; };
 		447262F0AEC9552EBF728481 /* AnswerChoiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2934842E5CEA44B854BB0F5 /* AnswerChoiceTests.swift */; };
 		4AAA2C561C89776B38328E85 /* QuizQuestionCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 939087293ACF822184E70174 /* QuizQuestionCount.swift */; };
 		4F02A57D2BF62F61003DF310 /* QuizEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F02A57C2BF62F61003DF310 /* QuizEntity.swift */; };
@@ -53,15 +57,19 @@
 		92E7336F125333D17ED42F74 /* ComboStageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381C1E2175A9F05AAB45505 /* ComboStageTests.swift */; };
 		9431A16ABA552A3DA82E34E8 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4689944114408D9DC263A40 /* FirebaseAnalytics.swift */; };
 		94FD550E249A186DC1FD7354 /* QuizRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F251B3CAE86C65768630F09 /* QuizRange.swift */; };
+		9A27B449340AC3CF445B077E /* correct_1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2ED80902891BF99662591A19 /* correct_1.caf */; };
 		A464F92BBE9E50D793410369 /* QuizDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F930AB2B5D1237FCE31F2CAD /* QuizDataManagerTests.swift */; };
 		A594ABFDAC2E5927E39ACD15 /* PrimeFactorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69D0DED6D686DD9038FF63A /* PrimeFactorization.swift */; };
 		A8191F214974F68FF5C5E60C /* SoundFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76E55438543682B5C190F17 /* SoundFeedback.swift */; };
 		ACC087F9588A9C69154F5D34 /* QuizAnswerRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7CAF292996E14CCDF4426 /* QuizAnswerRecord.swift */; };
 		AE356B45DDA1A9D8063C6C18 /* ScoreCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D9CBC2B3380EC6F674FC12 /* ScoreCalculator.swift */; };
+		B853E00CAD79F741F17D11F0 /* correct_4.caf in Resources */ = {isa = PBXBuildFile; fileRef = 59C1DEF2D29ECF3BDA30C719 /* correct_4.caf */; };
 		D8F10E898E4249C723420664 /* AnswerExplanationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C76017D6EBB8FED91D5B447 /* AnswerExplanationView.swift */; };
 		DA49F883A2C0CBB678FED56B /* NumberExplanationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF36E91AC39E4667EE745BF /* NumberExplanationTests.swift */; };
+		E35A78531C1424FD3FC87201 /* correct_3.caf in Resources */ = {isa = PBXBuildFile; fileRef = C344995803C9D2AF980EF5D0 /* correct_3.caf */; };
 		E903B1EA61B432B0232A68A0 /* QuizIndexViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C375B34482201149E95AC2 /* QuizIndexViewTests.swift */; };
 		F7DBBA5C18A5118EAC885B7B /* NumberExplanation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76BFBF1481763F2E727A1BC /* NumberExplanation.swift */; };
+		FA2314799896D0D2132AB950 /* correct_2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 050610A18A4CF90F7C5FDF14 /* correct_2.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,8 +83,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		050610A18A4CF90F7C5FDF14 /* correct_2.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = correct_2.caf; sourceTree = "<group>"; };
 		0C76017D6EBB8FED91D5B447 /* AnswerExplanationView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerExplanationView.swift; sourceTree = "<group>"; };
 		2C18A59D04746477C50D4631 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		2ED80902891BF99662591A19 /* correct_1.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = correct_1.caf; sourceTree = "<group>"; };
 		33E203857ADC476B86DF92C1 /* AnswerFeedbackEffect.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerFeedbackEffect.swift; sourceTree = "<group>"; };
 		348F9B9700F6A15141CCA545 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
 		3BC15F88A46D15524FCE751A /* ScoreCalculatorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScoreCalculatorTests.swift; sourceTree = "<group>"; };
@@ -104,12 +114,14 @@
 		4FEC65B02C01164800A8B731 /* SelectDifficultyButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDifficultyButtonView.swift; sourceTree = "<group>"; };
 		4FEC65B32C01184E00A8B731 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
 		5151BA48ADFFD8185C89A868 /* AnalyticsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsScreen.swift; sourceTree = "<group>"; };
+		59C1DEF2D29ECF3BDA30C719 /* correct_4.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = correct_4.caf; sourceTree = "<group>"; };
 		5F251B3CAE86C65768630F09 /* QuizRange.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizRange.swift; sourceTree = "<group>"; };
 		6DC127C55EF579E3557CC6E8 /* AnswerFeedback.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerFeedback.swift; sourceTree = "<group>"; };
 		706294ACDCB841247D16A4DA /* ScorePopupView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScorePopupView.swift; sourceTree = "<group>"; };
 		72E7CAF292996E14CCDF4426 /* QuizAnswerRecord.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizAnswerRecord.swift; sourceTree = "<group>"; };
 		76D9CBC2B3380EC6F674FC12 /* ScoreCalculator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScoreCalculator.swift; sourceTree = "<group>"; };
 		7C36F4F283E4470B1B885ED0 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		7CE8537A8423A0BDBFDB5608 /* correct_0.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = correct_0.caf; sourceTree = "<group>"; };
 		8C110C448B6383AE57DE1D0E /* AnswerChoice.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerChoice.swift; sourceTree = "<group>"; };
 		8DFE58C285109A55C5F569C0 /* PrimePickAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrimePickAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		939087293ACF822184E70174 /* QuizQuestionCount.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizQuestionCount.swift; sourceTree = "<group>"; };
@@ -121,15 +133,19 @@
 		A4999EB2C38AE3538FF3FBB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		A78976578BC5E117682B4EE5 /* PrimeFactorizationTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrimeFactorizationTests.swift; sourceTree = "<group>"; };
 		A7C0E8EC6B6A4C521CD4F234 /* GameModeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GameModeTests.swift; sourceTree = "<group>"; };
+		A835819C26975EA8BD8A1FD3 /* correct_6.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = correct_6.caf; sourceTree = "<group>"; };
 		AB1B2CC849127DD0088DB2B6 /* ScorePopupTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScorePopupTests.swift; sourceTree = "<group>"; };
 		B53375860F98A49A23F4CF3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA57796E7BB0A77899DAC236 /* AnswerAnalyticsEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerAnalyticsEvent.swift; sourceTree = "<group>"; };
 		C2934842E5CEA44B854BB0F5 /* AnswerChoiceTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerChoiceTests.swift; sourceTree = "<group>"; };
+		C344995803C9D2AF980EF5D0 /* correct_3.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = correct_3.caf; sourceTree = "<group>"; };
 		CC9BC4CC2E248572DA5CE9FC /* AnswerAnalyticsEventTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerAnalyticsEventTests.swift; sourceTree = "<group>"; };
 		D2BBB3DD6B0549FE35E2F2B5 /* QuizResultViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizResultViewTests.swift; sourceTree = "<group>"; };
 		D381C1E2175A9F05AAB45505 /* ComboStageTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ComboStageTests.swift; sourceTree = "<group>"; };
 		D76E55438543682B5C190F17 /* SoundFeedback.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SoundFeedback.swift; sourceTree = "<group>"; };
+		E2881EA7A56C0B0CBD21F993 /* correct_7.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = correct_7.caf; sourceTree = "<group>"; };
 		E435A5F88707A2F710D3EF4F /* ComboStage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ComboStage.swift; sourceTree = "<group>"; };
+		E6A2E75FE01B895750131D46 /* correct_5.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = correct_5.caf; sourceTree = "<group>"; };
 		F69D0DED6D686DD9038FF63A /* PrimeFactorization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrimeFactorization.swift; sourceTree = "<group>"; };
 		F76BFBF1481763F2E727A1BC /* NumberExplanation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NumberExplanation.swift; sourceTree = "<group>"; };
 		F930AB2B5D1237FCE31F2CAD /* QuizDataManagerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizDataManagerTests.swift; sourceTree = "<group>"; };
@@ -211,6 +227,7 @@
 				4F0C82872BC8247600E1480E /* PrimePickApp.entitlements */,
 				4F0C82882BC8247600E1480E /* Preview Content */,
 				32A78F9647F89F0C3FFE7FB7 /* Feedback */,
+				DFDBF1227819553DB250E9C5 /* Sounds */,
 			);
 			path = PrimePickApp;
 			sourceTree = "<group>";
@@ -341,6 +358,22 @@
 			path = PrimePickAppTests;
 			sourceTree = "<group>";
 		};
+		DFDBF1227819553DB250E9C5 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				7CE8537A8423A0BDBFDB5608 /* correct_0.caf */,
+				2ED80902891BF99662591A19 /* correct_1.caf */,
+				050610A18A4CF90F7C5FDF14 /* correct_2.caf */,
+				C344995803C9D2AF980EF5D0 /* correct_3.caf */,
+				59C1DEF2D29ECF3BDA30C719 /* correct_4.caf */,
+				E6A2E75FE01B895750131D46 /* correct_5.caf */,
+				A835819C26975EA8BD8A1FD3 /* correct_6.caf */,
+				E2881EA7A56C0B0CBD21F993 /* correct_7.caf */,
+			);
+			name = Sounds;
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -436,6 +469,14 @@
 				4F0C828A2BC8247600E1480E /* Preview Assets.xcassets in Resources */,
 				4F42C7A62BF7756200F92FBB /* ColorAssets.xcassets in Resources */,
 				4F0C82862BC8247600E1480E /* Assets.xcassets in Resources */,
+				05FD77E7B67946DC3D47BA84 /* correct_0.caf in Resources */,
+				9A27B449340AC3CF445B077E /* correct_1.caf in Resources */,
+				FA2314799896D0D2132AB950 /* correct_2.caf in Resources */,
+				E35A78531C1424FD3FC87201 /* correct_3.caf in Resources */,
+				B853E00CAD79F741F17D11F0 /* correct_4.caf in Resources */,
+				181E9FAD828642A92C85EA51 /* correct_5.caf in Resources */,
+				3B08953A0C22F9FB696E70CD /* correct_6.caf in Resources */,
+				4443CC227914420A89C05899 /* correct_7.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
