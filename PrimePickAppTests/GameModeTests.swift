@@ -36,6 +36,15 @@ final class GameModeTests: XCTestCase {
         }
     }
 
+    // MARK: - スコアルール
+
+    func testScoringRuleIsTimeAttackOnlyForTimeAttack() {
+        XCTAssertEqual(GameMode.practice.scoringRule, .practice)
+        for duration in TimeAttackDuration.allCases {
+            XCTAssertEqual(GameMode.timeAttack(duration).scoringRule, .timeAttack)
+        }
+    }
+
     // MARK: - モード選択の並び
 
     func testAllCasesIsPracticeFollowedByDurationsInAscendingOrder() {
