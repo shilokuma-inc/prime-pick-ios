@@ -50,6 +50,7 @@
 		A8191F214974F68FF5C5E60C /* SoundFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76E55438543682B5C190F17 /* SoundFeedback.swift */; };
 		ACC087F9588A9C69154F5D34 /* QuizAnswerRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72E7CAF292996E14CCDF4426 /* QuizAnswerRecord.swift */; };
 		AE356B45DDA1A9D8063C6C18 /* ScoreCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D9CBC2B3380EC6F674FC12 /* ScoreCalculator.swift */; };
+		D8F10E898E4249C723420664 /* AnswerExplanationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C76017D6EBB8FED91D5B447 /* AnswerExplanationView.swift */; };
 		DA49F883A2C0CBB678FED56B /* NumberExplanationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF36E91AC39E4667EE745BF /* NumberExplanationTests.swift */; };
 		F7DBBA5C18A5118EAC885B7B /* NumberExplanation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76BFBF1481763F2E727A1BC /* NumberExplanation.swift */; };
 /* End PBXBuildFile section */
@@ -65,6 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C76017D6EBB8FED91D5B447 /* AnswerExplanationView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerExplanationView.swift; sourceTree = "<group>"; };
 		2C18A59D04746477C50D4631 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		33E203857ADC476B86DF92C1 /* AnswerFeedbackEffect.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerFeedbackEffect.swift; sourceTree = "<group>"; };
 		348F9B9700F6A15141CCA545 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				4F8DC1852C08F53D00247F62 /* QuizContent */,
 				4F2239232BFCEEF0004C71A6 /* QuizButtonView.swift */,
 				4F8DC1832C08D66200247F62 /* QuizResultView.swift */,
+				0C76017D6EBB8FED91D5B447 /* AnswerExplanationView.swift */,
 			);
 			path = Quiz;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				83D3EA8A9559063A4A7E29E4 /* AnswerChoice.swift in Sources */,
 				67303872FE1D62B6C6EBEE16 /* AnswerAnalyticsEvent.swift in Sources */,
 				F7DBBA5C18A5118EAC885B7B /* NumberExplanation.swift in Sources */,
+				D8F10E898E4249C723420664 /* AnswerExplanationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

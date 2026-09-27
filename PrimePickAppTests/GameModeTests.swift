@@ -27,6 +27,15 @@ final class GameModeTests: XCTestCase {
         }
     }
 
+    // MARK: - ミニ解説
+
+    func testAnswerExplanationIsShownOnlyInPractice() {
+        XCTAssertTrue(GameMode.practice.showsAnswerExplanation)
+        for duration in TimeAttackDuration.allCases {
+            XCTAssertFalse(GameMode.timeAttack(duration).showsAnswerExplanation)
+        }
+    }
+
     // MARK: - モード選択の並び
 
     func testAllCasesIsPracticeFollowedByDurationsInAscendingOrder() {
