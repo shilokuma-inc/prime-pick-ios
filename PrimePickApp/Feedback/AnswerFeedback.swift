@@ -23,10 +23,12 @@ enum AnswerFeedback {
         }
     }
 
-    var sound: SoundEffect {
+    /// 鳴らす効果音。正解音はコンボに応じて音程が上がる
+    /// - Parameter combo: この解答を反映した後の連続正解数
+    func sound(combo: Int) -> SoundEffect {
         switch self {
         case .correct:
-            return .correct
+            return .correct(combo: combo)
         case .incorrect:
             return .incorrect
         }

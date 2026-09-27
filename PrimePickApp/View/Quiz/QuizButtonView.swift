@@ -149,7 +149,7 @@ struct QuizButtonView: View {
     /// 触覚は `sensoryFeedback` がこのきっかけの変化を検知して再生する。
     /// 効果音・触覚とも再生完了を待たないため、この直後の次の問題への遷移をブロックしない。
     private func playFeedback(_ result: AnswerFeedback, on button: AnswerChoice) {
-        SoundFeedback.play(result.sound)
+        SoundFeedback.play(result.sound(combo: scoreCalculator.currentCombo))
 
         // 同じ結果が続いても触覚とアニメーションが再生されるよう、解答ごとに異なる ID を発行する
         feedbackSequence += 1
