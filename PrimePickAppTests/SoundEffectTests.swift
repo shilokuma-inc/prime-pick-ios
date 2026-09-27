@@ -51,6 +51,32 @@ final class SoundEffectTests: XCTestCase {
         }
     }
 
+    /// 場面ごとの効果音もすべてバンドルに含まれている
+    func testEverySceneSoundIsBundled() {
+        let bundle = Bundle(for: QuizDataManager.self)
+        let effects: [SoundEffect] = [
+            .comboStageUp(.good), .comboStageUp(.great), .comboStageUp(.max),
+            .comboBreak, .countdownTick, .timeUp
+        ]
+        for effect in effects {
+            guard let name = effect.resourceName else {
+                XCTFail("\(effect) に音源が割り当てられていない")
+                continue
+            }
+            XCTAssertNotNil(
+                bundle.url(forResource: name, withExtension: SoundFeedback.resourceExtension),
+                "\(name).\(SoundFeedback.resourceExtension) がバンドルに無い"
+            )
+        }
+    }
+
+    /// 段階ごとに違う到達音を鳴らし、通常段階（段階が下がった扱い）では鳴らさない
+    func testComboStageUpSoundDiffersByStage() {
+        XCTAssertNil(SoundEffect.comboStageUp(.normal).resourceName)
+        let names = [ComboStage.good, .great, .max].compactMap { SoundEffect.comboStageUp($0).resourceName }
+        XCTAssertEqual(Set(names).count, 3)
+    }
+
     func testIncorrectUsesSystemSound() {
         XCTAssertNil(SoundEffect.incorrect.resourceName)
         XCTAssertEqual(AnswerFeedback.incorrect.sound(combo: 0), .incorrect)
