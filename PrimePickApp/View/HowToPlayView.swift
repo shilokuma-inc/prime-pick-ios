@@ -19,6 +19,8 @@ struct HowToPlayView: View {
                     VStack(alignment: .leading, spacing: 24) {
                         rulesSection
 
+                        timeAttackSection
+
                         difficultySection
                     }
                     .padding(24)
@@ -48,6 +50,31 @@ private extension HowToPlayView {
             ruleRow(number: 3, text: "素数だと思ったら右の「素数」、素数ではないと思ったら左の「ちがう」を選びます。")
             ruleRow(number: 4, text: "選んだ問題数に答えると、正解数がスコアとして表示されます。")
         }
+    }
+
+    /// タイムアタックだけのスコアルール（Discussion #156）
+    ///
+    /// 数値はルールの定数から埋め込み、ルールを変えたときに説明だけ古くならないようにする。
+    var timeAttackSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            sectionTitle("Time Attack")
+
+            ruleRow(number: 1, text: "制限時間内にできるだけ高いスコアを目指します。連続で正解するとコンボになり、点が増えます。")
+            ruleRow(
+                number: 2,
+                text: "コンボが \(ScoreCalculator.timeAttackSpeedBonusMinimumCombo) 以上のときは、早く答えるほど速度ボーナスが付きます。"
+            )
+            ruleRow(
+                number: 3,
+                text: "間違えると点が減り（Easy \(missPenalty(.easy)) / Normal \(missPenalty(.normal)) / Hard \(missPenalty(.hard))）、残り時間も \(GameMode.timeAttackMissTimePenaltySeconds) 秒減ります。スコアは 0 点より下にはなりません。"
+            )
+            ruleRow(number: 4, text: "間違えた直後の 0.5 秒はボタンを押せません。")
+            ruleRow(number: 5, text: "難易度と制限時間ごとに自己ベストが記録されます。")
+        }
+    }
+
+    func missPenalty(_ difficulty: Difficulty) -> Int {
+        ScoreCalculator.missPenalty(difficulty: difficulty, rule: .timeAttack)
     }
 
     var difficultySection: some View {
