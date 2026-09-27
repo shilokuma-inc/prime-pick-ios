@@ -65,7 +65,7 @@ struct QuizButtonView: View {
             .animation(.easeInOut(duration: 0.1), value: isInputLocked)
             .answerFeedbackEffect(trigger: trigger)
             .sensoryFeedback(trigger: trigger) { _, trigger in
-                trigger?.result.sensoryFeedback
+                trigger?.sensoryFeedback
             }
             .onTapGesture {
                 answer(choice)
@@ -153,7 +153,7 @@ struct QuizButtonView: View {
 
         // 同じ結果が続いても触覚とアニメーションが再生されるよう、解答ごとに異なる ID を発行する
         feedbackSequence += 1
-        let trigger = AnswerFeedbackTrigger(id: feedbackSequence, result: result)
+        let trigger = AnswerFeedbackTrigger(id: feedbackSequence, result: result, combo: scoreCalculator.currentCombo)
         switch button {
         case .prime:
             primeButtonTrigger = trigger

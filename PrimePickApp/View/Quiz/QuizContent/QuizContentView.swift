@@ -20,6 +20,14 @@ struct QuizContentView: View {
     var scorePopup: ScorePopup?
     /// 時間ペナルティのポップアップ
     var timePenaltyPopup: ScorePopup?
+    /// コンボが切れた回数。変わるたびに画面を短く揺らす（「視差効果を減らす」が有効なときは呼び出し側で増やさない）
+    var comboBreakCount: Int = 0
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    private var comboStage: ComboStage {
+        ComboStage(combo: currentCombo)
+    }
     
     var body: some View {
         GeometryReader { geometry in
@@ -39,6 +47,13 @@ struct QuizContentView: View {
                         .edgesIgnoringSafeArea(.all)
                 }
 
+                // MAX 段階では背景をゆっくり虹色にし、光の粒を流す
+                if comboStage == .max && !reduceMotion {
+                    MaxComboBackground()
+                        .edgesIgnoringSafeArea(.all)
+                        .transition(.opacity)
+                }
+
                 VStack(spacing: .zero) {
                     QuizIndexView(
                         difficulty: difficulty,
@@ -53,7 +68,8 @@ struct QuizContentView: View {
                     QuizNumberView(
                         quizNumber: $quizNumber,
                         difficulty: difficulty,
-                        quizData: quizData
+                        quizData: quizData,
+                        comboStage: comboStage
                     )
                     .frame(height: geometry.size.height * 2 / 3)
                     
@@ -65,7 +81,9 @@ struct QuizContentView: View {
                     )
                         .frame(height: geometry.size.height / 6)
                 }
+                .shortShake(trigger: comboBreakCount)
             }
+            .animation(.easeInOut(duration: 0.6), value: comboStage == .max)
         }
     }
 }

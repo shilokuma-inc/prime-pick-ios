@@ -816,6 +816,54 @@
           }
         }
       }
+    },
+    "Good combo!": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Good combo!"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Good コンボ！"
+          }
+        }
+      }
+    },
+    "Great combo!": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Great combo!"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Great コンボ！"
+          }
+        }
+      }
+    },
+    "MAX combo!": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MAX combo!"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MAX コンボ！"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

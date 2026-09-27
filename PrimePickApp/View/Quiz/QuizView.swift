@@ -14,6 +14,7 @@ struct QuizView: View {
     private static let answerExplanationDuration: TimeInterval = 1.5
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var quizNumber: Int = 0
     @State var isPresentedResult: Bool = false
     @State private var scoreCalculator: ScoreCalculator
@@ -29,6 +30,8 @@ struct QuizView: View {
     @State private var scorePopup: ScorePopup?
     /// 誤答直後に出している時間ペナルティ。表示していないときは nil
     @State private var timePenaltyPopup: ScorePopup?
+    /// コンボが切れた回数。変わるたびに画面を短く揺らす
+    @State private var comboBreakCount: Int = 0
     /// このプレイで自己ベストを更新したか。リザルトで NEW RECORD! を出すために使う
     @State private var isNewRecord = false
 
@@ -79,7 +82,8 @@ struct QuizView: View {
                         currentCombo: scoreCalculator.currentCombo,
                         score: scoreCalculator.totalScore,
                         scorePopup: scorePopup,
-                        timePenaltyPopup: timePenaltyPopup
+                        timePenaltyPopup: timePenaltyPopup,
+                        comboBreakCount: comboBreakCount
                     )
                     .frame(height: geometry.size.height / 2)
 
@@ -138,6 +142,9 @@ struct QuizView: View {
             questionStartDate = Date()
             refillQuizDataIfNeeded(currentIndex: newValue)
         }
+        .onChange(of: scoreCalculator.currentCombo) { oldCombo, newCombo in
+            handleComboChange(from: oldCombo, to: newCombo)
+        }
         .onChange(of: answerRecords.count) { _, _ in
             showAnswerExplanationIfNeeded()
             showScorePopupIfNeeded()
@@ -188,6 +195,20 @@ private extension QuizView {
     func finishByTimeUp() {
         stopTimer()
         isPresentedResult = true
+    }
+
+    /// コンボ切れで画面を揺らし、段階が上がったら VoiceOver で読み上げる
+    ///
+    /// 毎問読み上げると邪魔になるため、読み上げは段階が上がったときだけにする。
+    func handleComboChange(from oldCombo: Int, to newCombo: Int) {
+        // コンボ表示が出ていた（2 以上）ときだけ「切れた」とみなす
+        if newCombo == 0, oldCombo >= 2, !reduceMotion {
+            comboBreakCount += 1
+        }
+        if ComboStage.didStageUp(from: oldCombo, to: newCombo),
+           let announcement = ComboStage(combo: newCombo).announcement {
+            AccessibilityNotification.Announcement(String(localized: announcement)).post()
+        }
     }
 
     /// タイムアタックの誤答で残り時間を減らす。残り時間が尽きたらその場でタイムアップにする
