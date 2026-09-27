@@ -720,6 +720,22 @@
           }
         }
       }
+    },
+    "NEW RECORD!": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NEW RECORD!"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NEW RECORD!"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
