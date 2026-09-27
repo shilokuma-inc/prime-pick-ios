@@ -67,6 +67,9 @@ struct ScoreCalculator {
     /// 獲得点・減点の内訳の累計。リザルトで内訳を出すために持つ
     private(set) var breakdown = ScoreBreakdown()
 
+    /// 直前の 1 問の増減の内訳。まだ解答していなければ nil。解答直後のポップアップ表示に使う
+    private(set) var lastSubmission: ScoreBreakdown?
+
     init(rule: ScoringRule = .practice) {
         self.rule = rule
     }
@@ -87,6 +90,7 @@ struct ScoreCalculator {
             let deducted = min(totalScore, Self.missPenalty(difficulty: difficulty, rule: rule))
             totalScore -= deducted
             breakdown.penalty = Self.addingClamped(breakdown.penalty, deducted)
+            lastSubmission = ScoreBreakdown(penalty: deducted)
             return -deducted
         }
 
@@ -104,6 +108,7 @@ struct ScoreCalculator {
         breakdown.comboBonus = Self.addingClamped(breakdown.comboBonus, gained.comboBonus)
         breakdown.speedBonus = Self.addingClamped(breakdown.speedBonus, gained.speedBonus)
         totalScore = Self.addingClamped(totalScore, gained.total)
+        lastSubmission = gained
         return gained.total
     }
 

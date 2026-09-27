@@ -25,6 +25,10 @@ struct QuizView: View {
     @State private var questionStartDate: Date = Date()
     /// 解答直後に表示しているミニ解説。表示していないときは nil
     @State private var answerExplanation: AnswerExplanationItem?
+    /// 解答直後に出しているスコアの増減。表示していないときは nil
+    @State private var scorePopup: ScorePopup?
+    /// 誤答直後に出している時間ペナルティ。表示していないときは nil
+    @State private var timePenaltyPopup: ScorePopup?
 
     let difficulty: Difficulty
     let gameMode: GameMode
@@ -71,7 +75,9 @@ struct QuizView: View {
                         remainingSeconds: remainingSeconds,
                         quizData: quizData,
                         currentCombo: scoreCalculator.currentCombo,
-                        score: scoreCalculator.totalScore
+                        score: scoreCalculator.totalScore,
+                        scorePopup: scorePopup,
+                        timePenaltyPopup: timePenaltyPopup
                     )
                     .frame(height: geometry.size.height / 2)
 
@@ -130,6 +136,7 @@ struct QuizView: View {
         }
         .onChange(of: answerRecords.count) { _, _ in
             showAnswerExplanationIfNeeded()
+            showScorePopupIfNeeded()
             applyMissTimePenaltyIfNeeded()
         }
         .onChange(of: isPresentedResult) { _, isPresented in
@@ -182,9 +189,37 @@ private extension QuizView {
               !record.isAnswerCorrect
         else { return }
 
+        let secondsBeforePenalty = remainingSeconds
         remainingSeconds = gameMode.remainingSecondsAfterMiss(from: remainingSeconds)
+        showTimePenaltyPopup(deductedSeconds: secondsBeforePenalty - remainingSeconds)
         if remainingSeconds == 0 {
             finishByTimeUp()
+        }
+    }
+
+    /// タイムアタックで、直前の解答によるスコアの増減をポップアップで出す
+    ///
+    /// 練習モードはプレイ中にスコアを表示しないため出さない。
+    func showScorePopupIfNeeded() {
+        guard gameMode.isTimeAttack,
+              let submission = scoreCalculator.lastSubmission,
+              let popup = ScorePopup.score(id: answerRecords.count, submission: submission)
+        else { return }
+        scorePopup = popup
+        DispatchQueue.main.asyncAfter(deadline: .now() + ScorePopup.displayDuration) {
+            // 続けて解答していた場合は、新しいポップアップを消さないよう何もしない
+            guard scorePopup?.id == popup.id else { return }
+            scorePopup = nil
+        }
+    }
+
+    /// 誤答で減った残り時間をポップアップで出す
+    func showTimePenaltyPopup(deductedSeconds: Int) {
+        guard let popup = ScorePopup.time(id: answerRecords.count, deductedSeconds: deductedSeconds) else { return }
+        timePenaltyPopup = popup
+        DispatchQueue.main.asyncAfter(deadline: .now() + ScorePopup.displayDuration) {
+            guard timePenaltyPopup?.id == popup.id else { return }
+            timePenaltyPopup = nil
         }
     }
 

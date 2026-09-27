@@ -14,6 +14,8 @@ struct QuizIndexView: View {
     let currentCombo: Int
     /// 現在の合計スコア。タイムアタックでだけ表示する
     var score: Int = 0
+    /// スコアの横に出す増減のポップアップ。タイムアタックでだけ渡される
+    var scorePopup: ScorePopup?
 
     /// コンボが 2 以上のときだけ表示する（1 連続目は倍率が 1.0 倍で意味がないため）
     private var isComboVisible: Bool {
@@ -27,6 +29,12 @@ struct QuizIndexView: View {
                 .foregroundStyle(Color.gray)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
+
+            // スコアの右に出す。Spacer より手前に置くので、出し入れしてもスコアやコンボの位置は動かない
+            if let scorePopup {
+                ScorePopupView(popup: scorePopup)
+                    .id(scorePopup.id)
+            }
 
             Spacer()
 
