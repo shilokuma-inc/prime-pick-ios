@@ -21,33 +21,44 @@ struct QuizButtonView: View {
     @State private var feedbackSequence: Int = 0
 
     var body: some View {
-        ZStack {
+        GeometryReader { geometry in
+            let buttonSize = CGSize(
+                width: geometry.size.width * 2 / 5,
+                height: geometry.size.height * 3 / 4
+            )
+
+            // 左 = 素数ではない / 右 = 素数 で固定する（Discussion #138 で決定）。
+            // プレイヤーは位置で押し分けるため、問題ごと・画面ごとに入れ替えない。
             HStack {
                 Spacer()
 
-                quizButton(choice: .notPrime)
-                .answerFeedbackEffect(trigger: notPrimeButtonTrigger)
-                .sensoryFeedback(trigger: notPrimeButtonTrigger) { _, trigger in
-                    trigger?.result.sensoryFeedback
-                }
-                .onTapGesture {
-                    answer(.notPrime)
-                }
+                answerButton(.notPrime, size: buttonSize, trigger: notPrimeButtonTrigger)
 
                 Spacer()
 
-                quizButton(choice: .prime)
-                .answerFeedbackEffect(trigger: primeButtonTrigger)
-                .sensoryFeedback(trigger: primeButtonTrigger) { _, trigger in
-                    trigger?.result.sensoryFeedback
-                }
-                .onTapGesture {
-                    answer(.prime)
-                }
+                answerButton(.prime, size: buttonSize, trigger: primeButtonTrigger)
 
                 Spacer()
             }
+            .frame(width: geometry.size.width, height: geometry.size.height)
         }
+    }
+
+    private func answerButton(_ choice: AnswerChoice, size: CGSize, trigger: AnswerFeedbackTrigger?) -> some View {
+        quizButton(choice: choice, size: size)
+            .answerFeedbackEffect(trigger: trigger)
+            .sensoryFeedback(trigger: trigger) { _, trigger in
+                trigger?.result.sensoryFeedback
+            }
+            .onTapGesture {
+                answer(choice)
+            }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(choice.accessibilityLabel)
+            .accessibilityAddTraits(.isButton)
+            .accessibilityAction {
+                answer(choice)
+            }
     }
 
     /// 解答を記録してスコアに反映し、フィードバックを再生して次の問題へ進める。最後の問題ならリザルトを表示する。
@@ -99,17 +110,62 @@ struct QuizButtonView: View {
     }
 }
 
-private func quizButton(choice: AnswerChoice) -> some View {
+private func quizButton(choice: AnswerChoice, size: CGSize) -> some View {
     let color = choice.isPrime ? Color.quizCorrectButton : Color.quizIncorrectButton
 
     return ZStack {
         RoundedRectangle(cornerRadius: 25)
             .stroke(color, lineWidth: 5)
             .background(RoundedRectangle(cornerRadius: 25).fill(color.opacity(0.1)))
-            .frame(width: UIScreen.main.bounds.width * 2 / 5, height: UIScreen.main.bounds.height / 4)
             .shadow(radius: 10)
 
-        Text(choice.isPrime ? "✅" : "❌")
-            .font(.custom("ArialRoundedMTBold", size: 80))
+        // 意味は文言で伝え、絵文字は一目で見分けるための補助として添える
+        VStack(spacing: 8) {
+            Text(choice.symbol)
+                .font(.custom("ArialRoundedMTBold", size: 56))
+                .minimumScaleFactor(0.5)
+
+            Text(choice.title)
+                // ArialRoundedMTBold には日本語の字形が無く細字で描かれるため、日本語も太字になるシステムフォントを使う
+                .font(.system(size: 30, weight: .bold, design: .rounded))
+                .foregroundStyle(Color.primary)
+                .multilineTextAlignment(.center)
+                .lineLimit(2)
+                .minimumScaleFactor(0.5)
+        }
+        .padding(12)
+    }
+    .frame(width: size.width, height: size.height)
+}
+
+private extension AnswerChoice {
+    /// ボタンに表示する文言
+    var title: LocalizedStringKey {
+        switch self {
+        case .notPrime:
+            return "NOT PRIME"
+        case .prime:
+            return "PRIME"
+        }
+    }
+
+    /// 文言に添える絵文字
+    var symbol: String {
+        switch self {
+        case .notPrime:
+            return "❌"
+        case .prime:
+            return "✅"
+        }
+    }
+
+    /// VoiceOver で読み上げる文言
+    var accessibilityLabel: Text {
+        switch self {
+        case .notPrime:
+            return Text("Answer not prime")
+        case .prime:
+            return Text("Answer prime")
+        }
     }
 }
