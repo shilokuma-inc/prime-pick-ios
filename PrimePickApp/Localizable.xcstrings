@@ -704,6 +704,22 @@
           }
         }
       }
+    },
+    "Score %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Score %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スコア %lld"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
