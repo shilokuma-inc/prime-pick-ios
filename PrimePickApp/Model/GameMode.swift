@@ -38,7 +38,7 @@ enum GameMode: Hashable, Identifiable, CaseIterable {
 
     /// 解答直後にミニ解説を表示するか
     ///
-    /// タイムアタックで表示するかは未決のため、テンポを崩さないよう練習モードだけで表示する。
+    /// タイムアタックではテンポを崩さないよう表示せず、練習モードだけで表示する（Discussion #138 / PR #152 で確認済み）。
     var showsAnswerExplanation: Bool {
         !isTimeAttack
     }
