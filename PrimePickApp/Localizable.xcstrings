@@ -864,6 +864,102 @@
           }
         }
       }
+    },
+    "Time Attack": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Attack"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タイムアタック"
+          }
+        }
+      }
+    },
+    "制限時間内にできるだけ高いスコアを目指します。連続で正解するとコンボになり、点が増えます。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aim for the highest score you can before time runs out. Consecutive correct answers build a combo and earn more points."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "制限時間内にできるだけ高いスコアを目指します。連続で正解するとコンボになり、点が増えます。"
+          }
+        }
+      }
+    },
+    "コンボが %lld 以上のときは、早く答えるほど速度ボーナスが付きます。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "While your combo is %lld or more, faster answers earn a speed bonus."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コンボが %lld 以上のときは、早く答えるほど速度ボーナスが付きます。"
+          }
+        }
+      }
+    },
+    "間違えた直後の 0.5 秒はボタンを押せません。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The buttons are locked for 0.5 seconds after a wrong answer."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "間違えた直後の 0.5 秒はボタンを押せません。"
+          }
+        }
+      }
+    },
+    "難易度と制限時間ごとに自己ベストが記録されます。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your personal best is saved for each difficulty and time limit."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "難易度と制限時間ごとに自己ベストが記録されます。"
+          }
+        }
+      }
+    },
+    "間違えると点が減り（Easy %lld / Normal %lld / Hard %lld）、残り時間も %lld 秒減ります。スコアは 0 点より下にはなりません。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A wrong answer costs points (Easy %1$lld / Normal %2$lld / Hard %3$lld) and %4$lld seconds of time. Your score never drops below 0."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "間違えると点が減り（Easy %1$lld / Normal %2$lld / Hard %3$lld）、残り時間も %4$lld 秒減ります。スコアは 0 点より下にはなりません。"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
