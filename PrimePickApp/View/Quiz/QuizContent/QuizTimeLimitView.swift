@@ -11,6 +11,8 @@ struct QuizTimeLimitView: View {
     let difficulty: Difficulty
     var gameMode: GameMode = .practice
     var remainingSeconds: Int = 0
+    /// 残り時間の近くに出す時間ペナルティのポップアップ
+    var timePenaltyPopup: ScorePopup?
 
     var borderColor: Color {
         switch difficulty {
@@ -59,6 +61,13 @@ struct QuizTimeLimitView: View {
                 outlinedTitle("No Timelimit!")
             case .timeAttack:
                 outlinedTitle("\(remainingSeconds) sec")
+            }
+        }
+        .overlay(alignment: .trailing) {
+            if let timePenaltyPopup {
+                ScorePopupView(popup: timePenaltyPopup, fontSize: 26)
+                    .id(timePenaltyPopup.id)
+                    .padding(.trailing, 24)
             }
         }
         .border(borderColor, width: 5.0)

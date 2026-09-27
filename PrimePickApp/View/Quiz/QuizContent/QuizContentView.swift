@@ -16,6 +16,10 @@ struct QuizContentView: View {
     let currentCombo: Int
     /// 現在の合計スコア。タイムアタックで左上に表示する
     var score: Int = 0
+    /// スコアの増減のポップアップ
+    var scorePopup: ScorePopup?
+    /// 時間ペナルティのポップアップ
+    var timePenaltyPopup: ScorePopup?
     
     var body: some View {
         GeometryReader { geometry in
@@ -41,7 +45,8 @@ struct QuizContentView: View {
                         gameMode: gameMode,
                         quizNumber: $quizNumber,
                         currentCombo: currentCombo,
-                        score: score
+                        score: score,
+                        scorePopup: scorePopup
                     )
                     .frame(height: geometry.size.height / 6)
                     
@@ -55,7 +60,8 @@ struct QuizContentView: View {
                     QuizTimeLimitView(
                         difficulty: difficulty,
                         gameMode: gameMode,
-                        remainingSeconds: remainingSeconds
+                        remainingSeconds: remainingSeconds,
+                        timePenaltyPopup: timePenaltyPopup
                     )
                         .frame(height: geometry.size.height / 6)
                 }
