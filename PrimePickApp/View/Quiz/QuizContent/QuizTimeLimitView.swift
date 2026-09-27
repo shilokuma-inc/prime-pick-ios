@@ -14,6 +14,13 @@ struct QuizTimeLimitView: View {
     /// 残り時間の近くに出す時間ペナルティのポップアップ
     var timePenaltyPopup: ScorePopup?
 
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    /// 残り 5 秒以下か。残り時間とバーを赤くし、1 秒ごとにパルスさせる
+    private var isInFinalCountdown: Bool {
+        gameMode.isInFinalCountdown(remainingSeconds: remainingSeconds)
+    }
+
     var borderColor: Color {
         switch difficulty {
         case .easy:
@@ -51,7 +58,7 @@ struct QuizTimeLimitView: View {
             }
             
             ProgressView(value: progress)
-                .progressViewStyle(LinearProgressViewStyle(tint: .gray))
+                .progressViewStyle(LinearProgressViewStyle(tint: isInFinalCountdown ? .red : .gray))
                 .scaleEffect(x: 1, y: 4, anchor: .center)
                 .padding(.horizontal, 20)
                 .animation(.linear(duration: 1), value: progress)
@@ -60,7 +67,8 @@ struct QuizTimeLimitView: View {
             case .practice:
                 outlinedTitle("No Timelimit!")
             case .timeAttack:
-                outlinedTitle("\(remainingSeconds) sec")
+                outlinedTitle("\(remainingSeconds) sec", color: isInFinalCountdown ? .red : .white)
+                    .modifier(FinalCountdownPulse(isActive: isInFinalCountdown && !reduceMotion, trigger: remainingSeconds))
             }
         }
         .overlay(alignment: .trailing) {
@@ -82,7 +90,7 @@ private extension QuizTimeLimitView {
     }
 
     /// 背景に紛れないよう黒い縁取りを付けたタイトル
-    func outlinedTitle(_ key: LocalizedStringKey) -> some View {
+    func outlinedTitle(_ key: LocalizedStringKey, color: Color = .white) -> some View {
         ZStack {
             ForEach(Self.outlineOffsets.indices, id: \.self) { index in
                 titleText(key)
@@ -94,7 +102,7 @@ private extension QuizTimeLimitView {
             }
 
             titleText(key)
-                .foregroundColor(.white)
+                .foregroundColor(color)
         }
         .padding()
     }
@@ -108,10 +116,33 @@ private extension QuizTimeLimitView {
     }
 }
 
+/// 残り時間が 1 秒減るたびに一瞬拡大して戻す
+private struct FinalCountdownPulse: ViewModifier {
+    let isActive: Bool
+    let trigger: Int
+
+    func body(content: Content) -> some View {
+        if isActive {
+            content.keyframeAnimator(initialValue: 1.0, trigger: trigger) { view, scale in
+                view.scaleEffect(scale)
+            } keyframes: { _ in
+                KeyframeTrack {
+                    SpringKeyframe(1.25, duration: 0.12)
+                    CubicKeyframe(1.0, duration: 0.35)
+                }
+            }
+        } else {
+            content
+        }
+    }
+}
+
 #Preview {
     VStack {
         QuizTimeLimitView(difficulty: .easy)
 
         QuizTimeLimitView(difficulty: .hard, gameMode: .timeAttack(.sixtySeconds), remainingSeconds: 42)
+
+        QuizTimeLimitView(difficulty: .normal, gameMode: .timeAttack(.fifteenSeconds), remainingSeconds: 4)
     }
 }

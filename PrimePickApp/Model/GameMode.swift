@@ -13,6 +13,9 @@ enum GameMode: Hashable, Identifiable, CaseIterable {
     /// タイムアタックの誤答後に入力を受け付けない時間（秒）
     static let timeAttackMissInputLockDuration: TimeInterval = 0.5
 
+    /// タイムアタックで残り時間を赤くして急かし始める秒数
+    static let timeAttackFinalCountdownSeconds = 5
+
     /// 10 問固定・時間無制限
     case practice
     /// 制限時間内に何問正解できるかを競うモード
@@ -67,6 +70,13 @@ enum GameMode: Hashable, Identifiable, CaseIterable {
     /// 誤答のペナルティを反映した残り時間。0 以下になる場合は 0（即タイムアップ）を返す
     func remainingSecondsAfterMiss(from remainingSeconds: Int) -> Int {
         max(0, remainingSeconds - missTimePenaltySeconds)
+    }
+
+    /// 残り時間が終盤（残り 5 秒以下）か。練習モードは制限時間が無いので常に false
+    ///
+    /// 0 秒はタイムアップでリザルトを出すため含めない。
+    func isInFinalCountdown(remainingSeconds: Int) -> Bool {
+        isTimeAttack && (1...Self.timeAttackFinalCountdownSeconds).contains(remainingSeconds)
     }
 
     /// 画面に表示するモード名

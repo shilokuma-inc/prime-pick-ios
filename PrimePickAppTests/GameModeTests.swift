@@ -75,6 +75,23 @@ final class GameModeTests: XCTestCase {
         XCTAssertEqual(GameMode.practice.remainingSecondsAfterMiss(from: 10), 10)
     }
 
+    // MARK: - 残り 5 秒の演出
+
+    func testFinalCountdownStartsAtFiveSeconds() {
+        for duration in TimeAttackDuration.allCases {
+            let mode = GameMode.timeAttack(duration)
+            XCTAssertFalse(mode.isInFinalCountdown(remainingSeconds: 6))
+            XCTAssertTrue(mode.isInFinalCountdown(remainingSeconds: 5))
+            XCTAssertTrue(mode.isInFinalCountdown(remainingSeconds: 1))
+            // 0 秒はタイムアップ
+            XCTAssertFalse(mode.isInFinalCountdown(remainingSeconds: 0))
+        }
+    }
+
+    func testPracticeHasNoFinalCountdown() {
+        XCTAssertFalse(GameMode.practice.isInFinalCountdown(remainingSeconds: 3))
+    }
+
     // MARK: - モード選択の並び
 
     func testAllCasesIsPracticeFollowedByDurationsInAscendingOrder() {
