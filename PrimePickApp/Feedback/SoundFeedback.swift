@@ -9,12 +9,21 @@ import AVFoundation
 /// アプリ内で鳴らす効果音の種類
 ///
 /// 呼び出し側は「どの場面の音か」だけを指定し、どの音源を鳴らすかはここで決める。
-/// 正解音は `scripts/generate-sounds.py` で生成した音階 8 音の音源（`Sounds/correct_0〜7.caf`）を、
-/// コンボに応じて鳴らし分ける。誤答音は独自の音源が無いため、iOS のシステムサウンドで代替している。
+/// 音源は `scripts/generate-sounds.py` で生成したもの（`Sounds/*.caf`）を使う。
+/// 正解音は音階 8 音（`correct_0〜7`）をコンボに応じて鳴らし分ける。
+/// 誤答音は独自の音源が無いため、iOS のシステムサウンドで代替している。
 enum SoundEffect: Equatable {
     /// 正解。`combo` はこの解答を反映した後の連続正解数
     case correct(combo: Int)
     case incorrect
+    /// コンボ段階が上がった。MAX はジングル。通常段階では鳴らさない
+    case comboStageUp(ComboStage)
+    /// コンボが切れた（下降音）
+    case comboBreak
+    /// 残り 5 秒の 1 秒ごとのチック
+    case countdownTick
+    /// タイムアップのホイッスル
+    case timeUp
 
     /// 正解音の音階の数
     static let correctNoteCount = 8
@@ -38,16 +47,33 @@ enum SoundEffect: Equatable {
             return "correct_\(Self.correctNoteIndex(combo: combo))"
         case .incorrect:
             return nil
+        case .comboStageUp(let stage):
+            switch stage {
+            case .normal:
+                return nil
+            case .good:
+                return "stage_good"
+            case .great:
+                return "stage_great"
+            case .max:
+                return "stage_max"
+            }
+        case .comboBreak:
+            return "combo_break"
+        case .countdownTick:
+            return "countdown_tick"
+        case .timeUp:
+            return "time_up"
         }
     }
 
     /// 参照している ID は iOS 標準の UISounds に含まれる短い否定音
     fileprivate var systemSoundID: SystemSoundID? {
         switch self {
-        case .correct:
-            return nil
         case .incorrect:
             return 1053
+        case .correct, .comboStageUp, .comboBreak, .countdownTick, .timeUp:
+            return nil
         }
     }
 }

@@ -185,6 +185,9 @@ private extension QuizView {
         guard !isPresentedResult else { return }
         if remainingSeconds > 1 {
             remainingSeconds -= 1
+            if gameMode.isInFinalCountdown(remainingSeconds: remainingSeconds) {
+                SoundFeedback.play(.countdownTick)
+            }
         } else {
             remainingSeconds = 0
             finishByTimeUp()
@@ -194,20 +197,27 @@ private extension QuizView {
     /// 時間切れでリザルトを表示する
     func finishByTimeUp() {
         stopTimer()
+        SoundFeedback.play(.timeUp)
         isPresentedResult = true
     }
 
-    /// コンボ切れで画面を揺らし、段階が上がったら VoiceOver で読み上げる
+    /// コンボ切れで画面を揺らして下降音を鳴らし、段階が上がったら到達音を鳴らして VoiceOver で読み上げる
     ///
     /// 毎問読み上げると邪魔になるため、読み上げは段階が上がったときだけにする。
     func handleComboChange(from oldCombo: Int, to newCombo: Int) {
         // コンボ表示が出ていた（2 以上）ときだけ「切れた」とみなす
-        if newCombo == 0, oldCombo >= 2, !reduceMotion {
-            comboBreakCount += 1
+        if newCombo == 0, oldCombo >= 2 {
+            SoundFeedback.play(.comboBreak)
+            if !reduceMotion {
+                comboBreakCount += 1
+            }
         }
-        if ComboStage.didStageUp(from: oldCombo, to: newCombo),
-           let announcement = ComboStage(combo: newCombo).announcement {
-            AccessibilityNotification.Announcement(String(localized: announcement)).post()
+        if ComboStage.didStageUp(from: oldCombo, to: newCombo) {
+            let stage = ComboStage(combo: newCombo)
+            SoundFeedback.play(.comboStageUp(stage))
+            if let announcement = stage.announcement {
+                AccessibilityNotification.Announcement(String(localized: announcement)).post()
+            }
         }
     }
 

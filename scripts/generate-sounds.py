@@ -33,6 +33,57 @@ def tone(frequency, duration, decay, partials=((1, 1.0), (2, 0.3), (3, 0.1)), at
     return samples
 
 
+def glide(start_hz, end_hz, duration, decay):
+    """start_hz から end_hz へ音程を滑らかに下げ（上げ）ながら減衰する音"""
+    samples = []
+    phase = 0.0
+    count = int(SAMPLE_RATE * duration)
+    for index in range(count):
+        t = index / SAMPLE_RATE
+        # 周波数を指数的に動かすと、耳には一定の速さで音程が変わって聞こえる
+        frequency = start_hz * (end_hz / start_hz) ** (index / count)
+        phase += 2 * math.pi * frequency / SAMPLE_RATE
+        envelope = min(1.0, t / 0.005) * math.exp(-t / decay)
+        samples.append((math.sin(phase) + 0.3 * math.sin(2 * phase)) / 1.3 * envelope)
+    return samples
+
+
+def whistle(frequency, duration, vibrato_hz=28, vibrato_depth=0.03):
+    """細かく揺れる高音。ホイッスルの代わりに使う。立ち上がりと終わりは短くフェードする"""
+    samples = []
+    phase = 0.0
+    count = int(SAMPLE_RATE * duration)
+    fade = 0.02
+    for index in range(count):
+        t = index / SAMPLE_RATE
+        current = frequency * (1 + vibrato_depth * math.sin(2 * math.pi * vibrato_hz * t))
+        phase += 2 * math.pi * current / SAMPLE_RATE
+        envelope = min(1.0, t / fade, (duration - t) / fade)
+        samples.append(math.sin(phase) * envelope)
+    return samples
+
+
+def sequence(*parts, gap=0.0):
+    """複数の音を順に並べる。gap 秒の無音をはさむ"""
+    samples = []
+    for part in parts:
+        samples.extend(part)
+        samples.extend([0.0] * int(SAMPLE_RATE * gap))
+    return samples
+
+
+def overlap(parts_with_offsets):
+    """(開始秒, サンプル列) の組を重ねて 1 つにする。和音やアルペジオの余韻に使う"""
+    length = max(int(offset * SAMPLE_RATE) + len(part) for offset, part in parts_with_offsets)
+    samples = [0.0] * length
+    for offset, part in parts_with_offsets:
+        start = int(offset * SAMPLE_RATE)
+        for index, value in enumerate(part):
+            samples[start + index] += value
+    peak = max(abs(value) for value in samples) or 1.0
+    return [value / peak for value in samples]
+
+
 def write_caf(name, samples, volume=0.6):
     """サンプル列を <name>.caf として書き出す"""
     os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -54,6 +105,36 @@ def write_caf(name, samples, volume=0.6):
 def main():
     for index, frequency in enumerate(CORRECT_SCALE_HZ):
         write_caf(f"correct_{index}", tone(frequency, duration=0.25, decay=0.08))
+
+    # コンボ段階到達。段階が上がるほど音を増やし、MAX は和音で締めるジングルにする
+    g5, c6, e6, g6, c7 = 783.99, 1046.50, 1318.51, 1567.98, 2093.00
+    write_caf("stage_good", overlap([(0.0, tone(g5, 0.3, 0.1)), (0.08, tone(c6, 0.35, 0.12))]), volume=0.5)
+    write_caf(
+        "stage_great",
+        overlap([(0.0, tone(c6, 0.3, 0.1)), (0.07, tone(e6, 0.3, 0.1)), (0.14, tone(g6, 0.4, 0.14))]),
+        volume=0.5,
+    )
+    write_caf(
+        "stage_max",
+        overlap([
+            (0.0, tone(c6, 0.3, 0.1)),
+            (0.08, tone(e6, 0.3, 0.1)),
+            (0.16, tone(g6, 0.3, 0.1)),
+            (0.26, tone(c7, 0.8, 0.3)),
+            (0.26, tone(g6, 0.8, 0.3)),
+            (0.26, tone(e6, 0.8, 0.3)),
+        ]),
+        volume=0.5,
+    )
+
+    # 残り 5 秒のチック。解答の音を邪魔しないよう短く小さくする
+    write_caf("countdown_tick", tone(1760.0, duration=0.06, decay=0.015, partials=((1, 1.0),)), volume=0.4)
+
+    # タイムアップのホイッスル（短く 2 回）
+    write_caf("time_up", sequence(whistle(2350.0, 0.18), whistle(2350.0, 0.45), gap=0.06), volume=0.45)
+
+    # コンボ切れの下降音
+    write_caf("combo_break", glide(620.0, 180.0, duration=0.4, decay=0.18), volume=0.55)
 
 
 if __name__ == "__main__":
