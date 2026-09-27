@@ -13,6 +13,10 @@ struct QuizButtonView: View {
     let range: QuizRange
     /// 現在の問題が表示された時刻。速度ボーナスの計測基準
     let questionStartDate: Date
+    /// 解答してから次の問題（またはリザルト）へ進むまでの待ち時間。0 なら即座に進む
+    ///
+    /// 練習モードではミニ解説を読み終えてから次の問題を出し、解説を読む時間が次の問題の速度ボーナスを削らないようにする。
+    var advanceDelay: TimeInterval = 0
     @Binding var scoreCalculator: ScoreCalculator
     @Binding var quizIndex: Int
     @Binding var isPresentedResult: Bool
@@ -20,6 +24,8 @@ struct QuizButtonView: View {
     @State private var notPrimeButtonTrigger: AnswerFeedbackTrigger?
     @State private var primeButtonTrigger: AnswerFeedbackTrigger?
     @State private var feedbackSequence: Int = 0
+    /// 解答後、次の問題へ進むのを待っている間は true。その間の解答は受け付けない
+    @State private var isWaitingToAdvance = false
     private let analytics = FirebaseAnalytics()
 
     var body: some View {
@@ -67,7 +73,7 @@ struct QuizButtonView: View {
     /// タイムアタックでは `QuizView` が問題を補充するため、通常ここでは終了しない。
     private func answer(_ choice: AnswerChoice) {
         // 時間切れでリザルトを表示したあとは、背後のボタンに触れても解答・遷移させない
-        guard !isPresentedResult else { return }
+        guard !isPresentedResult, !isWaitingToAdvance else { return }
 
         let quiz = quizData[quizIndex]
         let record = QuizAnswerRecord(
@@ -96,6 +102,20 @@ struct QuizButtonView: View {
             record.isAnswerCorrect ? .correct : .incorrect,
             on: choice
         )
+        guard advanceDelay > 0 else {
+            advance()
+            return
+        }
+        isWaitingToAdvance = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + advanceDelay) {
+            isWaitingToAdvance = false
+            advance()
+        }
+    }
+
+    /// 次の問題へ進める。最後の問題ならリザルトを表示する
+    private func advance() {
+        guard !isPresentedResult else { return }
         if quizIndex < quizData.count - 1 {
             quizIndex += 1
         } else {

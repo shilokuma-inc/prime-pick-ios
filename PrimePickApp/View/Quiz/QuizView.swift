@@ -85,6 +85,7 @@ struct QuizView: View {
                         difficulty: difficulty,
                         range: range,
                         questionStartDate: questionStartDate,
+                        advanceDelay: gameMode.showsAnswerExplanation ? Self.answerExplanationDuration : 0,
                         scoreCalculator: $scoreCalculator,
                         quizIndex: $quizNumber,
                         isPresentedResult: $isPresentedResult,
