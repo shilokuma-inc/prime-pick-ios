@@ -16,7 +16,7 @@ struct QuizView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var quizNumber: Int = 0
     @State var isPresentedResult: Bool = false
-    @State private var scoreCalculator = ScoreCalculator()
+    @State private var scoreCalculator: ScoreCalculator
     @State private var answerRecords: [QuizAnswerRecord] = []
     @State private var quizData: [QuizEntity]
     @State private var remainingSeconds: Int
@@ -53,6 +53,7 @@ struct QuizView: View {
                 questionCount: questionCount
             )
         )
+        _scoreCalculator = State(initialValue: ScoreCalculator(rule: gameMode.scoringRule))
         _remainingSeconds = State(initialValue: gameMode.timeLimitSeconds ?? 0)
     }
 

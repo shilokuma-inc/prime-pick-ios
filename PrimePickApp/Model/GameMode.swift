@@ -43,6 +43,11 @@ enum GameMode: Hashable, Identifiable, CaseIterable {
         !isTimeAttack
     }
 
+    /// スコアの計算ルール。誤答の減点と速度ボーナスの条件はタイムアタックだけに適用する
+    var scoringRule: ScoringRule {
+        isTimeAttack ? .timeAttack : .practice
+    }
+
     /// 画面に表示するモード名
     var localizedTitle: LocalizedStringKey {
         switch self {
