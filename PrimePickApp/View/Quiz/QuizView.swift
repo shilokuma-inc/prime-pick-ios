@@ -90,6 +90,7 @@ struct QuizView: View {
                         range: range,
                         questionStartDate: questionStartDate,
                         advanceDelay: gameMode.showsAnswerExplanation ? Self.answerExplanationDuration : 0,
+                        incorrectInputLockDuration: gameMode.missInputLockDuration,
                         scoreCalculator: $scoreCalculator,
                         quizIndex: $quizNumber,
                         isPresentedResult: $isPresentedResult,
@@ -128,6 +129,7 @@ struct QuizView: View {
         }
         .onChange(of: answerRecords.count) { _, _ in
             showAnswerExplanationIfNeeded()
+            applyMissTimePenaltyIfNeeded()
         }
         .onChange(of: isPresentedResult) { _, isPresented in
             // 10 問を解き終えた場合など、タイムアップ以外の終了でもタイマーを止める
@@ -169,6 +171,20 @@ private extension QuizView {
     func finishByTimeUp() {
         stopTimer()
         isPresentedResult = true
+    }
+
+    /// タイムアタックの誤答で残り時間を減らす。残り時間が尽きたらその場でタイムアップにする
+    func applyMissTimePenaltyIfNeeded() {
+        guard gameMode.missTimePenaltySeconds > 0,
+              !isPresentedResult,
+              let record = answerRecords.last,
+              !record.isAnswerCorrect
+        else { return }
+
+        remainingSeconds = gameMode.remainingSecondsAfterMiss(from: remainingSeconds)
+        if remainingSeconds == 0 {
+            finishByTimeUp()
+        }
     }
 
     /// 直前に解答した数のミニ解説を短時間だけ表示する
