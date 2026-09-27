@@ -110,26 +110,12 @@ struct QuizResultView: View {
         HStack(spacing: 8) {
             Text(verbatim: "❌")
 
-            factorizationText(for: record.number)
+            NumberExplanation(number: record.number).text
                 .font(.body)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
 
             Spacer(minLength: 0)
-        }
-    }
-
-    /// 素因数分解の表示。合成数は `391 = 17 × 23`、素数などは文言で返す。
-    private func factorizationText(for number: Int) -> Text {
-        let factors = PrimeFactorization.factors(of: number)
-        if factors.count >= 2 {
-            let expression = factors.map(String.init).joined(separator: " × ")
-            return Text(verbatim: "\(number) = \(expression)")
-        } else if factors.count == 1 {
-            return Text("\(number) is a prime number")
-        } else {
-            // 1 以下は素因数を持たないため、専用の文言にする
-            return Text("\(number) is not a prime number")
         }
     }
 

@@ -353,18 +353,18 @@
         }
       }
     },
-    "素数だと思ったら ✅、素数ではないと思ったら ❌ を選びます。": {
+    "素数だと思ったら右の「素数」、素数ではないと思ったら左の「ちがう」を選びます。": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tap ✅ if you think it is a prime number, or ❌ if you do not."
+            "value": "Tap PRIME on the right if you think it is a prime number, or NOT PRIME on the left if you do not."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "素数だと思ったら ✅、素数ではないと思ったら ❌ を選びます。"
+            "value": "素数だと思ったら右の「素数」、素数ではないと思ったら左の「ちがう」を選びます。"
           }
         }
       }
@@ -621,6 +621,86 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld 秒"
+          }
+        }
+      }
+    },
+    "PRIME": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PRIME"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "素数"
+          }
+        }
+      }
+    },
+    "NOT PRIME": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NOT PRIME"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ちがう"
+          }
+        }
+      }
+    },
+    "Answer prime": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Answer prime"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "素数と答える"
+          }
+        }
+      }
+    },
+    "Answer not prime": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Answer not prime"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "素数ではないと答える"
+          }
+        }
+      }
+    },
+    "Is it prime?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Is it prime?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この数は素数？"
           }
         }
       }

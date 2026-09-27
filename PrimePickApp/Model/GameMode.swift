@@ -36,6 +36,13 @@ enum GameMode: Hashable, Identifiable, CaseIterable {
         }
     }
 
+    /// 解答直後にミニ解説を表示するか
+    ///
+    /// タイムアタックではテンポを崩さないよう表示せず、練習モードだけで表示する（Discussion #138 / PR #152 で確認済み）。
+    var showsAnswerExplanation: Bool {
+        !isTimeAttack
+    }
+
     /// 画面に表示するモード名
     var localizedTitle: LocalizedStringKey {
         switch self {

@@ -10,6 +10,8 @@ import SwiftUI
 struct QuizView: View {
     /// タイムアタックで残りの問題がこの数以下になったら追加生成する
     private static let refillThreshold: Int = 3
+    /// ミニ解説を表示しておく秒数
+    private static let answerExplanationDuration: TimeInterval = 1.5
 
     @Environment(\.dismiss) private var dismiss
     @State private var quizNumber: Int = 0
@@ -21,6 +23,8 @@ struct QuizView: View {
     @State private var timer: Timer?
     /// 現在の問題が表示された時刻。速度ボーナスの計測基準
     @State private var questionStartDate: Date = Date()
+    /// 解答直後に表示しているミニ解説。表示していないときは nil
+    @State private var answerExplanation: AnswerExplanationItem?
 
     let difficulty: Difficulty
     let gameMode: GameMode
@@ -65,13 +69,23 @@ struct QuizView: View {
                         currentCombo: scoreCalculator.currentCombo
                     )
                     .frame(height: geometry.size.height / 2)
-                    
-                    Spacer()
+
+                    // 表示の有無でボタンの位置が動かないよう、高さを固定した領域に出す
+                    ZStack {
+                        if let answerExplanation {
+                            AnswerExplanationView(explanation: answerExplanation.explanation)
+                                .id(answerExplanation.id)
+                                .transition(.opacity)
+                        }
+                    }
+                    .frame(height: geometry.size.height / 12)
                     
                     QuizButtonView(
                         quizData: quizData,
                         difficulty: difficulty,
+                        range: range,
                         questionStartDate: questionStartDate,
+                        advanceDelay: gameMode.showsAnswerExplanation ? Self.answerExplanationDuration : 0,
                         scoreCalculator: $scoreCalculator,
                         quizIndex: $quizNumber,
                         isPresentedResult: $isPresentedResult,
@@ -107,6 +121,9 @@ struct QuizView: View {
             // 次の問題に切り替わった時点を経過時間の基準にする
             questionStartDate = Date()
             refillQuizDataIfNeeded(currentIndex: newValue)
+        }
+        .onChange(of: answerRecords.count) { _, _ in
+            showAnswerExplanationIfNeeded()
         }
         .onChange(of: isPresentedResult) { _, isPresented in
             // 10 問を解き終えた場合など、タイムアップ以外の終了でもタイマーを止める
@@ -150,6 +167,24 @@ private extension QuizView {
         isPresentedResult = true
     }
 
+    /// 直前に解答した数のミニ解説を短時間だけ表示する
+    func showAnswerExplanationIfNeeded() {
+        guard gameMode.showsAnswerExplanation, let record = answerRecords.last else { return }
+
+        let item = AnswerExplanationItem(id: answerRecords.count, explanation: NumberExplanation(number: record.number))
+        withAnimation(.easeOut(duration: 0.15)) {
+            answerExplanation = item
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + Self.answerExplanationDuration) {
+            // 続けて解答していた場合は、新しい解説を消さないよう何もしない
+            guard answerExplanation?.id == item.id else { return }
+            withAnimation(.easeIn(duration: 0.2)) {
+                answerExplanation = nil
+            }
+        }
+    }
+
     /// タイムアタックでは制限時間内に問題が尽きないよう、残りが少なくなったら追加生成する
     func refillQuizDataIfNeeded(currentIndex: Int) {
         guard gameMode.isTimeAttack else { return }
@@ -162,6 +197,14 @@ private extension QuizView {
             )
         )
     }
+}
+
+/// 表示中のミニ解説
+///
+/// 続けて解答したとき、前の解説を消すタイマーが新しい解説を消さないよう、解答ごとに異なる `id` を持たせる。
+private struct AnswerExplanationItem: Equatable {
+    let id: Int
+    let explanation: NumberExplanation
 }
 
 #Preview {
