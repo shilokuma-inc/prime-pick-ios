@@ -118,7 +118,8 @@ struct QuizView: View {
                         maxCombo: scoreCalculator.maxCombo,
                         answerRecords: answerRecords,
                         gameMode: gameMode,
-                        isNewRecord: isNewRecord
+                        isNewRecord: isNewRecord,
+                        breakdown: scoreCalculator.breakdown
                     )
                 }
             }
