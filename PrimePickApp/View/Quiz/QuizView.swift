@@ -29,6 +29,8 @@ struct QuizView: View {
     @State private var scorePopup: ScorePopup?
     /// 誤答直後に出している時間ペナルティ。表示していないときは nil
     @State private var timePenaltyPopup: ScorePopup?
+    /// このプレイで自己ベストを更新したか。リザルトで NEW RECORD! を出すために使う
+    @State private var isNewRecord = false
 
     let difficulty: Difficulty
     let gameMode: GameMode
@@ -115,7 +117,8 @@ struct QuizView: View {
                         correctCount: scoreCalculator.correctCount,
                         maxCombo: scoreCalculator.maxCombo,
                         answerRecords: answerRecords,
-                        gameMode: gameMode
+                        gameMode: gameMode,
+                        isNewRecord: isNewRecord
                     )
                 }
             }
@@ -143,6 +146,11 @@ struct QuizView: View {
             // 10 問を解き終えた場合など、タイムアップ以外の終了でもタイマーを止める
             if isPresented {
                 stopTimer()
+                isNewRecord = BestScoreStore().record(
+                    score: scoreCalculator.totalScore,
+                    gameMode: gameMode,
+                    difficulty: difficulty
+                )
             }
         }
     }

@@ -15,6 +15,8 @@ struct QuizResultView: View {
     let maxCombo: Int
     let answerRecords: [QuizAnswerRecord]
     var gameMode: GameMode = .practice
+    /// 自己ベストを更新したか（タイムアタックのみ）
+    var isNewRecord: Bool = false
 
     /// 復習一覧に出すのは間違えた問題だけ
     private var missedRecords: [QuizAnswerRecord] {
@@ -28,6 +30,12 @@ struct QuizResultView: View {
                     .ignoresSafeArea()
 
                 VStack(spacing: 16) {
+                    if isNewRecord {
+                        Text("NEW RECORD!")
+                            .font(.system(size: 32, weight: .heavy, design: .rounded))
+                            .foregroundStyle(rainbowColor)
+                    }
+
                     Text("Your Score is \(score) points!")
                         .font(.title)
                         .multilineTextAlignment(.center)
@@ -151,6 +159,17 @@ struct QuizResultView: View {
             currentIndex = (currentIndex + 1) % colors.count
         }
     }
+}
+
+#Preview("自己ベスト更新") {
+    QuizResultView(
+        score: 2_480,
+        correctCount: 14,
+        maxCombo: 9,
+        answerRecords: [],
+        gameMode: .timeAttack(.thirtySeconds),
+        isNewRecord: true
+    )
 }
 
 #Preview {
