@@ -14,4 +14,8 @@ final class FirebaseAnalytics {
             ]
         )
     }
+
+    func sendAnswer(_ event: AnswerAnalyticsEvent) {
+        Analytics.logEvent(AnswerAnalyticsEvent.name, parameters: event.parameters)
+    }
 }
