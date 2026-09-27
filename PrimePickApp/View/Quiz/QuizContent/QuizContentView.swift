@@ -14,6 +14,8 @@ struct QuizContentView: View {
     var remainingSeconds: Int = 0
     let quizData: [QuizEntity]
     let currentCombo: Int
+    /// 現在の合計スコア。タイムアタックで左上に表示する
+    var score: Int = 0
     
     var body: some View {
         GeometryReader { geometry in
@@ -36,8 +38,10 @@ struct QuizContentView: View {
                 VStack(spacing: .zero) {
                     QuizIndexView(
                         difficulty: difficulty,
+                        gameMode: gameMode,
                         quizNumber: $quizNumber,
-                        currentCombo: currentCombo
+                        currentCombo: currentCombo,
+                        score: score
                     )
                     .frame(height: geometry.size.height / 6)
                     

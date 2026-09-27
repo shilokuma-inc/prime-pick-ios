@@ -70,7 +70,8 @@ struct QuizView: View {
                         gameMode: gameMode,
                         remainingSeconds: remainingSeconds,
                         quizData: quizData,
-                        currentCombo: scoreCalculator.currentCombo
+                        currentCombo: scoreCalculator.currentCombo,
+                        score: scoreCalculator.totalScore
                     )
                     .frame(height: geometry.size.height / 2)
 
