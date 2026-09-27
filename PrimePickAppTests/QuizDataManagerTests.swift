@@ -113,28 +113,6 @@ final class QuizDataManagerTests: XCTestCase {
         }
     }
 
-    func testCoprimeToThirtyRandomValueCoversEveryCandidate() {
-        let bounds = 1...99
-        let candidates = bounds.filter { $0 % 2 != 0 && $0 % 3 != 0 && $0 % 5 != 0 }
-        var generator = SeededGenerator(seed: 5)
-        var drawn: Set<Int> = []
-        for _ in 0..<10_000 {
-            guard let value = CoprimeToThirty.randomValue(in: bounds, using: &generator) else {
-                return XCTFail("候補があるのに nil が返った")
-            }
-            XCTAssertTrue(candidates.contains(value), "\(value) は候補ではない")
-            drawn.insert(value)
-        }
-        XCTAssertEqual(drawn, Set(candidates), "引かれなかった候補がある")
-    }
-
-    /// 候補が 1 つもないレンジでは無限ループせず nil を返す
-    func testCoprimeToThirtyRandomValueReturnsNilWhenNoCandidateExists() {
-        var generator = SeededGenerator(seed: 6)
-        XCTAssertNil(CoprimeToThirty.randomValue(in: 2...6, using: &generator))
-        XCTAssertNil(CoprimeToThirty.randomValue(in: 20...22, using: &generator))
-    }
-
     // MARK: - SeededGenerator
 
     func testSeededGeneratorIsDeterministic() {

@@ -28,7 +28,8 @@ struct QuizView: View {
 
     let difficulty: Difficulty
     let gameMode: GameMode
-    let manager = QuizDataManager()
+    /// 1 プレイの間は同じ素数の出現確率を使い続けるため、`View` が作り直されても同じインスタンスを保持する
+    @State private var manager: QuizDataManager
     let range: QuizRange
     let questionCount: QuizQuestionCount
 
@@ -43,6 +44,8 @@ struct QuizView: View {
         self.gameMode = gameMode
         self.range = resolvedRange
         self.questionCount = questionCount
+        let manager = QuizDataManager()
+        _manager = State(initialValue: manager)
         _quizData = State(
             initialValue: manager.makeQuizData(
                 difficulty: difficulty,
