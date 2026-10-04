@@ -7,6 +7,11 @@ on:
     branches:
       - 'epic/**'
 
+# 同じブランチへの連続 push では古い実行をキャンセルする
+concurrency:
+  group: archive-working-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     name: Archive

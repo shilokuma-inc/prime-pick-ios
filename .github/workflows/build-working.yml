@@ -9,6 +9,11 @@ on:
       # assets/** は PR 用スクリーンショットの置き場でアプリのコードを含まないため除外する
       - '!assets/**'
 
+# 同じブランチへの連続 push では古い実行をキャンセルする
+concurrency:
+  group: build-working-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     name: Build
