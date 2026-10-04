@@ -22,6 +22,23 @@ xcodebuild test -project PrimePickApp.xcodeproj -scheme PrimePickApp -destinatio
 - Simulator 名は OS 更新で改名されることがある。解決できない場合は `xcrun simctl list devices available` で UDID を調べて `id=` で指定する
 - CI（`.github/workflows/build-*.yml`）は `generic/platform=iOS Simulator` で `build-for-testing` する
 
+## App Store の掲載情報
+
+手動で発火する GitHub Actions で、編集中のバージョンに反映する（審査中・配信済みのバージョンには触らない）。認証は Organization secrets の App Store Connect API Key（`APPLE_API_KEY_BASE64` / `APPLE_API_KEY_ID` / `APPLE_API_ISSUER_ID`）。
+
+| ワークフロー | 反映するもの | 元ネタ |
+| --- | --- | --- |
+| `Screenshots/App Store` | スクリーンショット（iPhone 6.9 inch / iPad 13 inch × ja / en-US） | `AppStore/screenshots.json` / `AppStore/languages.json` |
+| `Metadata/App Store` | 説明文・キーワード・プロモーションテキスト・URL。`mode` は `dry-run`（既定・差分表示）/ `upload` / `export`（現在値を JSON に書き出す） | `AppStore/metadata/*.json` |
+| `Verify/App Store metadata` | PR で `AppStore/**` / `Tools/**` を変えたとき、文字数と設定ファイルの整合を検査する | 同上 |
+
+- 撮る画面・枚数・並び順は Issue #201 で決めた（ホーム / 練習モードの出題中 / タイムアタック / 結果 / 遊び方）。変えるときは `AppStore/screenshots.json` と `ScreenshotDemo.Scene` を合わせて直す。
+- 撮影はアプリの撮影モード（起動引数 `-screenshot-demo -screenshot-scene <名前>`、`PrimePickApp/Screenshot/ScreenshotDemo.swift`）で行う。撮影モードでは出題を固定し、繰り返すアニメーション・タイムアタックのタイマー・Analytics を止める。デモの数値は言語に依らない（ja / en 共通）。
+- 手元で撮るなら `Tools/capture_screenshots.sh APP_IPHONE_67 [ja,en]`（出力は `build/screenshots/`）。寸法検証（`Tools/verify_screenshots.py`）まで通る。
+- 説明文は App Store Connect の現在値が正。書き換えるときは `mode: export` で取り込んだ JSON を直して PR にし、`dry-run` で差分を確かめてから `upload` する。`python3 Tools/upload_metadata.py --check` で文字数の上限を手元でも確かめられる。
+- 対応言語を増やしたら `AppStore/languages.json` と `AppStore/metadata/<言語>.json` に足す。App Store Connect 側にその言語が無いときは `missing_locales: create` で追加できるが、説明文が空のまま作られるので先に `metadata/<言語>.json` を用意する。
+- PR 本文のスクリーンショットは `assets/issue-<番号>` ブランチに置く。マージ時に `cleanup-assets-branch.yml` が削除する。
+
 ## ブランチ運用・規約
 
 - 通常のフィーチャーブランチは `develop` 起点で切る。ralph-loop の作業ブランチは `epic/**` 起点で切り、PR もその epic 宛てに出す
