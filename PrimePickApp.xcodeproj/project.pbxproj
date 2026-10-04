@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4B8DE98570E12C357BF6FFE2 /* AppVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */; };
+		2FBA23985914BFF764B17FAF /* PrivacyPolicyViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEE8470B88092E2D6CBD065 /* PrivacyPolicyViewTests.swift */; };
 		6BB2DC3EB9F74B89C787327F /* AppThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF204663CA496CCC1F87A9 /* AppThemeTests.swift */; };
 		2C47F3AD72D77A1570A4933A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4503D465E99E77BA7BD1E9BE /* SettingView.swift */; };
 		8AAD08796CAD6F5A61243E89 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD91082AD6AB6210C600EBA /* WebView.swift */; };
@@ -73,6 +74,7 @@
 
 /* Begin PBXFileReference section */
 		7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppVersionTests.swift; sourceTree = "<group>"; };
+		2AEE8470B88092E2D6CBD065 /* PrivacyPolicyViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewTests.swift; sourceTree = "<group>"; };
 		CEEF204663CA496CCC1F87A9 /* AppThemeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppThemeTests.swift; sourceTree = "<group>"; };
 		4503D465E99E77BA7BD1E9BE /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		7BD91082AD6AB6210C600EBA /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				3BC15F88A46D15524FCE751A /* ScoreCalculatorTests.swift */,
 				A7C0E8EC6B6A4C521CD4F234 /* GameModeTests.swift */,
 				7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */,
+				2AEE8470B88092E2D6CBD065 /* PrivacyPolicyViewTests.swift */,
 				CEEF204663CA496CCC1F87A9 /* AppThemeTests.swift */,
 				A78976578BC5E117682B4EE5 /* PrimeFactorizationTests.swift */,
 				F930AB2B5D1237FCE31F2CAD /* QuizDataManagerTests.swift */,
@@ -492,6 +495,7 @@
 				323BE4CCFDD0906F666F8204 /* ScoreCalculatorTests.swift in Sources */,
 				2FE99BB3CC809E27B4B0FCD9 /* GameModeTests.swift in Sources */,
 				4B8DE98570E12C357BF6FFE2 /* AppVersionTests.swift in Sources */,
+				2FBA23985914BFF764B17FAF /* PrivacyPolicyViewTests.swift in Sources */,
 				6BB2DC3EB9F74B89C787327F /* AppThemeTests.swift in Sources */,
 				8BE248D1FC202001C53B2F23 /* PrimeFactorizationTests.swift in Sources */,
 				A464F92BBE9E50D793410369 /* QuizDataManagerTests.swift in Sources */,
