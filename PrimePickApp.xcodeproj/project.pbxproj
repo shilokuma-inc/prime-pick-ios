@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4B8DE98570E12C357BF6FFE2 /* AppVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */; };
+		6BB2DC3EB9F74B89C787327F /* AppThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF204663CA496CCC1F87A9 /* AppThemeTests.swift */; };
 		2C47F3AD72D77A1570A4933A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4503D465E99E77BA7BD1E9BE /* SettingView.swift */; };
 		B513D613BACFE920CCD79666 /* AppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB3345B71E99C1E6FD54E8F /* AppVersion.swift */; };
 		0E2623A1589F58BCF0706E89 /* AnswerFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC127C55EF579E3557CC6E8 /* AnswerFeedback.swift */; };
@@ -70,6 +71,7 @@
 
 /* Begin PBXFileReference section */
 		7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppVersionTests.swift; sourceTree = "<group>"; };
+		CEEF204663CA496CCC1F87A9 /* AppThemeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppThemeTests.swift; sourceTree = "<group>"; };
 		4503D465E99E77BA7BD1E9BE /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		4DB3345B71E99C1E6FD54E8F /* AppVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersion.swift; sourceTree = "<group>"; };
 		0C76017D6EBB8FED91D5B447 /* AnswerExplanationView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerExplanationView.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				3BC15F88A46D15524FCE751A /* ScoreCalculatorTests.swift */,
 				A7C0E8EC6B6A4C521CD4F234 /* GameModeTests.swift */,
 				7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */,
+				CEEF204663CA496CCC1F87A9 /* AppThemeTests.swift */,
 				A78976578BC5E117682B4EE5 /* PrimeFactorizationTests.swift */,
 				F930AB2B5D1237FCE31F2CAD /* QuizDataManagerTests.swift */,
 				C2934842E5CEA44B854BB0F5 /* AnswerChoiceTests.swift */,
@@ -481,6 +484,7 @@
 				323BE4CCFDD0906F666F8204 /* ScoreCalculatorTests.swift in Sources */,
 				2FE99BB3CC809E27B4B0FCD9 /* GameModeTests.swift in Sources */,
 				4B8DE98570E12C357BF6FFE2 /* AppVersionTests.swift in Sources */,
+				6BB2DC3EB9F74B89C787327F /* AppThemeTests.swift in Sources */,
 				8BE248D1FC202001C53B2F23 /* PrimeFactorizationTests.swift in Sources */,
 				A464F92BBE9E50D793410369 /* QuizDataManagerTests.swift in Sources */,
 				447262F0AEC9552EBF728481 /* AnswerChoiceTests.swift in Sources */,
