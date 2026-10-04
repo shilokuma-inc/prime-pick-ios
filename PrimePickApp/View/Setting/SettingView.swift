@@ -71,6 +71,12 @@ private extension SettingView {
             } label: {
                 Text("Privacy Policy")
             }
+
+            NavigationLink {
+                LicenseView()
+            } label: {
+                Text("Licenses")
+            }
         } header: {
             Text("App Info")
         }
