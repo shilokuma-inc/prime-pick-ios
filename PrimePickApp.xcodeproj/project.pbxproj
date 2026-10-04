@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B8DE98570E12C357BF6FFE2 /* AppVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */; };
+		2C47F3AD72D77A1570A4933A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4503D465E99E77BA7BD1E9BE /* SettingView.swift */; };
+		B513D613BACFE920CCD79666 /* AppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB3345B71E99C1E6FD54E8F /* AppVersion.swift */; };
 		0E2623A1589F58BCF0706E89 /* AnswerFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC127C55EF579E3557CC6E8 /* AnswerFeedback.swift */; };
 		0EE0BB1AB88CC6D4826E576F /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC5CD22C7A2079467B43E12 /* GameMode.swift */; };
 		185D5F76D5812CA38E8E31AC /* AnswerFeedbackEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E203857ADC476B86DF92C1 /* AnswerFeedbackEffect.swift */; };
@@ -66,6 +69,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppVersionTests.swift; sourceTree = "<group>"; };
+		4503D465E99E77BA7BD1E9BE /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		4DB3345B71E99C1E6FD54E8F /* AppVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersion.swift; sourceTree = "<group>"; };
 		0C76017D6EBB8FED91D5B447 /* AnswerExplanationView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerExplanationView.swift; sourceTree = "<group>"; };
 		2C18A59D04746477C50D4631 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		33E203857ADC476B86DF92C1 /* AnswerFeedbackEffect.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerFeedbackEffect.swift; sourceTree = "<group>"; };
@@ -137,6 +143,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C83942EBDA3E9A54DB4A6D7B /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				4503D465E99E77BA7BD1E9BE /* SettingView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		32A78F9647F89F0C3FFE7FB7 /* Feedback */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +268,7 @@
 				4F0C82832BC8247500E1480E /* MainView.swift */,
 				4FEC65B02C01164800A8B731 /* SelectDifficultyButtonView.swift */,
 				4FEC65B62C01252800A8B731 /* Quiz */,
+				C83942EBDA3E9A54DB4A6D7B /* Setting */,
 				A2D21351F7D654F07CF96CC8 /* SelectQuizSettingView.swift */,
 			);
 			path = View;
@@ -285,6 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				7C36F4F283E4470B1B885ED0 /* AppTheme.swift */,
+				4DB3345B71E99C1E6FD54E8F /* AppVersion.swift */,
 				3EC5CD22C7A2079467B43E12 /* GameMode.swift */,
 				76D9CBC2B3380EC6F674FC12 /* ScoreCalculator.swift */,
 			);
@@ -304,6 +320,7 @@
 			children = (
 				3BC15F88A46D15524FCE751A /* ScoreCalculatorTests.swift */,
 				A7C0E8EC6B6A4C521CD4F234 /* GameModeTests.swift */,
+				7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */,
 				A78976578BC5E117682B4EE5 /* PrimeFactorizationTests.swift */,
 				F930AB2B5D1237FCE31F2CAD /* QuizDataManagerTests.swift */,
 				C2934842E5CEA44B854BB0F5 /* AnswerChoiceTests.swift */,
@@ -424,6 +441,8 @@
 				624168433780D0B8FD63B8D4 /* AppDelegate.swift in Sources */,
 				58D00C0E23DFBA64A9924780 /* HowToPlayView.swift in Sources */,
 				54D69EBDCDA4A3DBECB1740A /* AppTheme.swift in Sources */,
+				2C47F3AD72D77A1570A4933A /* SettingView.swift in Sources */,
+				B513D613BACFE920CCD79666 /* AppVersion.swift in Sources */,
 				4F42C7A42BF76E7700F92FBB /* QuizNumberView.swift in Sources */,
 				4F2239242BFCEEF0004C71A6 /* QuizButtonView.swift in Sources */,
 				4F8DC1842C08D66200247F62 /* QuizResultView.swift in Sources */,
@@ -461,6 +480,7 @@
 			files = (
 				323BE4CCFDD0906F666F8204 /* ScoreCalculatorTests.swift in Sources */,
 				2FE99BB3CC809E27B4B0FCD9 /* GameModeTests.swift in Sources */,
+				4B8DE98570E12C357BF6FFE2 /* AppVersionTests.swift in Sources */,
 				8BE248D1FC202001C53B2F23 /* PrimeFactorizationTests.swift in Sources */,
 				A464F92BBE9E50D793410369 /* QuizDataManagerTests.swift in Sources */,
 				447262F0AEC9552EBF728481 /* AnswerChoiceTests.swift in Sources */,
