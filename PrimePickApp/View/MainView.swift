@@ -9,7 +9,8 @@ import SwiftUI
 
 struct MainView: View {
     @State private var hue: Double = 0
-    @State private var isHowToPlayPresented: Bool = false
+    /// How to Play と設定画面が同時に出ないよう、表示中のシートを 1 つの状態で持つ
+    @State private var presentedSheet: MainSheet?
     @State private var gameMode: GameMode = .practice
     /// `nil` は「おまかせ」＝ 難易度ごとの既定レンジを使う
     @State private var selectedRange: QuizRange?
@@ -49,18 +50,46 @@ struct MainView: View {
                     Spacer()
                 }
             }
-            .sheet(isPresented: $isHowToPlayPresented) {
-                HowToPlayView()
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    settingButton
+                }
+            }
+            .sheet(item: $presentedSheet) { sheet in
+                switch sheet {
+                case .howToPlay:
+                    HowToPlayView()
+                case .setting:
+                    SettingView()
+                }
             }
             .sendAnalyticsScreen(.main)
         }
     }
 }
 
+/// メイン画面から開くシート
+private enum MainSheet: Identifiable {
+    case howToPlay
+    case setting
+
+    var id: Self { self }
+}
+
 private extension MainView {
+    var settingButton: some View {
+        Button {
+            presentedSheet = .setting
+        } label: {
+            Image(systemName: "gearshape")
+                .foregroundColor(.primary)
+        }
+        .accessibilityLabel("Settings")
+    }
+
     var howToPlayButton: some View {
         Button {
-            isHowToPlayPresented = true
+            presentedSheet = .howToPlay
         } label: {
             Label("How to Play", systemImage: "questionmark.circle")
                 .font(.system(size: 18, weight: .bold, design: .rounded))
