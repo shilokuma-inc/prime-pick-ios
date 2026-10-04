@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MainView: View {
     @State private var hue: Double = 0
+    /// 難易度ボタンで積まれるクイズ画面
+    @State private var path: [QuizSetting] = []
     /// How to Play と設定画面が同時に出ないよう、表示中のシートを 1 つの状態で持つ
     @State private var presentedSheet: MainSheet?
     @State private var gameMode: GameMode = .practice
@@ -17,7 +19,7 @@ struct MainView: View {
     @State private var selectedQuestionCount: QuizQuestionCount = .default
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             ZStack {
                 Color.appBackground
                     .ignoresSafeArea()
@@ -49,6 +51,14 @@ struct MainView: View {
                     
                     Spacer()
                 }
+            }
+            .navigationDestination(for: QuizSetting.self) { setting in
+                QuizView(
+                    difficulty: setting.difficulty,
+                    gameMode: setting.gameMode,
+                    range: setting.range,
+                    questionCount: setting.questionCount
+                )
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -116,19 +126,6 @@ extension Difficulty {
         }
     }
 }
-                                   
-struct LazyView<Content: View>: View {
-   let content: () -> Content
-   
-   init(_ content: @autoclosure @escaping () -> Content) {
-       self.content = content
-   }
-   
-   var body: Content {
-       content()
-   }
-}
-
 #Preview {
     MainView()
 }
