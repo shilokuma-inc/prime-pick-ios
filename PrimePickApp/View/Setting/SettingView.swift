@@ -65,6 +65,12 @@ private extension SettingView {
                 Text(appVersion.displayText)
                     .foregroundStyle(.secondary)
             }
+
+            NavigationLink {
+                PrivacyPolicyView()
+            } label: {
+                Text("Privacy Policy")
+            }
         } header: {
             Text("App Info")
         }
