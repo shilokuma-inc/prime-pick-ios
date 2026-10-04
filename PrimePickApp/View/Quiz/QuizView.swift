@@ -43,6 +43,24 @@ struct QuizView: View {
         self.gameMode = gameMode
         self.range = resolvedRange
         self.questionCount = questionCount
+
+        let setting = QuizSetting(difficulty: difficulty, gameMode: gameMode, range: range, questionCount: questionCount)
+        if let demo = ScreenshotDemo.quiz, demo.setting == setting {
+            // 撮影モード: 決まった出題と途中までの進行状態から始める
+            _quizData = State(initialValue: demo.quizData)
+            _quizNumber = State(initialValue: demo.quizNumber)
+            _scoreCalculator = State(initialValue: demo.scoreCalculator)
+            _answerRecords = State(initialValue: demo.answerRecords)
+            _remainingSeconds = State(initialValue: demo.remainingSeconds)
+            _isPresentedResult = State(initialValue: demo.isFinished)
+            if gameMode.showsAnswerExplanation, !demo.isFinished, let explanation = demo.lastAnsweredExplanation {
+                _answerExplanation = State(
+                    initialValue: AnswerExplanationItem(id: demo.answeredCount, explanation: explanation)
+                )
+            }
+            return
+        }
+
         _quizData = State(
             initialValue: manager.makeQuizData(
                 difficulty: difficulty,
@@ -138,6 +156,8 @@ private extension QuizView {
     /// タイムアタック時のみ 1 秒ごとのカウントダウンを開始する
     func startTimerIfNeeded() {
         guard gameMode.isTimeAttack, timer == nil, !isPresentedResult else { return }
+        // 撮影モードでは残り時間を止めたまま撮る（動き続ける画面は撮影が落ち着かない）
+        guard !ScreenshotDemo.isEnabled else { return }
         let scheduledTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             countDown()
         }

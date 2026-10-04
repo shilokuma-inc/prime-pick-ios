@@ -15,7 +15,8 @@ struct PrimePickApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
-                .preferredColorScheme(AppTheme(rawValue: appTheme)?.colorScheme)
+                // 撮影モードでは端末やテーマ設定によらず同じ配色で撮る
+                .preferredColorScheme(ScreenshotDemo.colorScheme ?? AppTheme(rawValue: appTheme)?.colorScheme)
         }
     }
 }

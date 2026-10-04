@@ -9,10 +9,11 @@ import SwiftUI
 
 struct MainView: View {
     @State private var hue: Double = 0
-    /// 難易度ボタンで積まれるクイズ画面
-    @State private var path: [QuizSetting] = []
-    /// How to Play と設定画面が同時に出ないよう、表示中のシートを 1 つの状態で持つ
-    @State private var presentedSheet: MainSheet?
+    /// 難易度ボタンで積まれるクイズ画面。撮影モードでは最初から出題中・結果の画面を積んでおく
+    @State private var path: [QuizSetting] = ScreenshotDemo.initialPath
+    /// How to Play と設定画面が同時に出ないよう、表示中のシートを 1 つの状態で持つ。
+    /// 撮影モードでは最初から遊び方のシートを開いておく
+    @State private var presentedSheet: MainSheet? = ScreenshotDemo.scene == .howToPlay ? .howToPlay : nil
     @State private var gameMode: GameMode = .practice
     /// `nil` は「おまかせ」＝ 難易度ごとの既定レンジを使う
     @State private var selectedRange: QuizRange?
