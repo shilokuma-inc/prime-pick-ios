@@ -21,7 +21,8 @@ struct QuizNumberView: View {
                 // 何を答えるボタンなのかが分かるよう、設問文を常に表示する
                 Text("Is it prime?")
                     .font(.system(size: 26, weight: .bold, design: .rounded))
-                    .foregroundStyle(Color.gray)
+                    // 難易度色の半透明の背景に載るため、ライト・ダークそれぞれで読める色にする
+                    .foregroundStyle(Color.quizSubText)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                     .frame(height: quizQuestionAreaHeight)

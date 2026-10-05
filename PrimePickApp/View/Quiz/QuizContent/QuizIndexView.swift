@@ -21,14 +21,14 @@ struct QuizIndexView: View {
         HStack {
             Text("No.\(quizNumber + 1)")
                 .font(.custom("ArialRoundedMTBold", size: 45))
-                .foregroundStyle(Color.gray)
+                .foregroundStyle(Color.quizSubText)
 
             Spacer()
 
             if isComboVisible {
                 Text("Combo \(currentCombo)")
                     .font(.custom("ArialRoundedMTBold", size: 28))
-                    .foregroundStyle(Color.orange)
+                    .foregroundStyle(Color.quizComboText)
             }
         }
         .padding(.horizontal, 16)
