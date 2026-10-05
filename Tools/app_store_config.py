@@ -28,6 +28,7 @@ ROOT = Path(__file__).resolve().parent.parent
 LANGUAGES_FILE = ROOT / "AppStore" / "languages.json"
 SCREENSHOTS_FILE = ROOT / "AppStore" / "screenshots.json"
 PROJECT_FILE = ROOT / "PrimePickApp.xcodeproj" / "project.pbxproj"
+SCREENSHOT_DEMO_FILE = ROOT / "PrimePickApp" / "Screenshot" / "ScreenshotDemo.swift"
 
 #: 1 つの言語・表示サイズに載せられる枚数の上限（App Store Connect の制限）
 MAX_SCREENSHOTS = 10
@@ -78,12 +79,36 @@ def _screenshots_config() -> dict:
     return json.loads(SCREENSHOTS_FILE.read_text(encoding="utf-8"))
 
 
+def known_scenes() -> set[str]:
+    """アプリの撮影モードが受け付ける scene（`ScreenshotDemo.Scene` の rawValue）を Swift のソースから読む。
+
+    設定にだけある名前を渡すと、アプリは変換に失敗してタイトル画面を出し、それが別の画面のファイル名で
+    保存されてしまう（寸法の検証では気づけない）。設定を読む時点で突き合わせるため、ここで一覧を持つ。
+    """
+    source = SCREENSHOT_DEMO_FILE.read_text(encoding="utf-8")
+    match = re.search(r"enum Scene: String \{\n(.*?)\n    \}", source, re.DOTALL)
+    if match is None:
+        raise SystemExit(f"{SCREENSHOT_DEMO_FILE.name} に enum Scene: String が見つかりません")
+    # `case main` は rawValue が名前そのもの、`case timeAttack = "time-attack"` は引用符の中が rawValue
+    return {
+        raw_value or name
+        for name, raw_value in re.findall(r"^\s*case (\w+)(?: = \"([^\"]+)\")?", match.group(1), re.MULTILINE)
+    }
+
+
 def scenes() -> list[Scene]:
     entries = _screenshots_config()["scenes"]
     if len(entries) > MAX_SCREENSHOTS:
         raise SystemExit(
             f"{SCREENSHOTS_FILE.name} の scenes が {len(entries)} 件あります。"
             f"App Store Connect は 1 つの表示サイズにつき {MAX_SCREENSHOTS} 枚までです。"
+        )
+    known = known_scenes()
+    unknown = [entry["scene"] for entry in entries if entry["scene"] not in known]
+    if unknown:
+        raise SystemExit(
+            f"{SCREENSHOTS_FILE.name} の scene が ScreenshotDemo.Scene にありません: {', '.join(unknown)}\n"
+            f"使えるのは: {', '.join(sorted(known))}"
         )
     return [Scene(file=entry["file"], scene=entry["scene"]) for entry in entries]
 
