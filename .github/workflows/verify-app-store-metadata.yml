@@ -10,6 +10,8 @@ on:
     paths:
       - 'AppStore/**'
       - 'Tools/**'
+      # scene 名の突き合わせ元（ScreenshotDemo.Scene）が変わったときも検査する
+      - 'PrimePickApp/Screenshot/ScreenshotDemo.swift'
       - 'PrimePickApp.xcodeproj/project.pbxproj'
       - '.github/workflows/verify-app-store-metadata.yml'
 
