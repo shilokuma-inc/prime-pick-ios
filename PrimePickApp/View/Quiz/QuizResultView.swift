@@ -141,6 +141,8 @@ struct QuizResultView: View {
     }
 
     private func startColorAnimation() {
+        // 撮影モードでは枠の色を変えずに止めておく
+        guard !ScreenshotDemo.isEnabled else { return }
         let colors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple]
         var currentIndex = 0
 

@@ -1,0 +1,31 @@
+{
+  "_comment": [
+    "App Store の日本語（ja）の説明文など。上限: description 4000 字 / keywords 合計 100 字（カンマ込み）/ promotionalText 170 字。",
+    "初期値は Metadata/App Store の mode: export で App Store Connect（1.3.0）の現在値を取り込んだもの。書き換えるときは dry-run で差分を確かめてから upload する。",
+    "promotionalText は省略できる（省略すると App Store Connect 側の値をそのまま残す）。"
+  ],
+  "description": "Let's pick a prime number! You'll become strong in numbers!\n素数を選ぼう！数に強くなれるぞ！",
+  "keywords": [
+    "prime",
+    "quiz",
+    "pick",
+    "素数",
+    "クイズ",
+    "問題",
+    "math",
+    "calc",
+    "計算",
+    "算数",
+    "数学",
+    "学習",
+    "study",
+    "number",
+    "数",
+    "子供向け",
+    "for children",
+    "easy",
+    "かんたん",
+    "教育",
+    "勉強"
+  ]
+}
