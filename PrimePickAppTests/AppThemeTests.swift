@@ -27,4 +27,37 @@ final class AppThemeTests: XCTestCase {
         XCTAssertEqual(AppTheme.light.colorScheme, .light)
         XCTAssertEqual(AppTheme.dark.colorScheme, .dark)
     }
+
+    func testUserInterfaceStyle() {
+        XCTAssertEqual(AppTheme.system.userInterfaceStyle, .unspecified)
+        XCTAssertEqual(AppTheme.light.userInterfaceStyle, .light)
+        XCTAssertEqual(AppTheme.dark.userInterfaceStyle, .dark)
+    }
+
+    /// 撮影モードでは保存されたテーマによらずライトで撮る
+    func testResolvedUserInterfaceStylePrefersScreenshotColorScheme() {
+        for theme in AppTheme.allCases {
+            XCTAssertEqual(
+                AppTheme.resolvedUserInterfaceStyle(rawValue: theme.rawValue, screenshotColorScheme: .light),
+                .light
+            )
+        }
+    }
+
+    func testResolvedUserInterfaceStyleFollowsTheme() {
+        for theme in AppTheme.allCases {
+            XCTAssertEqual(
+                AppTheme.resolvedUserInterfaceStyle(rawValue: theme.rawValue, screenshotColorScheme: nil),
+                theme.userInterfaceStyle
+            )
+        }
+    }
+
+    /// 想定外の保存値は端末設定に従う
+    func testResolvedUserInterfaceStyleFallsBackToSystem() {
+        XCTAssertEqual(
+            AppTheme.resolvedUserInterfaceStyle(rawValue: "unknown", screenshotColorScheme: nil),
+            .unspecified
+        )
+    }
 }
