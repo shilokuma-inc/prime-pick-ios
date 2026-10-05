@@ -18,9 +18,15 @@ jobs:
     name: metadata
     runs-on: ubuntu-latest
 
+    # PR のコード（Python スクリプト）をそのまま実行するので、トークンは読み取りだけにし、checkout 後の .git/config にも残さない
+    permissions:
+      contents: read
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Verify App Store metadata
         run: python3 Tools/upload_metadata.py --check
