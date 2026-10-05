@@ -15,8 +15,49 @@ struct PrimePickApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                // シートは別の presentation になり `.preferredColorScheme` が開いたままでは届かないため、
+                // ウィンドウごと切り替えてシートとその遷移先にも即時に反映する。
                 // 撮影モードでは端末やテーマ設定によらず同じ配色で撮る
-                .preferredColorScheme(ScreenshotDemo.colorScheme ?? AppTheme(rawValue: appTheme)?.colorScheme)
+                .background(
+                    WindowUserInterfaceStyleView(
+                        style: AppTheme.resolvedUserInterfaceStyle(
+                            rawValue: appTheme,
+                            screenshotColorScheme: ScreenshotDemo.colorScheme
+                        )
+                    )
+                )
+        }
+    }
+}
+
+/// 配置先のウィンドウの `overrideUserInterfaceStyle` を設定する。ウィンドウに載った直後（起動時）と値の変更時に適用する
+private struct WindowUserInterfaceStyleView: UIViewRepresentable {
+    let style: UIUserInterfaceStyle
+
+    func makeUIView(context: Context) -> StyleApplyingView {
+        let view = StyleApplyingView()
+        view.isUserInteractionEnabled = false
+        view.style = style
+        return view
+    }
+
+    func updateUIView(_ uiView: StyleApplyingView, context: Context) {
+        uiView.style = style
+    }
+
+    final class StyleApplyingView: UIView {
+        var style: UIUserInterfaceStyle = .unspecified {
+            didSet { applyStyle() }
+        }
+
+        override func didMoveToWindow() {
+            super.didMoveToWindow()
+            applyStyle()
+        }
+
+        private func applyStyle() {
+            guard let window, window.overrideUserInterfaceStyle != style else { return }
+            window.overrideUserInterfaceStyle = style
         }
     }
 }
