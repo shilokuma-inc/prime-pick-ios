@@ -32,9 +32,17 @@ struct QuizIndexView: View {
             }
         }
         .padding(.horizontal, 16)
+        .padding(.vertical, quizIndexVerticalPadding)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
+
+/// `No.` の段の上下に足す余白
+///
+/// この段の高さは `No.`（45pt のフォント。1 行の高さは約 52pt）の固有の高さ + この余白で決まり、約 60pt になる。
+/// 以前は出題領域の 1/6（iPhone SE で約 50pt、16 Pro Max で約 68pt）を割り当てていたが、
+/// 文字 1 行ぶんに縮めて、残りを数字カードの段に回している（Discussion #216 の案 C）
+private let quizIndexVerticalPadding: CGFloat = 4
 
 #Preview {
     QuizIndexView(difficulty: .easy, quizNumber: .constant(2), currentCombo: 3)

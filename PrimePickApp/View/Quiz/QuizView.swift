@@ -13,6 +13,18 @@ struct QuizView: View {
     /// ミニ解説を表示しておく秒数
     private static let answerExplanationDuration: TimeInterval = 1.5
 
+    // 画面の高さ（セーフエリア内）を縦に配る割合。3 つの合計が 1 になる（最下段に余りを置かない）。
+    // 以前は出題領域 1/2 + 最下段の未使用 Spacer 1/12 だったが、#146 で設問文（44pt）を足したぶん
+    // 数字カードの上下余白が消えたため、Spacer を 0 にして出題領域に回した（Discussion #216 の案 B）。
+    // ボタンは領域の 3/4 の高さで中央に置かれるので、画面の下端からは 1/24（iPhone SE で約 25pt）空く
+
+    /// 出題領域（`QuizContentView`）の割合
+    private static let quizContentHeightRatio: CGFloat = 7 / 12
+    /// ミニ解説の領域の割合（表示の有無で高さが変わらないよう固定）
+    private static let answerExplanationHeightRatio: CGFloat = 1 / 12
+    /// 解答ボタンの領域の割合
+    private static let quizButtonHeightRatio: CGFloat = 1 / 3
+
     @Environment(\.dismiss) private var dismiss
     @State private var quizNumber: Int = 0
     @State var isPresentedResult: Bool = false
@@ -86,7 +98,7 @@ struct QuizView: View {
                         quizData: quizData,
                         currentCombo: scoreCalculator.currentCombo
                     )
-                    .frame(height: geometry.size.height / 2)
+                    .frame(height: geometry.size.height * Self.quizContentHeightRatio)
 
                     // 表示の有無でボタンの位置が動かないよう、高さを固定した領域に出す
                     ZStack {
@@ -96,7 +108,7 @@ struct QuizView: View {
                                 .transition(.opacity)
                         }
                     }
-                    .frame(height: geometry.size.height / 12)
+                    .frame(height: geometry.size.height * Self.answerExplanationHeightRatio)
                     
                     QuizButtonView(
                         quizData: quizData,
@@ -109,9 +121,7 @@ struct QuizView: View {
                         isPresentedResult: $isPresentedResult,
                         answerRecords: $answerRecords
                     )
-                    .frame(height: geometry.size.height / 3)
-                    
-                    Spacer()
+                    .frame(height: geometry.size.height * Self.quizButtonHeightRatio)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 
