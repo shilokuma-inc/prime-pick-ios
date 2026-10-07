@@ -91,10 +91,26 @@ final class DailyChallengePlayTests: XCTestCase {
 
     /// 23:59 に始めて 0:01 に解き終えても、始めた日の記録になる
     func testFinishAfterMidnightKeepsStartedDay() {
-        let started = startedRecord()
-        let finisher = DailyChallengePlayFinisher(startedRecord: started, store: store, now: { started.startedAt.addingTimeInterval(120) })
+        let tokyo = TimeZone(identifier: "Asia/Tokyo")!
+        let calendar = DailyChallengeDay.calendar(timeZone: tokyo)
+        let startedAt = calendar.date(from: DateComponents(year: 2026, month: 10, day: 1, hour: 23, minute: 59))!
+        let completedAt = startedAt.addingTimeInterval(120)
+        // 前提: 解き終えた時刻はもう翌日
+        XCTAssertEqual(DailyChallengeDay(date: completedAt, timeZone: tokyo).dayKey, "2026-10-02")
+
+        guard case .playing(_, let started) = DailyChallengeView.phase(
+            for: DailyChallengeDay(date: startedAt, timeZone: tokyo),
+            now: startedAt,
+            store: store,
+            generator: .v1
+        ) else {
+            return XCTFail("最初は遊べる")
+        }
+        let finisher = DailyChallengePlayFinisher(startedRecord: started, store: store, now: { completedAt })
         _ = finisher.finish(outcome(answers: Array(repeating: true, count: 10)))
+
         XCTAssertEqual(store.allRecords().map(\.dayKey), ["2026-10-01"])
+        XCTAssertEqual(store.record(dayKey: "2026-10-01")?.completedAt, completedAt)
     }
 
     func testApplyingAnswerRecordsSumsElapsedSeconds() {
