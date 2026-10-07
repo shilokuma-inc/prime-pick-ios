@@ -16,17 +16,25 @@ struct QuizNumberView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            // 小さい画面でも設問文と数字カードが上下のビューにはみ出さないよう、カードの高さを縮める
-            let cardHeight = max(0, min(quizNumberCardMaxHeight, geometry.size.height - quizQuestionAreaHeight))
+            // カードの高さは「領域の高さ − 設問文 − 上下の余白」と上限の小さい方。
+            // 小さい画面（iPhone SE / 13 mini）では余白を保ったままカードが縮み、大きい画面では上限で止まって余白だけが増える
+            let cardHeight = max(
+                0,
+                min(quizNumberCardMaxHeight, geometry.size.height - quizQuestionAreaHeight - quizNumberCardVerticalMargin * 2)
+            )
 
             VStack(spacing: .zero) {
                 // 何を答えるボタンなのかが分かるよう、設問文を常に表示する
                 Text("Is it prime?")
                     .font(.system(size: 26, weight: .bold, design: .rounded))
-                    .foregroundStyle(Color.gray)
+                    // 難易度色の半透明の背景に載るため、ライト・ダークそれぞれで読める色にする
+                    .foregroundStyle(Color.quizSubText)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                     .frame(height: quizQuestionAreaHeight)
+
+                // 余った高さはカードの上下に等しく配る。どの画面でも少なくとも quizNumberCardVerticalMargin は空く
+                Spacer(minLength: quizNumberCardVerticalMargin)
 
                 ZStack {
                     quizNumberBackgroundView(difficulty: difficulty, height: cardHeight)
@@ -40,6 +48,8 @@ struct QuizNumberView: View {
                         height: cardHeight
                     )
                 }
+
+                Spacer(minLength: quizNumberCardVerticalMargin)
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
         }
@@ -51,6 +61,13 @@ private let quizQuestionAreaHeight: CGFloat = 44
 
 /// 数字カードの高さの上限
 private let quizNumberCardMaxHeight: CGFloat = 200
+
+/// 数字カードの上下に最低限確保する余白
+///
+/// 下側は残り時間バー（枠線 5pt）との境になる。カードの枠線（5pt。半分の 2.5pt が外側に出る）と影（半径 10）が
+/// 隣に落ちても別のパーツに見える量として 16pt にした。以前は「比率で配った残り」が余白になっていて、
+/// iPhone 13 では約 0〜5pt、SE / 13 mini では 0pt になり、カードとバーがくっついて見えていた（#215）
+private let quizNumberCardVerticalMargin: CGFloat = 16
 
 private func quizNumberBackgroundView(difficulty: Difficulty, height: CGFloat) -> some View {
     let color = if difficulty == .easy {

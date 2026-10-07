@@ -46,8 +46,11 @@ final class QuizDataManager {
         range: QuizRange,
         questionCount: QuizQuestionCount
     ) -> [QuizEntity] {
-        let timestamp = UInt64(Date().timeIntervalSince1970 * 1000)
-        var generator = SeededGenerator(seed: timestamp)
+        // 撮影モードでは撮り直しても同じ出題になるようシードを固定する
+        let seed = ScreenshotDemo.isEnabled
+            ? ScreenshotDemo.randomSeed
+            : UInt64(Date().timeIntervalSince1970 * 1000)
+        var generator = SeededGenerator(seed: seed)
         return makeQuizData(
             difficulty: difficulty,
             range: range,

@@ -27,14 +27,13 @@ struct SelectDifficultyButtonView: View {
 
 extension SelectDifficultyButtonView {
     func selectDifficultyButton(difficulty: Difficulty) -> some View {
+        // 遷移先は MainView の navigationDestination で作る（押すまで QuizView を作らないため）
         NavigationLink(
-            destination: LazyView(
-                QuizView(
-                    difficulty: difficulty,
-                    gameMode: gameMode,
-                    range: selectedRange,
-                    questionCount: questionCount
-                )
+            value: QuizSetting(
+                difficulty: difficulty,
+                gameMode: gameMode,
+                range: selectedRange,
+                questionCount: questionCount
             )
         ) {
             Text(difficulty.localizedTitle)

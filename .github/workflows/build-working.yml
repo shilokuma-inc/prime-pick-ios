@@ -6,6 +6,13 @@ on:
       - '**'
       - '!main'
       - '!develop'
+      # assets/** は PR 用スクリーンショットの置き場でアプリのコードを含まないため除外する
+      - '!assets/**'
+
+# 同じブランチへの連続 push では古い実行をキャンセルする
+concurrency:
+  group: build-working-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -22,7 +29,7 @@ jobs:
           xcode-version: latest-stable
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: ci_post_clone
         run: |

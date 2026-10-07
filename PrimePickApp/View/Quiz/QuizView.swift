@@ -13,6 +13,18 @@ struct QuizView: View {
     /// ミニ解説を表示しておく秒数
     private static let answerExplanationDuration: TimeInterval = 1.5
 
+    // 画面の高さ（セーフエリア内）を縦に配る割合。3 つの合計が 1 になる（最下段に余りを置かない）。
+    // 以前は出題領域 1/2 + 最下段の未使用 Spacer 1/12 だったが、#146 で設問文（44pt）を足したぶん
+    // 数字カードの上下余白が消えたため、Spacer を 0 にして出題領域に回した（Discussion #216 の案 B）。
+    // ボタンは領域の 3/4 の高さで中央に置かれるので、画面の下端からは 1/24（iPhone SE で約 25pt）空く
+
+    /// 出題領域（`QuizContentView`）の割合
+    private static let quizContentHeightRatio: CGFloat = 7 / 12
+    /// ミニ解説の領域の割合（表示の有無で高さが変わらないよう固定）
+    private static let answerExplanationHeightRatio: CGFloat = 1 / 12
+    /// 解答ボタンの領域の割合
+    private static let quizButtonHeightRatio: CGFloat = 1 / 3
+
     @Environment(\.dismiss) private var dismiss
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var quizNumber: Int = 0
@@ -55,6 +67,24 @@ struct QuizView: View {
         self.questionCount = questionCount
         let manager = QuizDataManager()
         _manager = State(initialValue: manager)
+
+        let setting = QuizSetting(difficulty: difficulty, gameMode: gameMode, range: range, questionCount: questionCount)
+        if let demo = ScreenshotDemo.quiz, demo.setting == setting {
+            // 撮影モード: 決まった出題と途中までの進行状態から始める
+            _quizData = State(initialValue: demo.quizData)
+            _quizNumber = State(initialValue: demo.quizNumber)
+            _scoreCalculator = State(initialValue: demo.scoreCalculator)
+            _answerRecords = State(initialValue: demo.answerRecords)
+            _remainingSeconds = State(initialValue: demo.remainingSeconds)
+            _isPresentedResult = State(initialValue: demo.isFinished)
+            if gameMode.showsAnswerExplanation, !demo.isFinished, let explanation = demo.lastAnsweredExplanation {
+                _answerExplanation = State(
+                    initialValue: AnswerExplanationItem(id: demo.answeredCount, explanation: explanation)
+                )
+            }
+            return
+        }
+
         _quizData = State(
             initialValue: manager.makeQuizData(
                 difficulty: difficulty,
@@ -85,7 +115,7 @@ struct QuizView: View {
                         timePenaltyPopup: timePenaltyPopup,
                         comboBreakCount: comboBreakCount
                     )
-                    .frame(height: geometry.size.height / 2)
+                    .frame(height: geometry.size.height * Self.quizContentHeightRatio)
 
                     // 表示の有無でボタンの位置が動かないよう、高さを固定した領域に出す
                     ZStack {
@@ -95,7 +125,7 @@ struct QuizView: View {
                                 .transition(.opacity)
                         }
                     }
-                    .frame(height: geometry.size.height / 12)
+                    .frame(height: geometry.size.height * Self.answerExplanationHeightRatio)
                     
                     QuizButtonView(
                         quizData: quizData,
@@ -109,9 +139,7 @@ struct QuizView: View {
                         isPresentedResult: $isPresentedResult,
                         answerRecords: $answerRecords
                     )
-                    .frame(height: geometry.size.height / 3)
-                    
-                    Spacer()
+                    .frame(height: geometry.size.height * Self.quizButtonHeightRatio)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 
@@ -168,6 +196,8 @@ private extension QuizView {
     /// タイムアタック時のみ 1 秒ごとのカウントダウンを開始する
     func startTimerIfNeeded() {
         guard gameMode.isTimeAttack, timer == nil, !isPresentedResult else { return }
+        // 撮影モードでは残り時間を止めたまま撮る（動き続ける画面は撮影が落ち着かない）
+        guard !ScreenshotDemo.isEnabled else { return }
         let scheduledTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             countDown()
         }

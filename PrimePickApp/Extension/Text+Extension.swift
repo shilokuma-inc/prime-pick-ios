@@ -32,6 +32,8 @@ struct GamingText: ViewModifier {
                 .hueRotation(Angle(degrees: hue))
             )
             .onAppear {
+                // 撮影モードでは色相を回し続けない（グラデーションは止まったまま写る）
+                guard !ScreenshotDemo.isEnabled else { return }
                 withAnimation(Animation.linear(duration: 1).repeatForever(autoreverses: false)) {
                     hue = 360
                 }
