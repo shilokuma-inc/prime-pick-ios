@@ -65,6 +65,42 @@ final class DailyChallengeStreakTests: XCTestCase {
         XCTAssertEqual(streak.longest, 2)
     }
 
+    // MARK: - 記録から
+
+    /// 途中でやめた（未完了の）日は数えない。正解数は問わない
+    func testRecordsCountOnlyCompletedDays() {
+        let records = [
+            record(back: 0, completed: true, correctCount: 0),
+            record(back: 1, completed: true, correctCount: 10),
+            record(back: 2, completed: false, correctCount: 3),
+            record(back: 3, completed: true, correctCount: 5),
+            record(back: 4, completed: true, correctCount: 5)
+        ]
+        let streak = DailyChallengeStreak(records: records, today: today)
+        XCTAssertEqual(streak.current, 2)
+        XCTAssertEqual(streak.longest, 2)
+    }
+
+    /// 今日始めて途中でやめても、昨日までの連続は表示する（今日は未完了なので数えない）
+    func testIncompleteTodayKeepsStreakFromYesterday() {
+        let records = [record(back: 0, completed: false, correctCount: 1)] + (1...3).map { record(back: $0, completed: true, correctCount: 7) }
+        XCTAssertEqual(DailyChallengeStreak(records: records, today: today).current, 3)
+    }
+
+    private func record(back: Int, completed: Bool, correctCount: Int) -> DailyChallengeRecord {
+        let startedAt = Date(timeIntervalSince1970: 1_790_000_000)
+        var record = DailyChallengeRecord.started(
+            dayKey: today.adding(days: -back).dayKey,
+            generatorVersion: 1,
+            questionCount: 10,
+            startedAt: startedAt
+        )
+        record.results = Array(repeating: .correct, count: correctCount)
+            + Array(repeating: completed ? .incorrect : .unanswered, count: 10 - correctCount)
+        record.completedAt = completed ? startedAt.addingTimeInterval(60) : nil
+        return record
+    }
+
     /// `today` から `back` 日前の日
     private func days(back range: ClosedRange<Int>) -> [DailyChallengeDay] {
         range.map { today.adding(days: -$0) }

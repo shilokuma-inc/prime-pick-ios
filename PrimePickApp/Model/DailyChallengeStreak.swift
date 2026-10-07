@@ -48,4 +48,14 @@ struct DailyChallengeStreak: Equatable {
         self.current = current
         self.longest = max(longest, current)
     }
+
+    /// 保存された記録から計算する。最後まで解いた記録だけを数え、`dayKey` が読めない記録は無視する
+    init(records: some Sequence<DailyChallengeRecord>, today: DailyChallengeDay) {
+        self.init(
+            completedDays: records.lazy
+                .filter(\.isCompleted)
+                .compactMap { DailyChallengeDay(dayKey: $0.dayKey) },
+            today: today
+        )
+    }
 }
