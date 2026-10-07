@@ -111,7 +111,8 @@ struct DailyChallengeResult {
             difficulty: .normal,
             gameMode: selectedGameMode.isTimeAttack ? selectedGameMode : .timeAttack(.sixtySeconds),
             range: selectedRange,
-            questionCount: selectedQuestionCount
+            questionCount: selectedQuestionCount,
+            source: .dailyResult
         )
     }
 }

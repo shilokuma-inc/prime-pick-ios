@@ -59,6 +59,10 @@ struct QuizView: View {
     let questionCount: QuizQuestionCount
     /// プレイの終わりの処理。既定は自己ベストの記録
     private let finisher: any QuizPlayFinishing
+    /// どの画面から始めたか。`quiz_start` イベントの `source` に使う
+    private let source: QuizStartSource
+    /// `quiz_start` を送ったか。画面が出直しても 1 プレイで 1 回だけ送る
+    @State private var hasSentQuizStart = false
 
     /// - Parameters:
     ///   - quizData: 外で作った出題（デイリーチャレンジなど）。`nil` か空なら `QuizDataManager` で作る
@@ -69,7 +73,8 @@ struct QuizView: View {
         range: QuizRange? = nil,
         questionCount: QuizQuestionCount = .default,
         quizData providedQuizData: [QuizEntity]? = nil,
-        finisher: any QuizPlayFinishing = BestScorePlayFinisher()
+        finisher: any QuizPlayFinishing = BestScorePlayFinisher(),
+        source: QuizStartSource = .title
     ) {
         let resolvedRange = range ?? difficulty.defaultRange
         self.difficulty = difficulty
@@ -77,6 +82,7 @@ struct QuizView: View {
         self.range = resolvedRange
         self.questionCount = questionCount
         self.finisher = finisher
+        self.source = source
         let manager = QuizDataManager()
         _manager = State(initialValue: manager)
 
@@ -191,6 +197,7 @@ struct QuizView: View {
             Text("Unanswered questions will be left blank and your result will be final. You can't try today's challenge again.")
         }
         .onAppear {
+            sendQuizStartIfNeeded()
             startTimerIfNeeded()
             // 1 問目が表示された時点を経過時間の基準にする
             questionStartDate = Date()
@@ -223,6 +230,24 @@ struct QuizView: View {
 }
 
 extension QuizView {
+    /// プレイ開始の計測イベント。デイリーは別のイベントで測るので nil
+    static func quizStartEvent(
+        gameMode: GameMode,
+        difficulty: Difficulty,
+        range: QuizRange,
+        questionCount: QuizQuestionCount,
+        source: QuizStartSource
+    ) -> QuizStartAnalyticsEvent? {
+        guard gameMode != .dailyChallenge else { return nil }
+        return QuizStartAnalyticsEvent(
+            gameMode: gameMode,
+            difficulty: difficulty,
+            range: range,
+            questionCount: questionCount,
+            source: source
+        )
+    }
+
     /// やめた時点で全問に答えていれば、途中でやめたのではなく解き終えたものとして扱う
     static func quitCompletesPlay(answeredCount: Int, questionCount: Int) -> Bool {
         questionCount > 0 && answeredCount >= questionCount
@@ -284,6 +309,19 @@ private extension QuizView {
         isNewRecord = finisher.finish(currentOutcome)
     }
 
+    /// 練習・タイムアタックを始めたことを 1 回だけ送る。デイリーは `daily_challenge_start` で測るので送らない
+    func sendQuizStartIfNeeded() {
+        guard let event = Self.quizStartEvent(
+            gameMode: gameMode,
+            difficulty: difficulty,
+            range: range,
+            questionCount: questionCount,
+            source: source
+        ), !hasSentQuizStart else { return }
+        hasSentQuizStart = true
+        FirebaseAnalytics().sendQuizStart(event)
+    }
+
     /// 途中でやめるときに確認を挟むか。結果画面を出したあとは確認せずに戻れる
     var requiresQuitConfirmation: Bool {
         gameMode.confirmsBeforeQuitting && !isPresentedResult
@@ -308,7 +346,8 @@ private extension QuizView {
             difficulty: difficulty,
             score: scoreCalculator.totalScore,
             correctCount: scoreCalculator.correctCount,
-            answerRecords: answerRecords
+            answerRecords: answerRecords,
+            shownQuestionNumber: quizNumber + 1
         )
     }
 

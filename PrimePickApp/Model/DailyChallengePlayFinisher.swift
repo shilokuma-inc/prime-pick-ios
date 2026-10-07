@@ -17,6 +17,8 @@ struct DailyChallengePlayFinisher: QuizPlayFinishing {
     var now: () -> Date = Date.init
     /// 解き終えた記録を保存したあとに呼ばれる。結果画面に切り替えるために使う
     var onFinish: ((DailyChallengeRecord) -> Void)?
+    /// 計測イベントの送り先。テストのために差し替えられる
+    var sendAnalytics: (DailyChallengeAnalyticsEvent) -> Void = FirebaseAnalytics().sendDailyChallenge
 
     func recordProgress(_ outcome: QuizPlayOutcome) {
         store.save(startedRecord.applying(answerRecords: outcome.answerRecords))
@@ -27,6 +29,14 @@ struct DailyChallengePlayFinisher: QuizPlayFinishing {
     /// 1 問ごとに保存しているので通常は保存済みと同じ内容だが、やめる直前の解答も確実に残すため保存し直す。
     func abandon(_ outcome: QuizPlayOutcome) {
         recordProgress(outcome)
+        sendAnalytics(
+            .abandon(
+                dayNumber: dayNumber,
+                // 表示中の問題を送る。ミニ解説の間にやめた場合は、解いたばかりの問題になる
+                questionNumber: outcome.shownQuestionNumber
+                    ?? min(outcome.answerRecords.count + 1, startedRecord.results.count)
+            )
+        )
     }
 
     /// 解き終えた記録を保存する。デイリーには自己ベストが無いので NEW RECORD! は出さない
@@ -34,7 +44,26 @@ struct DailyChallengePlayFinisher: QuizPlayFinishing {
         var record = startedRecord.applying(answerRecords: outcome.answerRecords)
         record.completedAt = now()
         store.save(record)
+        sendAnalytics(
+            .complete(
+                dayNumber: dayNumber,
+                correctCount: record.correctCount,
+                totalSeconds: record.totalAnswerSeconds,
+                streak: streak(after: record)
+            )
+        )
         onFinish?(record)
         return false
+    }
+
+    /// 記録した日の通し番号。`dayKey` が読めなければ 0
+    private var dayNumber: Int {
+        DailyChallengeDay(dayKey: startedRecord.dayKey)?.dayNumber ?? 0
+    }
+
+    /// 解き終えた日を「今日」として数えたストリーク
+    private func streak(after record: DailyChallengeRecord) -> Int {
+        guard let day = DailyChallengeDay(dayKey: record.dayKey) else { return 0 }
+        return DailyChallengeStreak(records: store.allRecords(), today: day).current
     }
 }

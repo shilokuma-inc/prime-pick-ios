@@ -14,4 +14,6 @@ struct QuizSetting: Hashable {
     /// `nil` は「おまかせ」＝ 難易度ごとの既定レンジ（`Difficulty.defaultRange`）を使う
     let range: QuizRange?
     let questionCount: QuizQuestionCount
+    /// どの画面から始めたか。計測（`quiz_start` の `source`）だけに使う
+    var source: QuizStartSource = .title
 }

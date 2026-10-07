@@ -21,4 +21,14 @@ final class FirebaseAnalytics {
         guard !ScreenshotDemo.isEnabled else { return }
         Analytics.logEvent(AnswerAnalyticsEvent.name, parameters: event.parameters)
     }
+
+    func sendQuizStart(_ event: QuizStartAnalyticsEvent) {
+        guard !ScreenshotDemo.isEnabled else { return }
+        Analytics.logEvent(QuizStartAnalyticsEvent.name, parameters: event.parameters)
+    }
+
+    func sendDailyChallenge(_ event: DailyChallengeAnalyticsEvent) {
+        guard !ScreenshotDemo.isEnabled else { return }
+        Analytics.logEvent(event.name, parameters: event.parameters)
+    }
 }

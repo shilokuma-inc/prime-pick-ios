@@ -14,6 +14,8 @@ struct QuizPlayOutcome: Equatable {
     let correctCount: Int
     /// 解答した問題の記録（出題順）。時間切れなどで解かなかった問題は含まない
     let answerRecords: [QuizAnswerRecord]
+    /// 画面に表示している問題（1 始まり）。解答後のミニ解説の間は、解いたばかりの問題のまま
+    var shownQuestionNumber: Int?
 }
 
 /// プレイの終わりの処理

@@ -90,7 +90,10 @@ final class DailyChallengeResultTests: XCTestCase {
             selectedRange: .fourDigits,
             selectedQuestionCount: .twenty
         )
-        XCTAssertEqual(setting, QuizSetting(difficulty: .normal, gameMode: .timeAttack(.thirtySeconds), range: .fourDigits, questionCount: .twenty))
+        XCTAssertEqual(
+            setting,
+            QuizSetting(difficulty: .normal, gameMode: .timeAttack(.thirtySeconds), range: .fourDigits, questionCount: .twenty, source: .dailyResult)
+        )
     }
 
     /// タイトルで練習を選んでいたら 60 秒のタイムアタックにする

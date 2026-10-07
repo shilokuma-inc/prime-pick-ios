@@ -51,7 +51,13 @@ struct DailyChallengeView: View {
     /// 最初に表示されたときだけ、今日の記録の有無で遊ぶか要約を出すかを決める
     private func startIfNeeded() {
         guard case .loading = phase else { return }
-        phase = Self.phase(for: DailyChallengeDay.today(), now: Date(), store: store, generator: generator)
+        let today = DailyChallengeDay.today()
+        // 始める前のストリーク。始めた記録（未完了）を保存する前に数える
+        let streakBefore = DailyChallengeStreak(records: store.allRecords(), today: today).current
+        phase = Self.phase(for: today, now: Date(), store: store, generator: generator)
+        if case .playing = phase {
+            FirebaseAnalytics().sendDailyChallenge(.start(dayNumber: today.dayNumber, streakBefore: streakBefore))
+        }
     }
 
     /// 今日の記録があれば要約、無ければ始めた記録を保存して出題する
