@@ -102,6 +102,9 @@ final class DailyChallengeGeneratorTests: XCTestCase {
 
     func testSeedIsFNV1aOfPrefixedDayKey() {
         XCTAssertEqual(DailyChallengeGeneratorV1.seedPrefix, "prime-pick.daily.v1:")
+        // 期待値は Swift と別に書いた FNV-1a 64bit（オフセット 0xcbf29ce484222325・素数 0x100000001b3）で算出した値
+        XCTAssertEqual(DailyChallengeGeneratorV1.seed(dayKey: "2026-10-01"), 0xa8c0_5538_c09d_2806)
+        XCTAssertEqual(DailyChallengeGeneratorV1.seed(dayKey: ""), 0xdee4_7d84_0ce1_b902)
         XCTAssertNotEqual(
             DailyChallengeGeneratorV1.seed(dayKey: "2026-10-01"),
             DailyChallengeGeneratorV1.seed(dayKey: "2026-10-02")
