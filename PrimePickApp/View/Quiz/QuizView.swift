@@ -118,11 +118,12 @@ struct QuizView: View {
                 VStack(spacing: .zero) {
                     QuizContentView(
                         quizNumber: $quizNumber,
-                        difficulty: difficulty,
+                        difficulty: displayedDifficulty,
                         gameMode: gameMode,
                         remainingSeconds: remainingSeconds,
                         quizData: quizData,
-                        currentCombo: scoreCalculator.currentCombo,
+                        // コンボを出さないモードでは、コンボ表示と MAX 段階の背景を出さないよう 0 として渡す
+                        currentCombo: gameMode.showsCombo ? scoreCalculator.currentCombo : 0,
                         score: scoreCalculator.totalScore,
                         scorePopup: scorePopup,
                         timePenaltyPopup: timePenaltyPopup,
@@ -186,6 +187,7 @@ struct QuizView: View {
             handleComboChange(from: oldCombo, to: newCombo)
         }
         .onChange(of: answerRecords.count) { _, _ in
+            finisher.recordProgress(currentOutcome)
             showAnswerExplanationIfNeeded()
             showScorePopupIfNeeded()
             applyMissTimePenaltyIfNeeded()
@@ -254,15 +256,26 @@ private extension QuizView {
     func finishPlay() {
         guard !hasFinishedPlay else { return }
         hasFinishedPlay = true
-        isNewRecord = finisher.finish(
-            QuizPlayOutcome(
-                gameMode: gameMode,
-                difficulty: difficulty,
-                score: scoreCalculator.totalScore,
-                correctCount: scoreCalculator.correctCount,
-                answerRecords: answerRecords
-            )
+        isNewRecord = finisher.finish(currentOutcome)
+    }
+
+    /// ここまでの解答を反映したプレイの結果
+    var currentOutcome: QuizPlayOutcome {
+        QuizPlayOutcome(
+            gameMode: gameMode,
+            difficulty: difficulty,
+            score: scoreCalculator.totalScore,
+            correctCount: scoreCalculator.correctCount,
+            answerRecords: answerRecords
         )
+    }
+
+    /// 背景色などの見た目に使う難易度。表示中の問題の難易度に合わせる
+    ///
+    /// 練習・タイムアタックは全問がプレイの難易度と同じなので変わらない。
+    /// デイリーは 2 桁 → 3 桁 → Hard と段階で難易度が変わるため、段階に合わせて背景色が変わる。
+    var displayedDifficulty: Difficulty {
+        quizData.indices.contains(quizNumber) ? quizData[quizNumber].difficulty : difficulty
     }
 
     /// 時間切れでリザルトを表示する
@@ -276,6 +289,7 @@ private extension QuizView {
     ///
     /// 毎問読み上げると邪魔になるため、読み上げは段階が上がったときだけにする。
     func handleComboChange(from oldCombo: Int, to newCombo: Int) {
+        guard gameMode.showsCombo else { return }
         // コンボ表示が出ていた（2 以上）ときだけ「切れた」とみなす
         if newCombo == 0, oldCombo >= 2 {
             SoundFeedback.play(.comboBreak)
