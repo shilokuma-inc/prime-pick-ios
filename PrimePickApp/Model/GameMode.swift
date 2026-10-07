@@ -58,6 +58,13 @@ enum GameMode: Hashable, Identifiable, CaseIterable {
         self != .dailyChallenge
     }
 
+    /// 出題中に戻るとき確認を挟むか
+    ///
+    /// デイリーは始めた時点で今日の挑戦権を使い、やめるとそこで結果が確定するため、誤って抜けないよう確認する（Discussion #181 Q3）。
+    var confirmsBeforeQuitting: Bool {
+        self == .dailyChallenge
+    }
+
     /// 解答直後にミニ解説を表示するか
     ///
     /// タイムアタックではテンポを崩さないよう表示せず、練習モードだけで表示する（Discussion #138 / PR #152 で確認済み）。

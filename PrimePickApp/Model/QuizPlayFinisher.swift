@@ -26,10 +26,13 @@ protocol QuizPlayFinishing {
     func recordProgress(_ outcome: QuizPlayOutcome)
     /// 終わりの処理を行い、自己ベストを更新したか（結果画面に NEW RECORD! を出すか）を返す
     func finish(_ outcome: QuizPlayOutcome) -> Bool
+    /// 途中でやめたときに呼ばれる。解答済みまでで結果を確定したいプレイ（デイリー）だけが実装する
+    func abandon(_ outcome: QuizPlayOutcome)
 }
 
 extension QuizPlayFinishing {
     func recordProgress(_ outcome: QuizPlayOutcome) {}
+    func abandon(_ outcome: QuizPlayOutcome) {}
 }
 
 /// 練習・タイムアタックの終わりの処理。タイムアタックの自己ベストを記録する

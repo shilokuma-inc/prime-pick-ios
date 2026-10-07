@@ -20,6 +20,13 @@ struct DailyChallengePlayFinisher: QuizPlayFinishing {
         store.save(startedRecord.applying(answerRecords: outcome.answerRecords))
     }
 
+    /// 途中でやめたら、解答済みまでで記録を確定する（残りは未解答。`completedAt` は入れないので未完了のまま）
+    ///
+    /// 1 問ごとに保存しているので通常は保存済みと同じ内容だが、やめる直前の解答も確実に残すため保存し直す。
+    func abandon(_ outcome: QuizPlayOutcome) {
+        recordProgress(outcome)
+    }
+
     /// 解き終えた記録を保存する。デイリーには自己ベストが無いので NEW RECORD! は出さない
     func finish(_ outcome: QuizPlayOutcome) -> Bool {
         var record = startedRecord.applying(answerRecords: outcome.answerRecords)

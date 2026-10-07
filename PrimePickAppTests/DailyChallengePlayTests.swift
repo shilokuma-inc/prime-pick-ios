@@ -122,6 +122,35 @@ final class DailyChallengePlayTests: XCTestCase {
         XCTAssertEqual(record.totalAnswerSeconds, 5.5, accuracy: 0.0001)
     }
 
+    // MARK: - 途中でやめる
+
+    /// やめたら解答済みまでで確定する。残りは未解答で、未完了のまま（ストリークに数えない）
+    func testAbandonKeepsAnsweredResultsAndStaysIncomplete() {
+        let finisher = DailyChallengePlayFinisher(startedRecord: startedRecord(), store: store)
+        finisher.abandon(outcome(answers: [true, true, false]))
+
+        let saved = store.record(dayKey: "2026-10-01")
+        XCTAssertEqual(saved?.results, [.correct, .correct, .incorrect] + Array(repeating: .unanswered, count: 7))
+        XCTAssertEqual(saved?.isCompleted, false)
+        XCTAssertEqual(DailyChallengeStreak(records: store.allRecords(), today: today).current, 0)
+    }
+
+    /// 最後の問題に答えたあと（ミニ解説の表示中）にやめたら、解き終えた扱いにする
+    func testQuitAfterAnsweringAllCompletesPlay() {
+        XCTAssertFalse(QuizView.quitCompletesPlay(answeredCount: 0, questionCount: 10))
+        XCTAssertFalse(QuizView.quitCompletesPlay(answeredCount: 9, questionCount: 10))
+        XCTAssertTrue(QuizView.quitCompletesPlay(answeredCount: 10, questionCount: 10))
+        XCTAssertFalse(QuizView.quitCompletesPlay(answeredCount: 0, questionCount: 0))
+    }
+
+    func testOnlyDailyChallengeConfirmsBeforeQuitting() {
+        XCTAssertTrue(GameMode.dailyChallenge.confirmsBeforeQuitting)
+        XCTAssertFalse(GameMode.practice.confirmsBeforeQuitting)
+        for duration in TimeAttackDuration.allCases {
+            XCTAssertFalse(GameMode.timeAttack(duration).confirmsBeforeQuitting)
+        }
+    }
+
     // MARK: - モード
 
     func testDailyChallengeModeRules() {
