@@ -1408,6 +1408,22 @@
           }
         }
       }
+    },
+    "Start today's 10 questions": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start today's 10 questions"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日の 10 問に挑戦"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

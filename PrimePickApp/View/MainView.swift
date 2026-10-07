@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct MainView: View {
+    @Environment(\.scenePhase) private var scenePhase
     @State private var hue: Double = 0
-    /// 難易度ボタンで積まれるクイズ画面。撮影モードでは最初から出題中・結果の画面を積んでおく
-    @State private var path: [QuizSetting] = ScreenshotDemo.initialPath
+    /// 難易度ボタンで積まれるクイズ画面と、カードから開くデイリーチャレンジ。撮影モードでは最初から出題中・結果の画面を積んでおく
+    @State private var path = NavigationPath(ScreenshotDemo.initialPath)
+    /// 「今日のチャレンジ」カードの内容。表示のたびに記録から読み直す
+    @State private var dailyChallengeCard: DailyChallengeCardState?
     /// How to Play と設定画面が同時に出ないよう、表示中のシートを 1 つの状態で持つ。
     /// 撮影モードでは最初から遊び方のシートを開いておく
     @State private var presentedSheet: MainSheet? = ScreenshotDemo.scene == .howToPlay ? .howToPlay : nil
@@ -26,6 +29,8 @@ struct MainView: View {
                     .ignoresSafeArea()
                 
                 VStack {
+                    dailyChallengeCardLink
+
                     Spacer()
                     
                     Text("Prime Pick")
@@ -53,6 +58,9 @@ struct MainView: View {
                     Spacer()
                 }
             }
+            .navigationDestination(for: DailyChallengeRoute.self) { _ in
+                DailyChallengeView(onPlayTimeAttack: playTimeAttackFromDailyChallenge)
+            }
             .navigationDestination(for: QuizSetting.self) { setting in
                 QuizView(
                     difficulty: setting.difficulty,
@@ -75,6 +83,18 @@ struct MainView: View {
                 }
             }
             .sendAnalyticsScreen(.main)
+            // デイリーから戻ったとき・日付が変わって前面に戻ったときに、カードの状態とストリークを読み直す
+            .onAppear(perform: refreshDailyChallengeCard)
+            .onChange(of: path.count) { _, count in
+                if count == 0 {
+                    refreshDailyChallengeCard()
+                }
+            }
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .active {
+                    refreshDailyChallengeCard()
+                }
+            }
         }
     }
 }
@@ -87,7 +107,46 @@ private enum MainSheet: Identifiable {
     var id: Self { self }
 }
 
+/// カードからデイリーチャレンジへ遷移するときの `NavigationPath` の値
+struct DailyChallengeRoute: Hashable {}
+
 private extension MainView {
+    /// 最上段の「今日のチャレンジ」カード
+    ///
+    /// 撮影モードでは出さない。App Store のスクリーンショット（Issue #201 で決めたホーム画面）の見た目を変えないため。
+    @ViewBuilder
+    var dailyChallengeCardLink: some View {
+        if !ScreenshotDemo.isEnabled, let dailyChallengeCard {
+            NavigationLink(value: DailyChallengeRoute()) {
+                DailyChallengeCardView(state: dailyChallengeCard)
+            }
+            .buttonStyle(.plain)
+            .padding(.horizontal, 24)
+            .padding(.top, 8)
+        }
+    }
+
+    /// デイリーの結果画面から、タイトルで選んでいる設定のタイムアタックを始める
+    ///
+    /// デイリーの画面をタイムアタックに置き換える（タイムアタックから戻るとタイトルに戻る）。
+    func playTimeAttackFromDailyChallenge() {
+        let setting = DailyChallengeResult.timeAttackSetting(
+            selectedGameMode: gameMode,
+            selectedRange: selectedRange,
+            selectedQuestionCount: selectedQuestionCount
+        )
+        var newPath = NavigationPath()
+        newPath.append(setting)
+        path = newPath
+    }
+
+    func refreshDailyChallengeCard() {
+        dailyChallengeCard = DailyChallengeCardState(
+            records: UserDefaultsDailyChallengeStore().allRecords(),
+            today: DailyChallengeDay.today()
+        )
+    }
+
     var settingButton: some View {
         Button {
             presentedSheet = .setting

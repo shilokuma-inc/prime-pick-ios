@@ -14,6 +14,7 @@
 		2FBA23985914BFF764B17FAF /* PrivacyPolicyViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEE8470B88092E2D6CBD065 /* PrivacyPolicyViewTests.swift */; };
 		8D70626D6AB962C21A1BDCCD /* LicenseListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5531D63288F0DA73C439CF78 /* LicenseListTests.swift */; };
 		6BB2DC3EB9F74B89C787327F /* AppThemeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF204663CA496CCC1F87A9 /* AppThemeTests.swift */; };
+		D6E2DF42853C366D0C447EC9 /* DailyChallengeCardStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C447EC9C4CB6543299E3517 /* DailyChallengeCardStateTests.swift */; };
 		2C47F3AD72D77A1570A4933A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4503D465E99E77BA7BD1E9BE /* SettingView.swift */; };
 		8AAD08796CAD6F5A61243E89 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BD91082AD6AB6210C600EBA /* WebView.swift */; };
 		3E601F1C429455E505634061 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617AFABB66DC358B87EE635D /* PrivacyPolicyView.swift */; };
@@ -54,6 +55,7 @@
 		EA31363004DD2C8053A222CD /* DailyChallengeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A222CD73E96964D168F086 /* DailyChallengeGenerator.swift */; };
 		4F0C82822BC8247500E1480E /* PrimePickApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82812BC8247500E1480E /* PrimePickApp.swift */; };
 		4F0C82842BC8247500E1480E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82832BC8247500E1480E /* MainView.swift */; };
+		B4B3E0FBB5B094E9DB9D10F9 /* DailyChallengeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9D10F9B63B39D5001DE476 /* DailyChallengeCardView.swift */; };
 		4F0C82862BC8247600E1480E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F0C82852BC8247600E1480E /* Assets.xcassets */; };
 		4F0C828A2BC8247600E1480E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F0C82892BC8247600E1480E /* Preview Assets.xcassets */; };
 		4F2239222BFC9DEB004C71A6 /* QuizTimeLimitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2239212BFC9DEB004C71A6 /* QuizTimeLimitView.swift */; };
@@ -74,6 +76,7 @@
 		5DCD1C6FE87124B5F6E145F5 /* DailyChallengeDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E145F517236FCAF0FA950A /* DailyChallengeDayTests.swift */; };
 		7B2D1F304C7E9BAD1F203B4E /* QuizPlayFinisherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D1F304C7E9BAD1F203B4F /* QuizPlayFinisherTests.swift */; };
 		54D69EBDCDA4A3DBECB1740A /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36F4F283E4470B1B885ED0 /* AppTheme.swift */; };
+		72358C22F4980C53ADB7720F /* DailyChallengeCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7720F52BBF1F60ACB6688 /* DailyChallengeCardState.swift */; };
 		58D00C0E23DFBA64A9924780 /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348F9B9700F6A15141CCA545 /* HowToPlayView.swift */; };
 		01BCD3887C95781987A9BEB9 /* DailyChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9BEB9C37A62F499B13B7B /* DailyChallengeView.swift */; };
 		624168433780D0B8FD63B8D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53375860F98A49A23F4CF3D /* AppDelegate.swift */; };
@@ -127,6 +130,7 @@
 		2AEE8470B88092E2D6CBD065 /* PrivacyPolicyViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewTests.swift; sourceTree = "<group>"; };
 		5531D63288F0DA73C439CF78 /* LicenseListTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LicenseListTests.swift; sourceTree = "<group>"; };
 		CEEF204663CA496CCC1F87A9 /* AppThemeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppThemeTests.swift; sourceTree = "<group>"; };
+		0C447EC9C4CB6543299E3517 /* DailyChallengeCardStateTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeCardStateTests.swift; sourceTree = "<group>"; };
 		4503D465E99E77BA7BD1E9BE /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		7BD91082AD6AB6210C600EBA /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		617AFABB66DC358B87EE635D /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
@@ -155,6 +159,7 @@
 		4F0C827E2BC8247500E1480E /* PrimePickApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrimePickApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0C82812BC8247500E1480E /* PrimePickApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimePickApp.swift; sourceTree = "<group>"; };
 		4F0C82832BC8247500E1480E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		DB9D10F9B63B39D5001DE476 /* DailyChallengeCardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeCardView.swift; sourceTree = "<group>"; };
 		4F0C82852BC8247600E1480E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F0C82872BC8247600E1480E /* PrimePickApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrimePickApp.entitlements; sourceTree = "<group>"; };
 		4F0C82892BC8247600E1480E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -180,6 +185,7 @@
 		76D9CBC2B3380EC6F674FC12 /* ScoreCalculator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScoreCalculator.swift; sourceTree = "<group>"; };
 		A59994082E74A0B472A71FF4 /* DailyChallengeResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeResult.swift; sourceTree = "<group>"; };
 		7C36F4F283E4470B1B885ED0 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		ADB7720F52BBF1F60ACB6688 /* DailyChallengeCardState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeCardState.swift; sourceTree = "<group>"; };
 		7CE8537A8423A0BDBFDB5608 /* correct_0.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = correct_0.caf; sourceTree = "<group>"; };
 		8AF06039D8694AABFA88063B /* countdown_tick.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = countdown_tick.caf; sourceTree = "<group>"; };
 		8C110C448B6383AE57DE1D0E /* AnswerChoice.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerChoice.swift; sourceTree = "<group>"; };
@@ -379,6 +385,7 @@
 				348F9B9700F6A15141CCA545 /* HowToPlayView.swift */,
 				87A9BEB9C37A62F499B13B7B /* DailyChallengeView.swift */,
 				4F0C82832BC8247500E1480E /* MainView.swift */,
+				DB9D10F9B63B39D5001DE476 /* DailyChallengeCardView.swift */,
 				4FEC65B02C01164800A8B731 /* SelectDifficultyButtonView.swift */,
 				4FEC65B62C01252800A8B731 /* Quiz */,
 				C83942EBDA3E9A54DB4A6D7B /* Setting */,
@@ -415,6 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				7C36F4F283E4470B1B885ED0 /* AppTheme.swift */,
+				ADB7720F52BBF1F60ACB6688 /* DailyChallengeCardState.swift */,
 				4DB3345B71E99C1E6FD54E8F /* AppVersion.swift */,
 				A09E49B4E6A0B372138AAF28 /* DailyChallengeStore.swift */,
 				115EDA1D3D182B12FFA8D68E /* DailyChallengeRecord.swift */,
@@ -451,6 +459,7 @@
 				2AEE8470B88092E2D6CBD065 /* PrivacyPolicyViewTests.swift */,
 				5531D63288F0DA73C439CF78 /* LicenseListTests.swift */,
 				CEEF204663CA496CCC1F87A9 /* AppThemeTests.swift */,
+				0C447EC9C4CB6543299E3517 /* DailyChallengeCardStateTests.swift */,
 				A78976578BC5E117682B4EE5 /* PrimeFactorizationTests.swift */,
 				F930AB2B5D1237FCE31F2CAD /* QuizDataManagerTests.swift */,
 				716C22B16C5CFF84F365A500 /* DailyChallengeGeneratorTests.swift */,
@@ -630,6 +639,7 @@
 				58D00C0E23DFBA64A9924780 /* HowToPlayView.swift in Sources */,
 				01BCD3887C95781987A9BEB9 /* DailyChallengeView.swift in Sources */,
 				54D69EBDCDA4A3DBECB1740A /* AppTheme.swift in Sources */,
+				72358C22F4980C53ADB7720F /* DailyChallengeCardState.swift in Sources */,
 				2C47F3AD72D77A1570A4933A /* SettingView.swift in Sources */,
 				8AAD08796CAD6F5A61243E89 /* WebView.swift in Sources */,
 				3E601F1C429455E505634061 /* PrivacyPolicyView.swift in Sources */,
@@ -645,6 +655,7 @@
 				4F02A57D2BF62F61003DF310 /* QuizEntity.swift in Sources */,
 				4F65A3992C01019000065A53 /* Difficulty.swift in Sources */,
 				4F0C82842BC8247500E1480E /* MainView.swift in Sources */,
+				B4B3E0FBB5B094E9DB9D10F9 /* DailyChallengeCardView.swift in Sources */,
 				4FEC65B12C01164800A8B731 /* SelectDifficultyButtonView.swift in Sources */,
 				4F8BE16E2BF504BB00D7CF0E /* QuizView.swift in Sources */,
 				4F8DC1872C08F56000247F62 /* QuizContentView.swift in Sources */,
@@ -694,6 +705,7 @@
 				2FBA23985914BFF764B17FAF /* PrivacyPolicyViewTests.swift in Sources */,
 				8D70626D6AB962C21A1BDCCD /* LicenseListTests.swift in Sources */,
 				6BB2DC3EB9F74B89C787327F /* AppThemeTests.swift in Sources */,
+				D6E2DF42853C366D0C447EC9 /* DailyChallengeCardStateTests.swift in Sources */,
 				8BE248D1FC202001C53B2F23 /* PrimeFactorizationTests.swift in Sources */,
 				A464F92BBE9E50D793410369 /* QuizDataManagerTests.swift in Sources */,
 				FD47BEEDEB6563A5716C22B1 /* DailyChallengeGeneratorTests.swift in Sources */,
