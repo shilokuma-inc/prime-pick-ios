@@ -64,7 +64,7 @@ struct QuizTimeLimitView: View {
                 .animation(.linear(duration: 1), value: progress)
             
             switch gameMode {
-            case .practice:
+            case .practice, .dailyChallenge:
                 outlinedTitle("No Timelimit!")
             case .timeAttack:
                 outlinedTitle("\(remainingSeconds) sec", color: isInFinalCountdown ? .red : .white)

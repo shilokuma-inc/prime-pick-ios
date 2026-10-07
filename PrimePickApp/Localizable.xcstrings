@@ -1136,6 +1136,86 @@
           }
         }
       }
+    },
+    "Daily Challenge": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daily Challenge"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日のチャレンジ"
+          }
+        }
+      }
+    },
+    "Today's challenge is done": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today's challenge is done"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日のチャレンジは挑戦済みです"
+          }
+        }
+      }
+    },
+    "%lld / %lld correct": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld / %2$lld correct"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$lld 問中 %1$lld 問正解"
+          }
+        }
+      }
+    },
+    "Incomplete %lld / %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incomplete %1$lld / %2$lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未完了 %1$lld / %2$lld"
+          }
+        }
+      }
+    },
+    "Come back tomorrow for a new challenge.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Come back tomorrow for a new challenge."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "明日また新しい問題に挑戦できます。"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

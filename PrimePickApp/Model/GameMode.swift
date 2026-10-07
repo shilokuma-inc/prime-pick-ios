@@ -20,8 +20,14 @@ enum GameMode: Hashable, Identifiable, CaseIterable {
     case practice
     /// 制限時間内に何問正解できるかを競うモード
     case timeAttack(TimeAttackDuration)
+    /// デイリーチャレンジ。全員が同じ日に同じ 10 問を 1 日 1 回解く（Discussion #181）
+    ///
+    /// 時間無制限・ミニ解説ありは練習と同じ。評価は正解数と合計解答時間だけなので、スコアとコンボは出さない。
+    case dailyChallenge
 
     /// モード選択に並べる選択肢。タイムアタックは制限時間ごとに 1 つ並ぶ
+    ///
+    /// デイリーはタイトル画面のカードから始めるため、ここには含めない。
     static var allCases: [GameMode] {
         [.practice] + TimeAttackDuration.allCases.map(GameMode.timeAttack)
     }
@@ -32,17 +38,24 @@ enum GameMode: Hashable, Identifiable, CaseIterable {
             return "practice"
         case .timeAttack(let duration):
             return "timeAttack_\(duration.seconds)"
+        case .dailyChallenge:
+            return "dailyChallenge"
         }
     }
 
     /// タイムアタックかどうか
     var isTimeAttack: Bool {
         switch self {
-        case .practice:
+        case .practice, .dailyChallenge:
             return false
         case .timeAttack:
             return true
         }
+    }
+
+    /// プレイ中にコンボ（連続正解数）を見せるか。デイリーはスコアを競わないので出さない（Discussion #181 Q2）
+    var showsCombo: Bool {
+        self != .dailyChallenge
     }
 
     /// 解答直後にミニ解説を表示するか
@@ -86,13 +99,15 @@ enum GameMode: Hashable, Identifiable, CaseIterable {
             return "Practice"
         case .timeAttack(let duration):
             return duration.localizedTitle
+        case .dailyChallenge:
+            return "Daily Challenge"
         }
     }
 
     /// 制限時間（秒）。練習モードは制限なしのため nil を返す
     var timeLimitSeconds: Int? {
         switch self {
-        case .practice:
+        case .practice, .dailyChallenge:
             return nil
         case .timeAttack(let duration):
             return duration.seconds

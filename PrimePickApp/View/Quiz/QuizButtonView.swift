@@ -84,13 +84,14 @@ struct QuizButtonView: View {
         guard !isPresentedResult, !isWaitingToAdvance, !isInputLocked else { return }
 
         let quiz = quizData[quizIndex]
+        let elapsedTime = Date().timeIntervalSince(questionStartDate)
         let record = QuizAnswerRecord(
             id: quiz.quizId,
             number: quiz.number,
             isPrime: quiz.isCorrect,
-            answeredPrime: choice.isPrime
+            answeredPrime: choice.isPrime,
+            elapsedSeconds: elapsedTime
         )
-        let elapsedTime = Date().timeIntervalSince(questionStartDate)
         answerRecords.append(record)
         scoreCalculator.submit(
             isCorrect: record.isAnswerCorrect,

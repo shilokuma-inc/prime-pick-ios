@@ -17,6 +17,8 @@ struct QuizAnswerRecord: Identifiable, Equatable {
     let isPrime: Bool
     /// ユーザーの解答。素数だと答えたなら `true`
     let answeredPrime: Bool
+    /// 問題が表示されてから解答するまでの秒数。デイリーの合計解答時間に使う
+    var elapsedSeconds: TimeInterval = 0
 
     /// ユーザーの解答が正解と一致したか
     var isAnswerCorrect: Bool {

@@ -22,8 +22,14 @@ struct QuizPlayOutcome: Equatable {
 /// 練習・タイムアタックは自己ベストを記録する `BestScorePlayFinisher` を使い、
 /// デイリーチャレンジのように終わりに別の記録を残すプレイは、この型を差し替えて載せる。
 protocol QuizPlayFinishing {
+    /// 1 問解答するごとに呼ばれる。途中経過を残したいプレイ（強制終了に備えるデイリーなど）だけが実装する
+    func recordProgress(_ outcome: QuizPlayOutcome)
     /// 終わりの処理を行い、自己ベストを更新したか（結果画面に NEW RECORD! を出すか）を返す
     func finish(_ outcome: QuizPlayOutcome) -> Bool
+}
+
+extension QuizPlayFinishing {
+    func recordProgress(_ outcome: QuizPlayOutcome) {}
 }
 
 /// 練習・タイムアタックの終わりの処理。タイムアタックの自己ベストを記録する

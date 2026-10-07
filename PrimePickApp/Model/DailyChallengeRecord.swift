@@ -49,6 +49,20 @@ struct DailyChallengeRecord: Codable, Equatable {
         )
     }
 
+    /// 解答の記録（出題順）を反映した記録。解いていない問題は `unanswered` のまま残す
+    ///
+    /// 合計解答時間は各解答の経過時間（問題が表示されてから解答するまで）の合計。
+    /// ミニ解説を表示している間は次の問題が出ていないため、解説の時間は含まれない。
+    func applying(answerRecords: [QuizAnswerRecord]) -> DailyChallengeRecord {
+        var record = self
+        record.results = results.indices.map { index in
+            guard answerRecords.indices.contains(index) else { return .unanswered }
+            return answerRecords[index].isAnswerCorrect ? .correct : .incorrect
+        }
+        record.totalAnswerSeconds = answerRecords.prefix(results.count).reduce(0) { $0 + $1.elapsedSeconds }
+        return record
+    }
+
     /// 最後まで解いたか。ストリークに数えるのはこの日だけ
     var isCompleted: Bool {
         completedAt != nil
