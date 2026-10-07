@@ -86,6 +86,15 @@ final class DailyChallengeStoreTests: XCTestCase {
         XCTAssertEqual(store.allRecords().map(\.dayKey), ["2026-09-30", "2026-10-01", "2026-10-03"])
     }
 
+    /// 別の日の保存が同時に走っても、どの日の記録も消えない
+    func testConcurrentSavesKeepAllRecords() {
+        let dayKeys = (1...28).map { String(format: "2026-02-%02d", $0) }
+        DispatchQueue.concurrentPerform(iterations: dayKeys.count) { index in
+            UserDefaultsDailyChallengeStore(userDefaults: userDefaults).save(makeRecord(dayKey: dayKeys[index]))
+        }
+        XCTAssertEqual(store.allRecords().map(\.dayKey), dayKeys)
+    }
+
     /// 保存データが壊れていても落ちず、記録なしとして扱う
     func testCorruptedDataIsTreatedAsEmpty() {
         userDefaults.set(Data("not json".utf8), forKey: UserDefaultsDailyChallengeStore.recordsKey)

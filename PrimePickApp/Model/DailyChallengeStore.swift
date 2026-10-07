@@ -40,6 +40,10 @@ struct UserDefaultsDailyChallengeStore: DailyChallengeStore {
     }
 
     func save(_ record: DailyChallengeRecord) {
+        // 全件を読んで 1 件差し替えて書き戻すため、別の日の保存と重なると先の保存を消してしまう。
+        // 読み込みから書き込みまでを、すべてのインスタンスで共有するロックで 1 つの操作にする
+        Self.saveLock.lock()
+        defer { Self.saveLock.unlock() }
         var records = loadRecords()
         records[record.dayKey] = record
         guard let data = try? Self.encoder.encode(records) else { return }
@@ -53,6 +57,8 @@ struct UserDefaultsDailyChallengeStore: DailyChallengeStore {
         else { return [:] }
         return records
     }
+
+    private static let saveLock = NSLock()
 
     /// 日時は UNIX 時間（秒）で保存する。`JSONEncoder` の既定（2001 年起点）より他の仕組みから読みやすい
     private static let encoder: JSONEncoder = {
