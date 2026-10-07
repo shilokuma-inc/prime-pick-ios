@@ -62,11 +62,23 @@ final class BestScoreStoreTests: XCTestCase {
 
         var keys: Set<String> = []
         for duration in TimeAttackDuration.allCases {
-            for difficulty in [Difficulty.easy, .normal, .hard] {
+            for difficulty in Difficulty.allCases {
                 keys.insert(BestScoreStore.key(gameMode: .timeAttack(duration), difficulty: difficulty)!)
             }
         }
-        XCTAssertEqual(keys.count, 9)
+        XCTAssertEqual(keys.count, 12)
+    }
+
+    /// Expert は新しい区分なので、他の難易度の記録があっても 0 から取る
+    func testExpertStartsWithoutBestScore() {
+        let mode = GameMode.timeAttack(.sixtySeconds)
+        store.record(score: 1_500, gameMode: mode, difficulty: .hard)
+
+        XCTAssertEqual(BestScoreStore.key(gameMode: mode, difficulty: .expert), "bestScore.timeAttack_60.Expert")
+        XCTAssertNil(store.bestScore(gameMode: mode, difficulty: .expert))
+        XCTAssertTrue(store.record(score: 300, gameMode: mode, difficulty: .expert))
+        XCTAssertEqual(store.bestScore(gameMode: mode, difficulty: .expert), 300)
+        XCTAssertEqual(store.bestScore(gameMode: mode, difficulty: .hard), 1_500)
     }
 
     /// 出題レンジの選択をなくしても保存キーは変えない。

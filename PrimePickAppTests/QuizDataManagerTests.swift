@@ -12,20 +12,58 @@ final class QuizDataManagerTests: XCTestCase {
 
     // MARK: - 難易度ごとの出題範囲
 
-    /// 出る数は難易度だけで決める。Easy / Normal / Hard は、出題レンジの選択をなくす前の「おまかせ」と同じ範囲・除外条件を使う
+    /// 出る数は難易度だけで決める。Easy / Normal / Hard は、出題レンジの選択をなくす前の「おまかせ」と同じ範囲・除外条件を使う。
+    /// Expert は 1000〜9999 から 2・3・5 の倍数を除く
     func testDifficultyDeterminesRangeAndExclusion() {
+        XCTAssertEqual(Difficulty.allCases, [.easy, .normal, .hard, .expert])
+
         XCTAssertEqual(Difficulty.easy.range, .oneOrTwoDigits)
         XCTAssertEqual(Difficulty.normal.range, .threeDigits)
         XCTAssertEqual(Difficulty.hard.range, .threeDigits)
+        XCTAssertEqual(Difficulty.expert.range, .fourDigits)
 
         XCTAssertFalse(Difficulty.easy.excludesMultiplesOfTwoThreeFive)
         XCTAssertFalse(Difficulty.normal.excludesMultiplesOfTwoThreeFive)
         XCTAssertTrue(Difficulty.hard.excludesMultiplesOfTwoThreeFive)
+        XCTAssertTrue(Difficulty.expert.excludesMultiplesOfTwoThreeFive)
+    }
+
+    /// rawValue は自己ベストの保存キーと Analytics の値を兼ねるので固定する
+    func testDifficultyRawValuesAreStable() {
+        XCTAssertEqual(Difficulty.allCases.map(\.rawValue), ["Easy", "Normal", "Hard", "Expert"])
+    }
+
+    /// Expert は 4 桁から 2・3・5 の倍数を除いた数だけを出し、素数・素数でない数の両方が出る
+    func testExpertProducesFourDigitNumbersWithoutMultiplesOfTwoThreeFive() {
+        var hasPrime = false
+        var hasNonPrime = false
+        for seed in UInt64(0)..<20 {
+            var generator = SeededGenerator(seed: seed)
+            let quizData = manager.makeQuizData(
+                difficulty: .expert,
+                range: Difficulty.expert.range,
+                questionCount: .twenty,
+                using: &generator
+            )
+            for quiz in quizData {
+                XCTAssertTrue((1000...9999).contains(quiz.number), "seed=\(seed) で 4 桁でない \(quiz.number)")
+                XCTAssertFalse(
+                    quiz.number % 2 == 0 || quiz.number % 3 == 0 || quiz.number % 5 == 0,
+                    "seed=\(seed) で 2・3・5 の倍数 \(quiz.number) が出題された"
+                )
+                XCTAssertEqual(quiz.isCorrect, PrimeFactorization.isPrime(quiz.number))
+                XCTAssertEqual(quiz.difficulty, .expert)
+                XCTAssertEqual(quiz.range, .fourDigits)
+                if quiz.isCorrect { hasPrime = true } else { hasNonPrime = true }
+            }
+        }
+        XCTAssertTrue(hasPrime, "Expert で素数が 1 問も出なかった")
+        XCTAssertTrue(hasNonPrime, "Expert で素数でない数が 1 問も出なかった")
     }
 
     /// 難易度の出題範囲で作った出題は、すべてその範囲に収まり、問題ごとの `range` も同じ値を持つ
     func testMakeQuizDataWithDifficultyRangeStaysWithinIt() {
-        for difficulty in [Difficulty.easy, .normal, .hard] {
+        for difficulty in Difficulty.allCases {
             var generator = SeededGenerator(seed: 5)
             let quizData = manager.makeQuizData(
                 difficulty: difficulty,
@@ -73,7 +111,7 @@ final class QuizDataManagerTests: XCTestCase {
 
     /// `answer` イベントは問題ごとの難易度・レンジで送るため、既存のモードでは全問がプレイの設定と同じ値を持つこと
     func testMakeQuizDataCarriesRequestedDifficultyAndRange() {
-        for difficulty in [Difficulty.easy, .normal, .hard] {
+        for difficulty in Difficulty.allCases {
             for range in QuizRange.allCases {
                 var generator = SeededGenerator(seed: 4)
                 let quizData = manager.makeQuizData(
@@ -163,7 +201,7 @@ final class QuizDataManagerTests: XCTestCase {
 
     /// 各問題は独立に確率 p で素数になるので、多数回出題すれば素数率は p に近づく
     func testPrimeRatioApproachesPrimeProbability() {
-        for difficulty in [Difficulty.easy, .normal, .hard] {
+        for difficulty in Difficulty.allCases {
             for probability in [0.3, 0.5, 0.7] {
                 let manager = QuizDataManager(primeProbability: probability)
                 var generator = SeededGenerator(seed: 9)
