@@ -32,6 +32,8 @@ struct DailyChallengeDay: Hashable, Comparable {
               let year = Int(parts[0]), let month = Int(parts[1]), let day = Int(parts[2])
         else { return nil }
         let candidate = DailyChallengeDay(year: year, month: month, day: day)
+        // `Int` は `+1`・`-01` のような符号付きも読めるため、正規形と一致するものだけを受け付ける（同じ日に別のキーを作らない）
+        guard candidate.dayKey == dayKey else { return nil }
         // 正規化して元に戻らない日付（13 月・2 月 30 日など）は受け付けない
         guard let date = candidate.startDate(in: Self.utc),
               DailyChallengeDay(date: date, timeZone: Self.utc) == candidate

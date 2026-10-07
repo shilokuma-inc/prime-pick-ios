@@ -30,6 +30,10 @@ final class DailyChallengeDayTests: XCTestCase {
         XCTAssertNil(DailyChallengeDay(dayKey: "2026-1-01"))
         XCTAssertNil(DailyChallengeDay(dayKey: "20261001"))
         XCTAssertNil(DailyChallengeDay(dayKey: ""))
+        // 符号付きの数字は長さが合っていても正規形ではない
+        XCTAssertNil(DailyChallengeDay(dayKey: "2026-+1-01"))
+        XCTAssertNil(DailyChallengeDay(dayKey: "+026-10-01"))
+        XCTAssertNil(DailyChallengeDay(dayKey: "2026-10--1"))
     }
 
     // MARK: - 今日
