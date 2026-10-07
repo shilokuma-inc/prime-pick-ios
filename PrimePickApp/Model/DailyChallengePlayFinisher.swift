@@ -15,6 +15,8 @@ struct DailyChallengePlayFinisher: QuizPlayFinishing {
     let store: any DailyChallengeStore
     /// 現在時刻。テストのために差し替えられる
     var now: () -> Date = Date.init
+    /// 解き終えた記録を保存したあとに呼ばれる。結果画面に切り替えるために使う
+    var onFinish: ((DailyChallengeRecord) -> Void)?
 
     func recordProgress(_ outcome: QuizPlayOutcome) {
         store.save(startedRecord.applying(answerRecords: outcome.answerRecords))
@@ -32,6 +34,7 @@ struct DailyChallengePlayFinisher: QuizPlayFinishing {
         var record = startedRecord.applying(answerRecords: outcome.answerRecords)
         record.completedAt = now()
         store.save(record)
+        onFinish?(record)
         return false
     }
 }

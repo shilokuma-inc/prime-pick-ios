@@ -53,6 +53,13 @@ enum GameMode: Hashable, Identifiable, CaseIterable {
         }
     }
 
+    /// 解き終えたら出題画面の上に結果（`QuizResultView`）を重ねるか
+    ///
+    /// デイリーはスコアを出さない専用の結果画面（`DailyChallengeResultView`）に切り替えるため重ねない。
+    var showsQuizResult: Bool {
+        self != .dailyChallenge
+    }
+
     /// プレイ中にコンボ（連続正解数）を見せるか。デイリーはスコアを競わないので出さない（Discussion #181 Q2）
     var showsCombo: Bool {
         self != .dailyChallenge

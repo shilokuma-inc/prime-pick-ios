@@ -1153,22 +1153,6 @@
         }
       }
     },
-    "Today's challenge is done": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Today's challenge is done"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今日のチャレンジは挑戦済みです"
-          }
-        }
-      }
-    },
     "%lld / %lld correct": {
       "localizations": {
         "en": {
@@ -1201,18 +1185,98 @@
         }
       }
     },
-    "Come back tomorrow for a new challenge.": {
+    "Total Time %@ sec": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Come back tomorrow for a new challenge."
+            "value": "Total Time %@ sec"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "明日また新しい問題に挑戦できます。"
+            "value": "合計時間 %@ 秒"
+          }
+        }
+      }
+    },
+    "Streak %lld days": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Streak %lld days"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 日連続"
+          }
+        }
+      }
+    },
+    "Best %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Best %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最長 %lld"
+          }
+        }
+      }
+    },
+    "Next challenge in %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next challenge in %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "次のチャレンジまで %@"
+          }
+        }
+      }
+    },
+    "Play Time Attack": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Play Time Attack"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タイムアタックで遊ぶ"
+          }
+        }
+      }
+    },
+    "Correct %lld / %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Correct %1$lld / %2$lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$lld 問中 %1$lld 問正解"
           }
         }
       }

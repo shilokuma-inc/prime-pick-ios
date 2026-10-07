@@ -158,7 +158,7 @@ struct QuizView: View {
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 
-                if isPresentedResult {
+                if isPresentedResult && gameMode.showsQuizResult {
                     QuizResultView(
                         score: scoreCalculator.totalScore,
                         correctCount: scoreCalculator.correctCount,
