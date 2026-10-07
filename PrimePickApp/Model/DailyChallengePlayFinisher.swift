@@ -32,7 +32,9 @@ struct DailyChallengePlayFinisher: QuizPlayFinishing {
         sendAnalytics(
             .abandon(
                 dayNumber: dayNumber,
-                questionNumber: min(outcome.answerRecords.count + 1, startedRecord.results.count)
+                // 表示中の問題を送る。ミニ解説の間にやめた場合は、解いたばかりの問題になる
+                questionNumber: outcome.shownQuestionNumber
+                    ?? min(outcome.answerRecords.count + 1, startedRecord.results.count)
             )
         )
     }

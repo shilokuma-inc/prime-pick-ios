@@ -346,7 +346,8 @@ private extension QuizView {
             difficulty: difficulty,
             score: scoreCalculator.totalScore,
             correctCount: scoreCalculator.correctCount,
-            answerRecords: answerRecords
+            answerRecords: answerRecords,
+            shownQuestionNumber: quizNumber + 1
         )
     }
 

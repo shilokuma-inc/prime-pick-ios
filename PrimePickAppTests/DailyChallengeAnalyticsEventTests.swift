@@ -112,6 +112,24 @@ final class DailyChallengeAnalyticsEventTests: XCTestCase {
         ])
     }
 
+    /// 3 問目に答えてミニ解説を出している間（画面はまだ 3 問目）にやめたら、3 問目として送る
+    func testAbandonDuringExplanationSendsShownQuestion() {
+        let (store, cleanup) = makeStore()
+        defer { cleanup() }
+        let day = DailyChallengeDay(year: 2026, month: 10, day: 15)
+        var events: [DailyChallengeAnalyticsEvent] = []
+        let finisher = DailyChallengePlayFinisher(
+            startedRecord: .started(dayKey: day.dayKey, generatorVersion: 1, questionCount: 10, startedAt: Date()),
+            store: store,
+            sendAnalytics: { events.append($0) }
+        )
+        var answered = outcome(answers: [true, false, true], elapsedSeconds: 1)
+        answered.shownQuestionNumber = 3
+        finisher.abandon(answered)
+
+        XCTAssertEqual(events, [.abandon(dayNumber: day.dayNumber, questionNumber: 3)])
+    }
+
     // MARK: - ヘルパー
 
     private func makeStore() -> (UserDefaultsDailyChallengeStore, () -> Void) {
