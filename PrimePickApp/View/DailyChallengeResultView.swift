@@ -31,13 +31,15 @@ struct DailyChallengeResultView: View {
                         .font(.system(size: 30))
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
-                        .accessibilityLabel(Text("Correct \(record.correctCount) / \(record.results.count)"))
+                        // 絵文字の並びは読み上げても意味が伝わらないため、問題ごとの番号と結果を順に読み上げる
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel(Text(verbatim: DailyChallengeResult.accessibilityDescription(of: record.results)))
 
                     summary
 
                     streakAndCountdown
 
-                    QuizReviewList(answerRecords: result.answerRecords)
+                    QuizReviewList(answerRecords: result.answerRecords, isComplete: record.isCompleted)
 
                     buttons
                 }

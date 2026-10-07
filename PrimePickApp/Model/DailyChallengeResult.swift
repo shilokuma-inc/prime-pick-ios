@@ -53,6 +53,22 @@ struct DailyChallengeResult {
         record.results.map(Self.symbol(for:)).joined()
     }
 
+    /// 正誤の並びの読み上げ（「1 問目 正解、2 問目 不正解、…」）。並びの順を保つ
+    static func accessibilityDescription(of results: [DailyChallengeAnswerResult]) -> String {
+        results.enumerated().map { index, result in
+            let number = index + 1
+            switch result {
+            case .correct:
+                return String(localized: "Question \(number): Correct")
+            case .incorrect:
+                return String(localized: "Question \(number): Incorrect")
+            case .unanswered:
+                return String(localized: "Question \(number): Unanswered")
+            }
+        }
+        .joined(separator: ", ")
+    }
+
     static func symbol(for result: DailyChallengeAnswerResult) -> String {
         switch result {
         case .correct:

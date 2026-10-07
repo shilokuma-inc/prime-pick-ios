@@ -1344,6 +1344,70 @@
           }
         }
       }
+    },
+    "Question %lld: Correct": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Question %lld: Correct"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 問目 正解"
+          }
+        }
+      }
+    },
+    "Question %lld: Incorrect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Question %lld: Incorrect"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 問目 不正解"
+          }
+        }
+      }
+    },
+    "Question %lld: Unanswered": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Question %lld: Unanswered"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 問目 未解答"
+          }
+        }
+      }
+    },
+    "No missed questions so far": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No missed questions so far"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "解いた問題に間違いはありません"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

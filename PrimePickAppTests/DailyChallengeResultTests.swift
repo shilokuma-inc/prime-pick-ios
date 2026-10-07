@@ -18,6 +18,19 @@ final class DailyChallengeResultTests: XCTestCase {
         XCTAssertEqual(result.resultPattern, "🟩🟥🟩🟩🟩🟩🟩⬜⬜⬜")
     }
 
+    /// VoiceOver では問題ごとの番号と結果を順に読み上げる
+    func testAccessibilityDescriptionListsEachQuestionInOrder() {
+        let description = DailyChallengeResult.accessibilityDescription(of: [.correct, .incorrect, .unanswered])
+        let parts = description.components(separatedBy: ", ")
+        // 文言は端末の言語で変わるため、件数・順序（番号）・結果ごとに別の文言であることを確かめる
+        XCTAssertEqual(parts.count, 3)
+        for (index, part) in parts.enumerated() {
+            XCTAssertTrue(part.contains("\(index + 1)"), part)
+        }
+        let withoutNumbers = parts.map { $0.filter { !$0.isNumber } }
+        XCTAssertEqual(Set(withoutNumbers).count, 3, "\(withoutNumbers)")
+    }
+
     /// 復習一覧には解答した問題だけを渡し、間違えた問題は正解と逆の解答として組み立てる
     func testAnswerRecordsRebuildAnswersFromQuizData() {
         let result = makeResult(results: [.correct, .incorrect] + Array(repeating: .unanswered, count: 8))

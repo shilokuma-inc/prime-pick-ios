@@ -11,6 +11,8 @@ import SwiftUI
 struct QuizReviewList: View {
     /// 解答した問題の記録。このうち間違えた問題だけを並べる
     let answerRecords: [QuizAnswerRecord]
+    /// 最後まで解いたか。途中でやめたデイリーでは、誤答が無くても「全問正解」とは出さない
+    var isComplete: Bool = true
 
     /// 復習一覧に出すのは間違えた問題だけ
     private var missedRecords: [QuizAnswerRecord] {
@@ -19,7 +21,7 @@ struct QuizReviewList: View {
 
     var body: some View {
         if missedRecords.isEmpty {
-            Text("Perfect! All questions correct!")
+            Text(isComplete ? "Perfect! All questions correct!" : "No missed questions so far")
                 .font(.headline)
                 .multilineTextAlignment(.center)
                 .minimumScaleFactor(0.6)
