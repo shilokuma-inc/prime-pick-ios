@@ -5,15 +5,18 @@
 
 import SwiftUI
 
-/// デイリーチャレンジの画面。今日まだ始めていなければ 10 問を出し、始めていれば記録の要約だけを出す
+/// デイリーチャレンジの画面。今日まだ始めていなければ 10 問を出し、始めていれば結果だけを出す
 ///
 /// 1 日 1 回だけ遊べる（Discussion #181 本文 2-2）。開いた瞬間に始めた記録を保存して、その日の挑戦権を使う。
+/// 解き終えたら結果画面（`DailyChallengeResultView`）に切り替える。
 struct DailyChallengeView: View {
     /// 1 日の問題数。v1 の生成器が作る問題数と同じ
     static let questionCount: QuizQuestionCount = .ten
 
     var store: any DailyChallengeStore = UserDefaultsDailyChallengeStore()
     var generator: DailyChallengeGenerator = .v1
+    /// 結果画面の「タイムアタックで遊ぶ」を押したとき。nil ならボタンを出さない
+    var onPlayTimeAttack: (() -> Void)?
 
     @State private var phase: Phase = .loading
 
@@ -29,10 +32,17 @@ struct DailyChallengeView: View {
                     gameMode: .dailyChallenge,
                     questionCount: Self.questionCount,
                     quizData: quizData,
-                    finisher: DailyChallengePlayFinisher(startedRecord: startedRecord, store: store)
+                    finisher: DailyChallengePlayFinisher(
+                        startedRecord: startedRecord,
+                        store: store,
+                        onFinish: { record in phase = .alreadyPlayed(record) }
+                    )
                 )
             case .alreadyPlayed(let record):
-                DailyChallengePlayedView(record: record)
+                DailyChallengeResultView(
+                    result: DailyChallengeResult(record: record, records: store.allRecords(), today: DailyChallengeDay.today()),
+                    onPlayTimeAttack: onPlayTimeAttack
+                )
             }
         }
         .onAppear(perform: startIfNeeded)
@@ -69,37 +79,5 @@ struct DailyChallengeView: View {
         case loading
         case playing(quizData: [QuizEntity], startedRecord: DailyChallengeRecord)
         case alreadyPlayed(DailyChallengeRecord)
-    }
-}
-
-/// 挑戦済みの日に出す要約。結果画面（後続タスク）ができるまでの最小限の表示
-private struct DailyChallengePlayedView: View {
-    let record: DailyChallengeRecord
-
-    var body: some View {
-        ZStack {
-            Color.appBackground
-                .ignoresSafeArea()
-
-            VStack(spacing: 16) {
-                Text("Today's challenge is done")
-                    .font(.system(size: 28, weight: .bold, design: .rounded))
-                    .multilineTextAlignment(.center)
-
-                if record.isCompleted {
-                    Text("\(record.correctCount) / \(record.results.count) correct")
-                        .font(.system(size: 22, weight: .semibold, design: .rounded))
-                } else {
-                    Text("Incomplete \(record.answeredCount) / \(record.results.count)")
-                        .font(.system(size: 22, weight: .semibold, design: .rounded))
-                }
-
-                Text("Come back tomorrow for a new challenge.")
-                    .font(.system(size: 17, design: .rounded))
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
-            }
-            .padding(24)
-        }
     }
 }

@@ -25,11 +25,6 @@ struct QuizResultView: View {
     /// 獲得点・減点の内訳
     var breakdown = ScoreBreakdown()
 
-    /// 復習一覧に出すのは間違えた問題だけ
-    private var missedRecords: [QuizAnswerRecord] {
-        answerRecords.filter { !$0.isAnswerCorrect }
-    }
-
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -55,7 +50,7 @@ struct QuizResultView: View {
 
                     breakdownSection
 
-                    reviewSection
+                    QuizReviewList(answerRecords: answerRecords)
 
                     returnToTitleButton
                 }
@@ -131,46 +126,6 @@ struct QuizResultView: View {
                 .monospacedDigit()
                 .foregroundStyle(value < 0 ? Color.red : Color.primary)
                 .gridColumnAlignment(.trailing)
-        }
-    }
-
-    @ViewBuilder
-    private var reviewSection: some View {
-        if missedRecords.isEmpty {
-            Text("Perfect! All questions correct!")
-                .font(.headline)
-                .multilineTextAlignment(.center)
-                .minimumScaleFactor(0.6)
-                .padding(.vertical, 8)
-        } else {
-            VStack(alignment: .leading, spacing: 8) {
-                Text("Missed Questions")
-                    .font(.headline)
-
-                // 問題数が増えても収まるようにスクロールさせる
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 8) {
-                        ForEach(missedRecords) { record in
-                            reviewRow(record)
-                        }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }
-    }
-
-    private func reviewRow(_ record: QuizAnswerRecord) -> some View {
-        HStack(spacing: 8) {
-            Text(verbatim: "❌")
-
-            NumberExplanation(number: record.number).text
-                .font(.body)
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
-
-            Spacer(minLength: 0)
         }
     }
 
