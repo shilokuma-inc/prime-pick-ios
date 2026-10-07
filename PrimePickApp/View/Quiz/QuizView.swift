@@ -54,11 +54,13 @@ struct QuizView: View {
     let range: QuizRange
     let questionCount: QuizQuestionCount
 
+    /// - Parameter quizData: 外で作った出題（デイリーチャレンジなど）。`nil` か空なら `QuizDataManager` で作る
     init(
         difficulty: Difficulty,
         gameMode: GameMode = .practice,
         range: QuizRange? = nil,
-        questionCount: QuizQuestionCount = .default
+        questionCount: QuizQuestionCount = .default,
+        quizData providedQuizData: [QuizEntity]? = nil
     ) {
         let resolvedRange = range ?? difficulty.defaultRange
         self.difficulty = difficulty
@@ -69,7 +71,8 @@ struct QuizView: View {
         _manager = State(initialValue: manager)
 
         let setting = QuizSetting(difficulty: difficulty, gameMode: gameMode, range: range, questionCount: questionCount)
-        if let demo = ScreenshotDemo.quiz, demo.setting == setting {
+        // 出題を渡されたときは、設定が撮影モードの場面と一致しても渡された出題を使う
+        if providedQuizData?.isEmpty ?? true, let demo = ScreenshotDemo.quiz, demo.setting == setting {
             // 撮影モード: 決まった出題と途中までの進行状態から始める
             _quizData = State(initialValue: demo.quizData)
             _quizNumber = State(initialValue: demo.quizNumber)
@@ -86,11 +89,13 @@ struct QuizView: View {
         }
 
         _quizData = State(
-            initialValue: manager.makeQuizData(
-                difficulty: difficulty,
-                range: resolvedRange,
-                questionCount: questionCount
-            )
+            initialValue: Self.initialQuizData(provided: providedQuizData) {
+                manager.makeQuizData(
+                    difficulty: difficulty,
+                    range: resolvedRange,
+                    questionCount: questionCount
+                )
+            }
         )
         _scoreCalculator = State(initialValue: ScoreCalculator(rule: gameMode.scoringRule))
         _remainingSeconds = State(initialValue: gameMode.timeLimitSeconds ?? 0)
@@ -188,6 +193,21 @@ struct QuizView: View {
                 )
             }
         }
+    }
+}
+
+extension QuizView {
+    /// 最初に出題する問題。渡された出題があればそれを使い、無ければ（空も含む）`makeQuizData` で作る
+    ///
+    /// 空の出題を受け取ると 1 問目の表示で範囲外アクセスになるため、空は渡されなかったものとして扱う。
+    static func initialQuizData(
+        provided: [QuizEntity]?,
+        makeQuizData: () -> [QuizEntity]
+    ) -> [QuizEntity] {
+        if let provided, !provided.isEmpty {
+            return provided
+        }
+        return makeQuizData()
     }
 }
 
