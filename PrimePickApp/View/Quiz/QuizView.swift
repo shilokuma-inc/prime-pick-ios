@@ -46,6 +46,10 @@ struct QuizView: View {
     @State private var comboBreakCount: Int = 0
     /// このプレイで自己ベストを更新したか。リザルトで NEW RECORD! を出すために使う
     @State private var isNewRecord = false
+    /// プレイの終わりの処理を済ませたか。1 プレイで 2 回記録しないために使う
+    @State private var hasFinishedPlay = false
+    /// 途中でやめる確認を出しているか
+    @State private var isQuitConfirmationPresented = false
 
     let difficulty: Difficulty
     let gameMode: GameMode
@@ -53,23 +57,38 @@ struct QuizView: View {
     @State private var manager: QuizDataManager
     let range: QuizRange
     let questionCount: QuizQuestionCount
+    /// プレイの終わりの処理。既定は自己ベストの記録
+    private let finisher: any QuizPlayFinishing
+    /// どの画面から始めたか。`quiz_start` イベントの `source` に使う
+    private let source: QuizStartSource
+    /// `quiz_start` を送ったか。画面が出直しても 1 プレイで 1 回だけ送る
+    @State private var hasSentQuizStart = false
 
+    /// - Parameters:
+    ///   - quizData: 外で作った出題（デイリーチャレンジなど）。`nil` か空なら `QuizDataManager` で作る
+    ///   - finisher: プレイの終わりの処理。既定は自己ベストの記録
     init(
         difficulty: Difficulty,
         gameMode: GameMode = .practice,
         range: QuizRange? = nil,
-        questionCount: QuizQuestionCount = .default
+        questionCount: QuizQuestionCount = .default,
+        quizData providedQuizData: [QuizEntity]? = nil,
+        finisher: any QuizPlayFinishing = BestScorePlayFinisher(),
+        source: QuizStartSource = .title
     ) {
         let resolvedRange = range ?? difficulty.defaultRange
         self.difficulty = difficulty
         self.gameMode = gameMode
         self.range = resolvedRange
         self.questionCount = questionCount
+        self.finisher = finisher
+        self.source = source
         let manager = QuizDataManager()
         _manager = State(initialValue: manager)
 
         let setting = QuizSetting(difficulty: difficulty, gameMode: gameMode, range: range, questionCount: questionCount)
-        if let demo = ScreenshotDemo.quiz, demo.setting == setting {
+        // 出題を渡されたときは、設定が撮影モードの場面と一致しても渡された出題を使う
+        if providedQuizData?.isEmpty ?? true, let demo = ScreenshotDemo.quiz, demo.setting == setting {
             // 撮影モード: 決まった出題と途中までの進行状態から始める
             _quizData = State(initialValue: demo.quizData)
             _quizNumber = State(initialValue: demo.quizNumber)
@@ -86,11 +105,13 @@ struct QuizView: View {
         }
 
         _quizData = State(
-            initialValue: manager.makeQuizData(
-                difficulty: difficulty,
-                range: resolvedRange,
-                questionCount: questionCount
-            )
+            initialValue: Self.initialQuizData(provided: providedQuizData) {
+                manager.makeQuizData(
+                    difficulty: difficulty,
+                    range: resolvedRange,
+                    questionCount: questionCount
+                )
+            }
         )
         _scoreCalculator = State(initialValue: ScoreCalculator(rule: gameMode.scoringRule))
         _remainingSeconds = State(initialValue: gameMode.timeLimitSeconds ?? 0)
@@ -105,11 +126,12 @@ struct QuizView: View {
                 VStack(spacing: .zero) {
                     QuizContentView(
                         quizNumber: $quizNumber,
-                        difficulty: difficulty,
+                        difficulty: displayedDifficulty,
                         gameMode: gameMode,
                         remainingSeconds: remainingSeconds,
                         quizData: quizData,
-                        currentCombo: scoreCalculator.currentCombo,
+                        // コンボを出さないモードでは、コンボ表示と MAX 段階の背景を出さないよう 0 として渡す
+                        currentCombo: gameMode.showsCombo ? scoreCalculator.currentCombo : 0,
                         score: scoreCalculator.totalScore,
                         scorePopup: scorePopup,
                         timePenaltyPopup: timePenaltyPopup,
@@ -130,7 +152,6 @@ struct QuizView: View {
                     QuizButtonView(
                         quizData: quizData,
                         difficulty: difficulty,
-                        range: range,
                         questionStartDate: questionStartDate,
                         advanceDelay: gameMode.showsAnswerExplanation ? Self.answerExplanationDuration : 0,
                         incorrectInputLockDuration: gameMode.missInputLockDuration,
@@ -143,7 +164,7 @@ struct QuizView: View {
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 
-                if isPresentedResult {
+                if isPresentedResult && gameMode.showsQuizResult {
                     QuizResultView(
                         score: scoreCalculator.totalScore,
                         correctCount: scoreCalculator.correctCount,
@@ -157,7 +178,26 @@ struct QuizView: View {
             }
         }
         .sendAnalyticsScreen(.quiz)
+        // デイリーの出題中は標準の戻るボタンを隠し、確認を挟む「やめる」に置き換える。
+        // 戻るボタンを隠すとスワイプで戻る操作も効かなくなるので、確認を経ずに抜けられない
+        .navigationBarBackButtonHidden(requiresQuitConfirmation)
+        .toolbar {
+            if requiresQuitConfirmation {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Quit") {
+                        isQuitConfirmationPresented = true
+                    }
+                }
+            }
+        }
+        .alert("Quit today's challenge?", isPresented: $isQuitConfirmationPresented) {
+            Button("Quit", role: .destructive, action: quit)
+            Button("Keep Playing", role: .cancel) {}
+        } message: {
+            Text("Unanswered questions will be left blank and your result will be final. You can't try today's challenge again.")
+        }
         .onAppear {
+            sendQuizStartIfNeeded()
             startTimerIfNeeded()
             // 1 問目が表示された時点を経過時間の基準にする
             questionStartDate = Date()
@@ -174,6 +214,7 @@ struct QuizView: View {
             handleComboChange(from: oldCombo, to: newCombo)
         }
         .onChange(of: answerRecords.count) { _, _ in
+            finisher.recordProgress(currentOutcome)
             showAnswerExplanationIfNeeded()
             showScorePopupIfNeeded()
             applyMissTimePenaltyIfNeeded()
@@ -182,13 +223,47 @@ struct QuizView: View {
             // 10 問を解き終えた場合など、タイムアップ以外の終了でもタイマーを止める
             if isPresented {
                 stopTimer()
-                isNewRecord = BestScoreStore().record(
-                    score: scoreCalculator.totalScore,
-                    gameMode: gameMode,
-                    difficulty: difficulty
-                )
+                finishPlay()
             }
         }
+    }
+}
+
+extension QuizView {
+    /// プレイ開始の計測イベント。デイリーは別のイベントで測るので nil
+    static func quizStartEvent(
+        gameMode: GameMode,
+        difficulty: Difficulty,
+        range: QuizRange,
+        questionCount: QuizQuestionCount,
+        source: QuizStartSource
+    ) -> QuizStartAnalyticsEvent? {
+        guard gameMode != .dailyChallenge else { return nil }
+        return QuizStartAnalyticsEvent(
+            gameMode: gameMode,
+            difficulty: difficulty,
+            range: range,
+            questionCount: questionCount,
+            source: source
+        )
+    }
+
+    /// やめた時点で全問に答えていれば、途中でやめたのではなく解き終えたものとして扱う
+    static func quitCompletesPlay(answeredCount: Int, questionCount: Int) -> Bool {
+        questionCount > 0 && answeredCount >= questionCount
+    }
+
+    /// 最初に出題する問題。渡された出題があればそれを使い、無ければ（空も含む）`makeQuizData` で作る
+    ///
+    /// 空の出題を受け取ると 1 問目の表示で範囲外アクセスになるため、空は渡されなかったものとして扱う。
+    static func initialQuizData(
+        provided: [QuizEntity]?,
+        makeQuizData: () -> [QuizEntity]
+    ) -> [QuizEntity] {
+        if let provided, !provided.isEmpty {
+            return provided
+        }
+        return makeQuizData()
     }
 }
 
@@ -224,6 +299,66 @@ private extension QuizView {
         }
     }
 
+    /// プレイの終わりの処理を 1 回だけ行う
+    ///
+    /// 解き終えた・時間切れのどちらで終わっても、結果画面を出す時点でここを通る。
+    /// 撮影モードの結果画面は最初から表示した状態で始まるため、ここを通らず記録もしない。
+    func finishPlay() {
+        guard !hasFinishedPlay else { return }
+        hasFinishedPlay = true
+        isNewRecord = finisher.finish(currentOutcome)
+    }
+
+    /// 練習・タイムアタックを始めたことを 1 回だけ送る。デイリーは `daily_challenge_start` で測るので送らない
+    func sendQuizStartIfNeeded() {
+        guard let event = Self.quizStartEvent(
+            gameMode: gameMode,
+            difficulty: difficulty,
+            range: range,
+            questionCount: questionCount,
+            source: source
+        ), !hasSentQuizStart else { return }
+        hasSentQuizStart = true
+        FirebaseAnalytics().sendQuizStart(event)
+    }
+
+    /// 途中でやめるときに確認を挟むか。結果画面を出したあとは確認せずに戻れる
+    var requiresQuitConfirmation: Bool {
+        gameMode.confirmsBeforeQuitting && !isPresentedResult
+    }
+
+    /// 確認のうえで途中でやめる。解答済みまでで結果を確定して画面を閉じる
+    func quit() {
+        stopTimer()
+        if Self.quitCompletesPlay(answeredCount: answerRecords.count, questionCount: quizData.count) {
+            // 最後の問題に答えてミニ解説を出している間にやめた場合は、解き終えた扱いにする
+            finishPlay()
+        } else {
+            finisher.abandon(currentOutcome)
+        }
+        dismiss()
+    }
+
+    /// ここまでの解答を反映したプレイの結果
+    var currentOutcome: QuizPlayOutcome {
+        QuizPlayOutcome(
+            gameMode: gameMode,
+            difficulty: difficulty,
+            score: scoreCalculator.totalScore,
+            correctCount: scoreCalculator.correctCount,
+            answerRecords: answerRecords,
+            shownQuestionNumber: quizNumber + 1
+        )
+    }
+
+    /// 背景色などの見た目に使う難易度。表示中の問題の難易度に合わせる
+    ///
+    /// 練習・タイムアタックは全問がプレイの難易度と同じなので変わらない。
+    /// デイリーは 2 桁 → 3 桁 → Hard と段階で難易度が変わるため、段階に合わせて背景色が変わる。
+    var displayedDifficulty: Difficulty {
+        quizData.indices.contains(quizNumber) ? quizData[quizNumber].difficulty : difficulty
+    }
+
     /// 時間切れでリザルトを表示する
     func finishByTimeUp() {
         stopTimer()
@@ -235,6 +370,7 @@ private extension QuizView {
     ///
     /// 毎問読み上げると邪魔になるため、読み上げは段階が上がったときだけにする。
     func handleComboChange(from oldCombo: Int, to newCombo: Int) {
+        guard gameMode.showsCombo else { return }
         // コンボ表示が出ていた（2 以上）ときだけ「切れた」とみなす
         if newCombo == 0, oldCombo >= 2 {
             SoundFeedback.play(.comboBreak)

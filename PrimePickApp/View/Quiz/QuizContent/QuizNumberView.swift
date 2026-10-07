@@ -122,7 +122,7 @@ struct QuizNumberView_Previews: PreviewProvider {
         QuizNumberView(
             quizNumber: $quizNumber,
             difficulty: .easy,
-            quizData: [QuizEntity(quizId: 0, number: 3, isCorrect: true)]
+            quizData: [QuizEntity(quizId: 0, number: 3, isCorrect: true, difficulty: .easy, range: .oneOrTwoDigits)]
         )
     }
 }

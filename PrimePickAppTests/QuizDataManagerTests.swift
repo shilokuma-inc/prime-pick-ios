@@ -41,6 +41,25 @@ final class QuizDataManagerTests: XCTestCase {
         }
     }
 
+    /// `answer` イベントは問題ごとの難易度・レンジで送るため、既存のモードでは全問がプレイの設定と同じ値を持つこと
+    func testMakeQuizDataCarriesRequestedDifficultyAndRange() {
+        for difficulty in [Difficulty.easy, .normal, .hard] {
+            for range in QuizRange.allCases {
+                var generator = SeededGenerator(seed: 4)
+                let quizData = manager.makeQuizData(
+                    difficulty: difficulty,
+                    range: range,
+                    questionCount: .ten,
+                    using: &generator
+                )
+                for quiz in quizData {
+                    XCTAssertEqual(quiz.difficulty, difficulty)
+                    XCTAssertEqual(quiz.range, range)
+                }
+            }
+        }
+    }
+
     func testMakeQuizDataMarksPrimeNumbersAsCorrect() {
         var generator = SeededGenerator(seed: 3)
         let quizData = manager.makeQuizData(

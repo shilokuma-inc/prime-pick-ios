@@ -75,7 +75,13 @@ final class QuizDataManager {
             let wantsPrime = Double.random(in: 0..<1, using: &generator) < primeProbability
             let number = drawNumber(from: pool, wantsPrime: wantsPrime, using: &generator)
             quizData.append(
-                QuizEntity(quizId: quizId, number: number, isCorrect: PrimeFactorization.isPrime(number))
+                QuizEntity(
+                    quizId: quizId,
+                    number: number,
+                    isCorrect: PrimeFactorization.isPrime(number),
+                    difficulty: difficulty,
+                    range: range
+                )
             )
         }
         return quizData
