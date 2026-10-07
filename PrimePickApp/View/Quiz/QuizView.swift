@@ -48,6 +48,8 @@ struct QuizView: View {
     @State private var isNewRecord = false
     /// プレイの終わりの処理を済ませたか。1 プレイで 2 回記録しないために使う
     @State private var hasFinishedPlay = false
+    /// 途中でやめる確認を出しているか
+    @State private var isQuitConfirmationPresented = false
 
     let difficulty: Difficulty
     let gameMode: GameMode
@@ -170,6 +172,24 @@ struct QuizView: View {
             }
         }
         .sendAnalyticsScreen(.quiz)
+        // デイリーの出題中は標準の戻るボタンを隠し、確認を挟む「やめる」に置き換える。
+        // 戻るボタンを隠すとスワイプで戻る操作も効かなくなるので、確認を経ずに抜けられない
+        .navigationBarBackButtonHidden(requiresQuitConfirmation)
+        .toolbar {
+            if requiresQuitConfirmation {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Quit") {
+                        isQuitConfirmationPresented = true
+                    }
+                }
+            }
+        }
+        .alert("Quit today's challenge?", isPresented: $isQuitConfirmationPresented) {
+            Button("Quit", role: .destructive, action: quit)
+            Button("Keep Playing", role: .cancel) {}
+        } message: {
+            Text("Unanswered questions will be left blank and your result will be final. You can't try today's challenge again.")
+        }
         .onAppear {
             startTimerIfNeeded()
             // 1 問目が表示された時点を経過時間の基準にする
@@ -203,6 +223,11 @@ struct QuizView: View {
 }
 
 extension QuizView {
+    /// やめた時点で全問に答えていれば、途中でやめたのではなく解き終えたものとして扱う
+    static func quitCompletesPlay(answeredCount: Int, questionCount: Int) -> Bool {
+        questionCount > 0 && answeredCount >= questionCount
+    }
+
     /// 最初に出題する問題。渡された出題があればそれを使い、無ければ（空も含む）`makeQuizData` で作る
     ///
     /// 空の出題を受け取ると 1 問目の表示で範囲外アクセスになるため、空は渡されなかったものとして扱う。
@@ -257,6 +282,23 @@ private extension QuizView {
         guard !hasFinishedPlay else { return }
         hasFinishedPlay = true
         isNewRecord = finisher.finish(currentOutcome)
+    }
+
+    /// 途中でやめるときに確認を挟むか。結果画面を出したあとは確認せずに戻れる
+    var requiresQuitConfirmation: Bool {
+        gameMode.confirmsBeforeQuitting && !isPresentedResult
+    }
+
+    /// 確認のうえで途中でやめる。解答済みまでで結果を確定して画面を閉じる
+    func quit() {
+        stopTimer()
+        if Self.quitCompletesPlay(answeredCount: answerRecords.count, questionCount: quizData.count) {
+            // 最後の問題に答えてミニ解説を出している間にやめた場合は、解き終えた扱いにする
+            finishPlay()
+        } else {
+            finisher.abandon(currentOutcome)
+        }
+        dismiss()
     }
 
     /// ここまでの解答を反映したプレイの結果
