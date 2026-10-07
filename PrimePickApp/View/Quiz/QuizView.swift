@@ -46,6 +46,8 @@ struct QuizView: View {
     @State private var comboBreakCount: Int = 0
     /// このプレイで自己ベストを更新したか。リザルトで NEW RECORD! を出すために使う
     @State private var isNewRecord = false
+    /// プレイの終わりの処理を済ませたか。1 プレイで 2 回記録しないために使う
+    @State private var hasFinishedPlay = false
 
     let difficulty: Difficulty
     let gameMode: GameMode
@@ -53,20 +55,26 @@ struct QuizView: View {
     @State private var manager: QuizDataManager
     let range: QuizRange
     let questionCount: QuizQuestionCount
+    /// プレイの終わりの処理。既定は自己ベストの記録
+    private let finisher: any QuizPlayFinishing
 
-    /// - Parameter quizData: 外で作った出題（デイリーチャレンジなど）。`nil` か空なら `QuizDataManager` で作る
+    /// - Parameters:
+    ///   - quizData: 外で作った出題（デイリーチャレンジなど）。`nil` か空なら `QuizDataManager` で作る
+    ///   - finisher: プレイの終わりの処理。既定は自己ベストの記録
     init(
         difficulty: Difficulty,
         gameMode: GameMode = .practice,
         range: QuizRange? = nil,
         questionCount: QuizQuestionCount = .default,
-        quizData providedQuizData: [QuizEntity]? = nil
+        quizData providedQuizData: [QuizEntity]? = nil,
+        finisher: any QuizPlayFinishing = BestScorePlayFinisher()
     ) {
         let resolvedRange = range ?? difficulty.defaultRange
         self.difficulty = difficulty
         self.gameMode = gameMode
         self.range = resolvedRange
         self.questionCount = questionCount
+        self.finisher = finisher
         let manager = QuizDataManager()
         _manager = State(initialValue: manager)
 
@@ -186,11 +194,7 @@ struct QuizView: View {
             // 10 問を解き終えた場合など、タイムアップ以外の終了でもタイマーを止める
             if isPresented {
                 stopTimer()
-                isNewRecord = BestScoreStore().record(
-                    score: scoreCalculator.totalScore,
-                    gameMode: gameMode,
-                    difficulty: difficulty
-                )
+                finishPlay()
             }
         }
     }
@@ -241,6 +245,24 @@ private extension QuizView {
             remainingSeconds = 0
             finishByTimeUp()
         }
+    }
+
+    /// プレイの終わりの処理を 1 回だけ行う
+    ///
+    /// 解き終えた・時間切れのどちらで終わっても、結果画面を出す時点でここを通る。
+    /// 撮影モードの結果画面は最初から表示した状態で始まるため、ここを通らず記録もしない。
+    func finishPlay() {
+        guard !hasFinishedPlay else { return }
+        hasFinishedPlay = true
+        isNewRecord = finisher.finish(
+            QuizPlayOutcome(
+                gameMode: gameMode,
+                difficulty: difficulty,
+                score: scoreCalculator.totalScore,
+                correctCount: scoreCalculator.correctCount,
+                answerRecords: answerRecords
+            )
+        )
     }
 
     /// 時間切れでリザルトを表示する
