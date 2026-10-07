@@ -7,10 +7,15 @@
 
 import SwiftUI
 
-enum Difficulty: String {
+/// 難易度。出る数（範囲と 2・3・5 の倍数の除外）と見た目・スコア係数を決める
+///
+/// rawValue は自己ベストの保存キー（`BestScoreStore`）と Analytics の `difficulty` の値を兼ねるので変えない。
+enum Difficulty: String, CaseIterable {
     case easy = "Easy"
     case normal = "Normal"
     case hard = "Hard"
+    /// 4 桁（1000〜9999）を出す 4 段階目（Discussion #255 Q2）
+    case expert = "Expert"
 
     /// 画面に表示する難易度名
     var localizedTitle: LocalizedStringKey {
@@ -26,6 +31,8 @@ enum Difficulty: String {
             return .oneOrTwoDigits
         case .normal, .hard:
             return .threeDigits
+        case .expert:
+            return .fourDigits
         }
     }
 
@@ -33,6 +40,11 @@ enum Difficulty: String {
     ///
     /// 「一目で素数でないと分かる数」を弾くための条件。出題範囲（`range`）とあわせて出る数を決める。
     var excludesMultiplesOfTwoThreeFive: Bool {
-        self == .hard
+        switch self {
+        case .easy, .normal:
+            return false
+        case .hard, .expert:
+            return true
+        }
     }
 }

@@ -29,6 +29,8 @@ struct QuizTimeLimitView: View {
             return Color.blue
         case .hard:
             return Color.red
+        case .expert:
+            return Color.indigo
         }
     }
     
@@ -53,6 +55,10 @@ struct QuizTimeLimitView: View {
                     .edgesIgnoringSafeArea(.all)
             case .hard:
                 Color.red
+                    .opacity(0.5)
+                    .edgesIgnoringSafeArea(.all)
+            case .expert:
+                Color.indigo
                     .opacity(0.5)
                     .edgesIgnoringSafeArea(.all)
             }
