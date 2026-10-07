@@ -59,7 +59,7 @@ struct MainView: View {
                 }
             }
             .navigationDestination(for: DailyChallengeRoute.self) { _ in
-                DailyChallengeView()
+                DailyChallengeView(onPlayTimeAttack: playTimeAttackFromDailyChallenge)
             }
             .navigationDestination(for: QuizSetting.self) { setting in
                 QuizView(
@@ -124,6 +124,20 @@ private extension MainView {
             .padding(.horizontal, 24)
             .padding(.top, 8)
         }
+    }
+
+    /// デイリーの結果画面から、タイトルで選んでいる設定のタイムアタックを始める
+    ///
+    /// デイリーの画面をタイムアタックに置き換える（タイムアタックから戻るとタイトルに戻る）。
+    func playTimeAttackFromDailyChallenge() {
+        let setting = DailyChallengeResult.timeAttackSetting(
+            selectedGameMode: gameMode,
+            selectedRange: selectedRange,
+            selectedQuestionCount: selectedQuestionCount
+        )
+        var newPath = NavigationPath()
+        newPath.append(setting)
+        path = newPath
     }
 
     func refreshDailyChallengeCard() {
