@@ -130,7 +130,6 @@ struct QuizView: View {
                     QuizButtonView(
                         quizData: quizData,
                         difficulty: difficulty,
-                        range: range,
                         questionStartDate: questionStartDate,
                         advanceDelay: gameMode.showsAnswerExplanation ? Self.answerExplanationDuration : 0,
                         incorrectInputLockDuration: gameMode.missInputLockDuration,

@@ -119,7 +119,13 @@ struct ScreenshotDemoQuiz {
     /// `QuizView` が持つ出題データ
     var quizData: [QuizEntity] {
         numbers.enumerated().map { index, number in
-            QuizEntity(quizId: index + 1, number: number, isCorrect: PrimeFactorization.isPrime(number))
+            QuizEntity(
+                quizId: index + 1,
+                number: number,
+                isCorrect: PrimeFactorization.isPrime(number),
+                difficulty: setting.difficulty,
+                range: setting.range ?? setting.difficulty.defaultRange
+            )
         }
     }
 
