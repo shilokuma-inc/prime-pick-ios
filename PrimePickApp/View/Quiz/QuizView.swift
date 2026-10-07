@@ -55,7 +55,6 @@ struct QuizView: View {
     let gameMode: GameMode
     /// 1 プレイの間は同じ素数の出現確率を使い続けるため、`View` が作り直されても同じインスタンスを保持する
     @State private var manager: QuizDataManager
-    let range: QuizRange
     let questionCount: QuizQuestionCount
     /// プレイの終わりの処理。既定は自己ベストの記録
     private let finisher: any QuizPlayFinishing
@@ -70,23 +69,20 @@ struct QuizView: View {
     init(
         difficulty: Difficulty,
         gameMode: GameMode = .practice,
-        range: QuizRange? = nil,
         questionCount: QuizQuestionCount = .default,
         quizData providedQuizData: [QuizEntity]? = nil,
         finisher: any QuizPlayFinishing = BestScorePlayFinisher(),
         source: QuizStartSource = .title
     ) {
-        let resolvedRange = range ?? difficulty.defaultRange
         self.difficulty = difficulty
         self.gameMode = gameMode
-        self.range = resolvedRange
         self.questionCount = questionCount
         self.finisher = finisher
         self.source = source
         let manager = QuizDataManager()
         _manager = State(initialValue: manager)
 
-        let setting = QuizSetting(difficulty: difficulty, gameMode: gameMode, range: range, questionCount: questionCount)
+        let setting = QuizSetting(difficulty: difficulty, gameMode: gameMode, questionCount: questionCount)
         // 出題を渡されたときは、設定が撮影モードの場面と一致しても渡された出題を使う
         if providedQuizData?.isEmpty ?? true, let demo = ScreenshotDemo.quiz, demo.setting == setting {
             // 撮影モード: 決まった出題と途中までの進行状態から始める
@@ -108,7 +104,7 @@ struct QuizView: View {
             initialValue: Self.initialQuizData(provided: providedQuizData) {
                 manager.makeQuizData(
                     difficulty: difficulty,
-                    range: resolvedRange,
+                    range: difficulty.range,
                     questionCount: questionCount
                 )
             }
@@ -314,7 +310,7 @@ private extension QuizView {
         guard let event = Self.quizStartEvent(
             gameMode: gameMode,
             difficulty: difficulty,
-            range: range,
+            range: difficulty.range,
             questionCount: questionCount,
             source: source
         ), !hasSentQuizStart else { return }
@@ -454,7 +450,7 @@ private extension QuizView {
         quizData.append(
             contentsOf: manager.makeQuizData(
                 difficulty: difficulty,
-                range: range,
+                range: difficulty.range,
                 questionCount: questionCount
             )
         )
@@ -470,5 +466,5 @@ private struct AnswerExplanationItem: Equatable {
 }
 
 #Preview {
-    QuizView(difficulty: .easy, range: .oneOrTwoDigits, questionCount: .default)
+    QuizView(difficulty: .easy, questionCount: .default)
 }

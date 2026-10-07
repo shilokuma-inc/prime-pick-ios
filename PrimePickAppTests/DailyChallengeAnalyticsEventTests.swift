@@ -64,9 +64,9 @@ final class DailyChallengeAnalyticsEventTests: XCTestCase {
 
     /// タイトルの難易度ボタンからは `title`、デイリーの結果画面からは `daily_result`
     func testSourceOfSettings() {
-        XCTAssertEqual(QuizSetting(difficulty: .easy, gameMode: .practice, range: nil, questionCount: .ten).source, .title)
+        XCTAssertEqual(QuizSetting(difficulty: .easy, gameMode: .practice, questionCount: .ten).source, .title)
         XCTAssertEqual(
-            DailyChallengeResult.timeAttackSetting(selectedGameMode: .practice, selectedRange: nil, selectedQuestionCount: .ten).source,
+            DailyChallengeResult.timeAttackSetting(selectedGameMode: .practice, selectedQuestionCount: .ten).source,
             .dailyResult
         )
     }

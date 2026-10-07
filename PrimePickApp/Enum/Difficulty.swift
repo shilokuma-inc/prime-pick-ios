@@ -17,10 +17,10 @@ enum Difficulty: String {
         LocalizedStringKey(rawValue)
     }
 
-    /// 出題レンジを明示的に選んでいないときに使う既定のレンジ
+    /// この難易度で出題する数の範囲
     ///
-    /// レンジ選択が追加される前の挙動をそのまま再現する。
-    var defaultRange: QuizRange {
+    /// 出る数は難易度だけで決める（Discussion #255）。Easy / Normal / Hard は、出題レンジの選択をなくす前の「おまかせ」と同じ。
+    var range: QuizRange {
         switch self {
         case .easy:
             return .oneOrTwoDigits
@@ -31,7 +31,7 @@ enum Difficulty: String {
 
     /// 2・3・5 の倍数を出題から除外するか
     ///
-    /// 「一目で素数でないと分かる数」を弾くための条件であり、出題レンジとは独立している。
+    /// 「一目で素数でないと分かる数」を弾くための条件。出題範囲（`range`）とあわせて出る数を決める。
     var excludesMultiplesOfTwoThreeFive: Bool {
         self == .hard
     }

@@ -3,12 +3,13 @@
 //  PrimePickApp
 //
 
-import SwiftUI
+import Foundation
 
 /// 出題する数値の範囲
 ///
 /// 難易度（`Difficulty`）が「出題される数の性質（2・3・5 の倍数を除くか）」と見た目を担うのに対し、
-/// こちらは「どの桁数の数を出すか」だけを担う。
+/// こちらは「どの桁数の数を出すか」だけを担う。どの範囲を使うかは難易度が決める（`Difficulty.range`）。
+/// 画面では選ばせないが、出題（`QuizEntity.range`）・デイリー v1・Analytics の `quiz_range` が使う。
 enum QuizRange: String, CaseIterable, Identifiable {
     /// 1 〜 99
     case oneOrTwoDigits = "1-99"
@@ -34,10 +35,5 @@ enum QuizRange: String, CaseIterable, Identifiable {
     /// この範囲で出題されうる最大の桁数
     var maxDigitCount: Int {
         bounds.upperBound.description.count
-    }
-
-    /// 画面に表示するレンジ名
-    var localizedTitle: LocalizedStringKey {
-        LocalizedStringKey(rawValue)
     }
 }

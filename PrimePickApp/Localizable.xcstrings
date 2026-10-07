@@ -385,22 +385,6 @@
         }
       }
     },
-    "Auto": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auto"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "おまかせ"
-          }
-        }
-      }
-    },
     "Questions": {
       "localizations": {
         "en": {
@@ -417,50 +401,18 @@
         }
       }
     },
-    "Range": {
+    "ゲームモードと問題数を選び、難易度を選ぶとクイズが始まります。": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Range"
+            "value": "Pick a game mode and the number of questions, then choose a difficulty to start the quiz."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "出題レンジ"
-          }
-        }
-      }
-    },
-    "出題レンジと問題数を選び、難易度を選ぶとクイズが始まります。": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pick a range and the number of questions, then choose a difficulty to start the quiz."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "出題レンジと問題数を選び、難易度を選ぶとクイズが始まります。"
-          }
-        }
-      }
-    },
-    "出題レンジで「おまかせ」以外を選ぶと、上記のレンジを上書きします。": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choosing anything other than Auto for the range overrides the ranges above."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "出題レンジで「おまかせ」以外を選ぶと、上記のレンジを上書きします。"
+            "value": "ゲームモードと問題数を選び、難易度を選ぶとクイズが始まります。"
           }
         }
       }
@@ -477,54 +429,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "選んだ問題数に答えると、正解数がスコアとして表示されます。"
-          }
-        }
-      }
-    },
-    "1-99": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1-99"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1-99"
-          }
-        }
-      }
-    },
-    "100-999": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "100-999"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "100-999"
-          }
-        }
-      }
-    },
-    "1000-9999": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1000-9999"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1000-9999"
           }
         }
       }

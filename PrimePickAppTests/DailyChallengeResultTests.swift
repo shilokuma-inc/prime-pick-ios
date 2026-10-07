@@ -87,21 +87,19 @@ final class DailyChallengeResultTests: XCTestCase {
     func testTimeAttackSettingKeepsSelectedTimeAttack() {
         let setting = DailyChallengeResult.timeAttackSetting(
             selectedGameMode: .timeAttack(.thirtySeconds),
-            selectedRange: .fourDigits,
             selectedQuestionCount: .twenty
         )
         XCTAssertEqual(
             setting,
-            QuizSetting(difficulty: .normal, gameMode: .timeAttack(.thirtySeconds), range: .fourDigits, questionCount: .twenty, source: .dailyResult)
+            QuizSetting(difficulty: .normal, gameMode: .timeAttack(.thirtySeconds), questionCount: .twenty, source: .dailyResult)
         )
     }
 
     /// タイトルで練習を選んでいたら 60 秒のタイムアタックにする
     func testTimeAttackSettingFallsBackToSixtySecondsFromPractice() {
-        let setting = DailyChallengeResult.timeAttackSetting(selectedGameMode: .practice, selectedRange: nil, selectedQuestionCount: .default)
+        let setting = DailyChallengeResult.timeAttackSetting(selectedGameMode: .practice, selectedQuestionCount: .default)
         XCTAssertEqual(setting.gameMode, .timeAttack(.sixtySeconds))
         XCTAssertEqual(setting.difficulty, .normal)
-        XCTAssertNil(setting.range)
     }
 
     // MARK: - 結果画面への切り替え

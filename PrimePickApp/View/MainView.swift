@@ -18,8 +18,6 @@ struct MainView: View {
     /// 撮影モードでは最初から遊び方のシートを開いておく
     @State private var presentedSheet: MainSheet? = ScreenshotDemo.scene == .howToPlay ? .howToPlay : nil
     @State private var gameMode: GameMode = .practice
-    /// `nil` は「おまかせ」＝ 難易度ごとの既定レンジを使う
-    @State private var selectedRange: QuizRange?
     @State private var selectedQuestionCount: QuizQuestionCount = .default
 
     var body: some View {
@@ -43,13 +41,11 @@ struct MainView: View {
 
                     SelectQuizSettingView(
                         gameMode: $gameMode,
-                        selectedRange: $selectedRange,
                         selectedQuestionCount: $selectedQuestionCount
                     )
 
                     SelectDifficultyButtonView(
                         gameMode: gameMode,
-                        selectedRange: selectedRange,
                         questionCount: selectedQuestionCount
                     )
 
@@ -65,7 +61,6 @@ struct MainView: View {
                 QuizView(
                     difficulty: setting.difficulty,
                     gameMode: setting.gameMode,
-                    range: setting.range,
                     questionCount: setting.questionCount,
                     source: setting.source
                 )
@@ -133,7 +128,6 @@ private extension MainView {
     func playTimeAttackFromDailyChallenge() {
         let setting = DailyChallengeResult.timeAttackSetting(
             selectedGameMode: gameMode,
-            selectedRange: selectedRange,
             selectedQuestionCount: selectedQuestionCount
         )
         var newPath = NavigationPath()
