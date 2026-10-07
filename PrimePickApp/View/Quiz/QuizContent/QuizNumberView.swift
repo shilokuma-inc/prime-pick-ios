@@ -11,6 +11,8 @@ struct QuizNumberView: View {
     @Binding var quizNumber: Int
     let difficulty: Difficulty
     let quizData: [QuizEntity]
+    /// Great 段階以上では数字カードの枠を光らせる
+    var comboStage: ComboStage = .normal
     
     var body: some View {
         GeometryReader { geometry in
@@ -36,6 +38,8 @@ struct QuizNumberView: View {
 
                 ZStack {
                     quizNumberBackgroundView(difficulty: difficulty, height: cardHeight)
+                        .shadow(color: Color.orange.opacity(comboStage >= .great ? 0.9 : 0), radius: 16)
+                        .animation(.easeInOut(duration: 0.3), value: comboStage)
 
                     quizNumberText(
                         quizNumber: quizNumber,

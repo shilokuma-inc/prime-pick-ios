@@ -36,6 +36,62 @@ final class GameModeTests: XCTestCase {
         }
     }
 
+    // MARK: - スコアルール
+
+    func testScoringRuleIsTimeAttackOnlyForTimeAttack() {
+        XCTAssertEqual(GameMode.practice.scoringRule, .practice)
+        for duration in TimeAttackDuration.allCases {
+            XCTAssertEqual(GameMode.timeAttack(duration).scoringRule, .timeAttack)
+        }
+    }
+
+    // MARK: - 誤答のペナルティ
+
+    func testMissPenaltyAppliesOnlyToTimeAttack() {
+        XCTAssertEqual(GameMode.practice.missTimePenaltySeconds, 0)
+        XCTAssertEqual(GameMode.practice.missInputLockDuration, 0)
+        for duration in TimeAttackDuration.allCases {
+            // 制限時間の長さによらず固定
+            XCTAssertEqual(GameMode.timeAttack(duration).missTimePenaltySeconds, 2)
+            XCTAssertEqual(GameMode.timeAttack(duration).missInputLockDuration, 0.5, accuracy: 0.0001)
+        }
+    }
+
+    func testRemainingSecondsAfterMissSubtractsTwoSeconds() {
+        let mode = GameMode.timeAttack(.thirtySeconds)
+        XCTAssertEqual(mode.remainingSecondsAfterMiss(from: 30), 28)
+        XCTAssertEqual(mode.remainingSecondsAfterMiss(from: 3), 1)
+    }
+
+    /// 残り 2 秒以下で誤答したら 0（即タイムアップ）になり、負にはならない
+    func testRemainingSecondsAfterMissStopsAtZero() {
+        let mode = GameMode.timeAttack(.fifteenSeconds)
+        XCTAssertEqual(mode.remainingSecondsAfterMiss(from: 2), 0)
+        XCTAssertEqual(mode.remainingSecondsAfterMiss(from: 1), 0)
+        XCTAssertEqual(mode.remainingSecondsAfterMiss(from: 0), 0)
+    }
+
+    func testPracticeRemainingSecondsIsUnchangedByMiss() {
+        XCTAssertEqual(GameMode.practice.remainingSecondsAfterMiss(from: 10), 10)
+    }
+
+    // MARK: - 残り 5 秒の演出
+
+    func testFinalCountdownStartsAtFiveSeconds() {
+        for duration in TimeAttackDuration.allCases {
+            let mode = GameMode.timeAttack(duration)
+            XCTAssertFalse(mode.isInFinalCountdown(remainingSeconds: 6))
+            XCTAssertTrue(mode.isInFinalCountdown(remainingSeconds: 5))
+            XCTAssertTrue(mode.isInFinalCountdown(remainingSeconds: 1))
+            // 0 秒はタイムアップ
+            XCTAssertFalse(mode.isInFinalCountdown(remainingSeconds: 0))
+        }
+    }
+
+    func testPracticeHasNoFinalCountdown() {
+        XCTAssertFalse(GameMode.practice.isInFinalCountdown(remainingSeconds: 3))
+    }
+
     // MARK: - モード選択の並び
 
     func testAllCasesIsPracticeFollowedByDurationsInAscendingOrder() {

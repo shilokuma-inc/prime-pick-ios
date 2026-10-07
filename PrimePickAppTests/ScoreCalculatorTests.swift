@@ -136,8 +136,9 @@ final class ScoreCalculatorTests: XCTestCase {
         XCTAssertEqual(calculator.correctCount, 5)
     }
 
+    /// 練習モードでは誤答で減点しない（タイムアタックの減点は下の MARK で確認する）
     func testIncorrectAnswerResetsComboAndScoresNothing() {
-        var calculator = ScoreCalculator()
+        var calculator = ScoreCalculator(rule: .practice)
         calculator.submit(isCorrect: true, difficulty: .easy, elapsedTime: 6.0)
         calculator.submit(isCorrect: true, difficulty: .easy, elapsedTime: 6.0)
         let scoreBeforeMiss = calculator.totalScore
@@ -202,5 +203,115 @@ final class ScoreCalculatorTests: XCTestCase {
         }
         XCTAssertLessThan(calculator.totalScore, Int.max)
         XCTAssertGreaterThan(calculator.totalScore, 0)
+    }
+
+    // MARK: - タイムアタックのルール
+
+    func testMissPenaltyIsTwiceBasePointsTimesDifficultyFactor() {
+        XCTAssertEqual(ScoreCalculator.missPenalty(difficulty: .easy, rule: .timeAttack), 200)
+        XCTAssertEqual(ScoreCalculator.missPenalty(difficulty: .normal, rule: .timeAttack), 300)
+        XCTAssertEqual(ScoreCalculator.missPenalty(difficulty: .hard, rule: .timeAttack), 400)
+        for difficulty in [Difficulty.easy, .normal, .hard] {
+            XCTAssertEqual(ScoreCalculator.missPenalty(difficulty: difficulty, rule: .practice), 0)
+        }
+    }
+
+    func testTimeAttackIncorrectAnswerDeductsAndReturnsNegative() {
+        var calculator = ScoreCalculator(rule: .timeAttack)
+        for _ in 1...5 {
+            calculator.submit(isCorrect: true, difficulty: .normal, elapsedTime: 6.0)
+        }
+        let scoreBeforeMiss = calculator.totalScore
+
+        let change = calculator.submit(isCorrect: false, difficulty: .normal, elapsedTime: 0)
+
+        XCTAssertEqual(change, -300)
+        XCTAssertEqual(calculator.totalScore, scoreBeforeMiss - 300)
+        XCTAssertEqual(calculator.currentCombo, 0)
+        XCTAssertEqual(calculator.maxCombo, 5)
+        XCTAssertEqual(calculator.breakdown.penalty, 300)
+    }
+
+    /// スコアは 0 未満にならず、戻り値と減点の累計は実際に減った分だけになる
+    func testTimeAttackScoreStopsAtZero() {
+        var calculator = ScoreCalculator(rule: .timeAttack)
+        calculator.submit(isCorrect: true, difficulty: .easy, elapsedTime: 6.0)  // 100
+
+        XCTAssertEqual(calculator.submit(isCorrect: false, difficulty: .easy, elapsedTime: 0), -100)
+        XCTAssertEqual(calculator.totalScore, 0)
+        XCTAssertEqual(calculator.submit(isCorrect: false, difficulty: .easy, elapsedTime: 0), 0)
+        XCTAssertEqual(calculator.totalScore, 0)
+        XCTAssertEqual(calculator.breakdown.penalty, 100)
+    }
+
+    func testTimeAttackSpeedBonusRequiresComboOfThree() {
+        var calculator = ScoreCalculator(rule: .timeAttack)
+        // 100 × 1.0 × 1.0（速度ボーナスなし）
+        XCTAssertEqual(calculator.submit(isCorrect: true, difficulty: .easy, elapsedTime: 0), 100)
+        // 100 × 1.0 × 1.1（速度ボーナスなし）
+        XCTAssertEqual(calculator.submit(isCorrect: true, difficulty: .easy, elapsedTime: 0), 110)
+        // 100 × 1.0 × 1.2 + 50
+        XCTAssertEqual(calculator.submit(isCorrect: true, difficulty: .easy, elapsedTime: 0), 170)
+        XCTAssertEqual(calculator.breakdown.speedBonus, ScoreCalculator.maxSpeedBonus)
+
+        // 誤答でコンボが切れたら、また 3 連続になるまで速度ボーナスは付かない
+        calculator.submit(isCorrect: false, difficulty: .easy, elapsedTime: 0)
+        XCTAssertEqual(calculator.submit(isCorrect: true, difficulty: .easy, elapsedTime: 0), 100)
+    }
+
+    func testEarnsSpeedBonus() {
+        XCTAssertFalse(ScoreCalculator.earnsSpeedBonus(combo: 1, rule: .timeAttack))
+        XCTAssertFalse(ScoreCalculator.earnsSpeedBonus(combo: 2, rule: .timeAttack))
+        XCTAssertTrue(ScoreCalculator.earnsSpeedBonus(combo: 3, rule: .timeAttack))
+        XCTAssertTrue(ScoreCalculator.earnsSpeedBonus(combo: 11, rule: .timeAttack))
+        XCTAssertTrue(ScoreCalculator.earnsSpeedBonus(combo: 1, rule: .practice))
+    }
+
+    /// 練習モードの計算結果は変えない。同じ解答列で従来どおりの点になることを確認する
+    func testPracticeKeepsSpeedBonusFromFirstAnswer() {
+        var calculator = ScoreCalculator(rule: .practice)
+        XCTAssertEqual(calculator.submit(isCorrect: true, difficulty: .easy, elapsedTime: 0), 150)
+        XCTAssertEqual(calculator.submit(isCorrect: true, difficulty: .easy, elapsedTime: 0), 160)
+        XCTAssertEqual(calculator.submit(isCorrect: false, difficulty: .easy, elapsedTime: 0), 0)
+        XCTAssertEqual(calculator.totalScore, 310)
+        XCTAssertEqual(ScoreCalculator().rule, .practice)
+    }
+
+    func testTimeAttackTotalScoreNeverGoesNegative() {
+        var calculator = ScoreCalculator(rule: .timeAttack)
+        for index in 0..<2_000 {
+            calculator.submit(isCorrect: index % 3 == 0, difficulty: .hard, elapsedTime: 0)
+            XCTAssertGreaterThanOrEqual(calculator.totalScore, 0)
+        }
+    }
+
+    // MARK: - 内訳
+
+    func testPointsBreakdownSplitsPoints() {
+        // 100 × 1.5 = 150、× 1.2 = 180 でコンボ分は 30、速度ボーナスは 25
+        XCTAssertEqual(
+            ScoreCalculator.pointsBreakdown(difficulty: .normal, combo: 3, elapsedTime: 3.5),
+            ScoreBreakdown(correctPoints: 150, comboBonus: 30, speedBonus: 25)
+        )
+        XCTAssertEqual(
+            ScoreCalculator.pointsBreakdown(difficulty: .normal, combo: 2, elapsedTime: 0, rule: .timeAttack),
+            ScoreBreakdown(correctPoints: 150, comboBonus: 15, speedBonus: 0)
+        )
+    }
+
+    /// 内訳の合計は常に合計スコアと一致する
+    func testBreakdownTotalMatchesTotalScore() {
+        for rule in [ScoringRule.practice, .timeAttack] {
+            var calculator = ScoreCalculator(rule: rule)
+            var generator = SeededGenerator(seed: 1)
+            for _ in 0..<500 {
+                calculator.submit(
+                    isCorrect: Bool.random(using: &generator),
+                    difficulty: [Difficulty.easy, .normal, .hard].randomElement(using: &generator)!,
+                    elapsedTime: Double.random(in: 0...8, using: &generator)
+                )
+                XCTAssertEqual(calculator.breakdown.total, calculator.totalScore, "\(rule)")
+            }
+        }
     }
 }

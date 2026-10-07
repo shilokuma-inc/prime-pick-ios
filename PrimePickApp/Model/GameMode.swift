@@ -7,6 +7,15 @@ import SwiftUI
 
 /// クイズの進行ルール
 enum GameMode: Hashable, Identifiable, CaseIterable {
+    /// タイムアタックの誤答で減らす残り時間（秒）。制限時間の長さによらず固定
+    static let timeAttackMissTimePenaltySeconds = 2
+
+    /// タイムアタックの誤答後に入力を受け付けない時間（秒）
+    static let timeAttackMissInputLockDuration: TimeInterval = 0.5
+
+    /// タイムアタックで残り時間を赤くして急かし始める秒数
+    static let timeAttackFinalCountdownSeconds = 5
+
     /// 10 問固定・時間無制限
     case practice
     /// 制限時間内に何問正解できるかを競うモード
@@ -41,6 +50,33 @@ enum GameMode: Hashable, Identifiable, CaseIterable {
     /// タイムアタックではテンポを崩さないよう表示せず、練習モードだけで表示する（Discussion #138 / PR #152 で確認済み）。
     var showsAnswerExplanation: Bool {
         !isTimeAttack
+    }
+
+    /// スコアの計算ルール。誤答の減点と速度ボーナスの条件はタイムアタックだけに適用する
+    var scoringRule: ScoringRule {
+        isTimeAttack ? .timeAttack : .practice
+    }
+
+    /// 誤答で減らす残り時間（秒）。練習モードは制限時間が無いので 0
+    var missTimePenaltySeconds: Int {
+        isTimeAttack ? Self.timeAttackMissTimePenaltySeconds : 0
+    }
+
+    /// 誤答後に入力を受け付けない時間（秒）。練習モードはロックしないので 0
+    var missInputLockDuration: TimeInterval {
+        isTimeAttack ? Self.timeAttackMissInputLockDuration : 0
+    }
+
+    /// 誤答のペナルティを反映した残り時間。0 以下になる場合は 0（即タイムアップ）を返す
+    func remainingSecondsAfterMiss(from remainingSeconds: Int) -> Int {
+        max(0, remainingSeconds - missTimePenaltySeconds)
+    }
+
+    /// 残り時間が終盤（残り 5 秒以下）か。練習モードは制限時間が無いので常に false
+    ///
+    /// 0 秒はタイムアップでリザルトを出すため含めない。
+    func isInFinalCountdown(remainingSeconds: Int) -> Bool {
+        isTimeAttack && (1...Self.timeAttackFinalCountdownSeconds).contains(remainingSeconds)
     }
 
     /// 画面に表示するモード名

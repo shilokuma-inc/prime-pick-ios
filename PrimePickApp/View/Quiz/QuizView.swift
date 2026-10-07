@@ -26,9 +26,10 @@ struct QuizView: View {
     private static let quizButtonHeightRatio: CGFloat = 1 / 3
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var quizNumber: Int = 0
     @State var isPresentedResult: Bool = false
-    @State private var scoreCalculator = ScoreCalculator()
+    @State private var scoreCalculator: ScoreCalculator
     @State private var answerRecords: [QuizAnswerRecord] = []
     @State private var quizData: [QuizEntity]
     @State private var remainingSeconds: Int
@@ -37,10 +38,19 @@ struct QuizView: View {
     @State private var questionStartDate: Date = Date()
     /// 解答直後に表示しているミニ解説。表示していないときは nil
     @State private var answerExplanation: AnswerExplanationItem?
+    /// 解答直後に出しているスコアの増減。表示していないときは nil
+    @State private var scorePopup: ScorePopup?
+    /// 誤答直後に出している時間ペナルティ。表示していないときは nil
+    @State private var timePenaltyPopup: ScorePopup?
+    /// コンボが切れた回数。変わるたびに画面を短く揺らす
+    @State private var comboBreakCount: Int = 0
+    /// このプレイで自己ベストを更新したか。リザルトで NEW RECORD! を出すために使う
+    @State private var isNewRecord = false
 
     let difficulty: Difficulty
     let gameMode: GameMode
-    let manager = QuizDataManager()
+    /// 1 プレイの間は同じ素数の出現確率を使い続けるため、`View` が作り直されても同じインスタンスを保持する
+    @State private var manager: QuizDataManager
     let range: QuizRange
     let questionCount: QuizQuestionCount
 
@@ -55,6 +65,8 @@ struct QuizView: View {
         self.gameMode = gameMode
         self.range = resolvedRange
         self.questionCount = questionCount
+        let manager = QuizDataManager()
+        _manager = State(initialValue: manager)
 
         let setting = QuizSetting(difficulty: difficulty, gameMode: gameMode, range: range, questionCount: questionCount)
         if let demo = ScreenshotDemo.quiz, demo.setting == setting {
@@ -80,6 +92,7 @@ struct QuizView: View {
                 questionCount: questionCount
             )
         )
+        _scoreCalculator = State(initialValue: ScoreCalculator(rule: gameMode.scoringRule))
         _remainingSeconds = State(initialValue: gameMode.timeLimitSeconds ?? 0)
     }
 
@@ -96,7 +109,11 @@ struct QuizView: View {
                         gameMode: gameMode,
                         remainingSeconds: remainingSeconds,
                         quizData: quizData,
-                        currentCombo: scoreCalculator.currentCombo
+                        currentCombo: scoreCalculator.currentCombo,
+                        score: scoreCalculator.totalScore,
+                        scorePopup: scorePopup,
+                        timePenaltyPopup: timePenaltyPopup,
+                        comboBreakCount: comboBreakCount
                     )
                     .frame(height: geometry.size.height * Self.quizContentHeightRatio)
 
@@ -116,6 +133,7 @@ struct QuizView: View {
                         range: range,
                         questionStartDate: questionStartDate,
                         advanceDelay: gameMode.showsAnswerExplanation ? Self.answerExplanationDuration : 0,
+                        incorrectInputLockDuration: gameMode.missInputLockDuration,
                         scoreCalculator: $scoreCalculator,
                         quizIndex: $quizNumber,
                         isPresentedResult: $isPresentedResult,
@@ -131,7 +149,9 @@ struct QuizView: View {
                         correctCount: scoreCalculator.correctCount,
                         maxCombo: scoreCalculator.maxCombo,
                         answerRecords: answerRecords,
-                        gameMode: gameMode
+                        gameMode: gameMode,
+                        isNewRecord: isNewRecord,
+                        breakdown: scoreCalculator.breakdown
                     )
                 }
             }
@@ -150,13 +170,23 @@ struct QuizView: View {
             questionStartDate = Date()
             refillQuizDataIfNeeded(currentIndex: newValue)
         }
+        .onChange(of: scoreCalculator.currentCombo) { oldCombo, newCombo in
+            handleComboChange(from: oldCombo, to: newCombo)
+        }
         .onChange(of: answerRecords.count) { _, _ in
             showAnswerExplanationIfNeeded()
+            showScorePopupIfNeeded()
+            applyMissTimePenaltyIfNeeded()
         }
         .onChange(of: isPresentedResult) { _, isPresented in
             // 10 問を解き終えた場合など、タイムアップ以外の終了でもタイマーを止める
             if isPresented {
                 stopTimer()
+                isNewRecord = BestScoreStore().record(
+                    score: scoreCalculator.totalScore,
+                    gameMode: gameMode,
+                    difficulty: difficulty
+                )
             }
         }
     }
@@ -185,6 +215,9 @@ private extension QuizView {
         guard !isPresentedResult else { return }
         if remainingSeconds > 1 {
             remainingSeconds -= 1
+            if gameMode.isInFinalCountdown(remainingSeconds: remainingSeconds) {
+                SoundFeedback.play(.countdownTick)
+            }
         } else {
             remainingSeconds = 0
             finishByTimeUp()
@@ -194,7 +227,70 @@ private extension QuizView {
     /// 時間切れでリザルトを表示する
     func finishByTimeUp() {
         stopTimer()
+        SoundFeedback.play(.timeUp)
         isPresentedResult = true
+    }
+
+    /// コンボ切れで画面を揺らして下降音を鳴らし、段階が上がったら到達音を鳴らして VoiceOver で読み上げる
+    ///
+    /// 毎問読み上げると邪魔になるため、読み上げは段階が上がったときだけにする。
+    func handleComboChange(from oldCombo: Int, to newCombo: Int) {
+        // コンボ表示が出ていた（2 以上）ときだけ「切れた」とみなす
+        if newCombo == 0, oldCombo >= 2 {
+            SoundFeedback.play(.comboBreak)
+            if !reduceMotion {
+                comboBreakCount += 1
+            }
+        }
+        if ComboStage.didStageUp(from: oldCombo, to: newCombo) {
+            let stage = ComboStage(combo: newCombo)
+            SoundFeedback.play(.comboStageUp(stage))
+            if let announcement = stage.announcement {
+                AccessibilityNotification.Announcement(String(localized: announcement)).post()
+            }
+        }
+    }
+
+    /// タイムアタックの誤答で残り時間を減らす。残り時間が尽きたらその場でタイムアップにする
+    func applyMissTimePenaltyIfNeeded() {
+        guard gameMode.missTimePenaltySeconds > 0,
+              !isPresentedResult,
+              let record = answerRecords.last,
+              !record.isAnswerCorrect
+        else { return }
+
+        let secondsBeforePenalty = remainingSeconds
+        remainingSeconds = gameMode.remainingSecondsAfterMiss(from: remainingSeconds)
+        showTimePenaltyPopup(deductedSeconds: secondsBeforePenalty - remainingSeconds)
+        if remainingSeconds == 0 {
+            finishByTimeUp()
+        }
+    }
+
+    /// タイムアタックで、直前の解答によるスコアの増減をポップアップで出す
+    ///
+    /// 練習モードはプレイ中にスコアを表示しないため出さない。
+    func showScorePopupIfNeeded() {
+        guard gameMode.isTimeAttack,
+              let submission = scoreCalculator.lastSubmission,
+              let popup = ScorePopup.score(id: answerRecords.count, submission: submission)
+        else { return }
+        scorePopup = popup
+        DispatchQueue.main.asyncAfter(deadline: .now() + ScorePopup.displayDuration) {
+            // 続けて解答していた場合は、新しいポップアップを消さないよう何もしない
+            guard scorePopup?.id == popup.id else { return }
+            scorePopup = nil
+        }
+    }
+
+    /// 誤答で減った残り時間をポップアップで出す
+    func showTimePenaltyPopup(deductedSeconds: Int) {
+        guard let popup = ScorePopup.time(id: answerRecords.count, deductedSeconds: deductedSeconds) else { return }
+        timePenaltyPopup = popup
+        DispatchQueue.main.asyncAfter(deadline: .now() + ScorePopup.displayDuration) {
+            guard timePenaltyPopup?.id == popup.id else { return }
+            timePenaltyPopup = nil
+        }
     }
 
     /// 直前に解答した数のミニ解説を短時間だけ表示する
