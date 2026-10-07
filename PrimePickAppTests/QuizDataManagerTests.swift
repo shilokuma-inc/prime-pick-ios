@@ -10,6 +10,36 @@ final class QuizDataManagerTests: XCTestCase {
 
     private let manager = QuizDataManager(primeProbability: 0.5)
 
+    // MARK: - 難易度ごとの出題範囲
+
+    /// 出る数は難易度だけで決める。Easy / Normal / Hard は、出題レンジの選択をなくす前の「おまかせ」と同じ範囲・除外条件を使う
+    func testDifficultyDeterminesRangeAndExclusion() {
+        XCTAssertEqual(Difficulty.easy.range, .oneOrTwoDigits)
+        XCTAssertEqual(Difficulty.normal.range, .threeDigits)
+        XCTAssertEqual(Difficulty.hard.range, .threeDigits)
+
+        XCTAssertFalse(Difficulty.easy.excludesMultiplesOfTwoThreeFive)
+        XCTAssertFalse(Difficulty.normal.excludesMultiplesOfTwoThreeFive)
+        XCTAssertTrue(Difficulty.hard.excludesMultiplesOfTwoThreeFive)
+    }
+
+    /// 難易度の出題範囲で作った出題は、すべてその範囲に収まり、問題ごとの `range` も同じ値を持つ
+    func testMakeQuizDataWithDifficultyRangeStaysWithinIt() {
+        for difficulty in [Difficulty.easy, .normal, .hard] {
+            var generator = SeededGenerator(seed: 5)
+            let quizData = manager.makeQuizData(
+                difficulty: difficulty,
+                range: difficulty.range,
+                questionCount: .twenty,
+                using: &generator
+            )
+            for quiz in quizData {
+                XCTAssertTrue(difficulty.range.bounds.contains(quiz.number), "\(difficulty.rawValue) で範囲外の \(quiz.number)")
+                XCTAssertEqual(quiz.range, difficulty.range)
+            }
+        }
+    }
+
     // MARK: - 出題データ
 
     func testMakeQuizDataReturnsRequestedNumberOfQuestions() {

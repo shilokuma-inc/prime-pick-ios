@@ -69,6 +69,22 @@ final class BestScoreStoreTests: XCTestCase {
         XCTAssertEqual(keys.count, 9)
     }
 
+    /// 出題レンジの選択をなくしても保存キーは変えない。
+    /// 以前のバージョンが保存した自己ベストを、そのまま読み出して更新できる（Discussion #255 Q5: 引き継ぐ）
+    func testReadsBestScoreSavedByPreviousVersion() {
+        userDefaults.set(1_200, forKey: "bestScore.timeAttack_60.Hard")
+        userDefaults.set(800, forKey: "bestScore.timeAttack_15.Easy")
+        userDefaults.set(950, forKey: "bestScore.timeAttack_30.Normal")
+
+        XCTAssertEqual(store.bestScore(gameMode: .timeAttack(.sixtySeconds), difficulty: .hard), 1_200)
+        XCTAssertEqual(store.bestScore(gameMode: .timeAttack(.fifteenSeconds), difficulty: .easy), 800)
+        XCTAssertEqual(store.bestScore(gameMode: .timeAttack(.thirtySeconds), difficulty: .normal), 950)
+
+        XCTAssertFalse(store.record(score: 1_100, gameMode: .timeAttack(.sixtySeconds), difficulty: .hard))
+        XCTAssertTrue(store.record(score: 1_300, gameMode: .timeAttack(.sixtySeconds), difficulty: .hard))
+        XCTAssertEqual(userDefaults.integer(forKey: "bestScore.timeAttack_60.Hard"), 1_300)
+    }
+
     func testPracticeIsNotSaved() {
         XCTAssertFalse(store.record(score: 5_000, gameMode: .practice, difficulty: .easy))
         XCTAssertNil(store.bestScore(gameMode: .practice, difficulty: .easy))
