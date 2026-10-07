@@ -10,7 +10,6 @@ import SwiftUI
 struct QuizButtonView: View {
     var quizData: [QuizEntity]
     let difficulty: Difficulty
-    let range: QuizRange
     /// 現在の問題が表示された時刻。速度ボーナスの計測基準
     let questionStartDate: Date
     /// 解答してから次の問題（またはリザルト）へ進むまでの待ち時間。0 なら即座に進む
@@ -100,8 +99,8 @@ struct QuizButtonView: View {
         )
         analytics.sendAnswer(
             AnswerAnalyticsEvent(
-                difficulty: difficulty,
-                range: range,
+                difficulty: quiz.difficulty,
+                range: quiz.range,
                 questionNumber: quizIndex + 1,
                 isCorrect: record.isAnswerCorrect,
                 elapsedSeconds: elapsedTime
