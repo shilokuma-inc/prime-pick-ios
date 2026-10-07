@@ -102,7 +102,7 @@ final class QuizDataManagerTests: XCTestCase {
             var generator = SeededGenerator(seed: 4)
             let quizData = manager.makeQuizData(
                 difficulty: difficulty,
-                range: difficulty.defaultRange,
+                range: difficulty.range,
                 questionCount: .twenty,
                 using: &generator
             )
@@ -141,7 +141,7 @@ final class QuizDataManagerTests: XCTestCase {
                 for _ in 0..<250 {
                     quizData += manager.makeQuizData(
                         difficulty: difficulty,
-                        range: difficulty.defaultRange,
+                        range: difficulty.range,
                         questionCount: .twenty,
                         using: &generator
                     )

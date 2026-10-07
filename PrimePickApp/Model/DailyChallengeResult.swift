@@ -100,17 +100,15 @@ struct DailyChallengeResult {
 
     /// 「タイムアタックで遊ぶ」で始めるタイムアタックの設定
     ///
-    /// タイトル画面で選んでいる制限時間・レンジ・問題数を引き継ぐ。モードが練習なら 60 秒にする。
+    /// タイトル画面で選んでいる制限時間・問題数を引き継ぐ。モードが練習なら 60 秒にする。
     /// 難易度はデイリーの中心の段階（3 桁）と同じ Normal にする。
     static func timeAttackSetting(
         selectedGameMode: GameMode,
-        selectedRange: QuizRange?,
         selectedQuestionCount: QuizQuestionCount
     ) -> QuizSetting {
         QuizSetting(
             difficulty: .normal,
             gameMode: selectedGameMode.isTimeAttack ? selectedGameMode : .timeAttack(.sixtySeconds),
-            range: selectedRange,
             questionCount: selectedQuestionCount,
             source: .dailyResult
         )

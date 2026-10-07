@@ -5,11 +5,9 @@
 
 import SwiftUI
 
-/// タイトル画面でゲームモード・出題レンジ・問題数を選ぶ UI
+/// タイトル画面でゲームモード・問題数を選ぶ UI。出題範囲は難易度ボタンで決まる
 struct SelectQuizSettingView: View {
     @Binding var gameMode: GameMode
-    /// `nil` は「おまかせ」＝ 難易度ごとの既定レンジ（`Difficulty.defaultRange`）を使う
-    @Binding var selectedRange: QuizRange?
     @Binding var selectedQuestionCount: QuizQuestionCount
 
     var body: some View {
@@ -21,19 +19,6 @@ struct SelectQuizSettingView: View {
                     }
                 }
                 .pickerStyle(.segmented)
-            }
-
-            settingRow(title: "Range") {
-                // 選択肢のラベルが長いため、幅に左右されないメニュー形式にする
-                Picker("Range", selection: $selectedRange) {
-                    Text("Auto").tag(QuizRange?.none)
-
-                    ForEach(QuizRange.allCases) { range in
-                        Text(range.localizedTitle).tag(QuizRange?.some(range))
-                    }
-                }
-                .pickerStyle(.menu)
-                .frame(maxWidth: .infinity, alignment: .leading)
             }
 
             // タイムアタックは時間切れまで出題し続けるため、問題数の選択は意味を持たない
@@ -77,13 +62,11 @@ private extension SelectQuizSettingView {
 
 struct SelectQuizSettingView_Previews: PreviewProvider {
     @State static var gameMode: GameMode = .practice
-    @State static var range: QuizRange?
     @State static var questionCount: QuizQuestionCount = .default
 
     static var previews: some View {
         SelectQuizSettingView(
             gameMode: $gameMode,
-            selectedRange: $range,
             selectedQuestionCount: $questionCount
         )
     }
