@@ -66,7 +66,8 @@ struct MainView: View {
                     difficulty: setting.difficulty,
                     gameMode: setting.gameMode,
                     range: setting.range,
-                    questionCount: setting.questionCount
+                    questionCount: setting.questionCount,
+                    source: setting.source
                 )
             }
             .toolbar {
