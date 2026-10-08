@@ -11,6 +11,8 @@ import SwiftUI
 struct PrimePickApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @AppStorage(AppTheme.userDefaultsKey) private var appTheme = AppTheme.system.rawValue
+    /// タイムアタックの記録の保存先（Discussion #223 Q4）。撮影モードでは端末に書かない
+    private let timeAttackRecordStore = SwiftDataTimeAttackRecordStore.makeDefault(inMemory: ScreenshotDemo.isEnabled)
 
     var body: some Scene {
         WindowGroup {
@@ -26,6 +28,7 @@ struct PrimePickApp: App {
                         )
                     )
                 )
+                .environment(\.timeAttackRecordStore, timeAttackRecordStore)
         }
     }
 }
