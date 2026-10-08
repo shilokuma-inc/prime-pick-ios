@@ -25,33 +25,15 @@ struct MainView: View {
             ZStack {
                 Color.appBackground
                     .ignoresSafeArea()
-                
-                VStack {
-                    dailyChallengeCardLink
 
-                    Spacer()
-                    
-                    Text("Prime Pick")
-                        .gamingText()
-                        .font(.custom("Helvetica Neue", size: 60))
-                        .fontWeight(.bold)
-                    
-                    
-                    Spacer()
+                // 難易度ボタンが 4 つになり、iPhone SE などの背の低い画面ではデイリーのカードから「遊び方」までが収まらない。
+                // 収まらないときだけスクロールさせる（大きい画面の見た目は変えない）
+                ViewThatFits(in: .vertical) {
+                    homeContent
 
-                    SelectQuizSettingView(
-                        gameMode: $gameMode,
-                        selectedQuestionCount: $selectedQuestionCount
-                    )
-
-                    SelectDifficultyButtonView(
-                        gameMode: gameMode,
-                        questionCount: selectedQuestionCount
-                    )
-
-                    howToPlayButton
-                    
-                    Spacer()
+                    ScrollView {
+                        homeContent
+                    }
                 }
             }
             .navigationDestination(for: DailyChallengeRoute.self) { _ in
@@ -107,6 +89,37 @@ private enum MainSheet: Identifiable {
 struct DailyChallengeRoute: Hashable {}
 
 private extension MainView {
+    /// タイトル・設定・難易度ボタン・遊び方のボタン
+    var homeContent: some View {
+        VStack {
+            dailyChallengeCardLink
+
+            Spacer()
+            
+            Text("Prime Pick")
+                .gamingText()
+                .font(.custom("Helvetica Neue", size: 60))
+                .fontWeight(.bold)
+            
+            
+            Spacer()
+
+            SelectQuizSettingView(
+                gameMode: $gameMode,
+                selectedQuestionCount: $selectedQuestionCount
+            )
+
+            SelectDifficultyButtonView(
+                gameMode: gameMode,
+                questionCount: selectedQuestionCount
+            )
+
+            howToPlayButton
+            
+            Spacer()
+        }
+    }
+
     /// 最上段の「今日のチャレンジ」カード
     ///
     /// 撮影モードでは出さない。App Store のスクリーンショット（Issue #201 で決めたホーム画面）の見た目を変えないため。
