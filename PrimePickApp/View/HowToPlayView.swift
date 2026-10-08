@@ -66,7 +66,7 @@ private extension HowToPlayView {
             )
             ruleRow(
                 number: 3,
-                text: "間違えると点が減り（Easy \(missPenalty(.easy)) / Normal \(missPenalty(.normal)) / Hard \(missPenalty(.hard))）、残り時間も \(GameMode.timeAttackMissTimePenaltySeconds) 秒減ります。スコアは 0 点より下にはなりません。"
+                text: "間違えると点が減り（Easy \(missPenalty(.easy)) / Normal \(missPenalty(.normal)) / Hard \(missPenalty(.hard)) / Expert \(missPenalty(.expert))）、残り時間も \(GameMode.timeAttackMissTimePenaltySeconds) 秒減ります。スコアは 0 点より下にはなりません。"
             )
             ruleRow(number: 4, text: "間違えた直後の 0.5 秒はボタンを押せません。")
             ruleRow(number: 5, text: "難易度と制限時間ごとに自己ベストが記録されます。")
@@ -84,6 +84,7 @@ private extension HowToPlayView {
             difficultyRow(difficulty: .easy, description: "1 〜 99 から出題されます。")
             difficultyRow(difficulty: .normal, description: "100 〜 999 から出題されます。")
             difficultyRow(difficulty: .hard, description: "100 〜 999 のうち、2・3・5 の倍数を除いた数から出題されます。")
+            difficultyRow(difficulty: .expert, description: "1000 〜 9999 のうち、2・3・5 の倍数を除いた数から出題されます。")
         }
     }
 
