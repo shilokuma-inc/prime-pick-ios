@@ -15,7 +15,7 @@ struct MainView: View {
     @State private var path = NavigationPath(ScreenshotDemo.initialPath)
     /// 「今日のチャレンジ」カードの内容。表示のたびに記録から読み直す
     @State private var dailyChallengeCard: DailyChallengeCardState?
-    /// How to Play と設定画面が同時に出ないよう、表示中のシートを 1 つの状態で持つ。
+    /// How to Play・記録・設定画面が同時に出ないよう、表示中のシートを 1 つの状態で持つ。
     /// 撮影モードでは最初から遊び方のシートを開いておく
     @State private var presentedSheet: MainSheet? = ScreenshotDemo.scene == .howToPlay ? .howToPlay : nil
     @State private var gameMode: GameMode = .practice
@@ -58,6 +58,8 @@ struct MainView: View {
                 switch sheet {
                 case .howToPlay:
                     HowToPlayView()
+                case .record:
+                    TimeAttackRecordView()
                 case .setting:
                     SettingView()
                 }
@@ -82,6 +84,8 @@ struct MainView: View {
 /// メイン画面から開くシート
 private enum MainSheet: Identifiable {
     case howToPlay
+    /// タイムアタックの記録（Discussion #223 Q4）
+    case record
     case setting
 
     var id: Self { self }
@@ -91,7 +95,7 @@ private enum MainSheet: Identifiable {
 struct DailyChallengeRoute: Hashable {}
 
 private extension MainView {
-    /// タイトル・設定・難易度ボタン・遊び方のボタン
+    /// タイトル・設定・難易度ボタン・遊び方と記録のボタン
     var homeContent: some View {
         VStack {
             dailyChallengeCardLink
@@ -116,7 +120,18 @@ private extension MainView {
                 questionCount: selectedQuestionCount
             )
 
-            howToPlayButton
+            // 縦の余白を増やさないよう、遊び方と記録は横に並べる。横に収まらない（文字が大きい）ときだけ縦に積む
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 12) {
+                    howToPlayButton
+                    recordButton
+                }
+
+                VStack(spacing: 8) {
+                    howToPlayButton
+                    recordButton
+                }
+            }
             
             Spacer()
         }
@@ -168,14 +183,27 @@ private extension MainView {
     }
 
     var howToPlayButton: some View {
-        Button {
+        capsuleButton("How to Play", systemImage: "questionmark.circle") {
             presentedSheet = .howToPlay
-        } label: {
-            Label("How to Play", systemImage: "questionmark.circle")
+        }
+    }
+
+    /// タイムアタックの記録画面を開く（Discussion #223 Q4）
+    var recordButton: some View {
+        capsuleButton("Records", systemImage: "trophy") {
+            presentedSheet = .record
+        }
+    }
+
+    func capsuleButton(_ title: LocalizedStringKey, systemImage: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Label(title, systemImage: systemImage)
                 .font(.system(size: 18, weight: .bold, design: .rounded))
                 .foregroundColor(.primary)
+                .lineLimit(1)
+                .fixedSize()
                 .padding(.vertical, 12)
-                .padding(.horizontal, 24)
+                .padding(.horizontal, 20)
                 .overlay(
                     Capsule()
                         .stroke(Color.primary.opacity(0.4), lineWidth: 2)
