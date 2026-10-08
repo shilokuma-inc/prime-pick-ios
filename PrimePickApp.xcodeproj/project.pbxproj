@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE744B4ABDB7480696292733 /* TimeAttackRecordStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AA8B4BADA04E769398EEC8 /* TimeAttackRecordStoreTests.swift */; };
+		9C55257A8C014A0987320028 /* TimeAttackRecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95712BC2BE074E648A2055B3 /* TimeAttackRecordStore.swift */; };
+		9ED7EC8D96724206984CB86A /* TimeAttackPlayRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271889CEEE8E48438A6CF563 /* TimeAttackPlayRecord.swift */; };
 		05FD77E7B67946DC3D47BA84 /* correct_0.caf in Resources */ = {isa = PBXBuildFile; fileRef = 7CE8537A8423A0BDBFDB5608 /* correct_0.caf */; };
 		0ABA00425788CD356A6D8B87 /* combo_break.caf in Resources */ = {isa = PBXBuildFile; fileRef = A3BCE0229018567C771B0404 /* combo_break.caf */; };
 		4B8DE98570E12C357BF6FFE2 /* AppVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */; };
@@ -127,6 +130,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D1AA8B4BADA04E769398EEC8 /* TimeAttackRecordStoreTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordStoreTests.swift; sourceTree = "<group>"; };
+		95712BC2BE074E648A2055B3 /* TimeAttackRecordStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordStore.swift; sourceTree = "<group>"; };
+		271889CEEE8E48438A6CF563 /* TimeAttackPlayRecord.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackPlayRecord.swift; sourceTree = "<group>"; };
 		050610A18A4CF90F7C5FDF14 /* correct_2.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = correct_2.caf; sourceTree = "<group>"; };
 		7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppVersionTests.swift; sourceTree = "<group>"; };
 		381D93040954B28CB32EDDEC /* DailyChallengeStoreTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeStoreTests.swift; sourceTree = "<group>"; };
@@ -433,6 +439,8 @@
 				ADB7720F52BBF1F60ACB6688 /* DailyChallengeCardState.swift */,
 				4DB3345B71E99C1E6FD54E8F /* AppVersion.swift */,
 				A09E49B4E6A0B372138AAF28 /* DailyChallengeStore.swift */,
+				271889CEEE8E48438A6CF563 /* TimeAttackPlayRecord.swift */,
+				95712BC2BE074E648A2055B3 /* TimeAttackRecordStore.swift */,
 				115EDA1D3D182B12FFA8D68E /* DailyChallengeRecord.swift */,
 				3EC5CD22C7A2079467B43E12 /* GameMode.swift */,
 				8B7E46F5A08BD6E4177E69D5 /* DailyChallengePlayFinisher.swift */,
@@ -464,6 +472,7 @@
 				E81A0EB6633EC75BF89B16BF /* DailyChallengePlayTests.swift */,
 				7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */,
 				381D93040954B28CB32EDDEC /* DailyChallengeStoreTests.swift */,
+				D1AA8B4BADA04E769398EEC8 /* TimeAttackRecordStoreTests.swift */,
 				2AEE8470B88092E2D6CBD065 /* PrivacyPolicyViewTests.swift */,
 				5531D63288F0DA73C439CF78 /* LicenseListTests.swift */,
 				CEEF204663CA496CCC1F87A9 /* AppThemeTests.swift */,
@@ -655,6 +664,8 @@
 				95F85BAA652B07425C1A3294 /* LicenseView.swift in Sources */,
 				B513D613BACFE920CCD79666 /* AppVersion.swift in Sources */,
 				E301EFBC806FAFD6A09E49B4 /* DailyChallengeStore.swift in Sources */,
+				9ED7EC8D96724206984CB86A /* TimeAttackPlayRecord.swift in Sources */,
+				9C55257A8C014A0987320028 /* TimeAttackRecordStore.swift in Sources */,
 				CECA78B77589CE8D115EDA1D /* DailyChallengeRecord.swift in Sources */,
 				4F42C7A42BF76E7700F92FBB /* QuizNumberView.swift in Sources */,
 				4F2239242BFCEEF0004C71A6 /* QuizButtonView.swift in Sources */,
@@ -713,6 +724,7 @@
 				0A6646145696972DE81A0EB6 /* DailyChallengePlayTests.swift in Sources */,
 				4B8DE98570E12C357BF6FFE2 /* AppVersionTests.swift in Sources */,
 				91C49A5C699AE56C381D9304 /* DailyChallengeStoreTests.swift in Sources */,
+				BE744B4ABDB7480696292733 /* TimeAttackRecordStoreTests.swift in Sources */,
 				2FBA23985914BFF764B17FAF /* PrivacyPolicyViewTests.swift in Sources */,
 				8D70626D6AB962C21A1BDCCD /* LicenseListTests.swift in Sources */,
 				6BB2DC3EB9F74B89C787327F /* AppThemeTests.swift in Sources */,
