@@ -28,10 +28,18 @@ struct QuizPlayOutcome: Equatable {
 protocol QuizPlayFinishing {
     /// 1 問解答するごとに呼ばれる。途中経過を残したいプレイ（強制終了に備えるデイリーなど）だけが実装する
     func recordProgress(_ outcome: QuizPlayOutcome)
-    /// 終わりの処理を行い、自己ベストを更新したか（結果画面に NEW RECORD! を出すか）を返す
-    func finish(_ outcome: QuizPlayOutcome) -> Bool
+    /// 終わりの処理を行い、結果画面に出す過去の記録との比べを返す
+    func finish(_ outcome: QuizPlayOutcome) -> QuizPlayFinishResult
     /// 途中でやめたときに呼ばれる。解答済みまでで結果を確定したいプレイ（デイリー）だけが実装する
     func abandon(_ outcome: QuizPlayOutcome)
+}
+
+/// プレイの終わりの処理の結果。結果画面に出す
+struct QuizPlayFinishResult: Equatable {
+    /// 自己ベストを更新したか（NEW RECORD! を出すか）
+    var isNewRecord = false
+    /// 自己ベストとの比べ。比べないプレイ（練習・デイリー）や初回は nil
+    var bestScoreComparison: BestScoreComparison?
 }
 
 extension QuizPlayFinishing {
@@ -50,7 +58,7 @@ struct BestScorePlayFinisher: QuizPlayFinishing {
     /// 記録に残す日時
     var now: () -> Date = Date.init
 
-    func finish(_ outcome: QuizPlayOutcome) -> Bool {
+    func finish(_ outcome: QuizPlayOutcome) -> QuizPlayFinishResult {
         if let recordStore, case .timeAttack(let duration) = outcome.gameMode {
             recordStore.save(TimeAttackPlayRecord(
                 playedAt: now(),
@@ -62,6 +70,7 @@ struct BestScorePlayFinisher: QuizPlayFinishing {
                 maxCombo: outcome.maxCombo
             ))
         }
-        return store.record(score: outcome.score, gameMode: outcome.gameMode, difficulty: outcome.difficulty)
+        let update = store.record(score: outcome.score, gameMode: outcome.gameMode, difficulty: outcome.difficulty)
+        return QuizPlayFinishResult(isNewRecord: update.isNewRecord, bestScoreComparison: update.comparison)
     }
 }

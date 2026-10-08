@@ -1360,6 +1360,54 @@
           }
         }
       }
+    },
+    "Beat your best by %lld points": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beat your best by %lld points"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ベストを %lld 点更新"
+          }
+        }
+      }
+    },
+    "Tied your best": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tied your best"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ベストと同点"
+          }
+        }
+      }
+    },
+    "%lld points short of your best": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld points short of your best"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ベストまであと %lld 点"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
