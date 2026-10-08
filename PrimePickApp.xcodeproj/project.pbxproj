@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B9FFA0B2EBD341E69DC944E8 /* TimeAttackRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DF05A60AEA46A48DCF8694 /* TimeAttackRecordView.swift */; };
 		1E87DB31FDB2400BAA7B3C13 /* TimeAttackRecordSummaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85984AE1AE4FF8A54256E5 /* TimeAttackRecordSummaryTests.swift */; };
 		E766190FE78A4E7D88EB4D65 /* TimeAttackRecordSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BA085677C1455090BBFE06 /* TimeAttackRecordSummary.swift */; };
 		BE744B4ABDB7480696292733 /* TimeAttackRecordStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AA8B4BADA04E769398EEC8 /* TimeAttackRecordStoreTests.swift */; };
@@ -132,6 +133,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01DF05A60AEA46A48DCF8694 /* TimeAttackRecordView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordView.swift; sourceTree = "<group>"; };
 		CE85984AE1AE4FF8A54256E5 /* TimeAttackRecordSummaryTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordSummaryTests.swift; sourceTree = "<group>"; };
 		C7BA085677C1455090BBFE06 /* TimeAttackRecordSummary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordSummary.swift; sourceTree = "<group>"; };
 		D1AA8B4BADA04E769398EEC8 /* TimeAttackRecordStoreTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordStoreTests.swift; sourceTree = "<group>"; };
@@ -280,6 +282,14 @@
 			path = Setting;
 			sourceTree = "<group>";
 		};
+		C944AA5CC93C46BEB581F05A /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				01DF05A60AEA46A48DCF8694 /* TimeAttackRecordView.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
 		32A78F9647F89F0C3FFE7FB7 /* Feedback */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,6 +415,7 @@
 				4FEC65B02C01164800A8B731 /* SelectDifficultyButtonView.swift */,
 				4FEC65B62C01252800A8B731 /* Quiz */,
 				C83942EBDA3E9A54DB4A6D7B /* Setting */,
+				C944AA5CC93C46BEB581F05A /* Record */,
 				A2D21351F7D654F07CF96CC8 /* SelectQuizSettingView.swift */,
 				5E6C543FD57F8474461FBE96 /* DailyChallengeResultView.swift */,
 			);
@@ -665,6 +676,7 @@
 				54D69EBDCDA4A3DBECB1740A /* AppTheme.swift in Sources */,
 				72358C22F4980C53ADB7720F /* DailyChallengeCardState.swift in Sources */,
 				2C47F3AD72D77A1570A4933A /* SettingView.swift in Sources */,
+				B9FFA0B2EBD341E69DC944E8 /* TimeAttackRecordView.swift in Sources */,
 				8AAD08796CAD6F5A61243E89 /* WebView.swift in Sources */,
 				3E601F1C429455E505634061 /* PrivacyPolicyView.swift in Sources */,
 				95F85BAA652B07425C1A3294 /* LicenseView.swift in Sources */,
