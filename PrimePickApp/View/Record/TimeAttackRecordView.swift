@@ -3,11 +3,12 @@
 //  PrimePickApp
 //
 
+import Charts
 import SwiftUI
 
 /// タイムアタックの記録画面（Discussion #223 Q4）
 ///
-/// 制限時間と難易度を切り替えて、その区分の TOP 10 を出す。記録は端末の中だけにある。
+/// 制限時間と難易度を切り替えて、その区分のスコアの推移と TOP 10 を出す。記録は端末の中だけにある。
 /// 履歴を始める前のプレイは TOP 10 に出てこないため、`BestScoreStore` の自己ベストを上部に別に出す。
 struct TimeAttackRecordView: View {
     @Environment(\.dismiss) private var dismiss
@@ -27,6 +28,10 @@ struct TimeAttackRecordView: View {
 
                 Section {
                     bestScoreRow
+                }
+
+                Section("Score Trend") {
+                    trendChart
                 }
 
                 Section("Top \(TimeAttackRecordSummary.topLimit)") {
@@ -90,6 +95,48 @@ struct TimeAttackRecordView: View {
             }
         }
         .font(.headline)
+    }
+
+    /// 直近のスコアを古い順に結んだ折れ線（Discussion #223 Q4）
+    ///
+    /// 横軸はプレイの順番（1 回目・2 回目…）。日時にすると、まとめて遊んだ日と間が空いた日で点の間隔がばらつくため。
+    /// 線にならない 1 件以下のときはグラフを出さず、案内だけにする。
+    @ViewBuilder
+    private var trendChart: some View {
+        if summary.trend.count < 2 {
+            Text("Play this category at least twice to see your score trend.")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity)
+                .multilineTextAlignment(.center)
+                .padding(.vertical, 12)
+        } else {
+            Chart(Array(summary.trend.enumerated()), id: \.offset) { index, record in
+                LineMark(
+                    x: .value("Play", index + 1),
+                    y: .value("Score", record.score)
+                )
+                PointMark(
+                    x: .value("Play", index + 1),
+                    y: .value("Score", record.score)
+                )
+            }
+            .chartXScale(domain: 1...summary.trend.count)
+            .chartXAxis {
+                AxisMarks(values: .automatic(desiredCount: min(summary.trend.count, 5))) { value in
+                    AxisGridLine()
+                    AxisValueLabel {
+                        if let play = value.as(Int.self) {
+                            Text(verbatim: "\(play)")
+                        }
+                    }
+                }
+            }
+            .foregroundStyle(Color.orange)
+            .frame(height: 180)
+            .padding(.vertical, 8)
+            .accessibilityLabel(Text("Score trend of the last \(summary.trend.count) plays"))
+        }
     }
 
     private var emptyRow: some View {
