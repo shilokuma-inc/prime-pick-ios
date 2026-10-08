@@ -178,6 +178,8 @@ extension Difficulty {
             return [Color.purple, Color.blue]
         case .hard:
             return [Color.red, Color.purple]
+        case .expert:
+            return [Color.indigo, Color.black]
         }
     }
 }

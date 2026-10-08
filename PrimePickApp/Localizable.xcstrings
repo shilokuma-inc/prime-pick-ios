@@ -177,6 +177,22 @@
         }
       }
     },
+    "Expert": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expert"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エキスパート"
+          }
+        }
+      }
+    },
     "Hard": {
       "localizations": {
         "en": {
