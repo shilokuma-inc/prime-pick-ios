@@ -105,6 +105,7 @@ struct TimeAttackRecordView: View {
         .padding(.vertical, 12)
     }
 
+    /// 選んでいる区分の記録と自己ベストを読み直す
     private func reload() {
         summary = TimeAttackRecordSummary(records: recordStore.records(gameMode: gameMode, difficulty: difficulty))
         bestScore = bestScoreStore.bestScore(gameMode: gameMode, difficulty: difficulty)
@@ -112,6 +113,8 @@ struct TimeAttackRecordView: View {
 }
 
 /// TOP 10 の 1 行。順位・スコア・日時と、正解数・最大コンボを出す
+///
+/// 横に収まらない（画面が狭い・文字が大きい）ときは、詳細を縦に並べて省略させない。
 private struct TimeAttackRecordRow: View {
     let rank: Int
     let record: TimeAttackPlayRecord
@@ -124,31 +127,57 @@ private struct TimeAttackRecordRow: View {
                 .frame(minWidth: 28)
                 .foregroundStyle(rank == 1 ? Color.orange : Color.primary)
 
-            VStack(alignment: .leading, spacing: 2) {
-                Text("\(record.score) pts")
-                    .font(.headline)
-                    .monospacedDigit()
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 12) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        scoreText
+                        correctText
+                    }
+                    .fixedSize()
 
-                Text("Correct \(record.correctCount) / Answered \(record.answeredCount)")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
+                    Spacer(minLength: 0)
 
-            Spacer()
+                    VStack(alignment: .trailing, spacing: 2) {
+                        playedAtText
+                        maxComboText
+                    }
+                    .fixedSize()
+                }
 
-            VStack(alignment: .trailing, spacing: 2) {
-                Text(record.playedAt, format: .dateTime.year().month().day().hour().minute())
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-
-                Text("Max Combo \(record.maxCombo)")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                VStack(alignment: .leading, spacing: 2) {
+                    scoreText
+                    correctText
+                    maxComboText
+                    playedAtText
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
-        .lineLimit(1)
-        .minimumScaleFactor(0.7)
         .accessibilityElement(children: .combine)
+    }
+
+    private var scoreText: some View {
+        Text("\(record.score) pts")
+            .font(.headline)
+            .monospacedDigit()
+    }
+
+    private var correctText: some View {
+        Text("Correct \(record.correctCount) / Answered \(record.answeredCount)")
+            .font(.caption)
+            .foregroundStyle(.secondary)
+    }
+
+    private var playedAtText: some View {
+        Text(record.playedAt, format: .dateTime.year().month().day().hour().minute())
+            .font(.caption)
+            .foregroundStyle(.secondary)
+    }
+
+    private var maxComboText: some View {
+        Text("Max Combo \(record.maxCombo)")
+            .font(.caption)
+            .foregroundStyle(.secondary)
     }
 }
 
