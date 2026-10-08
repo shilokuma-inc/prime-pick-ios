@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.timeAttackRecordStore) private var timeAttackRecordStore
     @State private var hue: Double = 0
     /// 難易度ボタンで積まれるクイズ画面と、カードから開くデイリーチャレンジ。撮影モードでは最初から出題中・結果の画面を積んでおく
     @State private var path = NavigationPath(ScreenshotDemo.initialPath)
@@ -44,6 +45,7 @@ struct MainView: View {
                     difficulty: setting.difficulty,
                     gameMode: setting.gameMode,
                     questionCount: setting.questionCount,
+                    finisher: BestScorePlayFinisher(recordStore: timeAttackRecordStore),
                     source: setting.source
                 )
             }
