@@ -44,7 +44,7 @@ struct QuizView: View {
     @State private var timePenaltyPopup: ScorePopup?
     /// コンボが切れた回数。変わるたびに画面を短く揺らす
     @State private var comboBreakCount: Int = 0
-    /// 終わりの処理の結果。リザルトで NEW RECORD! と自己ベストとの差を出すために使う
+    /// 終わりの処理の結果。リザルトで NEW RECORD! と自己ベスト・前回との差を出すために使う
     @State private var finishResult = QuizPlayFinishResult()
     /// プレイの終わりの処理を済ませたか。1 プレイで 2 回記録しないために使う
     @State private var hasFinishedPlay = false
@@ -169,6 +169,7 @@ struct QuizView: View {
                         gameMode: gameMode,
                         isNewRecord: finishResult.isNewRecord,
                         bestScoreComparison: finishResult.bestScoreComparison,
+                        previousScoreDifference: finishResult.previousScoreDifference,
                         breakdown: scoreCalculator.breakdown
                     )
                 }

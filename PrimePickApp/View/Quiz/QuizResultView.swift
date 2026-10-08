@@ -24,6 +24,8 @@ struct QuizResultView: View {
     var isNewRecord: Bool = false
     /// 自己ベストとの比べ（タイムアタックのみ。初回は nil）
     var bestScoreComparison: BestScoreComparison?
+    /// 前回のプレイのスコアとの差（タイムアタックのみ。前回の記録が無ければ nil）
+    var previousScoreDifference: Int?
     /// 獲得点・減点の内訳
     var breakdown = ScoreBreakdown()
 
@@ -48,12 +50,8 @@ struct QuizResultView: View {
                         // 数え上げ途中の値ではなく、最終スコアを読み上げる
                         .accessibilityLabel(Text("Your Score is \(score) points!"))
 
-                    if gameMode.isTimeAttack, let bestScoreComparison {
-                        Self.bestScoreComparisonText(bestScoreComparison)
-                            .font(.headline)
-                            .foregroundStyle(.secondary)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.6)
+                    if gameMode.isTimeAttack {
+                        comparisonSection
                     }
 
                     summarySection
@@ -87,6 +85,22 @@ struct QuizResultView: View {
                 displayedScore = Double(score)
             }
         }
+    }
+
+    /// 自己ベスト・前回のプレイとの差。どちらも無ければ何も出さない
+    private var comparisonSection: some View {
+        VStack(spacing: 2) {
+            if let bestScoreComparison {
+                Self.bestScoreComparisonText(bestScoreComparison)
+            }
+            if let previousScoreDifference {
+                Self.previousScoreDifferenceText(previousScoreDifference)
+            }
+        }
+        .font(.headline)
+        .foregroundStyle(.secondary)
+        .lineLimit(1)
+        .minimumScaleFactor(0.6)
     }
 
     /// 合計スコアの内訳。タイムアタックは問題数が固定ではないため解答数も並べる
@@ -172,6 +186,17 @@ struct QuizResultView: View {
         }
     }
 
+    /// 前回のプレイとの差の文言（Discussion #223 Q4）
+    static func previousScoreDifferenceText(_ difference: Int) -> Text {
+        if difference > 0 {
+            return Text("\(difference) points higher than last time")
+        } else if difference < 0 {
+            return Text("\(-difference) points lower than last time")
+        } else {
+            return Text("Same score as last time")
+        }
+    }
+
     /// 正答率（%、四捨五入）。1 問も解答していなければ nil
     static func accuracyPercent(correctCount: Int, answeredCount: Int) -> Int? {
         guard answeredCount > 0 else { return nil }
@@ -207,6 +232,7 @@ struct QuizResultView: View {
         gameMode: .timeAttack(.thirtySeconds),
         isNewRecord: true,
         bestScoreComparison: .updated(by: 320),
+        previousScoreDifference: 540,
         breakdown: ScoreBreakdown(correctPoints: 1_400, comboBonus: 780, speedBonus: 600, penalty: 300)
     )
 }

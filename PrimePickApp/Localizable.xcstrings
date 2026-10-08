@@ -1408,6 +1408,54 @@
           }
         }
       }
+    },
+    "%lld points higher than last time": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld points higher than last time"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "前回より %lld 点アップ"
+          }
+        }
+      }
+    },
+    "%lld points lower than last time": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld points lower than last time"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "前回より %lld 点ダウン"
+          }
+        }
+      }
+    },
+    "Same score as last time": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Same score as last time"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "前回と同点"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
