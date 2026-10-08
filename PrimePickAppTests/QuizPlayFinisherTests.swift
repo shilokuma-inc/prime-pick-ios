@@ -42,6 +42,79 @@ final class QuizPlayFinisherTests: XCTestCase {
         XCTAssertNil(BestScoreStore(userDefaults: userDefaults).bestScore(gameMode: .practice, difficulty: .hard))
     }
 
+    // MARK: - 1 プレイの記録（Discussion #223）
+
+    /// タイムアタックを終えたら 1 プレイの記録を 1 件残す
+    func testTimeAttackSavesPlayRecord() {
+        let recordStore = SwiftDataTimeAttackRecordStore.inMemory()
+        let playedAt = Date(timeIntervalSince1970: 1_790_000_000)
+        let finisher = BestScorePlayFinisher(
+            store: BestScoreStore(userDefaults: userDefaults),
+            recordStore: recordStore,
+            now: { playedAt }
+        )
+        let outcome = QuizPlayOutcome(
+            gameMode: .timeAttack(.thirtySeconds),
+            difficulty: .normal,
+            score: 1_500,
+            correctCount: 2,
+            answerRecords: [answerRecord(id: 0, isCorrect: true), answerRecord(id: 1, isCorrect: false), answerRecord(id: 2, isCorrect: true)],
+            maxCombo: 1
+        )
+
+        XCTAssertTrue(finisher.finish(outcome))
+
+        XCTAssertEqual(recordStore.allRecords(), [
+            TimeAttackPlayRecord(
+                playedAt: playedAt,
+                duration: .thirtySeconds,
+                difficulty: .normal,
+                score: 1_500,
+                correctCount: 2,
+                answeredCount: 3,
+                maxCombo: 1
+            )
+        ])
+        // 自己ベストもこれまでどおり記録する
+        XCTAssertEqual(
+            BestScoreStore(userDefaults: userDefaults).bestScore(gameMode: .timeAttack(.thirtySeconds), difficulty: .normal),
+            1_500
+        )
+    }
+
+    /// 自己ベストを更新しなかったプレイ・0 点のプレイも記録に残す
+    func testTimeAttackSavesEveryPlay() {
+        let recordStore = SwiftDataTimeAttackRecordStore.inMemory()
+        let finisher = BestScorePlayFinisher(store: BestScoreStore(userDefaults: userDefaults), recordStore: recordStore)
+
+        XCTAssertTrue(finisher.finish(outcome(gameMode: .timeAttack(.fifteenSeconds), score: 800)))
+        XCTAssertFalse(finisher.finish(outcome(gameMode: .timeAttack(.fifteenSeconds), score: 500)))
+        XCTAssertFalse(finisher.finish(outcome(gameMode: .timeAttack(.fifteenSeconds), score: 0)))
+
+        XCTAssertEqual(recordStore.allRecords().map(\.score), [800, 500, 0])
+    }
+
+    /// 練習モードは記録を残さない（Discussion #223 Q5）
+    func testPracticeDoesNotSavePlayRecord() {
+        let recordStore = SwiftDataTimeAttackRecordStore.inMemory()
+        let finisher = BestScorePlayFinisher(store: BestScoreStore(userDefaults: userDefaults), recordStore: recordStore)
+
+        _ = finisher.finish(outcome(gameMode: .practice, score: 1_200))
+
+        XCTAssertEqual(recordStore.allRecords(), [])
+    }
+
+    /// 途中でやめたプレイは記録を残さない
+    func testAbandonedTimeAttackDoesNotSavePlayRecord() {
+        let recordStore = SwiftDataTimeAttackRecordStore.inMemory()
+        let finisher = BestScorePlayFinisher(store: BestScoreStore(userDefaults: userDefaults), recordStore: recordStore)
+
+        finisher.abandon(outcome(gameMode: .timeAttack(.sixtySeconds), score: 1_200))
+
+        XCTAssertEqual(recordStore.allRecords(), [])
+        XCTAssertNil(BestScoreStore(userDefaults: userDefaults).bestScore(gameMode: .timeAttack(.sixtySeconds), difficulty: .hard))
+    }
+
     private func outcome(gameMode: GameMode, score: Int) -> QuizPlayOutcome {
         QuizPlayOutcome(
             gameMode: gameMode,
@@ -50,5 +123,9 @@ final class QuizPlayFinisherTests: XCTestCase {
             correctCount: 0,
             answerRecords: []
         )
+    }
+
+    private func answerRecord(id: Int, isCorrect: Bool) -> QuizAnswerRecord {
+        QuizAnswerRecord(id: id, number: 7, isPrime: true, answeredPrime: isCorrect)
     }
 }

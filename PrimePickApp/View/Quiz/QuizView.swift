@@ -343,6 +343,7 @@ private extension QuizView {
             score: scoreCalculator.totalScore,
             correctCount: scoreCalculator.correctCount,
             answerRecords: answerRecords,
+            maxCombo: scoreCalculator.maxCombo,
             shownQuestionNumber: quizNumber + 1
         )
     }
