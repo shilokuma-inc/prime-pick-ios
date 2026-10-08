@@ -113,6 +113,47 @@ final class QuizPlayFinisherTests: XCTestCase {
         XCTAssertEqual(recordStore.allRecords().map(\.score), [800, 500, 0])
     }
 
+    /// 前回（同じ区分で直前に記録したプレイ）とのスコアの差を返す。前回が無ければ nil
+    func testFinishReturnsDifferenceFromPreviousPlay() {
+        let recordStore = SwiftDataTimeAttackRecordStore.inMemory()
+        var time: TimeInterval = 0
+        let finisher = BestScorePlayFinisher(
+            store: BestScoreStore(userDefaults: userDefaults),
+            recordStore: recordStore,
+            now: {
+                time += 1
+                return Date(timeIntervalSince1970: time)
+            }
+        )
+        let mode = GameMode.timeAttack(.thirtySeconds)
+
+        XCTAssertNil(finisher.finish(outcome(gameMode: mode, score: 800)).previousScoreDifference)
+        XCTAssertEqual(finisher.finish(outcome(gameMode: mode, score: 500)).previousScoreDifference, -300)
+        XCTAssertEqual(finisher.finish(outcome(gameMode: mode, score: 500)).previousScoreDifference, 0)
+        XCTAssertEqual(finisher.finish(outcome(gameMode: mode, score: 900)).previousScoreDifference, 400)
+    }
+
+    /// 前回は同じ区分（制限時間 × 難易度）の記録だけから選ぶ
+    func testPreviousPlayIsFromSameCategory() {
+        let recordStore = SwiftDataTimeAttackRecordStore.inMemory()
+        var time: TimeInterval = 0
+        let finisher = BestScorePlayFinisher(
+            store: BestScoreStore(userDefaults: userDefaults),
+            recordStore: recordStore,
+            now: {
+                time += 1
+                return Date(timeIntervalSince1970: time)
+            }
+        )
+
+        _ = finisher.finish(outcome(gameMode: .timeAttack(.thirtySeconds), score: 800))
+        XCTAssertNil(finisher.finish(outcome(gameMode: .timeAttack(.sixtySeconds), score: 500)).previousScoreDifference)
+        XCTAssertEqual(
+            finisher.finish(outcome(gameMode: .timeAttack(.thirtySeconds), score: 1_000)).previousScoreDifference,
+            200
+        )
+    }
+
     /// 練習モードは記録を残さない（Discussion #223 Q5）
     func testPracticeDoesNotSavePlayRecord() {
         let recordStore = SwiftDataTimeAttackRecordStore.inMemory()

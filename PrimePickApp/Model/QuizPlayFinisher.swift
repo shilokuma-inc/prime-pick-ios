@@ -40,6 +40,8 @@ struct QuizPlayFinishResult: Equatable {
     var isNewRecord = false
     /// 自己ベストとの比べ。比べないプレイ（練習・デイリー）や初回は nil
     var bestScoreComparison: BestScoreComparison?
+    /// 前回（同じ区分で直前に記録したプレイ）のスコアとの差（Discussion #223 Q4）。前回の記録が無ければ nil
+    var previousScoreDifference: Int?
 }
 
 extension QuizPlayFinishing {
@@ -59,7 +61,11 @@ struct BestScorePlayFinisher: QuizPlayFinishing {
     var now: () -> Date = Date.init
 
     func finish(_ outcome: QuizPlayOutcome) -> QuizPlayFinishResult {
+        var previousScoreDifference: Int?
         if let recordStore, case .timeAttack(let duration) = outcome.gameMode {
+            // 保存する前に読み、今回のプレイを前回と取り違えないようにする
+            let previous = recordStore.records(gameMode: outcome.gameMode, difficulty: outcome.difficulty).last
+            previousScoreDifference = previous.map { outcome.score - $0.score }
             recordStore.save(TimeAttackPlayRecord(
                 playedAt: now(),
                 duration: duration,
@@ -71,6 +77,10 @@ struct BestScorePlayFinisher: QuizPlayFinishing {
             ))
         }
         let update = store.record(score: outcome.score, gameMode: outcome.gameMode, difficulty: outcome.difficulty)
-        return QuizPlayFinishResult(isNewRecord: update.isNewRecord, bestScoreComparison: update.comparison)
+        return QuizPlayFinishResult(
+            isNewRecord: update.isNewRecord,
+            bestScoreComparison: update.comparison,
+            previousScoreDifference: previousScoreDifference
+        )
     }
 }
