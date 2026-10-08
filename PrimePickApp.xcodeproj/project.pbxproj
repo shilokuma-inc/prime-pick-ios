@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E87DB31FDB2400BAA7B3C13 /* TimeAttackRecordSummaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85984AE1AE4FF8A54256E5 /* TimeAttackRecordSummaryTests.swift */; };
+		E766190FE78A4E7D88EB4D65 /* TimeAttackRecordSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BA085677C1455090BBFE06 /* TimeAttackRecordSummary.swift */; };
 		BE744B4ABDB7480696292733 /* TimeAttackRecordStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AA8B4BADA04E769398EEC8 /* TimeAttackRecordStoreTests.swift */; };
 		9C55257A8C014A0987320028 /* TimeAttackRecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95712BC2BE074E648A2055B3 /* TimeAttackRecordStore.swift */; };
 		9ED7EC8D96724206984CB86A /* TimeAttackPlayRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271889CEEE8E48438A6CF563 /* TimeAttackPlayRecord.swift */; };
@@ -130,6 +132,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE85984AE1AE4FF8A54256E5 /* TimeAttackRecordSummaryTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordSummaryTests.swift; sourceTree = "<group>"; };
+		C7BA085677C1455090BBFE06 /* TimeAttackRecordSummary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordSummary.swift; sourceTree = "<group>"; };
 		D1AA8B4BADA04E769398EEC8 /* TimeAttackRecordStoreTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordStoreTests.swift; sourceTree = "<group>"; };
 		95712BC2BE074E648A2055B3 /* TimeAttackRecordStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordStore.swift; sourceTree = "<group>"; };
 		271889CEEE8E48438A6CF563 /* TimeAttackPlayRecord.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackPlayRecord.swift; sourceTree = "<group>"; };
@@ -441,6 +445,7 @@
 				A09E49B4E6A0B372138AAF28 /* DailyChallengeStore.swift */,
 				271889CEEE8E48438A6CF563 /* TimeAttackPlayRecord.swift */,
 				95712BC2BE074E648A2055B3 /* TimeAttackRecordStore.swift */,
+				C7BA085677C1455090BBFE06 /* TimeAttackRecordSummary.swift */,
 				115EDA1D3D182B12FFA8D68E /* DailyChallengeRecord.swift */,
 				3EC5CD22C7A2079467B43E12 /* GameMode.swift */,
 				8B7E46F5A08BD6E4177E69D5 /* DailyChallengePlayFinisher.swift */,
@@ -473,6 +478,7 @@
 				7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */,
 				381D93040954B28CB32EDDEC /* DailyChallengeStoreTests.swift */,
 				D1AA8B4BADA04E769398EEC8 /* TimeAttackRecordStoreTests.swift */,
+				CE85984AE1AE4FF8A54256E5 /* TimeAttackRecordSummaryTests.swift */,
 				2AEE8470B88092E2D6CBD065 /* PrivacyPolicyViewTests.swift */,
 				5531D63288F0DA73C439CF78 /* LicenseListTests.swift */,
 				CEEF204663CA496CCC1F87A9 /* AppThemeTests.swift */,
@@ -666,6 +672,7 @@
 				E301EFBC806FAFD6A09E49B4 /* DailyChallengeStore.swift in Sources */,
 				9ED7EC8D96724206984CB86A /* TimeAttackPlayRecord.swift in Sources */,
 				9C55257A8C014A0987320028 /* TimeAttackRecordStore.swift in Sources */,
+				E766190FE78A4E7D88EB4D65 /* TimeAttackRecordSummary.swift in Sources */,
 				CECA78B77589CE8D115EDA1D /* DailyChallengeRecord.swift in Sources */,
 				4F42C7A42BF76E7700F92FBB /* QuizNumberView.swift in Sources */,
 				4F2239242BFCEEF0004C71A6 /* QuizButtonView.swift in Sources */,
@@ -725,6 +732,7 @@
 				4B8DE98570E12C357BF6FFE2 /* AppVersionTests.swift in Sources */,
 				91C49A5C699AE56C381D9304 /* DailyChallengeStoreTests.swift in Sources */,
 				BE744B4ABDB7480696292733 /* TimeAttackRecordStoreTests.swift in Sources */,
+				1E87DB31FDB2400BAA7B3C13 /* TimeAttackRecordSummaryTests.swift in Sources */,
 				2FBA23985914BFF764B17FAF /* PrivacyPolicyViewTests.swift in Sources */,
 				8D70626D6AB962C21A1BDCCD /* LicenseListTests.swift in Sources */,
 				6BB2DC3EB9F74B89C787327F /* AppThemeTests.swift in Sources */,
