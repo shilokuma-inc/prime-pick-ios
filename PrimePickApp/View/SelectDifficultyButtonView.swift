@@ -10,12 +10,12 @@ import SwiftUI
 struct SelectDifficultyButtonView: View {
     /// ゲームモード。選択 UI は `SelectQuizSettingView` にまとめている
     var gameMode: GameMode = .practice
-    /// `nil` は「おまかせ」＝ 難易度ごとの既定レンジを使う
-    var selectedRange: QuizRange?
     var questionCount: QuizQuestionCount = .default
 
     var body: some View {
         VStack {
+            selectDifficultyButton(difficulty: .expert)
+
             selectDifficultyButton(difficulty: .hard)
 
             selectDifficultyButton(difficulty: .normal)
@@ -32,7 +32,6 @@ extension SelectDifficultyButtonView {
             value: QuizSetting(
                 difficulty: difficulty,
                 gameMode: gameMode,
-                range: selectedRange,
                 questionCount: questionCount
             )
         ) {

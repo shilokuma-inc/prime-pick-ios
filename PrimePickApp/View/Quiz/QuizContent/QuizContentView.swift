@@ -44,6 +44,10 @@ struct QuizContentView: View {
                 Color.red
                     .opacity(0.5)
                     .edgesIgnoringSafeArea(.all)
+            case .expert:
+                Color.indigo
+                    .opacity(0.5)
+                    .edgesIgnoringSafeArea(.all)
             }
 
             // MAX 段階では背景をゆっくり虹色にし、光の粒を流す

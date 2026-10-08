@@ -83,7 +83,7 @@ struct ScreenshotDemoQuiz {
 
     /// 練習モード（ふつう）の 4 問目。直前の `323 = 17 × 19` のミニ解説と 3 コンボを表示する
     static let practice = ScreenshotDemoQuiz(
-        setting: QuizSetting(difficulty: .normal, gameMode: .practice, range: nil, questionCount: .ten),
+        setting: QuizSetting(difficulty: .normal, gameMode: .practice, questionCount: .ten),
         numbers: practiceNumbers,
         answeredCount: 3,
         missedIndices: [],
@@ -95,7 +95,7 @@ struct ScreenshotDemoQuiz {
     ///
     /// むずかしいは 2・3・5 の倍数を出題しないので、その条件に合う数だけを並べる
     static let timeAttack = ScreenshotDemoQuiz(
-        setting: QuizSetting(difficulty: .hard, gameMode: .timeAttack(.sixtySeconds), range: nil, questionCount: .ten),
+        setting: QuizSetting(difficulty: .hard, gameMode: .timeAttack(.sixtySeconds), questionCount: .ten),
         numbers: [101, 143, 221, 289, 307, 391, 541, 629, 787, 899],
         answeredCount: 6,
         missedIndices: [],
@@ -105,7 +105,7 @@ struct ScreenshotDemoQuiz {
 
     /// 練習モード（ふつう）を解き終えた結果。10 問中 9 問正解で、復習一覧に `561 = 3 × 11 × 17` が 1 件出る
     static let result = ScreenshotDemoQuiz(
-        setting: QuizSetting(difficulty: .normal, gameMode: .practice, range: nil, questionCount: .ten),
+        setting: QuizSetting(difficulty: .normal, gameMode: .practice, questionCount: .ten),
         numbers: practiceNumbers,
         answeredCount: 10,
         missedIndices: [4],
@@ -124,7 +124,7 @@ struct ScreenshotDemoQuiz {
                 number: number,
                 isCorrect: PrimeFactorization.isPrime(number),
                 difficulty: setting.difficulty,
-                range: setting.range ?? setting.difficulty.defaultRange
+                range: setting.difficulty.range
             )
         }
     }

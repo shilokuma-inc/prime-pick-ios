@@ -14,6 +14,7 @@ final class ScoreCalculatorTests: XCTestCase {
         XCTAssertEqual(ScoreCalculator.difficultyFactor(.easy), 1.0, accuracy: 0.0001)
         XCTAssertEqual(ScoreCalculator.difficultyFactor(.normal), 1.5, accuracy: 0.0001)
         XCTAssertEqual(ScoreCalculator.difficultyFactor(.hard), 2.0, accuracy: 0.0001)
+        XCTAssertEqual(ScoreCalculator.difficultyFactor(.expert), 2.5, accuracy: 0.0001)
     }
 
     func testSameConditionScoresHigherOnHarderDifficulty() {
@@ -211,7 +212,8 @@ final class ScoreCalculatorTests: XCTestCase {
         XCTAssertEqual(ScoreCalculator.missPenalty(difficulty: .easy, rule: .timeAttack), 200)
         XCTAssertEqual(ScoreCalculator.missPenalty(difficulty: .normal, rule: .timeAttack), 300)
         XCTAssertEqual(ScoreCalculator.missPenalty(difficulty: .hard, rule: .timeAttack), 400)
-        for difficulty in [Difficulty.easy, .normal, .hard] {
+        XCTAssertEqual(ScoreCalculator.missPenalty(difficulty: .expert, rule: .timeAttack), 500)
+        for difficulty in Difficulty.allCases {
             XCTAssertEqual(ScoreCalculator.missPenalty(difficulty: difficulty, rule: .practice), 0)
         }
     }

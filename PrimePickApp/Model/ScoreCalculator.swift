@@ -123,6 +123,8 @@ struct ScoreCalculator {
             return 1.5
         case .hard:
             return 2.0
+        case .expert:
+            return 2.5
         }
     }
 

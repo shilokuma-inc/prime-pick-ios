@@ -62,11 +62,39 @@ final class BestScoreStoreTests: XCTestCase {
 
         var keys: Set<String> = []
         for duration in TimeAttackDuration.allCases {
-            for difficulty in [Difficulty.easy, .normal, .hard] {
+            for difficulty in Difficulty.allCases {
                 keys.insert(BestScoreStore.key(gameMode: .timeAttack(duration), difficulty: difficulty)!)
             }
         }
-        XCTAssertEqual(keys.count, 9)
+        XCTAssertEqual(keys.count, 12)
+    }
+
+    /// Expert は新しい区分なので、他の難易度の記録があっても 0 から取る
+    func testExpertStartsWithoutBestScore() {
+        let mode = GameMode.timeAttack(.sixtySeconds)
+        store.record(score: 1_500, gameMode: mode, difficulty: .hard)
+
+        XCTAssertEqual(BestScoreStore.key(gameMode: mode, difficulty: .expert), "bestScore.timeAttack_60.Expert")
+        XCTAssertNil(store.bestScore(gameMode: mode, difficulty: .expert))
+        XCTAssertTrue(store.record(score: 300, gameMode: mode, difficulty: .expert))
+        XCTAssertEqual(store.bestScore(gameMode: mode, difficulty: .expert), 300)
+        XCTAssertEqual(store.bestScore(gameMode: mode, difficulty: .hard), 1_500)
+    }
+
+    /// 出題レンジの選択をなくしても保存キーは変えない。
+    /// 以前のバージョンが保存した自己ベストを、そのまま読み出して更新できる（Discussion #255 Q5: 引き継ぐ）
+    func testReadsBestScoreSavedByPreviousVersion() {
+        userDefaults.set(1_200, forKey: "bestScore.timeAttack_60.Hard")
+        userDefaults.set(800, forKey: "bestScore.timeAttack_15.Easy")
+        userDefaults.set(950, forKey: "bestScore.timeAttack_30.Normal")
+
+        XCTAssertEqual(store.bestScore(gameMode: .timeAttack(.sixtySeconds), difficulty: .hard), 1_200)
+        XCTAssertEqual(store.bestScore(gameMode: .timeAttack(.fifteenSeconds), difficulty: .easy), 800)
+        XCTAssertEqual(store.bestScore(gameMode: .timeAttack(.thirtySeconds), difficulty: .normal), 950)
+
+        XCTAssertFalse(store.record(score: 1_100, gameMode: .timeAttack(.sixtySeconds), difficulty: .hard))
+        XCTAssertTrue(store.record(score: 1_300, gameMode: .timeAttack(.sixtySeconds), difficulty: .hard))
+        XCTAssertEqual(userDefaults.integer(forKey: "bestScore.timeAttack_60.Hard"), 1_300)
     }
 
     func testPracticeIsNotSaved() {

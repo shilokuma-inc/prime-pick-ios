@@ -45,7 +45,7 @@ private extension HowToPlayView {
         VStack(alignment: .leading, spacing: 12) {
             sectionTitle("Rules")
 
-            ruleRow(number: 1, text: "出題レンジと問題数を選び、難易度を選ぶとクイズが始まります。")
+            ruleRow(number: 1, text: "ゲームモードと問題数を選び、難易度を選ぶとクイズが始まります。")
             ruleRow(number: 2, text: "表示された数が素数かどうかを答えます。")
             ruleRow(number: 3, text: "素数だと思ったら右の「素数」、素数ではないと思ったら左の「ちがう」を選びます。")
             ruleRow(number: 4, text: "選んだ問題数に答えると、正解数がスコアとして表示されます。")
@@ -66,7 +66,7 @@ private extension HowToPlayView {
             )
             ruleRow(
                 number: 3,
-                text: "間違えると点が減り（Easy \(missPenalty(.easy)) / Normal \(missPenalty(.normal)) / Hard \(missPenalty(.hard))）、残り時間も \(GameMode.timeAttackMissTimePenaltySeconds) 秒減ります。スコアは 0 点より下にはなりません。"
+                text: "間違えると点が減り（Easy \(missPenalty(.easy)) / Normal \(missPenalty(.normal)) / Hard \(missPenalty(.hard)) / Expert \(missPenalty(.expert))）、残り時間も \(GameMode.timeAttackMissTimePenaltySeconds) 秒減ります。スコアは 0 点より下にはなりません。"
             )
             ruleRow(number: 4, text: "間違えた直後の 0.5 秒はボタンを押せません。")
             ruleRow(number: 5, text: "難易度と制限時間ごとに自己ベストが記録されます。")
@@ -84,11 +84,7 @@ private extension HowToPlayView {
             difficultyRow(difficulty: .easy, description: "1 〜 99 から出題されます。")
             difficultyRow(difficulty: .normal, description: "100 〜 999 から出題されます。")
             difficultyRow(difficulty: .hard, description: "100 〜 999 のうち、2・3・5 の倍数を除いた数から出題されます。")
-
-            Text("出題レンジで「おまかせ」以外を選ぶと、上記のレンジを上書きします。")
-                .font(.footnote)
-                .foregroundColor(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
+            difficultyRow(difficulty: .expert, description: "1000 〜 9999 のうち、2・3・5 の倍数を除いた数から出題されます。")
         }
     }
 

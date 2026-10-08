@@ -65,6 +65,22 @@
         }
       }
     },
+    "1000 〜 9999 のうち、2・3・5 の倍数を除いた数から出題されます。": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questions are drawn from 1000 to 9999, excluding multiples of 2, 3 and 5."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1000 〜 9999 のうち、2・3・5 の倍数を除いた数から出題されます。"
+          }
+        }
+      }
+    },
     "100 〜 999 のうち、2・3・5 の倍数を除いた数から出題されます。": {
       "localizations": {
         "en": {
@@ -173,6 +189,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "かんたん"
+          }
+        }
+      }
+    },
+    "Expert": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expert"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エキスパート"
           }
         }
       }
@@ -385,22 +417,6 @@
         }
       }
     },
-    "Auto": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auto"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "おまかせ"
-          }
-        }
-      }
-    },
     "Questions": {
       "localizations": {
         "en": {
@@ -417,50 +433,18 @@
         }
       }
     },
-    "Range": {
+    "ゲームモードと問題数を選び、難易度を選ぶとクイズが始まります。": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Range"
+            "value": "Pick a game mode and the number of questions, then choose a difficulty to start the quiz."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "出題レンジ"
-          }
-        }
-      }
-    },
-    "出題レンジと問題数を選び、難易度を選ぶとクイズが始まります。": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pick a range and the number of questions, then choose a difficulty to start the quiz."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "出題レンジと問題数を選び、難易度を選ぶとクイズが始まります。"
-          }
-        }
-      }
-    },
-    "出題レンジで「おまかせ」以外を選ぶと、上記のレンジを上書きします。": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choosing anything other than Auto for the range overrides the ranges above."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "出題レンジで「おまかせ」以外を選ぶと、上記のレンジを上書きします。"
+            "value": "ゲームモードと問題数を選び、難易度を選ぶとクイズが始まります。"
           }
         }
       }
@@ -477,54 +461,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "選んだ問題数に答えると、正解数がスコアとして表示されます。"
-          }
-        }
-      }
-    },
-    "1-99": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1-99"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1-99"
-          }
-        }
-      }
-    },
-    "100-999": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "100-999"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "100-999"
-          }
-        }
-      }
-    },
-    "1000-9999": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1000-9999"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1000-9999"
           }
         }
       }
@@ -1121,18 +1057,18 @@
         }
       }
     },
-    "間違えると点が減り（Easy %lld / Normal %lld / Hard %lld）、残り時間も %lld 秒減ります。スコアは 0 点より下にはなりません。": {
+    "間違えると点が減り（Easy %lld / Normal %lld / Hard %lld / Expert %lld）、残り時間も %lld 秒減ります。スコアは 0 点より下にはなりません。": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "A wrong answer costs points (Easy %1$lld / Normal %2$lld / Hard %3$lld) and %4$lld seconds of time. Your score never drops below 0."
+            "value": "A wrong answer costs points (Easy %1$lld / Normal %2$lld / Hard %3$lld / Expert %4$lld) and %5$lld seconds of time. Your score never drops below 0."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "間違えると点が減り（Easy %1$lld / Normal %2$lld / Hard %3$lld）、残り時間も %4$lld 秒減ります。スコアは 0 点より下にはなりません。"
+            "value": "間違えると点が減り（Easy %1$lld / Normal %2$lld / Hard %3$lld / Expert %4$lld）、残り時間も %5$lld 秒減ります。スコアは 0 点より下にはなりません。"
           }
         }
       }
