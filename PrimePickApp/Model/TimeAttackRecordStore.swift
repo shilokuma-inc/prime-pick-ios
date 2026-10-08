@@ -37,12 +37,13 @@ struct SwiftDataTimeAttackRecordStore: TimeAttackRecordStore {
 
     /// 端末に保存するコンテナを作る。`inMemory` が true なら端末に書かない（テスト・撮影モード用）
     static func makeContainer(inMemory: Bool = false) throws -> ModelContainer {
+        let schema = Schema([StoredTimeAttackPlay.self])
         let configuration = ModelConfiguration(
             configurationName,
-            schema: Schema([StoredTimeAttackPlay.self]),
+            schema: schema,
             isStoredInMemoryOnly: inMemory
         )
-        return try ModelContainer(for: StoredTimeAttackPlay.self, configurations: configuration)
+        return try ModelContainer(for: schema, configurations: configuration)
     }
 
     /// 端末に書かないストア。テスト・撮影モード・プレビューで使う
