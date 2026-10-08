@@ -14,6 +14,8 @@ struct SelectDifficultyButtonView: View {
 
     var body: some View {
         VStack {
+            selectDifficultyButton(difficulty: .expert)
+
             selectDifficultyButton(difficulty: .hard)
 
             selectDifficultyButton(difficulty: .normal)
