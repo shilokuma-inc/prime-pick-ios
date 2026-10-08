@@ -22,6 +22,8 @@ struct QuizResultView: View {
     var gameMode: GameMode = .practice
     /// 自己ベストを更新したか（タイムアタックのみ）
     var isNewRecord: Bool = false
+    /// 自己ベストとの比べ（タイムアタックのみ。初回は nil）
+    var bestScoreComparison: BestScoreComparison?
     /// 獲得点・減点の内訳
     var breakdown = ScoreBreakdown()
 
@@ -45,6 +47,14 @@ struct QuizResultView: View {
                         .minimumScaleFactor(0.6)
                         // 数え上げ途中の値ではなく、最終スコアを読み上げる
                         .accessibilityLabel(Text("Your Score is \(score) points!"))
+
+                    if gameMode.isTimeAttack, let bestScoreComparison {
+                        Self.bestScoreComparisonText(bestScoreComparison)
+                            .font(.headline)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.6)
+                    }
 
                     summarySection
 
@@ -150,6 +160,18 @@ struct QuizResultView: View {
         }
     }
 
+    /// 自己ベストとの差の文言（Discussion #223 / 本文 A）
+    static func bestScoreComparisonText(_ comparison: BestScoreComparison) -> Text {
+        switch comparison {
+        case .updated(let points):
+            return Text("Beat your best by \(points) points")
+        case .tied:
+            return Text("Tied your best")
+        case .below(let points):
+            return Text("\(points) points short of your best")
+        }
+    }
+
     /// 正答率（%、四捨五入）。1 問も解答していなければ nil
     static func accuracyPercent(correctCount: Int, answeredCount: Int) -> Int? {
         guard answeredCount > 0 else { return nil }
@@ -184,6 +206,7 @@ struct QuizResultView: View {
         answerRecords: [],
         gameMode: .timeAttack(.thirtySeconds),
         isNewRecord: true,
+        bestScoreComparison: .updated(by: 320),
         breakdown: ScoreBreakdown(correctPoints: 1_400, comboBonus: 780, speedBonus: 600, penalty: 300)
     )
 }
