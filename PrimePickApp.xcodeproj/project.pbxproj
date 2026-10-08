@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F97AB4C9F638498CB281059C /* SettingViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059460E5B72E4A7FB3AA621D /* SettingViewTests.swift */; };
 		B9FFA0B2EBD341E69DC944E8 /* TimeAttackRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DF05A60AEA46A48DCF8694 /* TimeAttackRecordView.swift */; };
 		1E87DB31FDB2400BAA7B3C13 /* TimeAttackRecordSummaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85984AE1AE4FF8A54256E5 /* TimeAttackRecordSummaryTests.swift */; };
 		E766190FE78A4E7D88EB4D65 /* TimeAttackRecordSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BA085677C1455090BBFE06 /* TimeAttackRecordSummary.swift */; };
@@ -133,6 +134,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		059460E5B72E4A7FB3AA621D /* SettingViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingViewTests.swift; sourceTree = "<group>"; };
 		01DF05A60AEA46A48DCF8694 /* TimeAttackRecordView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordView.swift; sourceTree = "<group>"; };
 		CE85984AE1AE4FF8A54256E5 /* TimeAttackRecordSummaryTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordSummaryTests.swift; sourceTree = "<group>"; };
 		C7BA085677C1455090BBFE06 /* TimeAttackRecordSummary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordSummary.swift; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 				7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */,
 				381D93040954B28CB32EDDEC /* DailyChallengeStoreTests.swift */,
 				D1AA8B4BADA04E769398EEC8 /* TimeAttackRecordStoreTests.swift */,
+				059460E5B72E4A7FB3AA621D /* SettingViewTests.swift */,
 				CE85984AE1AE4FF8A54256E5 /* TimeAttackRecordSummaryTests.swift */,
 				2AEE8470B88092E2D6CBD065 /* PrivacyPolicyViewTests.swift */,
 				5531D63288F0DA73C439CF78 /* LicenseListTests.swift */,
@@ -744,6 +747,7 @@
 				4B8DE98570E12C357BF6FFE2 /* AppVersionTests.swift in Sources */,
 				91C49A5C699AE56C381D9304 /* DailyChallengeStoreTests.swift in Sources */,
 				BE744B4ABDB7480696292733 /* TimeAttackRecordStoreTests.swift in Sources */,
+				F97AB4C9F638498CB281059C /* SettingViewTests.swift in Sources */,
 				1E87DB31FDB2400BAA7B3C13 /* TimeAttackRecordSummaryTests.swift in Sources */,
 				2FBA23985914BFF764B17FAF /* PrivacyPolicyViewTests.swift in Sources */,
 				8D70626D6AB962C21A1BDCCD /* LicenseListTests.swift in Sources */,

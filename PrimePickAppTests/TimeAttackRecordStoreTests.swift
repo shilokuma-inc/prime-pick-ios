@@ -65,16 +65,16 @@ final class TimeAttackRecordStoreTests: XCTestCase {
 
     // MARK: - 削除
 
-    func testDeleteAllRemovesEveryRecord() {
+    func testDeleteAllRemovesEveryRecord() throws {
         store.save(makeRecord(duration: .fifteenSeconds, playedAt: 100))
         store.save(makeRecord(duration: .sixtySeconds, difficulty: .easy, playedAt: 200))
-        store.deleteAll()
+        try store.deleteAll()
         XCTAssertEqual(store.allRecords(), [])
     }
 
-    func testCanSaveAfterDeleteAll() {
+    func testCanSaveAfterDeleteAll() throws {
         store.save(makeRecord(score: 100, playedAt: 100))
-        store.deleteAll()
+        try store.deleteAll()
         let record = makeRecord(score: 200, playedAt: 200)
         store.save(record)
         XCTAssertEqual(store.allRecords(), [record])

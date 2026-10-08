@@ -12,6 +12,8 @@ struct SettingView: View {
     @AppStorage(AppTheme.userDefaultsKey) private var appTheme = AppTheme.system.rawValue
     /// 記録のリセットの確認を出しているか
     @State private var isResetConfirmationPresented = false
+    /// 記録のリセットに失敗したことを知らせているか
+    @State private var isResetFailureAlertPresented = false
     var bestScoreStore = BestScoreStore()
 
     private let appVersion = AppVersion.current
@@ -75,13 +77,29 @@ private extension SettingView {
             } message: {
                 Text("Your play history and personal bests for every time limit and difficulty will be deleted. This cannot be undone.")
             }
+            .alert("Couldn't reset records", isPresented: $isResetFailureAlertPresented) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text("Nothing was deleted. Please try again.")
+            }
         } header: {
             Text("Records")
         }
     }
 
     func resetRecords() {
-        timeAttackRecordStore.deleteAll()
+        do {
+            try Self.resetRecords(recordStore: timeAttackRecordStore, bestScoreStore: bestScoreStore)
+        } catch {
+            isResetFailureAlertPresented = true
+        }
+    }
+}
+
+extension SettingView {
+    /// 1 プレイの記録を消せたときだけ自己ベストも消す。記録が残ったまま自己ベストだけ消えると、記録画面とリザルトが食い違うため
+    static func resetRecords(recordStore: any TimeAttackRecordStore, bestScoreStore: BestScoreStore) throws {
+        try recordStore.deleteAll()
         bestScoreStore.deleteAll()
     }
 

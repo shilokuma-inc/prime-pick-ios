@@ -17,14 +17,15 @@ protocol TimeAttackRecordStore {
     func allRecords() -> [TimeAttackPlayRecord]
     /// 記録を 1 件足す
     func save(_ record: TimeAttackPlayRecord)
-    /// すべての記録を消す
-    func deleteAll()
+    /// すべての記録を消す。消せなかったときは投げる（設定画面のリセットで、自己ベストだけ消えないようにするため）
+    func deleteAll() throws
 }
 
 /// SwiftData に保存する `TimeAttackRecordStore`
 ///
 /// 操作ごとに `ModelContext` を作って保存まで終える。呼び出し側がスレッドやコンテキストの寿命を気にしなくてよいようにするため。
 /// 保存・読み込みに失敗しても、記録が残らない（空として扱う）だけにして、プレイや画面は止めない。
+/// 削除だけは利用者が選んだ操作なので、失敗を呼び出し側に伝える。
 struct SwiftDataTimeAttackRecordStore: TimeAttackRecordStore {
     /// 保存ファイルの名前
     static let configurationName = "TimeAttackRecords"
@@ -77,10 +78,10 @@ struct SwiftDataTimeAttackRecordStore: TimeAttackRecordStore {
         try? context.save()
     }
 
-    func deleteAll() {
+    func deleteAll() throws {
         let context = ModelContext(modelContainer)
-        try? context.delete(model: StoredTimeAttackPlay.self)
-        try? context.save()
+        try context.delete(model: StoredTimeAttackPlay.self)
+        try context.save()
     }
 
     private func fetch(_ descriptor: FetchDescriptor<StoredTimeAttackPlay>) -> [TimeAttackPlayRecord] {
