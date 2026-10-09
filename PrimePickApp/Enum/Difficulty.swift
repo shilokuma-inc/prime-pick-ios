@@ -9,7 +9,7 @@ import SwiftUI
 
 /// 難易度。出る数（範囲と 2・3・5 の倍数の除外）と見た目・スコア係数を決める
 ///
-/// rawValue は自己ベストの保存キー（`BestScoreStore`）と Analytics の `difficulty` の値を兼ねるので変えない。
+/// rawValue はタイムアタックの記録の保存キー（`TimeAttackRecordStore`）と Analytics の `difficulty` の値を兼ねるので変えない。
 enum Difficulty: String, CaseIterable {
     case easy = "Easy"
     case normal = "Normal"

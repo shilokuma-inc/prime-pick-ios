@@ -6,13 +6,14 @@
 import FirebaseCore
 import UIKit
 
-/// Firebase の初期化を行う AppDelegate。`@UIApplicationDelegateAdaptor` から参照する
+/// 起動時の初期化（Firebase・日付の無い旧形式の自己ベストの削除）を行う AppDelegate。`@UIApplicationDelegateAdaptor` から参照する
 final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
         configureFirebase()
+        TimeAttackRecordStore().removeLegacyBestScores()
         return true
     }
 
