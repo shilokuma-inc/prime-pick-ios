@@ -145,6 +145,40 @@ final class TimeAttackRecordStoreTests: XCTestCase {
         XCTAssertEqual(userDefaults.integer(forKey: "bestScore.timeAttack_30.Easy"), 1_200, "旧キーにはこのストアから触らない")
     }
 
+    // MARK: - 旧形式の削除
+
+    /// 日付の無い旧形式の自己ベストを 12 枠すべて消し、新しい記録とほかのキーは残す（Discussion #270 Q2）
+    func testRemoveLegacyBestScoresRemovesAllTwelveKeys() {
+        let legacyKeys = TimeAttackRecordStore.legacyBestScoreKeys
+        XCTAssertEqual(Set(legacyKeys).count, 12)
+        XCTAssertTrue(legacyKeys.contains("bestScore.timeAttack_15.Easy"))
+        XCTAssertTrue(legacyKeys.contains("bestScore.timeAttack_60.Expert"))
+        for (index, key) in legacyKeys.enumerated() {
+            userDefaults.set(index + 1, forKey: key)
+        }
+        record(300)
+        userDefaults.set("keep", forKey: "dailyChallenge.records.v1")
+
+        store.removeLegacyBestScores()
+
+        for key in legacyKeys {
+            XCTAssertNil(userDefaults.object(forKey: key), key)
+        }
+        XCTAssertEqual(store.bestScore(gameMode: .timeAttack(.thirtySeconds), difficulty: .easy), 300)
+        XCTAssertEqual(userDefaults.string(forKey: "dailyChallenge.records.v1"), "keep")
+    }
+
+    /// 何度呼んでも、旧形式が無くても壊れない
+    func testRemoveLegacyBestScoresIsIdempotent() {
+        userDefaults.set(1_200, forKey: "bestScore.timeAttack_60.Hard")
+
+        store.removeLegacyBestScores()
+        store.removeLegacyBestScores()
+
+        XCTAssertNil(userDefaults.object(forKey: "bestScore.timeAttack_60.Hard"))
+        XCTAssertTrue(store.record(score: 100, gameMode: .timeAttack(.sixtySeconds), difficulty: .hard))
+    }
+
     func testPracticeAndDailyChallengeAreNotSaved() {
         for mode in [GameMode.practice, .dailyChallenge] {
             XCTAssertNil(TimeAttackRecordStore.key(gameMode: mode, difficulty: .easy))

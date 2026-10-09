@@ -37,9 +37,9 @@ extension QuizPlayFinishing {
     func abandon(_ outcome: QuizPlayOutcome) {}
 }
 
-/// 練習・タイムアタックの終わりの処理。タイムアタックの自己ベストを記録する
+/// 練習・タイムアタックの終わりの処理。タイムアタックの記録を残し、自己ベスト（1 位）を更新したかを返す
 struct BestScorePlayFinisher: QuizPlayFinishing {
-    var store = BestScoreStore()
+    var store = TimeAttackRecordStore()
 
     func finish(_ outcome: QuizPlayOutcome) -> Bool {
         store.record(score: outcome.score, gameMode: outcome.gameMode, difficulty: outcome.difficulty)

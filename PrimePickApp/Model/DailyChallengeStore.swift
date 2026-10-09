@@ -19,7 +19,7 @@ protocol DailyChallengeStore {
 
 /// UserDefaults に保存する `DailyChallengeStore`
 ///
-/// 自己ベスト（`BestScoreStore`）と同じく UserDefaults を使い、テストでは使い捨ての領域を注入する。
+/// タイムアタックの記録（`TimeAttackRecordStore`）と同じく UserDefaults を使い、テストでは使い捨ての領域を注入する。
 /// 記録は `dayKey` をキーにした辞書を 1 つの JSON として 1 キーに保存する（1 日 1 件・1 件数百バイトなので、数年分でも小さい）。
 struct UserDefaultsDailyChallengeStore: DailyChallengeStore {
     /// 保存に使うキー。形式を変えるときは別のキーにして、古いキーから移す
