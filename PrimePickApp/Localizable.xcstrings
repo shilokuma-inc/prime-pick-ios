@@ -1408,6 +1408,22 @@
           }
         }
       }
+    },
+    "Time Attack Records": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time Attack Records"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タイムアタックの記録"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

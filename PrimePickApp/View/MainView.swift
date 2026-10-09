@@ -14,7 +14,7 @@ struct MainView: View {
     @State private var path = NavigationPath(ScreenshotDemo.initialPath)
     /// 「今日のチャレンジ」カードの内容。表示のたびに記録から読み直す
     @State private var dailyChallengeCard: DailyChallengeCardState?
-    /// How to Play と設定画面が同時に出ないよう、表示中のシートを 1 つの状態で持つ。
+    /// How to Play・設定・記録の画面が同時に出ないよう、表示中のシートを 1 つの状態で持つ。
     /// 撮影モードでは最初から遊び方のシートを開いておく
     @State private var presentedSheet: MainSheet? = ScreenshotDemo.scene == .howToPlay ? .howToPlay : nil
     @State private var gameMode: GameMode = .practice
@@ -48,7 +48,8 @@ struct MainView: View {
                 )
             }
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    recordsButton
                     settingButton
                 }
             }
@@ -58,6 +59,8 @@ struct MainView: View {
                     HowToPlayView()
                 case .setting:
                     SettingView()
+                case .records:
+                    TimeAttackRecordsView()
                 }
             }
             .sendAnalyticsScreen(.main)
@@ -81,6 +84,8 @@ struct MainView: View {
 private enum MainSheet: Identifiable {
     case howToPlay
     case setting
+    /// タイムアタックの記録（Discussion #270）
+    case records
 
     var id: Self { self }
 }
@@ -153,6 +158,22 @@ private extension MainView {
             records: UserDefaultsDailyChallengeStore().allRecords(),
             today: DailyChallengeDay.today()
         )
+    }
+
+    /// 設定の左に置くタイムアタックの記録の入口
+    ///
+    /// 撮影モードでは出さない。App Store のスクリーンショットの見た目を変えないため（デイリーのカードと同じ扱い）。
+    @ViewBuilder
+    var recordsButton: some View {
+        if !ScreenshotDemo.isEnabled {
+            Button {
+                presentedSheet = .records
+            } label: {
+                Image(systemName: "trophy")
+                    .foregroundColor(.primary)
+            }
+            .accessibilityLabel("Time Attack Records")
+        }
     }
 
     var settingButton: some View {
