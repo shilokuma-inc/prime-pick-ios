@@ -163,7 +163,7 @@ final class DailyChallengePlayTests: XCTestCase {
         XCTAssertEqual(mode.missTimePenaltySeconds, 0)
         // モード選択には出さず、自己ベストも保存しない
         XCTAssertFalse(GameMode.allCases.contains(.dailyChallenge))
-        XCTAssertNil(BestScoreStore.key(gameMode: mode, difficulty: .easy))
+        XCTAssertNil(TimeAttackRecordStore.key(gameMode: mode, difficulty: .easy))
         XCTAssertTrue(GameMode.practice.showsCombo)
     }
 
