@@ -39,6 +39,7 @@
 		59C78DD84ADBF76145796C47 /* DailyChallengeResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45796C471F1DF917DFC6B1F0 /* DailyChallengeResultTests.swift */; };
 		7A1C0E2F4B6D8A9C0E1F2A3B /* QuizViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C0E2F4B6D8A9C0E1F2A3C /* QuizViewTests.swift */; };
 		2CD2336581502C5671DABCA8 /* BestScoreStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAE6BD4FD4850412EAE2C2F /* BestScoreStore.swift */; };
+		9476AC6CD951A0C610B44E8D /* TimeAttackRecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8CA0B16FB2CCFDE804B75F /* TimeAttackRecordStore.swift */; };
 		2AC96767B5F2678C52C4C89C /* DailyChallengeDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C4C89C7BA5971AD860B28F /* DailyChallengeDay.swift */; };
 		7B2D1F304C7E9BAD1F203B4C /* QuizPlayFinisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D1F304C7E9BAD1F203B4D /* QuizPlayFinisher.swift */; };
 		2FE99BB3CC809E27B4B0FCD9 /* GameModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C0E8EC6B6A4C521CD4F234 /* GameModeTests.swift */; };
@@ -73,6 +74,7 @@
 		52ADC9B6E462E7791E44704D /* time_up.caf in Resources */ = {isa = PBXBuildFile; fileRef = E9770179F192CFC3E23473F6 /* time_up.caf */; };
 		5445BD0E65813C76907E63B2 /* stage_good.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9C994C763CA183700CF82598 /* stage_good.caf */; };
 		54860D1962E2ED3BCFAB3ED9 /* BestScoreStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4101677D1E855495ADB1DC31 /* BestScoreStoreTests.swift */; };
+		0E8A040B62DE7086FBD62164 /* TimeAttackRecordStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C9B59A5BCDF3D76AAD9333 /* TimeAttackRecordStoreTests.swift */; };
 		5DCD1C6FE87124B5F6E145F5 /* DailyChallengeDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E145F517236FCAF0FA950A /* DailyChallengeDayTests.swift */; };
 		7B2D1F304C7E9BAD1F203B4E /* QuizPlayFinisherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D1F304C7E9BAD1F203B4F /* QuizPlayFinisherTests.swift */; };
 		54D69EBDCDA4A3DBECB1740A /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36F4F283E4470B1B885ED0 /* AppTheme.swift */; };
@@ -149,11 +151,13 @@
 		87A9BEB9C37A62F499B13B7B /* DailyChallengeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeView.swift; sourceTree = "<group>"; };
 		3BC15F88A46D15524FCE751A /* ScoreCalculatorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScoreCalculatorTests.swift; sourceTree = "<group>"; };
 		3EAE6BD4FD4850412EAE2C2F /* BestScoreStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BestScoreStore.swift; sourceTree = "<group>"; };
+		3B8CA0B16FB2CCFDE804B75F /* TimeAttackRecordStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordStore.swift; sourceTree = "<group>"; };
 		52C4C89C7BA5971AD860B28F /* DailyChallengeDay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeDay.swift; sourceTree = "<group>"; };
 		7B2D1F304C7E9BAD1F203B4D /* QuizPlayFinisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizPlayFinisher.swift; sourceTree = "<group>"; };
 		3EC5CD22C7A2079467B43E12 /* GameMode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
 		8B7E46F5A08BD6E4177E69D5 /* DailyChallengePlayFinisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengePlayFinisher.swift; sourceTree = "<group>"; };
 		4101677D1E855495ADB1DC31 /* BestScoreStoreTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BestScoreStoreTests.swift; sourceTree = "<group>"; };
+		94C9B59A5BCDF3D76AAD9333 /* TimeAttackRecordStoreTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordStoreTests.swift; sourceTree = "<group>"; };
 		F6E145F517236FCAF0FA950A /* DailyChallengeDayTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeDayTests.swift; sourceTree = "<group>"; };
 		7B2D1F304C7E9BAD1F203B4F /* QuizPlayFinisherTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizPlayFinisherTests.swift; sourceTree = "<group>"; };
 		4F02A57C2BF62F61003DF310 /* QuizEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizEntity.swift; sourceTree = "<group>"; };
@@ -439,6 +443,7 @@
 				76D9CBC2B3380EC6F674FC12 /* ScoreCalculator.swift */,
 				A59994082E74A0B472A71FF4 /* DailyChallengeResult.swift */,
 				3EAE6BD4FD4850412EAE2C2F /* BestScoreStore.swift */,
+				3B8CA0B16FB2CCFDE804B75F /* TimeAttackRecordStore.swift */,
 				52C4C89C7BA5971AD860B28F /* DailyChallengeDay.swift */,
 				7B2D1F304C7E9BAD1F203B4D /* QuizPlayFinisher.swift */,
 				E435A5F88707A2F710D3EF4F /* ComboStage.swift */,
@@ -478,6 +483,7 @@
 				94C375B34482201149E95AC2 /* QuizIndexViewTests.swift */,
 				AB1B2CC849127DD0088DB2B6 /* ScorePopupTests.swift */,
 				4101677D1E855495ADB1DC31 /* BestScoreStoreTests.swift */,
+				94C9B59A5BCDF3D76AAD9333 /* TimeAttackRecordStoreTests.swift */,
 				F6E145F517236FCAF0FA950A /* DailyChallengeDayTests.swift */,
 				7B2D1F304C7E9BAD1F203B4F /* QuizPlayFinisherTests.swift */,
 				D2BBB3DD6B0549FE35E2F2B5 /* QuizResultViewTests.swift */,
@@ -694,6 +700,7 @@
 				D8F10E898E4249C723420664 /* AnswerExplanationView.swift in Sources */,
 				2ACEADDA8F8379CDB39B512D /* ScorePopupView.swift in Sources */,
 				2CD2336581502C5671DABCA8 /* BestScoreStore.swift in Sources */,
+				9476AC6CD951A0C610B44E8D /* TimeAttackRecordStore.swift in Sources */,
 				2AC96767B5F2678C52C4C89C /* DailyChallengeDay.swift in Sources */,
 				7B2D1F304C7E9BAD1F203B4C /* QuizPlayFinisher.swift in Sources */,
 				202E72718B46A2F2174250DB /* ComboStage.swift in Sources */,
@@ -727,6 +734,7 @@
 				E903B1EA61B432B0232A68A0 /* QuizIndexViewTests.swift in Sources */,
 				1F194D2C166FDC49EBB254E0 /* ScorePopupTests.swift in Sources */,
 				54860D1962E2ED3BCFAB3ED9 /* BestScoreStoreTests.swift in Sources */,
+				0E8A040B62DE7086FBD62164 /* TimeAttackRecordStoreTests.swift in Sources */,
 				5DCD1C6FE87124B5F6E145F5 /* DailyChallengeDayTests.swift in Sources */,
 				7B2D1F304C7E9BAD1F203B4E /* QuizPlayFinisherTests.swift in Sources */,
 				2AE423022D02ED36E305AE4C /* QuizResultViewTests.swift in Sources */,
