@@ -64,6 +64,24 @@ struct TimeAttackRecordStore {
         return score > previousBest
     }
 
+    /// 日付の無い旧形式の自己ベスト（`bestScore.<GameMode.id>.<Difficulty.rawValue>`）を 12 枠すべて消す（Discussion #270 Q2）
+    ///
+    /// 旧形式は達成日時を持たないため移行せずに捨て、記録は取り直す。起動のたびに呼び、無いキーを消しても何も起きない。
+    func removeLegacyBestScores() {
+        for key in Self.legacyBestScoreKeys {
+            userDefaults.removeObject(forKey: key)
+        }
+    }
+
+    /// 日付の無い旧形式の自己ベストのキー（制限時間 × 難易度の 12 枠）
+    static var legacyBestScoreKeys: [String] {
+        TimeAttackDuration.allCases.flatMap { duration in
+            Difficulty.allCases.map { difficulty in
+                "bestScore.\(GameMode.timeAttack(duration).id).\(difficulty.rawValue)"
+            }
+        }
+    }
+
     /// 保存に使うキー。保存対象外のモードは nil
     ///
     /// 日付の無い旧形式（`bestScore.<GameMode.id>.<Difficulty.rawValue>`）とは別のキーにする。形式を変えるときは版を上げる。
