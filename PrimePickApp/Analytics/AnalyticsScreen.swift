@@ -12,6 +12,7 @@ enum AnalyticsScreen: String {
     case quiz = "Quiz"
     case quizResult = "QuizResult"
     case settings = "Settings"
+    case timeAttackRecords = "TimeAttackRecords"
 }
 
 private struct AnalyticsScreenModifier: ViewModifier {
