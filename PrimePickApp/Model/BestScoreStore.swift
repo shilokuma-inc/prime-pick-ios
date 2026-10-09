@@ -41,6 +41,19 @@ struct BestScoreStore {
         return BestScoreUpdate(score: score, previousBest: previousBest, isNewRecord: true)
     }
 
+    /// すべての区分の自己ベストを消す
+    ///
+    /// 設定画面の「記録をリセット」で、1 プレイの記録と一緒に消す（Discussion #223）。
+    /// 片方だけ残ると、リザルトの「ベストまであと N 点」と記録画面が食い違うため。キーの形式は変えない。
+    func deleteAll() {
+        for duration in TimeAttackDuration.allCases {
+            for difficulty in Difficulty.allCases {
+                guard let key = Self.key(gameMode: .timeAttack(duration), difficulty: difficulty) else { continue }
+                userDefaults.removeObject(forKey: key)
+            }
+        }
+    }
+
     /// 保存に使うキー。保存対象外のモードは nil
     static func key(gameMode: GameMode, difficulty: Difficulty) -> String? {
         guard gameMode.isTimeAttack else { return nil }

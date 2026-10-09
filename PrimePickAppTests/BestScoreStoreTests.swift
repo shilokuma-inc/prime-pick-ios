@@ -140,6 +140,41 @@ final class BestScoreStoreTests: XCTestCase {
         )
     }
 
+    // MARK: - リセット（Discussion #223）
+
+    func testDeleteAllRemovesEveryCategory() {
+        for duration in TimeAttackDuration.allCases {
+            for difficulty in Difficulty.allCases {
+                store.record(score: 100, gameMode: .timeAttack(duration), difficulty: difficulty)
+            }
+        }
+        store.deleteAll()
+        for duration in TimeAttackDuration.allCases {
+            for difficulty in Difficulty.allCases {
+                XCTAssertNil(store.bestScore(gameMode: .timeAttack(duration), difficulty: difficulty))
+            }
+        }
+    }
+
+    /// リセットしても他の設定（テーマなど）は残す
+    func testDeleteAllKeepsOtherKeys() {
+        userDefaults.set("dark", forKey: AppTheme.userDefaultsKey)
+        store.record(score: 100, gameMode: .timeAttack(.thirtySeconds), difficulty: .normal)
+        store.deleteAll()
+        XCTAssertEqual(userDefaults.string(forKey: AppTheme.userDefaultsKey), "dark")
+    }
+
+    /// リセットした後は、初回と同じく 1 点以上で NEW RECORD! になる
+    func testRecordAfterDeleteAllIsFirstRecord() {
+        let mode = GameMode.timeAttack(.sixtySeconds)
+        store.record(score: 1_000, gameMode: mode, difficulty: .hard)
+        store.deleteAll()
+        XCTAssertEqual(
+            store.record(score: 300, gameMode: mode, difficulty: .hard),
+            BestScoreUpdate(score: 300, previousBest: nil, isNewRecord: true)
+        )
+    }
+
     func testPracticeIsNotSaved() {
         XCTAssertFalse(store.record(score: 5_000, gameMode: .practice, difficulty: .easy).isNewRecord)
         XCTAssertNil(store.record(score: 5_000, gameMode: .practice, difficulty: .easy).comparison)
