@@ -2,7 +2,7 @@
 素数クイズアプリ
 
 ## Environment
-- Xcode 26.3
+- Xcode 26.6
 - iOS 17.0+
 
 ## Status
