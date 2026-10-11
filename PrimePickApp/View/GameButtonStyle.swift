@@ -61,11 +61,13 @@ struct GameButtonAppearance {
     ///
     /// 上面はライトで白・ダークで背景より明るい紺、側面はそれより暗い色にする。
     /// 上面に半透明の色を使うと側面が透けるため、不透明な色にしている。
+    /// `side` を渡すと側面だけその色にする（解答ボタンのように、ボタンの色を側面で見せたいとき）。
     static func neutral(
+        side: Color? = nil,
         shape: Shape = .roundedRectangle(cornerRadius: GameButtonAppearance.defaultCornerRadius),
         depth: CGFloat = GameButtonAppearance.defaultDepth
     ) -> GameButtonAppearance {
-        GameButtonAppearance(color: .gameButtonNeutralFace, side: .gameButtonNeutralSide, shape: shape, depth: depth)
+        GameButtonAppearance(color: .gameButtonNeutralFace, side: side ?? .gameButtonNeutralSide, shape: shape, depth: depth)
     }
 
     /// 押されているときに上面を下げる量。沈みきると側面は隠れる
