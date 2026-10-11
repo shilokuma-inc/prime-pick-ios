@@ -12,6 +12,8 @@ import SwiftUI
 struct DailyChallengeCardView: View {
     let state: DailyChallengeCardState
 
+    static let cornerRadius: CGFloat = 16
+
     var body: some View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
@@ -43,15 +45,11 @@ struct DailyChallengeCardView: View {
         .foregroundStyle(Color.primary)
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color.primary.opacity(0.06))
-        )
+        // 面と側面は、カードを包む NavigationLink の GameButtonStyle が描く
         .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(state.isPlayable ? Color.accentColor : Color.primary.opacity(0.2), lineWidth: 2)
+            RoundedRectangle(cornerRadius: Self.cornerRadius, style: .continuous)
+                .strokeBorder(state.isPlayable ? Color.accentColor : Color.primary.opacity(0.2), lineWidth: 2)
         )
-        .contentShape(RoundedRectangle(cornerRadius: 16))
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(.isButton)
     }
@@ -70,10 +68,23 @@ struct DailyChallengeCardView: View {
 }
 
 #Preview {
+    let states = [
+        DailyChallengeCardState(status: .notStarted, dayNumber: 12, streak: 4),
+        DailyChallengeCardState(status: .incomplete(answeredCount: 3, questionCount: 10), dayNumber: 12, streak: 4),
+        DailyChallengeCardState(status: .completed(correctCount: 8, questionCount: 10), dayNumber: 12, streak: 5)
+    ]
     VStack(spacing: 12) {
-        DailyChallengeCardView(state: DailyChallengeCardState(status: .notStarted, dayNumber: 12, streak: 4))
-        DailyChallengeCardView(state: DailyChallengeCardState(status: .incomplete(answeredCount: 3, questionCount: 10), dayNumber: 12, streak: 4))
-        DailyChallengeCardView(state: DailyChallengeCardState(status: .completed(correctCount: 8, questionCount: 10), dayNumber: 12, streak: 5))
+        ForEach(states.indices, id: \.self) { index in
+            Button {} label: {
+                DailyChallengeCardView(state: states[index])
+            }
+            .buttonStyle(
+                GameButtonStyle(
+                    appearance: .neutral(shape: .roundedRectangle(cornerRadius: DailyChallengeCardView.cornerRadius), depth: 4)
+                )
+            )
+        }
     }
     .padding()
+    .background(Color.appBackground)
 }

@@ -134,7 +134,14 @@ private extension MainView {
             NavigationLink(value: DailyChallengeRoute()) {
                 DailyChallengeCardView(state: dailyChallengeCard)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(
+                GameButtonStyle(
+                    appearance: .neutral(
+                        shape: .roundedRectangle(cornerRadius: DailyChallengeCardView.cornerRadius),
+                        depth: Self.homeSecondaryButtonDepth
+                    )
+                )
+            )
             .padding(.horizontal, 24)
             .padding(.top, 8)
         }
@@ -197,10 +204,14 @@ private extension MainView {
                 .padding(.horizontal, 24)
                 .overlay(
                     Capsule()
-                        .stroke(Color.primary.opacity(0.4), lineWidth: 2)
+                        .strokeBorder(Color.primary.opacity(0.4), lineWidth: 2)
                 )
         }
+        .buttonStyle(GameButtonStyle(appearance: .neutral(shape: .capsule, depth: Self.homeSecondaryButtonDepth)))
     }
+
+    /// 遊び方のボタンと今日のチャレンジのカードの厚み。背の低い画面でホームの高さを圧迫しないよう、難易度ボタンより薄くする
+    static let homeSecondaryButtonDepth: CGFloat = 4
 }
 
 extension Difficulty {

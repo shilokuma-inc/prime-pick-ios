@@ -57,6 +57,17 @@ struct GameButtonAppearance {
         self.depth = depth
     }
 
+    /// 色の付いていない控えめなボタン（遊び方・今日のチャレンジなど）
+    ///
+    /// 上面はライトで白・ダークで背景より明るい紺、側面はそれより暗い色にする。
+    /// 上面に半透明の色を使うと側面が透けるため、不透明な色にしている。
+    static func neutral(
+        shape: Shape = .roundedRectangle(cornerRadius: GameButtonAppearance.defaultCornerRadius),
+        depth: CGFloat = GameButtonAppearance.defaultDepth
+    ) -> GameButtonAppearance {
+        GameButtonAppearance(color: .gameButtonNeutralFace, side: .gameButtonNeutralSide, shape: shape, depth: depth)
+    }
+
     /// 押されているときに上面を下げる量。沈みきると側面は隠れる
     func faceOffset(isPressed: Bool) -> CGFloat {
         isPressed ? depth : 0
@@ -75,6 +86,20 @@ struct GameButtonAppearance {
             return AnyShape(Capsule())
         }
     }
+}
+
+private extension Color {
+    static let gameButtonNeutralFace = Color(uiColor: UIColor { traits in
+        traits.userInterfaceStyle == .dark
+            ? UIColor(red: 0.22, green: 0.22, blue: 0.34, alpha: 1)
+            : .white
+    })
+
+    static let gameButtonNeutralSide = Color(uiColor: UIColor { traits in
+        traits.userInterfaceStyle == .dark
+            ? UIColor(red: 0.04, green: 0.04, blue: 0.10, alpha: 1)
+            : UIColor(red: 0.70, green: 0.76, blue: 0.80, alpha: 1)
+    })
 }
 
 /// 立体の見た目だけを付ける。押されているかどうかは呼び出し側が渡す
