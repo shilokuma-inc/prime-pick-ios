@@ -28,6 +28,13 @@ final class GameButtonStyleTests: XCTestCase {
         XCTAssertNotNil(GameButtonAppearance.pressAnimation(reduceMotion: false))
     }
 
+    /// 色の付いていないボタンは側面色を明示する（上面を暗くすると背景と見分けにくいため）。厚みは指定どおり
+    func testNeutralAppearanceHasExplicitSideColor() {
+        let appearance = GameButtonAppearance.neutral(shape: .capsule, depth: 4)
+        XCTAssertNotNil(appearance.side)
+        XCTAssertEqual(appearance.faceOffset(isPressed: true), 4)
+    }
+
     // MARK: - 触覚・効果音
 
     /// 押し始めた瞬間だけ返し、離したときや押し続けている間は返さない
