@@ -56,7 +56,7 @@ final class SoundEffectTests: XCTestCase {
         let bundle = Bundle(for: QuizDataManager.self)
         let effects: [SoundEffect] = [
             .comboStageUp(.good), .comboStageUp(.great), .comboStageUp(.max),
-            .comboBreak, .countdownTick, .timeUp
+            .comboBreak, .countdownTick, .timeUp, .buttonPress
         ]
         for effect in effects {
             guard let name = effect.resourceName else {
@@ -75,6 +75,15 @@ final class SoundEffectTests: XCTestCase {
         XCTAssertNil(SoundEffect.comboStageUp(.normal).resourceName)
         let names = [ComboStage.good, .great, .max].compactMap { SoundEffect.comboStageUp($0).resourceName }
         XCTAssertEqual(Set(names).count, 3)
+    }
+
+    /// 押下音は正解音・誤答音とは別の音源にする
+    func testButtonPressUsesItsOwnSound() {
+        let name = SoundEffect.buttonPress.resourceName
+        XCTAssertEqual(name, "button_press")
+        let answerSounds = (1...20).compactMap { SoundEffect.correct(combo: $0).resourceName }
+            + [SoundEffect.incorrect.resourceName].compactMap { $0 }
+        XCTAssertFalse(answerSounds.contains(name ?? ""))
     }
 
     func testIncorrectUsesSystemSound() {
