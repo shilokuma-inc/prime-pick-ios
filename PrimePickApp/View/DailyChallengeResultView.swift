@@ -96,14 +96,15 @@ struct DailyChallengeResultView: View {
 
     private var buttons: some View {
         VStack(spacing: 12) {
+            // 主ボタンはアクセント色で塗り、副ボタンは色の付いていない neutral にして主従を分ける
             if let onPlayTimeAttack {
                 Button(action: onPlayTimeAttack) {
                     Text("Play Time Attack")
                         .font(.custom("ArialRoundedMTBold", size: 22))
+                        .foregroundStyle(.white)
                         .frame(maxWidth: .infinity, minHeight: 56)
                 }
-                .buttonStyle(.borderedProminent)
-                .clipShape(RoundedRectangle(cornerRadius: 25))
+                .buttonStyle(GameButtonStyle(appearance: GameButtonAppearance(color: .accentColor)))
             }
 
             Button {
@@ -111,10 +112,10 @@ struct DailyChallengeResultView: View {
             } label: {
                 Text("Return to Title")
                     .font(.custom("ArialRoundedMTBold", size: 22))
+                    .foregroundStyle(Color.accentColor)
                     .frame(maxWidth: .infinity, minHeight: 56)
             }
-            .buttonStyle(.bordered)
-            .clipShape(RoundedRectangle(cornerRadius: 25))
+            .buttonStyle(GameButtonStyle(appearance: .neutral()))
         }
     }
 }
