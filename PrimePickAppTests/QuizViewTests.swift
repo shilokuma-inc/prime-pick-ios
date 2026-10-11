@@ -8,6 +8,16 @@ import XCTest
 
 final class QuizViewTests: XCTestCase {
 
+    // MARK: - 解答の受け付け
+
+    /// 指が触れた瞬間に解答しても、リザルト表示後・次の問題を待っている間・誤答後のロック中は受け付けない
+    func testAcceptsAnswerOnlyWhenNotBlocked() {
+        XCTAssertTrue(QuizButtonView.acceptsAnswer(isPresentedResult: false, isWaitingToAdvance: false, isInputLocked: false))
+        XCTAssertFalse(QuizButtonView.acceptsAnswer(isPresentedResult: true, isWaitingToAdvance: false, isInputLocked: false))
+        XCTAssertFalse(QuizButtonView.acceptsAnswer(isPresentedResult: false, isWaitingToAdvance: true, isInputLocked: false))
+        XCTAssertFalse(QuizButtonView.acceptsAnswer(isPresentedResult: false, isWaitingToAdvance: false, isInputLocked: true))
+    }
+
     // MARK: - 最初の出題
 
     /// デイリーチャレンジのように外で作った出題を渡したときは、それをそのまま使い、自前では作らない

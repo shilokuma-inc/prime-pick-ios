@@ -35,6 +35,13 @@ final class GameButtonStyleTests: XCTestCase {
         XCTAssertEqual(appearance.faceOffset(isPressed: true), 4)
     }
 
+    /// 側面色を渡すと、側面だけその色になる（解答ボタン）
+    func testNeutralAppearanceUsesGivenSideColor() {
+        let appearance = GameButtonAppearance.neutral(side: .green)
+        XCTAssertEqual(appearance.side, .green)
+        XCTAssertEqual(appearance.depth, GameButtonAppearance.defaultDepth)
+    }
+
     // MARK: - 触覚・効果音
 
     /// 押し始めた瞬間だけ返し、離したときや押し続けている間は返さない
