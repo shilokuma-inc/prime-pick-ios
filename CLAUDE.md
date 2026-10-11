@@ -9,7 +9,7 @@
 | リポジトリ | `shilokuma-inc/prime-pick-ios` |
 | デフォルトブランチ | `develop` |
 | UI フレームワーク | SwiftUI |
-| Xcode / Deployment Target | Xcode 26.3 / iOS 17.0 |
+| Xcode / Deployment Target | Xcode 26.6 / iOS 17.0 |
 | プロジェクト / スキーム | `PrimePickApp.xcodeproj` / `PrimePickApp` |
 
 ## ビルド・検証
