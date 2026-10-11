@@ -130,24 +130,20 @@ struct QuizResultView: View {
     }
 
     private var returnToTitleButton: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 25)
-                .stroke(Color.primary, lineWidth: 5)
-                .frame(height: 60)
-                .background(
-                    RoundedRectangle(cornerRadius: 25)
-                        .fill(Color.primary.opacity(0.1))
-                )
-                .shadow(radius: 10)
-
+        Button {
+            dismiss()
+        } label: {
             Text("Return to Title")
                 .font(.custom("ArialRoundedMTBold", size: 24))
+                .foregroundStyle(Color.primary)
+                .frame(maxWidth: .infinity)
+                .frame(height: 60)
+                .overlay(
+                    RoundedRectangle(cornerRadius: GameButtonAppearance.defaultCornerRadius, style: .continuous)
+                        .strokeBorder(Color.primary, lineWidth: 3)
+                )
         }
-        .frame(height: 60)
-        .contentShape(Rectangle())
-        .onTapGesture {
-            dismiss()
-        }
+        .buttonStyle(GameButtonStyle(appearance: .neutral()))
     }
 
     /// 正答率（%、四捨五入）。1 問も解答していなければ nil
