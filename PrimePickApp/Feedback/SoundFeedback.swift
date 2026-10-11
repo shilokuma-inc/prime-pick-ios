@@ -24,6 +24,8 @@ enum SoundEffect: Equatable {
     case countdownTick
     /// タイムアップのホイッスル
     case timeUp
+    /// ゲーム内のボタンを押した（短く控えめな音）
+    case buttonPress
 
     /// 正解音の音階の数
     static let correctNoteCount = 8
@@ -64,6 +66,8 @@ enum SoundEffect: Equatable {
             return "countdown_tick"
         case .timeUp:
             return "time_up"
+        case .buttonPress:
+            return "button_press"
         }
     }
 
@@ -72,7 +76,7 @@ enum SoundEffect: Equatable {
         switch self {
         case .incorrect:
             return 1053
-        case .correct, .comboStageUp, .comboBreak, .countdownTick, .timeUp:
+        case .correct, .comboStageUp, .comboBreak, .countdownTick, .timeUp, .buttonPress:
             return nil
         }
     }

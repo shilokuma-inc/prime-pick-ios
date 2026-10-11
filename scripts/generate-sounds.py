@@ -136,6 +136,9 @@ def main():
     # コンボ切れの下降音
     write_caf("combo_break", glide(620.0, 180.0, duration=0.4, decay=0.18), volume=0.55)
 
+    # ボタンを押したときの「ポコッ」という短い音。何度も聞く音なので、短く小さく、正解音より低い音域にする
+    write_caf("button_press", glide(880.0, 440.0, duration=0.07, decay=0.018), volume=0.35)
+
 
 if __name__ == "__main__":
     main()

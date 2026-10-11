@@ -58,30 +58,36 @@ struct QuizButtonView: View {
     }
 
     private func answerButton(_ choice: AnswerChoice, size: CGSize, trigger: AnswerFeedbackTrigger?) -> some View {
-        quizButton(choice: choice, size: size)
-            .grayscale(isInputLocked ? 1 : 0)
-            .opacity(isInputLocked ? 0.4 : 1)
-            .animation(.easeInOut(duration: 0.1), value: isInputLocked)
-            .answerFeedbackEffect(trigger: trigger)
-            .sensoryFeedback(trigger: trigger) { _, trigger in
-                trigger?.sensoryFeedback
-            }
-            .onTapGesture {
-                answer(choice)
-            }
-            .accessibilityElement(children: .ignore)
-            .accessibilityLabel(choice.accessibilityLabel)
-            .accessibilityAddTraits(.isButton)
-            .accessibilityAction {
-                answer(choice)
-            }
+        // 触覚は正誤の触覚（`trigger`）だけを返す。触れた瞬間に解答するため、押した触覚と正誤の触覚は同時になる
+        AnswerTouchArea(isEnabled: !isInputLocked) {
+            answer(choice)
+        } label: { isPressed in
+            quizButton(choice: choice, size: size, isPressed: isPressed)
+        }
+        .grayscale(isInputLocked ? 1 : 0)
+        .opacity(isInputLocked ? 0.4 : 1)
+        .animation(.easeInOut(duration: 0.1), value: isInputLocked)
+        .answerFeedbackEffect(trigger: trigger)
+        .sensoryFeedback(trigger: trigger) { _, trigger in
+            trigger?.sensoryFeedback
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(choice.accessibilityLabel)
+        .accessibilityAddTraits(.isButton)
+        .accessibilityAction {
+            answer(choice)
+        }
     }
 
     /// 解答を記録してスコアに反映し、フィードバックを再生して次の問題へ進める。最後の問題ならリザルトを表示する。
     /// タイムアタックでは `QuizView` が問題を補充するため、通常ここでは終了しない。
     private func answer(_ choice: AnswerChoice) {
         // 時間切れでリザルトを表示したあとは、背後のボタンに触れても解答・遷移させない
-        guard !isPresentedResult, !isWaitingToAdvance, !isInputLocked else { return }
+        guard Self.acceptsAnswer(
+            isPresentedResult: isPresentedResult,
+            isWaitingToAdvance: isWaitingToAdvance,
+            isInputLocked: isInputLocked
+        ) else { return }
 
         let quiz = quizData[quizIndex]
         let elapsedTime = Date().timeIntervalSince(questionStartDate)
@@ -125,6 +131,11 @@ struct QuizButtonView: View {
         }
     }
 
+    /// 解答を受け付けるか。リザルト表示後・次の問題へ進むのを待っている間・誤答後のロック中は受け付けない
+    static func acceptsAnswer(isPresentedResult: Bool, isWaitingToAdvance: Bool, isInputLocked: Bool) -> Bool {
+        !isPresentedResult && !isWaitingToAdvance && !isInputLocked
+    }
+
     /// 誤答後、`incorrectInputLockDuration` の間だけ解答を受け付けない
     private func lockInputIfNeeded() {
         guard incorrectInputLockDuration > 0 else { return }
@@ -163,32 +174,74 @@ struct QuizButtonView: View {
     }
 }
 
-private func quizButton(choice: AnswerChoice, size: CGSize) -> some View {
-    let color = choice.isPrime ? Color.quizCorrectButton : Color.quizIncorrectButton
+/// 指が触れた瞬間に `onTouchDown` を呼ぶ押下領域（Discussion #307 Q4）
+///
+/// `Button` は指を離したときに action を呼ぶため使わず、`DragGesture(minimumDistance: 0)` で触れた瞬間を拾う。
+/// 呼ぶのは 1 回のタッチにつき触れた瞬間の 1 回だけ。指を離すまでの間に次の問題へ進んでも、同じタッチで再び解答しない。
+private struct AnswerTouchArea<Label: View>: View {
+    /// false の間（誤答後のロック中）は沈み込みを見せない。解答を受け付けるかは `onTouchDown` の側で判定する
+    let isEnabled: Bool
+    let onTouchDown: () -> Void
+    @ViewBuilder let label: (_ isPressed: Bool) -> Label
 
-    return ZStack {
-        RoundedRectangle(cornerRadius: 25)
-            .stroke(color, lineWidth: 5)
-            .background(RoundedRectangle(cornerRadius: 25).fill(color.opacity(0.1)))
-            .shadow(radius: 10)
+    /// 指が触れている間は true。タッチが取り消されたとき（着信など）も自動で false に戻る
+    @GestureState private var isTouching = false
+    /// 今のタッチで `onTouchDown` を呼んだか
+    @State private var hasHandledCurrentTouch = false
 
-        // 意味は文言で伝え、絵文字は一目で見分けるための補助として添える
-        VStack(spacing: 8) {
-            Text(choice.symbol)
-                .font(.custom("ArialRoundedMTBold", size: 56))
-                .minimumScaleFactor(0.5)
-
-            Text(choice.title)
-                // ArialRoundedMTBold には日本語の字形が無く細字で描かれるため、日本語も太字になるシステムフォントを使う
-                .font(.system(size: 30, weight: .bold, design: .rounded))
-                .foregroundStyle(Color.primary)
-                .multilineTextAlignment(.center)
-                .lineLimit(2)
-                .minimumScaleFactor(0.5)
-        }
-        .padding(12)
+    var body: some View {
+        label(isEnabled && isTouching)
+            .contentShape(Rectangle())
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .updating($isTouching) { _, state, _ in
+                        state = true
+                    }
+                    .onChanged { _ in
+                        guard !hasHandledCurrentTouch else { return }
+                        hasHandledCurrentTouch = true
+                        onTouchDown()
+                    }
+                    .onEnded { _ in
+                        hasHandledCurrentTouch = false
+                    }
+            )
+            .onChange(of: isTouching) { _, isTouching in
+                // onEnded が呼ばれずにタッチが取り消された場合も、次のタッチを受け付けられるよう戻す
+                if !isTouching {
+                    hasHandledCurrentTouch = false
+                }
+            }
     }
-    .frame(width: size.width, height: size.height)
+}
+
+private func quizButton(choice: AnswerChoice, size: CGSize, isPressed: Bool) -> some View {
+    let color = choice.isPrime ? Color.quizCorrectButton : Color.quizIncorrectButton
+    // 上面は色の付いていない面にし、ボタンの色は枠線と側面で見せる
+    let appearance = GameButtonAppearance.neutral(side: color)
+
+    // 意味は文言で伝え、絵文字は一目で見分けるための補助として添える
+    return VStack(spacing: 8) {
+        Text(choice.symbol)
+            .font(.custom("ArialRoundedMTBold", size: 56))
+            .minimumScaleFactor(0.5)
+
+        Text(choice.title)
+            // ArialRoundedMTBold には日本語の字形が無く細字で描かれるため、日本語も太字になるシステムフォントを使う
+            .font(.system(size: 30, weight: .bold, design: .rounded))
+            .foregroundStyle(Color.primary)
+            .multilineTextAlignment(.center)
+            .lineLimit(2)
+            .minimumScaleFactor(0.5)
+    }
+    .padding(12)
+    // 側面の厚みの分だけ上面を低くし、ボタン全体の高さはこれまでと同じにする
+    .frame(width: size.width, height: max(size.height - appearance.depth, 0))
+    .overlay(
+        RoundedRectangle(cornerRadius: GameButtonAppearance.defaultCornerRadius, style: .continuous)
+            .strokeBorder(color, lineWidth: 5)
+    )
+    .gameButtonSurface(appearance, isPressed: isPressed)
 }
 
 private extension AnswerChoice {
