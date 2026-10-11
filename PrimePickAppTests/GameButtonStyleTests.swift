@@ -42,4 +42,18 @@ final class GameButtonStyleTests: XCTestCase {
     func testPressFeedbackIsSilentInScreenshotDemo() {
         XCTAssertFalse(GameButtonStyle.shouldPlayPressFeedback(wasPressed: false, isPressed: true, isScreenshotDemo: true))
     }
+
+    // MARK: - 難易度ボタンの側面色
+
+    /// ダークモードのエキスパートだけ側面色を明示し、ほかは上面のグラデーションを暗くして使う
+    func testOnlyExpertInDarkModeHasExplicitSideColor() {
+        for difficulty in Difficulty.allCases {
+            XCTAssertNil(difficulty.gameButtonSideColor(for: .light), "\(difficulty)")
+            if difficulty == .expert {
+                XCTAssertNotNil(difficulty.gameButtonSideColor(for: .dark))
+            } else {
+                XCTAssertNil(difficulty.gameButtonSideColor(for: .dark), "\(difficulty)")
+            }
+        }
+    }
 }
