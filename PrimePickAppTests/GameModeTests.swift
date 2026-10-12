@@ -3,6 +3,7 @@
 //  PrimePickAppTests
 //
 
+import SwiftUI
 import XCTest
 @testable import PrimePickApp
 
@@ -109,5 +110,32 @@ final class GameModeTests: XCTestCase {
     func testIdIsUniqueForEveryCase() {
         let ids = GameMode.allCases.map(\.id)
         XCTAssertEqual(Set(ids).count, ids.count)
+    }
+
+    // MARK: - モードの色
+
+    func testPracticeAndTimeAttackHaveDifferentThemeColors() {
+        XCTAssertEqual(GameMode.practice.themeColors, GameMode.practiceThemeColors)
+        XCTAssertNotEqual(GameMode.practiceThemeColors, GameMode.timeAttackThemeColors)
+    }
+
+    /// タイムアタックは制限時間によらず同じ色
+    func testTimeAttackThemeColorsAreSameForEveryDuration() {
+        for duration in TimeAttackDuration.allCases {
+            XCTAssertEqual(GameMode.timeAttack(duration).themeColors, GameMode.timeAttackThemeColors)
+        }
+    }
+
+    /// デイリーはモード選択に並ばないが、時間無制限で練習と同じ進め方なので練習の色
+    func testDailyChallengeUsesPracticeThemeColors() {
+        XCTAssertEqual(GameMode.dailyChallenge.themeColors, GameMode.practiceThemeColors)
+    }
+
+    /// 選択中のカプセルは 2 色のグラデーションで塗る
+    func testThemeColorsAreTwoColorGradient() {
+        for mode in GameMode.allCases + [.dailyChallenge] {
+            XCTAssertEqual(mode.themeColors.count, 2, "\(mode.id)")
+            XCTAssertNotEqual(mode.themeColors.first, mode.themeColors.last, "\(mode.id)")
+        }
     }
 }
