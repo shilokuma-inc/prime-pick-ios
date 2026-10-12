@@ -127,6 +127,26 @@ enum GameMode: Hashable, Identifiable, CaseIterable {
             return duration.seconds
         }
     }
+
+    /// モードの色。タイトル画面のモード・問題数の選択で、選択中のカプセルに塗る 2 色のグラデーション（Discussion #330 Q3）
+    ///
+    /// タイムアタックは制限時間によらず同じ色にする。デイリーはモード選択に並ばないが、
+    /// 時間無制限で練習と同じ進め方なので練習の色を返す。
+    var themeColors: [Color] {
+        isTimeAttack ? Self.timeAttackThemeColors : Self.practiceThemeColors
+    }
+
+    /// 練習の色（緑〜水色）。白い太字を載せるので、ライト・ダークのどちらでも読めるよう明るすぎない色にしている
+    static let practiceThemeColors: [Color] = [
+        Color(red: 0.13, green: 0.70, blue: 0.40),
+        Color(red: 0.04, green: 0.60, blue: 0.85)
+    ]
+
+    /// タイムアタックの色（オレンジ〜赤）
+    static let timeAttackThemeColors: [Color] = [
+        Color(red: 1.00, green: 0.56, blue: 0.00),
+        Color(red: 0.92, green: 0.20, blue: 0.27)
+    ]
 }
 
 /// タイムアタックの制限時間
