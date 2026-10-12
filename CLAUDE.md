@@ -37,7 +37,7 @@ xcodebuild test -project PrimePickApp.xcodeproj -scheme PrimePickApp -destinatio
 - 手元で撮るなら `Tools/capture_screenshots.sh APP_IPHONE_67 [ja,en]`（出力は `build/screenshots/`）。寸法検証（`Tools/verify_screenshots.py`）まで通る。
 - 説明文は App Store Connect の現在値が正。書き換えるときは `mode: export` で取り込んだ JSON を直して PR にし、`dry-run` で差分を確かめてから `upload` する。`python3 Tools/upload_metadata.py --check` で文字数の上限を手元でも確かめられる。
 - App Store Connect に登録している言語は日本語（ja）だけ（2026-10 時点）。アプリ自体は en にも対応しているが、App Store に英語を足すには英語の説明文・キーワードが要る。足すときは `AppStore/metadata/en.json` を用意してから `AppStore/languages.json` に `en`（storeLocale `en-US`）を加え、`Metadata/App Store` を `missing_locales: create` で実行する（言語の追加と説明文の書き込みを同時に行う。先に Screenshots で `create` すると説明文が空の言語ができる）。
-- PR 本文のスクリーンショットは `gh pr create --attach` で添付する（assets ブランチは使わない）。本文は Markdown の表に `![Before](./before.png)` の形で書き、作成後に `<img width="300">` に置き換える（手順は shilokuma-inc/template-app-ios の README の「PR 本文のスクリーンショット」）。
+- PR 本文のスクリーンショットは `gh pr create --attach`（gh v2.99.0 以上）で添付する（assets ブランチは使わない）。本文は Markdown の表に `![Before](./before.png)` の形で書き、作成後に `<img width="300">` に置き換える（手順は shilokuma-inc/template-app-ios の README の「PR 本文のスクリーンショット」）。
 
 ## ブランチ運用・規約
 
