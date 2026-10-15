@@ -139,6 +139,25 @@ final class GameModeTests: XCTestCase {
         }
     }
 
+    /// 練習は緑〜水色、タイムアタックはオレンジ〜赤の系統にする（Discussion #330 Q3）。タイトル画面の背景の光もこの色を使う
+    func testThemeColorsStayInEachModeHueRange() {
+        for color in GameMode.practiceThemeColors {
+            let hue = Self.hueDegrees(of: color)
+            XCTAssertTrue((90...210).contains(hue), "練習の色相 \(hue)")
+        }
+        for color in GameMode.timeAttackThemeColors {
+            let hue = Self.hueDegrees(of: color)
+            XCTAssertTrue(hue >= 330 || hue <= 45, "タイムアタックの色相 \(hue)")
+        }
+    }
+
+    /// 色相（0〜360 度）
+    private static func hueDegrees(of color: Color) -> Double {
+        var hue: CGFloat = 0
+        UIColor(color).getHue(&hue, saturation: nil, brightness: nil, alpha: nil)
+        return Double(hue) * 360
+    }
+
     // MARK: - タイトル画面の背景
 
     /// 背景に重ねるモードの色の光は、文字やボタンの読みやすさを損なわない「若干」の濃さにとどめる（Discussion #330）
