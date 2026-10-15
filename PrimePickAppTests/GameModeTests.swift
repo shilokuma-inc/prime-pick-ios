@@ -3,6 +3,7 @@
 //  PrimePickAppTests
 //
 
+import SwiftUI
 import XCTest
 @testable import PrimePickApp
 
@@ -109,5 +110,70 @@ final class GameModeTests: XCTestCase {
     func testIdIsUniqueForEveryCase() {
         let ids = GameMode.allCases.map(\.id)
         XCTAssertEqual(Set(ids).count, ids.count)
+    }
+
+    // MARK: - モードの色
+
+    func testPracticeAndTimeAttackHaveDifferentThemeColors() {
+        XCTAssertEqual(GameMode.practice.themeColors, GameMode.practiceThemeColors)
+        XCTAssertNotEqual(GameMode.practiceThemeColors, GameMode.timeAttackThemeColors)
+    }
+
+    /// タイムアタックは制限時間によらず同じ色
+    func testTimeAttackThemeColorsAreSameForEveryDuration() {
+        for duration in TimeAttackDuration.allCases {
+            XCTAssertEqual(GameMode.timeAttack(duration).themeColors, GameMode.timeAttackThemeColors)
+        }
+    }
+
+    /// デイリーはモード選択に並ばないが、時間無制限で練習と同じ進め方なので練習の色
+    func testDailyChallengeUsesPracticeThemeColors() {
+        XCTAssertEqual(GameMode.dailyChallenge.themeColors, GameMode.practiceThemeColors)
+    }
+
+    /// 選択中のカプセルは 2 色のグラデーションで塗る
+    func testThemeColorsAreTwoColorGradient() {
+        for mode in GameMode.allCases + [.dailyChallenge] {
+            XCTAssertEqual(mode.themeColors.count, 2, "\(mode.id)")
+            XCTAssertNotEqual(mode.themeColors.first, mode.themeColors.last, "\(mode.id)")
+        }
+    }
+
+    /// 練習は緑〜水色、タイムアタックはオレンジ〜赤の系統にする（Discussion #330 Q3）。タイトル画面の背景の光もこの色を使う
+    func testThemeColorsStayInEachModeHueRange() {
+        for color in GameMode.practiceThemeColors {
+            let hue = Self.hueDegrees(of: color)
+            XCTAssertTrue((90...210).contains(hue), "練習の色相 \(hue)")
+        }
+        for color in GameMode.timeAttackThemeColors {
+            let hue = Self.hueDegrees(of: color)
+            XCTAssertTrue(hue >= 330 || hue <= 45, "タイムアタックの色相 \(hue)")
+        }
+    }
+
+    /// 色相（0〜360 度）
+    private static func hueDegrees(of color: Color) -> Double {
+        var hue: CGFloat = 0
+        UIColor(color).getHue(&hue, saturation: nil, brightness: nil, alpha: nil)
+        return Double(hue) * 360
+    }
+
+    // MARK: - タイトル画面の背景
+
+    /// 背景に重ねるモードの色の光は、文字やボタンの読みやすさを損なわない「若干」の濃さにとどめる（Discussion #330）
+    func testAmbientBackgroundGlowIsSubtle() {
+        for colorScheme in [ColorScheme.light, .dark] {
+            let opacity = ModeAmbientBackground.glowOpacity(for: colorScheme)
+            XCTAssertGreaterThan(opacity, 0, "\(colorScheme)")
+            XCTAssertLessThanOrEqual(opacity, 0.3, "\(colorScheme)")
+        }
+    }
+
+    /// ダークは暗い背景の上で色が浮きやすいので、ライトより薄くする
+    func testAmbientBackgroundGlowIsFainterInDarkMode() {
+        XCTAssertLessThan(
+            ModeAmbientBackground.glowOpacity(for: .dark),
+            ModeAmbientBackground.glowOpacity(for: .light)
+        )
     }
 }
