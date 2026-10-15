@@ -138,4 +138,23 @@ final class GameModeTests: XCTestCase {
             XCTAssertNotEqual(mode.themeColors.first, mode.themeColors.last, "\(mode.id)")
         }
     }
+
+    // MARK: - タイトル画面の背景
+
+    /// 背景に重ねるモードの色の光は、文字やボタンの読みやすさを損なわない「若干」の濃さにとどめる（Discussion #330）
+    func testAmbientBackgroundGlowIsSubtle() {
+        for colorScheme in [ColorScheme.light, .dark] {
+            let opacity = ModeAmbientBackground.glowOpacity(for: colorScheme)
+            XCTAssertGreaterThan(opacity, 0, "\(colorScheme)")
+            XCTAssertLessThanOrEqual(opacity, 0.3, "\(colorScheme)")
+        }
+    }
+
+    /// ダークは暗い背景の上で色が浮きやすいので、ライトより薄くする
+    func testAmbientBackgroundGlowIsFainterInDarkMode() {
+        XCTAssertLessThan(
+            ModeAmbientBackground.glowOpacity(for: .dark),
+            ModeAmbientBackground.glowOpacity(for: .light)
+        )
+    }
 }
