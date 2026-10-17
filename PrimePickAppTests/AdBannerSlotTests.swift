@@ -28,6 +28,25 @@ final class AdBannerSlotTests: XCTestCase {
         XCTAssertEqual(AdBannerSlot.state(canShowBanner: true, isReadyToLoadAds: true, didFailToLoad: true), .hidden)
     }
 
+    /// 一度も表示できていなければ枠を消し、表示できたあとの自動リフレッシュの失敗では残す
+    func testCollapsesOnlyWhenNoAdWasReceived() {
+        XCTAssertTrue(AdBannerSlot.collapsesOnFailure(hasReceivedAd: false))
+        XCTAssertFalse(AdBannerSlot.collapsesOnFailure(hasReceivedAd: true))
+    }
+
+    /// 撮影モードでは結果画面にも枠を出さない（結果画面のスクリーンショットのレイアウトを変えない）
+    func testScreenshotDemoHidesResultBanners() {
+        let eligibility = AdEligibility(isScreenshotDemo: true, isRunningTests: false, hasConfiguration: true)
+        for placement in [AdPlacement.quizResult, .dailyChallengeResult] {
+            let slot = AdBannerSlot.state(
+                canShowBanner: eligibility.canShowBanner(at: placement),
+                isReadyToLoadAds: true,
+                didFailToLoad: false
+            )
+            XCTAssertEqual(slot, .hidden, "\(placement)")
+        }
+    }
+
     /// 撮影モードではホームに枠を出さない（スクリーンショットのレイアウトを変えない）
     func testScreenshotDemoHidesHomeBanner() {
         let eligibility = AdEligibility(isScreenshotDemo: true, isRunningTests: false, hasConfiguration: true)
