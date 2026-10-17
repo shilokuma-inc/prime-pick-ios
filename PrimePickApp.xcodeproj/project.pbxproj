@@ -132,6 +132,8 @@
 		FA2314799896D0D2132AB950 /* correct_2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 050610A18A4CF90F7C5FDF14 /* correct_2.caf */; };
 		F202F119F24738DBFE7870FA /* ScreenshotDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73837A3084D060C084384488 /* ScreenshotDemo.swift */; };
 		5583B593BF9115F14237DDCD /* QuizSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05161A112848F9B0DA232D7 /* QuizSetting.swift */; };
+		BE7CF4CE6BB335D21E2D3995 /* PrivacyOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AF37F050342B205A0C23B2 /* PrivacyOptions.swift */; };
+		BEAE4B2C6F8354B14D40DF84 /* PrivacyOptionsModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE64915B5E4245D0082E82D /* PrivacyOptionsModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -271,6 +273,8 @@
 		716C22B16C5CFF84F365A500 /* DailyChallengeGeneratorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeGeneratorTests.swift; sourceTree = "<group>"; };
 		73837A3084D060C084384488 /* ScreenshotDemo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScreenshotDemo.swift; sourceTree = "<group>"; };
 		E05161A112848F9B0DA232D7 /* QuizSetting.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizSetting.swift; sourceTree = "<group>"; };
+		D8AF37F050342B205A0C23B2 /* PrivacyOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyOptions.swift; sourceTree = "<group>"; };
+		BDE64915B5E4245D0082E82D /* PrivacyOptionsModelTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrivacyOptionsModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -503,6 +507,7 @@
 				A7C0E8EC6B6A4C521CD4F234 /* GameModeTests.swift */,
 				E81A0EB6633EC75BF89B16BF /* DailyChallengePlayTests.swift */,
 				88ACE46B8B4D82A012D16A83 /* AdConfigurationTests.swift */,
+				BDE64915B5E4245D0082E82D /* PrivacyOptionsModelTests.swift */,
 				AF94ABAE0E14F7B9A25ED7E2 /* AdEligibilityTests.swift */,
 				91E2A2B129E839BE4F0D6CA5 /* AdsStartupTests.swift */,
 				F797DA8F6B9FDFC8BA3E13D3 /* AdBannerSlotTests.swift */,
@@ -578,6 +583,7 @@
 				04EA2FB5919585B7A52E15D8 /* AdEligibility.swift */,
 				BF9F09FAF2351DE83D3F84E7 /* AdPlacement.swift */,
 				CF49FAB8E5E96DB773B2692A /* AdConfiguration.swift */,
+				D8AF37F050342B205A0C23B2 /* PrivacyOptions.swift */,
 			);
 			path = Ads;
 			sourceTree = "<group>";
@@ -768,6 +774,7 @@
 				84289A09DDB3FCB0A729A1FD /* ComboEffects.swift in Sources */,
 				F202F119F24738DBFE7870FA /* ScreenshotDemo.swift in Sources */,
 				E804BB764B9C9B3FAF3518B7 /* AdConfiguration.swift in Sources */,
+				BE7CF4CE6BB335D21E2D3995 /* PrivacyOptions.swift in Sources */,
 				B77751BC030B40278B53F6EA /* GoogleMobileAdsServices.swift in Sources */,
 				86B39999780BF1B66E498F90 /* AdsStartup.swift in Sources */,
 				55EE766C6DC6C1665ACC5E2F /* AdBannerView.swift in Sources */,
@@ -790,6 +797,7 @@
 				B7528572BEDF03439A16F358 /* AdBannerSlotTests.swift in Sources */,
 				1EE442F667A0D11F10A4802B /* AdEligibilityTests.swift in Sources */,
 				4CC67540E21C0C9835FEB49A /* AdConfigurationTests.swift in Sources */,
+				BEAE4B2C6F8354B14D40DF84 /* PrivacyOptionsModelTests.swift in Sources */,
 				91C49A5C699AE56C381D9304 /* DailyChallengeStoreTests.swift in Sources */,
 				2FBA23985914BFF764B17FAF /* PrivacyPolicyViewTests.swift in Sources */,
 				8D70626D6AB962C21A1BDCCD /* LicenseListTests.swift in Sources */,
