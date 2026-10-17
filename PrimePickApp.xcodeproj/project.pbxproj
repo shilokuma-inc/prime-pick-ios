@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E804BB764B9C9B3FAF3518B7 /* AdConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF49FAB8E5E96DB773B2692A /* AdConfiguration.swift */; };
+		4CC67540E21C0C9835FEB49A /* AdConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88ACE46B8B4D82A012D16A83 /* AdConfigurationTests.swift */; };
+		990565BDA5A61E48BCB9E7E6 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 3F32C332EEE42B0581D9CD99 /* GoogleMobileAds */; };
 		05FD77E7B67946DC3D47BA84 /* correct_0.caf in Resources */ = {isa = PBXBuildFile; fileRef = 7CE8537A8423A0BDBFDB5608 /* correct_0.caf */; };
 		0ABA00425788CD356A6D8B87 /* combo_break.caf in Resources */ = {isa = PBXBuildFile; fileRef = A3BCE0229018567C771B0404 /* combo_break.caf */; };
 		4B8DE98570E12C357BF6FFE2 /* AppVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */; };
@@ -132,6 +135,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CF49FAB8E5E96DB773B2692A /* AdConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdConfiguration.swift; sourceTree = "<group>"; };
+		88ACE46B8B4D82A012D16A83 /* AdConfigurationTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AdConfigurationTests.swift; sourceTree = "<group>"; };
 		050610A18A4CF90F7C5FDF14 /* correct_2.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = correct_2.caf; sourceTree = "<group>"; };
 		7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppVersionTests.swift; sourceTree = "<group>"; };
 		381D93040954B28CB32EDDEC /* DailyChallengeStoreTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeStoreTests.swift; sourceTree = "<group>"; };
@@ -263,6 +268,7 @@
 			files = (
 				193A97532DEDA1148EE0A2C9 /* FirebaseAnalytics in Frameworks */,
 				02FF4F352DD9D0D2B2CD889C /* LicenseList in Frameworks */,
+				990565BDA5A61E48BCB9E7E6 /* GoogleMobileAds in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +344,7 @@
 				32A78F9647F89F0C3FFE7FB7 /* Feedback */,
 				DFDBF1227819553DB250E9C5 /* Sounds */,
 				9A175A01D1D1EF520C5D6E51 /* Screenshot */,
+				D6494AE618487EBB82AA09CD /* Ads */,
 			);
 			path = PrimePickApp;
 			sourceTree = "<group>";
@@ -474,6 +481,7 @@
 				3BC15F88A46D15524FCE751A /* ScoreCalculatorTests.swift */,
 				A7C0E8EC6B6A4C521CD4F234 /* GameModeTests.swift */,
 				E81A0EB6633EC75BF89B16BF /* DailyChallengePlayTests.swift */,
+				88ACE46B8B4D82A012D16A83 /* AdConfigurationTests.swift */,
 				7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */,
 				381D93040954B28CB32EDDEC /* DailyChallengeStoreTests.swift */,
 				2AEE8470B88092E2D6CBD065 /* PrivacyPolicyViewTests.swift */,
@@ -536,6 +544,14 @@
 			path = Screenshot;
 			sourceTree = "<group>";
 		};
+		D6494AE618487EBB82AA09CD /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				CF49FAB8E5E96DB773B2692A /* AdConfiguration.swift */,
+			);
+			path = Ads;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -555,6 +571,7 @@
 			packageProductDependencies = (
 				2E8881254652FCE64BDC5E49 /* FirebaseAnalytics */,
 				32790AB93D445A009671FE20 /* LicenseList */,
+				3F32C332EEE42B0581D9CD99 /* GoogleMobileAds */,
 			);
 			productName = PrimePickApp;
 			productReference = 4F0C827E2BC8247500E1480E /* PrimePickApp.app */;
@@ -606,6 +623,7 @@
 			packageReferences = (
 				7BA07D0A663503931EA1B7A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				A46CBE12B5749BF9BA814536 /* XCRemoteSwiftPackageReference "LicenseList" */,
+				D6FAEDB532A7EAA3CE407A49 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = 4F0C827F2BC8247500E1480E /* Products */;
 			projectDirPath = "";
@@ -718,6 +736,7 @@
 				27D59164A893C7179B0C928E /* DailyChallengeStreak.swift in Sources */,
 				84289A09DDB3FCB0A729A1FD /* ComboEffects.swift in Sources */,
 				F202F119F24738DBFE7870FA /* ScreenshotDemo.swift in Sources */,
+				E804BB764B9C9B3FAF3518B7 /* AdConfiguration.swift in Sources */,
 				5583B593BF9115F14237DDCD /* QuizSetting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -730,6 +749,7 @@
 				2FE99BB3CC809E27B4B0FCD9 /* GameModeTests.swift in Sources */,
 				0A6646145696972DE81A0EB6 /* DailyChallengePlayTests.swift in Sources */,
 				4B8DE98570E12C357BF6FFE2 /* AppVersionTests.swift in Sources */,
+				4CC67540E21C0C9835FEB49A /* AdConfigurationTests.swift in Sources */,
 				91C49A5C699AE56C381D9304 /* DailyChallengeStoreTests.swift in Sources */,
 				2FBA23985914BFF764B17FAF /* PrivacyPolicyViewTests.swift in Sources */,
 				8D70626D6AB962C21A1BDCCD /* LicenseListTests.swift in Sources */,
@@ -1042,6 +1062,14 @@
 				minimumVersion = 2.2.0;
 			};
 		};
+		D6FAEDB532A7EAA3CE407A49 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.11.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1054,6 +1082,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A46CBE12B5749BF9BA814536 /* XCRemoteSwiftPackageReference "LicenseList" */;
 			productName = LicenseList;
+		};
+		3F32C332EEE42B0581D9CD99 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6FAEDB532A7EAA3CE407A49 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
