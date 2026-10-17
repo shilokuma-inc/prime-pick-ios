@@ -21,6 +21,12 @@ enum AdBannerSlot: Equatable {
         // 読み込めなかったら枠ごと消す
         canShowBanner && isReadyToLoadAds && !didFailToLoad ? .loading : .hidden
     }
+
+    /// 読み込みに失敗したときに枠を消すか。一度表示できたあとの失敗（自動リフレッシュの失敗）では、
+    /// SDK が前の広告を出したままにするので枠を残す
+    static func collapsesOnFailure(hasReceivedAd: Bool) -> Bool {
+        !hasReceivedAd
+    }
 }
 
 private struct AdsReadyToLoadKey: EnvironmentKey {

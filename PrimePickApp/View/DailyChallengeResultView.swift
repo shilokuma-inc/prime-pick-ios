@@ -49,6 +49,10 @@ struct DailyChallengeResultView: View {
                 .frame(maxWidth: .infinity)
             }
         }
+        // バナーの分だけ下を空け、ボタンに重ねない（結果はスクロールで読める）
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            AdBannerView(placement: .dailyChallengeResult)
+        }
         .sendAnalyticsScreen(.quizResult)
     }
 

@@ -17,6 +17,7 @@ struct AdBannerView: View {
     @Environment(\.isAdsReadyToLoad) private var isReadyToLoadAds
     @State private var width: CGFloat = 0
     @State private var didFailToLoad = false
+    @State private var hasReceivedAd = false
 
     var body: some View {
         let slot = AdBannerSlot.state(
@@ -42,7 +43,12 @@ struct AdBannerView: View {
                         BannerAdRepresentable(
                             adUnitID: configuration.bannerAdUnitID,
                             adSize: Self.adSize(width: width),
-                            onFailure: { didFailToLoad = true }
+                            onReceive: { hasReceivedAd = true },
+                            onFailure: {
+                                if AdBannerSlot.collapsesOnFailure(hasReceivedAd: hasReceivedAd) {
+                                    didFailToLoad = true
+                                }
+                            }
                         )
                     }
                 }
@@ -58,10 +64,11 @@ struct AdBannerView: View {
 private struct BannerAdRepresentable: UIViewRepresentable {
     let adUnitID: String
     let adSize: AdSize
+    let onReceive: () -> Void
     let onFailure: () -> Void
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(onFailure: onFailure)
+        Coordinator(onReceive: onReceive, onFailure: onFailure)
     }
 
     func makeUIView(context: Context) -> BannerView {
@@ -73,6 +80,7 @@ private struct BannerAdRepresentable: UIViewRepresentable {
     }
 
     func updateUIView(_ banner: BannerView, context: Context) {
+        context.coordinator.onReceive = onReceive
         context.coordinator.onFailure = onFailure
         if !isAdSizeEqualToSize(size1: banner.adSize, size2: adSize) {
             banner.adSize = adSize
@@ -80,10 +88,16 @@ private struct BannerAdRepresentable: UIViewRepresentable {
     }
 
     final class Coordinator: NSObject, BannerViewDelegate {
+        var onReceive: () -> Void
         var onFailure: () -> Void
 
-        init(onFailure: @escaping () -> Void) {
+        init(onReceive: @escaping () -> Void, onFailure: @escaping () -> Void) {
+            self.onReceive = onReceive
             self.onFailure = onFailure
+        }
+
+        func bannerViewDidReceiveAd(_ bannerView: BannerView) {
+            onReceive()
         }
 
         func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
