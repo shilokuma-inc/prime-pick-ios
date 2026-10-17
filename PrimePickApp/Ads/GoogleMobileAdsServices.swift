@@ -20,6 +20,17 @@ final class UserMessagingPlatformConsent: AdConsentGathering {
     }
 }
 
+/// 設定画面から出す、UMP のプライバシー オプション（同意のやり直し）のフォーム
+final class UserMessagingPlatformPrivacyOptions: PrivacyOptionsPresenting {
+    var isPrivacyOptionsRequired: Bool {
+        ConsentInformation.shared.privacyOptionsRequirementStatus == .required
+    }
+
+    func presentPrivacyOptions() async throws {
+        try await ConsentForm.presentPrivacyOptionsForm(from: UIApplication.shared.topViewController)
+    }
+}
+
 /// ATT のダイアログ。許可した人にだけパーソナライズ広告が出る（許可しない人には SDK が非パーソナライズ広告を出す）
 final class AppTrackingAuthorization: TrackingAuthorizationRequesting {
     func requestAuthorizationIfNeeded() async {
@@ -44,6 +55,13 @@ extension AdsStartup {
             tracking: AppTrackingAuthorization(),
             mobileAds: GoogleMobileAdsStarter()
         )
+    }
+}
+
+extension PrivacyOptionsModel {
+    /// アプリで使う、実際の UMP につないだもの
+    static func live() -> PrivacyOptionsModel {
+        PrivacyOptionsModel(eligibility: .current, presenter: UserMessagingPlatformPrivacyOptions())
     }
 }
 
