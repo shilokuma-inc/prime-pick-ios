@@ -9,6 +9,9 @@
 	<string>ca-app-pub-3940256099942544~1458002511</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<!-- ATT のダイアログの文言。ja / en は InfoPlist.xcstrings に入れる -->
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Allowing tracking lets us show ads that match your interests. If you don't allow it, you'll still see ads, but they won't be personalized.</string>
 	<!-- Google の公式ドキュメント（Mobile Ads SDK の Quick start）にある一覧 -->
 	<key>SKAdNetworkItems</key>
 	<array>

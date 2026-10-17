@@ -1,0 +1,24 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "NSUserTrackingUsageDescription" : {
+      "comment" : "ATT（App Tracking Transparency）のダイアログの説明文",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allowing tracking lets us show ads that match your interests. If you don't allow it, you'll still see ads, but they won't be personalized."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "許可すると、興味に合った広告が表示されます。許可しなくても広告は表示されますが、あなたに合わせたものにはなりません。"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
