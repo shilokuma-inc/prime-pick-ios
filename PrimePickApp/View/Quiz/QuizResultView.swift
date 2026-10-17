@@ -26,6 +26,26 @@ struct QuizResultView: View {
     var breakdown = ScoreBreakdown()
 
     var body: some View {
+        // バナーはカードの下に並べ、カードに重ねない。撮影モードなどでバナーが無いときは今までと同じ全画面のレイアウトになる
+        VStack(spacing: 0) {
+            resultCard
+
+            AdBannerView(placement: .quizResult)
+                .background {
+                    Color.black.opacity(0.4)
+                        .ignoresSafeArea(edges: .bottom)
+                }
+        }
+        .sendAnalyticsScreen(.quizResult)
+        .onAppear {
+            startColorAnimation()
+            withAnimation(.easeOut(duration: Self.scoreCountUpDuration)) {
+                displayedScore = Double(score)
+            }
+        }
+    }
+
+    private var resultCard: some View {
         GeometryReader { geometry in
             ZStack {
                 Color.black.opacity(0.4)
@@ -70,13 +90,6 @@ struct QuizResultView: View {
             .frame(width: geometry.size.width, height: geometry.size.height)
         }
         .edgesIgnoringSafeArea(.all)
-        .sendAnalyticsScreen(.quizResult)
-        .onAppear {
-            startColorAnimation()
-            withAnimation(.easeOut(duration: Self.scoreCountUpDuration)) {
-                displayedScore = Double(score)
-            }
-        }
     }
 
     /// 合計スコアの内訳。タイムアタックは問題数が固定ではないため解答数も並べる
