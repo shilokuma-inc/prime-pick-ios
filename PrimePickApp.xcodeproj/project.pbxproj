@@ -134,6 +134,8 @@
 		5583B593BF9115F14237DDCD /* QuizSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05161A112848F9B0DA232D7 /* QuizSetting.swift */; };
 		BE7CF4CE6BB335D21E2D3995 /* PrivacyOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AF37F050342B205A0C23B2 /* PrivacyOptions.swift */; };
 		BEAE4B2C6F8354B14D40DF84 /* PrivacyOptionsModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE64915B5E4245D0082E82D /* PrivacyOptionsModelTests.swift */; };
+		62212B55EF183216151C1C8B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 1AA0B9944ECF0D060E528106 /* PrivacyInfo.xcprivacy */; };
+		1AC1BB646ED2BA2E8DC40DFC /* PrivacyManifestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61BC1372AE1CDE17FEC3FCC /* PrivacyManifestTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -275,6 +277,8 @@
 		E05161A112848F9B0DA232D7 /* QuizSetting.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizSetting.swift; sourceTree = "<group>"; };
 		D8AF37F050342B205A0C23B2 /* PrivacyOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyOptions.swift; sourceTree = "<group>"; };
 		BDE64915B5E4245D0082E82D /* PrivacyOptionsModelTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrivacyOptionsModelTests.swift; sourceTree = "<group>"; };
+		1AA0B9944ECF0D060E528106 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		A61BC1372AE1CDE17FEC3FCC /* PrivacyManifestTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrivacyManifestTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -364,6 +368,7 @@
 				4F0C82852BC8247600E1480E /* Assets.xcassets */,
 				4F42C7A52BF7756200F92FBB /* ColorAssets.xcassets */,
 				4FC177B82BEEAB2C00447A06 /* Info.plist */,
+				1AA0B9944ECF0D060E528106 /* PrivacyInfo.xcprivacy */,
 				4F0C82872BC8247600E1480E /* PrimePickApp.entitlements */,
 				4F0C82882BC8247600E1480E /* Preview Content */,
 				32A78F9647F89F0C3FFE7FB7 /* Feedback */,
@@ -514,6 +519,7 @@
 				7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */,
 				381D93040954B28CB32EDDEC /* DailyChallengeStoreTests.swift */,
 				2AEE8470B88092E2D6CBD065 /* PrivacyPolicyViewTests.swift */,
+				A61BC1372AE1CDE17FEC3FCC /* PrivacyManifestTests.swift */,
 				5531D63288F0DA73C439CF78 /* LicenseListTests.swift */,
 				CEEF204663CA496CCC1F87A9 /* AppThemeTests.swift */,
 				0C447EC9C4CB6543299E3517 /* DailyChallengeCardStateTests.swift */,
@@ -683,6 +689,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62212B55EF183216151C1C8B /* PrivacyInfo.xcprivacy in Resources */,
 				86F1EE92CEDD8FEA6AF42A7F /* Localizable.xcstrings in Resources */,
 				98E5E61483607A87D5F2A8F8 /* InfoPlist.xcstrings in Resources */,
 				4F0C828A2BC8247600E1480E /* Preview Assets.xcassets in Resources */,
@@ -800,6 +807,7 @@
 				BEAE4B2C6F8354B14D40DF84 /* PrivacyOptionsModelTests.swift in Sources */,
 				91C49A5C699AE56C381D9304 /* DailyChallengeStoreTests.swift in Sources */,
 				2FBA23985914BFF764B17FAF /* PrivacyPolicyViewTests.swift in Sources */,
+				1AC1BB646ED2BA2E8DC40DFC /* PrivacyManifestTests.swift in Sources */,
 				8D70626D6AB962C21A1BDCCD /* LicenseListTests.swift in Sources */,
 				6BB2DC3EB9F74B89C787327F /* AppThemeTests.swift in Sources */,
 				D6E2DF42853C366D0C447EC9 /* DailyChallengeCardStateTests.swift in Sources */,
