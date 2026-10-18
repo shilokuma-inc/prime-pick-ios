@@ -34,6 +34,11 @@ final class AdBannerSlotTests: XCTestCase {
         XCTAssertFalse(AdBannerSlot.collapsesOnFailure(hasReceivedAd: true))
     }
 
+    /// 在庫切れのときに短い間隔でリクエストを繰り返さない
+    func testRetryDelayIsNotTooShort() {
+        XCTAssertGreaterThanOrEqual(AdBannerSlot.retryDelay, .seconds(30))
+    }
+
     /// 撮影モードでは結果画面にも枠を出さない（結果画面のスクリーンショットのレイアウトを変えない）
     func testScreenshotDemoHidesResultBanners() {
         let eligibility = AdEligibility(isScreenshotDemo: true, isRunningTests: false, hasConfiguration: true)
