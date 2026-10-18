@@ -12,22 +12,28 @@ import Foundation
 struct AdConfiguration: Equatable {
     static let applicationIDKey = "GADApplicationIdentifier"
     static let bannerAdUnitIDKey = "AdMobBannerAdUnitID"
+    static let nativeAdUnitIDKey = "AdMobNativeAdUnitID"
 
     /// AdMob の App ID（`ca-app-pub-…~…`）
     let applicationID: String
     /// 結果画面のバナーの広告ユニット ID（`ca-app-pub-…/…`）
     let bannerAdUnitID: String
+    /// ネイティブ広告の広告ユニット ID（`ca-app-pub-…/…`）
+    let nativeAdUnitID: String
 
     /// ID が欠けている・空のときは nil。広告を出さない判断に使う
     init?(infoDictionary: [String: Any]?) {
         guard let applicationID = infoDictionary?[Self.applicationIDKey] as? String,
               let bannerAdUnitID = infoDictionary?[Self.bannerAdUnitIDKey] as? String,
+              let nativeAdUnitID = infoDictionary?[Self.nativeAdUnitIDKey] as? String,
               !applicationID.isEmpty,
-              !bannerAdUnitID.isEmpty else {
+              !bannerAdUnitID.isEmpty,
+              !nativeAdUnitID.isEmpty else {
             return nil
         }
         self.applicationID = applicationID
         self.bannerAdUnitID = bannerAdUnitID
+        self.nativeAdUnitID = nativeAdUnitID
     }
 
     static let current = AdConfiguration(infoDictionary: Bundle.main.infoDictionary)
