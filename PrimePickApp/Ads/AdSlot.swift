@@ -1,25 +1,25 @@
 //
-//  AdBannerSlot.swift
+//  AdSlot.swift
 //  PrimePickApp
 //
 
 import SwiftUI
 
-/// バナーの枠を出すか。SDK に依存しない判定だけを持ち、単体テストする
-enum AdBannerSlot: Equatable {
+/// 広告の枠を出すか。バナーとネイティブ広告で同じ判定を使い、SDK に依存しない部分だけを持って単体テストする
+enum AdSlot: Equatable {
     /// 枠を出さない（レイアウトも変えない）
     case hidden
     /// 枠を確保して広告を読み込む
     case loading
 
     /// - Parameters:
-    ///   - canShowBanner: 撮影モード・テスト実行中でなく、その置き場所に出してよい（`AdEligibility.canShowBanner(at:)`）
+    ///   - canShowAds: 撮影モード・テスト実行中でなく、その置き場所に出してよい（`AdEligibility.canShowAds(at:)`）
     ///   - isReadyToLoadAds: 起動時の同意フローと SDK の初期化が済んだ（`AdsStartup.isReadyToLoadAds`）
     ///   - didFailToLoad: 広告を読み込めなかった（在庫切れ・通信エラー）
-    static func state(canShowBanner: Bool, isReadyToLoadAds: Bool, didFailToLoad: Bool) -> AdBannerSlot {
-        // 枠は読み込みを始める時点で確保し、読み込めたあとにボタンの位置がずれないようにする（誤タップを避ける）。
+    static func state(canShowAds: Bool, isReadyToLoadAds: Bool, didFailToLoad: Bool) -> AdSlot {
+        // 枠は読み込みを始める時点で確保し、読み込めたあとに置いた画面がずれないようにする（一覧では行が増え、結果画面ではボタンが動く）。
         // 読み込めなかったら枠ごと消す
-        canShowBanner && isReadyToLoadAds && !didFailToLoad ? .loading : .hidden
+        canShowAds && isReadyToLoadAds && !didFailToLoad ? .loading : .hidden
     }
 
     /// 一度も表示できずに枠を閉じたあと、読み込み直すまでの間隔。在庫切れのときに短い間隔でリクエストを繰り返さない
@@ -29,6 +29,19 @@ enum AdBannerSlot: Equatable {
     /// SDK が前の広告を出したままにするので枠を残す
     static func collapsesOnFailure(hasReceivedAd: Bool) -> Bool {
         !hasReceivedAd
+    }
+}
+
+extension View {
+    /// 広告を読み込めずに枠を閉じたとき、`AdSlot.retryDelay` のあとに読み込み直す。
+    /// 失敗のフラグを戻すと SDK のビューが作り直され、新しいリクエストを送る
+    func adRetriesOnFailure(_ didFailToLoad: Binding<Bool>) -> some View {
+        task(id: didFailToLoad.wrappedValue) {
+            guard didFailToLoad.wrappedValue else { return }
+            try? await Task.sleep(for: AdSlot.retryDelay)
+            guard !Task.isCancelled else { return }
+            didFailToLoad.wrappedValue = false
+        }
     }
 }
 

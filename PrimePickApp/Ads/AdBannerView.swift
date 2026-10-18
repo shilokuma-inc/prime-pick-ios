@@ -9,7 +9,7 @@ import SwiftUI
 /// 画面の下部に置くアンカー型アダプティブバナー。幅は置いた場所いっぱい、高さは SDK が幅から決める
 ///
 /// 撮影モード・テスト実行中・同意フローが済む前は何も出さない（枠も確保しない）。
-/// 一度も表示できずに読み込みに失敗したら枠を閉じ、`AdBannerSlot.retryDelay` のあとに読み込み直す
+/// 一度も表示できずに読み込みに失敗したら枠を閉じ、`AdSlot.retryDelay` のあとに読み込み直す
 struct AdBannerView: View {
     let placement: AdPlacement
     var eligibility: AdEligibility = .current
@@ -21,8 +21,8 @@ struct AdBannerView: View {
     @State private var hasReceivedAd = false
 
     var body: some View {
-        let slot = AdBannerSlot.state(
-            canShowBanner: eligibility.canShowBanner(at: placement),
+        let slot = AdSlot.state(
+            canShowAds: eligibility.canShowAds(at: placement),
             isReadyToLoadAds: isReadyToLoadAds,
             didFailToLoad: didFailToLoad
         )
@@ -32,13 +32,7 @@ struct AdBannerView: View {
                 banner(configuration: configuration)
             }
         }
-        .task(id: didFailToLoad) {
-            guard didFailToLoad else { return }
-            try? await Task.sleep(for: AdBannerSlot.retryDelay)
-            guard !Task.isCancelled else { return }
-            // 枠を出し直すと BannerAdRepresentable が作り直され、新しいリクエストを送る
-            didFailToLoad = false
-        }
+        .adRetriesOnFailure($didFailToLoad)
     }
 
     private func banner(configuration: AdConfiguration) -> some View {
@@ -61,7 +55,7 @@ struct AdBannerView: View {
                         adSize: Self.adSize(width: width),
                         onReceive: { hasReceivedAd = true },
                         onFailure: {
-                            if AdBannerSlot.collapsesOnFailure(hasReceivedAd: hasReceivedAd) {
+                            if AdSlot.collapsesOnFailure(hasReceivedAd: hasReceivedAd) {
                                 didFailToLoad = true
                             }
                         }

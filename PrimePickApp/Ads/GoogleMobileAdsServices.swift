@@ -68,14 +68,21 @@ extension PrivacyOptionsModel {
 private extension UIApplication {
     /// 同意フォームを出す画面。前面のウィンドウで最も手前に出ている画面を返す
     var topViewController: UIViewController? {
-        let window = connectedScenes
-            .compactMap { $0 as? UIWindowScene }
-            .first { $0.activationState == .foregroundActive }?
-            .keyWindow
-        var top = window?.rootViewController
+        var top = adPresentationRootViewController
         while let presented = top?.presentedViewController {
             top = presented
         }
         return top
+    }
+}
+
+extension UIApplication {
+    /// 広告を出す画面。前面のウィンドウのルート（同意フォームはこの上に出し、広告のタップはここから遷移する）
+    var adPresentationRootViewController: UIViewController? {
+        connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .first { $0.activationState == .foregroundActive }?
+            .keyWindow?
+            .rootViewController
     }
 }

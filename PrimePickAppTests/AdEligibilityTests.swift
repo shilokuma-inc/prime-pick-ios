@@ -26,7 +26,7 @@ final class AdEligibilityTests: XCTestCase {
         let eligibility = eligibility()
         XCTAssertTrue(eligibility.isAdsEnabled)
         for placement in AdPlacement.allCases {
-            XCTAssertTrue(eligibility.canShowBanner(at: placement), "\(placement)")
+            XCTAssertTrue(eligibility.canShowAds(at: placement), "\(placement)")
         }
     }
 
@@ -35,26 +35,26 @@ final class AdEligibilityTests: XCTestCase {
         let eligibility = eligibility(isScreenshotDemo: true)
         XCTAssertFalse(eligibility.isAdsEnabled)
         for placement in AdPlacement.allCases {
-            XCTAssertFalse(eligibility.canShowBanner(at: placement), "\(placement)")
+            XCTAssertFalse(eligibility.canShowAds(at: placement), "\(placement)")
         }
     }
 
     func testNoAdsWhileRunningTests() {
         let eligibility = eligibility(isRunningTests: true)
         XCTAssertFalse(eligibility.isAdsEnabled)
-        XCTAssertFalse(eligibility.canShowBanner(at: .quizResult))
+        XCTAssertFalse(eligibility.canShowAds(at: .quizResult))
     }
 
     func testNoAdsWithoutConfiguration() {
         let eligibility = eligibility(hasConfiguration: false)
         XCTAssertFalse(eligibility.isAdsEnabled)
-        XCTAssertFalse(eligibility.canShowBanner(at: .quizResult))
+        XCTAssertFalse(eligibility.canShowAds(at: .quizResult))
     }
 
-    func testBannerOnlyAtEnabledPlacements() {
+    func testAdsOnlyAtEnabledPlacements() {
         let eligibility = eligibility(enabledPlacements: [.quizResult])
-        XCTAssertTrue(eligibility.canShowBanner(at: .quizResult))
-        XCTAssertFalse(eligibility.canShowBanner(at: .dailyChallengeResult))
+        XCTAssertTrue(eligibility.canShowAds(at: .quizResult))
+        XCTAssertFalse(eligibility.canShowAds(at: .dailyChallengeResult))
     }
 
     /// 結果画面に出す。ホーム（Discussion #376 で外した）と出題中には出さない
