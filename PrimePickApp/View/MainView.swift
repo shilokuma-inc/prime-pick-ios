@@ -40,10 +40,6 @@ struct MainView: View {
                     }
                 }
             }
-            // バナーの分だけ下を空け、ホームのボタンに重ねない（背の低い画面では上のスクロールで逃がす）
-            .safeAreaInset(edge: .bottom, spacing: 0) {
-                AdBannerView(placement: .home)
-            }
             .navigationDestination(for: DailyChallengeRoute.self) { _ in
                 DailyChallengeView(onPlayTimeAttack: playTimeAttackFromDailyChallenge)
             }

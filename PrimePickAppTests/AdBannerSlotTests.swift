@@ -52,17 +52,6 @@ final class AdBannerSlotTests: XCTestCase {
         }
     }
 
-    /// 撮影モードではホームに枠を出さない（スクリーンショットのレイアウトを変えない）
-    func testScreenshotDemoHidesHomeBanner() {
-        let eligibility = AdEligibility(isScreenshotDemo: true, isRunningTests: false, hasConfiguration: true)
-        let slot = AdBannerSlot.state(
-            canShowBanner: eligibility.canShowBanner(at: .home),
-            isReadyToLoadAds: true,
-            didFailToLoad: false
-        )
-        XCTAssertEqual(slot, .hidden)
-    }
-
     func testAdsAreNotReadyByDefault() {
         XCTAssertFalse(EnvironmentValues().isAdsReadyToLoad)
     }

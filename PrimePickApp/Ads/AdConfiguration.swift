@@ -15,7 +15,7 @@ struct AdConfiguration: Equatable {
 
     /// AdMob の App ID（`ca-app-pub-…~…`）
     let applicationID: String
-    /// ホーム・結果画面のバナーの広告ユニット ID（`ca-app-pub-…/…`）
+    /// 結果画面のバナーの広告ユニット ID（`ca-app-pub-…/…`）
     let bannerAdUnitID: String
 
     /// ID が欠けている・空のときは nil。広告を出さない判断に使う

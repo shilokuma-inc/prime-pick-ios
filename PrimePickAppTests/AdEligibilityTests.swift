@@ -42,25 +42,24 @@ final class AdEligibilityTests: XCTestCase {
     func testNoAdsWhileRunningTests() {
         let eligibility = eligibility(isRunningTests: true)
         XCTAssertFalse(eligibility.isAdsEnabled)
-        XCTAssertFalse(eligibility.canShowBanner(at: .home))
+        XCTAssertFalse(eligibility.canShowBanner(at: .quizResult))
     }
 
     func testNoAdsWithoutConfiguration() {
         let eligibility = eligibility(hasConfiguration: false)
         XCTAssertFalse(eligibility.isAdsEnabled)
-        XCTAssertFalse(eligibility.canShowBanner(at: .home))
+        XCTAssertFalse(eligibility.canShowBanner(at: .quizResult))
     }
 
     func testBannerOnlyAtEnabledPlacements() {
-        let eligibility = eligibility(enabledPlacements: [.home])
-        XCTAssertTrue(eligibility.canShowBanner(at: .home))
-        XCTAssertFalse(eligibility.canShowBanner(at: .quizResult))
+        let eligibility = eligibility(enabledPlacements: [.quizResult])
+        XCTAssertTrue(eligibility.canShowBanner(at: .quizResult))
         XCTAssertFalse(eligibility.canShowBanner(at: .dailyChallengeResult))
     }
 
-    /// ホームと 2 つの結果画面に出す（Discussion #348 の決定）
-    func testDefaultPlacementsAreHomeAndResults() {
-        XCTAssertEqual(AdPlacement.enabled, [.home, .quizResult, .dailyChallengeResult])
+    /// 結果画面に出す。ホーム（Discussion #376 で外した）と出題中には出さない
+    func testDefaultPlacementsAreResults() {
+        XCTAssertEqual(AdPlacement.enabled, [.quizResult, .dailyChallengeResult])
     }
 
     func testDetectsTestRunFromEnvironment() {
