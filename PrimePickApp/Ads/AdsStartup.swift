@@ -54,7 +54,8 @@ final class AdsStartup: ObservableObject {
         self.mobileAds = mobileAds
     }
 
-    /// アプリがアクティブになったときに呼ぶ（ATT はアクティブでないと出ないため）。2 回目以降は何もしない
+    /// アプリがアクティブになったときに呼ぶ（ATT はアクティブでないと出ないため）。
+    /// SDK の初期化まで進んだあと・処理中は何もしない。同意が得られずに終わったときは、次にアクティブになったときにやり直す
     func startIfNeeded() async {
         // 撮影モード・テスト実行中は同意フォーム・ATT・SDK のどれも動かさない
         guard eligibility.isAdsEnabled, !hasStarted else { return }
@@ -65,8 +66,12 @@ final class AdsStartup: ObservableObject {
         } catch {
             print("広告の同意情報を取得できませんでした: \(error)")
         }
-        // 同意が得られていない（同意フォームを閉じられない・取得に失敗した）あいだは、ATT も広告も出さない
-        guard consent.canRequestAds else { return }
+        // 同意が得られていない（同意フォームを閉じられない・取得に失敗した）あいだは、ATT も広告も出さない。
+        // 一時的な通信エラーなどでこの起動中ずっと広告が出なくならないよう、次にアクティブになったときにやり直す
+        guard consent.canRequestAds else {
+            hasStarted = false
+            return
+        }
 
         await tracking.requestAuthorizationIfNeeded()
         await mobileAds.start()

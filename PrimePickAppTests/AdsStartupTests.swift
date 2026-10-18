@@ -91,6 +91,21 @@ final class AdsStartupTests: XCTestCase {
         XCTAssertFalse(startup.isReadyToLoadAds)
     }
 
+    /// 同意が得られずに終わったら、次にアクティブになったときに同意の取得からやり直す
+    func testRetriesOnNextActivationWhenAdsCannotBeRequested() async {
+        let log = CallLog()
+        let consent = FakeConsent(log: log, canRequestAds: false, error: ConsentError())
+        let startup = makeStartup(log: log, consent: consent)
+
+        await startup.startIfNeeded()
+        consent.canRequestAds = true
+        consent.error = nil
+        await startup.startIfNeeded()
+
+        XCTAssertEqual(log.calls, ["consent", "consent", "tracking", "start"])
+        XCTAssertTrue(startup.isReadyToLoadAds)
+    }
+
     /// 同意情報の更新に失敗しても、前回までの同意で広告を出せるなら続ける
     func testContinuesWithPreviousConsentWhenGatheringFails() async {
         let log = CallLog()
