@@ -8,7 +8,8 @@ import SwiftUI
 
 /// 画面の下部に置くアンカー型アダプティブバナー。幅は置いた場所いっぱい、高さは SDK が幅から決める
 ///
-/// 撮影モード・テスト実行中・同意フローが済む前は何も出さない（枠も確保しない）
+/// 撮影モード・テスト実行中・同意フローが済む前は何も出さない（枠も確保しない）。
+/// 一度も表示できずに読み込みに失敗したら枠を閉じ、`AdBannerSlot.retryDelay` のあとに読み込み直す
 struct AdBannerView: View {
     let placement: AdPlacement
     var eligibility: AdEligibility = .current
@@ -25,34 +26,48 @@ struct AdBannerView: View {
             isReadyToLoadAds: isReadyToLoadAds,
             didFailToLoad: didFailToLoad
         )
-        if slot == .loading, let configuration {
-            Color.clear
-                .frame(maxWidth: .infinity)
-                .frame(height: width > 0 ? Self.adSize(width: width).size.height : 0)
-                .background {
-                    GeometryReader { proxy in
-                        Color.clear
-                            .onAppear { width = proxy.size.width }
-                            .onChange(of: proxy.size.width) { _, newWidth in
-                                width = newWidth
-                            }
-                    }
-                }
-                .overlay {
-                    if width > 0 {
-                        BannerAdRepresentable(
-                            adUnitID: configuration.bannerAdUnitID,
-                            adSize: Self.adSize(width: width),
-                            onReceive: { hasReceivedAd = true },
-                            onFailure: {
-                                if AdBannerSlot.collapsesOnFailure(hasReceivedAd: hasReceivedAd) {
-                                    didFailToLoad = true
-                                }
-                            }
-                        )
-                    }
-                }
+        // 枠を閉じているあいだも再試行の task を動かすため、中身が無くても消えない入れ物に置く
+        VStack(spacing: 0) {
+            if slot == .loading, let configuration {
+                banner(configuration: configuration)
+            }
         }
+        .task(id: didFailToLoad) {
+            guard didFailToLoad else { return }
+            try? await Task.sleep(for: AdBannerSlot.retryDelay)
+            guard !Task.isCancelled else { return }
+            // 枠を出し直すと BannerAdRepresentable が作り直され、新しいリクエストを送る
+            didFailToLoad = false
+        }
+    }
+
+    private func banner(configuration: AdConfiguration) -> some View {
+        Color.clear
+            .frame(maxWidth: .infinity)
+            .frame(height: width > 0 ? Self.adSize(width: width).size.height : 0)
+            .background {
+                GeometryReader { proxy in
+                    Color.clear
+                        .onAppear { width = proxy.size.width }
+                        .onChange(of: proxy.size.width) { _, newWidth in
+                            width = newWidth
+                        }
+                }
+            }
+            .overlay {
+                if width > 0 {
+                    BannerAdRepresentable(
+                        adUnitID: configuration.bannerAdUnitID,
+                        adSize: Self.adSize(width: width),
+                        onReceive: { hasReceivedAd = true },
+                        onFailure: {
+                            if AdBannerSlot.collapsesOnFailure(hasReceivedAd: hasReceivedAd) {
+                                didFailToLoad = true
+                            }
+                        }
+                    )
+                }
+            }
     }
 
     private static func adSize(width: CGFloat) -> AdSize {

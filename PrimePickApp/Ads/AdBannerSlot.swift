@@ -22,6 +22,9 @@ enum AdBannerSlot: Equatable {
         canShowBanner && isReadyToLoadAds && !didFailToLoad ? .loading : .hidden
     }
 
+    /// 一度も表示できずに枠を閉じたあと、読み込み直すまでの間隔。在庫切れのときに短い間隔でリクエストを繰り返さない
+    static let retryDelay: Duration = .seconds(60)
+
     /// 読み込みに失敗したときに枠を消すか。一度表示できたあとの失敗（自動リフレッシュの失敗）では、
     /// SDK が前の広告を出したままにするので枠を残す
     static func collapsesOnFailure(hasReceivedAd: Bool) -> Bool {
