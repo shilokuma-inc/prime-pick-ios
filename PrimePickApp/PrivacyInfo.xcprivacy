@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- ATT で許可した人にパーソナライズ広告を出す（Google Mobile Ads が IDFA を使う）ため、トラッキングあり -->
+	<key>NSPrivacyTracking</key>
+	<true/>
+	<!-- アプリ自身はトラッキングのためのドメインに通信しない。広告の通信は Google Mobile Ads が行う -->
+	<key>NSPrivacyTrackingDomains</key>
+	<array/>
+	<!-- 収集するデータは Google Mobile Ads・UMP・Firebase のマニフェストが SDK 側で宣言する。アプリ自身が集めるものは無い -->
+	<key>NSPrivacyCollectedDataTypes</key>
+	<array/>
+	<key>NSPrivacyAccessedAPITypes</key>
+	<array>
+		<!-- 自己ベスト・デイリーチャレンジの記録・テーマの設定をアプリ自身の UserDefaults に保存する -->
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>CA92.1</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>

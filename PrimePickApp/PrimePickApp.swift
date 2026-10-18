@@ -11,6 +11,8 @@ import SwiftUI
 struct PrimePickApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @AppStorage(AppTheme.userDefaultsKey) private var appTheme = AppTheme.system.rawValue
+    @Environment(\.scenePhase) private var scenePhase
+    @StateObject private var adsStartup = AdsStartup.live()
 
     var body: some Scene {
         WindowGroup {
@@ -26,6 +28,14 @@ struct PrimePickApp: App {
                         )
                     )
                 )
+                // 同意フローと SDK の初期化が済んだらバナーが広告を読み込む
+                .environment(\.isAdsReadyToLoad, adsStartup.isReadyToLoadAds)
+                // ATT のダイアログはアプリがアクティブでないと出ないため、起動直後ではなくアクティブになってから始める
+                .onChange(of: scenePhase, initial: true) { _, phase in
+                    if phase == .active {
+                        Task { await adsStartup.startIfNeeded() }
+                    }
+                }
         }
     }
 }
