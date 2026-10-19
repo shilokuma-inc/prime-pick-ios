@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B7528572BEDF03439A16F358 /* AdSlotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F797DA8F6B9FDFC8BA3E13D3 /* AdSlotTests.swift */; };
-		55EE766C6DC6C1665ACC5E2F /* AdBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70EBB253AFC5B829026655DF /* AdBannerView.swift */; };
 		A5C1D7E93B2F40816A7D2E11 /* AdNativeAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C1D7E93B2F40816A7D2E12 /* AdNativeAdView.swift */; };
 		A5C1D7E93B2F40816A7D2E13 /* NativeAdCardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C1D7E93B2F40816A7D2E14 /* NativeAdCardLayout.swift */; };
 		A5C1D7E93B2F40816A7D2E16 /* NativeAdCardLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C1D7E93B2F40816A7D2E15 /* NativeAdCardLayoutTests.swift */; };
@@ -153,7 +152,6 @@
 
 /* Begin PBXFileReference section */
 		F797DA8F6B9FDFC8BA3E13D3 /* AdSlotTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AdSlotTests.swift; sourceTree = "<group>"; };
-		70EBB253AFC5B829026655DF /* AdBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannerView.swift; sourceTree = "<group>"; };
 		A5C1D7E93B2F40816A7D2E12 /* AdNativeAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdNativeAdView.swift; sourceTree = "<group>"; };
 		A5C1D7E93B2F40816A7D2E14 /* NativeAdCardLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAdCardLayout.swift; sourceTree = "<group>"; };
 		A5C1D7E93B2F40816A7D2E15 /* NativeAdCardLayoutTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NativeAdCardLayoutTests.swift; sourceTree = "<group>"; };
@@ -591,7 +589,6 @@
 			children = (
 				CDEC67649FA932A224D77C46 /* GoogleMobileAdsServices.swift */,
 				E0B16A0BCF56E0C1792C1990 /* AdsStartup.swift */,
-				70EBB253AFC5B829026655DF /* AdBannerView.swift */,
 				A5C1D7E93B2F40816A7D2E12 /* AdNativeAdView.swift */,
 				A5C1D7E93B2F40816A7D2E14 /* NativeAdCardLayout.swift */,
 				F0EE3A123B8C26404113310D /* AdSlot.swift */,
@@ -793,7 +790,6 @@
 				BE7CF4CE6BB335D21E2D3995 /* PrivacyOptions.swift in Sources */,
 				B77751BC030B40278B53F6EA /* GoogleMobileAdsServices.swift in Sources */,
 				86B39999780BF1B66E498F90 /* AdsStartup.swift in Sources */,
-				55EE766C6DC6C1665ACC5E2F /* AdBannerView.swift in Sources */,
 				A5C1D7E93B2F40816A7D2E11 /* AdNativeAdView.swift in Sources */,
 				A5C1D7E93B2F40816A7D2E13 /* NativeAdCardLayout.swift in Sources */,
 				A43E3DA99C9B5F9A07A20339 /* AdSlot.swift in Sources */,

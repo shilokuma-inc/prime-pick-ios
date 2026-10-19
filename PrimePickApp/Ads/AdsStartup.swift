@@ -30,7 +30,7 @@ protocol MobileAdsStarting: AnyObject {
 /// 起動時の「UMP の同意 → ATT → 広告 SDK の初期化」を順に行う
 ///
 /// 同意フローが失敗しても起動・画面の表示は止めない（前回までの同意で `canRequestAds` が true なら広告を出す）。
-/// `isReadyToLoadAds` が true になるまでバナーは広告を読み込まない
+/// `isReadyToLoadAds` が true になるまでネイティブ広告は読み込まない
 @MainActor
 final class AdsStartup: ObservableObject {
     /// SDK の初期化が済み、広告を読み込んでよい
