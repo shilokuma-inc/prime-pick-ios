@@ -28,7 +28,7 @@ struct PrimePickApp: App {
                         )
                     )
                 )
-                // 同意フローと SDK の初期化が済んだらバナーが広告を読み込む
+                // 同意フローと SDK の初期化が済んだらネイティブ広告が読み込む
                 .environment(\.isAdsReadyToLoad, adsStartup.isReadyToLoadAds)
                 // ATT のダイアログはアプリがアクティブでないと出ないため、起動直後ではなくアクティブになってから始める
                 .onChange(of: scenePhase, initial: true) { _, phase in

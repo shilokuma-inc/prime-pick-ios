@@ -36,7 +36,7 @@ struct AdEligibility: Equatable {
         !isScreenshotDemo && !isRunningTests && hasConfiguration
     }
 
-    /// その置き場所に広告（バナー・ネイティブ広告）の枠を出してよいか
+    /// その置き場所に広告（ネイティブ広告）の枠を出してよいか
     func canShowAds(at placement: AdPlacement) -> Bool {
         isAdsEnabled && enabledPlacements.contains(placement)
     }
