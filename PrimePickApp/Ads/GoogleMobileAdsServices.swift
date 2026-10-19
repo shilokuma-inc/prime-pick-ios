@@ -12,7 +12,7 @@ import UserMessagingPlatform
 final class UserMessagingPlatformConsent: AdConsentGathering {
     func gatherConsent() async throws {
         try await ConsentInformation.shared.requestConsentInfoUpdate(with: RequestParameters())
-        try await ConsentForm.loadAndPresentIfRequired(from: UIApplication.shared.topViewController)
+        try await ConsentForm.loadAndPresentIfRequired(from: UIApplication.shared.adPresentationViewController)
     }
 
     var canRequestAds: Bool {
@@ -27,7 +27,7 @@ final class UserMessagingPlatformPrivacyOptions: PrivacyOptionsPresenting {
     }
 
     func presentPrivacyOptions() async throws {
-        try await ConsentForm.presentPrivacyOptionsForm(from: UIApplication.shared.topViewController)
+        try await ConsentForm.presentPrivacyOptionsForm(from: UIApplication.shared.adPresentationViewController)
     }
 }
 
@@ -65,24 +65,20 @@ extension PrivacyOptionsModel {
     }
 }
 
-private extension UIApplication {
-    /// 同意フォームを出す画面。前面のウィンドウで最も手前に出ている画面を返す
-    var topViewController: UIViewController? {
-        var top = adPresentationRootViewController
-        while let presented = top?.presentedViewController {
-            top = presented
-        }
-        return top
-    }
-}
-
 extension UIApplication {
-    /// 広告を出す画面。前面のウィンドウのルート（同意フォームはこの上に出し、広告のタップはここから遷移する）
-    var adPresentationRootViewController: UIViewController? {
-        connectedScenes
+    /// 広告・同意フォームを出す画面。前面のウィンドウで最も手前に出ている画面
+    ///
+    /// 記録画面・設定画面のようにシートで出す画面にも広告を置くので、ルート（`MainView`）ではなく
+    /// 最前面の画面を渡す。ルート画面はすでにシートを出しているため、そこから広告をタップしても遷移できない
+    var adPresentationViewController: UIViewController? {
+        var top = connectedScenes
             .compactMap { $0 as? UIWindowScene }
             .first { $0.activationState == .foregroundActive }?
             .keyWindow?
             .rootViewController
+        while let presented = top?.presentedViewController {
+            top = presented
+        }
+        return top
     }
 }

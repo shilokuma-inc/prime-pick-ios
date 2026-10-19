@@ -33,8 +33,10 @@ final class NativeAdCardLayout {
     private static let adChoicesSize: CGFloat = 20
     private static let badgeHeight: CGFloat = 16
     private static let actionHeight: CGFloat = 34
-    /// メディアの最小の高さ。カードの高さ（`AdNativeAdView.defaultHeight`）から文字の分を引いた残りを埋める
-    private static let mediaMinHeight: CGFloat = 60
+    /// メディアの最小の高さ。カードの高さ（`AdNativeAdView.defaultHeight`）から文字の分を引いた残りを埋める。
+    /// SDK は幅・高さが 120pt 未満のメディアを「小さすぎる」と警告し、将来は収益化の対象から外すため、
+    /// 120pt を下回らないようにする（大きい文字の設定では入りきらないので、優先度を下げて譲る）
+    private static let mediaMinHeight: CGFloat = 120
 
     /// レイアウトを組んで `NativeAdView` のアセットビューに設定する。読み込んだ内容は `render(_:)` で流し込む
     func install(in adView: NativeAdView) {
@@ -139,9 +141,11 @@ final class NativeAdCardLayout {
         mediaView.clipsToBounds = true
         mediaView.setContentHuggingPriority(.defaultLow, for: .vertical)
         mediaView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-        NSLayoutConstraint.activate([
-            mediaView.heightAnchor.constraint(greaterThanOrEqualToConstant: Self.mediaMinHeight)
-        ])
+        // カードの高さが決まっていれば、この最小の高さは自然に満たされる。満たせないとき（大きい文字）は
+        // 破らずに譲る（必須にすると制約の衝突でレイアウトが崩れる）
+        let mediaMinHeight = mediaView.heightAnchor.constraint(greaterThanOrEqualToConstant: Self.mediaMinHeight)
+        mediaMinHeight.priority = .defaultHigh
+        mediaMinHeight.isActive = true
 
         iconImageView.contentMode = .scaleAspectFill
         iconImageView.layer.cornerRadius = 8
