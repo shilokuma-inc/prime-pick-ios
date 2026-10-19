@@ -19,8 +19,10 @@ struct AdNativeAdView: View {
     /// カードの高さ。枠を出すときはこの高さを確保する
     var height: CGFloat = Self.defaultHeight
 
-    /// メディアありの大きめの広告の高さ（Discussion #376 の決定で 250pt 前後）
-    static let defaultHeight: CGFloat = 250
+    /// カードの高さ。メディアありの大きめの広告（Discussion #376 の決定で 250pt 前後）だが、
+    /// 250pt だと文字の分を引いたメディアの領域が SDK の下限（120pt）を下回って
+    /// 「メディアが小さすぎる」と警告されるため、メディアに十分な高さを残せる 300pt にする
+    static let defaultHeight: CGFloat = 300
 
     @Environment(\.isAdsReadyToLoad) private var isReadyToLoadAds
     @State private var didFailToLoad = false
@@ -32,8 +34,7 @@ struct AdNativeAdView: View {
             isReadyToLoadAds: isReadyToLoadAds,
             didFailToLoad: didFailToLoad
         )
-        // 枠を閉じているあいだも再試行の task を動かすため、中身が無くても消えない入れ物に置く。
-        // 一覧に置くときは、この View ごと行・セクションを消して区切りを残さない
+        // 枠を閉じているあいだも再試行の task を動かすため、中身が無くても消えない入れ物に置く
         VStack(spacing: 0) {
             if slot == .loading, let configuration {
                 NativeAdCard(
@@ -100,8 +101,9 @@ extension NativeAdCard {
 
             let adLoader = AdLoader(
                 adUnitID: adUnitID,
-                // 広告をタップしたとき（App Store への遷移など）に出す画面
-                rootViewController: UIApplication.shared.adPresentationRootViewController,
+                // 広告をタップしたとき（App Store への遷移など）に出す画面。
+                // シートの中に置いた広告からもタップできるよう、最前面の画面を渡す
+                rootViewController: UIApplication.shared.adPresentationViewController,
                 adTypes: [.native],
                 // 画像・動画の縦横比は SDK に任せる（カードのメディアの領域に合わせて描かれる）
                 options: [NativeAdMediaAdLoaderOptions()]
