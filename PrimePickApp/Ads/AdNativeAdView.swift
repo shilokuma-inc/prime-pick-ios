@@ -34,9 +34,10 @@ struct AdNativeAdView: View {
             isReadyToLoadAds: isReadyToLoadAds,
             didFailToLoad: didFailToLoad
         )
-        // 枠を閉じているあいだは何も描かない（`List` に空の行・区切り・余白を残さない）。
-        // 中身が無くても消えない入れ物（`Group`）に置き、枠を閉じているあいだも再試行の task を動かす
-        Group {
+        // 枠を閉じているあいだも再試行の task を動かすため、中身が無くても消えない入れ物に置く。
+        // 行そのものを消す（`Group` を空にする）と SwiftUI がビューを片付けて task がキャンセルされ、
+        // 再試行が動かなくなる（シミュレータで確認）。代わりに下の修飾で行を空に見せる
+        VStack(spacing: 0) {
             if slot == .loading, let configuration {
                 NativeAdCard(
                     adUnitID: configuration.nativeAdUnitID,
@@ -53,6 +54,11 @@ struct AdNativeAdView: View {
             }
         }
         .adRetriesOnFailure($didFailToLoad)
+        // `List` に置いたとき、枠を閉じているあいだは行を空にして区切り・余白を残さない
+        // （一覧以外に置いたときは効かない修飾）
+        .listRowInsets(slot == .hidden ? EdgeInsets() : nil)
+        .listRowSeparator(slot == .hidden ? .hidden : .automatic)
+        .listRowBackground(slot == .hidden ? Color.clear : nil)
     }
 }
 
