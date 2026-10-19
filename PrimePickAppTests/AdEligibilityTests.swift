@@ -57,9 +57,9 @@ final class AdEligibilityTests: XCTestCase {
         XCTAssertFalse(eligibility.canShowAds(at: .dailyChallengeResult))
     }
 
-    /// 結果画面に出す。ホーム（Discussion #376 で外した）と出題中には出さない
-    func testDefaultPlacementsAreResults() {
-        XCTAssertEqual(AdPlacement.enabled, [.quizResult, .dailyChallengeResult])
+    /// 結果画面 2 つと設定画面に出す。ホーム（Discussion #376 で外した）と出題中には出さない
+    func testDefaultPlacementsAreResultsAndSettings() {
+        XCTAssertEqual(AdPlacement.enabled, [.quizResult, .dailyChallengeResult, .setting])
     }
 
     func testDetectsTestRunFromEnvironment() {
