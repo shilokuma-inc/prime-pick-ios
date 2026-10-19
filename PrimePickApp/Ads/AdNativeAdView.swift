@@ -34,8 +34,9 @@ struct AdNativeAdView: View {
             isReadyToLoadAds: isReadyToLoadAds,
             didFailToLoad: didFailToLoad
         )
-        // 枠を閉じているあいだも再試行の task を動かすため、中身が無くても消えない入れ物に置く
-        VStack(spacing: 0) {
+        // 枠を閉じているあいだは何も描かない（`List` に空の行・区切り・余白を残さない）。
+        // 中身が無くても消えない入れ物（`Group`）に置き、枠を閉じているあいだも再試行の task を動かす
+        Group {
             if slot == .loading, let configuration {
                 NativeAdCard(
                     adUnitID: configuration.nativeAdUnitID,
