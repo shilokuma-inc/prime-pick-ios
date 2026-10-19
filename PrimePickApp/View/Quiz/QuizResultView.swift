@@ -52,25 +52,12 @@ struct QuizResultView: View {
                     .ignoresSafeArea()
 
                 VStack(spacing: 16) {
-                    if isNewRecord {
-                        Text("NEW RECORD!")
-                            .font(.system(size: 32, weight: .heavy, design: .rounded))
-                            .foregroundStyle(rainbowColor)
+                    // 小さい画面や大きい文字の設定でカードに収まらないときは、カードの中でスクロールして読めるようにする。
+                    // 収まるときの見た目は今までどおり（スコアなどは上、戻るボタンは下）
+                    ScrollView {
+                        scoreSections
                     }
-
-                    CountingScoreText(value: displayedScore)
-                        .font(.title)
-                        .multilineTextAlignment(.center)
-                        .lineLimit(2)
-                        .minimumScaleFactor(0.6)
-                        // 数え上げ途中の値ではなく、最終スコアを読み上げる
-                        .accessibilityLabel(Text("Your Score is \(score) points!"))
-
-                    summarySection
-
-                    breakdownSection
-
-                    QuizReviewList(answerRecords: answerRecords)
+                    .scrollBounceBehavior(.basedOnSize)
 
                     returnToTitleButton
                 }
@@ -90,6 +77,32 @@ struct QuizResultView: View {
             .frame(width: geometry.size.width, height: geometry.size.height)
         }
         .edgesIgnoringSafeArea(.all)
+    }
+
+    /// スコア・正答数の内訳・復習一覧。カードの中でスクロールする入れ物に入れて使う
+    private var scoreSections: some View {
+        VStack(spacing: 16) {
+            if isNewRecord {
+                Text("NEW RECORD!")
+                    .font(.system(size: 32, weight: .heavy, design: .rounded))
+                    .foregroundStyle(rainbowColor)
+            }
+
+            CountingScoreText(value: displayedScore)
+                .font(.title)
+                .multilineTextAlignment(.center)
+                .lineLimit(2)
+                .minimumScaleFactor(0.6)
+                // 数え上げ途中の値ではなく、最終スコアを読み上げる
+                .accessibilityLabel(Text("Your Score is \(score) points!"))
+
+            summarySection
+
+            breakdownSection
+
+            // 入れ子のスクロールを避けるため、復習一覧は外側の `ScrollView` に任せる
+            QuizReviewList(answerRecords: answerRecords, scrolls: false)
+        }
     }
 
     /// 合計スコアの内訳。タイムアタックは問題数が固定ではないため解答数も並べる
