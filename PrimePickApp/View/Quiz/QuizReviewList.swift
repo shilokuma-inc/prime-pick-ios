@@ -19,6 +19,10 @@ struct QuizReviewList: View {
         answerRecords.filter { !$0.isAnswerCorrect }
     }
 
+    /// 問題数が増えても収まるようにスクロールさせるか。
+    /// 外側でスクロールする場所（結果画面のカードの中）に置くときは false にして、入れ子のスクロールを避ける
+    var scrolls: Bool = true
+
     var body: some View {
         if missedRecords.isEmpty {
             Text(isComplete ? "Perfect! All questions correct!" : "No missed questions so far")
@@ -31,18 +35,27 @@ struct QuizReviewList: View {
                 Text("Missed Questions")
                     .font(.headline)
 
-                // 問題数が増えても収まるようにスクロールさせる
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 8) {
-                        ForEach(missedRecords) { record in
-                            reviewRow(record)
-                        }
+                if scrolls {
+                    // 問題数が増えても収まるようにスクロールさせる
+                    ScrollView {
+                        reviewRows
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                } else {
+                    reviewRows
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
+    }
+
+    /// 間違えた問題の行
+    private var reviewRows: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            ForEach(missedRecords) { record in
+                reviewRow(record)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private func reviewRow(_ record: QuizAnswerRecord) -> some View {
