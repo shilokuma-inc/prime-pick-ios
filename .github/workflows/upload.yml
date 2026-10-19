@@ -1,0 +1,145 @@
+name: Upload
+
+# develop / release/** への push で Archive → App Store Connect へアップロードする。
+# epic ブランチなどの作業ブランチを TestFlight で確認したいときは、手動実行（workflow_dispatch）でそのブランチを選ぶ
+# （AskHub の「マージ待ち」からもこのワークフローを起動する。ファイル名 upload.yml は AskHub との取り決め）。
+# 作業ブランチの push ごとに上げると App Store Connect の 1 日あたりのアップロード上限に当たるため、自動では上げない。
+
+on:
+  push:
+    branches:
+      - develop
+      - 'release/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Upload (${{ github.ref_name }})
+    runs-on: macos-latest
+
+    steps:
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '26.6'
+
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: ci_post_clone
+        run: |
+          defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
+          defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES
+
+      - name: Install Distribution Certificate
+        env:
+          DISTRIBUTION_CERT_P12_BASE64: ${{ secrets.DISTRIBUTION_CERT_P12_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+        run: |
+          set -euo pipefail
+
+          CERTIFICATE_PATH="$RUNNER_TEMP/distribution.p12"
+          KEYCHAIN_PATH="$RUNNER_TEMP/signing.keychain-db"
+          KEYCHAIN_PASSWORD=$(openssl rand -base64 24)
+
+          echo -n "$DISTRIBUTION_CERT_P12_BASE64" | base64 --decode > "$CERTIFICATE_PATH"
+
+          # 一時キーチェーンを作成し、配信用証明書を取り込む
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+          security import "$CERTIFICATE_PATH" \
+            -P "$P12_PASSWORD" \
+            -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
+          security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH" > /dev/null
+          security list-keychain -d user -s "$KEYCHAIN_PATH" login.keychain-db
+
+          security find-identity -v -p codesigning "$KEYCHAIN_PATH"
+
+      - name: Install Provisioning Profile
+        env:
+          PROVISIONING_PROFILE_BASE64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "$PROVISIONING_PROFILE_BASE64" ]; then
+            echo "::error::PROVISIONING_PROFILE_BASE64 が空です。リポジトリ Secrets の設定を確認してください"
+            exit 1
+          fi
+
+          PROFILES_DIR="$HOME/Library/MobileDevice/Provisioning Profiles"
+          mkdir -p "$PROFILES_DIR"
+          echo -n "$PROVISIONING_PROFILE_BASE64" | tr -d '[:space:]' | base64 --decode > "$PROFILES_DIR/appstore.mobileprovision"
+
+          # プロファイル名は secret を増やさずプロファイル自体から取り出す
+          PROFILE_NAME="$(security cms -D -i "$PROFILES_DIR/appstore.mobileprovision" | plutil -extract Name raw -)"
+
+          # 手動署名の設定は xcconfig にまとめ、プロファイル指定はアプリターゲットだけに当てる。
+          # コマンドライン引数で PROVISIONING_PROFILE_SPECIFIER を渡すと SPM のパッケージターゲットにも
+          # 波及し、"does not support provisioning profiles" で archive が落ちる。
+          SIGNING_XCCONFIG="$RUNNER_TEMP/ManualSigning.xcconfig"
+          cat > "$SIGNING_XCCONFIG" <<EOF
+          CODE_SIGN_STYLE = Manual
+          CODE_SIGN_IDENTITY = Apple Distribution
+          DEVELOPMENT_TEAM = XU74X3434S
+          PROVISIONING_PROFILE_SPECIFIER = \$(PROVISIONING_PROFILE_SPECIFIER_\$(PRODUCT_NAME))
+          PROVISIONING_PROFILE_SPECIFIER_PrimePickApp = $PROFILE_NAME
+          EOF
+          echo "SIGNING_XCCONFIG=$SIGNING_XCCONFIG" >> "$GITHUB_ENV"
+
+      # 手動署名にしたことで ExportOptions 経由のビルド番号自動採番が効かなくなった。
+      # pbxproj の CURRENT_PROJECT_VERSION は固定値なので、ここで毎回一意な値を決める。
+      - name: Determine Build Number
+        id: build_number
+        run: echo "value=$(date -u +%Y%m%d.%H%M%S)" >> "$GITHUB_OUTPUT"
+
+      - name: Archive Project
+        run: |
+          # 署名は取り込み済みの証明書とプロファイルで固定し、自動生成を行わせない
+          xcodebuild archive \
+            -project PrimePickApp.xcodeproj \
+            -scheme PrimePickApp \
+            -sdk iphoneos \
+            -configuration Release \
+            -archivePath PrimePickApp.xcarchive \
+            -xcconfig "$SIGNING_XCCONFIG" \
+            CURRENT_PROJECT_VERSION=${{ steps.build_number.outputs.value }}
+
+      # EXPORT_OPTIONS はリポジトリ secret（signingStyle: manual）。org secret の自動署名用を上書きしている
+      - name: Create ExportOptions.plist
+        run: |
+          echo '${{ secrets.EXPORT_OPTIONS }}' > ExportOptions.plist
+
+      - name: Export IPA
+        run: |
+          xcodebuild -exportArchive \
+            -archivePath PrimePickApp.xcarchive \
+            -exportOptionsPlist ExportOptions.plist \
+            -exportPath app.ipa
+
+      # アップロードは App Store Connect API Key で認証する。altool は --apiKey の Key ID から
+      # ./private_keys/AuthKey_<Key ID>.p8 を探す
+      - name: Create Private Key
+        run: |
+          mkdir -p private_keys
+          echo -n '${{ secrets.APPLE_API_KEY_BASE64 }}' | base64 --decode > ./private_keys/AuthKey_${{ secrets.APPLE_API_KEY_ID }}.p8
+
+      - name: Upload IPA to App Store Connect
+        run: |
+          xcrun altool --upload-app -f app.ipa/PrimePickApp.ipa \
+                       --apiKey ${{ secrets.APPLE_API_KEY_ID }} \
+                       --apiIssuer ${{ secrets.APPLE_API_ISSUER_ID }} \
+                       --type ios
+
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: PrimePickApp-ipa
+          path: app.ipa/PrimePickApp.ipa
+
+      - name: Clean Up Keychain
+        if: ${{ always() }}
+        run: |
+          security delete-keychain "$RUNNER_TEMP/signing.keychain-db" || true
