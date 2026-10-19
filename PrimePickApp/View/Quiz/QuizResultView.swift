@@ -26,11 +26,11 @@ struct QuizResultView: View {
     var breakdown = ScoreBreakdown()
 
     var body: some View {
-        // バナーはカードの下に並べ、カードに重ねない。撮影モードなどでバナーが無いときは今までと同じ全画面のレイアウトになる
+        // 広告はカードの下に並べ、カードに重ねない。撮影モードなどで広告が無いときは今までと同じ全画面のレイアウトになる
         VStack(spacing: 0) {
             resultCard
 
-            AdBannerView(placement: .quizResult)
+            AdNativeAdView(placement: .quizResult)
                 .background {
                     Color.black.opacity(0.4)
                         .ignoresSafeArea(edges: .bottom)
