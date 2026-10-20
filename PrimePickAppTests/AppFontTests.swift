@@ -31,6 +31,12 @@ final class AppFontTests: XCTestCase {
         }
     }
 
+    func testPostScriptNames() {
+        XCTAssertEqual(AppTypeface.Face.system(.rounded).postScriptNames, [])
+        XCTAssertEqual(AppTypeface.Face.named("Didot-Bold").postScriptNames, ["Didot-Bold"])
+        XCTAssertEqual(AppTypeface.Face.namedWithJapanese("Didot-Bold", japanese: "HiraMinProN-W6").postScriptNames, ["Didot-Bold", "HiraMinProN-W6"])
+    }
+
     // MARK: - 役割 → 書体
 
     func testHeadingUsesHeadingFaceWithFixedSize() {
@@ -93,6 +99,30 @@ final class AppFontTests: XCTestCase {
 
         let textStyle = AppFont.cascadedUIFont(name: "Futura-Bold", japanese: "HiraginoSans-W6", size: .textStyle(.subheadline))
         XCTAssertEqual(textStyle.pointSize, UIFontMetrics(forTextStyle: .subheadline).scaledValue(for: 15), accuracy: 0.01)
+    }
+
+    /// SwiftUI の文字の大きさ（`.dynamicTypeSize`）で拡大する。拡大しない大きさは変わらない
+    func testCascadedFontFollowsDynamicTypeSize() {
+        let large = UITraitCollection(preferredContentSizeCategory: UIContentSizeCategory(DynamicTypeSize.large))
+        let huge = UITraitCollection(preferredContentSizeCategory: UIContentSizeCategory(DynamicTypeSize.accessibility3))
+
+        let scaledLarge = AppFont.cascadedUIFont(name: "Didot-Bold", japanese: "HiraMinProN-W6", size: .scaled(22), traits: large)
+        let scaledHuge = AppFont.cascadedUIFont(name: "Didot-Bold", japanese: "HiraMinProN-W6", size: .scaled(22), traits: huge)
+        XCTAssertEqual(scaledLarge.pointSize, 22, accuracy: 0.01)
+        XCTAssertGreaterThan(scaledHuge.pointSize, scaledLarge.pointSize)
+
+        let fixedHuge = AppFont.cascadedUIFont(name: "Didot-Bold", japanese: "HiraMinProN-W6", size: .fixed(22), traits: huge)
+        XCTAssertEqual(fixedHuge.pointSize, 22)
+
+        let styleHuge = AppFont.cascadedUIFont(name: "Didot-Bold", japanese: "HiraMinProN-W6", size: .textStyle(.headline), traits: huge)
+        XCTAssertEqual(styleHuge.pointSize, UIFontMetrics(forTextStyle: .headline).scaledValue(for: 17, compatibleWith: huge), accuracy: 0.01)
+    }
+
+    func testNumberWithTextStyle() {
+        let font = AppFont.number(.title)
+        XCTAssertEqual(font.face, AppTypeface.current.number)
+        XCTAssertEqual(font.size, .textStyle(.title))
+        XCTAssertNil(font.weight)
     }
 
     func testDefaultPointSizes() {
