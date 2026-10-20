@@ -203,7 +203,7 @@ private struct GameButtonStyleBody: View {
     VStack(spacing: 16) {
         Button {} label: {
             Text(verbatim: "Expert")
-                .font(.system(size: 24, weight: .bold, design: .rounded))
+                .appFont(.heading(size: 24, weight: .bold))
                 .foregroundStyle(.white)
                 .padding()
                 .frame(maxWidth: .infinity)
@@ -212,7 +212,7 @@ private struct GameButtonStyleBody: View {
 
         Button {} label: {
             Text(verbatim: "Easy")
-                .font(.system(size: 24, weight: .bold, design: .rounded))
+                .appFont(.heading(size: 24, weight: .bold))
                 .foregroundStyle(.white)
                 .padding()
                 .frame(maxWidth: .infinity)

@@ -391,7 +391,7 @@ private extension MainView {
             presentedSheet = .howToPlay
         } label: {
             Label("How to Play", systemImage: "questionmark.circle")
-                .font(.system(size: 18, weight: .bold, design: .rounded))
+                .appFont(.heading(size: 18, weight: .bold))
                 .foregroundColor(.primary)
                 .padding(.vertical, 12)
                 .padding(.horizontal, 24)

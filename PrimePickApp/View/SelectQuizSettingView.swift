@@ -55,7 +55,7 @@ private extension SelectQuizSettingView {
     ) -> some View {
         HStack(spacing: 8) {
             Text(title)
-                .font(.system(size: 14, weight: .bold, design: .rounded))
+                .appFont(.heading(size: 14, weight: .bold))
                 .foregroundColor(.primary)
                 .frame(width: 84, alignment: .leading)
 
@@ -100,7 +100,7 @@ private struct CapsuleChoicePicker<Option: Hashable & Identifiable, Label: View>
             selection = option
         } label: {
             label(option)
-                .font(.system(.subheadline, design: .rounded, weight: .bold))
+                .appFont(.heading(.subheadline, weight: .bold))
                 .foregroundStyle(isSelected ? Color.white : Color.primary)
                 // 4 つ並びは 1 つあたりの幅が狭いので、文字を大きくしても省略せずに縮めて収める
                 .lineLimit(1)

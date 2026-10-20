@@ -90,7 +90,7 @@ private extension HowToPlayView {
 
     func sectionTitle(_ title: LocalizedStringKey) -> some View {
         Text(title)
-            .font(.system(size: 24, weight: .bold, design: .rounded))
+            .appFont(.heading(size: 24, weight: .bold))
     }
 
     func ruleRow(number: Int, text: LocalizedStringKey) -> some View {
@@ -108,7 +108,7 @@ private extension HowToPlayView {
     func difficultyRow(difficulty: Difficulty, description: LocalizedStringKey) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(difficulty.localizedTitle)
-                .font(.system(size: 18, weight: .bold, design: .rounded))
+                .appFont(.heading(size: 18, weight: .bold))
                 .padding(.horizontal, 16)
                 .padding(.vertical, 6)
                 .background(

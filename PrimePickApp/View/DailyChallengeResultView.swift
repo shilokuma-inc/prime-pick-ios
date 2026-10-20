@@ -59,10 +59,10 @@ struct DailyChallengeResultView: View {
     private var header: some View {
         VStack(spacing: 4) {
             Text("Daily Challenge")
-                .font(.system(size: 28, weight: .bold, design: .rounded))
+                .appFont(.heading(size: 28, weight: .bold))
             if let dayNumber = result.dayNumber {
                 Text(verbatim: "#\(dayNumber)")
-                    .font(.system(size: 20, weight: .semibold, design: .rounded))
+                    .appFont(.heading(size: 20, weight: .semibold))
                     .foregroundStyle(.secondary)
             }
         }
@@ -72,10 +72,10 @@ struct DailyChallengeResultView: View {
         VStack(spacing: 6) {
             if record.isCompleted {
                 Text("\(record.correctCount) / \(record.results.count) correct")
-                    .font(.system(size: 26, weight: .bold, design: .rounded))
+                    .appFont(.heading(size: 26, weight: .bold))
             } else {
                 Text("Incomplete \(record.answeredCount) / \(record.results.count)")
-                    .font(.system(size: 26, weight: .bold, design: .rounded))
+                    .appFont(.heading(size: 26, weight: .bold))
             }
             Text("Total Time \(DailyChallengeResult.totalSecondsText(record.totalAnswerSeconds)) sec")
                 .font(.headline)
@@ -87,7 +87,7 @@ struct DailyChallengeResultView: View {
         VStack(spacing: 6) {
             HStack(spacing: 16) {
                 Text(verbatim: "🔥 \(result.streak.current)")
-                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                    .appFont(.heading(size: 24, weight: .bold))
                     .accessibilityLabel(Text("Streak \(result.streak.current) days"))
                 Text("Best \(result.streak.longest)")
                     .font(.headline)
@@ -104,7 +104,7 @@ struct DailyChallengeResultView: View {
             if let onPlayTimeAttack {
                 Button(action: onPlayTimeAttack) {
                     Text("Play Time Attack")
-                        .font(.custom("ArialRoundedMTBold", size: 22))
+                        .appFont(.number(size: 22))
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity, minHeight: 56)
                 }
@@ -115,7 +115,7 @@ struct DailyChallengeResultView: View {
                 dismiss()
             } label: {
                 Text("Return to Title")
-                    .font(.custom("ArialRoundedMTBold", size: 22))
+                    .appFont(.number(size: 22))
                     .foregroundStyle(Color.accentColor)
                     .frame(maxWidth: .infinity, minHeight: 56)
             }
