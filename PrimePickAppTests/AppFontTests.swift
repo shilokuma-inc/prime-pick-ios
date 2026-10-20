@@ -77,6 +77,24 @@ final class AppFontTests: XCTestCase {
         XCTAssertNotEqual(AppFont.number(size: 45, typeface: .standard).font, .custom("ArialRoundedMTBold", fixedSize: 45))
     }
 
+    func testCascadedFontUsesGivenSizeAndLatinFace() {
+        let font = AppFont.cascadedUIFont(name: "Futura-Bold", japanese: "HiraginoSans-W6", size: .fixed(24))
+        XCTAssertEqual(font.fontName, "Futura-Bold")
+        XCTAssertEqual(font.pointSize, 24)
+        let cascade = font.fontDescriptor.fontAttributes[.cascadeList] as? [UIFontDescriptor]
+        XCTAssertEqual(cascade?.first?.postscriptName, "HiraginoSans-W6")
+    }
+
+    /// Dynamic Type で拡大する大きさは、今の文字の大きさの設定で拡大した値になる
+    func testCascadedFontScalesWithDynamicType() {
+        let scaled = AppFont.cascadedUIFont(name: "Futura-Bold", japanese: "HiraginoSans-W6", size: .scaled(22))
+        XCTAssertEqual(scaled.pointSize, UIFontMetrics(forTextStyle: .body).scaledValue(for: 22), accuracy: 0.01)
+        XCTAssertEqual(scaled.fontName, "Futura-Bold")
+
+        let textStyle = AppFont.cascadedUIFont(name: "Futura-Bold", japanese: "HiraginoSans-W6", size: .textStyle(.subheadline))
+        XCTAssertEqual(textStyle.pointSize, UIFontMetrics(forTextStyle: .subheadline).scaledValue(for: 15), accuracy: 0.01)
+    }
+
     func testDefaultPointSizes() {
         XCTAssertEqual(AppFont.defaultPointSize(of: .subheadline), 15)
         XCTAssertEqual(AppFont.defaultPointSize(of: .body), 17)
