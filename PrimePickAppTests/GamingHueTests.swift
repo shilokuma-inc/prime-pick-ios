@@ -104,6 +104,24 @@ final class GamingHueTests: XCTestCase {
         XCTAssertEqual(GamingHue.resolved(anchor, cycleDuration: 0.5, at: Date(timeIntervalSinceReferenceDate: 200)), anchor)
     }
 
+    /// 速さを続けて変えても（0.4 → 1 → 0.65 秒）、変えるたびに色がつながる
+    func testResolvedAnchorKeepsHueContinuousAcrossChainedChanges() {
+        let start = Date(timeIntervalSinceReferenceDate: 812_345_678)
+        var anchor = GamingHue.resolved(.zero, cycleDuration: 0.4, at: start)
+        var previousCycle = 0.4
+        var date = start
+        for cycle in [1.0, 0.65] {
+            date = date.addingTimeInterval(0.73)
+            let before = GamingHue.degrees(at: date, anchor: anchor, cycleDuration: previousCycle, isAnimating: true)
+            anchor = GamingHue.resolved(anchor, cycleDuration: cycle, at: date)
+            XCTAssertEqual(
+                GamingHue.degrees(at: date, anchor: anchor, cycleDuration: cycle, isAnimating: true), before,
+                accuracy: 1e-3, "cycle=\(cycle)"
+            )
+            previousCycle = cycle
+        }
+    }
+
     // MARK: - 確認のカードの表示中の虹の激しさ（Discussion #394 Q3）
 
     private let difficultiesByLevel: [Difficulty] = [.easy, .normal, .hard, .expert]

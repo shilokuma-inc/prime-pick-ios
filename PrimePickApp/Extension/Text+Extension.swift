@@ -171,7 +171,9 @@ struct GamingText: ViewModifier {
                 // 色相は 350 度 → 10 度のような変化を逆向きに一周補間してしまい、色が流れて見えるため
                 .transaction { $0.animation = nil }
         }
-        .onChange(of: self.style.cycleDuration) { _, newValue in
+        // 最初から標準でない速さで作られたとき（カードを出したまま ViewThatFits の候補が切り替わったときなど）にも起点を合わせる。
+        // 合わせないと、描くたびに新しい起点が作られて脈動・揺れの経過時間が 0 のままになる
+        .onChange(of: self.style.cycleDuration, initial: true) { _, newValue in
             savedAnchor = GamingHue.resolved(savedAnchor, cycleDuration: newValue, at: Date())
         }
     }
