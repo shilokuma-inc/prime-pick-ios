@@ -43,7 +43,7 @@ enum TitleLogoLayout {
     /// ロゴは Dynamic Type で拡大しない（マスの並びの横幅が決まっていて、拡大すると画面からはみ出すため）
     static func scale(isRegularWidth: Bool, isCompact: Bool) -> CGFloat {
         if isRegularWidth { return 1.6 }
-        return isCompact ? 0.75 : 1
+        return isCompact ? 0.65 : 1
     }
 }
 
