@@ -16,6 +16,20 @@ struct AppTypeface: Equatable {
         case system(Font.Design)
         /// iOS に標準で入っている書体を PostScript 名で指定する。名前を間違えるとシステムの書体に黙って落ちる
         case named(String)
+        /// 欧文の書体（PostScript 名）に、日本語の文字だけ別の書体（`japanese`）を組み合わせる
+        ///
+        /// 欧文の書体だけを指定すると、日本語の文字はシステムの和文（ヒラギノ角ゴシック）に落ちるため。
+        /// `UIFont` を組み立てて使うので、`AppFont.weight` は効かない（太さは PostScript 名で選ぶ）
+        case namedWithJapanese(String, japanese: String)
+
+        /// この書体で使う PostScript 名（システムの書体なら空）
+        var postScriptNames: [String] {
+            switch self {
+            case .system: []
+            case let .named(name): [name]
+            case let .namedWithJapanese(name, japanese): [name, japanese]
+            }
+        }
     }
 
     /// 見出し・ボタン
@@ -80,6 +94,47 @@ struct AppFont: Equatable {
             Font.custom(name, size: size).applyingWeight(weight)
         case let (.named(name), .textStyle(style)):
             Font.custom(name, size: Self.defaultPointSize(of: style), relativeTo: style).applyingWeight(weight)
+        case let (.namedWithJapanese(name, japanese), size):
+            Font(Self.cascadedUIFont(name: name, japanese: japanese, size: size))
+        }
+    }
+
+    /// 欧文の書体に和文の書体を組み合わせた `UIFont`
+    ///
+    /// Dynamic Type で拡大する大きさは、組み立てた時点の文字の大きさの設定で決まる
+    static func cascadedUIFont(name: String, japanese: String, size: Size) -> UIFont {
+        let pointSize: CGFloat
+        let metrics: UIFontMetrics?
+        switch size {
+        case let .fixed(value):
+            pointSize = value
+            metrics = nil
+        case let .scaled(value):
+            pointSize = value
+            metrics = UIFontMetrics(forTextStyle: .body)
+        case let .textStyle(style):
+            pointSize = defaultPointSize(of: style)
+            metrics = UIFontMetrics(forTextStyle: uiTextStyle(of: style))
+        }
+        let descriptor = UIFontDescriptor(name: name, size: pointSize)
+            .addingAttributes([.cascadeList: [UIFontDescriptor(name: japanese, size: pointSize)]])
+        let font = UIFont(descriptor: descriptor, size: pointSize)
+        return metrics?.scaledFont(for: font) ?? font
+    }
+
+    static func uiTextStyle(of style: Font.TextStyle) -> UIFont.TextStyle {
+        switch style {
+        case .largeTitle: .largeTitle
+        case .title: .title1
+        case .title2: .title2
+        case .title3: .title3
+        case .headline: .headline
+        case .callout: .callout
+        case .subheadline: .subheadline
+        case .footnote: .footnote
+        case .caption: .caption1
+        case .caption2: .caption2
+        default: .body
         }
     }
 

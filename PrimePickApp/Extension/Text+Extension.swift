@@ -12,7 +12,18 @@ extension View {
     ///
     /// - Parameter style: 回す速さ・鮮やかさ・脈動・揺れ。既定は 1 秒 1 周で、脈動も揺れもしない
     func gamingText(style: GamingTextStyle = .standard) -> some View {
-        self.modifier(GamingText(style: style))
+        self.modifier(GamingText(style: style, background: EmptyView()))
+    }
+
+    /// 虹色で描き、虹にしない飾り（`background`）を後ろに敷く。脈動・揺れは飾りごとかける
+    ///
+    /// タイルに文字を載せたロゴのように、文字だけを虹にしてタイルは虹にしないときに使う。
+    /// `background` はこの View と同じ大きさに敷く
+    func gamingText<Background: View>(
+        style: GamingTextStyle = .standard,
+        @ViewBuilder background: () -> Background
+    ) -> some View {
+        self.modifier(GamingText(style: style, background: background()))
     }
 }
 
@@ -131,8 +142,10 @@ enum GamingHue {
     }
 }
 
-struct GamingText: ViewModifier {
+struct GamingText<Background: View>: ViewModifier {
     let style: GamingTextStyle
+    /// 虹にしない飾り。虹の後ろに敷き、脈動・揺れを一緒にかける
+    let background: Background
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     /// 色相の位相の起点。速さが変わるたびに付け替える
@@ -164,6 +177,7 @@ struct GamingText: ViewModifier {
                     )))
                     .saturation(style.saturation)
                 )
+                .background(background)
                 // レイアウトを動かさない変形だけを使う（難易度ボタンの位置などが揺れないように）
                 .scaleEffect(style.scale(elapsed: elapsed))
                 .offset(x: style.offset(elapsed: elapsed))

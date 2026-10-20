@@ -39,12 +39,14 @@ struct MainView: View {
                 .ignoresSafeArea()
 
                 // 難易度ボタンが 4 つになり、iPhone SE などの背の低い画面ではデイリーのカードから「遊び方」までが収まらない。
-                // 収まらないときだけスクロールさせる（大きい画面の見た目は変えない）
+                // 収まらないときは、まずタイトルのロゴを小さくし、それでも収まらないときだけスクロールさせる（大きい画面の見た目は変えない）
                 ViewThatFits(in: .vertical) {
-                    homeContent
+                    homeContent(isLogoCompact: false)
+
+                    homeContent(isLogoCompact: true)
 
                     ScrollView {
-                        homeContent
+                        homeContent(isLogoCompact: false)
                     }
                 }
                 // 確認のカードを出している間は、後ろのボタンを押させず、VoiceOver にも読ませない
@@ -248,7 +250,7 @@ extension Difficulty {
 
 private extension MainView {
     /// タイトル・設定・難易度ボタン・遊び方のボタン
-    var homeContent: some View {
+    func homeContent(isLogoCompact: Bool) -> some View {
         VStack {
             dailyChallengeCardLink
 
@@ -257,7 +259,8 @@ private extension MainView {
             // 確認のカードを出している間は、難易度に応じて虹を激しくする（Discussion #394 Q3）
             TitleLogoView(
                 style: pendingTimeAttack.map { $0.difficulty.confirmationTitleStyle(reduceMotion: reduceMotion) }
-                    ?? .standard
+                    ?? .standard,
+                isCompact: isLogoCompact
             )
             
             
