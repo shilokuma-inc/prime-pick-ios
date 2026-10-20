@@ -124,6 +124,31 @@ final class AppFontTests: XCTestCase {
         XCTAssertEqual(styleHuge.pointSize, UIFontMetrics(forTextStyle: .headline).scaledValue(for: 17, compatibleWith: huge), accuracy: 0.01)
     }
 
+    /// `font(dynamicTypeSize:)` は渡した文字の大きさで拡大する
+    func testFontFollowsGivenDynamicTypeSize() {
+        let huge = UITraitCollection(preferredContentSizeCategory: UIContentSizeCategory(DynamicTypeSize.accessibility3))
+        let scaled = AppFont(face: .system(.rounded), size: .scaled(22), weight: .bold)
+        XCTAssertEqual(
+            scaled.font(dynamicTypeSize: .accessibility3),
+            .system(size: UIFontMetrics(forTextStyle: .body).scaledValue(for: 22, compatibleWith: huge), weight: .bold, design: .rounded)
+        )
+        XCTAssertNotEqual(scaled.font(dynamicTypeSize: .accessibility3), scaled.font(dynamicTypeSize: .large))
+        // 拡大しない大きさは文字の大きさによらない
+        let fixed = AppFont.heading(size: 22, weight: .bold, typeface: .standard)
+        XCTAssertEqual(fixed.font(dynamicTypeSize: .accessibility3), fixed.font(dynamicTypeSize: .large))
+    }
+
+    /// アプリの書体の日本語はヒラギノ明朝 W6 で描く
+    func testSieveFontCascadesToMincho() {
+        guard case let .namedWithJapanese(name, japanese) = AppTypeface.sieve.heading else {
+            return XCTFail("和文を組み合わせた書体になっていない")
+        }
+        let font = AppFont.cascadedUIFont(name: name, japanese: japanese, size: .fixed(22))
+        XCTAssertEqual(font.fontName, "Didot-Bold")
+        let cascade = font.fontDescriptor.fontAttributes[.cascadeList] as? [UIFontDescriptor]
+        XCTAssertEqual(cascade?.map(\.postscriptName), ["HiraMinProN-W6"])
+    }
+
     func testNumberWithTextStyle() {
         let font = AppFont.number(.title)
         XCTAssertEqual(font.face, AppTypeface.current.number)
