@@ -41,6 +41,10 @@ struct TimeAttackRecordsView: View {
                     ForEach(Self.sections(store: store, difficulty: difficulty), id: \.duration) { section in
                         recordSection(section)
                     }
+
+                    // 一覧のいちばん下に置く。読み込みを始める時点で枠を確保し、
+                    // 読み込めなかったときは行ごと消す（高さも区切りも残らない）
+                    AdNativeAdView(placement: .timeAttackRecords)
                 }
                 .scrollContentBackground(.hidden)
                 .background(.clear)

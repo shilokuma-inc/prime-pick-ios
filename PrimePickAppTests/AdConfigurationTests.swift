@@ -11,19 +11,23 @@ final class AdConfigurationTests: XCTestCase {
     func testReadsIDsFromInfoDictionary() {
         let configuration = AdConfiguration(infoDictionary: [
             "GADApplicationIdentifier": "ca-app-pub-1~2",
-            "AdMobBannerAdUnitID": "ca-app-pub-1/3"
+            "AdMobNativeAdUnitID": "ca-app-pub-1/4"
         ])
         XCTAssertEqual(configuration?.applicationID, "ca-app-pub-1~2")
-        XCTAssertEqual(configuration?.bannerAdUnitID, "ca-app-pub-1/3")
+        XCTAssertEqual(configuration?.nativeAdUnitID, "ca-app-pub-1/4")
     }
 
     func testIsNilWhenIDIsMissingOrEmpty() {
         XCTAssertNil(AdConfiguration(infoDictionary: nil))
         XCTAssertNil(AdConfiguration(infoDictionary: ["GADApplicationIdentifier": "ca-app-pub-1~2"]))
-        XCTAssertNil(AdConfiguration(infoDictionary: ["AdMobBannerAdUnitID": "ca-app-pub-1/3"]))
+        XCTAssertNil(AdConfiguration(infoDictionary: ["AdMobNativeAdUnitID": "ca-app-pub-1/4"]))
         XCTAssertNil(AdConfiguration(infoDictionary: [
             "GADApplicationIdentifier": "",
-            "AdMobBannerAdUnitID": "ca-app-pub-1/3"
+            "AdMobNativeAdUnitID": "ca-app-pub-1/4"
+        ]))
+        XCTAssertNil(AdConfiguration(infoDictionary: [
+            "GADApplicationIdentifier": "ca-app-pub-1~2",
+            "AdMobNativeAdUnitID": ""
         ]))
     }
 
@@ -31,7 +35,7 @@ final class AdConfigurationTests: XCTestCase {
     func testAppUsesGoogleTestIDs() {
         let configuration = AdConfiguration.current
         XCTAssertEqual(configuration?.applicationID, "ca-app-pub-3940256099942544~1458002511")
-        XCTAssertEqual(configuration?.bannerAdUnitID, "ca-app-pub-3940256099942544/2435281174")
+        XCTAssertEqual(configuration?.nativeAdUnitID, "ca-app-pub-3940256099942544/3986624511")
     }
 
     /// Google Mobile Ads SDK は SKAdNetworkItems の一覧を前提にしている。Google の一覧の先頭（Google 自身）が入っていることを確かめる
