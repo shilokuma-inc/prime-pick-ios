@@ -19,13 +19,13 @@ struct DailyChallengeCardView: View {
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 6) {
                     Text("Daily Challenge")
-                        .font(.system(size: 18, weight: .bold, design: .rounded))
+                        .appFont(.heading(size: 18, weight: .bold))
                     Text(verbatim: "#\(state.dayNumber)")
-                        .font(.system(size: 15, weight: .semibold, design: .rounded))
+                        .appFont(.heading(size: 15, weight: .semibold))
                         .foregroundStyle(.secondary)
                 }
                 statusText
-                    .font(.system(size: 14, weight: .semibold, design: .rounded))
+                    .appFont(.heading(size: 14, weight: .semibold))
                     .foregroundStyle(state.isPlayable ? Color.accentColor : .secondary)
             }
             .lineLimit(1)
@@ -34,7 +34,7 @@ struct DailyChallengeCardView: View {
             Spacer(minLength: 0)
 
             Text(verbatim: "🔥 \(state.streak)")
-                .font(.system(size: 22, weight: .bold, design: .rounded))
+                .appFont(.heading(size: 22, weight: .bold))
                 .monospacedDigit()
                 .accessibilityLabel(Text("Streak \(state.streak) days"))
 

@@ -31,7 +31,7 @@ struct QuizIndexView: View {
     var body: some View {
         HStack {
             leadingLabel
-                .font(.custom("ArialRoundedMTBold", size: 45))
+                .appFont(.number(size: 45))
                 .foregroundStyle(Color.quizSubText)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
@@ -72,15 +72,15 @@ struct QuizIndexView: View {
     private var comboLabel: some View {
         HStack(alignment: .firstTextBaseline, spacing: 8) {
             Text("Combo \(currentCombo)")
-                .font(.custom("ArialRoundedMTBold", size: 28))
+                .appFont(.number(size: 28))
 
             // 倍率の数字は言語によらず同じ表記なので、ローカライズしない
             if comboStage == .max {
                 Text(verbatim: "MAX" + (gameMode.isTimeAttack ? " " + Self.multiplierText(combo: currentCombo) : ""))
-                    .font(.custom("ArialRoundedMTBold", size: 22))
+                    .appFont(.number(size: 22))
             } else if gameMode.isTimeAttack {
                 Text(verbatim: Self.multiplierText(combo: currentCombo))
-                    .font(.custom("ArialRoundedMTBold", size: 22))
+                    .appFont(.number(size: 22))
             }
         }
         .modifier(ComboStageStyle(stage: comboStage, reduceMotion: reduceMotion))

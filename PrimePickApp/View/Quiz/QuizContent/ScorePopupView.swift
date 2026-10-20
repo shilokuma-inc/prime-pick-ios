@@ -85,12 +85,12 @@ struct ScorePopupView: View {
             if popup.isFast {
                 // ゲーム用語として言語によらず同じ表記にする
                 Text(verbatim: "FAST!")
-                    .font(.custom("ArialRoundedMTBold", size: fontSize * 0.55))
+                    .appFont(.number(size: fontSize * 0.55))
                     .foregroundStyle(Color.orange)
             }
 
             Text(verbatim: popup.text)
-                .font(.custom("ArialRoundedMTBold", size: fontSize))
+                .appFont(.number(size: fontSize))
                 .foregroundStyle(popup.isNegative ? Color.red : Color.orange)
         }
         .lineLimit(1)

@@ -84,7 +84,7 @@ struct QuizResultView: View {
         VStack(spacing: 16) {
             if isNewRecord {
                 Text("NEW RECORD!")
-                    .font(.system(size: 32, weight: .heavy, design: .rounded))
+                    .appFont(.heading(size: 32, weight: .heavy))
                     .foregroundStyle(rainbowColor)
             }
 
@@ -160,7 +160,7 @@ struct QuizResultView: View {
             dismiss()
         } label: {
             Text("Return to Title")
-                .font(.custom("ArialRoundedMTBold", size: 24))
+                .appFont(.number(size: 24))
                 .foregroundStyle(Color.primary)
                 .frame(maxWidth: .infinity)
                 .frame(height: 60)

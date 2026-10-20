@@ -64,7 +64,7 @@ extension SelectDifficultyButtonView {
 
     private func difficultyLabel(_ difficulty: Difficulty) -> some View {
         Text(difficulty.localizedTitle)
-            .font(.system(size: 24, weight: .bold, design: .rounded))
+            .appFont(.heading(size: 24, weight: .bold))
             .padding()
             .frame(maxWidth: .infinity)
             .foregroundColor(.white)

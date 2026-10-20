@@ -11,7 +11,7 @@ struct AnswerExplanationView: View {
 
     var body: some View {
         explanation.text
-            .font(.system(size: 22, weight: .bold, design: .rounded))
+            .appFont(.heading(size: 22, weight: .bold))
             .foregroundStyle(Color.primary)
             .lineLimit(1)
             .minimumScaleFactor(0.5)
