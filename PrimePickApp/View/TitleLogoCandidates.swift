@@ -651,7 +651,7 @@ private struct TitleLogoArtwork: View {
                 let word = row == 0 ? TitleLogoGlyphs.firstWord : TitleLogoGlyphs.secondWord
                 HStack(spacing: 0) {
                     ZStack(alignment: .topTrailing) {
-                        Rectangle().fill(adaptive(light: 0x3A3A3C, dark: 0x1C1C1E))
+                        Rectangle().fill(adaptive(light: 0x3A3A3C, dark: 0x5A5A5E))
                         Path { path in
                             path.move(to: .zero)
                             path.addLine(to: CGPoint(x: cell, y: cell))
