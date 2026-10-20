@@ -72,6 +72,13 @@ enum GameMode: Hashable, Identifiable, CaseIterable {
         self == .dailyChallenge
     }
 
+    /// 難易度ボタンを押したとき、すぐ始めずにスタートの確認を挟むか
+    ///
+    /// タイムアタックだけ確認する（Discussion #394）。練習は今どおりすぐ始める。
+    var confirmsBeforeStarting: Bool {
+        isTimeAttack
+    }
+
     /// 解答直後にミニ解説を表示するか
     ///
     /// タイムアタックではテンポを崩さないよう表示せず、練習モードだけで表示する（Discussion #138 / PR #152 で確認済み）。
