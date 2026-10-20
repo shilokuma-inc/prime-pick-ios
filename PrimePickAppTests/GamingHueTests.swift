@@ -78,21 +78,30 @@ final class GamingHueTests: XCTestCase {
     }
 
     /// 速さを変えた瞬間の色相は、変える前と同じ（色が飛ばない）
-    func testReanchoringKeepsHueContinuous() {
+    func testResolvedAnchorKeepsHueContinuous() {
         let switchDate = Date(timeIntervalSinceReferenceDate: 812_345_678.3)
         let before = GamingHue.degrees(at: switchDate, cycleDuration: 1, isAnimating: true)
-        let anchor = GamingHue.reanchored(.zero, at: switchDate, previousCycleDuration: 1)
-        for cycle in [0.4, 0.5, 0.65, 0.8, 1.0] {
+        for cycle in [0.4, 0.5, 0.65, 0.8] {
+            let anchor = GamingHue.resolved(.zero, cycleDuration: cycle, at: switchDate)
+            XCTAssertEqual(anchor.date, switchDate, "cycle=\(cycle)")
+            XCTAssertEqual(anchor.cycleDuration, cycle, "cycle=\(cycle)")
             XCTAssertEqual(
                 GamingHue.degrees(at: switchDate, anchor: anchor, cycleDuration: cycle, isAnimating: true), before,
                 accuracy: 1e-6, "cycle=\(cycle)"
             )
         }
         // 変えた後は新しい速さで回る
+        let anchor = GamingHue.resolved(.zero, cycleDuration: 0.4, at: switchDate)
         let later = switchDate.addingTimeInterval(0.1)
         let expected = (before + 360 * 0.1 / 0.4).truncatingRemainder(dividingBy: 360)
         // 8 億秒台の時刻に 0.1 秒を足すと丸めで 1e-7 秒ほどずれるので、1e-3 度まで許す
         XCTAssertEqual(GamingHue.degrees(at: later, anchor: anchor, cycleDuration: 0.4, isAnimating: true), expected, accuracy: 1e-3)
+    }
+
+    /// 速さが同じなら起点は変えない（描くたびに求め直しても、脈動・揺れの経過時間が 0 に戻らない）
+    func testResolvedAnchorIsUnchangedForSameCycle() {
+        let anchor = GamingHue.Anchor(date: Date(timeIntervalSinceReferenceDate: 100), phase: 0.3, cycleDuration: 0.5)
+        XCTAssertEqual(GamingHue.resolved(anchor, cycleDuration: 0.5, at: Date(timeIntervalSinceReferenceDate: 200)), anchor)
     }
 
     // MARK: - 確認のカードの表示中の虹の激しさ（Discussion #394 Q3）

@@ -80,8 +80,10 @@ enum GamingHue {
         let date: Date
         /// 起点の時刻の位相（0 以上 1 未満）
         let phase: Double
+        /// この起点から回すときの一周の秒数
+        var cycleDuration: TimeInterval = GamingHue.defaultCycleDuration
 
-        /// 基準日時（2001-01-01）に位相 0
+        /// 基準日時（2001-01-01）に位相 0・既定の速さ
         static let zero = Anchor(date: Date(timeIntervalSinceReferenceDate: 0), phase: 0)
     }
 
@@ -102,9 +104,17 @@ enum GamingHue {
         return phase - phase.rounded(.down)
     }
 
-    /// 速さを変えるときの新しい起点。`date` までは前の速さ（`previousCycleDuration`）で回したものとして位相を引き継ぐ
-    static func reanchored(_ anchor: Anchor, at date: Date, previousCycleDuration: TimeInterval) -> Anchor {
-        Anchor(date: date, phase: phase(at: date, anchor: anchor, cycleDuration: previousCycleDuration))
+    /// `cycleDuration` の速さで回すための起点
+    ///
+    /// 起点の速さと同じならそのまま返す。違うときは、`date` までは起点の速さで回したものとして位相を引き継いだ、`date` を起点にした新しい起点を返す。
+    /// View は描くたびにこれで起点を求めるので、速さが変わった最初のフレームから色がつながる（保存している起点の付け替えを待たない）。
+    static func resolved(_ anchor: Anchor, cycleDuration: TimeInterval, at date: Date) -> Anchor {
+        guard anchor.cycleDuration != cycleDuration else { return anchor }
+        return Anchor(
+            date: date,
+            phase: phase(at: date, anchor: anchor, cycleDuration: anchor.cycleDuration),
+            cycleDuration: cycleDuration
+        )
     }
 
     /// `date` の時点の色相の回転（度。0 以上 360 未満）
@@ -126,12 +136,13 @@ struct GamingText: ViewModifier {
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     /// 色相の位相の起点。速さが変わるたびに付け替える
-    @State private var anchor = GamingHue.Anchor.zero
+    @State private var savedAnchor = GamingHue.Anchor.zero
 
     func body(content: Content) -> some View {
         let isAnimating = GamingHue.isAnimating(reduceMotion: reduceMotion, isScreenshotDemo: ScreenshotDemo.isEnabled)
         let style = isAnimating ? style : style.stopped
         TimelineView(.animation(paused: !isAnimating)) { context in
+            let anchor = GamingHue.resolved(savedAnchor, cycleDuration: style.cycleDuration, at: context.date)
             let elapsed = context.date.timeIntervalSince(anchor.date)
             content
                 .foregroundColor(Color.white)
@@ -156,9 +167,12 @@ struct GamingText: ViewModifier {
                 // レイアウトを動かさない変形だけを使う（難易度ボタンの位置などが揺れないように）
                 .scaleEffect(style.scale(elapsed: elapsed))
                 .offset(x: style.offset(elapsed: elapsed))
+                // カードの開閉のアニメーション（MainView）で色相・脈動・揺れを補間させない。
+                // 色相は 350 度 → 10 度のような変化を逆向きに一周補間してしまい、色が流れて見えるため
+                .transaction { $0.animation = nil }
         }
-        .onChange(of: self.style.cycleDuration) { oldValue, _ in
-            anchor = GamingHue.reanchored(anchor, at: Date(), previousCycleDuration: oldValue)
+        .onChange(of: self.style.cycleDuration) { _, newValue in
+            savedAnchor = GamingHue.resolved(savedAnchor, cycleDuration: newValue, at: Date())
         }
     }
 }
@@ -188,6 +202,7 @@ extension Difficulty {
                 cycleDuration: 0.4,
                 saturation: 1,
                 pulse: GamingTextStyle.Pulse(period: 0.7, amplitude: 0.06),
+                // 揺れは位置だけが変わり明るさは変わらないので、点滅の上限（1 秒あたり 3 回）の対象にしない
                 shake: GamingTextStyle.Shake(period: 0.15, amplitude: 2.5)
             )
         }
