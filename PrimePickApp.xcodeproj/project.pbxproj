@@ -71,6 +71,7 @@
 		EA31363004DD2C8053A222CD /* DailyChallengeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A222CD73E96964D168F086 /* DailyChallengeGenerator.swift */; };
 		4F0C82822BC8247500E1480E /* PrimePickApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82812BC8247500E1480E /* PrimePickApp.swift */; };
 		4F0C82842BC8247500E1480E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82832BC8247500E1480E /* MainView.swift */; };
+		D409A1000000000000000001 /* TitleLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D409A1000000000000000002 /* TitleLogoView.swift */; };
 		B4B3E0FBB5B094E9DB9D10F9 /* DailyChallengeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9D10F9B63B39D5001DE476 /* DailyChallengeCardView.swift */; };
 		4F0C82862BC8247600E1480E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F0C82852BC8247600E1480E /* Assets.xcassets */; };
 		4F0C828A2BC8247600E1480E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F0C82892BC8247600E1480E /* Preview Assets.xcassets */; };
@@ -203,6 +204,7 @@
 		4F0C827E2BC8247500E1480E /* PrimePickApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrimePickApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0C82812BC8247500E1480E /* PrimePickApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimePickApp.swift; sourceTree = "<group>"; };
 		4F0C82832BC8247500E1480E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		D409A1000000000000000002 /* TitleLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLogoView.swift; sourceTree = "<group>"; };
 		DB9D10F9B63B39D5001DE476 /* DailyChallengeCardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeCardView.swift; sourceTree = "<group>"; };
 		4F0C82852BC8247600E1480E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F0C82872BC8247600E1480E /* PrimePickApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrimePickApp.entitlements; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 				397301C948163DCF61CB29B8 /* TimeAttackRecordsView.swift */,
 				87A9BEB9C37A62F499B13B7B /* DailyChallengeView.swift */,
 				4F0C82832BC8247500E1480E /* MainView.swift */,
+				D409A1000000000000000002 /* TitleLogoView.swift */,
 				DB9D10F9B63B39D5001DE476 /* DailyChallengeCardView.swift */,
 				4FEC65B02C01164800A8B731 /* SelectDifficultyButtonView.swift */,
 				D394B2000000000000000002 /* TimeAttackStartConfirmationView.swift */,
@@ -755,6 +758,7 @@
 				4F02A57D2BF62F61003DF310 /* QuizEntity.swift in Sources */,
 				4F65A3992C01019000065A53 /* Difficulty.swift in Sources */,
 				4F0C82842BC8247500E1480E /* MainView.swift in Sources */,
+				D409A1000000000000000001 /* TitleLogoView.swift in Sources */,
 				B4B3E0FBB5B094E9DB9D10F9 /* DailyChallengeCardView.swift in Sources */,
 				4FEC65B12C01164800A8B731 /* SelectDifficultyButtonView.swift in Sources */,
 				D394B2000000000000000001 /* TimeAttackStartConfirmationView.swift in Sources */,
