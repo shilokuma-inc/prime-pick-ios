@@ -40,8 +40,14 @@ struct AppTypeface: Equatable {
     /// 今までの書体（見出し・ボタンは SF Rounded、数字は Arial Rounded MT Bold）
     static let standard = AppTypeface(heading: .system(.rounded), number: .named("ArialRoundedMTBold"))
 
-    /// アプリで使う書体
-    static let current = standard
+    /// ホームのタイトルのロゴ（エラトステネスのふるい。Issue #415 の案 3）の書体。欧文と数字は Didot Bold、日本語はヒラギノ明朝 W6
+    static let sieve = AppTypeface(
+        heading: .namedWithJapanese("Didot-Bold", japanese: "HiraMinProN-W6"),
+        number: .namedWithJapanese("Didot-Bold", japanese: "HiraMinProN-W6")
+    )
+
+    /// アプリで使う書体（ロゴに合わせる。Discussion #409 Q4）
+    static let current = sieve
 }
 
 /// 役割ごとの書体と大きさ・太さ

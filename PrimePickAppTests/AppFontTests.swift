@@ -17,17 +17,23 @@ final class AppFontTests: XCTestCase {
         XCTAssertEqual(AppTypeface.standard.number, .named("ArialRoundedMTBold"))
     }
 
-    func testCurrentTypefaceIsStandard() {
-        XCTAssertEqual(AppTypeface.current, .standard)
+    /// アプリの書体はタイトルのロゴ（Issue #415 の案 3）に合わせる
+    func testCurrentTypefaceIsSieve() {
+        XCTAssertEqual(AppTypeface.current, .sieve)
+        XCTAssertEqual(AppTypeface.sieve.heading, .namedWithJapanese("Didot-Bold", japanese: "HiraMinProN-W6"))
+        XCTAssertEqual(AppTypeface.sieve.number, .namedWithJapanese("Didot-Bold", japanese: "HiraMinProN-W6"))
+        // ロゴの文字と同じ欧文の書体
+        XCTAssertEqual(AppTypeface.sieve.heading.postScriptNames.first, TitleLogoLayout.fontName)
     }
 
     /// 名前を間違えるとエラーにならずにシステムの書体に落ちるため、iOS に入っていることを確かめる
     func testNamedFacesAreInstalled() {
-        for face in [AppTypeface.current.heading, AppTypeface.current.number] {
-            guard case let .named(name) = face else { continue }
-            let font = UIFont(name: name, size: 20)
-            XCTAssertNotNil(font, name)
-            XCTAssertEqual(font?.pointSize, 20)
+        for typeface in [AppTypeface.current, .standard, .sieve] {
+            for name in typeface.heading.postScriptNames + typeface.number.postScriptNames {
+                let font = UIFont(name: name, size: 20)
+                XCTAssertNotNil(font, name)
+                XCTAssertEqual(font?.pointSize, 20)
+            }
         }
     }
 
