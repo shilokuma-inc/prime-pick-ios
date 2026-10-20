@@ -66,6 +66,17 @@ final class AppFontTests: XCTestCase {
         XCTAssertEqual(AppFont.number(size: 22, typeface: typeface).face, .system(.monospaced))
     }
 
+    /// 標準の書体では、置き換える前に書いていた `Font` と同じになる（見た目と Dynamic Type での拡大のされ方を変えない）
+    func testStandardFontsMatchPreviousExpressions() {
+        XCTAssertEqual(AppFont.heading(size: 24, weight: .bold, typeface: .standard).font, .system(size: 24, weight: .bold, design: .rounded))
+        XCTAssertEqual(
+            AppFont.heading(.subheadline, weight: .bold, typeface: .standard).font,
+            .system(.subheadline, design: .rounded, weight: .bold)
+        )
+        XCTAssertEqual(AppFont.number(size: 45, typeface: .standard).font, .custom("ArialRoundedMTBold", size: 45))
+        XCTAssertNotEqual(AppFont.number(size: 45, typeface: .standard).font, .custom("ArialRoundedMTBold", fixedSize: 45))
+    }
+
     func testDefaultPointSizes() {
         XCTAssertEqual(AppFont.defaultPointSize(of: .subheadline), 15)
         XCTAssertEqual(AppFont.defaultPointSize(of: .body), 17)
