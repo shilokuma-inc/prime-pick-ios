@@ -1393,6 +1393,38 @@
         }
       }
     },
+    "Start": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スタート"
+          }
+        }
+      }
+    },
+    "Start Time Attack?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start Time Attack?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タイムアタックを始めますか？"
+          }
+        }
+      }
+    },
     "Start today's 10 questions": {
       "localizations": {
         "en": {

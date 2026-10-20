@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var hue: Double = 0
     /// 難易度ボタンで積まれるクイズ画面と、カードから開くデイリーチャレンジ。撮影モードでは最初から出題中・結果の画面を積んでおく
     @State private var path = NavigationPath(ScreenshotDemo.initialPath)
@@ -19,6 +20,8 @@ struct MainView: View {
     @State private var presentedSheet: MainSheet? = ScreenshotDemo.scene == .howToPlay ? .howToPlay : nil
     @State private var gameMode: GameMode = .practice
     @State private var selectedQuestionCount: QuizQuestionCount = .default
+    /// 確認のカードを出しているタイムアタックの設定。nil ならカードを出していない（Discussion #394）
+    @State private var pendingTimeAttack: QuizSetting?
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -39,7 +42,15 @@ struct MainView: View {
                         homeContent
                     }
                 }
+                // 確認のカードを出している間は、後ろのボタンを押させず、VoiceOver にも読ませない
+                .disabled(isConfirmingTimeAttack)
+                .accessibilityHidden(isConfirmingTimeAttack)
+
+                if let pendingTimeAttack {
+                    timeAttackStartConfirmation(for: pendingTimeAttack)
+                }
             }
+            .animation(Self.confirmationAnimation, value: pendingTimeAttack)
             .navigationDestination(for: DailyChallengeRoute.self) { _ in
                 DailyChallengeView(onPlayTimeAttack: playTimeAttackFromDailyChallenge)
             }
@@ -53,8 +64,12 @@ struct MainView: View {
             }
             .toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {
-                    recordsButton
-                    settingButton
+                    Group {
+                        recordsButton
+                        settingButton
+                    }
+                    .disabled(isConfirmingTimeAttack)
+                    .accessibilityHidden(isConfirmingTimeAttack)
                 }
             }
             .sheet(item: $presentedSheet) { sheet in
@@ -173,7 +188,8 @@ private extension MainView {
 
             SelectDifficultyButtonView(
                 gameMode: gameMode,
-                questionCount: selectedQuestionCount
+                questionCount: selectedQuestionCount,
+                onRequestStartConfirmation: { pendingTimeAttack = $0 }
             )
 
             howToPlayButton
@@ -203,6 +219,40 @@ private extension MainView {
             .padding(.top, 8)
         }
     }
+
+    var isConfirmingTimeAttack: Bool {
+        pendingTimeAttack != nil
+    }
+
+    /// タイムアタックを始めるか確かめるカード。後ろのタイトル画面が見えるよう、薄く暗くするだけにとどめる
+    ///
+    /// カードの外のタップでは閉じない（後ろの暗い面がタップを受け止める）。閉じるのは「やめる」とエスケープのジェスチャーだけ
+    @ViewBuilder
+    func timeAttackStartConfirmation(for setting: QuizSetting) -> some View {
+        Color.black.opacity(Self.confirmationScrimOpacity)
+            .ignoresSafeArea()
+            .accessibilityHidden(true)
+            .transition(.opacity)
+
+        TimeAttackStartConfirmationView(
+            setting: setting,
+            onStart: {
+                pendingTimeAttack = nil
+                path.append(setting)
+            },
+            onCancel: {
+                pendingTimeAttack = nil
+            }
+        )
+        // Reduce Motion のときは拡大させず、フェードだけにする
+        .transition(reduceMotion ? .opacity : .opacity.combined(with: .scale(scale: 0.9)))
+    }
+
+    /// 確認のカードの後ろを暗くする黒の不透明度
+    static let confirmationScrimOpacity: Double = 0.2
+
+    /// 確認のカードを出し入れするアニメーション
+    static let confirmationAnimation: Animation = .easeOut(duration: 0.2)
 
     /// デイリーの結果画面から、タイトルで選んでいる設定のタイムアタックを始める
     ///
