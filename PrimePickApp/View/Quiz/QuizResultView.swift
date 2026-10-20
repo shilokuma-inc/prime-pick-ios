@@ -88,12 +88,17 @@ struct QuizResultView: View {
                     .foregroundStyle(rainbowColor)
             }
 
-            CountingScoreText(value: displayedScore)
+            // 最終スコアの文で場所を取り、数え上げの途中の値をその上に重ねる。
+            // 途中で桁が増えて行数が変わっても、下の行がずれない（明朝は文字幅が広く、2 行になりやすい）
+            CountingScoreText(value: Double(score))
+                .hidden()
+                .overlay {
+                    CountingScoreText(value: displayedScore)
+                }
                 .appFont(.number(.title))
                 .multilineTextAlignment(.center)
-                // 数え上げの途中で桁が増えて 2 行に変わると下の行がずれるため、折り返さずに縮める
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
+                .lineLimit(2)
+                .minimumScaleFactor(0.6)
                 // 数え上げ途中の値ではなく、最終スコアを読み上げる
                 .accessibilityLabel(Text("Your Score is \(score) points!"))
 
