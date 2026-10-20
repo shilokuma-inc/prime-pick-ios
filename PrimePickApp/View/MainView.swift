@@ -173,8 +173,12 @@ private extension MainView {
 
             Spacer()
             
+            // 確認のカードを出している間は、難易度に応じて虹を激しくする（Discussion #394 Q3）
             Text("Prime Pick")
-                .gamingText()
+                .gamingText(
+                    style: pendingTimeAttack.map { $0.difficulty.confirmationTitleStyle(reduceMotion: reduceMotion) }
+                        ?? .standard
+                )
                 .font(.custom("Helvetica Neue", size: 60))
                 .fontWeight(.bold)
             
