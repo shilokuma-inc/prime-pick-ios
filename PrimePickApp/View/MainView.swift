@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.colorScheme) private var colorScheme
     @State private var hue: Double = 0
     /// 難易度ボタンで積まれるクイズ画面と、カードから開くデイリーチャレンジ。撮影モードでは最初から出題中・結果の画面を積んでおく
     @State private var path = NavigationPath(ScreenshotDemo.initialPath)
@@ -29,9 +30,13 @@ struct MainView: View {
                 Color.appBackground
                     .ignoresSafeArea()
 
-                // 選んでいるモードの色を背景にうっすら重ね、モードで雰囲気を変える（Discussion #330）
-                ModeAmbientBackground(colors: gameMode.themeColors)
-                    .ignoresSafeArea()
+                // 選んでいるモードの色を背景にうっすら重ね、モードで雰囲気を変える（Discussion #330）。
+                // タイムアタックの確認のカードを出している間は、難易度の色にして難しいほど濃くする（Discussion #394 Q2）
+                ModeAmbientBackground(
+                    colors: pendingTimeAttack.map { $0.difficulty.ambientColors(for: colorScheme) } ?? gameMode.themeColors,
+                    style: pendingTimeAttack.map { $0.difficulty.confirmationGlowStyle(reduceMotion: reduceMotion) } ?? .standard
+                )
+                .ignoresSafeArea()
 
                 // 難易度ボタンが 4 つになり、iPhone SE などの背の低い画面ではデイリーのカードから「遊び方」までが収まらない。
                 // 収まらないときだけスクロールさせる（大きい画面の見た目は変えない）
@@ -116,10 +121,13 @@ struct DailyChallengeRoute: Hashable {}
 ///
 /// 左上にモードの色の 1 色目、右下に 2 色目を置き、画面の内側に向かって消えるようにぼかす。
 /// 文字やボタンの読みやすさを損なわないよう薄くとどめ、モードを切り替えたときは前の光とクロスフェードさせる。
-/// 動き続けるアニメーションは使わないので、撮影モードでも画面は落ち着く。
+/// タイムアタックの確認のカードを出している間だけ、`style` で濃くしたり脈動させたりする（Discussion #394 Q2）。
+/// 脈動しないときは時刻による描き直しを止めるので、撮影モードでも画面は落ち着く。
 struct ModeAmbientBackground: View {
-    /// 光の色。`GameMode.themeColors`
+    /// 光の色。`GameMode.themeColors`、または確認のカードの表示中は難易度の色
     let colors: [Color]
+    /// 光の濃さと脈動
+    var style: AmbientGlowStyle = .standard
 
     @Environment(\.colorScheme) private var colorScheme
 
@@ -134,34 +142,107 @@ struct ModeAmbientBackground: View {
     var body: some View {
         ZStack {
             // 色が変わったときだけ前の光と入れ替える。タイムアタックの制限時間どうしは色が同じなので変わらない
-            glow
-                .id(colors)
-                .transition(.opacity)
+            TimelineView(.animation(paused: style.pulse == nil)) { context in
+                glow(opacity: style.glowOpacity(base: Self.glowOpacity(for: colorScheme), at: context.date))
+            }
+            .id(colors)
+            .transition(.opacity)
         }
         .animation(.easeInOut(duration: Self.crossFadeDuration), value: colors)
+        .animation(.easeInOut(duration: Self.crossFadeDuration), value: style)
         .allowsHitTesting(false)
         .accessibilityHidden(true)
     }
 
-    private var glow: some View {
+    private func glow(opacity: Double) -> some View {
         GeometryReader { proxy in
             // 画面の長い辺の 6 割まで広げ、2 つの光が画面の中ほどで薄く重なるようにする
             let radius = max(proxy.size.width, proxy.size.height) * 0.6
             ZStack {
-                light(colors.first, center: .topLeading, radius: radius)
-                light(colors.last, center: .bottomTrailing, radius: radius)
+                light(colors.first, opacity: opacity, center: .topLeading, radius: radius)
+                light(colors.last, opacity: opacity, center: .bottomTrailing, radius: radius)
             }
         }
     }
 
-    private func light(_ color: Color?, center: UnitPoint, radius: CGFloat) -> some View {
+    private func light(_ color: Color?, opacity: Double, center: UnitPoint, radius: CGFloat) -> some View {
         let color = color ?? .clear
         return RadialGradient(
-            colors: [color.opacity(Self.glowOpacity(for: colorScheme)), color.opacity(0)],
+            colors: [color.opacity(opacity), color.opacity(0)],
             center: center,
             startRadius: 0,
             endRadius: radius
         )
+    }
+}
+
+/// 背景の光の濃さと脈動（Discussion #394 Q2）
+struct AmbientGlowStyle: Equatable {
+    /// 光の脈動。濃さを `1 - depth` 倍から 1 倍の間でゆっくり往復させる
+    struct Pulse: Equatable {
+        /// 1 往復の秒数。点滅に見えないよう、1 秒あたり 3 回未満（0.34 秒より長く）にする
+        let period: TimeInterval
+        /// 濃さを下げる割合（0〜1）
+        let depth: Double
+    }
+
+    /// 光の中心の濃さを、モードの光（`ModeAmbientBackground.glowOpacity`）の何倍にするか
+    let intensity: Double
+    /// nil なら脈動しない
+    let pulse: Pulse?
+
+    /// モードの光（今までの見た目）
+    static let standard = AmbientGlowStyle(intensity: 1, pulse: nil)
+
+    /// `date` の時点の光の中心の濃さ。1 を超えないようにする
+    func glowOpacity(base: Double, at date: Date) -> Double {
+        min(1, base * intensity * pulseScale(at: date))
+    }
+
+    /// 脈動による濃さの倍率（`1 - depth` 以上 1 以下）。脈動しないときは 1
+    func pulseScale(at date: Date) -> Double {
+        guard let pulse, pulse.period > 0 else { return 1 }
+        let phase = date.timeIntervalSinceReferenceDate / pulse.period
+        // 時刻 0 で 1（いちばん濃い）から始まる余弦の波
+        let wave = (1 + cos(2 * .pi * phase)) / 2
+        return 1 - pulse.depth * (1 - wave)
+    }
+}
+
+extension Difficulty {
+    /// 確認のカードを出している間の背景の光の色
+    ///
+    /// エキスパートの 2 色目（黒）はダークの背景に溶けて見えないので、ダークでは難易度ボタンの側面と同じ紺にする。
+    func ambientColors(for colorScheme: ColorScheme) -> [Color] {
+        switch (self, colorScheme) {
+        case (.expert, .dark):
+            return [Color.indigo, gameButtonSideColor(for: colorScheme) ?? Color.indigo]
+        default:
+            return gradientColors
+        }
+    }
+
+    /// 確認のカードを出している間の背景の光の濃さと脈動。難しいほど濃くし、Hard・Expert では脈動させる
+    ///
+    /// Reduce Motion のときは脈動させず、色と濃さだけで難易度を伝える（Discussion #394 Q5）。
+    func confirmationGlowStyle(reduceMotion: Bool) -> AmbientGlowStyle {
+        let intensity: Double
+        let pulse: AmbientGlowStyle.Pulse?
+        switch self {
+        case .easy:
+            intensity = 1.4
+            pulse = nil
+        case .normal:
+            intensity = 1.7
+            pulse = nil
+        case .hard:
+            intensity = 2.0
+            pulse = AmbientGlowStyle.Pulse(period: 2.4, depth: 0.3)
+        case .expert:
+            intensity = 2.4
+            pulse = AmbientGlowStyle.Pulse(period: 1.6, depth: 0.4)
+        }
+        return AmbientGlowStyle(intensity: intensity, pulse: reduceMotion ? nil : pulse)
     }
 }
 
