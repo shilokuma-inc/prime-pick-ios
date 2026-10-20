@@ -41,16 +41,7 @@ struct AppTypeface: Equatable {
     static let standard = AppTypeface(heading: .system(.rounded), number: .named("ArialRoundedMTBold"))
 
     /// アプリで使う書体
-    ///
-    /// DEBUG ビルドでは、起動引数 `-title-logo-candidate <番号>` で選んだロゴの案の書体にする（Issue #415）
-    static var current: AppTypeface {
-        #if DEBUG
-        if let candidate = TitleLogoCandidate.active {
-            return candidate.typeface
-        }
-        #endif
-        return standard
-    }
+    static let current = standard
 }
 
 /// 役割ごとの書体と大きさ・太さ

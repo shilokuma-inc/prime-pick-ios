@@ -72,7 +72,6 @@
 		4F0C82822BC8247500E1480E /* PrimePickApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82812BC8247500E1480E /* PrimePickApp.swift */; };
 		4F0C82842BC8247500E1480E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0C82832BC8247500E1480E /* MainView.swift */; };
 		D409A1000000000000000001 /* TitleLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D409A1000000000000000002 /* TitleLogoView.swift */; };
-		D409C1000000000000000001 /* TitleLogoCandidates.swift in Sources */ = {isa = PBXBuildFile; fileRef = D409C1000000000000000002 /* TitleLogoCandidates.swift */; };
 		B4B3E0FBB5B094E9DB9D10F9 /* DailyChallengeCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB9D10F9B63B39D5001DE476 /* DailyChallengeCardView.swift */; };
 		4F0C82862BC8247600E1480E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F0C82852BC8247600E1480E /* Assets.xcassets */; };
 		4F0C828A2BC8247600E1480E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F0C82892BC8247600E1480E /* Preview Assets.xcassets */; };
@@ -120,7 +119,7 @@
 		92E7336F125333D17ED42F74 /* ComboStageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D381C1E2175A9F05AAB45505 /* ComboStageTests.swift */; };
 		D394A1000000000000000001 /* GamingHueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D394A1000000000000000002 /* GamingHueTests.swift */; };
 		D409B1000000000000000003 /* AppFontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D409B1000000000000000004 /* AppFontTests.swift */; };
-		D409C1000000000000000003 /* TitleLogoCandidateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D409C1000000000000000004 /* TitleLogoCandidateTests.swift */; };
+		D409C1000000000000000003 /* TitleLogoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D409C1000000000000000004 /* TitleLogoTests.swift */; };
 		2556E0FD6E6D48E74D03B76F /* DailyChallengeStreakTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D03B76FC4928104288AD558 /* DailyChallengeStreakTests.swift */; };
 		9431A16ABA552A3DA82E34E8 /* FirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4689944114408D9DC263A40 /* FirebaseAnalytics.swift */; };
 		94FD550E249A186DC1FD7354 /* QuizRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F251B3CAE86C65768630F09 /* QuizRange.swift */; };
@@ -209,7 +208,6 @@
 		4F0C82812BC8247500E1480E /* PrimePickApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimePickApp.swift; sourceTree = "<group>"; };
 		4F0C82832BC8247500E1480E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		D409A1000000000000000002 /* TitleLogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLogoView.swift; sourceTree = "<group>"; };
-		D409C1000000000000000002 /* TitleLogoCandidates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLogoCandidates.swift; sourceTree = "<group>"; };
 		DB9D10F9B63B39D5001DE476 /* DailyChallengeCardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeCardView.swift; sourceTree = "<group>"; };
 		4F0C82852BC8247600E1480E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F0C82872BC8247600E1480E /* PrimePickApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrimePickApp.entitlements; sourceTree = "<group>"; };
@@ -277,7 +275,7 @@
 		D381C1E2175A9F05AAB45505 /* ComboStageTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ComboStageTests.swift; sourceTree = "<group>"; };
 		D394A1000000000000000002 /* GamingHueTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GamingHueTests.swift; sourceTree = "<group>"; };
 		D409B1000000000000000004 /* AppFontTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppFontTests.swift; sourceTree = "<group>"; };
-		D409C1000000000000000004 /* TitleLogoCandidateTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TitleLogoCandidateTests.swift; sourceTree = "<group>"; };
+		D409C1000000000000000004 /* TitleLogoTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TitleLogoTests.swift; sourceTree = "<group>"; };
 		4D03B76FC4928104288AD558 /* DailyChallengeStreakTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeStreakTests.swift; sourceTree = "<group>"; };
 		D76E55438543682B5C190F17 /* SoundFeedback.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SoundFeedback.swift; sourceTree = "<group>"; };
 		D7B0FEAF8D6377ED1DEB0949 /* stage_max.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = stage_max.caf; sourceTree = "<group>"; };
@@ -458,7 +456,6 @@
 				87A9BEB9C37A62F499B13B7B /* DailyChallengeView.swift */,
 				4F0C82832BC8247500E1480E /* MainView.swift */,
 				D409A1000000000000000002 /* TitleLogoView.swift */,
-				D409C1000000000000000002 /* TitleLogoCandidates.swift */,
 				DB9D10F9B63B39D5001DE476 /* DailyChallengeCardView.swift */,
 				4FEC65B02C01164800A8B731 /* SelectDifficultyButtonView.swift */,
 				D394B2000000000000000002 /* TimeAttackStartConfirmationView.swift */,
@@ -565,7 +562,7 @@
 				D381C1E2175A9F05AAB45505 /* ComboStageTests.swift */,
 				D394A1000000000000000002 /* GamingHueTests.swift */,
 				D409B1000000000000000004 /* AppFontTests.swift */,
-				D409C1000000000000000004 /* TitleLogoCandidateTests.swift */,
+				D409C1000000000000000004 /* TitleLogoTests.swift */,
 				4D03B76FC4928104288AD558 /* DailyChallengeStreakTests.swift */,
 				B2A5086DCAB4090FF988D897 /* SoundEffectTests.swift */,
 				A02F6B7D4C9E1F3A8B5D6C7E /* GameButtonStyleTests.swift */,
@@ -771,7 +768,6 @@
 				4F65A3992C01019000065A53 /* Difficulty.swift in Sources */,
 				4F0C82842BC8247500E1480E /* MainView.swift in Sources */,
 				D409A1000000000000000001 /* TitleLogoView.swift in Sources */,
-				D409C1000000000000000001 /* TitleLogoCandidates.swift in Sources */,
 				B4B3E0FBB5B094E9DB9D10F9 /* DailyChallengeCardView.swift in Sources */,
 				4FEC65B12C01164800A8B731 /* SelectDifficultyButtonView.swift in Sources */,
 				D394B2000000000000000001 /* TimeAttackStartConfirmationView.swift in Sources */,
@@ -863,7 +859,7 @@
 				92E7336F125333D17ED42F74 /* ComboStageTests.swift in Sources */,
 				D394A1000000000000000001 /* GamingHueTests.swift in Sources */,
 				D409B1000000000000000003 /* AppFontTests.swift in Sources */,
-				D409C1000000000000000003 /* TitleLogoCandidateTests.swift in Sources */,
+				D409C1000000000000000003 /* TitleLogoTests.swift in Sources */,
 				2556E0FD6E6D48E74D03B76F /* DailyChallengeStreakTests.swift in Sources */,
 				737F5C5649A714DBA0FC7676 /* SoundEffectTests.swift in Sources */,
 				9F1E5A6C3B8D0E2F7A4C5B6D /* GameButtonStyleTests.swift in Sources */,

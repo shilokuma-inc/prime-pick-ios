@@ -36,10 +36,6 @@ struct PrimePickApp: App {
                         Task { await adsStartup.startIfNeeded() }
                     }
                 }
-                #if DEBUG
-                // ロゴの案を見比べる一覧（Issue #415。起動引数 `-title-logo-gallery`）
-                .titleLogoGalleryIfRequested()
-                #endif
         }
     }
 }
