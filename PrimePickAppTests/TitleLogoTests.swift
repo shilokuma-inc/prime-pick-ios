@@ -55,13 +55,13 @@ final class TitleLogoTests: XCTestCase {
         XCTAssertEqual(TitleLogoLayout.scale(isRegularWidth: false, isCompact: false), 1)
         XCTAssertEqual(TitleLogoLayout.scale(isRegularWidth: false, isCompact: true), 0.65)
         XCTAssertEqual(TitleLogoLayout.scale(isRegularWidth: true, isCompact: false), 1.6)
-        XCTAssertEqual(TitleLogoLayout.scale(isRegularWidth: true, isCompact: true), 1.6)
+        XCTAssertEqual(TitleLogoLayout.scale(isRegularWidth: true, isCompact: true), 1.2)
     }
 
     /// 文字の層と飾りの層は同じ大きさで重なる（ずれると文字がマスからはみ出す）
     @MainActor
     func testLettersAndDecorationLayersHaveSameSize() throws {
-        for scale in [0.65, 1, 1.6] as [CGFloat] {
+        for scale in [0.65, 1, 1.2, 1.6] as [CGFloat] {
             let letters = ImageRenderer(content: TitleLogoArtwork(layer: .letters, scale: scale)).uiImage
             let decoration = ImageRenderer(content: TitleLogoArtwork(layer: .decoration, scale: scale)).uiImage
             let lettersSize = try XCTUnwrap(letters?.size)
