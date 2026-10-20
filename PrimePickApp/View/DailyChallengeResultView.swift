@@ -90,7 +90,7 @@ struct DailyChallengeResultView: View {
                     .appFont(.heading(size: 24, weight: .bold))
                     .accessibilityLabel(Text("Streak \(result.streak.current) days"))
                 Text("Best \(result.streak.longest)")
-                    .font(.headline)
+                    .appFont(.number(.headline))
                     .foregroundStyle(.secondary)
             }
 
