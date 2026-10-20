@@ -78,7 +78,7 @@ struct DailyChallengeResultView: View {
                     .appFont(.heading(size: 26, weight: .bold))
             }
             Text("Total Time \(DailyChallengeResult.totalSecondsText(record.totalAnswerSeconds)) sec")
-                .font(.headline)
+                .appFont(.number(.headline))
                 .monospacedDigit()
         }
     }

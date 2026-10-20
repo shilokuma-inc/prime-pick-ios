@@ -89,7 +89,7 @@ struct QuizResultView: View {
             }
 
             CountingScoreText(value: displayedScore)
-                .font(.title)
+                .appFont(.number(.title))
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
                 .minimumScaleFactor(0.6)
@@ -123,7 +123,7 @@ struct QuizResultView: View {
                 Text("Accuracy \(accuracy)%")
             }
         }
-        .font(.headline)
+        .appFont(.number(.headline))
         .multilineTextAlignment(.center)
         .lineLimit(1)
         .minimumScaleFactor(0.6)
