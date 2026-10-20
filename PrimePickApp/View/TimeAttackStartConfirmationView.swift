@@ -23,6 +23,9 @@ struct TimeAttackStartConfirmationView: View {
             Text("Start Time Attack?")
                 .appFont(.heading(size: 22, weight: .bold))
                 .multilineTextAlignment(.center)
+                // 明朝は文字幅が広く、カードの幅（360pt）では「始め／ますか？」と語の途中で折り返すため、縮めて 1 行に収める
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
                 .accessibilityAddTraits(.isHeader)
 
             summary

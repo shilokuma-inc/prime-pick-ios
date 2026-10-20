@@ -40,8 +40,14 @@ struct AppTypeface: Equatable {
     /// 今までの書体（見出し・ボタンは SF Rounded、数字は Arial Rounded MT Bold）
     static let standard = AppTypeface(heading: .system(.rounded), number: .named("ArialRoundedMTBold"))
 
-    /// アプリで使う書体
-    static let current = standard
+    /// ホームのタイトルのロゴ（エラトステネスのふるい。Issue #415 の案 3）の書体。欧文と数字は Didot Bold、日本語はヒラギノ明朝 W6
+    static let sieve = AppTypeface(
+        heading: .namedWithJapanese("Didot-Bold", japanese: "HiraMinProN-W6"),
+        number: .namedWithJapanese("Didot-Bold", japanese: "HiraMinProN-W6")
+    )
+
+    /// アプリで使う書体（ロゴに合わせる。Discussion #409 Q4）
+    static let current = sieve
 }
 
 /// 役割ごとの書体と大きさ・太さ
@@ -78,14 +84,26 @@ struct AppFont: Equatable {
         AppFont(face: typeface.number, size: .scaled(size), weight: weight)
     }
 
-    var font: Font {
-        switch (face, size) {
+    /// 数字。テキストスタイルの大きさにする（スコア・記録など、今までテキストスタイルで出していた数字）
+    static func number(_ style: Font.TextStyle, weight: Font.Weight? = nil, typeface: AppTypeface = .current) -> AppFont {
+        AppFont(face: typeface.number, size: .textStyle(style), weight: weight)
+    }
+
+    /// 既定の文字の大きさの設定（`dynamicTypeSize` が nil）で組み立てた `Font`
+    var font: Font { font(dynamicTypeSize: nil) }
+
+    /// `dynamicTypeSize` の文字の大きさで組み立てた `Font`。nil なら端末の設定に従う
+    ///
+    /// 和文を組み合わせた書体は `UIFont` から作るので、SwiftUI の `.dynamicTypeSize` の環境を自分で反映する
+    func font(dynamicTypeSize: DynamicTypeSize?) -> Font {
+        let traits = Self.traits(for: dynamicTypeSize)
+        return switch (face, size) {
         case let (.system(design), .fixed(size)):
             .system(size: size, weight: weight, design: design)
         case let (.system(design), .scaled(size)):
             // システムの書体には、大きさを指定して Dynamic Type で拡大する API が無いため、
             // 同じ拡大のされ方になるよう本文のテキストスタイルを基準に大きさを合わせる
-            .system(size: UIFontMetrics(forTextStyle: .body).scaledValue(for: size), weight: weight, design: design)
+            .system(size: UIFontMetrics(forTextStyle: .body).scaledValue(for: size, compatibleWith: traits), weight: weight, design: design)
         case let (.system(design), .textStyle(style)):
             .system(style, design: design, weight: weight)
         case let (.named(name), .fixed(size)):
@@ -95,14 +113,19 @@ struct AppFont: Equatable {
         case let (.named(name), .textStyle(style)):
             Font.custom(name, size: Self.defaultPointSize(of: style), relativeTo: style).applyingWeight(weight)
         case let (.namedWithJapanese(name, japanese), size):
-            Font(Self.cascadedUIFont(name: name, japanese: japanese, size: size))
+            Font(Self.cascadedUIFont(name: name, japanese: japanese, size: size, traits: traits))
         }
+    }
+
+    /// SwiftUI の文字の大きさを、`UIFontMetrics` に渡す `UITraitCollection` にする。nil なら端末の設定に従う（nil を返す）
+    static func traits(for dynamicTypeSize: DynamicTypeSize?) -> UITraitCollection? {
+        dynamicTypeSize.map { UITraitCollection(preferredContentSizeCategory: UIContentSizeCategory($0)) }
     }
 
     /// 欧文の書体に和文の書体を組み合わせた `UIFont`
     ///
-    /// Dynamic Type で拡大する大きさは、組み立てた時点の文字の大きさの設定で決まる
-    static func cascadedUIFont(name: String, japanese: String, size: Size) -> UIFont {
+    /// Dynamic Type で拡大する大きさは `traits` の文字の大きさで決まる（nil なら組み立てた時点の端末の設定）
+    static func cascadedUIFont(name: String, japanese: String, size: Size, traits: UITraitCollection? = nil) -> UIFont {
         let pointSize: CGFloat
         let metrics: UIFontMetrics?
         switch size {
@@ -119,7 +142,7 @@ struct AppFont: Equatable {
         let descriptor = UIFontDescriptor(name: name, size: pointSize)
             .addingAttributes([.cascadeList: [UIFontDescriptor(name: japanese, size: pointSize)]])
         let font = UIFont(descriptor: descriptor, size: pointSize)
-        return metrics?.scaledFont(for: font) ?? font
+        return metrics?.scaledFont(for: font, compatibleWith: traits) ?? font
     }
 
     static func uiTextStyle(of style: Font.TextStyle) -> UIFont.TextStyle {
@@ -167,6 +190,17 @@ private extension Font {
 extension View {
     /// 役割ごとの書体（`AppFont`）を使う
     func appFont(_ appFont: AppFont) -> some View {
-        font(appFont.font)
+        modifier(AppFontModifier(appFont: appFont))
+    }
+}
+
+/// 文字の大きさの設定（`.dynamicTypeSize` の上限を含む）が変わったら、書体を組み立て直す
+private struct AppFontModifier: ViewModifier {
+    let appFont: AppFont
+
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+    func body(content: Content) -> some View {
+        content.font(appFont.font(dynamicTypeSize: dynamicTypeSize))
     }
 }

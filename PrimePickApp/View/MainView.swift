@@ -46,7 +46,7 @@ struct MainView: View {
                     homeContent(isLogoCompact: true)
 
                     ScrollView {
-                        homeContent(isLogoCompact: false)
+                        homeContent(isLogoCompact: true)
                     }
                 }
                 // 確認のカードを出している間は、後ろのボタンを押させず、VoiceOver にも読ませない

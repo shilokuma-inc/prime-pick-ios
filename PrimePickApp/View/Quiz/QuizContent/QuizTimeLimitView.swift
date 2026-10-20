@@ -115,8 +115,7 @@ private extension QuizTimeLimitView {
 
     func titleText(_ key: LocalizedStringKey) -> some View {
         Text(key)
-            .font(.largeTitle)
-            .fontWeight(.heavy)
+            .appFont(.heading(.largeTitle, weight: .heavy))
             .minimumScaleFactor(0.5)
             .lineLimit(1)
     }

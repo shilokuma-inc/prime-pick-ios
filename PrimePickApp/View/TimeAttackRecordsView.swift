@@ -101,13 +101,15 @@ private extension TimeAttackRecordsView {
         let isBest = rank == 1
         return HStack(spacing: 12) {
             Text(verbatim: "\(rank)")
-                .font(.headline.monospacedDigit())
+                .appFont(.number(.headline))
+                .monospacedDigit()
                 .frame(minWidth: 24, alignment: .trailing)
                 .foregroundStyle(isBest ? Color.appGreen : Color.secondary)
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(record.score, format: .number)
-                    .font(isBest ? .title3.bold().monospacedDigit() : .body.monospacedDigit())
+                    .appFont(.number(isBest ? .title3 : .body))
+                    .monospacedDigit()
 
                 if isBest {
                     Label("Personal Best", systemImage: "trophy.fill")

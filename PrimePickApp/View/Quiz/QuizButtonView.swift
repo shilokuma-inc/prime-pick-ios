@@ -227,7 +227,7 @@ private func quizButton(choice: AnswerChoice, size: CGSize, isPressed: Bool) -> 
             .minimumScaleFactor(0.5)
 
         Text(choice.title)
-            // 数字の書体（ArialRoundedMTBold）には日本語の字形が無く細字で描かれるため、日本語も太字になる見出しの書体を使う
+            // 選択肢の名前は見出しの書体で出す（数字の書体だった頃は日本語の字形が無く細字で描かれていた）
             .appFont(.heading(size: 30, weight: .bold))
             .foregroundStyle(Color.primary)
             .multilineTextAlignment(.center)
