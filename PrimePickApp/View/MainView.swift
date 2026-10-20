@@ -337,15 +337,16 @@ private extension MainView {
 
     /// デイリーの結果画面から、タイトルで選んでいる設定のタイムアタックを始める
     ///
-    /// デイリーの画面をタイムアタックに置き換える（タイムアタックから戻るとタイトルに戻る）。
+    /// すぐには始めず、タイトル画面に戻ってから確認のカードを出す（Discussion #394 Q4）。
+    /// 背景と虹の演出はタイトル画面にしかないため。「スタート」で出題画面へ進み、戻るとタイトルに戻る。「やめる」ならタイトル画面に残る。
+    /// 設定の `source`（`.dailyResult`）はカードを挟んでもそのまま `QuizView` に渡すので、`quiz_start` の source は変わらない。
     func playTimeAttackFromDailyChallenge() {
         let setting = DailyChallengeResult.timeAttackSetting(
             selectedGameMode: gameMode,
             selectedQuestionCount: selectedQuestionCount
         )
-        var newPath = NavigationPath()
-        newPath.append(setting)
-        path = newPath
+        path = NavigationPath()
+        pendingTimeAttack = setting
     }
 
     func refreshDailyChallengeCard() {

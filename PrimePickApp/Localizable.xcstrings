@@ -1393,6 +1393,38 @@
         }
       }
     },
+    "Difficulty: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Difficulty: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "難易度 %@"
+          }
+        }
+      }
+    },
+    "Time limit: %lld sec": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time limit: %lld sec"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "制限時間 %lld 秒"
+          }
+        }
+      }
+    },
     "Start": {
       "localizations": {
         "en": {

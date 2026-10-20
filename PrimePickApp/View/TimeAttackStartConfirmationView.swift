@@ -97,6 +97,8 @@ struct TimeAttackStartConfirmationView: View {
                             )
                         )
                 )
+                // 見た目は難易度名だけだが、読み上げでは何の値かが分かるようにする
+                .accessibilityLabel(Text("Difficulty: \(Text(setting.difficulty.localizedTitle))"))
 
             if case .timeAttack(let duration) = setting.gameMode {
                 Label {
@@ -105,6 +107,8 @@ struct TimeAttackStartConfirmationView: View {
                     Image(systemName: "timer")
                 }
                 .font(.system(size: 18, weight: .bold, design: .rounded))
+                // 時計のアイコンは読み上げないので、制限時間であることを言葉で伝える
+                .accessibilityLabel(Text("Time limit: \(duration.seconds) sec"))
             }
         }
         .accessibilityElement(children: .combine)
