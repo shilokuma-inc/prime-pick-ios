@@ -30,6 +30,14 @@ final class GameModeTests: XCTestCase {
 
     // MARK: - ミニ解説
 
+    func testOnlyTimeAttackConfirmsBeforeStarting() {
+        XCTAssertFalse(GameMode.practice.confirmsBeforeStarting)
+        XCTAssertFalse(GameMode.dailyChallenge.confirmsBeforeStarting)
+        for duration in TimeAttackDuration.allCases {
+            XCTAssertTrue(GameMode.timeAttack(duration).confirmsBeforeStarting, "duration=\(duration.seconds)")
+        }
+    }
+
     func testAnswerExplanationIsShownOnlyInPractice() {
         XCTAssertTrue(GameMode.practice.showsAnswerExplanation)
         for duration in TimeAttackDuration.allCases {
