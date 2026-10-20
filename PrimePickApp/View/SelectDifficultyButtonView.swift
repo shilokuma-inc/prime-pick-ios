@@ -11,6 +11,8 @@ struct SelectDifficultyButtonView: View {
     /// ゲームモード。選択 UI は `SelectQuizSettingView` にまとめている
     var gameMode: GameMode = .practice
     var questionCount: QuizQuestionCount = .default
+    /// 始める前に確認を挟むモード（タイムアタック）で難易度を押したときに呼ぶ。nil ならどのモードでもすぐ遷移する
+    var onRequestStartConfirmation: ((QuizSetting) -> Void)?
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
@@ -28,23 +30,25 @@ struct SelectDifficultyButtonView: View {
 
 extension SelectDifficultyButtonView {
     func selectDifficultyButton(difficulty: Difficulty) -> some View {
-        // 遷移先は MainView の navigationDestination で作る（押すまで QuizView を作らないため）
-        NavigationLink(
-            value: QuizSetting(
-                difficulty: difficulty,
-                gameMode: gameMode,
-                questionCount: questionCount
-            )
-        ) {
-            Text(difficulty.localizedTitle)
-                .font(.system(size: 24, weight: .bold, design: .rounded))
-                .padding()
-                .frame(maxWidth: .infinity)
-                .foregroundColor(.white)
-                .overlay(
-                    RoundedRectangle(cornerRadius: GameButtonAppearance.defaultCornerRadius, style: .continuous)
-                        .strokeBorder(Color.white.opacity(0.7), lineWidth: 2)
-                )
+        let setting = QuizSetting(
+            difficulty: difficulty,
+            gameMode: gameMode,
+            questionCount: questionCount
+        )
+        return Group {
+            if gameMode.confirmsBeforeStarting, let onRequestStartConfirmation {
+                // タイムアタックはすぐ始めず、MainView が確認のカードを出す（Discussion #394）
+                Button {
+                    onRequestStartConfirmation(setting)
+                } label: {
+                    difficultyLabel(difficulty)
+                }
+            } else {
+                // 遷移先は MainView の navigationDestination で作る（押すまで QuizView を作らないため）
+                NavigationLink(value: setting) {
+                    difficultyLabel(difficulty)
+                }
+            }
         }
         .buttonStyle(
             GameButtonStyle(
@@ -56,6 +60,18 @@ extension SelectDifficultyButtonView {
         )
         .padding(.horizontal, 50)
         .padding(.bottom, 10)
+    }
+
+    private func difficultyLabel(_ difficulty: Difficulty) -> some View {
+        Text(difficulty.localizedTitle)
+            .font(.system(size: 24, weight: .bold, design: .rounded))
+            .padding()
+            .frame(maxWidth: .infinity)
+            .foregroundColor(.white)
+            .overlay(
+                RoundedRectangle(cornerRadius: GameButtonAppearance.defaultCornerRadius, style: .continuous)
+                    .strokeBorder(Color.white.opacity(0.7), lineWidth: 2)
+            )
     }
 }
 

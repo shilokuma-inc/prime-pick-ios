@@ -1,0 +1,127 @@
+//
+//  TimeAttackStartConfirmationView.swift
+//  PrimePickApp
+//
+
+import SwiftUI
+
+/// タイムアタックを始める前に、タイトル画面に重ねて出す確認のカード（Discussion #394 Q1）
+///
+/// 後ろのタイトル画面（背景・「Prime Pick」の虹）が見えたままになるよう、画面全体は覆わずカードだけを出す。
+/// VoiceOver ではモーダルとして扱い、エスケープのジェスチャー（2 本指の Z）で「やめる」と同じにする。
+struct TimeAttackStartConfirmationView: View {
+    let setting: QuizSetting
+    let onStart: () -> Void
+    let onCancel: () -> Void
+
+    @Environment(\.colorScheme) private var colorScheme
+
+    static let cornerRadius: CGFloat = 28
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("Start Time Attack?")
+                .font(.system(size: 22, weight: .bold, design: .rounded))
+                .multilineTextAlignment(.center)
+                .accessibilityAddTraits(.isHeader)
+
+            summary
+
+            VStack(spacing: 12) {
+                Button(action: onStart) {
+                    Text("Start")
+                        .font(.system(size: 22, weight: .bold, design: .rounded))
+                        .foregroundColor(.white)
+                        .padding(.vertical, 14)
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(
+                    GameButtonStyle(
+                        appearance: GameButtonAppearance(
+                            colors: setting.difficulty.gradientColors,
+                            side: setting.difficulty.gameButtonSideColor(for: colorScheme)
+                        )
+                    )
+                )
+
+                Button(action: onCancel) {
+                    Text("Quit")
+                        .font(.system(size: 18, weight: .bold, design: .rounded))
+                        .foregroundColor(.primary)
+                        .padding(.vertical, 12)
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(GameButtonStyle(appearance: .neutral(shape: .capsule, depth: 4)))
+            }
+        }
+        .padding(24)
+        .frame(maxWidth: 360)
+        .background(
+            RoundedRectangle(cornerRadius: Self.cornerRadius, style: .continuous)
+                .fill(Color.appBackground)
+        )
+        .overlay(
+            // 難易度の色の縁取りで、どの難易度を始めるかをカードの見た目でも伝える
+            RoundedRectangle(cornerRadius: Self.cornerRadius, style: .continuous)
+                .strokeBorder(
+                    LinearGradient(
+                        colors: setting.difficulty.gradientColors,
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 4
+                )
+        )
+        .shadow(color: .black.opacity(0.25), radius: 20, y: 8)
+        .padding(.horizontal, 32)
+        .accessibilityElement(children: .contain)
+        .accessibilityAddTraits(.isModal)
+        .accessibilityAction(.escape, onCancel)
+    }
+
+    /// 難易度と制限時間。何が始まるかが分かるように並べる
+    private var summary: some View {
+        HStack(spacing: 12) {
+            Text(setting.difficulty.localizedTitle)
+                .font(.system(size: 18, weight: .bold, design: .rounded))
+                .foregroundColor(.white)
+                .padding(.vertical, 6)
+                .padding(.horizontal, 16)
+                .background(
+                    Capsule()
+                        .fill(
+                            LinearGradient(
+                                colors: setting.difficulty.gradientColors,
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                )
+                // 見た目は難易度名だけだが、読み上げでは何の値かが分かるようにする
+                .accessibilityLabel(Text("Difficulty: \(Text(setting.difficulty.localizedTitle))"))
+
+            if case .timeAttack(let duration) = setting.gameMode {
+                Label {
+                    Text(duration.localizedTitle)
+                } icon: {
+                    Image(systemName: "timer")
+                }
+                .font(.system(size: 18, weight: .bold, design: .rounded))
+                // 時計のアイコンは読み上げないので、制限時間であることを言葉で伝える
+                .accessibilityLabel(Text("Time limit: \(duration.seconds) sec"))
+            }
+        }
+        .accessibilityElement(children: .combine)
+    }
+}
+
+#Preview {
+    ZStack {
+        Color.appBackground.ignoresSafeArea()
+        TimeAttackStartConfirmationView(
+            setting: QuizSetting(difficulty: .expert, gameMode: .timeAttack(.thirtySeconds), questionCount: .default),
+            onStart: {},
+            onCancel: {}
+        )
+    }
+}

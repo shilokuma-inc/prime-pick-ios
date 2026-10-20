@@ -102,6 +102,15 @@ final class DailyChallengeResultTests: XCTestCase {
         XCTAssertEqual(setting.difficulty, .normal)
     }
 
+    /// デイリーの結果画面から始めるタイムアタックも、確認のカードを挟む（Discussion #394 Q4）
+    func testTimeAttackSettingFromDailyResultConfirmsBeforeStarting() {
+        for gameMode in GameMode.allCases {
+            let setting = DailyChallengeResult.timeAttackSetting(selectedGameMode: gameMode, selectedQuestionCount: .default)
+            XCTAssertTrue(setting.gameMode.confirmsBeforeStarting, "\(gameMode.id)")
+            XCTAssertEqual(setting.source, .dailyResult, "\(gameMode.id)")
+        }
+    }
+
     // MARK: - 結果画面への切り替え
 
     func testFinisherNotifiesFinishedRecord() {
