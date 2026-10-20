@@ -96,7 +96,7 @@ struct AppFont: Equatable {
     ///
     /// 和文を組み合わせた書体は `UIFont` から作るので、SwiftUI の `.dynamicTypeSize` の環境を自分で反映する
     func font(dynamicTypeSize: DynamicTypeSize?) -> Font {
-        let traits = dynamicTypeSize.map { UITraitCollection(preferredContentSizeCategory: UIContentSizeCategory($0)) }
+        let traits = Self.traits(for: dynamicTypeSize)
         return switch (face, size) {
         case let (.system(design), .fixed(size)):
             .system(size: size, weight: weight, design: design)
@@ -115,6 +115,11 @@ struct AppFont: Equatable {
         case let (.namedWithJapanese(name, japanese), size):
             Font(Self.cascadedUIFont(name: name, japanese: japanese, size: size, traits: traits))
         }
+    }
+
+    /// SwiftUI の文字の大きさを、`UIFontMetrics` に渡す `UITraitCollection` にする。nil なら端末の設定に従う（nil を返す）
+    static func traits(for dynamicTypeSize: DynamicTypeSize?) -> UITraitCollection? {
+        dynamicTypeSize.map { UITraitCollection(preferredContentSizeCategory: UIContentSizeCategory($0)) }
     }
 
     /// 欧文の書体に和文の書体を組み合わせた `UIFont`

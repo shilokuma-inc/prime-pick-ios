@@ -138,6 +138,17 @@ final class AppFontTests: XCTestCase {
         XCTAssertEqual(fixed.font(dynamicTypeSize: .accessibility3), fixed.font(dynamicTypeSize: .large))
     }
 
+    /// 和文を組み合わせた書体にも、SwiftUI の文字の大きさがそのまま渡る
+    func testTraitsForDynamicTypeSize() {
+        XCTAssertNil(AppFont.traits(for: nil))
+        XCTAssertEqual(AppFont.traits(for: .accessibility3)?.preferredContentSizeCategory, .accessibilityExtraLarge)
+        XCTAssertEqual(AppFont.traits(for: .large)?.preferredContentSizeCategory, .large)
+
+        let huge = AppFont.cascadedUIFont(name: "Didot-Bold", japanese: "HiraMinProN-W6", size: .scaled(22), traits: AppFont.traits(for: .accessibility3))
+        let large = AppFont.cascadedUIFont(name: "Didot-Bold", japanese: "HiraMinProN-W6", size: .scaled(22), traits: AppFont.traits(for: .large))
+        XCTAssertGreaterThan(huge.pointSize, large.pointSize)
+    }
+
     /// アプリの書体の日本語はヒラギノ明朝 W6 で描く
     func testSieveFontCascadesToMincho() {
         guard case let .namedWithJapanese(name, japanese) = AppTypeface.sieve.heading else {
