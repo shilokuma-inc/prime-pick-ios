@@ -43,7 +43,7 @@ xcodebuild test -project PrimePickApp.xcodeproj -scheme PrimePickApp -destinatio
 
 - 通常のフィーチャーブランチは `develop` 起点で切る。ralph-loop の作業ブランチは `epic/**` 起点で切り、PR もその epic 宛てに出す
 - コミット: `[type] 日本語の説明`。PR タイトル: `【TYPE】タイトル`。Assignee に自分を設定する
-- 見出し・ボタン・数字の書体は `AppFont`（`PrimePickApp/View/AppFont.swift`。`.appFont(.heading(size:weight:))` / `.appFont(.number(size:))`）を使う（直接 `.custom` や `.system(design: .rounded)` を書かない）。書体そのものは `AppTypeface.current` で差し替える
+- 見出し・ボタン・数字の書体は `AppFont`（`PrimePickApp/View/AppFont.swift`。`.appFont(.heading(size:weight:))` / `.appFont(.number(size:))`）を使う（直接 `.custom` や `.system(design: .rounded)` を書かない。タイトルのロゴ（`TitleLogoView`）の中の書体は除く）。書体そのものは `AppTypeface.current` で差し替える
 
 ## ralph-loop による自律開発
 
