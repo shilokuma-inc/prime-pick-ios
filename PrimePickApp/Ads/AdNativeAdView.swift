@@ -29,8 +29,10 @@ struct AdNativeAdView: View {
     @State private var hasReceivedAd = false
 
     var body: some View {
+        // 広告ユニット ID が欠けている置き場所には枠を出さない（ほかの置き場所は出す）
+        let adUnitID = configuration?.nativeAdUnitID(for: placement)
         let slot = AdSlot.state(
-            canShowAds: eligibility.canShowAds(at: placement),
+            canShowAds: eligibility.canShowAds(at: placement) && adUnitID != nil,
             isReadyToLoadAds: isReadyToLoadAds,
             didFailToLoad: didFailToLoad
         )
@@ -38,9 +40,9 @@ struct AdNativeAdView: View {
         // 行そのものを消す（`Group` を空にする）と SwiftUI がビューを片付けて task がキャンセルされ、
         // 再試行が動かなくなる（シミュレータで確認）。代わりに下の修飾で行を空に見せる
         VStack(spacing: 0) {
-            if slot == .loading, let configuration {
+            if slot == .loading, let adUnitID {
                 NativeAdCard(
-                    adUnitID: configuration.nativeAdUnitID,
+                    adUnitID: adUnitID,
                     onReceive: { hasReceivedAd = true },
                     onFailure: {
                         if AdSlot.collapsesOnFailure(hasReceivedAd: hasReceivedAd) {
