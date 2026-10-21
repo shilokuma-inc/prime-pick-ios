@@ -80,9 +80,10 @@ while IFS=$'\t' read -r -u 3 language _ _ _; do
         "$REMOVE_ALPHA" "$output"
         actual="$(sips -g pixelWidth -g pixelHeight "$output" | awk '/pixelWidth/{w=$2} /pixelHeight/{h=$2} END{print w "x" h}')"
         if [ "$actual" != "${width}x${height}" ]; then
-            echo "$output の寸法が ${width}x${height} ではありません（$actual）" >&2
+            echo "${output} の寸法が ${width}x${height} ではありません（${actual}）" >&2
             exit 1
         fi
-        echo "$output（$actual）"
+        # 変数名の直後に全角文字が続くと、macOS の bash 3.2 は全角文字の先頭バイトまで変数名と見なす（unbound variable）ので波括弧で閉じる
+        echo "${output}（${actual}）"
     done <<< "$TARGETS"
 done 3< <($CONFIG languages)

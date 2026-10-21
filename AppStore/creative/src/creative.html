@@ -5,7 +5,8 @@
   creative.html?type=header&lang=ja&screens=01_home のように指定する
   （同じフォルダの screens/<言語>/ に 6.9 inch のスクリーンショット、icon.png にアプリアイコンが要る）。
 
-  アプリを作ったら、:root の色と copy の文言（TODO:）をアプリに合わせて書き換える。
+  Prime Pick 用（#441）。色はホームの背景（淡いミントから水色）とタイトルのロゴのタイルの文字色、
+  見出しの書体はアプリの見出し（AppFont: Didot Bold ＋ ヒラギノ明朝 W6）に合わせた。
   TODO: が残っているあいだは Tools/upload_creative_assets.py が反映を止める。
 
   方針（https://developer.apple.com/app-store/asset-best-practices/）
@@ -18,14 +19,14 @@
 <head>
 <meta charset="utf-8">
 <style>
-  /* TODO: アプリのアイコンやテーマに合わせた色にする */
+  /* ホームの背景（ミント → 水色）と、タイトルのロゴの文字色（P の橙・C の青緑） */
   :root {
-    --background: #0b1026;
-    --background-2: #1b2470;
-    --highlight: #ffd98a;
-    --accent: #5b6cff;
-    --text: #ffffff;
-    --text-2: rgba(255, 255, 255, 0.76);
+    --background: #d9f6ec;
+    --background-2: #c3ebf6;
+    --highlight: #f26a1b;
+    --accent: #10a59a;
+    --text: #23313a;
+    --text-2: rgba(35, 49, 58, 0.72);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { width: 100%; height: 100%; overflow: hidden; }
@@ -36,10 +37,12 @@
     -webkit-font-smoothing: antialiased;
   }
   body[data-lang="en"] { font-family: "SF Pro Display", system-ui, "Hiragino Sans", sans-serif; }
+  /* 見出しはアプリの見出しと同じ書体（数字・英字は Didot、日本語はヒラギノ明朝） */
+  .headline, .copy .title, .brand { font-family: "Didot", "Hiragino Mincho ProN", serif; }
 
   .canvas { position: relative; width: 100vw; height: 100vh; overflow: hidden;
     background:
-      radial-gradient(ellipse 60% 70% at 50% 100%, color-mix(in srgb, var(--accent) 45%, transparent), transparent 70%),
+      radial-gradient(ellipse 60% 70% at 50% 100%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%),
       radial-gradient(ellipse 90% 80% at 50% 0%, var(--background-2), var(--background) 75%); }
 
   /* box-shadow の大きなぼかしは Chrome で四角い継ぎ目が出るので、光はグラデーションで描く */
@@ -59,11 +62,11 @@
   .chips { display: flex; flex-direction: column; gap: 0.55em; }
   .chip { display: inline-flex; align-items: center; gap: 0.6em; align-self: flex-start;
     padding: 0.45em 0.95em 0.5em 0.7em; border-radius: 999px; font-weight: 700;
-    background: color-mix(in srgb, var(--accent) 22%, transparent);
-    box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--accent) 60%, white 10%); }
+    background: color-mix(in srgb, var(--accent) 14%, white);
+    box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--accent) 70%, white 10%); }
   .chip i { font-style: normal; display: grid; place-items: center; width: 1.5em; height: 1.5em; border-radius: 50%;
-    background: var(--accent); font-size: 0.8em; }
-  .brand { position: absolute; display: flex; align-items: center; gap: 0.6em; font-weight: 800; color: var(--highlight); }
+    background: var(--accent); color: #ffffff; font-size: 0.8em; }
+  .brand { position: absolute; display: flex; align-items: center; gap: 0.6em; font-weight: 800; color: var(--text); }
   .brand img { height: 1.9em; border-radius: 22%; }
 </style>
 </head>
@@ -78,15 +81,15 @@
   const screens = (params.get("screens") || "").split(",").filter(Boolean);
   document.body.dataset.lang = lang;
 
-  // TODO: アプリに合わせて書き換える。<em> で囲んだところが強調色になる
+  // <em> で囲んだところが強調色になる。App Store に載せているのは ja だけ（en は languages.json に足すときのため）
   const copy = {
     ja: {
-      header: { title: "TODO: アプリの<em>いちばんの価値</em>をひとことで。", sub: "TODO: それを支える一文。" },
-      search: { title: "TODO: 何ができるかを<br><em>一目で</em>。", chips: ["TODO: 主な機能 1", "TODO: 主な機能 2", "TODO: 主な機能 3"] },
+      header: { title: "その数、<em>素数</em>？", sub: "「素数」か「ちがう」か。2 択で答えて、数に強くなる。" },
+      search: { title: "素数か、<br><em>ちがう</em>か。", chips: ["15〜60 秒のタイムアタック", "1 日 1 回の今日のチャレンジ", "間違えた数は素因数分解で復習"] },
     },
     en: {
-      header: { title: "TODO: Your app's <em>best value</em> in one line.", sub: "TODO: One sentence that backs it up." },
-      search: { title: "TODO: What it does,<br><em>at a glance</em>.", chips: ["TODO: Key feature 1", "TODO: Key feature 2", "TODO: Key feature 3"] },
+      header: { title: "Is it <em>prime</em>?", sub: "Prime or not — answer in one tap and get sharper with numbers." },
+      search: { title: "Prime,<br>or <em>not</em>?", chips: ["15, 30 and 60 sec Time Attack", "A new Daily Challenge every day", "Review misses with prime factors"] },
     },
   }[lang];
   // 文言の無い言語は、背景だけの画像を書き出さないようここで止める（render_creative_assets.sh でも先に確かめる）
