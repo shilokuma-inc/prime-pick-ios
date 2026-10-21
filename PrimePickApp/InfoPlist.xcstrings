@@ -8,13 +8,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Allowing tracking lets us show ads that match your interests. If you don't allow it, you'll still see ads, but they won't be personalized."
+            "value" : "Allowing tracking helps us show ads that better match your interests, based on your activity in other apps and websites. You'll still see ads if you don't allow it."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "許可すると、興味に合った広告が表示されます。許可しなくても広告は表示されますが、あなたに合わせたものにはなりません。"
+            "value" : "許可すると、ほかのアプリやWebサイトでの利用状況をもとに、興味に合った広告が表示されやすくなります。許可しなくても広告は表示されます。"
           }
         }
       }
