@@ -66,7 +66,13 @@ def load_shared(directory: Path) -> tuple[dict[str, str], list[str]]:
         if isinstance(value, str) and value.strip():
             # テンプレートの仮の値（TODO:）は形を問わず、反映の前の TODO: の検査で止める
             parsed = urllib.parse.urlparse(value)
-            if "TODO:" not in value and not (parsed.scheme == "https" and parsed.hostname):
+            try:
+                # `https://example.com:abc` のような不正なポート・範囲外のポートは、ここで ValueError になる
+                parsed.port
+                valid_port = True
+            except ValueError:
+                valid_port = False
+            if "TODO:" not in value and not (parsed.scheme == "https" and parsed.hostname and valid_port):
                 problems.append(f"{path}: {key} は https:// で始まる URL にしてください（ホスト名も要る）")
             attributes[key] = value
         elif required:
@@ -323,6 +329,8 @@ def main() -> int:
     placeholders = [
         f"{target.language}.{field}" for target, attributes in entries
         for field, value in attributes.items() if "TODO:" in value
+    ] + [
+        f"{language}.whatsNew.version" for language, version in whats_new_versions.items() if "TODO:" in version
     ]
     if placeholders and not args.check:
         raise SystemExit(f"テンプレートの仮の文言（TODO:）が残っています: {', '.join(placeholders)}")
