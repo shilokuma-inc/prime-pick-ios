@@ -285,22 +285,28 @@ class AppStoreConnect:
             {"data": [{"type": "appScreenshots", "id": i} for i in screenshot_ids]},
         )
 
-    def wait_for_delivery(self, screenshot_ids: list[str]) -> None:
-        """Apple 側の取り込みが終わるまで待つ。失敗していればここで気づける。"""
+    def wait_for_delivery(self, screenshot_ids: list[str]) -> dict[str, list]:
+        """Apple 側の取り込みが終わるまで待ち、取り込みに失敗した画像の ID とエラーを返す（全部通れば空）。
+
+        失敗した 1 枚で止めると、ほかの画像が通ったかどうかが分からないので、全部が終わる（通るか失敗する）まで待つ。
+        時間内に終わらない画像があればここで止める。
+        """
         if self.dry_run:
-            return
+            return {}
         deadline = time.time() + DELIVERY_TIMEOUT
         pending = list(screenshot_ids)
+        failed: dict[str, list] = {}
         while pending and time.time() < deadline:
             still_pending = []
             for screenshot_id in pending:
                 attributes = self.get(f"/v1/appScreenshots/{screenshot_id}")["data"]["attributes"]
                 state = attributes.get("assetDeliveryState") or {}
                 if state.get("errors"):
-                    raise SystemExit(
-                        f"{attributes.get('fileName')} の取り込みに失敗しました: {state['errors']}"
-                    )
-                if state.get("state") != "COMPLETE":
+                    failed[screenshot_id] = state["errors"]
+                    print(f"    {attributes.get('fileName')}: 取り込みに失敗 {state['errors']}")
+                elif state.get("state") == "COMPLETE":
+                    print(f"    {attributes.get('fileName')}: 取り込み済み")
+                else:
                     still_pending.append(screenshot_id)
             pending = still_pending
             if pending:
@@ -310,7 +316,7 @@ class AppStoreConnect:
                 f"{len(pending)} 枚の取り込みが {DELIVERY_TIMEOUT} 秒で終わりませんでした。"
                 "App Store Connect の画面で状態を確認してください。"
             )
-
+        return failed
 
 def make_token(key_id: str, issuer_id: str, private_key: str) -> str:
     now = int(time.time())

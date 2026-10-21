@@ -39,6 +39,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from app_store_config import MAX_SCREENSHOTS, bundle_id, languages, parse_list
 from app_store_connect import AppStoreConnect
 
+#: 取り込みに失敗した画像を上げる回数の上限（最初の 1 回を含む）
+DELIVERY_ATTEMPTS = 4
+
 
 def screenshots_for(directory: Path) -> list[Path]:
     """ファイル名の順に並べる。この順がそのまま App Store の並び順になる。"""
@@ -155,9 +158,30 @@ def main() -> int:
             client.delete(f"/v1/appScreenshotSets/{existing}")
         set_id = client.create_set(localization_id, args.display_type)
 
-        screenshot_ids = [client.upload(set_id, image) for image in images]
-        client.reorder(set_id, screenshot_ids)
-        client.wait_for_delivery(screenshot_ids)
+        screenshot_ids = {image: client.upload(set_id, image) for image in images}
+        # App Store Connect の取り込みはときどき ASSET_FAILED になる（画像は同じでも、上げ直すと通る）。
+        # セットごとやり直すと別の画像がまた失敗するので、失敗した画像だけを消して上げ直す
+        waiting = list(screenshot_ids.values())
+        for attempt in range(1, DELIVERY_ATTEMPTS + 1):
+            failed = client.wait_for_delivery(waiting)
+            if not failed:
+                break
+            names = [image.name for image, screenshot_id in screenshot_ids.items() if screenshot_id in failed]
+            if attempt == DELIVERY_ATTEMPTS:
+                raise SystemExit(
+                    f"{target.language}: {DELIVERY_ATTEMPTS} 回上げても取り込みに失敗しました: {', '.join(names)}"
+                )
+            print(f"  {target.language}: 取り込みに失敗した {len(names)} 枚を上げ直します"
+                  f"（{attempt + 1}/{DELIVERY_ATTEMPTS} 回目）: {', '.join(names)}")
+            # 通った画像は待ち直さず、上げ直した画像だけを待つ
+            waiting = []
+            for image, screenshot_id in list(screenshot_ids.items()):
+                if screenshot_id in failed:
+                    client.delete(f"/v1/appScreenshots/{screenshot_id}")
+                    screenshot_ids[image] = client.upload(set_id, image)
+                    waiting.append(screenshot_ids[image])
+        # 上げ直した画像はセットの末尾に付くので、並び順は全部が通ってから揃える
+        client.reorder(set_id, [screenshot_ids[image] for image in images])
         uploaded_total += len(images)
         print(f"  {target.language} → {target.store_locale}: {len(images)} 枚")
 
