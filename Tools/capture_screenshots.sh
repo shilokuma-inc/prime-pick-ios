@@ -165,11 +165,13 @@ xcrun simctl status_bar "$UDID" override \
 
 # iPhone Duo のように画面が 2 つある機種では、どちらの画面を撮るかが起動のたびに変わる（内側は真っ黒に写る）。
 # screenshots.json の sizes の先頭と同じ寸法の画面を選んで撮る。見つからなければ simctl の既定の画面を撮る
+# （awk は途中で exit せず最後まで読む。pipefail の下で simctl が SIGPIPE で落ちると、見つけた画面を捨ててしまう）
 EXPECTED_SIZE="$($CONFIG sizes "$DISPLAY_TYPE" | head -n 1)"
 DISPLAY_ID="$(xcrun simctl io "$UDID" enumerate 2>/dev/null | awk -v size="$EXPECTED_SIZE" '
     /^ *UUID:/ { uuid = $2 }
     /^ *Default width:/ { width = $3 }
-    /^ *Default height:/ { if (width "x" $3 == size) { print uuid; exit } }
+    /^ *Default height:/ { if (found == "" && width "x" $3 == size) { found = uuid } }
+    END { if (found != "") print found }
 ')" || DISPLAY_ID=""
 DISPLAY_OPTION=()
 if [ -n "$DISPLAY_ID" ]; then
