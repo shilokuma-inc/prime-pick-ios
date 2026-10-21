@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A1B2C3D4E5F60718293A4B5E /* QuizCore in Frameworks */ = {isa = PBXBuildFile; productRef = A1B2C3D4E5F60718293A4B5D /* QuizCore */; };
 		B7528572BEDF03439A16F358 /* AdSlotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F797DA8F6B9FDFC8BA3E13D3 /* AdSlotTests.swift */; };
 		A5C1D7E93B2F40816A7D2E11 /* AdNativeAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C1D7E93B2F40816A7D2E12 /* AdNativeAdView.swift */; };
 		A5C1D7E93B2F40816A7D2E13 /* NativeAdCardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C1D7E93B2F40816A7D2E14 /* NativeAdCardLayout.swift */; };
@@ -315,6 +316,7 @@
 				193A97532DEDA1148EE0A2C9 /* FirebaseAnalytics in Frameworks */,
 				02FF4F352DD9D0D2B2CD889C /* LicenseList in Frameworks */,
 				990565BDA5A61E48BCB9E7E6 /* GoogleMobileAds in Frameworks */,
+				A1B2C3D4E5F60718293A4B5E /* QuizCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,6 +644,7 @@
 				2E8881254652FCE64BDC5E49 /* FirebaseAnalytics */,
 				32790AB93D445A009671FE20 /* LicenseList */,
 				3F32C332EEE42B0581D9CD99 /* GoogleMobileAds */,
+				A1B2C3D4E5F60718293A4B5D /* QuizCore */,
 			);
 			productName = PrimePickApp;
 			productReference = 4F0C827E2BC8247500E1480E /* PrimePickApp.app */;
@@ -694,6 +697,7 @@
 				7BA07D0A663503931EA1B7A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				A46CBE12B5749BF9BA814536 /* XCRemoteSwiftPackageReference "LicenseList" */,
 				D6FAEDB532A7EAA3CE407A49 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				A1B2C3D4E5F60718293A4B5C /* XCRemoteSwiftPackageReference "quiz-kit" */,
 			);
 			productRefGroup = 4F0C827F2BC8247500E1480E /* Products */;
 			projectDirPath = "";
@@ -1164,6 +1168,14 @@
 				minimumVersion = 13.11.0;
 			};
 		};
+		A1B2C3D4E5F60718293A4B5C /* XCRemoteSwiftPackageReference "quiz-kit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/shilokuma-inc/quiz-kit";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1181,6 +1193,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D6FAEDB532A7EAA3CE407A49 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
+		};
+		A1B2C3D4E5F60718293A4B5D /* QuizCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1B2C3D4E5F60718293A4B5C /* XCRemoteSwiftPackageReference "quiz-kit" */;
+			productName = QuizCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

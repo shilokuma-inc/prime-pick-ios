@@ -3,6 +3,7 @@
 //  PrimePickApp
 //
 
+import QuizCore
 import SwiftUI
 
 /// 解答結果に対して返すフィードバックの種類
