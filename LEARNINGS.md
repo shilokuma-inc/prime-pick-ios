@@ -6,6 +6,7 @@
 
 - `PrimePickApp.xcodeproj/project.pbxproj` には `PRODUCT_BUNDLE_IDENTIFIER` がアプリ（`ml.mrs1669.PrimePickApp`）とテスト（`…Tests`）の 2 種類ある。`Tools/app_store_config.py` の `bundle_id()` は productType が application のターゲットの build configuration だけをたどる（ninjacord 由来の「全部集めて 1 つ」の実装だとテストの値が混ざって止まる）（2026-10-05）
 - 撮影モード（`-screenshot-demo`）で止める必要があった動き: `gamingText()` の hueRotation（タイトル）、`QuizResultView` の枠色を変える Timer、タイムアタックのカウントダウン。`Tools/capture_screenshots.sh` は連続 2 枚のスクリーンショットが一致するまで待つので、どれか 1 つでも動いていると撮影が落ち着かない（2026-10-05）
+- 撮影モードを入れた後に足した演出も、撮影モードで止めないと撮れなくなる。コンボの Great（`phaseAnimator` の脈打ち）・MAX（色の回転）がそうで、6 コンボのタイムアタックの画面が「40 秒たっても画面が落ち着きません」で止まった（#440）。繰り返す動きを足したら、`ScreenshotDemo.isEnabled` で止めるか、リリース前に `Tools/capture_screenshots.sh APP_IPHONE_67` を手元で 1 回流して確かめる（2026-10-22）
 - プロジェクトは objectVersion 56（ファイル同期グループ無し）。Swift ファイルを足したら `project.pbxproj` の PBXBuildFile / PBXFileReference / PBXGroup / PBXSourcesBuildPhase に手で登録する（2026-10-05）
 
 ## 広告（AdMob）
