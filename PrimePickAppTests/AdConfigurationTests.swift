@@ -11,23 +11,19 @@ final class AdConfigurationTests: XCTestCase {
     func testReadsIDsFromInfoDictionary() {
         let configuration = AdConfiguration(infoDictionary: [
             "GADApplicationIdentifier": "ca-app-pub-1~2",
-            "AdMobNativeAdUnitID": "ca-app-pub-1/4"
+            "AdMobNativeAdUnitIDQuizResult": "ca-app-pub-1/4"
         ])
         XCTAssertEqual(configuration?.applicationID, "ca-app-pub-1~2")
-        XCTAssertEqual(configuration?.nativeAdUnitID, "ca-app-pub-1/4")
+        XCTAssertEqual(configuration?.nativeAdUnitID(for: .quizResult), "ca-app-pub-1/4")
     }
 
-    func testIsNilWhenIDIsMissingOrEmpty() {
+    /// App ID が欠けたら、広告ユニット ID があっても広告まわりを全部動かさない
+    func testIsNilWhenApplicationIDIsMissingOrEmpty() {
         XCTAssertNil(AdConfiguration(infoDictionary: nil))
-        XCTAssertNil(AdConfiguration(infoDictionary: ["GADApplicationIdentifier": "ca-app-pub-1~2"]))
-        XCTAssertNil(AdConfiguration(infoDictionary: ["AdMobNativeAdUnitID": "ca-app-pub-1/4"]))
+        XCTAssertNil(AdConfiguration(infoDictionary: ["AdMobNativeAdUnitIDQuizResult": "ca-app-pub-1/4"]))
         XCTAssertNil(AdConfiguration(infoDictionary: [
             "GADApplicationIdentifier": "",
-            "AdMobNativeAdUnitID": "ca-app-pub-1/4"
-        ]))
-        XCTAssertNil(AdConfiguration(infoDictionary: [
-            "GADApplicationIdentifier": "ca-app-pub-1~2",
-            "AdMobNativeAdUnitID": ""
+            "AdMobNativeAdUnitIDQuizResult": "ca-app-pub-1/4"
         ]))
     }
 
@@ -35,7 +31,12 @@ final class AdConfigurationTests: XCTestCase {
     func testAppUsesGoogleTestIDs() {
         let configuration = AdConfiguration.current
         XCTAssertEqual(configuration?.applicationID, "ca-app-pub-3940256099942544~1458002511")
-        XCTAssertEqual(configuration?.nativeAdUnitID, "ca-app-pub-3940256099942544/3986624511")
+        for placement in AdPlacement.allCases {
+            XCTAssertEqual(
+                configuration?.nativeAdUnitID(for: placement), "ca-app-pub-3940256099942544/3986624511",
+                "\(placement)"
+            )
+        }
     }
 
     /// Google Mobile Ads SDK は SKAdNetworkItems の一覧を前提にしている。Google の一覧の先頭（Google 自身）が入っていることを確かめる

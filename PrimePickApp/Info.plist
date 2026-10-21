@@ -2,8 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<!-- AdMob の ID はここだけに書く。いまは Google 公式のテスト用 ID（本番 ID は AdMob の準備ができたら差し替える） -->
-	<key>AdMobNativeAdUnitID</key>
+	<!-- AdMob の ID はここだけに書く。いまは Google 公式のテスト用 ID（本番 ID は AdMob の準備ができたら差し替える）。
+	     広告ユニットは置き場所（AdPlacement）ごとに分ける。キーの名前は AdConfiguration.nativeAdUnitIDKey(for:) と合わせる -->
+	<!-- 練習・タイムアタックの結果（QuizResultView） -->
+	<key>AdMobNativeAdUnitIDQuizResult</key>
+	<string>ca-app-pub-3940256099942544/3986624511</string>
+	<!-- デイリーチャレンジの結果（DailyChallengeResultView） -->
+	<key>AdMobNativeAdUnitIDDailyChallengeResult</key>
+	<string>ca-app-pub-3940256099942544/3986624511</string>
+	<!-- タイムアタックの記録（TimeAttackRecordsView） -->
+	<key>AdMobNativeAdUnitIDTimeAttackRecords</key>
+	<string>ca-app-pub-3940256099942544/3986624511</string>
+	<!-- 設定（SettingView） -->
+	<key>AdMobNativeAdUnitIDSetting</key>
 	<string>ca-app-pub-3940256099942544/3986624511</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3940256099942544~1458002511</string>
