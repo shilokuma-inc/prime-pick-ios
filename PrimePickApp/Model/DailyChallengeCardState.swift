@@ -3,6 +3,7 @@
 //  PrimePickApp
 //
 
+import QuizCore
 import Foundation
 
 /// タイトル画面の「今日のチャレンジ」カードに出す内容（Discussion #181 本文 2-6）

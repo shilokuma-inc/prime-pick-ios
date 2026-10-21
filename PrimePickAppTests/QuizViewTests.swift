@@ -3,19 +3,35 @@
 //  PrimePickAppTests
 //
 
+import QuizCore
 import XCTest
 @testable import PrimePickApp
 
 final class QuizViewTests: XCTestCase {
 
-    // MARK: - 解答の受け付け
+    // MARK: - モードごとの進め方
 
-    /// 指が触れた瞬間に解答しても、リザルト表示後・次の問題を待っている間・誤答後のロック中は受け付けない
-    func testAcceptsAnswerOnlyWhenNotBlocked() {
-        XCTAssertTrue(QuizButtonView.acceptsAnswer(isPresentedResult: false, isWaitingToAdvance: false, isInputLocked: false))
-        XCTAssertFalse(QuizButtonView.acceptsAnswer(isPresentedResult: true, isWaitingToAdvance: false, isInputLocked: false))
-        XCTAssertFalse(QuizButtonView.acceptsAnswer(isPresentedResult: false, isWaitingToAdvance: true, isInputLocked: false))
-        XCTAssertFalse(QuizButtonView.acceptsAnswer(isPresentedResult: false, isWaitingToAdvance: false, isInputLocked: true))
+    // 解答の受け付け（リザルト表示後・次の問題を待っている間・誤答後のロック中は受け付けない）は QuizKit の QuizSessionTests で確かめる
+
+    /// 練習はミニ解説を読み終えてから進み、タイムアタックは誤答で時間を減らして入力を止める
+    func testRulesFollowGameMode() {
+        let practice = QuizView.rules(for: .practice)
+        XCTAssertNil(practice.timeLimitSeconds)
+        XCTAssertEqual(practice.advanceDelay, 1.5)
+        XCTAssertEqual(practice.missInputLockDuration, 0)
+        XCTAssertEqual(practice.scoringRule, .practice)
+
+        let timeAttack = QuizView.rules(for: .timeAttack(.thirtySeconds))
+        XCTAssertEqual(timeAttack.timeLimitSeconds, 30)
+        XCTAssertEqual(timeAttack.advanceDelay, 0)
+        XCTAssertEqual(timeAttack.missTimePenaltySeconds, GameMode.timeAttackMissTimePenaltySeconds)
+        XCTAssertEqual(timeAttack.missInputLockDuration, GameMode.timeAttackMissInputLockDuration)
+        XCTAssertEqual(timeAttack.finalCountdownSeconds, GameMode.timeAttackFinalCountdownSeconds)
+        XCTAssertEqual(timeAttack.scoringRule, .timeAttack)
+
+        let daily = QuizView.rules(for: .dailyChallenge)
+        XCTAssertNil(daily.timeLimitSeconds)
+        XCTAssertEqual(daily.advanceDelay, 1.5)
     }
 
     // MARK: - 最初の出題

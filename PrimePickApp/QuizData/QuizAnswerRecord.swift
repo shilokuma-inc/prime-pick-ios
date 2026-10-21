@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import QuizCore
 
 /// 1 問ごとの解答結果。リザルトの復習一覧で使う。
 struct QuizAnswerRecord: Identifiable, Equatable {
@@ -23,5 +24,18 @@ struct QuizAnswerRecord: Identifiable, Equatable {
     /// ユーザーの解答が正解と一致したか
     var isAnswerCorrect: Bool {
         isPrime == answeredPrime
+    }
+}
+
+extension QuizAnswerRecord {
+    /// `QuizSession` の解答から作る
+    init(_ answer: QuizAnswer<QuizEntity>) {
+        self.init(
+            id: answer.question.quizId,
+            number: answer.question.number,
+            isPrime: answer.question.isCorrect,
+            answeredPrime: answer.choice.isPrime,
+            elapsedSeconds: answer.elapsedSeconds
+        )
     }
 }
