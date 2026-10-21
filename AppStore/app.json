@@ -1,0 +1,17 @@
+{
+  "_comment": [
+    "App Store 用のスクリーンショットの撮影と、App Store Connect への反映で使うアプリの設定（template-app-ios と同じ形）。",
+    "project / scheme: 撮影でビルドするプロジェクトと Scheme。",
+    "configuration: 撮影でビルドする構成。Release は本番の AdMob ID だが、撮影モードでは AdEligibility が広告 SDK を動かさないので本番の広告は読み込まない（docs/ads-release-checklist.md）。",
+    "simulatorPrefix: 撮影で作る Simulator と DerivedData の名前の頭。",
+    "Bundle ID は PrimePickApp.xcodeproj/project.pbxproj のアプリターゲットの PRODUCT_BUNDLE_IDENTIFIER から読む（ここに bundleId を書けばそちらを使う）。",
+    "screenshotDemoSource: 撮影モードの Swift ファイル。screenshots.json の scene が ScreenshotDemo.Scene にあるかを突き合わせる。",
+    "appIcon: クリエイティブアセットに載せるアプリアイコン。"
+  ],
+  "project": "PrimePickApp.xcodeproj",
+  "scheme": "PrimePickApp",
+  "configuration": "Release",
+  "simulatorPrefix": "PrimePick",
+  "screenshotDemoSource": "PrimePickApp/Screenshot/ScreenshotDemo.swift",
+  "appIcon": "PrimePickApp/Assets.xcassets/AppIcon.appiconset/AppIcon.png"
+}

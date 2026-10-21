@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""App Store の説明文・キーワード・プロモーションテキスト・URL を App Store Connect に反映する。
+"""App Store の説明文・キーワード・プロモーションテキスト・最新情報・URL を App Store Connect に反映する。
 
 `AppStore/metadata/<言語>.json` と `AppStore/metadata/shared.json` を読み、
 対象バージョンの言語ごとに書き込む。
@@ -15,10 +15,13 @@
 
 触るのは **編集できる状態のバージョンだけ**。審査中や配信済みのバージョンは対象にしない。
 JSON に書いていない項目（例: 省略した promotionalText）は App Store Connect 側の値をそのまま残す。
+最新情報（whatsNew）はバージョンごとの文言なので、JSON の `whatsNew.version` が反映先のバージョンと
+一致するときだけ書き込む（前のバージョンの文言を次のバージョンに載せてしまわないため）。
 
 `--export` は逆向きで、App Store Connect の現在値を JSON に書き出す。公開中の文言を正として
 リポジトリに取り込むとき（初回）や、App Store Connect 側で直接編集した内容を取り込むときに使う。
 現在値が無い言語・項目は書かず、その旨を出力する（勝手に説明文を作らない）。
+最新情報は、書き出し元のバージョンの番号を `whatsNew.version` に入れて書く。
 
 PyJWT が要る（--check では不要）: `python3 -m pip install pyjwt cryptography`
 """
@@ -30,6 +33,7 @@ import difflib
 import json
 import os
 import sys
+import urllib.parse
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -45,6 +49,7 @@ LIMITS = {
     "description": 4000,
     "keywords": 100,
     "promotionalText": 170,
+    "whatsNew": 4000,
 }
 
 
@@ -59,23 +64,31 @@ def load_shared(directory: Path) -> tuple[dict[str, str], list[str]]:
     for key, required in (("supportUrl", True), ("marketingUrl", False)):
         value = raw.get(key)
         if isinstance(value, str) and value.strip():
-            if not value.startswith("https://"):
-                problems.append(f"{path}: {key} は https:// で始まる URL にしてください")
+            # テンプレートの仮の値（TODO:）は形を問わず、反映の前の TODO: の検査で止める
+            parsed = urllib.parse.urlparse(value)
+            try:
+                # `https://example.com:abc` のような不正なポート・範囲外のポートは、ここで ValueError になる
+                parsed.port
+                valid_port = True
+            except ValueError:
+                valid_port = False
+            if "TODO:" not in value and not (parsed.scheme == "https" and parsed.hostname and valid_port):
+                problems.append(f"{path}: {key} は https:// で始まる URL にしてください（ホスト名も要る）")
             attributes[key] = value
         elif required:
             problems.append(f"{path}: {key} がありません")
     return attributes, problems
 
 
-def load(directory: Path, target: Language, shared: dict[str, str]) -> tuple[dict[str, str] | None, list[str]]:
-    """1 言語ぶんの書き込む値を読む。問題があれば値の代わりに理由を返す。"""
+def load(directory: Path, target: Language, shared: dict[str, str]) -> tuple[dict[str, str] | None, str | None, list[str]]:
+    """1 言語ぶんの書き込む値と、最新情報の対象バージョンを読む。問題があれば値の代わりに理由を返す。"""
     path = directory / f"{target.language}.json"
     if not path.is_file():
-        return None, [f"{path} がありません"]
+        return None, None, [f"{path} がありません"]
     try:
         raw = json.loads(path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as error:
-        return None, [f"{path} が JSON として読めません: {error}"]
+        return None, None, [f"{path} が JSON として読めません: {error}"]
 
     problems: list[str] = []
     attributes: dict[str, str] = {}
@@ -90,7 +103,11 @@ def load(directory: Path, target: Language, shared: dict[str, str]) -> tuple[dic
     if isinstance(keywords, list) and keywords:
         # App Store Connect にはカンマ区切りの 1 本の文字列として渡す。
         # 区切りのあとに空白を入れると、そのぶん 100 字の枠を食うので詰めて繋ぐ。
-        attributes["keywords"] = ",".join(str(keyword).strip() for keyword in keywords)
+        # null や空文字を str() で "None" や空の区切りにしてしまわないよう、空でない文字列だけを許す
+        if all(isinstance(keyword, str) and keyword.strip() for keyword in keywords):
+            attributes["keywords"] = ",".join(keyword.strip() for keyword in keywords)
+        else:
+            problems.append(f"{path}: keywords に空の要素か文字列以外の要素があります")
     else:
         problems.append(f"{path}: keywords がありません（配列で書く）")
 
@@ -101,14 +118,26 @@ def load(directory: Path, target: Language, shared: dict[str, str]) -> tuple[dic
         else:
             problems.append(f"{path}: promotionalText が空です（使わないなら項目ごと消す）")
 
+    whats_new_version = None
+    # 省略（キーが無い）と null を分ける。null は書き損じなので、省略と同じには扱わない
+    if "whatsNew" in raw:
+        whats_new = raw["whatsNew"]
+        version = whats_new.get("version") if isinstance(whats_new, dict) else None
+        text = whats_new.get("text") if isinstance(whats_new, dict) else None
+        if not (isinstance(version, str) and version.strip() and isinstance(text, str) and text.strip()):
+            problems.append(f"{path}: whatsNew は {{\"version\": \"2.1.0\", \"text\": \"…\"}} の形で書く（使わないなら項目ごと消す）")
+        else:
+            attributes["whatsNew"] = text
+            whats_new_version = version
+
     for field, limit in LIMITS.items():
         value = attributes.get(field, "")
         if len(value) > limit:
             problems.append(f"{path}: {field} が {len(value)} 字あります（上限 {limit} 字）")
 
     if problems:
-        return None, problems
-    return {**attributes, **shared}, []
+        return None, None, problems
+    return {**attributes, **shared}, whats_new_version, []
 
 
 def describe_changes(current: dict, new: dict[str, str]) -> list[str]:
@@ -145,6 +174,15 @@ def _write_json(path: Path, body: dict) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def _exported_length(field: str, value: object) -> int:
+    """書き出した値の、App Store Connect 上の文字数（keywords はカンマ込み、whatsNew は本文）。"""
+    if field == "keywords" and isinstance(value, list):
+        return len(",".join(value))
+    if field == "whatsNew" and isinstance(value, dict):
+        return len(value.get("text", ""))
+    return len(value) if isinstance(value, str) else 0
+
+
 def export(directory: Path, targets: list[Language], available: dict[str, dict], version_string: str) -> int:
     """App Store Connect の現在値を `<言語>.json` と `shared.json` に書き出す。
 
@@ -167,6 +205,7 @@ def export(directory: Path, targets: list[Language], available: dict[str, dict],
         description = attributes.get("description") or ""
         keywords = attributes.get("keywords") or ""
         promotional_text = attributes.get("promotionalText") or ""
+        whats_new = attributes.get("whatsNew") or ""
         if description.strip():
             body["description"] = description
         else:
@@ -177,6 +216,8 @@ def export(directory: Path, targets: list[Language], available: dict[str, dict],
             missing.append(f"{label}: keywords が空です")
         if promotional_text.strip():
             body["promotionalText"] = promotional_text
+        if whats_new.strip():
+            body["whatsNew"] = {"version": version_string, "text": whats_new}
 
         for key in ("supportUrl", "marketingUrl"):
             value = attributes.get(key) or ""
@@ -186,10 +227,7 @@ def export(directory: Path, targets: list[Language], available: dict[str, dict],
         path = directory / f"{target.language}.json"
         _write_json(path, body)
         written += 1
-        counts = " / ".join(
-            f"{field} {len(value if isinstance(value, str) else ','.join(value))} 字"
-            for field, value in body.items()
-        )
+        counts = " / ".join(f"{field} {_exported_length(field, value)} 字" for field, value in body.items())
         print(f"  {label}: {path} に書き出し（{counts or '値なし'}）")
 
     # URL は言語によらない前提なので shared.json に 1 つだけ持つ。言語で違っていたら最初の言語の値を採り、報告する
@@ -276,20 +314,37 @@ def main() -> int:
 
     shared, problems = load_shared(args.metadata_dir)
     entries: list[tuple[Language, dict[str, str]]] = []
+    whats_new_versions: dict[str, str] = {}
     for target in targets:
-        attributes, issues = load(args.metadata_dir, target, shared)
+        attributes, whats_new_version, issues = load(args.metadata_dir, target, shared)
         problems.extend(issues)
         if attributes:
             entries.append((target, attributes))
+        if whats_new_version:
+            whats_new_versions[target.language] = whats_new_version
     if problems:
         raise SystemExit("\n".join(problems))
 
+    # テンプレートの仮の文言（TODO:）が残ったまま App Store Connect に書き込まない
+    placeholders = [
+        f"{target.language}.{field}" for target, attributes in entries
+        for field, value in attributes.items() if "TODO:" in value
+    ] + [
+        f"{language}.whatsNew.version" for language, version in whats_new_versions.items() if "TODO:" in version
+    ]
+    if placeholders and not args.check:
+        raise SystemExit(f"テンプレートの仮の文言（TODO:）が残っています: {', '.join(placeholders)}")
+
     if args.check:
+        if placeholders:
+            print(f"注意: テンプレートの仮の文言（TODO:）が残っています: {', '.join(placeholders)}")
         for target, attributes in entries:
             counts = " / ".join(
                 f"{field} {len(attributes[field])} 字" for field in LIMITS if field in attributes
             )
-            print(f"  {target.language}: {counts}")
+            version_note = (f"（whatsNew は {whats_new_versions[target.language]} 向け）"
+                            if target.language in whats_new_versions else "")
+            print(f"  {target.language}: {counts}{version_note}")
         print(f"問題なし: {len(entries)} 言語")
         return 0
 
@@ -302,6 +357,13 @@ def main() -> int:
           f"({version['attributes']['appStoreState']})")
     if args.dry_run:
         print("--dry-run: App Store Connect には何も書き込みません")
+
+    # 最新情報は、書いてあるバージョンが反映先と一致する言語だけに入れる
+    for target, attributes in entries:
+        whats_new_version = whats_new_versions.get(target.language)
+        if "whatsNew" in attributes and whats_new_version != version_string:
+            del attributes["whatsNew"]
+            print(f"  {target.language}: whatsNew は {whats_new_version} 向けなので {version_string} には書き込みません")
 
     available = client.localization_entries(version["id"])
 
