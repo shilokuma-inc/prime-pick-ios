@@ -5,9 +5,10 @@
 
 import Foundation
 
-/// AdMob の ID。値は `Info.plist` の 1 か所にまとめ、本番 ID への差し替えをそこだけで済ませる
+/// AdMob の ID。`Info.plist` から読む
 ///
-/// いまは Google 公式のテスト用 ID を入れている（AdMob の準備ができたら本番 ID に差し替える）。
+/// 値は build setting から `Info.plist` に差し込む。Debug は Google 公式のテスト用 ID（`AdMob-Debug.xcconfig`）、
+/// Release は本番 ID（`AdMob-Release.xcconfig`）。ID を差し替えるときは 2 つの xcconfig だけを直す。
 /// App ID（`GADApplicationIdentifier`）は Google Mobile Ads SDK が起動時に `Info.plist` から読む。
 /// 広告ユニットは置き場所（`AdPlacement`）ごとに分け、AdMob のレポートで置き場所ごとの成果を見られるようにする
 struct AdConfiguration: Equatable {

@@ -75,7 +75,9 @@ final class AdConfigurationTests: XCTestCase {
         }
     }
 
-    /// AdMob の準備ができるまでは Google 公式のテスト用 ID を使う。本番 ID に差し替えたらこのテストも直す
+    /// テスト実行（Debug 構成）の Info.plist は Google 公式のテスト用 ID（`AdMob-Debug.xcconfig`）。
+    /// 本番 ID は Release 構成（`AdMob-Release.xcconfig`）だけに入り、Unit テストでは読めないので、
+    /// Release のビルドの Info.plist を `plutil -p` で確かめる
     func testAppUsesGoogleTestIDs() {
         let configuration = AdConfiguration.current
         XCTAssertEqual(configuration?.applicationID, "ca-app-pub-3940256099942544~1458002511")
@@ -84,6 +86,27 @@ final class AdConfigurationTests: XCTestCase {
                 configuration?.nativeAdUnitID(for: placement), "ca-app-pub-3940256099942544/3986624511",
                 "\(placement)"
             )
+        }
+    }
+
+    /// ID は build setting から差し込む。xcconfig の付け忘れ・名前の打ち間違いで `$(…)` のまま残ったり空になったりすると、
+    /// Google Mobile Ads SDK が起動時に落ちる（App ID）か、広告が黙って出なくなる（広告ユニット ID）
+    func testInfoPlistIDsAreExpandedFromBuildSettings() throws {
+        let info = try XCTUnwrap(Bundle.main.infoDictionary)
+        let keys = [AdConfiguration.applicationIDKey] + AdPlacement.allCases.map(AdConfiguration.nativeAdUnitIDKey(for:))
+        for key in keys {
+            let value = try XCTUnwrap(info[key] as? String, key)
+            XCTAssertTrue(value.hasPrefix("ca-app-pub-"), "\(key): \(value)")
+            XCTAssertFalse(value.contains("$("), "\(key): \(value)")
+        }
+    }
+
+    /// 本番のパブリッシャー ID（`AdMob-Release.xcconfig`）が Debug の Info.plist に漏れていない
+    func testDebugInfoPlistHasNoProductionPublisherID() throws {
+        let info = try XCTUnwrap(Bundle.main.infoDictionary)
+        let keys = [AdConfiguration.applicationIDKey] + AdPlacement.allCases.map(AdConfiguration.nativeAdUnitIDKey(for:))
+        for key in keys {
+            XCTAssertFalse((info[key] as? String ?? "").contains("7683522872696760"), key)
         }
     }
 
