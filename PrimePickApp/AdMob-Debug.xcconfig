@@ -2,7 +2,7 @@
 //  AdMob-Debug.xcconfig
 //  PrimePickApp
 //
-//  Debug 構成（xcodebuild test・Simulator での起動・撮影モード・CI の Build）の AdMob の ID。
+//  Debug 構成（xcodebuild test・Xcode からの Simulator での起動・CI の Build）の AdMob の ID。
 //  開発中に本番の広告を読み込まないよう、Google 公式のテスト用 ID を入れる（本番 ID は AdMob-Release.xcconfig）。
 //  値は Info.plist の $(ADMOB_…) に差し込まれる。ID を差し替えるときはこのファイルと AdMob-Release.xcconfig だけを直す。
 //  xcconfig では「//」から後ろがコメントになるので、値に「//」を含めない

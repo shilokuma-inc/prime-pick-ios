@@ -4,8 +4,11 @@
 //
 //  Release 構成（Archive・TestFlight・App Store に出すビルド）の AdMob の本番 ID（AdMob で「ネイティブ アドバンス」として作成済み）。
 //  値は Info.plist の $(ADMOB_…) に差し込まれる。ID を差し替えるときはこのファイルと AdMob-Debug.xcconfig だけを直す。
-//  Release でビルドしたアプリを Simulator・実機で起動しない（本番の広告を読み込み、AdMob の無効なトラフィックになりうる）。
+//  手元で Release でビルドしたアプリを、撮影モード以外で Simulator・実機で起動しない（本番の広告を読み込み、AdMob の無効なトラフィックになりうる）。
 //  確かめるのはビルドした .app の Info.plist の値だけにする（plutil -p）。
+//  例外: App Store のスクリーンショット（Tools/capture_screenshots.sh・Screenshots/App Store）は既定で Release を Simulator で起動するが、
+//  撮影モード（-screenshot-demo）では AdEligibility が広告 SDK を動かさないので、本番の広告は読み込まない。
+//  TestFlight（Release）で試す端末は、AdMob にテストデバイスとして登録する（docs/ads-release-checklist.md）
 //  xcconfig では「//」から後ろがコメントになるので、値に「//」を含めない
 //
 
