@@ -18,8 +18,9 @@
 
 | workflow | 内容 |
 | --- | --- |
-| [![Screenshots/App Store](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/app-store-screenshots.yml/badge.svg)](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/app-store-screenshots.yml) | スクリーンショットを撮って反映する（`AppStore/screenshots.json`） |
-| [![Metadata/App Store](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/app-store-metadata.yml/badge.svg)](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/app-store-metadata.yml) | 説明文・キーワード・URL を反映する（`AppStore/metadata/*.json`。既定は dry-run） |
+| [![Screenshots/App Store](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/app-store-screenshots.yml/badge.svg)](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/app-store-screenshots.yml) | スクリーンショットを撮って反映する（`AppStore/screenshots.json`。`release/**` から実行する） |
+| [![Metadata/App Store](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/app-store-metadata.yml/badge.svg)](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/app-store-metadata.yml) | 説明文・キーワード・最新情報・URL を反映する（`AppStore/metadata/*.json`。既定は dry-run） |
+| [![Creative assets/App Store](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/app-store-creative-assets.yml/badge.svg)](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/app-store-creative-assets.yml) | プロダクトページのヘッダーと検索結果の画像を反映する（`AppStore/creative/`。既定は dry-run） |
 
 ## 広告（AdMob）
 
