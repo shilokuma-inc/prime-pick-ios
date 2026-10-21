@@ -16,10 +16,10 @@
 | SDK | 版 | アプリでの使い方 |
 | --- | --- | --- |
 | Google Mobile Ads（`swift-package-manager-google-mobile-ads`） | 13.11.0 | 4 か所のネイティブ広告（`PrimePickApp/Ads/`、`AdPlacement`） |
-| Google User Messaging Platform（UMP） | 3.1.0 | 起動時の同意（EU・英国など）と IDFA の説明メッセージ、設定の「プライバシー設定」（`PrivacyOptions.swift`） |
+| Google User Messaging Platform（UMP） | 3.1.0 | 起動時の同意（EU・英国など）と、設定の「プライバシー設定」（`PrivacyOptions.swift`）。ATT ダイアログはアプリが `ATTrackingManager` で直接出す（`GoogleMobileAdsServices.swift`）。UMP の IDFA の説明メッセージを使うかは未定 |
 | Firebase Analytics（`firebase-ios-sdk` の `FirebaseAnalytics`。`GoogleAppMeasurement` 11.15.0） | 11.15.0 | 画面の表示・出題の開始・解答・デイリーチャレンジのイベント（`PrimePickApp/Analytics/`） |
 
-- ビルドした `.app` の `Frameworks/` には `GoogleMobileAds`・`UserMessagingPlatform`・`FirebaseAnalytics`・`GoogleAppMeasurement`・`GoogleAppMeasurementIdentitySupport`・`GoogleAdsOnDeviceConversion` が入っている
+- ビルドした `.app`（Debug・Release とも同じ）の `Frameworks/` には `GoogleMobileAds`・`UserMessagingPlatform`・`FirebaseAnalytics`・`GoogleAppMeasurement`・`GoogleAppMeasurementIdentitySupport`・`GoogleAdsOnDeviceConversion` が入っている
 - アプリ自身は位置情報・連絡先・写真などを読まない。保存は端末の `UserDefaults`（記録・設定）だけ（`PrimePickApp/PrivacyInfo.xcprivacy`）
 - ATT ダイアログの文言（`NSUserTrackingUsageDescription`、PR #424）
   - ja: 許可すると、ほかのアプリやWebサイトでの利用状況をもとに、興味に合った広告が表示されやすくなります。許可しなくても広告は表示されます。
@@ -37,6 +37,7 @@
 - 連絡先は `Contact Us` の節のメールアドレス（この文書には書き写さない）
 
 追記案は、今のページと同じく英語で、同じ書き方（`the Application` / `the Service Provider` と呼ぶ）にしています。
+下の差分は読みやすさのため Markdown で書いています。元のページは HTML なので、反映するときは箇条書きを `<li>…</li>`、節の見出しを `<strong>…</strong>`、段落を `<p>…</p>` に置き換えてください（今のページの書き方に合わせる）。
 
 ### 追記の場所と文案
 
@@ -93,7 +94,10 @@
 ### 要確認（人間が決めること・確かめること）
 
 - **同意が求められる地域の書き方**（「the EEA, the UK and Switzerland」）: UMP のどのメッセージをどの地域に出すかは AdMob の管理画面の設定による（GDPR メッセージはまだ作成・公開していない）。公開した設定に合わせて直す。**要確認**
-- **今のページの既存の記述**: `Information Collection and Use` に「The Application collects your device's location ...」（位置情報を集めて Geolocation Services などに使う）とあるが、アプリ自身は位置情報を読まない（Location Services を使っていない）。生成ツールの雛形のままと思われる。直すか・残すかは人間が決める。**要確認**
+- **今のページの非表示の記述**: `Information Collection and Use` の「The Application collects your device's location ...」（位置情報を集めて Geolocation Services などに使う）の段落は、HTML の `<div style="display: none;">` の中にあり、ページには表示されていない（表示されているのは「The Application does not gather precise information about the location of your mobile device.」だけ）。生成ツールの雛形がソースに残っていると思われる。改訂のついでに消すかは人間が決める。**要確認**
+- **今のページの雛形の記述**: 「The Service Provider may use the information you provided to contact you ... marketing promotions」「may require you to provide us with certain personally identifiable information」は、アプリが連絡先などを集めないこと（下の回答案で Contact Info を「集めない」としている）と合わない。直すかは人間が決める。**要確認**
+- **Firebase Analytics の書き方**: 文案は「使い方を知るため」だけを書いている。Google Analytics はマスクした IP アドレスからおおよその位置を出し、`.app` に IDFA を扱う部品（`GoogleAppMeasurementIdentitySupport`）が入っている（下の「App のプライバシー」の要確認）。識別子・おおよその位置もポリシーに書くか、Firebase のプライバシーの案内へのリンクを付けるかは**要確認**
+- **Analytics と同意**: Firebase Analytics は UMP の同意に関係なく送っている（Consent Mode の設定は無い）。文案の同意の段落は「広告のための同意」に限っているので約束とは食い違わないが、EU の同意のポリシー（Google パブリッシャー ポリシーが従うよう求める EU user consent policy）の下で Analytics をどう扱うかは**要確認**
 - `Third Party Access` の「Only aggregated, anonymized data is periodically transmitted to external services」は、広告 SDK が識別子を Google に送ることと合わない。`Advertising` の節を足すときに合わせて直すかを決める。**要確認**
 - `Children`: 子ども向けの扱い（Google Mobile Ads の子ども向けのタグ）は付けていない（PR #355 の時点の判断）。年齢区分と合わせて確かめる。**要確認**
 - ページを日本語でも用意するか（今は英語だけ）。**要確認**
@@ -109,9 +113,11 @@ Apple は、アプリに入れたサードパーティの SDK（広告ネット�
 
 - **Google Mobile Ads・UMP**: SDK に入っているプライバシーマニフェスト（`GoogleMobileAds.framework/PrivacyInfo.xcprivacy`・`UserMessagingPlatform.framework/PrivacyInfo.xcprivacy`。上の版のもの）。Google は「マニフェストを確かめ、アプリのデータの開示を最新に保つのは開発者の責任」としている（<https://developers.google.com/admob/ios/privacy/data-disclosure>）
 - **Firebase Analytics**: Google Analytics の「Prepare for Apple's App Store data-disclosure requirements」<https://support.google.com/analytics/answer/10285841>。この記事には「The latest version of the Google Analytics for Firebase SDK ... does not include a privacy manifest」とあり、ビルドした `.app` の `GoogleAppMeasurement` にもマニフェストは無かった。Apple の分類での表も無い
-- Firebase の SDK（FirebaseCore・FirebaseInstallations など）のマニフェスト: FirebaseInstallations が Other Diagnostic Data（紐付けなし・トラッキングなし・Analytics）を宣言（Firebase のデータ開示の案内 <https://firebase.google.com/docs/ios/app-store-data-collection>）
+- Firebase の SDK（FirebaseCore・FirebaseInstallations など）のマニフェスト: FirebaseInstallations が Other Diagnostic Data（紐付けなし・トラッキングなし・Analytics）を宣言（SDK のマニフェスト `firebase-ios-sdk/FirebaseInstallations/Source/Library/Resources/PrivacyInfo.xcprivacy`。Firebase の案内 <https://firebase.google.com/docs/ios/app-store-data-collection> は、マニフェストが既定で集めるものを開示していること、実際の使い方に合わせて正しく答えるのは開発者の責任であることを書いている）
 
 ### SDK ごとの宣言（マニフェストの値）
+
+ビルドした `.app` に入っている SDK のマニフェストだけを載せています（依存のパッケージにあっても `.app` に入らないもの、例えば GoogleDataTransport は載せていません）。
 
 | SDK | データの種類 | 目的 | ユーザーへの紐付け | トラッキング |
 | --- | --- | --- | --- | --- |
@@ -144,7 +150,7 @@ App Store Connect では、データの種類ごとに「目的」「ユーザ�
 
 上の表に無いもの（Contact Info・Health & Fitness・Financial Info・Precise Location・Sensitive Info・Contacts・User Content・Browsing History・Search History・User ID・Purchases など）は、アプリも SDK のマニフェストも集めると宣言していないので「集めない」の案です。
 
-- 「トラッキング」の定義: アプリで集めたデータを、ほかの会社のアプリ・Web サイトなどのデータと、ターゲティング広告や広告の測定のために結び付けること、またはデータブローカーと共有すること（Apple「User privacy and data use」<https://developer.apple.com/app-store/user-privacy-and-data-use/>）。Device ID を「トラッキングに使う」と答えるので、ATT の許可を求める今の実装（`NSPrivacyTracking` = true）と合う
+- 「トラッキング」の定義: アプリで集めたデータを、ほかの会社のアプリ・Web サイトなどのデータと、ターゲティング広告や広告の測定のために結び付けること、またはデータブローカーと共有すること（Apple「User privacy and data use」<https://developer.apple.com/app-store/user-privacy-and-data-use/>）。Device ID を「トラッキングに使う」と答えるので、ATT の許可を求める今の実装と、アプリのマニフェスト `PrimePickApp/PrivacyInfo.xcprivacy` の `NSPrivacyTracking` = true（SDK のマニフェストにはこのキーは無い）と合う
 
 ### 要確認（人間が決めること・確かめること）
 

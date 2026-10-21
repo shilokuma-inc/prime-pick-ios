@@ -20,3 +20,8 @@
 | --- | --- |
 | [![Screenshots/App Store](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/app-store-screenshots.yml/badge.svg)](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/app-store-screenshots.yml) | スクリーンショットを撮って反映する（`AppStore/screenshots.json`） |
 | [![Metadata/App Store](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/app-store-metadata.yml/badge.svg)](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/app-store-metadata.yml) | 説明文・キーワード・URL を反映する（`AppStore/metadata/*.json`。既定は dry-run） |
+
+## 広告（AdMob）
+
+- [広告のリリース前に人間がする作業](docs/ads-release-checklist.md)（本番 ID の差し替え箇所・AdMob / App Store Connect の作業・実機確認）
+- [広告まわりのプライバシーの文案](docs/ads-privacy-drafts.md)（プライバシーポリシーの追記案・「App のプライバシー」の回答案）
