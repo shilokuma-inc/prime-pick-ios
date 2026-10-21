@@ -2,22 +2,23 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<!-- AdMob の ID はここだけに書く。いまは Google 公式のテスト用 ID（本番 ID は AdMob の準備ができたら差し替える）。
+	<!-- AdMob の ID は build setting から差し込む。値は AdMob-Debug.xcconfig（Debug: Google のテスト用 ID）と
+	     AdMob-Release.xcconfig（Release: 本番 ID）にだけ書く。
 	     広告ユニットは置き場所（AdPlacement）ごとに分ける。キーの名前は AdConfiguration.nativeAdUnitIDKey(for:) と合わせる -->
 	<!-- 練習・タイムアタックの結果（QuizResultView） -->
 	<key>AdMobNativeAdUnitIDQuizResult</key>
-	<string>ca-app-pub-3940256099942544/3986624511</string>
+	<string>$(ADMOB_NATIVE_AD_UNIT_ID_QUIZ_RESULT)</string>
 	<!-- デイリーチャレンジの結果（DailyChallengeResultView） -->
 	<key>AdMobNativeAdUnitIDDailyChallengeResult</key>
-	<string>ca-app-pub-3940256099942544/3986624511</string>
+	<string>$(ADMOB_NATIVE_AD_UNIT_ID_DAILY_CHALLENGE_RESULT)</string>
 	<!-- タイムアタックの記録（TimeAttackRecordsView） -->
 	<key>AdMobNativeAdUnitIDTimeAttackRecords</key>
-	<string>ca-app-pub-3940256099942544/3986624511</string>
+	<string>$(ADMOB_NATIVE_AD_UNIT_ID_TIME_ATTACK_RECORDS)</string>
 	<!-- 設定（SettingView） -->
 	<key>AdMobNativeAdUnitIDSetting</key>
-	<string>ca-app-pub-3940256099942544/3986624511</string>
+	<string>$(ADMOB_NATIVE_AD_UNIT_ID_SETTING)</string>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-3940256099942544~1458002511</string>
+	<string>$(ADMOB_APP_ID)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<!-- ATT のダイアログの文言。ja / en は InfoPlist.xcstrings に入れる -->
