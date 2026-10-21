@@ -223,12 +223,12 @@ private func quizButton(choice: AnswerChoice, size: CGSize, isPressed: Bool) -> 
     // 意味は文言で伝え、絵文字は一目で見分けるための補助として添える
     return VStack(spacing: 8) {
         Text(choice.symbol)
-            .font(.custom("ArialRoundedMTBold", size: 56))
+            .appFont(.number(size: 56))
             .minimumScaleFactor(0.5)
 
         Text(choice.title)
-            // ArialRoundedMTBold には日本語の字形が無く細字で描かれるため、日本語も太字になるシステムフォントを使う
-            .font(.system(size: 30, weight: .bold, design: .rounded))
+            // 選択肢の名前は見出しの書体で出す（数字の書体だった頃は日本語の字形が無く細字で描かれていた）
+            .appFont(.heading(size: 30, weight: .bold))
             .foregroundStyle(Color.primary)
             .multilineTextAlignment(.center)
             .lineLimit(2)

@@ -26,14 +26,14 @@ struct QuizReviewList: View {
     var body: some View {
         if missedRecords.isEmpty {
             Text(isComplete ? "Perfect! All questions correct!" : "No missed questions so far")
-                .font(.headline)
+                .appFont(.heading(.headline, weight: .semibold))
                 .multilineTextAlignment(.center)
                 .minimumScaleFactor(0.6)
                 .padding(.vertical, 8)
         } else {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Missed Questions")
-                    .font(.headline)
+                    .appFont(.heading(.headline, weight: .semibold))
 
                 if scrolls {
                     // 問題数が増えても収まるようにスクロールさせる

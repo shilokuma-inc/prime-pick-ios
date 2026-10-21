@@ -21,8 +21,11 @@ struct TimeAttackStartConfirmationView: View {
     var body: some View {
         VStack(spacing: 20) {
             Text("Start Time Attack?")
-                .font(.system(size: 22, weight: .bold, design: .rounded))
+                .appFont(.heading(size: 22, weight: .bold))
                 .multilineTextAlignment(.center)
+                // 明朝は文字幅が広く、カードの幅（360pt）では「始め／ますか？」と語の途中で折り返すため、縮めて 1 行に収める
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
                 .accessibilityAddTraits(.isHeader)
 
             summary
@@ -30,7 +33,7 @@ struct TimeAttackStartConfirmationView: View {
             VStack(spacing: 12) {
                 Button(action: onStart) {
                     Text("Start")
-                        .font(.system(size: 22, weight: .bold, design: .rounded))
+                        .appFont(.heading(size: 22, weight: .bold))
                         .foregroundColor(.white)
                         .padding(.vertical, 14)
                         .frame(maxWidth: .infinity)
@@ -46,7 +49,7 @@ struct TimeAttackStartConfirmationView: View {
 
                 Button(action: onCancel) {
                     Text("Quit")
-                        .font(.system(size: 18, weight: .bold, design: .rounded))
+                        .appFont(.heading(size: 18, weight: .bold))
                         .foregroundColor(.primary)
                         .padding(.vertical, 12)
                         .frame(maxWidth: .infinity)
@@ -83,7 +86,7 @@ struct TimeAttackStartConfirmationView: View {
     private var summary: some View {
         HStack(spacing: 12) {
             Text(setting.difficulty.localizedTitle)
-                .font(.system(size: 18, weight: .bold, design: .rounded))
+                .appFont(.heading(size: 18, weight: .bold))
                 .foregroundColor(.white)
                 .padding(.vertical, 6)
                 .padding(.horizontal, 16)
@@ -106,7 +109,7 @@ struct TimeAttackStartConfirmationView: View {
                 } icon: {
                     Image(systemName: "timer")
                 }
-                .font(.system(size: 18, weight: .bold, design: .rounded))
+                .appFont(.heading(size: 18, weight: .bold))
                 // 時計のアイコンは読み上げないので、制限時間であることを言葉で伝える
                 .accessibilityLabel(Text("Time limit: \(duration.seconds) sec"))
             }

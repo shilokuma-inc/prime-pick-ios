@@ -26,7 +26,7 @@ struct QuizNumberView: View {
             VStack(spacing: .zero) {
                 // 何を答えるボタンなのかが分かるよう、設問文を常に表示する
                 Text("Is it prime?")
-                    .font(.system(size: 26, weight: .bold, design: .rounded))
+                    .appFont(.heading(size: 26, weight: .bold))
                     // 難易度色の半透明の背景に載るため、ライト・ダークそれぞれで読める色にする
                     .foregroundStyle(Color.quizSubText)
                     .lineLimit(1)
@@ -94,7 +94,7 @@ private func quizNumberText(quizNumber: Int, difficulty: Difficulty, quizData: [
     let text = quizData[quizNumber].number.description
 
     return Text(text)
-        .font(.custom("ArialRoundedMTBold", size: quizNumberFontSize(digitCount: text.count)))
+        .appFont(.number(size: quizNumberFontSize(digitCount: text.count)))
         .lineLimit(1)
         .minimumScaleFactor(0.5)
         .foregroundStyle(Color.gray)
