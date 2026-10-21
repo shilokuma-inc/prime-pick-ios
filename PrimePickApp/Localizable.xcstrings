@@ -449,18 +449,18 @@
         }
       }
     },
-    "選んだ問題数に答えると、正解数がスコアとして表示されます。": {
+    "選んだ問題数に答えるとスコアが表示されます。正解すると点が入り、難易度が高いほど、連続で正解する（コンボ）ほど、早く答えるほど点が増えます。": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Once you answer the chosen number of questions, your number of correct answers is shown as your score."
+            "value": "Once you answer the chosen number of questions, your score is shown. Each correct answer earns points, and you earn more on harder difficulties, with combos, and by answering quickly."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "選んだ問題数に答えると、正解数がスコアとして表示されます。"
+            "value": "選んだ問題数に答えるとスコアが表示されます。正解すると点が入り、難易度が高いほど、連続で正解する（コンボ）ほど、早く答えるほど点が増えます。"
           }
         }
       }

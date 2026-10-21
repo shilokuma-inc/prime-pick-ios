@@ -48,7 +48,7 @@ private extension HowToPlayView {
             ruleRow(number: 1, text: "ゲームモードと問題数を選び、難易度を選ぶとクイズが始まります。")
             ruleRow(number: 2, text: "表示された数が素数かどうかを答えます。")
             ruleRow(number: 3, text: "素数だと思ったら右の「素数」、素数ではないと思ったら左の「ちがう」を選びます。")
-            ruleRow(number: 4, text: "選んだ問題数に答えると、正解数がスコアとして表示されます。")
+            ruleRow(number: 4, text: "選んだ問題数に答えるとスコアが表示されます。正解すると点が入り、難易度が高いほど、連続で正解する（コンボ）ほど、早く答えるほど点が増えます。")
         }
     }
 

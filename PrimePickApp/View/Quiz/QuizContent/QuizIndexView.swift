@@ -83,7 +83,8 @@ struct QuizIndexView: View {
                     .appFont(.number(size: 22))
             }
         }
-        .modifier(ComboStageStyle(stage: comboStage, reduceMotion: reduceMotion))
+        // 撮影モードでは、画面が落ち着くのを待って撮れるよう「視差効果を減らす」と同じく脈打ち・色の回転を止める
+        .modifier(ComboStageStyle(stage: comboStage, reduceMotion: reduceMotion || ScreenshotDemo.isEnabled))
         .scaleEffect(comboStage >= .good ? 1.1 : 1, anchor: .trailing)
         .animation(.spring(response: 0.3, dampingFraction: 0.5), value: comboStage)
     }
