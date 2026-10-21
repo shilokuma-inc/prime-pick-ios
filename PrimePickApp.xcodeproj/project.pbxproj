@@ -222,6 +222,8 @@
 		4F8DC1832C08D66200247F62 /* QuizResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultView.swift; sourceTree = "<group>"; };
 		3340586D257B5D85E915175C /* QuizReviewList.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizReviewList.swift; sourceTree = "<group>"; };
 		4F8DC1862C08F56000247F62 /* QuizContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizContentView.swift; sourceTree = "<group>"; };
+		8C0E96CA99789AA7717F7551 /* AdMob-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AdMob-Debug.xcconfig"; sourceTree = "<group>"; };
+		F98E3D8AFF8D99AE0DB912DF /* AdMob-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "AdMob-Release.xcconfig"; sourceTree = "<group>"; };
 		4FC177B82BEEAB2C00447A06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4FEC65B02C01164800A8B731 /* SelectDifficultyButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDifficultyButtonView.swift; sourceTree = "<group>"; };
 		D394B2000000000000000002 /* TimeAttackStartConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAttackStartConfirmationView.swift; sourceTree = "<group>"; };
@@ -384,6 +386,8 @@
 				4F0C82852BC8247600E1480E /* Assets.xcassets */,
 				4F42C7A52BF7756200F92FBB /* ColorAssets.xcassets */,
 				4FC177B82BEEAB2C00447A06 /* Info.plist */,
+				8C0E96CA99789AA7717F7551 /* AdMob-Debug.xcconfig */,
+				F98E3D8AFF8D99AE0DB912DF /* AdMob-Release.xcconfig */,
 				1AA0B9944ECF0D060E528106 /* PrivacyInfo.xcprivacy */,
 				4F0C82872BC8247600E1480E /* PrimePickApp.entitlements */,
 				4F0C82882BC8247600E1480E /* Preview Content */,
@@ -1016,6 +1020,7 @@
 		};
 		4F0C828E2BC8247600E1480E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C0E96CA99789AA7717F7551 /* AdMob-Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1049,6 +1054,7 @@
 		};
 		4F0C828F2BC8247600E1480E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F98E3D8AFF8D99AE0DB912DF /* AdMob-Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

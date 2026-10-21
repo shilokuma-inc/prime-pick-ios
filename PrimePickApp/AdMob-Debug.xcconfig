@@ -1,0 +1,22 @@
+//
+//  AdMob-Debug.xcconfig
+//  PrimePickApp
+//
+//  Debug 構成（xcodebuild test・Xcode からの Simulator での起動・CI の Build）の AdMob の ID。
+//  開発中に本番の広告を読み込まないよう、Google 公式のテスト用 ID を入れる（本番 ID は AdMob-Release.xcconfig）。
+//  値は Info.plist の $(ADMOB_…) に差し込まれる。ID を差し替えるときはこのファイルと AdMob-Release.xcconfig だけを直す。
+//  xcconfig では「//」から後ろがコメントになるので、値に「//」を含めない
+//
+
+// App ID（Info.plist の GADApplicationIdentifier）
+ADMOB_APP_ID = ca-app-pub-3940256099942544~1458002511
+
+// ネイティブ広告の広告ユニット ID（置き場所ごと。AdPlacement と AdConfiguration.nativeAdUnitIDKey(for:) を参照）
+// 練習・タイムアタックの結果（QuizResultView）
+ADMOB_NATIVE_AD_UNIT_ID_QUIZ_RESULT = ca-app-pub-3940256099942544/3986624511
+// デイリーチャレンジの結果（DailyChallengeResultView）
+ADMOB_NATIVE_AD_UNIT_ID_DAILY_CHALLENGE_RESULT = ca-app-pub-3940256099942544/3986624511
+// タイムアタックの記録（TimeAttackRecordsView）
+ADMOB_NATIVE_AD_UNIT_ID_TIME_ATTACK_RECORDS = ca-app-pub-3940256099942544/3986624511
+// 設定（SettingView）
+ADMOB_NATIVE_AD_UNIT_ID_SETTING = ca-app-pub-3940256099942544/3986624511

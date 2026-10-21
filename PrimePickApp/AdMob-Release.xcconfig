@@ -1,0 +1,26 @@
+//
+//  AdMob-Release.xcconfig
+//  PrimePickApp
+//
+//  Release 構成（Archive・TestFlight・App Store に出すビルド）の AdMob の本番 ID（AdMob で「ネイティブ アドバンス」として作成済み）。
+//  値は Info.plist の $(ADMOB_…) に差し込まれる。ID を差し替えるときはこのファイルと AdMob-Debug.xcconfig だけを直す。
+//  手元で Release でビルドしたアプリを、撮影モード以外で Simulator・実機で起動しない（本番の広告を読み込み、AdMob の無効なトラフィックになりうる）。
+//  確かめるのはビルドした .app の Info.plist の値だけにする（plutil -p）。
+//  例外: App Store のスクリーンショット（Tools/capture_screenshots.sh・Screenshots/App Store）は既定で Release を Simulator で起動するが、
+//  撮影モード（-screenshot-demo）では AdEligibility が広告 SDK を動かさないので、本番の広告は読み込まない。
+//  TestFlight（Release）で試す端末は、AdMob にテストデバイスとして登録する（docs/ads-release-checklist.md）
+//  xcconfig では「//」から後ろがコメントになるので、値に「//」を含めない
+//
+
+// App ID（Info.plist の GADApplicationIdentifier）
+ADMOB_APP_ID = ca-app-pub-7683522872696760~4361548226
+
+// ネイティブ広告の広告ユニット ID（置き場所ごと。AdPlacement と AdConfiguration.nativeAdUnitIDKey(for:) を参照）
+// 練習・タイムアタックの結果（QuizResultView）
+ADMOB_NATIVE_AD_UNIT_ID_QUIZ_RESULT = ca-app-pub-7683522872696760/3775260254
+// デイリーチャレンジの結果（DailyChallengeResultView）
+ADMOB_NATIVE_AD_UNIT_ID_DAILY_CHALLENGE_RESULT = ca-app-pub-7683522872696760/4356432923
+// タイムアタックの記録（TimeAttackRecordsView）
+ADMOB_NATIVE_AD_UNIT_ID_TIME_ATTACK_RECORDS = ca-app-pub-7683522872696760/6495511106
+// 設定（SettingView）
+ADMOB_NATIVE_AD_UNIT_ID_SETTING = ca-app-pub-7683522872696760/5151921105

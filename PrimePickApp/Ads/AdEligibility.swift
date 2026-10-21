@@ -8,13 +8,14 @@ import Foundation
 /// 広告を出してよいかの判定。広告に加えて、同意フォーム・ATT ダイアログ・広告 SDK の初期化もこの判定に従う
 ///
 /// 撮影モード（スクリーンショットのレイアウトを変えない）・テスト実行中（SDK を動かさない）・
-/// AdMob の ID が無いときは出さない。同意（UMP の `canRequestAds`）による判定は別に行う
+/// AdMob の App ID が無いときは出さない。同意（UMP の `canRequestAds`）による判定は別に行う。
+/// 置き場所ごとの広告ユニット ID が欠けているかは、`AdNativeAdView` が置き場所ごとに見る
 struct AdEligibility: Equatable {
     /// 撮影モード（`ScreenshotDemo.isEnabled`）で起動している
     let isScreenshotDemo: Bool
     /// XCTest のテストホストとして起動している
     let isRunningTests: Bool
-    /// `Info.plist` に AdMob の ID がある
+    /// `Info.plist` に AdMob の App ID がある（`AdConfiguration.current` が nil でない）
     let hasConfiguration: Bool
     /// 広告を出す置き場所
     let enabledPlacements: Set<AdPlacement>
