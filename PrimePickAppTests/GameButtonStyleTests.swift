@@ -57,6 +57,24 @@ final class GameButtonStyleTests: XCTestCase {
         XCTAssertFalse(GameButtonStyle.shouldPlayPressFeedback(wasPressed: false, isPressed: true, isScreenshotDemo: true))
     }
 
+    /// 音を指定しないボタンは今の押下音を鳴らす（確認カード以外のボタンの音は変えない）
+    func testDefaultPressSoundIsButtonPress() {
+        XCTAssertEqual(GameButtonStyle.defaultPressSound, .buttonPress)
+        XCTAssertEqual(GameButtonStyle(appearance: .neutral()).pressSound, .buttonPress)
+    }
+
+    // MARK: - 確認カードの押下音
+
+    /// 確認カードの「Start」は進む押下音、「Quit」は今の押下音で、聞き分けられるよう別の音源にする（Discussion #454）
+    func testStartConfirmationButtonsUseForwardAndDefaultSounds() {
+        XCTAssertEqual(TimeAttackStartConfirmationView.startPressSound, .buttonPressForward)
+        XCTAssertEqual(TimeAttackStartConfirmationView.quitPressSound, .buttonPress)
+        XCTAssertNotEqual(
+            TimeAttackStartConfirmationView.startPressSound.resourceName,
+            TimeAttackStartConfirmationView.quitPressSound.resourceName
+        )
+    }
+
     // MARK: - 難易度ボタンの側面色
 
     /// ダークモードのエキスパートだけ側面色を明示し、ほかは上面のグラデーションを暗くして使う

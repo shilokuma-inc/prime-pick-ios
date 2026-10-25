@@ -150,16 +150,20 @@ extension View {
 
 /// 厚み（段差）型のボタンスタイル
 ///
-/// 押した瞬間に上面が沈み、軽い触覚と押下音（`SoundEffect.buttonPress`）を返す。
+/// 押した瞬間に上面が沈み、軽い触覚と押下音（`pressSound`。既定は `SoundEffect.buttonPress`）を返す。
+/// 押下音はボタンごとに選べる（確認カードの「Start」のような進むボタンは `SoundEffect.buttonPressForward`）。
 /// `NavigationLink` にも `.buttonStyle(GameButtonStyle(...))` で当てられ、画面遷移の仕組みは変えない。
 /// 撮影モード（`ScreenshotDemo`）では効果音と触覚を止める。
 struct GameButtonStyle: ButtonStyle {
     var appearance: GameButtonAppearance
-    /// 押したときに押下音を鳴らすか
-    var playsSound = true
+    /// 押したときに鳴らす押下音。nil なら鳴らさない（触覚は返す）
+    var pressSound: SoundEffect? = GameButtonStyle.defaultPressSound
+
+    /// 音を指定しないボタンで鳴らす押下音
+    static let defaultPressSound: SoundEffect = .buttonPress
 
     func makeBody(configuration: Configuration) -> some View {
-        GameButtonStyleBody(configuration: configuration, appearance: appearance, playsSound: playsSound)
+        GameButtonStyleBody(configuration: configuration, appearance: appearance, pressSound: pressSound)
     }
 
     /// 押し始めた瞬間（離している → 押している）だけ触覚・効果音を返す。撮影モードでは返さない
@@ -171,7 +175,7 @@ struct GameButtonStyle: ButtonStyle {
 private struct GameButtonStyleBody: View {
     let configuration: ButtonStyleConfiguration
     let appearance: GameButtonAppearance
-    let playsSound: Bool
+    let pressSound: SoundEffect?
 
     @Environment(\.isEnabled) private var isEnabled
 
@@ -187,14 +191,14 @@ private struct GameButtonStyleBody: View {
                 )
             }
             .onChange(of: configuration.isPressed) { wasPressed, isPressed in
-                guard playsSound,
+                guard let pressSound,
                       GameButtonStyle.shouldPlayPressFeedback(
                           wasPressed: wasPressed,
                           isPressed: isPressed,
                           isScreenshotDemo: ScreenshotDemo.isEnabled
                       )
                 else { return }
-                SoundFeedback.play(.buttonPress)
+                SoundFeedback.play(pressSound)
             }
     }
 }
