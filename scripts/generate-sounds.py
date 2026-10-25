@@ -33,8 +33,11 @@ def tone(frequency, duration, decay, partials=((1, 1.0), (2, 0.3), (3, 0.1)), at
     return samples
 
 
-def glide(start_hz, end_hz, duration, decay):
-    """start_hz から end_hz へ音程を滑らかに下げ（上げ）ながら減衰する音"""
+def glide(start_hz, end_hz, duration, decay, release=0.0):
+    """start_hz から end_hz へ音程を滑らかに下げ（上げ）ながら減衰する音
+
+    release 秒を指定すると、終わりの release 秒で 0 まで直線的に絞る（減衰が遅く、音が残ったまま切れる音のプツッという雑音を防ぐ）
+    """
     samples = []
     phase = 0.0
     count = int(SAMPLE_RATE * duration)
@@ -44,6 +47,8 @@ def glide(start_hz, end_hz, duration, decay):
         frequency = start_hz * (end_hz / start_hz) ** (index / count)
         phase += 2 * math.pi * frequency / SAMPLE_RATE
         envelope = min(1.0, t / 0.005) * math.exp(-t / decay)
+        if release > 0:
+            envelope *= min(1.0, (count - index) / (SAMPLE_RATE * release))
         samples.append((math.sin(phase) + 0.3 * math.sin(2 * phase)) / 1.3 * envelope)
     return samples
 
@@ -138,6 +143,11 @@ def main():
 
     # ボタンを押したときの「ポコッ」という短い音。何度も聞く音なので、短く小さく、正解音より低い音域にする
     write_caf("button_press", glide(880.0, 440.0, duration=0.07, decay=0.018), volume=0.35)
+
+    # 進むボタン（確認カードの「Start」など）を押したときの音。button_press と対になる、音程が上がる明るい音。
+    # button_press と同じ速い減衰だと上がりきる前に消えて上がって聞こえないので、減衰を遅くして少し長くし、
+    # その分だけ音量を下げて button_press と釣り合わせる。音が残ったまま切れないよう、終わりは release で絞る
+    write_caf("button_press_forward", glide(660.0, 1320.0, duration=0.09, decay=0.05, release=0.02), volume=0.22)
 
 
 if __name__ == "__main__":
