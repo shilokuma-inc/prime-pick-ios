@@ -141,16 +141,17 @@ def main():
     # コンボ切れの下降音
     write_caf("combo_break", glide(620.0, 180.0, duration=0.4, decay=0.18), volume=0.55)
 
-    # ボタンを押したときの「ポコッ」という短い音。何度も聞く音なので、短く小さく、正解音より低い音域にする
-    write_caf("button_press", glide(880.0, 440.0, duration=0.07, decay=0.018), volume=0.35)
+    # 戻るボタン（「やめる」「タイトルに戻る」など）を押したときの「ポコッ」という短い、音程が下がる音。
+    # 何度も聞く音なので、短く小さく、正解音より低い音域にする
+    write_caf("button_press_back", glide(880.0, 440.0, duration=0.07, decay=0.018), volume=0.35)
 
-    # 進むボタン（確認カードの「Start」など）を押したときの音。button_press と対になる、音程が上がる明るい音。
-    # button_press と同じ速い減衰だと上がりきる前に消えて上がって聞こえないので、減衰を遅くして少し長くし、
-    # その分だけ音量を下げて button_press と釣り合わせる。音が残ったまま切れないよう、終わりは release で絞る
+    # 進むボタン（確認カードの「Start」など）を押したときの音。button_press_back と対になる、音程が上がる明るい音。
+    # button_press_back と同じ速い減衰だと上がりきる前に消えて上がって聞こえないので、減衰を遅くして少し長くし、
+    # その分だけ音量を下げて button_press_back と釣り合わせる。音が残ったまま切れないよう、終わりは release で絞る
     write_caf("button_press_forward", glide(660.0, 1320.0, duration=0.09, decay=0.05, release=0.02), volume=0.22)
 
     # 進むでも戻るでもないボタン（遊び方など）を押したときの音。音程が動かない短いクリックにして、上がる・下がる押下音と聞き分ける。
-    # 長さ・減衰・音量は button_press にそろえ、高さは button_press（880 → 440 Hz）と button_press_forward（660 → 1320 Hz）の間にする。
+    # 長さ・減衰・音量は button_press_back にそろえ、高さは button_press_back（880 → 440 Hz）と button_press_forward（660 → 1320 Hz）の間にする。
     # 残り 5 秒のチック（1760 Hz の正弦波だけ）と取り違えないよう、それより低くし、倍音を重ねて丸い音にする
     write_caf("button_press_neutral", tone(740.0, duration=0.07, decay=0.018), volume=0.35)
 
