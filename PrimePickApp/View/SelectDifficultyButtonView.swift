@@ -15,6 +15,9 @@ struct SelectDifficultyButtonView: View {
     var onRequestStartConfirmation: ((QuizSetting) -> Void)?
     @Environment(\.colorScheme) private var colorScheme
 
+    /// 難易度ボタンの押下音。練習でもタイムアタックでも同じ音にする
+    static let pressSound: SoundEffect = .buttonPressBack
+
     var body: some View {
         VStack {
             selectDifficultyButton(difficulty: .expert)
@@ -55,7 +58,8 @@ extension SelectDifficultyButtonView {
                 appearance: GameButtonAppearance(
                     colors: difficulty.gradientColors,
                     side: difficulty.gameButtonSideColor(for: colorScheme)
-                )
+                ),
+                pressSound: Self.pressSound
             )
         )
         .padding(.horizontal, 50)
