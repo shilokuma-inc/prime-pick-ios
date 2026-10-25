@@ -18,6 +18,11 @@ struct TimeAttackStartConfirmationView: View {
 
     static let cornerRadius: CGFloat = 28
 
+    /// 「Start」の押下音。進むボタンなので、音程が上がる進む押下音にする（Discussion #454）
+    static let startPressSound: SoundEffect = .buttonPressForward
+    /// 「Quit」の押下音。戻るボタンなので、ほかのボタンと同じ今の押下音のままにする
+    static let quitPressSound: SoundEffect = .buttonPress
+
     var body: some View {
         VStack(spacing: 20) {
             Text("Start Time Attack?")
@@ -43,7 +48,8 @@ struct TimeAttackStartConfirmationView: View {
                         appearance: GameButtonAppearance(
                             colors: setting.difficulty.gradientColors,
                             side: setting.difficulty.gameButtonSideColor(for: colorScheme)
-                        )
+                        ),
+                        pressSound: Self.startPressSound
                     )
                 )
 
@@ -54,7 +60,7 @@ struct TimeAttackStartConfirmationView: View {
                         .padding(.vertical, 12)
                         .frame(maxWidth: .infinity)
                 }
-                .buttonStyle(GameButtonStyle(appearance: .neutral(shape: .capsule, depth: 4)))
+                .buttonStyle(GameButtonStyle(appearance: .neutral(shape: .capsule, depth: 4), pressSound: Self.quitPressSound))
             }
         }
         .padding(24)
