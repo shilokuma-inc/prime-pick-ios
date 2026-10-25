@@ -149,6 +149,11 @@ def main():
     # その分だけ音量を下げて button_press と釣り合わせる。音が残ったまま切れないよう、終わりは release で絞る
     write_caf("button_press_forward", glide(660.0, 1320.0, duration=0.09, decay=0.05, release=0.02), volume=0.22)
 
+    # 進むでも戻るでもないボタン（遊び方など）を押したときの音。音程が動かない短いクリックにして、上がる・下がる押下音と聞き分ける。
+    # 長さ・減衰・音量は button_press にそろえ、高さは button_press（880 → 440 Hz）と button_press_forward（660 → 1320 Hz）の間にする。
+    # 残り 5 秒のチック（1760 Hz の正弦波だけ）と取り違えないよう、それより低くし、倍音を重ねて丸い音にする
+    write_caf("button_press_neutral", tone(740.0, duration=0.07, decay=0.018), volume=0.35)
+
 
 if __name__ == "__main__":
     main()
