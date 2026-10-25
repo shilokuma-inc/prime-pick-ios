@@ -86,7 +86,7 @@ final class SoundEffectTests: XCTestCase {
         XCTAssertFalse(answerSounds.contains(name ?? ""))
     }
 
-    /// 進む押下音は今の押下音・正解音・誤答音とは別の音源にする
+    /// 進む押下音は戻る押下音・正解音・誤答音とは別の音源にする
     func testButtonPressForwardUsesItsOwnSound() {
         let name = SoundEffect.buttonPressForward.resourceName
         XCTAssertEqual(name, "button_press_forward")

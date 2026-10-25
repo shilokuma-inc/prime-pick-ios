@@ -79,8 +79,8 @@ final class GameButtonStyleTests: XCTestCase {
 
     // MARK: - 確認カードの押下音
 
-    /// 確認カードの「Start」は進む押下音、「Quit」は今の押下音で、聞き分けられるよう別の音源にする（Discussion #454）
-    func testStartConfirmationButtonsUseForwardAndDefaultSounds() {
+    /// 確認カードの「Start」は進む押下音、「Quit」は戻る押下音で、聞き分けられるよう別の音源にする（Discussion #454）
+    func testStartConfirmationButtonsUseForwardAndBackSounds() {
         XCTAssertEqual(TimeAttackStartConfirmationView.startPressSound, .buttonPressForward)
         XCTAssertEqual(TimeAttackStartConfirmationView.quitPressSound, .buttonPressBack)
         XCTAssertNotEqual(
