@@ -3,6 +3,7 @@
 //  PrimePickApp
 //
 
+import QuizCore
 import AudioToolbox
 import AVFoundation
 

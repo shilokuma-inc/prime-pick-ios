@@ -22,6 +22,23 @@ xcodebuild test -project PrimePickApp.xcodeproj -scheme PrimePickApp -destinatio
 - Simulator 名は OS 更新で改名されることがある。解決できない場合は `xcrun simctl list devices available` で UDID を調べて `id=` で指定する
 - CI（`.github/workflows/build-*.yml`）は `generic/platform=iOS Simulator` で `build-for-testing` する
 
+## QuizKit（共通のクイズ基盤）
+
+出題の進行・スコア・コンボ・タイムアタックの記録・デイリーの日付とストリーク・シード付き乱数は [shilokuma-inc/quiz-kit](https://github.com/shilokuma-inc/quiz-kit) の `QuizCore` を使う（`upToNextMinorVersion` で固定）。画面（`QuizView` 以下）はこのアプリ独自のまま。
+
+| このリポジトリ | QuizKit |
+| --- | --- |
+| `QuizView` / `QuizButtonView`（画面・効果音・ポップアップ・計測） | `QuizSession`（解答の受付・次の問題への切り替え・誤答のロックと時間ペナルティ・カウントダウン・補充・終わりの判定） |
+| `QuizView.rules(for:)`（モード → `QuizRules`） | `QuizRules` |
+| `Difficulty.scoreFactor` と `ScoreCalculator` の難易度で呼ぶ窓口 | `ScoreCalculator` / `ScoreBreakdown` / `ScoringRule`（係数の既定値はこのアプリで調整した値） |
+| `ComboStage` の振動と読み上げ | `ComboStage`（3 / 6 / 11 コンボの区切り） |
+| `TimeAttackRecordStore`（枠のキー） | `LocalLeaderboard`（上位 10 件の保存。形式は `timeAttackRecords.v1.*` のまま） |
+| `DailyChallengeDay` / `DailyChallengeStreak`（`QuizDay` / `QuizStreak` の別名と、公開日） | `QuizDay` / `QuizStreak` / `DayKeyedRecordStore` / `SplitMix64` / `StableSeed` |
+
+- 進行のルールそのもの（例: 解答の受け付け方・補充の条件）を変えたいときは、ほかのアプリにも効くので quiz-kit に PR を出し、リリースしてからこのリポジトリのバージョンを上げる
+- このアプリだけの見せ方・演出・計測は、`QuizSession.onEvent` と `QuizSession` の状態を見てこのリポジトリで書く
+- デイリーの出題（`DailyChallengeGeneratorV1`）は `SplitMix64` のメソッドだけを使う。標準ライブラリの `shuffled(using:)` などは OS の更新で引き方が変わりうる
+
 ## App Store の掲載情報
 
 手動で発火する GitHub Actions で、編集中のバージョンに反映する（審査中・配信済みのバージョンには触らない）。認証は Organization secrets の App Store Connect API Key（`APPLE_API_KEY_BASE64` / `APPLE_API_KEY_ID` / `APPLE_API_ISSUER_ID`）。

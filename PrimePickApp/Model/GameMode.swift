@@ -3,6 +3,7 @@
 //  PrimePickApp
 //
 
+import QuizCore
 import SwiftUI
 
 /// クイズの進行ルール

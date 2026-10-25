@@ -4,11 +4,12 @@
 //
 
 import Foundation
+import QuizCore
 
 /// デイリーチャレンジの 10 問を作る。同じ `dayKey` からは、どの端末・どの OS でも同じ 10 問ができる
 ///
 /// 「全員が同じ問題」を守るため、版ごとに中身を凍結する（Discussion #181 本文 3 章）。
-/// - 乱数は自前の `SplitMix64`。標準ライブラリの `random(in:using:)`・`randomElement(using:)`・`shuffled(using:)` は
+/// - 乱数は QuizKit の `SplitMix64`。標準ライブラリの `random(in:using:)`・`randomElement(using:)`・`shuffled(using:)` は
 ///   OS の更新で引き方が変わりうるため使わない（`QuizDataManager`・`SeededGenerator`・GameplayKit にも依存しない）
 /// - シードは `dayKey` の UTF-8 から FNV-1a で作る。`hashValue` / `Hasher` は起動ごとに値が変わるため使わない
 /// - 出題を変えたくなったら既存の版は触らず、新しい版を足す。`DailyChallengeGeneratorTests` のゴールデンテストが変更を検出する
@@ -90,12 +91,7 @@ enum DailyChallengeGeneratorV1 {
 
     /// `seedPrefix + dayKey` の UTF-8 に対する FNV-1a（64bit）
     static func seed(dayKey: String) -> UInt64 {
-        var hash: UInt64 = 0xcbf2_9ce4_8422_2325
-        for byte in (seedPrefix + dayKey).utf8 {
-            hash ^= UInt64(byte)
-            hash = hash &* 0x0000_0100_0000_01b3
-        }
-        return hash
+        StableSeed.fnv1a(seedPrefix + dayKey)
     }
 
     /// 段階の範囲の数を、小さい順に素数と素数でない数（1 を含む）に分けたもの
@@ -118,49 +114,6 @@ enum DailyChallengeGeneratorV1 {
             }
             self.primes = primes
             self.nonPrimes = nonPrimes
-        }
-    }
-}
-
-// MARK: - 乱数
-
-/// SplitMix64（Steele, Lea, Flood 2014）。状態 64bit の小さな PRNG で、同じシードからは常に同じ列を返す
-///
-/// デイリーの出題を凍結するために自前で持つ。`RandomNumberGenerator` には適合させない
-/// （適合させると標準ライブラリの `random(in:using:)` などに渡せてしまい、引き方が OS に依存する）。
-struct SplitMix64 {
-    private var state: UInt64
-
-    init(seed: UInt64) {
-        state = seed
-    }
-
-    mutating func next() -> UInt64 {
-        state = state &+ 0x9e37_79b9_7f4a_7c15
-        var z = state
-        z = (z ^ (z >> 30)) &* 0xbf58_476d_1ce4_e5b9
-        z = (z ^ (z >> 27)) &* 0x94d0_49bb_1331_11eb
-        return z ^ (z >> 31)
-    }
-
-    /// `0..<1` の一様な小数。上位 53bit をそのまま `Double` の仮数にする
-    mutating func nextUnit() -> Double {
-        Double(next() >> 11) * 0x1p-53
-    }
-
-    /// `0..<upperBound` から偏りなく 1 つ選ぶ
-    ///
-    /// 単純な剰余は `2^64` が `upperBound` で割り切れない分だけ小さい値に偏るため、
-    /// 端数にあたる `2^64 mod upperBound` 個の値を捨てて引き直す。
-    mutating func nextIndex(below upperBound: Int) -> Int {
-        precondition(upperBound > 0, "upperBound は 1 以上")
-        let bound = UInt64(upperBound)
-        let threshold = (0 &- bound) % bound
-        while true {
-            let value = next()
-            if value >= threshold {
-                return Int(value % bound)
-            }
         }
     }
 }

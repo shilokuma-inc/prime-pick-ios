@@ -5,6 +5,7 @@
 //  Created by 村石 拓海 on 2024/05/15.
 //
 
+import QuizCore
 import SwiftUI
 
 struct QuizView: View {
@@ -27,15 +28,8 @@ struct QuizView: View {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @State private var quizNumber: Int = 0
-    @State var isPresentedResult: Bool = false
-    @State private var scoreCalculator: ScoreCalculator
-    @State private var answerRecords: [QuizAnswerRecord] = []
-    @State private var quizData: [QuizEntity]
-    @State private var remainingSeconds: Int
-    @State private var timer: Timer?
-    /// 現在の問題が表示された時刻。速度ボーナスの計測基準
-    @State private var questionStartDate: Date = Date()
+    /// 1 プレイの進行（出題・解答の受付・スコア・残り時間・補充・終わりの判定）。QuizKit の `QuizSession` に任せる
+    @State private var session: QuizSession<QuizEntity>
     /// 解答直後に表示しているミニ解説。表示していないときは nil
     @State private var answerExplanation: AnswerExplanationItem?
     /// 解答直後に出しているスコアの増減。表示していないときは nil
@@ -53,8 +47,6 @@ struct QuizView: View {
 
     let difficulty: Difficulty
     let gameMode: GameMode
-    /// 1 プレイの間は同じ素数の出現確率を使い続けるため、`View` が作り直されても同じインスタンスを保持する
-    @State private var manager: QuizDataManager
     let questionCount: QuizQuestionCount
     /// プレイの終わりの処理。既定は自己ベストの記録
     private let finisher: any QuizPlayFinishing
@@ -79,19 +71,21 @@ struct QuizView: View {
         self.questionCount = questionCount
         self.finisher = finisher
         self.source = source
+        // 1 プレイの間は同じ素数の出現確率を使い続けるため、補充でも同じインスタンスを使う
         let manager = QuizDataManager()
-        _manager = State(initialValue: manager)
+        let rules = Self.rules(for: gameMode)
 
         let setting = QuizSetting(difficulty: difficulty, gameMode: gameMode, questionCount: questionCount)
         // 出題を渡されたときは、設定が撮影モードの場面と一致しても渡された出題を使う
         if providedQuizData?.isEmpty ?? true, let demo = ScreenshotDemo.quiz, demo.setting == setting {
             // 撮影モード: 決まった出題と途中までの進行状態から始める
-            _quizData = State(initialValue: demo.quizData)
-            _quizNumber = State(initialValue: demo.quizNumber)
-            _scoreCalculator = State(initialValue: demo.scoreCalculator)
-            _answerRecords = State(initialValue: demo.answerRecords)
-            _remainingSeconds = State(initialValue: demo.remainingSeconds)
-            _isPresentedResult = State(initialValue: demo.isFinished)
+            let session = QuizSession(questions: demo.quizData, rules: rules)
+            session.restore(
+                answeredChoices: demo.answeredChoices,
+                remainingSeconds: demo.remainingSeconds,
+                isFinished: demo.isFinished
+            )
+            _session = State(initialValue: session)
             if gameMode.showsAnswerExplanation, !demo.isFinished, let explanation = demo.lastAnsweredExplanation {
                 _answerExplanation = State(
                     initialValue: AnswerExplanationItem(id: demo.answeredCount, explanation: explanation)
@@ -100,17 +94,14 @@ struct QuizView: View {
             return
         }
 
-        _quizData = State(
-            initialValue: Self.initialQuizData(provided: providedQuizData) {
-                manager.makeQuizData(
-                    difficulty: difficulty,
-                    range: difficulty.range,
-                    questionCount: questionCount
-                )
-            }
-        )
-        _scoreCalculator = State(initialValue: ScoreCalculator(rule: gameMode.scoringRule))
-        _remainingSeconds = State(initialValue: gameMode.timeLimitSeconds ?? 0)
+        let quizData = Self.initialQuizData(provided: providedQuizData) {
+            manager.makeQuizData(difficulty: difficulty, range: difficulty.range, questionCount: questionCount)
+        }
+        // タイムアタックでは制限時間内に問題が尽きないよう、残りが少なくなったら追加生成する
+        let refill: (() -> [QuizEntity])? = gameMode.isTimeAttack
+            ? { manager.makeQuizData(difficulty: difficulty, range: difficulty.range, questionCount: questionCount) }
+            : nil
+        _session = State(initialValue: QuizSession(questions: quizData, rules: rules, refill: refill))
     }
 
     var body: some View {
@@ -121,14 +112,14 @@ struct QuizView: View {
 
                 VStack(spacing: .zero) {
                     QuizContentView(
-                        quizNumber: $quizNumber,
+                        quizNumber: .constant(session.currentIndex),
                         difficulty: displayedDifficulty,
                         gameMode: gameMode,
-                        remainingSeconds: remainingSeconds,
-                        quizData: quizData,
+                        remainingSeconds: session.remainingSeconds,
+                        quizData: session.questions,
                         // コンボを出さないモードでは、コンボ表示と MAX 段階の背景を出さないよう 0 として渡す
-                        currentCombo: gameMode.showsCombo ? scoreCalculator.currentCombo : 0,
-                        score: scoreCalculator.totalScore,
+                        currentCombo: gameMode.showsCombo ? session.score.currentCombo : 0,
+                        score: session.score.totalScore,
                         scorePopup: scorePopup,
                         timePenaltyPopup: timePenaltyPopup,
                         comboBreakCount: comboBreakCount
@@ -145,30 +136,20 @@ struct QuizView: View {
                     }
                     .frame(height: geometry.size.height * Self.answerExplanationHeightRatio)
                     
-                    QuizButtonView(
-                        quizData: quizData,
-                        difficulty: difficulty,
-                        questionStartDate: questionStartDate,
-                        advanceDelay: gameMode.showsAnswerExplanation ? Self.answerExplanationDuration : 0,
-                        incorrectInputLockDuration: gameMode.missInputLockDuration,
-                        scoreCalculator: $scoreCalculator,
-                        quizIndex: $quizNumber,
-                        isPresentedResult: $isPresentedResult,
-                        answerRecords: $answerRecords
-                    )
+                    QuizButtonView(session: session)
                     .frame(height: geometry.size.height * Self.quizButtonHeightRatio)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 
                 if isPresentedResult && gameMode.showsQuizResult {
                     QuizResultView(
-                        score: scoreCalculator.totalScore,
-                        correctCount: scoreCalculator.correctCount,
-                        maxCombo: scoreCalculator.maxCombo,
+                        score: session.score.totalScore,
+                        correctCount: session.score.correctCount,
+                        maxCombo: session.score.maxCombo,
                         answerRecords: answerRecords,
                         gameMode: gameMode,
                         isNewRecord: isNewRecord,
-                        breakdown: scoreCalculator.breakdown
+                        breakdown: session.score.breakdown
                     )
                 }
             }
@@ -194,38 +175,45 @@ struct QuizView: View {
         }
         .onAppear {
             sendQuizStartIfNeeded()
-            startTimerIfNeeded()
-            // 1 問目が表示された時点を経過時間の基準にする
-            questionStartDate = Date()
+            session.onEvent = handle
+            // 1 問目が表示された時点を経過時間の基準にし、タイムアタックならカウントダウンを始める。
+            // 撮影モードでは残り時間を止めたまま撮る（動き続ける画面は撮影が落ち着かない）
+            if ScreenshotDemo.isEnabled {
+                return
+            }
+            session.start()
         }
         .onDisappear {
-            stopTimer()
+            session.stop()
         }
-        .onChange(of: quizNumber) { _, newValue in
-            // 次の問題に切り替わった時点を経過時間の基準にする
-            questionStartDate = Date()
-            refillQuizDataIfNeeded(currentIndex: newValue)
-        }
-        .onChange(of: scoreCalculator.currentCombo) { oldCombo, newCombo in
+        .onChange(of: session.score.currentCombo) { oldCombo, newCombo in
             handleComboChange(from: oldCombo, to: newCombo)
         }
-        .onChange(of: answerRecords.count) { _, _ in
+        .onChange(of: session.answers.count) { _, _ in
             finisher.recordProgress(currentOutcome)
             showAnswerExplanationIfNeeded()
             showScorePopupIfNeeded()
-            applyMissTimePenaltyIfNeeded()
-        }
-        .onChange(of: isPresentedResult) { _, isPresented in
-            // 10 問を解き終えた場合など、タイムアップ以外の終了でもタイマーを止める
-            if isPresented {
-                stopTimer()
-                finishPlay()
-            }
         }
     }
 }
 
 extension QuizView {
+    /// モードごとの進め方
+    ///
+    /// 練習・デイリーはミニ解説を読み終えてから次の問題を出し、解説を読む時間が次の問題の速度ボーナスを削らないようにする。
+    /// タイムアタックは誤答で残り時間を減らし、誤答を連打して当てずっぽうに進めないよう短時間だけ入力を止める。
+    static func rules(for gameMode: GameMode) -> QuizRules {
+        QuizRules(
+            timeLimitSeconds: gameMode.timeLimitSeconds,
+            missTimePenaltySeconds: gameMode.missTimePenaltySeconds,
+            missInputLockDuration: gameMode.missInputLockDuration,
+            advanceDelay: gameMode.showsAnswerExplanation ? answerExplanationDuration : 0,
+            finalCountdownSeconds: GameMode.timeAttackFinalCountdownSeconds,
+            refillThreshold: refillThreshold,
+            scoringRule: gameMode.scoringRule
+        )
+    }
+
     /// プレイ開始の計測イベント。デイリーは別のイベントで測るので nil
     static func quizStartEvent(
         gameMode: GameMode,
@@ -244,11 +232,6 @@ extension QuizView {
         )
     }
 
-    /// やめた時点で全問に答えていれば、途中でやめたのではなく解き終えたものとして扱う
-    static func quitCompletesPlay(answeredCount: Int, questionCount: Int) -> Bool {
-        questionCount > 0 && answeredCount >= questionCount
-    }
-
     /// 最初に出題する問題。渡された出題があればそれを使い、無ければ（空も含む）`makeQuizData` で作る
     ///
     /// 空の出題を受け取ると 1 問目の表示で範囲外アクセスになるため、空は渡されなかったものとして扱う。
@@ -264,34 +247,32 @@ extension QuizView {
 }
 
 private extension QuizView {
-    /// タイムアタック時のみ 1 秒ごとのカウントダウンを開始する
-    func startTimerIfNeeded() {
-        guard gameMode.isTimeAttack, timer == nil, !isPresentedResult else { return }
-        // 撮影モードでは残り時間を止めたまま撮る（動き続ける画面は撮影が落ち着かない）
-        guard !ScreenshotDemo.isEnabled else { return }
-        let scheduledTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            countDown()
-        }
-        // スクロールなどのトラッキング中でもカウントダウンを止めない
-        RunLoop.main.add(scheduledTimer, forMode: .common)
-        timer = scheduledTimer
+    /// 解き終えた・時間切れでリザルトを表示する
+    var isPresentedResult: Bool {
+        session.isFinished && session.finishReason != .quit
     }
 
-    func stopTimer() {
-        timer?.invalidate()
-        timer = nil
+    /// 解答の記録（出題順）
+    var answerRecords: [QuizAnswerRecord] {
+        session.answers.map(QuizAnswerRecord.init)
     }
 
-    func countDown() {
-        guard !isPresentedResult else { return }
-        if remainingSeconds > 1 {
-            remainingSeconds -= 1
-            if gameMode.isInFinalCountdown(remainingSeconds: remainingSeconds) {
+    /// `QuizSession` の出来事に、効果音・ポップアップ・プレイの終わりの処理をつなぐ
+    func handle(_ event: QuizSessionEvent<QuizEntity>) {
+        switch event {
+        case .tick(_, let isFinalCountdown):
+            if isFinalCountdown {
                 SoundFeedback.play(.countdownTick)
             }
-        } else {
-            remainingSeconds = 0
-            finishByTimeUp()
+        case .timePenalty(let seconds):
+            showTimePenaltyPopup(deductedSeconds: seconds)
+        case .finished(.timeUp):
+            SoundFeedback.play(.timeUp)
+            finishPlay()
+        case .finished(.completed):
+            finishPlay()
+        case .answered, .advanced, .finished(.quit):
+            break
         }
     }
 
@@ -324,12 +305,11 @@ private extension QuizView {
     }
 
     /// 確認のうえで途中でやめる。解答済みまでで結果を確定して画面を閉じる
+    ///
+    /// 最後の問題に答えてミニ解説を出している間にやめた場合は、`QuizSession` が解き終えた扱いにする（`handle` で記録する）。
     func quit() {
-        stopTimer()
-        if Self.quitCompletesPlay(answeredCount: answerRecords.count, questionCount: quizData.count) {
-            // 最後の問題に答えてミニ解説を出している間にやめた場合は、解き終えた扱いにする
-            finishPlay()
-        } else {
+        session.quit()
+        if session.finishReason == .quit {
             finisher.abandon(currentOutcome)
         }
         dismiss()
@@ -340,10 +320,10 @@ private extension QuizView {
         QuizPlayOutcome(
             gameMode: gameMode,
             difficulty: difficulty,
-            score: scoreCalculator.totalScore,
-            correctCount: scoreCalculator.correctCount,
+            score: session.score.totalScore,
+            correctCount: session.score.correctCount,
             answerRecords: answerRecords,
-            shownQuestionNumber: quizNumber + 1
+            shownQuestionNumber: session.currentIndex + 1
         )
     }
 
@@ -352,14 +332,7 @@ private extension QuizView {
     /// 練習・タイムアタックは全問がプレイの難易度と同じなので変わらない。
     /// デイリーは 2 桁 → 3 桁 → Hard と段階で難易度が変わるため、段階に合わせて背景色が変わる。
     var displayedDifficulty: Difficulty {
-        quizData.indices.contains(quizNumber) ? quizData[quizNumber].difficulty : difficulty
-    }
-
-    /// 時間切れでリザルトを表示する
-    func finishByTimeUp() {
-        stopTimer()
-        SoundFeedback.play(.timeUp)
-        isPresentedResult = true
+        session.currentQuestion.difficulty
     }
 
     /// コンボ切れで画面を揺らして下降音を鳴らし、段階が上がったら到達音を鳴らして VoiceOver で読み上げる
@@ -383,28 +356,12 @@ private extension QuizView {
         }
     }
 
-    /// タイムアタックの誤答で残り時間を減らす。残り時間が尽きたらその場でタイムアップにする
-    func applyMissTimePenaltyIfNeeded() {
-        guard gameMode.missTimePenaltySeconds > 0,
-              !isPresentedResult,
-              let record = answerRecords.last,
-              !record.isAnswerCorrect
-        else { return }
-
-        let secondsBeforePenalty = remainingSeconds
-        remainingSeconds = gameMode.remainingSecondsAfterMiss(from: remainingSeconds)
-        showTimePenaltyPopup(deductedSeconds: secondsBeforePenalty - remainingSeconds)
-        if remainingSeconds == 0 {
-            finishByTimeUp()
-        }
-    }
-
     /// タイムアタックで、直前の解答によるスコアの増減をポップアップで出す
     ///
     /// 練習モードはプレイ中にスコアを表示しないため出さない。
     func showScorePopupIfNeeded() {
         guard gameMode.isTimeAttack,
-              let submission = scoreCalculator.lastSubmission,
+              let submission = session.score.lastSubmission,
               let popup = ScorePopup.score(id: answerRecords.count, submission: submission)
         else { return }
         scorePopup = popup
@@ -441,19 +398,6 @@ private extension QuizView {
                 answerExplanation = nil
             }
         }
-    }
-
-    /// タイムアタックでは制限時間内に問題が尽きないよう、残りが少なくなったら追加生成する
-    func refillQuizDataIfNeeded(currentIndex: Int) {
-        guard gameMode.isTimeAttack else { return }
-        guard currentIndex >= quizData.count - Self.refillThreshold else { return }
-        quizData.append(
-            contentsOf: manager.makeQuizData(
-                difficulty: difficulty,
-                range: difficulty.range,
-                questionCount: questionCount
-            )
-        )
     }
 }
 

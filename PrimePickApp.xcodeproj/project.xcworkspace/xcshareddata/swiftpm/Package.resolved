@@ -1,5 +1,5 @@
 {
-  "originHash" : "6cecd1126e8fa1d694f4f9c84551ebd41003f67568d3464f827226168804a28b",
+  "originHash" : "8b1f497f6e72d175a2d22acc5b312d0df3bf686122923527b1217d45380b896c",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -125,6 +125,15 @@
       "state" : {
         "revision" : "f4a19a3c313dc2616c70bb49d29a799fb16be837",
         "version" : "2.4.1"
+      }
+    },
+    {
+      "identity" : "quiz-kit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/shilokuma-inc/quiz-kit",
+      "state" : {
+        "revision" : "7d92f0599460c75070a96a4da6f7765cb754a265",
+        "version" : "0.1.1"
       }
     },
     {

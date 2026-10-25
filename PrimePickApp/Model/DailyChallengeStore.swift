@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import QuizCore
 
 /// デイリーチャレンジの記録の保存先
 ///
@@ -20,57 +21,26 @@ protocol DailyChallengeStore {
 /// UserDefaults に保存する `DailyChallengeStore`
 ///
 /// タイムアタックの記録（`TimeAttackRecordStore`）と同じく UserDefaults を使い、テストでは使い捨ての領域を注入する。
-/// 記録は `dayKey` をキーにした辞書を 1 つの JSON として 1 キーに保存する（1 日 1 件・1 件数百バイトなので、数年分でも小さい）。
+/// 保存は QuizKit の `DayKeyedRecordStore`（`dayKey` をキーにした辞書を 1 つの JSON として 1 キーに保存する）に任せる。
 struct UserDefaultsDailyChallengeStore: DailyChallengeStore {
     /// 保存に使うキー。形式を変えるときは別のキーにして、古いキーから移す
     static let recordsKey = "dailyChallenge.records.v1"
 
-    private let userDefaults: UserDefaults
+    private let store: DayKeyedRecordStore<DailyChallengeRecord>
 
     init(userDefaults: UserDefaults = .standard) {
-        self.userDefaults = userDefaults
+        store = DayKeyedRecordStore(recordsKey: Self.recordsKey, userDefaults: userDefaults)
     }
 
     func record(dayKey: String) -> DailyChallengeRecord? {
-        loadRecords()[dayKey]
+        store.record(dayKey: dayKey)
     }
 
     func allRecords() -> [DailyChallengeRecord] {
-        loadRecords().values.sorted { $0.dayKey < $1.dayKey }
+        store.allRecords()
     }
 
     func save(_ record: DailyChallengeRecord) {
-        // 全件を読んで 1 件差し替えて書き戻すため、別の日の保存と重なると先の保存を消してしまう。
-        // 読み込みから書き込みまでを、すべてのインスタンスで共有するロックで 1 つの操作にする
-        Self.saveLock.lock()
-        defer { Self.saveLock.unlock() }
-        var records = loadRecords()
-        records[record.dayKey] = record
-        guard let data = try? Self.encoder.encode(records) else { return }
-        userDefaults.set(data, forKey: Self.recordsKey)
+        store.save(record, dayKey: record.dayKey)
     }
-
-    /// 保存済みの記録。読めない（壊れている）ときは空として扱い、起動やプレイを止めない
-    private func loadRecords() -> [String: DailyChallengeRecord] {
-        guard let data = userDefaults.data(forKey: Self.recordsKey),
-              let records = try? Self.decoder.decode([String: DailyChallengeRecord].self, from: data)
-        else { return [:] }
-        return records
-    }
-
-    private static let saveLock = NSLock()
-
-    /// 日時は UNIX 時間（秒）で保存する。`JSONEncoder` の既定（2001 年起点）より他の仕組みから読みやすい
-    private static let encoder: JSONEncoder = {
-        let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .secondsSince1970
-        encoder.outputFormatting = .sortedKeys
-        return encoder
-    }()
-
-    private static let decoder: JSONDecoder = {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .secondsSince1970
-        return decoder
-    }()
 }

@@ -3,6 +3,7 @@
 //  PrimePickApp
 //
 
+import QuizCore
 import SwiftUI
 
 /// 解答直後に一瞬だけ出す、スコアや残り時間の増減
