@@ -216,7 +216,7 @@ private struct GameButtonStyleBody: View {
         .buttonStyle(
             GameButtonStyle(
                 appearance: GameButtonAppearance(colors: [.indigo, .black], side: .indigo.opacity(0.6)),
-                pressSound: .buttonPressForward
+                pressSound: .buttonPressBack
             )
         )
 
@@ -227,7 +227,7 @@ private struct GameButtonStyleBody: View {
                 .padding()
                 .frame(maxWidth: .infinity)
         }
-        .buttonStyle(GameButtonStyle(appearance: GameButtonAppearance(colors: [.green, .mint]), pressSound: .buttonPressForward))
+        .buttonStyle(GameButtonStyle(appearance: GameButtonAppearance(colors: [.green, .mint]), pressSound: .buttonPressBack))
 
         Button {} label: {
             Text(verbatim: "How to play")
@@ -236,7 +236,7 @@ private struct GameButtonStyleBody: View {
                 .padding(.horizontal, 20)
                 .padding(.vertical, 10)
         }
-        .buttonStyle(GameButtonStyle(appearance: GameButtonAppearance(color: .orange, shape: .capsule, depth: 4), pressSound: .buttonPressNeutral))
+        .buttonStyle(GameButtonStyle(appearance: GameButtonAppearance(color: .orange, shape: .capsule, depth: 4), pressSound: .buttonPressBack))
 
         Button {} label: {
             Text(verbatim: "Disabled")
