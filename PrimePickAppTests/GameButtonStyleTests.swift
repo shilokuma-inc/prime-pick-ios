@@ -63,6 +63,26 @@ final class GameButtonStyleTests: XCTestCase {
         XCTAssertEqual(GameButtonStyle(appearance: .neutral()).pressSound, .buttonPressBack)
     }
 
+    // MARK: - ボタンごとの押下音
+
+    /// GameButtonStyle を使うボタンは、それぞれの View の静的なプロパティで押下音を指定する。
+    /// 役割で分ける前の今の音のまま（確認カードの「Start」だけ進む押下音、ほかは戻る押下音）
+    func testEveryGameButtonKeepsItsCurrentPressSound() {
+        let expected: [(button: String, sound: SoundEffect, current: SoundEffect)] = [
+            ("難易度ボタン", SelectDifficultyButtonView.pressSound, .buttonPressBack),
+            ("今日のチャレンジのカード", MainView.dailyChallengeCardPressSound, .buttonPressBack),
+            ("遊び方", MainView.howToPlayPressSound, .buttonPressBack),
+            ("確認カードの Start", TimeAttackStartConfirmationView.startPressSound, .buttonPressForward),
+            ("確認カードの Quit", TimeAttackStartConfirmationView.quitPressSound, .buttonPressBack),
+            ("結果画面のタイトルに戻る", QuizResultView.returnToTitlePressSound, .buttonPressBack),
+            ("デイリーの結果のタイムアタックで遊ぶ", DailyChallengeResultView.playTimeAttackPressSound, .buttonPressBack),
+            ("デイリーの結果のタイトルに戻る", DailyChallengeResultView.returnToTitlePressSound, .buttonPressBack)
+        ]
+        for (button, sound, current) in expected {
+            XCTAssertEqual(sound, current, button)
+        }
+    }
+
     // MARK: - 確認カードの押下音
 
     /// 確認カードの「Start」は進む押下音、「Quit」は今の押下音で、聞き分けられるよう別の音源にする（Discussion #454）
