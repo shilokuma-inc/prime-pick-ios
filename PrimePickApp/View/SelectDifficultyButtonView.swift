@@ -15,8 +15,9 @@ struct SelectDifficultyButtonView: View {
     var onRequestStartConfirmation: ((QuizSetting) -> Void)?
     @Environment(\.colorScheme) private var colorScheme
 
-    /// 難易度ボタンの押下音。練習でもタイムアタックでも同じ音にする
-    static let pressSound: SoundEffect = .buttonPressBack
+    /// 難易度ボタンの押下音。出題（タイムアタックでは確認カード）へ進むボタンなので、進む押下音にする。
+    /// 練習でもタイムアタックでも同じ音にする（Discussion #463 Q3。タイムアタックでは確認カードの「Start」と進む音が 2 回続く）
+    static let pressSound: SoundEffect = .buttonPressForward
 
     var body: some View {
         VStack {

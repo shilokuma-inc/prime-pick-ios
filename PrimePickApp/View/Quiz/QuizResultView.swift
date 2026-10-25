@@ -178,7 +178,7 @@ struct QuizResultView: View {
         .buttonStyle(GameButtonStyle(appearance: .neutral(), pressSound: Self.returnToTitlePressSound))
     }
 
-    /// 「タイトルに戻る」の押下音
+    /// 「タイトルに戻る」の押下音。戻るボタンなので、戻る押下音にする
     static let returnToTitlePressSound: SoundEffect = .buttonPressBack
 
     /// 正答率（%、四捨五入）。1 問も解答していなければ nil

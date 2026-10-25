@@ -414,10 +414,10 @@ private extension MainView {
 }
 
 extension MainView {
-    /// 「今日のチャレンジ」カードの押下音
-    static let dailyChallengeCardPressSound: SoundEffect = .buttonPressBack
-    /// 遊び方のボタンの押下音
-    static let howToPlayPressSound: SoundEffect = .buttonPressBack
+    /// 「今日のチャレンジ」カードの押下音。デイリーの出題へ進むボタンなので、進む押下音にする
+    static let dailyChallengeCardPressSound: SoundEffect = .buttonPressForward
+    /// 遊び方のボタンの押下音。進むでも戻るでもない（説明のシートを開くだけの）ボタンなので、どちらでもない押下音にする
+    static let howToPlayPressSound: SoundEffect = .buttonPressNeutral
 }
 
 extension Difficulty {
