@@ -123,9 +123,9 @@ struct DailyChallengeResultView: View {
         }
     }
 
-    /// 「タイムアタックで遊ぶ」の押下音
-    static let playTimeAttackPressSound: SoundEffect = .buttonPressBack
-    /// 「タイトルに戻る」の押下音
+    /// 「タイムアタックで遊ぶ」の押下音。次のゲームへ進むボタンなので、進む押下音にする
+    static let playTimeAttackPressSound: SoundEffect = .buttonPressForward
+    /// 「タイトルに戻る」の押下音。戻るボタンなので、戻る押下音にする
     static let returnToTitlePressSound: SoundEffect = .buttonPressBack
 }
 

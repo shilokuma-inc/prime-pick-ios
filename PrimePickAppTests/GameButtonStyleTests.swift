@@ -59,22 +59,39 @@ final class GameButtonStyleTests: XCTestCase {
 
     // MARK: - ボタンごとの押下音
 
-    /// GameButtonStyle を使うボタンは、それぞれの View の静的なプロパティで押下音を指定する。
-    /// 役割で分ける前の今の音のまま（確認カードの「Start」だけ進む押下音、ほかは戻る押下音）
-    func testEveryGameButtonKeepsItsCurrentPressSound() {
-        let expected: [(button: String, sound: SoundEffect, current: SoundEffect)] = [
-            ("難易度ボタン", SelectDifficultyButtonView.pressSound, .buttonPressBack),
-            ("今日のチャレンジのカード", MainView.dailyChallengeCardPressSound, .buttonPressBack),
-            ("遊び方", MainView.howToPlayPressSound, .buttonPressBack),
-            ("確認カードの Start", TimeAttackStartConfirmationView.startPressSound, .buttonPressForward),
-            ("確認カードの Quit", TimeAttackStartConfirmationView.quitPressSound, .buttonPressBack),
-            ("結果画面のタイトルに戻る", QuizResultView.returnToTitlePressSound, .buttonPressBack),
-            ("デイリーの結果のタイムアタックで遊ぶ", DailyChallengeResultView.playTimeAttackPressSound, .buttonPressBack),
-            ("デイリーの結果のタイトルに戻る", DailyChallengeResultView.returnToTitlePressSound, .buttonPressBack)
+    /// GameButtonStyle を使うボタンは、それぞれの View の静的なプロパティで、役割に合わせた押下音を指定する（Discussion #463）
+    func testEveryGameButtonUsesTheSoundOfItsRole() {
+        let forward: [(button: String, sound: SoundEffect)] = [
+            // 練習でもタイムアタックでも同じ進む押下音（Q3）
+            ("難易度ボタン", SelectDifficultyButtonView.pressSound),
+            ("今日のチャレンジのカード", MainView.dailyChallengeCardPressSound),
+            ("確認カードの Start", TimeAttackStartConfirmationView.startPressSound),
+            ("デイリーの結果のタイムアタックで遊ぶ", DailyChallengeResultView.playTimeAttackPressSound)
         ]
-        for (button, sound, current) in expected {
-            XCTAssertEqual(sound, current, button)
+        let back: [(button: String, sound: SoundEffect)] = [
+            ("確認カードの Quit", TimeAttackStartConfirmationView.quitPressSound),
+            ("結果画面のタイトルに戻る", QuizResultView.returnToTitlePressSound),
+            ("デイリーの結果のタイトルに戻る", DailyChallengeResultView.returnToTitlePressSound)
+        ]
+        let neutral: [(button: String, sound: SoundEffect)] = [
+            ("遊び方", MainView.howToPlayPressSound)
+        ]
+        for (button, sound) in forward {
+            XCTAssertEqual(sound, .buttonPressForward, button)
         }
+        for (button, sound) in back {
+            XCTAssertEqual(sound, .buttonPressBack, button)
+        }
+        for (button, sound) in neutral {
+            XCTAssertEqual(sound, .buttonPressNeutral, button)
+        }
+    }
+
+    /// 進む・戻る・どちらでもないの 3 つの押下音は、聞き分けられるよう別々の音源にする
+    func testPressSoundsOfEachRoleUseDifferentResources() {
+        let names = [SoundEffect.buttonPressForward, .buttonPressBack, .buttonPressNeutral].compactMap(\.resourceName)
+        XCTAssertEqual(names.count, 3)
+        XCTAssertEqual(Set(names).count, 3)
     }
 
     // MARK: - 確認カードの押下音
