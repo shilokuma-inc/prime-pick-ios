@@ -20,7 +20,7 @@ struct TimeAttackStartConfirmationView: View {
 
     /// 「Start」の押下音。進むボタンなので、音程が上がる進む押下音にする（Discussion #454）
     static let startPressSound: SoundEffect = .buttonPressForward
-    /// 「Quit」の押下音。戻るボタンなので、ほかのボタンと同じ今の押下音のままにする
+    /// 「Quit」の押下音。戻るボタンなので、音程が下がる戻る押下音にする
     static let quitPressSound: SoundEffect = .buttonPressBack
 
     var body: some View {

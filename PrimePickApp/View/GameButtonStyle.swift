@@ -150,17 +150,18 @@ extension View {
 
 /// 厚み（段差）型のボタンスタイル
 ///
-/// 押した瞬間に上面が沈み、軽い触覚と押下音（`pressSound`。既定は `SoundEffect.buttonPressBack`）を返す。
-/// 押下音はボタンごとに選べる（確認カードの「Start」のような進むボタンは `SoundEffect.buttonPressForward`）。
+/// 押した瞬間に上面が沈み、軽い触覚と押下音（`pressSound`）を返す。
+/// 押下音はボタンの役割に合わせて呼び出し側が必ず指定する（指定漏れをコンパイルエラーにするため、既定値は置かない）。
+/// 進むボタンは `SoundEffect.buttonPressForward`、戻るボタンは `SoundEffect.buttonPressBack`、
+/// どちらでもないボタンは `SoundEffect.buttonPressNeutral`。触覚はどのボタンでも同じ。
 /// `NavigationLink` にも `.buttonStyle(GameButtonStyle(...))` で当てられ、画面遷移の仕組みは変えない。
 /// 撮影モード（`ScreenshotDemo`）では効果音と触覚を止める。
 struct GameButtonStyle: ButtonStyle {
     var appearance: GameButtonAppearance
     /// 押したときに鳴らす押下音。nil なら鳴らさない（触覚は返す）
-    var pressSound: SoundEffect? = GameButtonStyle.defaultPressSound
-
-    /// 音を指定しないボタンで鳴らす押下音
-    static let defaultPressSound: SoundEffect = .buttonPressBack
+    ///
+    /// `var` の Optional にするとメンバーワイズイニシャライザで nil が既定値になり、指定を省けてしまうため `let` にしている
+    let pressSound: SoundEffect?
 
     func makeBody(configuration: Configuration) -> some View {
         GameButtonStyleBody(configuration: configuration, appearance: appearance, pressSound: pressSound)
@@ -212,7 +213,12 @@ private struct GameButtonStyleBody: View {
                 .padding()
                 .frame(maxWidth: .infinity)
         }
-        .buttonStyle(GameButtonStyle(appearance: GameButtonAppearance(colors: [.indigo, .black], side: .indigo.opacity(0.6))))
+        .buttonStyle(
+            GameButtonStyle(
+                appearance: GameButtonAppearance(colors: [.indigo, .black], side: .indigo.opacity(0.6)),
+                pressSound: .buttonPressForward
+            )
+        )
 
         Button {} label: {
             Text(verbatim: "Easy")
@@ -221,7 +227,7 @@ private struct GameButtonStyleBody: View {
                 .padding()
                 .frame(maxWidth: .infinity)
         }
-        .buttonStyle(GameButtonStyle(appearance: GameButtonAppearance(colors: [.green, .mint])))
+        .buttonStyle(GameButtonStyle(appearance: GameButtonAppearance(colors: [.green, .mint]), pressSound: .buttonPressForward))
 
         Button {} label: {
             Text(verbatim: "How to play")
@@ -230,7 +236,7 @@ private struct GameButtonStyleBody: View {
                 .padding(.horizontal, 20)
                 .padding(.vertical, 10)
         }
-        .buttonStyle(GameButtonStyle(appearance: GameButtonAppearance(color: .orange, shape: .capsule, depth: 4)))
+        .buttonStyle(GameButtonStyle(appearance: GameButtonAppearance(color: .orange, shape: .capsule, depth: 4), pressSound: .buttonPressNeutral))
 
         Button {} label: {
             Text(verbatim: "Disabled")
@@ -238,7 +244,7 @@ private struct GameButtonStyleBody: View {
                 .padding()
                 .frame(maxWidth: .infinity)
         }
-        .buttonStyle(GameButtonStyle(appearance: GameButtonAppearance(color: .blue)))
+        .buttonStyle(GameButtonStyle(appearance: GameButtonAppearance(color: .blue), pressSound: .buttonPressBack))
         .disabled(true)
     }
     .padding(40)

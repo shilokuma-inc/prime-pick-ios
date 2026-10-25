@@ -24,10 +24,10 @@ enum SoundEffect: Equatable {
     case countdownTick
     /// タイムアップのホイッスル
     case timeUp
-    /// ゲーム内のボタンを押した（短く控えめな、音程が下がる音）
+    /// 戻るボタンを押した（短く控えめな、音程が下がる音）
     ///
-    /// 押下音は 3 種類ある。戻るボタン（確認カードの「Quit」など）はこの音、進むボタンは `buttonPressForward`、
-    /// 進むでも戻るでもないボタンは `buttonPressNeutral`。まだ役割で分けていないボタンもこの音を鳴らす
+    /// 押下音は 3 種類あり、`GameButtonStyle` の呼び出し側がボタンの役割に合わせて必ず選ぶ。
+    /// 戻るボタン（確認カードの「Quit」など）はこの音、進むボタンは `buttonPressForward`、進むでも戻るでもないボタンは `buttonPressNeutral`
     case buttonPressBack
     /// 進むボタン（確認カードの「Start」など）を押した
     ///

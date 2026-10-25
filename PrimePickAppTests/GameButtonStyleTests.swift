@@ -57,12 +57,6 @@ final class GameButtonStyleTests: XCTestCase {
         XCTAssertFalse(GameButtonStyle.shouldPlayPressFeedback(wasPressed: false, isPressed: true, isScreenshotDemo: true))
     }
 
-    /// 音を指定しないボタンは今の押下音を鳴らす（確認カード以外のボタンの音は変えない）
-    func testDefaultPressSoundIsButtonPress() {
-        XCTAssertEqual(GameButtonStyle.defaultPressSound, .buttonPressBack)
-        XCTAssertEqual(GameButtonStyle(appearance: .neutral()).pressSound, .buttonPressBack)
-    }
-
     // MARK: - ボタンごとの押下音
 
     /// GameButtonStyle を使うボタンは、それぞれの View の静的なプロパティで押下音を指定する。
