@@ -28,14 +28,14 @@ enum SoundEffect: Equatable {
     ///
     /// 押下音は 3 種類ある。戻るボタン（確認カードの「Quit」など）はこの音、進むボタンは `buttonPressForward`、
     /// 進むでも戻るでもないボタンは `buttonPressNeutral`。まだ役割で分けていないボタンもこの音を鳴らす
-    case buttonPress
+    case buttonPressBack
     /// 進むボタン（確認カードの「Start」など）を押した
     ///
-    /// `buttonPress` と対になる、音程が上がる明るい音。進むボタンだけをこの音にして、戻るボタンと聞き分けられるようにする
+    /// `buttonPressBack` と対になる、音程が上がる明るい音。進むボタンだけをこの音にして、戻るボタンと聞き分けられるようにする
     case buttonPressForward
     /// 進むでも戻るでもないボタン（遊び方など）を押した
     ///
-    /// 音程が上がりも下がりもしない短い音。`buttonPress`・`buttonPressForward` と聞き分けられるようにする
+    /// 音程が上がりも下がりもしない短い音。`buttonPressBack`・`buttonPressForward` と聞き分けられるようにする
     case buttonPressNeutral
 
     /// 正解音の音階の数
@@ -77,7 +77,7 @@ enum SoundEffect: Equatable {
             return "countdown_tick"
         case .timeUp:
             return "time_up"
-        case .buttonPress:
+        case .buttonPressBack:
             return "button_press_back"
         case .buttonPressForward:
             return "button_press_forward"
@@ -91,7 +91,7 @@ enum SoundEffect: Equatable {
         switch self {
         case .incorrect:
             return 1053
-        case .correct, .comboStageUp, .comboBreak, .countdownTick, .timeUp, .buttonPress, .buttonPressForward,
+        case .correct, .comboStageUp, .comboBreak, .countdownTick, .timeUp, .buttonPressBack, .buttonPressForward,
              .buttonPressNeutral:
             return nil
         }

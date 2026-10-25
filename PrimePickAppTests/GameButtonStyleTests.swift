@@ -59,8 +59,8 @@ final class GameButtonStyleTests: XCTestCase {
 
     /// 音を指定しないボタンは今の押下音を鳴らす（確認カード以外のボタンの音は変えない）
     func testDefaultPressSoundIsButtonPress() {
-        XCTAssertEqual(GameButtonStyle.defaultPressSound, .buttonPress)
-        XCTAssertEqual(GameButtonStyle(appearance: .neutral()).pressSound, .buttonPress)
+        XCTAssertEqual(GameButtonStyle.defaultPressSound, .buttonPressBack)
+        XCTAssertEqual(GameButtonStyle(appearance: .neutral()).pressSound, .buttonPressBack)
     }
 
     // MARK: - 確認カードの押下音
@@ -68,7 +68,7 @@ final class GameButtonStyleTests: XCTestCase {
     /// 確認カードの「Start」は進む押下音、「Quit」は今の押下音で、聞き分けられるよう別の音源にする（Discussion #454）
     func testStartConfirmationButtonsUseForwardAndDefaultSounds() {
         XCTAssertEqual(TimeAttackStartConfirmationView.startPressSound, .buttonPressForward)
-        XCTAssertEqual(TimeAttackStartConfirmationView.quitPressSound, .buttonPress)
+        XCTAssertEqual(TimeAttackStartConfirmationView.quitPressSound, .buttonPressBack)
         XCTAssertNotEqual(
             TimeAttackStartConfirmationView.startPressSound.resourceName,
             TimeAttackStartConfirmationView.quitPressSound.resourceName

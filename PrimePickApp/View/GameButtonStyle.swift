@@ -150,7 +150,7 @@ extension View {
 
 /// 厚み（段差）型のボタンスタイル
 ///
-/// 押した瞬間に上面が沈み、軽い触覚と押下音（`pressSound`。既定は `SoundEffect.buttonPress`）を返す。
+/// 押した瞬間に上面が沈み、軽い触覚と押下音（`pressSound`。既定は `SoundEffect.buttonPressBack`）を返す。
 /// 押下音はボタンごとに選べる（確認カードの「Start」のような進むボタンは `SoundEffect.buttonPressForward`）。
 /// `NavigationLink` にも `.buttonStyle(GameButtonStyle(...))` で当てられ、画面遷移の仕組みは変えない。
 /// 撮影モード（`ScreenshotDemo`）では効果音と触覚を止める。
@@ -160,7 +160,7 @@ struct GameButtonStyle: ButtonStyle {
     var pressSound: SoundEffect? = GameButtonStyle.defaultPressSound
 
     /// 音を指定しないボタンで鳴らす押下音
-    static let defaultPressSound: SoundEffect = .buttonPress
+    static let defaultPressSound: SoundEffect = .buttonPressBack
 
     func makeBody(configuration: Configuration) -> some View {
         GameButtonStyleBody(configuration: configuration, appearance: appearance, pressSound: pressSound)

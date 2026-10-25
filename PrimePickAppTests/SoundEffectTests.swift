@@ -56,7 +56,7 @@ final class SoundEffectTests: XCTestCase {
         let bundle = Bundle(for: QuizDataManager.self)
         let effects: [SoundEffect] = [
             .comboStageUp(.good), .comboStageUp(.great), .comboStageUp(.max),
-            .comboBreak, .countdownTick, .timeUp, .buttonPress, .buttonPressForward, .buttonPressNeutral
+            .comboBreak, .countdownTick, .timeUp, .buttonPressBack, .buttonPressForward, .buttonPressNeutral
         ]
         for effect in effects {
             guard let name = effect.resourceName else {
@@ -77,9 +77,9 @@ final class SoundEffectTests: XCTestCase {
         XCTAssertEqual(Set(names).count, 3)
     }
 
-    /// 押下音は正解音・誤答音とは別の音源にする
-    func testButtonPressUsesItsOwnSound() {
-        let name = SoundEffect.buttonPress.resourceName
+    /// 戻る押下音は正解音・誤答音とは別の音源にする
+    func testButtonPressBackUsesItsOwnSound() {
+        let name = SoundEffect.buttonPressBack.resourceName
         XCTAssertEqual(name, "button_press_back")
         let answerSounds = (1...20).compactMap { SoundEffect.correct(combo: $0).resourceName }
             + [SoundEffect.incorrect.resourceName].compactMap { $0 }
@@ -90,7 +90,7 @@ final class SoundEffectTests: XCTestCase {
     func testButtonPressForwardUsesItsOwnSound() {
         let name = SoundEffect.buttonPressForward.resourceName
         XCTAssertEqual(name, "button_press_forward")
-        XCTAssertNotEqual(name, SoundEffect.buttonPress.resourceName)
+        XCTAssertNotEqual(name, SoundEffect.buttonPressBack.resourceName)
         let answerSounds = (1...20).compactMap { SoundEffect.correct(combo: $0).resourceName }
             + [SoundEffect.incorrect.resourceName].compactMap { $0 }
         XCTAssertFalse(answerSounds.contains(name ?? ""))
@@ -100,7 +100,7 @@ final class SoundEffectTests: XCTestCase {
     func testButtonPressNeutralUsesItsOwnSound() {
         let name = SoundEffect.buttonPressNeutral.resourceName
         XCTAssertEqual(name, "button_press_neutral")
-        let otherSounds = [SoundEffect.buttonPress, .buttonPressForward, .countdownTick, .incorrect].compactMap(\.resourceName)
+        let otherSounds = [SoundEffect.buttonPressBack, .buttonPressForward, .countdownTick, .incorrect].compactMap(\.resourceName)
             + (1...20).compactMap { SoundEffect.correct(combo: $0).resourceName }
         XCTAssertFalse(otherSounds.contains(name ?? ""))
     }
