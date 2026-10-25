@@ -25,7 +25,13 @@ enum SoundEffect: Equatable {
     /// タイムアップのホイッスル
     case timeUp
     /// ゲーム内のボタンを押した（短く控えめな音）
+    ///
+    /// 戻るボタン（確認カードの「Quit」など）と、進む・戻るで分けないほかのボタンはこの音を鳴らす
     case buttonPress
+    /// 進むボタン（確認カードの「Start」など）を押した
+    ///
+    /// `buttonPress` と対になる、音程が上がる明るい音。進むボタンだけをこの音にして、戻るボタンと聞き分けられるようにする
+    case buttonPressForward
 
     /// 正解音の音階の数
     static let correctNoteCount = 8
@@ -68,6 +74,8 @@ enum SoundEffect: Equatable {
             return "time_up"
         case .buttonPress:
             return "button_press"
+        case .buttonPressForward:
+            return "button_press_forward"
         }
     }
 
@@ -76,7 +84,7 @@ enum SoundEffect: Equatable {
         switch self {
         case .incorrect:
             return 1053
-        case .correct, .comboStageUp, .comboBreak, .countdownTick, .timeUp, .buttonPress:
+        case .correct, .comboStageUp, .comboBreak, .countdownTick, .timeUp, .buttonPress, .buttonPressForward:
             return nil
         }
     }
