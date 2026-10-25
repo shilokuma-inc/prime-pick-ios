@@ -57,18 +57,49 @@ final class GameButtonStyleTests: XCTestCase {
         XCTAssertFalse(GameButtonStyle.shouldPlayPressFeedback(wasPressed: false, isPressed: true, isScreenshotDemo: true))
     }
 
-    /// 音を指定しないボタンは今の押下音を鳴らす（確認カード以外のボタンの音は変えない）
-    func testDefaultPressSoundIsButtonPress() {
-        XCTAssertEqual(GameButtonStyle.defaultPressSound, .buttonPress)
-        XCTAssertEqual(GameButtonStyle(appearance: .neutral()).pressSound, .buttonPress)
+    // MARK: - ボタンごとの押下音
+
+    /// GameButtonStyle を使うボタンは、それぞれの View の静的なプロパティで、役割に合わせた押下音を指定する（Discussion #463）
+    func testEveryGameButtonUsesTheSoundOfItsRole() {
+        let forward: [(button: String, sound: SoundEffect)] = [
+            // 練習でもタイムアタックでも同じ進む押下音（Q3）
+            ("難易度ボタン", SelectDifficultyButtonView.pressSound),
+            ("今日のチャレンジのカード", MainView.dailyChallengeCardPressSound),
+            ("確認カードの Start", TimeAttackStartConfirmationView.startPressSound),
+            ("デイリーの結果のタイムアタックで遊ぶ", DailyChallengeResultView.playTimeAttackPressSound)
+        ]
+        let back: [(button: String, sound: SoundEffect)] = [
+            ("確認カードの Quit", TimeAttackStartConfirmationView.quitPressSound),
+            ("結果画面のタイトルに戻る", QuizResultView.returnToTitlePressSound),
+            ("デイリーの結果のタイトルに戻る", DailyChallengeResultView.returnToTitlePressSound)
+        ]
+        let neutral: [(button: String, sound: SoundEffect)] = [
+            ("遊び方", MainView.howToPlayPressSound)
+        ]
+        for (button, sound) in forward {
+            XCTAssertEqual(sound, .buttonPressForward, button)
+        }
+        for (button, sound) in back {
+            XCTAssertEqual(sound, .buttonPressBack, button)
+        }
+        for (button, sound) in neutral {
+            XCTAssertEqual(sound, .buttonPressNeutral, button)
+        }
+    }
+
+    /// 進む・戻る・どちらでもないの 3 つの押下音は、聞き分けられるよう別々の音源にする
+    func testPressSoundsOfEachRoleUseDifferentResources() {
+        let names = [SoundEffect.buttonPressForward, .buttonPressBack, .buttonPressNeutral].compactMap(\.resourceName)
+        XCTAssertEqual(names.count, 3)
+        XCTAssertEqual(Set(names).count, 3)
     }
 
     // MARK: - 確認カードの押下音
 
-    /// 確認カードの「Start」は進む押下音、「Quit」は今の押下音で、聞き分けられるよう別の音源にする（Discussion #454）
-    func testStartConfirmationButtonsUseForwardAndDefaultSounds() {
+    /// 確認カードの「Start」は進む押下音、「Quit」は戻る押下音で、聞き分けられるよう別の音源にする（Discussion #454）
+    func testStartConfirmationButtonsUseForwardAndBackSounds() {
         XCTAssertEqual(TimeAttackStartConfirmationView.startPressSound, .buttonPressForward)
-        XCTAssertEqual(TimeAttackStartConfirmationView.quitPressSound, .buttonPress)
+        XCTAssertEqual(TimeAttackStartConfirmationView.quitPressSound, .buttonPressBack)
         XCTAssertNotEqual(
             TimeAttackStartConfirmationView.startPressSound.resourceName,
             TimeAttackStartConfirmationView.quitPressSound.resourceName

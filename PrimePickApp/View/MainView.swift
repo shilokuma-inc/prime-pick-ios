@@ -297,7 +297,8 @@ private extension MainView {
                     appearance: .neutral(
                         shape: .roundedRectangle(cornerRadius: DailyChallengeCardView.cornerRadius),
                         depth: Self.homeSecondaryButtonDepth
-                    )
+                    ),
+                    pressSound: Self.dailyChallengeCardPressSound
                 )
             )
             .padding(.horizontal, 24)
@@ -400,11 +401,23 @@ private extension MainView {
                         .strokeBorder(Color.primary.opacity(0.4), lineWidth: 2)
                 )
         }
-        .buttonStyle(GameButtonStyle(appearance: .neutral(shape: .capsule, depth: Self.homeSecondaryButtonDepth)))
+        .buttonStyle(
+            GameButtonStyle(
+                appearance: .neutral(shape: .capsule, depth: Self.homeSecondaryButtonDepth),
+                pressSound: Self.howToPlayPressSound
+            )
+        )
     }
 
     /// 遊び方のボタンと今日のチャレンジのカードの厚み。背の低い画面でホームの高さを圧迫しないよう、難易度ボタンより薄くする
     static let homeSecondaryButtonDepth: CGFloat = 4
+}
+
+extension MainView {
+    /// 「今日のチャレンジ」カードの押下音。デイリーの出題へ進むボタンなので、進む押下音にする
+    static let dailyChallengeCardPressSound: SoundEffect = .buttonPressForward
+    /// 遊び方のボタンの押下音。進むでも戻るでもない（説明のシートを開くだけの）ボタンなので、どちらでもない押下音にする
+    static let howToPlayPressSound: SoundEffect = .buttonPressNeutral
 }
 
 extension Difficulty {

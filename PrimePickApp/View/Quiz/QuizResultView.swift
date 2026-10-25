@@ -175,8 +175,11 @@ struct QuizResultView: View {
                         .strokeBorder(Color.primary, lineWidth: 3)
                 )
         }
-        .buttonStyle(GameButtonStyle(appearance: .neutral()))
+        .buttonStyle(GameButtonStyle(appearance: .neutral(), pressSound: Self.returnToTitlePressSound))
     }
+
+    /// 「タイトルに戻る」の押下音。戻るボタンなので、戻る押下音にする
+    static let returnToTitlePressSound: SoundEffect = .buttonPressBack
 
     /// 正答率（%、四捨五入）。1 問も解答していなければ nil
     static func accuracyPercent(correctCount: Int, answeredCount: Int) -> Int? {

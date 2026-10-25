@@ -91,8 +91,9 @@
 		D409B1000000000000000001 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D409B1000000000000000002 /* AppFont.swift */; };
 		4FEC65B42C01184E00A8B731 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEC65B32C01184E00A8B731 /* Text+Extension.swift */; };
 		52ADC9B6E462E7791E44704D /* time_up.caf in Resources */ = {isa = PBXBuildFile; fileRef = E9770179F192CFC3E23473F6 /* time_up.caf */; };
-		5B7A1C2E9D4F6A8B3C0E1D2F /* button_press.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6C8B2D3F0E5A7B9C4D1F2E3A /* button_press.caf */; };
+		5B7A1C2E9D4F6A8B3C0E1D2F /* button_press_back.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6C8B2D3F0E5A7B9C4D1F2E3A /* button_press_back.caf */; };
 		35564DEE80934E08514F8B03 /* button_press_forward.caf in Resources */ = {isa = PBXBuildFile; fileRef = 908F9E7D0F9EF869942A48E9 /* button_press_forward.caf */; };
+		05A85E2D5544DA621E7BDA52 /* button_press_neutral.caf in Resources */ = {isa = PBXBuildFile; fileRef = C7E303F94BADD86DF587ACD0 /* button_press_neutral.caf */; };
 		5445BD0E65813C76907E63B2 /* stage_good.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9C994C763CA183700CF82598 /* stage_good.caf */; };
 		0E8A040B62DE7086FBD62164 /* TimeAttackRecordStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C9B59A5BCDF3D76AAD9333 /* TimeAttackRecordStoreTests.swift */; };
 		5DCD1C6FE87124B5F6E145F5 /* DailyChallengeDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E145F517236FCAF0FA950A /* DailyChallengeDayTests.swift */; };
@@ -287,8 +288,9 @@
 		9B0C928E378BBE12786E399F /* DailyChallengeStreak.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeStreak.swift; sourceTree = "<group>"; };
 		E6A2E75FE01B895750131D46 /* correct_5.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = correct_5.caf; sourceTree = "<group>"; };
 		E9770179F192CFC3E23473F6 /* time_up.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = time_up.caf; sourceTree = "<group>"; };
-		6C8B2D3F0E5A7B9C4D1F2E3A /* button_press.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = button_press.caf; sourceTree = "<group>"; };
+		6C8B2D3F0E5A7B9C4D1F2E3A /* button_press_back.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = button_press_back.caf; sourceTree = "<group>"; };
 		908F9E7D0F9EF869942A48E9 /* button_press_forward.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = button_press_forward.caf; sourceTree = "<group>"; };
+		C7E303F94BADD86DF587ACD0 /* button_press_neutral.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = button_press_neutral.caf; sourceTree = "<group>"; };
 		F69D0DED6D686DD9038FF63A /* PrimeFactorization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrimeFactorization.swift; sourceTree = "<group>"; };
 		F76BFBF1481763F2E727A1BC /* NumberExplanation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NumberExplanation.swift; sourceTree = "<group>"; };
 		F930AB2B5D1237FCE31F2CAD /* QuizDataManagerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizDataManagerTests.swift; sourceTree = "<group>"; };
@@ -593,8 +595,9 @@
 				D7B0FEAF8D6377ED1DEB0949 /* stage_max.caf */,
 				8AF06039D8694AABFA88063B /* countdown_tick.caf */,
 				E9770179F192CFC3E23473F6 /* time_up.caf */,
-				6C8B2D3F0E5A7B9C4D1F2E3A /* button_press.caf */,
+				6C8B2D3F0E5A7B9C4D1F2E3A /* button_press_back.caf */,
 				908F9E7D0F9EF869942A48E9 /* button_press_forward.caf */,
+				C7E303F94BADD86DF587ACD0 /* button_press_neutral.caf */,
 				A3BCE0229018567C771B0404 /* combo_break.caf */,
 			);
 			name = Sounds;
@@ -739,8 +742,9 @@
 				8F5EC1BBC1DCF1E5F5000095 /* stage_max.caf in Resources */,
 				68604C12440CA322FF1CB992 /* countdown_tick.caf in Resources */,
 				52ADC9B6E462E7791E44704D /* time_up.caf in Resources */,
-				5B7A1C2E9D4F6A8B3C0E1D2F /* button_press.caf in Resources */,
+				5B7A1C2E9D4F6A8B3C0E1D2F /* button_press_back.caf in Resources */,
 				35564DEE80934E08514F8B03 /* button_press_forward.caf in Resources */,
+				05A85E2D5544DA621E7BDA52 /* button_press_neutral.caf in Resources */,
 				0ABA00425788CD356A6D8B87 /* combo_break.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
