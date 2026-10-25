@@ -80,7 +80,7 @@ final class SoundEffectTests: XCTestCase {
     /// 押下音は正解音・誤答音とは別の音源にする
     func testButtonPressUsesItsOwnSound() {
         let name = SoundEffect.buttonPress.resourceName
-        XCTAssertEqual(name, "button_press")
+        XCTAssertEqual(name, "button_press_back")
         let answerSounds = (1...20).compactMap { SoundEffect.correct(combo: $0).resourceName }
             + [SoundEffect.incorrect.resourceName].compactMap { $0 }
         XCTAssertFalse(answerSounds.contains(name ?? ""))

@@ -78,7 +78,7 @@ enum SoundEffect: Equatable {
         case .timeUp:
             return "time_up"
         case .buttonPress:
-            return "button_press"
+            return "button_press_back"
         case .buttonPressForward:
             return "button_press_forward"
         case .buttonPressNeutral:
