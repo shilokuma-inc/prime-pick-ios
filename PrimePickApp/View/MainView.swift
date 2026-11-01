@@ -5,6 +5,7 @@
 //  Created by 村石 拓海 on 2024/04/11.
 //
 
+import QuizCore
 import SwiftUI
 
 struct MainView: View {

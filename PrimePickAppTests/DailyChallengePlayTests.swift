@@ -4,6 +4,7 @@
 //
 
 import XCTest
+import QuizCore
 @testable import PrimePickApp
 
 final class DailyChallengePlayTests: XCTestCase {
@@ -136,11 +137,19 @@ final class DailyChallengePlayTests: XCTestCase {
     }
 
     /// 最後の問題に答えたあと（ミニ解説の表示中）にやめたら、解き終えた扱いにする
+    @MainActor
     func testQuitAfterAnsweringAllCompletesPlay() {
-        XCTAssertFalse(QuizView.quitCompletesPlay(answeredCount: 0, questionCount: 10))
-        XCTAssertFalse(QuizView.quitCompletesPlay(answeredCount: 9, questionCount: 10))
-        XCTAssertTrue(QuizView.quitCompletesPlay(answeredCount: 10, questionCount: 10))
-        XCTAssertFalse(QuizView.quitCompletesPlay(answeredCount: 0, questionCount: 0))
+        let quizData = DailyChallengeGenerator.v1.makeQuizData(dayKey: "2026-10-01")
+
+        let midway = QuizSession(questions: quizData, rules: QuizView.rules(for: .dailyChallenge))
+        midway.restore(answeredChoices: quizData.prefix(9).map { ($0.isCorrect ? .prime : .notPrime, elapsedSeconds: 1) })
+        midway.quit()
+        XCTAssertEqual(midway.finishReason, .quit)
+
+        let answeredAll = QuizSession(questions: quizData, rules: QuizView.rules(for: .dailyChallenge))
+        answeredAll.restore(answeredChoices: quizData.map { ($0.isCorrect ? .prime : .notPrime, elapsedSeconds: 1) })
+        answeredAll.quit()
+        XCTAssertEqual(answeredAll.finishReason, .completed)
     }
 
     func testOnlyDailyChallengeConfirmsBeforeQuitting() {

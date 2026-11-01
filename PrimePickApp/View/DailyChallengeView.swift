@@ -3,6 +3,7 @@
 //  PrimePickApp
 //
 
+import QuizCore
 import SwiftUI
 
 /// デイリーチャレンジの画面。今日まだ始めていなければ 10 問を出し、始めていれば結果だけを出す

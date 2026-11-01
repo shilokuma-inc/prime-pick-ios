@@ -3,6 +3,7 @@
 //  PrimePickApp
 //
 
+import QuizCore
 import SwiftUI
 
 /// App Store 用スクリーンショットの撮影モード（Issue #201）。
@@ -141,22 +142,11 @@ struct ScreenshotDemoQuiz {
         }
     }
 
-    /// 解答済みの問題を反映したスコア。実際のプレイと同じ計算式で求める
-    var scoreCalculator: ScoreCalculator {
-        var calculator = ScoreCalculator()
-        for record in answerRecords {
-            calculator.submit(
-                isCorrect: record.isAnswerCorrect,
-                difficulty: setting.difficulty,
-                elapsedTime: Self.elapsedTime
-            )
+    /// 解答済みの問題の選択肢と解答時間。`QuizSession.restore` に渡し、実際のプレイと同じ計算式でスコアを求める
+    var answeredChoices: [(AnswerChoice, elapsedSeconds: TimeInterval)] {
+        answerRecords.map { record in
+            (record.answeredPrime ? AnswerChoice.prime : .notPrime, elapsedSeconds: Self.elapsedTime)
         }
-        return calculator
-    }
-
-    /// 表示中の問題（0 始まり）。解き終えたあとは最後の問題のまま結果画面を重ねる
-    var quizNumber: Int {
-        isFinished ? max(0, answeredCount - 1) : answeredCount
     }
 
     /// 直前に解答した数のミニ解説。まだ解答していなければ nil

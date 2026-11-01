@@ -3,6 +3,7 @@
 //  PrimePickApp
 //
 
+import QuizCore
 import Foundation
 
 /// デイリーチャレンジの終わりの処理。自己ベストではなく、その日の記録を保存する
