@@ -185,6 +185,9 @@ struct QuizView: View {
         }
         .onDisappear {
             session.stop()
+            // `handle` は View を捕まえ、View は `@State` の初期値として session を持つため、外さないと循環参照で session が残る。
+            // 残ると、練習で最後の問題のミニ解説中に戻ったとき、閉じた後に予約済みの次への切り替えが走り、解き終えた扱いで記録してしまう
+            session.onEvent = nil
         }
         .onChange(of: session.score.currentCombo) { oldCombo, newCombo in
             handleComboChange(from: oldCombo, to: newCombo)
