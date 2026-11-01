@@ -3,7 +3,7 @@
 広告入りの最初のリリース（1.3.0 の想定）を審査に出す前に、コードの外で人間がする作業の一覧です。
 元になったのは #369 と Discussion #421 の「手作業が必要なもの」で、epic/admob-production-ids（#422〜#432）の時点の状態を書いています。
 
-- 「済み」「まだ」は、担当者が 2026-10-21 に答えた状況です。済ませたらこのファイルのチェックを付けてください
+- 「済み」「まだ」は、担当者が 2026-10-21 に答えた状況です（プライバシーポリシーの行は 2026-11-01 に Discussion #475 で更新）。済ませたらこのファイルのチェックを付けてください
 - 外部の画面の名前・手順は公式のヘルプで確かめたもので、出典の URL を添えています（ヘルプは英語版で確かめました。日本語の画面では表記が違うことがあります）
 - プライバシーポリシーの追記案と「App のプライバシー」の回答案は [ads-privacy-drafts.md](ads-privacy-drafts.md) にあります
 
@@ -19,7 +19,8 @@
 | app-ads.txt タブで「確認済み」になる | AdMob | **まだ**（マーケティング URL の反映・配信の後） |
 | GDPR（欧州の規制）のメッセージの作成・公開 | AdMob | **まだ** |
 | IDFA の説明メッセージを使うかの判断 | AdMob | **まだ**（任意） |
-| プライバシーポリシーの改訂 | `shilokuma-inc/iOS-Release-Sample` | **まだ**（**審査に出す前に**） |
+| プライバシーポリシーの改訂 | `https://shilokuma.jp/privacy/prime-pick/` | 済み（2026-10-19 更新のページを依頼者が公開した・Discussion #475） |
+| App Store Connect のプライバシーポリシー URL を新しいページにする | App Store Connect（App 情報） | **まだ**（手で書き換える。Discussion #475 の Q1） |
 | 「App のプライバシー」の更新 | App Store Connect | **まだ**（**審査に出す前に**） |
 | 実機確認 | TestFlight（Release） | **まだ**（#427・#356・#362） |
 
@@ -66,7 +67,7 @@ ID は build setting から `PrimePickApp/Info.plist` に差し込んでいま�
 - [ ] **Privacy & messaging** → **European regulations** のカードの **Create**（2 回目以降は **Manage** → **Create message**）→ **Select apps** で Prime Pick を選んで **Confirm** → 言語・ユーザーの選択肢・対象の地域（Targeting）・メッセージ名・プライバシーポリシーの URL を入れて **Publish**
   - 出典: Create a European regulations message for apps <https://support.google.com/admob/answer/10113207>
   - 対象の地域は「Countries subject to GDPR (EEA, UK, and Switzerland)」か「Everywhere」から選ぶ（同じ出典）。プライバシーポリシーの追記案の地域の書き方（[ads-privacy-drafts.md](ads-privacy-drafts.md) の要確認）を、選んだ地域に合わせる
-  - プライバシーポリシーの URL は、設定画面から開くページ `https://shilokuma-inc.github.io/iOS-Release-Sample/PrivacyPolicy/Prime-Pick/PrivacyPolicy.html`（`PrimePickApp/View/Setting/PrivacyPolicyView.swift`）
+  - プライバシーポリシーの URL は、設定画面から開くページ `https://shilokuma.jp/privacy/prime-pick/`（`PrimePickApp/View/Setting/PrivacyPolicyView.swift`。2026-11-01 に Discussion #475 で差し替えた）
   - 公開しないと、EU・英国などの利用者に UMP の同意フォームが出ない（Discussion #421）
 
 ### IDFA の説明メッセージ — まだ（任意）
@@ -130,11 +131,15 @@ ID は build setting から `PrimePickApp/Info.plist` に差し込んでいま�
   2. Google の広告ドメインを並べる（ATT を拒否した人には広告そのものが出なくなるおそれがあり、「拒否しても広告は出る」という決定と合わなくなる。Google はトラッキング専用のドメインの一覧を公開していない）
 - 変えたら、[ads-privacy-drafts.md](ads-privacy-drafts.md) の回答案の該当の記述も直す
 
-## 5. プライバシーポリシー — まだ（審査に出す前に）
+## 5. プライバシーポリシー — ページは済み・App Store Connect の URL はまだ
 
-- [ ] [ads-privacy-drafts.md](ads-privacy-drafts.md) の「1. プライバシーポリシーの追記案」を確かめ、`shilokuma-inc/iOS-Release-Sample` の `PrivacyPolicy/Prime-Pick/PrivacyPolicy.html` に反映する（法的な確認は人間がする）
-  - 追記案には「要確認」（同意を求める地域・雛形の記述など）が残っている
-  - GDPR のメッセージに入れるプライバシーポリシーの URL は、このページ
+2026-11-01 時点の状態です（Discussion #475）。
+
+- [x] 新しいページ `https://shilokuma.jp/privacy/prime-pick/`（最終更新 2026-10-19）を依頼者が公開した。Google AdMob・Google User Messaging Platform・Google Analytics for Firebase・App Tracking Transparency の記載がある（法的な確認の要否はこのリポジトリでは判断していない）
+- [x] アプリの設定画面から開く表示先（`PrimePickApp/View/Setting/PrivacyPolicyView.swift`）を新しいページに差し替えた（epic/privacy-policy-url。どの言語でも同じページを開く）
+- [ ] App Store Connect の「App 情報」→「プライバシーポリシー URL」を `https://shilokuma.jp/privacy/prime-pick/` に手で書き換える（`Metadata/App Store` では扱わない。Discussion #475 の Q1）
+- GDPR のメッセージに入れるプライバシーポリシーの URL も、新しいページ `https://shilokuma.jp/privacy/prime-pick/`
+- 旧ページ（`https://shilokuma-inc.github.io/iOS-Release-Sample/PrivacyPolicy/Prime-Pick/PrivacyPolicy.html`）は、配信中の版の設定画面が開くので残す（扱いは `shilokuma-inc/iOS-Release-Sample` 側で決める）
 
 ## 6. 実機確認 — まだ
 
