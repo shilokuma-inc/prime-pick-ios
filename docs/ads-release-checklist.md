@@ -20,7 +20,7 @@
 | GDPR（欧州の規制）のメッセージの作成・公開 | AdMob | **まだ** |
 | IDFA の説明メッセージを使うかの判断 | AdMob | **まだ**（任意） |
 | プライバシーポリシーの改訂 | `https://shilokuma.jp/privacy/prime-pick/` | 済み（2026-10-19 更新のページを依頼者が公開した・Discussion #475） |
-| App Store Connect のプライバシーポリシー URL を新しいページにする | App Store Connect（App 情報） | **まだ**（手で書き換える。Discussion #475 の Q1） |
+| App Store Connect のプライバシーポリシー URL を新しいページにする | App Store Connect（App 情報） | **まだ**（**審査に出す前に**手で書き換える。Discussion #475 の Q1） |
 | 「App のプライバシー」の更新 | App Store Connect | **まだ**（**審査に出す前に**） |
 | 実機確認 | TestFlight（Release） | **まだ**（#427・#356・#362） |
 
@@ -67,7 +67,7 @@ ID は build setting から `PrimePickApp/Info.plist` に差し込んでいま�
 - [ ] **Privacy & messaging** → **European regulations** のカードの **Create**（2 回目以降は **Manage** → **Create message**）→ **Select apps** で Prime Pick を選んで **Confirm** → 言語・ユーザーの選択肢・対象の地域（Targeting）・メッセージ名・プライバシーポリシーの URL を入れて **Publish**
   - 出典: Create a European regulations message for apps <https://support.google.com/admob/answer/10113207>
   - 対象の地域は「Countries subject to GDPR (EEA, UK, and Switzerland)」か「Everywhere」から選ぶ（同じ出典）。プライバシーポリシーの追記案の地域の書き方（[ads-privacy-drafts.md](ads-privacy-drafts.md) の要確認）を、選んだ地域に合わせる
-  - プライバシーポリシーの URL は、設定画面から開くページ `https://shilokuma.jp/privacy/prime-pick/`（`PrimePickApp/View/Setting/PrivacyPolicyView.swift`。2026-11-01 に Discussion #475 で差し替えた）
+  - プライバシーポリシーの URL は、設定画面から開くページ `https://shilokuma.jp/privacy/prime-pick/`（`PrimePickApp/View/Setting/PrivacyPolicyView.swift`。2026-11-01 に Discussion #475・#479 で差し替えた）
   - 公開しないと、EU・英国などの利用者に UMP の同意フォームが出ない（Discussion #421）
 
 ### IDFA の説明メッセージ — まだ（任意）
@@ -136,8 +136,8 @@ ID は build setting から `PrimePickApp/Info.plist` に差し込んでいま�
 2026-11-01 時点の状態です（Discussion #475）。
 
 - [x] 新しいページ `https://shilokuma.jp/privacy/prime-pick/`（最終更新 2026-10-19）を依頼者が公開した。Google AdMob・Google User Messaging Platform・Google Analytics for Firebase・App Tracking Transparency の記載がある（法的な確認の要否はこのリポジトリでは判断していない）
-- [x] アプリの設定画面から開く表示先（`PrimePickApp/View/Setting/PrivacyPolicyView.swift`）を新しいページに差し替えた（epic/privacy-policy-url。どの言語でも同じページを開く）
-- [ ] App Store Connect の「App 情報」→「プライバシーポリシー URL」を `https://shilokuma.jp/privacy/prime-pick/` に手で書き換える（`Metadata/App Store` では扱わない。Discussion #475 の Q1）
+- [x] アプリの設定画面から開く表示先（`PrimePickApp/View/Setting/PrivacyPolicyView.swift`）を新しいページに差し替えた（#479・epic/privacy-policy-url。どの言語でも同じページを開く）
+- [ ] **審査に出す前に** App Store Connect の「App 情報」→「プライバシーポリシー URL」を `https://shilokuma.jp/privacy/prime-pick/` に手で書き換える（CLAUDE.md の「リリース」の 4 の人がする作業。`Metadata/App Store` では扱わない。Discussion #475 の Q1）
 - GDPR のメッセージに入れるプライバシーポリシーの URL も、新しいページ `https://shilokuma.jp/privacy/prime-pick/`
 - 旧ページ（`https://shilokuma-inc.github.io/iOS-Release-Sample/PrivacyPolicy/Prime-Pick/PrivacyPolicy.html`）は、配信中の版の設定画面が開くので残す（扱いは `shilokuma-inc/iOS-Release-Sample` 側で決める）
 
