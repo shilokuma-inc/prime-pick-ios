@@ -4,7 +4,8 @@
 
 - この文書はリリース前の確認に使う案です。**法的な確認は人間が行ってください。** そのまま公開してよいと判断したものではありません
 - 反映するのは人間です（ループ・この PR では、プライバシーポリシーのページも App Store Connect も変えていません）
-  - プライバシーポリシーのページ: `shilokuma-inc/iOS-Release-Sample` の `PrivacyPolicy/Prime-Pick/PrivacyPolicy.html`（公開先 <https://shilokuma-inc.github.io/iOS-Release-Sample/PrivacyPolicy/Prime-Pick/PrivacyPolicy.html>）
+  - プライバシーポリシーのページ: <https://shilokuma.jp/privacy/prime-pick/>（2026-11-01 に更新。Discussion #475。アプリの設定画面もこのページを開く）
+    - 旧: `shilokuma-inc/iOS-Release-Sample` の `PrivacyPolicy/Prime-Pick/PrivacyPolicy.html`（公開先 <https://shilokuma-inc.github.io/iOS-Release-Sample/PrivacyPolicy/Prime-Pick/PrivacyPolicy.html>）。配信中の版が開くので残す
   - 「App のプライバシー」: App Store Connect のアプリのページ
 - 公式の文書・SDK のプライバシーマニフェストで確かめた点には出典を付けました。確かめられなかった点・食い違う点は **「要確認」** と書いています
 - 調べた日: 2026-10-21（このリポジトリの epic/admob-production-ids の時点。SDK の版は下の「前提」）
