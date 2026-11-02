@@ -41,14 +41,6 @@ struct QuizTimeLimitView: View {
         }
     }
     
-    /// 残り時間の割合。練習モードは従来どおり僅かに進んだ見た目を維持する
-    private var progress: Double {
-        guard let timeLimitSeconds = gameMode.timeLimitSeconds, timeLimitSeconds > 0 else {
-            return 0.01
-        }
-        return Double(remainingSeconds) / Double(timeLimitSeconds)
-    }
-    
     var body: some View {
         ZStack {
             switch difficulty {
@@ -70,11 +62,17 @@ struct QuizTimeLimitView: View {
                     .edgesIgnoringSafeArea(.all)
             }
             
-            ProgressView(value: progress)
-                .progressViewStyle(LinearProgressViewStyle(tint: isInFinalCountdown ? .red : .gray))
-                .scaleEffect(x: 1, y: 4, anchor: .center)
-                .padding(.horizontal, 20)
-                .animation(.linear(duration: 1), value: progress)
+            // 残り時間の割合を実時間で求め、1 秒ごとの段差ではなく滑らかに減らす（Discussion #484）。
+            // 練習モードは従来どおり僅かに進んだ見た目を維持する。誤答のペナルティで減った分は一気に減らす
+            TimelineView(.animation(
+                minimumInterval: TimeAttackCountdown.progressUpdateInterval,
+                paused: !countdown.updatesProgressContinuously
+            )) { context in
+                ProgressView(value: countdown.progress(at: context.date))
+                    .progressViewStyle(LinearProgressViewStyle(tint: isInFinalCountdown ? .red : .gray))
+                    .scaleEffect(x: 1, y: 4, anchor: .center)
+                    .padding(.horizontal, 20)
+            }
             
             switch gameMode {
             case .practice, .dailyChallenge:
