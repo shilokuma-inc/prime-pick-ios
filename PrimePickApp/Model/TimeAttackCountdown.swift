@@ -11,11 +11,6 @@ import Foundation
 /// その整数の残り秒と、最後にカウントダウンが進んだ時刻（`session.start()` を呼んだ時刻か、最後の `.tick` を受け取った時刻）から、
 /// 今の時刻での残り時間を求める。quiz-kit を変えずに小数の表示とプログレスバーの滑らかな動きを出すため、アプリの側で計算する。
 struct TimeAttackCountdown: Equatable {
-    /// 1 秒の途中の経過として数える上限。1 秒以上経っても、整数の残り秒から 1 秒以上は減らさない
-    ///
-    /// バックグラウンドから戻ったときや Timer が遅れたときに一気に減らさず、次の `.tick` を待つ。
-    static let maxElapsedWithinSecond: TimeInterval = 1.0.nextDown
-
     let gameMode: GameMode
     /// `QuizSession.remainingSeconds`。誤答のペナルティで減ったときもそのまま渡す
     let remainingSeconds: Int
@@ -24,14 +19,18 @@ struct TimeAttackCountdown: Equatable {
 
     /// `date` の時点の残り時間（秒）
     ///
+    /// 1 秒の途中の経過は `0 ..< 1` 秒に収め、整数の残り秒の 1 秒手前より下には減らさない。
+    /// バックグラウンドから戻ったときや Timer が遅れたときに一気に減らさず、次の `.tick` を待つ。
     /// 誤答のペナルティは整数の残り秒が減るだけで、1 秒の途中の経過はそのまま数える。
     /// まだ始めていないときと、残りが 0（タイムアップ）のときは整数の残り秒をそのまま返す。
     func remainingTime(at date: Date) -> TimeInterval {
         guard let lastAdvancedAt, remainingSeconds > 0 else {
             return TimeInterval(max(0, remainingSeconds))
         }
-        let elapsed = min(max(0, date.timeIntervalSince(lastAdvancedAt)), Self.maxElapsedWithinSecond)
-        return max(0, TimeInterval(remainingSeconds) - elapsed)
+        let elapsed = max(0, date.timeIntervalSince(lastAdvancedAt))
+        // 経過の上限を `1.0.nextDown` にしても、2 以上から引くと丸めで 1 秒手前ちょうどになるため、結果の側に下限を付ける
+        let floor = TimeInterval(remainingSeconds - 1).nextUp
+        return max(TimeInterval(remainingSeconds) - elapsed, floor)
     }
 
     /// `date` の時点で、残り時間を小数 2 桁で表示するか

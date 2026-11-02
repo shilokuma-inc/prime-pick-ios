@@ -33,6 +33,23 @@ final class TimeAttackCountdownTests: XCTestCase {
         XCTAssertEqual(countdown(4).displayValue(at: date(after: 30)), .fractionalSeconds("3.00"))
     }
 
+    func testRemainingTimeStaysAboveOneSecondLessForEveryWholeSecond() {
+        for remainingSeconds in 1...60 {
+            let remaining = countdown(remainingSeconds).remainingTime(at: date(after: 1.5))
+            XCTAssertGreaterThan(remaining, TimeInterval(remainingSeconds - 1), "remainingSeconds=\(remainingSeconds)")
+            XCTAssertLessThan(remaining, TimeInterval(remainingSeconds), "remainingSeconds=\(remainingSeconds)")
+        }
+    }
+
+    func testDisplayWhenElapsedExceedsOneSecond() {
+        // 残り 1 秒で .tick が遅れても 0.00 を出し、0 にはしない（タイムアップは QuizSession が決める）
+        XCTAssertGreaterThan(countdown(1).remainingTime(at: date(after: 1.5)), 0)
+        XCTAssertEqual(countdown(1).displayValue(at: date(after: 1.5)), .fractionalSeconds("0.00"))
+        XCTAssertEqual(countdown(5).displayValue(at: date(after: 1.5)), .fractionalSeconds("4.00"))
+        // 残り 6 秒は 5 秒より下に減らないので、整数のまま
+        XCTAssertEqual(countdown(6).displayValue(at: date(after: 1.5)), .wholeSeconds(6))
+    }
+
     func testRemainingTimeIgnoresDateBeforeLastAdvance() {
         XCTAssertEqual(countdown(4).remainingTime(at: date(after: -0.5)), 4, accuracy: 1e-9)
     }
@@ -80,9 +97,11 @@ final class TimeAttackCountdownTests: XCTestCase {
         for gameMode in [GameMode.practice, .dailyChallenge] {
             XCTAssertFalse(gameMode.showsFractionalRemainingTime(4.5), "\(gameMode)")
             XCTAssertFalse(gameMode.showsFractionalRemainingTime(0), "\(gameMode)")
-            let practice = countdown(0, gameMode: gameMode)
-            XCTAssertFalse(practice.showsFractionalSeconds(at: date(after: 0.5)), "\(gameMode)")
-            XCTAssertEqual(practice.displayValue(at: date(after: 0.5)), .wholeSeconds(0), "\(gameMode)")
+            for remainingSeconds in [0, 3] {
+                let practice = countdown(remainingSeconds, gameMode: gameMode)
+                XCTAssertFalse(practice.showsFractionalSeconds(at: date(after: 0.5)), "\(gameMode)")
+                XCTAssertEqual(practice.displayValue(at: date(after: 0.5)), .wholeSeconds(remainingSeconds), "\(gameMode)")
+            }
         }
     }
 
