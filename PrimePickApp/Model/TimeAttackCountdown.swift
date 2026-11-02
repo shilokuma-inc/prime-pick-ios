@@ -33,6 +33,16 @@ struct TimeAttackCountdown: Equatable {
         return max(TimeInterval(remainingSeconds) - elapsed, floor)
     }
 
+    /// 残り時間を毎フレーム描き直すか
+    ///
+    /// 整数の残り秒がしきい値以下なら、実時間の残りはしきい値以下で、ほぼずっと小数で表示する。
+    /// まだ始めていない（撮影モードを含む）ときと、タイムアップの後は描き直さない。
+    var updatesEveryFrame: Bool {
+        gameMode.isTimeAttack
+            && lastAdvancedAt != nil
+            && (1...GameMode.timeAttackFractionalDisplayThresholdSeconds).contains(remainingSeconds)
+    }
+
     /// `date` の時点で、残り時間を小数 2 桁で表示するか
     func showsFractionalSeconds(at date: Date) -> Bool {
         gameMode.showsFractionalRemainingTime(remainingTime(at: date))
