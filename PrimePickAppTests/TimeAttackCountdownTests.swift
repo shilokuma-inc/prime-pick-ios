@@ -105,6 +105,28 @@ final class TimeAttackCountdownTests: XCTestCase {
         }
     }
 
+    // MARK: - 毎フレームの描き直し
+
+    func testUpdatesEveryFrameOnlyWithinFractionalRange() {
+        XCTAssertFalse(countdown(6).updatesEveryFrame)
+        for remainingSeconds in 1...5 {
+            XCTAssertTrue(countdown(remainingSeconds).updatesEveryFrame, "remainingSeconds=\(remainingSeconds)")
+        }
+        // タイムアップの後は止める
+        XCTAssertFalse(countdown(0).updatesEveryFrame)
+    }
+
+    func testDoesNotUpdateEveryFrameBeforeStart() {
+        // 撮影モードは session.start() を呼ばないので、最後に進んだ時刻が無い
+        let notStarted = TimeAttackCountdown(gameMode: timeAttack, remainingSeconds: 4, lastAdvancedAt: nil)
+        XCTAssertFalse(notStarted.updatesEveryFrame)
+    }
+
+    func testPracticeAndDailyChallengeNeverUpdateEveryFrame() {
+        XCTAssertFalse(countdown(3, gameMode: .practice).updatesEveryFrame)
+        XCTAssertFalse(countdown(3, gameMode: .dailyChallenge).updatesEveryFrame)
+    }
+
     // MARK: - 表示の整形
 
     func testFractionalTextTruncatesToTwoDigits() {
