@@ -11,6 +11,12 @@ import Foundation
 /// その整数の残り秒と、最後にカウントダウンが進んだ時刻（`session.start()` を呼んだ時刻か、最後の `.tick` を受け取った時刻）から、
 /// 今の時刻での残り時間を求める。quiz-kit を変えずに小数の表示とプログレスバーの滑らかな動きを出すため、アプリの側で計算する。
 struct TimeAttackCountdown: Equatable {
+    /// プログレスバーを描き直す最短の間隔（秒）。毎秒 30 回
+    ///
+    /// バーはプレイの間ずっと動くので、端末の最大のフレームレート（ProMotion で毎秒 120 回）ではなく、
+    /// 電池と発熱を抑えつつ段差が見えない間隔にする。15 秒の制限時間でも 1 回の描き直しで減るのは 1pt 未満。
+    static let progressUpdateInterval: TimeInterval = 1.0 / 30
+
     let gameMode: GameMode
     /// `QuizSession.remainingSeconds`。誤答のペナルティで減ったときもそのまま渡す
     let remainingSeconds: Int
@@ -41,6 +47,23 @@ struct TimeAttackCountdown: Equatable {
         gameMode.isTimeAttack
             && lastAdvancedAt != nil
             && (1...GameMode.timeAttackFractionalDisplayThresholdSeconds).contains(remainingSeconds)
+    }
+
+    /// プログレスバーを実時間に合わせて描き直し続けるか
+    ///
+    /// まだ始めていない（撮影モードを含む）ときと、タイムアップの後は止める。
+    var updatesProgressContinuously: Bool {
+        gameMode.isTimeAttack && lastAdvancedAt != nil && remainingSeconds > 0
+    }
+
+    /// `date` の時点のプログレスバーの値（残り時間 ÷ 制限時間、`0...1`）
+    ///
+    /// 練習・デイリーは制限時間が無いので、今までどおり僅かに進んだ見た目（`0.01`）にする。
+    func progress(at date: Date) -> Double {
+        guard let timeLimitSeconds = gameMode.timeLimitSeconds, timeLimitSeconds > 0 else {
+            return 0.01
+        }
+        return min(1, max(0, remainingTime(at: date) / TimeInterval(timeLimitSeconds)))
     }
 
     /// `date` の時点で、残り時間を小数 2 桁で表示するか

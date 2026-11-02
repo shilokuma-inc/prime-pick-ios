@@ -127,6 +127,56 @@ final class TimeAttackCountdownTests: XCTestCase {
         XCTAssertFalse(countdown(3, gameMode: .dailyChallenge).updatesEveryFrame)
     }
 
+    // MARK: - プログレスバー
+
+    func testProgressDecreasesWithElapsedTime() {
+        let fifteen = countdown(15)
+        XCTAssertEqual(fifteen.progress(at: date(after: 0)), 1, accuracy: 1e-9)
+        XCTAssertEqual(fifteen.progress(at: date(after: 0.5)), 14.5 / 15, accuracy: 1e-9)
+        XCTAssertLessThan(fifteen.progress(at: date(after: 0.5)), fifteen.progress(at: date(after: 0.25)))
+    }
+
+    func testProgressStopsOneSecondBeforeUntilNextTick() {
+        // .tick が遅れても、整数の残り秒の 1 秒手前より下には減らない
+        XCTAssertEqual(countdown(10).progress(at: date(after: 5)), 9.0 / 15, accuracy: 1e-9)
+        XCTAssertGreaterThan(countdown(10).progress(at: date(after: 5)), 8.99 / 15)
+    }
+
+    func testProgressDropsByPenaltyAndKeepsElapsedTime() {
+        XCTAssertEqual(countdown(8).progress(at: date(after: 0.4)), 7.6 / 15, accuracy: 1e-9)
+        XCTAssertEqual(countdown(6).progress(at: date(after: 0.4)), 5.6 / 15, accuracy: 1e-9)
+    }
+
+    func testProgressUsesSelectedDuration() {
+        let sixty = countdown(42, gameMode: .timeAttack(.sixtySeconds))
+        XCTAssertEqual(sixty.progress(at: date(after: 0.5)), 41.5 / 60, accuracy: 1e-9)
+    }
+
+    func testProgressIsWholeSecondsBeforeStart() {
+        // 撮影モードは残り 42 秒の位置で止めたまま
+        let notStarted = TimeAttackCountdown(gameMode: .timeAttack(.sixtySeconds), remainingSeconds: 42, lastAdvancedAt: nil)
+        XCTAssertEqual(notStarted.progress(at: date(after: 0.5)), 42.0 / 60, accuracy: 1e-9)
+        XCTAssertFalse(notStarted.updatesProgressContinuously)
+    }
+
+    func testProgressIsZeroAfterTimeUp() {
+        XCTAssertEqual(countdown(0).progress(at: date(after: 0.5)), 0)
+        XCTAssertFalse(countdown(0).updatesProgressContinuously)
+    }
+
+    func testProgressUpdatesContinuouslyDuringTimeAttack() {
+        XCTAssertTrue(countdown(15).updatesProgressContinuously)
+        XCTAssertTrue(countdown(1).updatesProgressContinuously)
+    }
+
+    func testPracticeAndDailyChallengeKeepFixedProgress() {
+        for gameMode in [GameMode.practice, .dailyChallenge] {
+            let fixed = countdown(0, gameMode: gameMode)
+            XCTAssertEqual(fixed.progress(at: date(after: 0.5)), 0.01, "\(gameMode)")
+            XCTAssertFalse(fixed.updatesProgressContinuously, "\(gameMode)")
+        }
+    }
+
     // MARK: - 表示の整形
 
     func testFractionalTextTruncatesToTwoDigits() {
