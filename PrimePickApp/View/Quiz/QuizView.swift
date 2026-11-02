@@ -44,6 +44,8 @@ struct QuizView: View {
     @State private var hasFinishedPlay = false
     /// 途中でやめる確認を出しているか
     @State private var isQuitConfirmationPresented = false
+    /// タイムアタックのカウントダウンが最後に進んだ時刻（`session.start()` と `.tick` のとき）。残り 5 秒未満の小数の表示に使う
+    @State private var countdownAdvancedAt: Date?
 
     let difficulty: Difficulty
     let gameMode: GameMode
@@ -116,6 +118,7 @@ struct QuizView: View {
                         difficulty: displayedDifficulty,
                         gameMode: gameMode,
                         remainingSeconds: session.remainingSeconds,
+                        countdownAdvancedAt: countdownAdvancedAt,
                         quizData: session.questions,
                         // コンボを出さないモードでは、コンボ表示と MAX 段階の背景を出さないよう 0 として渡す
                         currentCombo: gameMode.showsCombo ? session.score.currentCombo : 0,
@@ -182,6 +185,7 @@ struct QuizView: View {
                 return
             }
             session.start()
+            countdownAdvancedAt = Date()
         }
         .onDisappear {
             session.stop()
@@ -264,6 +268,7 @@ private extension QuizView {
     func handle(_ event: QuizSessionEvent<QuizEntity>) {
         switch event {
         case .tick(_, let isFinalCountdown):
+            countdownAdvancedAt = Date()
             if isFinalCountdown {
                 SoundFeedback.play(.countdownTick)
             }

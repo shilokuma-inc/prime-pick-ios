@@ -17,6 +17,9 @@ enum GameMode: Hashable, Identifiable, CaseIterable {
     /// タイムアタックで残り時間を赤くして急かし始める秒数
     static let timeAttackFinalCountdownSeconds = 5
 
+    /// タイムアタックで残り時間を小数 2 桁で表示し始める秒数。残りがこれを下回った瞬間（`4.99`）から小数にする（Discussion #484）
+    static let timeAttackFractionalDisplayThresholdSeconds = 5
+
     /// 10 問固定・時間無制限
     case practice
     /// 制限時間内に何問正解できるかを競うモード
@@ -112,6 +115,11 @@ enum GameMode: Hashable, Identifiable, CaseIterable {
     /// 0 秒はタイムアップでリザルトを出すため含めない。
     func isInFinalCountdown(remainingSeconds: Int) -> Bool {
         isTimeAttack && (1...Self.timeAttackFinalCountdownSeconds).contains(remainingSeconds)
+    }
+
+    /// 残り時間（実時間の秒）を小数 2 桁で表示するか。練習・デイリーは制限時間が無いので常に false
+    func showsFractionalRemainingTime(_ remainingTime: TimeInterval) -> Bool {
+        isTimeAttack && remainingTime < TimeInterval(Self.timeAttackFractionalDisplayThresholdSeconds)
     }
 
     /// 画面に表示するモード名

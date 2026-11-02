@@ -513,6 +513,22 @@
         }
       }
     },
+    "%@ sec": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ sec"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "残り %@ 秒"
+          }
+        }
+      }
+    },
     "Correct %lld / Answered %lld": {
       "localizations": {
         "en": {
