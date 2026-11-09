@@ -9,18 +9,25 @@ import Foundation
 struct AppVersion {
     /// `CFBundleShortVersionString`（例: 1.2.0）
     let shortVersion: String?
+    /// `CFBundleVersion`（例: 202611091230）
+    let buildNumber: String?
 
     init(infoDictionary: [String: Any]?) {
         shortVersion = infoDictionary?["CFBundleShortVersionString"] as? String
+        buildNumber = infoDictionary?["CFBundleVersion"] as? String
     }
 
     static let current = AppVersion(infoDictionary: Bundle.main.infoDictionary)
 
-    /// 画面に出す文字列。取得できない場合は「-」を返す
+    /// 画面に出す文字列（例: 1.2.0 (42)）。ビルド番号が取得できない場合はバージョンだけを、
+    /// バージョンが取得できない場合は「-」を返す
     var displayText: String {
         guard let shortVersion, !shortVersion.isEmpty else {
             return "-"
         }
-        return shortVersion
+        guard let buildNumber, !buildNumber.isEmpty else {
+            return shortVersion
+        }
+        return "\(shortVersion) (\(buildNumber))"
     }
 }
