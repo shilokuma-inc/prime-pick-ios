@@ -86,6 +86,8 @@ private extension SettingView {
 
                 Text(appVersion.displayText)
                     .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
             }
 
             NavigationLink {
