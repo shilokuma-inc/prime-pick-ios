@@ -8,17 +8,21 @@ name: Creative assets/App Store
 # 画像は手元で Tools/render_creative_assets.sh を使って書き出し、コミットしておく（ここでは描かないので macOS は要らない）。
 # 置き場所のグループと画像の仕様は決め打ちせず、App Asset Library の参照データから引く（mode: ref-data で見られる）。
 # 反映先は「編集できる状態のバージョン」だけ。審査中・配信済みのバージョンには触らない。
+# 差し替えで外した画像は Asset Library に残る。mode: cleanup-dry-run で一覧を確かめてから、mode: cleanup で消す
+# （このツールの参照名で、どこにも配置していない、処理中・審査中でない画像だけ。消した画像は戻せない）。
 
 on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 'upload: 反映する / dry-run: やることだけ出す / ref-data: 置き場所と画像の仕様を出す'
+        description: 'upload: 反映する / dry-run: やることだけ出す / ref-data: 置き場所と画像の仕様を出す / cleanup-dry-run: 配置していない古い画像を一覧だけ出す / cleanup: その画像を Asset Library から消す'
         type: choice
         options:
           - upload
           - dry-run
           - ref-data
+          - cleanup-dry-run
+          - cleanup
         default: dry-run
       languages:
         description: '反映する言語（カンマ区切り）。空なら languages.json の全言語'
@@ -35,6 +39,11 @@ on:
 
 permissions:
   contents: read
+
+# 反映（upload）の途中で cleanup が走ると、処理が終わってこれから配置する画像を消してしまうので、1 本ずつ流す
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
 
 jobs:
   creative-assets:
@@ -82,6 +91,8 @@ jobs:
           case "$MODE" in
             dry-run) options+=(--dry-run) ;;
             ref-data) options+=(--ref-data) ;;
+            cleanup-dry-run) options+=(--delete-unplaced --dry-run) ;;
+            cleanup) options+=(--delete-unplaced) ;;
           esac
           if [ -n "$LANGUAGES" ]; then
             options+=(--languages "$LANGUAGES")
