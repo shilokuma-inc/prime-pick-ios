@@ -44,6 +44,9 @@ EDITABLE_STATES = {
 #: アップロード後、Apple 側の取り込みが終わるのを待つ上限（秒）
 DELIVERY_TIMEOUT = 300
 
+#: クリエイティブアセットの処理の待ちで、状態を問い合わせ直すまでの間隔（秒）
+POLL_INTERVAL = 30
+
 #: 1 リクエストあたりの待ち時間の上限（秒）。指定しないと応答が無いときに無期限に待つ
 REQUEST_TIMEOUT = 60
 
@@ -56,7 +59,21 @@ TOKEN_REFRESH_MARGIN = 5 * 60
 
 
 class ApiError(RuntimeError):
-    pass
+    def __init__(self, message: str, status: int | None = None):
+        super().__init__(message)
+        #: HTTP のステータスコード（転送の失敗など、API の応答でないときは None）
+        self.status = status
+
+
+#: 待っているあいだの状態の問い合わせで、問い合わせ直してよい HTTP のステータス（混雑・一時的なサーバーの不調）
+TRANSIENT_STATUSES = {429, 500, 502, 503, 504}
+
+
+def is_transient(error: Exception) -> bool:
+    """状態の問い合わせの失敗が一時的なもの（時間切れ・接続の失敗・429 / 5xx）か。"""
+    if isinstance(error, ApiError):
+        return error.status in TRANSIENT_STATUSES
+    return isinstance(error, (TimeoutError, urllib.error.URLError))
 
 
 class AppStoreConnect:
@@ -80,17 +97,25 @@ class AppStoreConnect:
 
     def _request(self, method: str, url: str, payload: dict | None = None) -> dict:
         body = json.dumps(payload).encode() if payload is not None else None
-        request = urllib.request.Request(url, data=body, method=method)
-        request.add_header("Authorization", f"Bearer {self.token}")
-        if body is not None:
-            request.add_header("Content-Type", "application/json")
-        try:
-            with urllib.request.urlopen(request, timeout=REQUEST_TIMEOUT) as response:
-                raw = response.read()
-        except urllib.error.HTTPError as error:
-            detail = error.read().decode(errors="replace")
-            raise ApiError(f"{method} {url} が {error.code} で失敗しました\n{detail}") from None
-        return json.loads(raw) if raw else {}
+        for attempt in range(2):
+            request = urllib.request.Request(url, data=body, method=method)
+            request.add_header("Authorization", f"Bearer {self.token}")
+            if body is not None:
+                request.add_header("Content-Type", "application/json")
+            try:
+                with urllib.request.urlopen(request, timeout=REQUEST_TIMEOUT) as response:
+                    raw = response.read()
+                return json.loads(raw) if raw else {}
+            except urllib.error.HTTPError as error:
+                detail = error.read().decode(errors="replace")
+                # 期限内のトークンでも、まれに 401 NOT_AUTHORIZED が返る（2026-11-10 に idfa-vault-ios で、作ってから 4 分のトークンで出た）。
+                # 401 のリクエストは処理されていないので、トークンを作り直して 1 回だけ送り直す
+                if error.code == 401 and attempt == 0:
+                    print(f"  {method} {url} が 401 だったので、トークンを作り直して送り直します")
+                    self._token_expires_at = 0.0
+                    continue
+                raise ApiError(f"{method} {url} が {error.code} で失敗しました\n{detail}", error.code) from None
+        raise AssertionError("unreachable")
 
     def get(self, path: str, params: dict | None = None) -> dict:
         url = f"{API}{path}"
@@ -226,6 +251,11 @@ class AppStoreConnect:
             },
         )
         return response["data"]["id"]
+
+    @staticmethod
+    def checksum(path: Path) -> str:
+        """App Store Connect の sourceFileChecksum と同じ MD5。"""
+        return hashlib.md5(path.read_bytes()).hexdigest()
 
     def upload(self, set_id: str, path: Path) -> str:
         """1 枚ぶんの予約 → 本体の転送 → 確定、までをやる。"""
