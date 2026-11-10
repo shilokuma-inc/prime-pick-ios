@@ -8,6 +8,8 @@ iOS 27 から、スクリーンショットとは別に「クリエイティブ�
     python3 Tools/upload_creative_assets.py               # 全言語を反映する
     python3 Tools/upload_creative_assets.py --dry-run     # 何も書き換えず、やることだけ出す
     python3 Tools/upload_creative_assets.py --ref-data    # 置き場所と画像の仕様を App Store Connect から読んで出す
+    python3 Tools/upload_creative_assets.py --delete-unplaced --dry-run  # 配置していない古い画像を一覧だけ出す
+    python3 Tools/upload_creative_assets.py --delete-unplaced            # 配置していない古い画像を Asset Library から消す
 
 App Asset Library の API で、次の順で反映する。
 
@@ -23,6 +25,7 @@ App Asset Library の API で、次の順で反映する。
 決め打ちせず、毎回参照データ（appAssetLibraryRefData）から引く。
 
 触るのは **編集できる状態のバージョンだけ**。外した配置の画像は Asset Library に残る。
+残った画像は --delete-unplaced で消せる（消す条件は delete_unplaced を参照。消した画像は戻せない）。
 
 認証は App Store Connect API Key（.p8）。次の環境変数でも渡せる。
 
@@ -62,10 +65,18 @@ CATEGORY = "CREATIVE_ASSETS"
 REUSABLE_STATES = {"UPLOAD_COMPLETE", "PREPARE_FOR_SUBMISSION"}
 #: 消して上げ直す状態。AWAITING_UPLOAD は転送か確定の途中で止まったもの
 RETRYABLE_STATES = {"AWAITING_UPLOAD", "FAILED"}
+#: --delete-unplaced でも消さない状態。上げている途中・Apple 側で処理中の画像は、実行中の upload がこれから配置するかもしれない。
+#: 審査に出している最中の画像にも触らない
+UNDELETABLE_STATES = {"AWAITING_UPLOAD", "UPLOAD_COMPLETE", "READY_FOR_REVIEW", "WAITING_FOR_REVIEW", "IN_REVIEW"}
 
 
 def load_config() -> list[dict]:
     return json.loads(CONFIG_PATH.read_text())["assets"]
+
+
+def reference_base(asset: dict) -> str:
+    """参照名の先頭（置き場所の名前）。後ろに「言語 バージョン ハッシュ」を付けて参照名にする。"""
+    return asset.get("referenceName", asset["placementType"])
 
 
 # MARK: - 参照データ
@@ -158,10 +169,17 @@ class AssetLibrary:
             data = data[0]
         return RefData(data["attributes"])
 
+    def images(self) -> list[dict]:
+        """Asset Library にある画像（スクリーンショットの分類のものも含む）。"""
+        return self.client.get_all(f"/v1/appAssetLibraries/{self.library_id}/images")
+
     def images_by_reference_name(self) -> dict[str, dict]:
         """Asset Library にある画像を参照名で引けるようにする。"""
-        images = self.client.get_all(f"/v1/appAssetLibraries/{self.library_id}/images")
-        return {(image.get("attributes") or {}).get("referenceName"): image for image in images}
+        return {(image.get("attributes") or {}).get("referenceName"): image for image in self.images()}
+
+    def image_placements(self, image_id: str) -> list[dict]:
+        """その画像の配置。編集中のバージョンに限らず、どのバージョン・言語のものも返る。"""
+        return self.client.get_all(f"/v1/appAssetLibraryImages/{image_id}/placements")
 
     def upload_image(self, path: Path, reference_name: str) -> str:
         """予約 → 転送 → 確定し、画像の ID を返す。Apple 側の処理は wait_for_processing でまとめて待つ。"""
@@ -282,6 +300,59 @@ def placement_image_id(placement: dict) -> str | None:
     return image.get("id")
 
 
+# MARK: - 配置していない画像の削除
+
+
+def delete_unplaced(library: AssetLibrary, assets: list[dict], dry_run: bool) -> int:
+    """このツールが上げた画像のうち、どこにも配置していないものを Asset Library から消す。
+
+    配置を差し替えても、外した画像は Asset Library に残る。消した画像は戻せないので、次を **すべて** 満たすものだけを消す。
+
+    1. 参照名が creative_assets.json の referenceName ＋ 半角スペースで始まる（手で上げた画像には触らない）
+    2. 上げている途中・Apple 側で処理中・審査中（UNDELETABLE_STATES）ではない（実行中の upload と取り合わない）
+    3. どのバージョン・言語にも配置されていない
+    """
+    prefixes = tuple(f"{reference_base(asset)} " for asset in assets)
+    images = library.images()
+    ours = [image for image in images
+            if ((image.get("attributes") or {}).get("referenceName") or "").startswith(prefixes)]
+    print(f"Asset Library の画像 {len(images)} 枚のうち、このツールの参照名のもの {len(ours)} 枚を確かめます"
+          f"（ほかの {len(images) - len(ours)} 枚には触りません）")
+
+    candidates = []
+    ours.sort(key=lambda image: (image["attributes"].get("createdDate") or "", image["attributes"]["referenceName"]))
+    for image in ours:
+        attributes = image["attributes"]
+        state = attributes.get("state")
+        summary = f"{attributes['referenceName']}（{state}、{attributes.get('createdDate') or '?'} に作成"
+        if state in UNDELETABLE_STATES:
+            print(f"  残す: {summary}、処理中か審査中）")
+            continue
+        placements = library.image_placements(image["id"])
+        if placements:
+            print(f"  残す: {summary}、配置 {len(placements)} 件）")
+            continue
+        print(f"  消す: {summary}、配置なし）")
+        candidates.append(image)
+
+    if dry_run:
+        print(f"--dry-run: 消す予定 {len(candidates)} 枚（何も消していません）")
+        return 0
+
+    deleted = 0
+    for image in candidates:
+        name = image["attributes"]["referenceName"]
+        # 一覧を出してから消すまでのあいだに配置されていたら消さない
+        if library.image_placements(image["id"]):
+            print(f"  {name}: 消す直前に配置されていたので残しました")
+            continue
+        library.delete_image(image["id"])
+        deleted += 1
+        print(f"  消した: {name}")
+    print(f"完了: {deleted} 枚を消しました")
+    return 0
+
+
 # MARK: - main
 
 
@@ -304,16 +375,25 @@ def main() -> int:
         help="前回上げた同じ画像でも、処理中（UPLOAD_COMPLETE）のものは消して上げ直す（Apple 側で処理が止まったとき）",
     )
     parser.add_argument("--dry-run", action="store_true", help="何も書き換えず、やることだけ出す")
-    parser.add_argument("--ref-data", action="store_true", help="置き場所と画像の仕様を出して終わる")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--ref-data", action="store_true", help="置き場所と画像の仕様を出して終わる")
+    mode.add_argument(
+        "--delete-unplaced",
+        action="store_true",
+        help="反映はせず、このツールが上げた画像のうち、どこにも配置していないものを Asset Library から消す"
+             "（--dry-run なら一覧だけ出す。言語・バージョンに依らず全部を見る）",
+    )
     args = parser.parse_args()
 
     assets = load_config()
     targets = languages(parse_list(args.languages))
+    # 反映しないモードでは、手元の画像と文言は確かめない
+    uploads = not (args.ref_data or args.delete_unplaced)
 
     # テンプレートの仮の文言（TODO:）のまま書き出した画像は反映しない
     source = ROOT / "AppStore" / "creative" / "src" / "creative.html"
     # 説明のコメントにも TODO: と書いてあるので、仮の文言（"TODO: … の形の文字列）だけを見る
-    if not args.ref_data and source.is_file() and '"TODO:' in source.read_text(encoding="utf-8"):
+    if uploads and source.is_file() and '"TODO:' in source.read_text(encoding="utf-8"):
         raise SystemExit(f"{source.relative_to(ROOT)} に TODO: が残っています。文言を書き換えて書き出し直してください")
 
     # 画像が揃っているかは API を叩く前に確かめる
@@ -322,7 +402,7 @@ def main() -> int:
         for language in targets for asset in assets
         if not (ASSETS_DIR / language.language / asset["file"]).is_file()
     ]
-    if missing and not args.ref_data:
+    if missing and uploads:
         raise SystemExit("画像がありません:\n  " + "\n  ".join(missing))
 
     missing_key = [
@@ -336,6 +416,11 @@ def main() -> int:
     client = AppStoreConnect(args.key_id, args.issuer_id, args.private_key.read_text())
     app = client.find_app(args.bundle_id or bundle_id())
     library = AssetLibrary(client, app["id"])
+
+    if args.delete_unplaced:
+        print(f"対象: {app['attributes']['name']} の Asset Library")
+        return delete_unplaced(library, assets, args.dry_run)
+
     ref_data = library.ref_data()
 
     if args.ref_data:
@@ -374,7 +459,7 @@ def main() -> int:
         for asset in assets:
             path = ASSETS_DIR / language.language / asset["file"]
             # 参照名は Asset Library の中で一意。中身のハッシュを入れて、同じ画像なら上げ直さず、描き直したら別の画像にする
-            reference_name = (f"{asset.get('referenceName', asset['placementType'])} "
+            reference_name = (f"{reference_base(asset)} "
                               f"{language.language} {version_string} {AppStoreConnect.checksum(path)[:8]}")
             label = f"{language.language}/{path.name}"
             found = library_images.get(reference_name)
