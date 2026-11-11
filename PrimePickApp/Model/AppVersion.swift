@@ -68,6 +68,29 @@ struct AppVersion {
         return "\(buildDateText) · \(buildNumber)"
     }
 
+    /// 設定画面の 1 行目に出すバージョン（例: 1.2.0）。バージョンが取得できない場合は「-」
+    var versionText: String {
+        guard let shortVersion, !shortVersion.isEmpty else {
+            return "-"
+        }
+        return shortVersion
+    }
+
+    /// 設定画面の 2 行目に出すビルド番号の欄（例: 2026/11/09 21:34 · 20261109.123456）。
+    /// ビルド番号を日時に直せた場合だけ返す。バージョンが取得できない場合や日時に直せない場合は nil
+    var detailLineText: String? {
+        guard let shortVersion, !shortVersion.isEmpty, buildDateText != nil else {
+            return nil
+        }
+        return buildDetailText
+    }
+
+    /// 設定画面の 1 行目に出す文字列。2 行目がある場合はバージョンだけ（例: 1.2.0）、
+    /// 無い場合は `displayText`（例: 1.2.0 (42)・1.2.0・-）
+    var firstLineText: String {
+        detailLineText == nil ? displayText : versionText
+    }
+
     /// 画面に出す文字列（例: 1.2.0 (2026/11/09 21:34 · 20261109.123456)、形が合わないビルド番号では 1.2.0 (42)）。
     /// ビルド番号が取得できない場合はバージョンだけを、バージョンが取得できない場合は「-」を返す
     var displayText: String {

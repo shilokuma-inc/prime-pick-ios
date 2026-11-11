@@ -79,16 +79,26 @@ private extension SettingView {
 
     var appInfoSection: some View {
         Section {
-            HStack {
-                Text("App Version")
+            // ビルド番号の欄（日時と元の番号）は長いので、縮めずに 2 行目に出す
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text("App Version")
 
-                Spacer()
+                    Spacer()
 
-                Text(appVersion.displayText)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
+                    Text(appVersion.firstLineText)
+                        .foregroundStyle(.secondary)
+                }
+
+                if let detailLineText = appVersion.detailLineText {
+                    Text(detailLineText)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .multilineTextAlignment(.trailing)
+                }
             }
+            .accessibilityElement(children: .combine)
 
             NavigationLink {
                 PrivacyPolicyView()
