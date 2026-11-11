@@ -148,6 +148,37 @@ final class AppVersionTests: XCTestCase {
                                timeZone: tokyo, locale: japanese).displayText, "-")
     }
 
+    // MARK: - 設定画面の 2 行の表示
+
+    func testTwoLineTextsForDateBuildNumber() {
+        let version = version(buildNumber: "20261109.123456", timeZone: tokyo, locale: japanese)
+        XCTAssertEqual(version.versionText, "1.2.0")
+        XCTAssertEqual(version.detailLineText, "2026/11/09 21:34 · 20261109.123456")
+    }
+
+    func testTwoLineTextsForMalformedBuildNumber() {
+        let version = version(buildNumber: "42", timeZone: tokyo, locale: japanese)
+        XCTAssertEqual(version.versionText, "1.2.0")
+        XCTAssertEqual(version.detailLineText, "42")
+    }
+
+    func testTwoLineTextsWithoutBuildNumber() {
+        for buildNumber in [nil, ""] as [String?] {
+            let version = version(buildNumber: buildNumber, timeZone: tokyo, locale: japanese)
+            XCTAssertEqual(version.versionText, "1.2.0")
+            XCTAssertNil(version.detailLineText)
+        }
+    }
+
+    func testTwoLineTextsWithoutVersion() {
+        for shortVersion in [nil, ""] as [String?] {
+            let version = version(buildNumber: "20261109.123456", shortVersion: shortVersion,
+                                  timeZone: tokyo, locale: japanese)
+            XCTAssertEqual(version.versionText, "-")
+            XCTAssertNil(version.detailLineText)
+        }
+    }
+
     func testCurrentReadsMainBundleVersion() {
         let expected = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         XCTAssertEqual(AppVersion.current.shortVersion, expected)
