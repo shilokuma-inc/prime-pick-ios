@@ -86,7 +86,7 @@ private extension SettingView {
 
                     Spacer()
 
-                    Text(appVersion.versionText)
+                    Text(appVersion.firstLineText)
                         .foregroundStyle(.secondary)
                 }
 
