@@ -3,6 +3,7 @@
 //  PrimePickApp
 //
 
+import QuizCore
 import Foundation
 
 /// デイリーの結果画面に出す値（Discussion #181 本文 2-4）

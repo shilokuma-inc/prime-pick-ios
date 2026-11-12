@@ -8,17 +8,21 @@ name: Creative assets/App Store
 # 画像は手元で Tools/render_creative_assets.sh を使って書き出し、コミットしておく（ここでは描かないので macOS は要らない）。
 # 置き場所のグループと画像の仕様は決め打ちせず、App Asset Library の参照データから引く（mode: ref-data で見られる）。
 # 反映先は「編集できる状態のバージョン」だけ。審査中・配信済みのバージョンには触らない。
+# 差し替えで外した画像は Asset Library に残る。mode: cleanup-dry-run で一覧を確かめてから、mode: cleanup で消す
+# （このツールの参照名で、どこにも配置していない、処理中・審査中でない画像だけ。消した画像は戻せない）。
 
 on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 'upload: 反映する / dry-run: やることだけ出す / ref-data: 置き場所と画像の仕様を出す'
+        description: 'upload: 反映する / dry-run: やることだけ出す / ref-data: 置き場所と画像の仕様を出す / cleanup-dry-run: 配置していない古い画像を一覧だけ出す / cleanup: その画像を Asset Library から消す'
         type: choice
         options:
           - upload
           - dry-run
           - ref-data
+          - cleanup-dry-run
+          - cleanup
         default: dry-run
       languages:
         description: '反映する言語（カンマ区切り）。空なら languages.json の全言語'
@@ -28,9 +32,18 @@ on:
         description: '反映先のバージョン。空なら編集できるバージョンを自動で選ぶ'
         required: false
         default: ''
+      reupload_pending:
+        description: '前回上げた同じ画像でも、処理中のまま止まったものは消して上げ直す（mode: upload のとき）'
+        type: boolean
+        default: false
 
 permissions:
   contents: read
+
+# 反映（upload）の途中で cleanup が走ると、処理が終わってこれから配置する画像を消してしまうので、1 本ずつ流す
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
 
 jobs:
   creative-assets:
@@ -38,7 +51,9 @@ jobs:
     # App Store Connect にアプリが無いリポジトリ（テンプレート自身など）は ENABLE_DELIVERY=false でスキップする
     if: vars.ENABLE_DELIVERY != 'false'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # 全言語の画像を上げてから、処理をまとめて待つ（CREATIVE_PROCESSING_TIMEOUT の 30 分）。
+    # 待ちが切れても、処理が終わった画像は配置してから失敗にする。流し直せば上げ直さずに続きから待てる
+    timeout-minutes: 60
 
     steps:
       - name: Checkout
@@ -63,6 +78,9 @@ jobs:
           MODE: ${{ inputs.mode }}
           LANGUAGES: ${{ inputs.languages }}
           APP_VERSION: ${{ inputs.app_version }}
+          REUPLOAD_PENDING: ${{ inputs.reupload_pending }}
+          # Apple 側の処理を、全部の画像でまとめて 30 分まで待つ
+          CREATIVE_PROCESSING_TIMEOUT: 1800
         run: |
           set -euo pipefail
           # PyJWT は標準では入っていないので、この実行かぎりの venv に入れる
@@ -73,12 +91,17 @@ jobs:
           case "$MODE" in
             dry-run) options+=(--dry-run) ;;
             ref-data) options+=(--ref-data) ;;
+            cleanup-dry-run) options+=(--delete-unplaced --dry-run) ;;
+            cleanup) options+=(--delete-unplaced) ;;
           esac
           if [ -n "$LANGUAGES" ]; then
             options+=(--languages "$LANGUAGES")
           fi
           if [ -n "$APP_VERSION" ]; then
             options+=(--app-version "$APP_VERSION")
+          fi
+          if [ "$REUPLOAD_PENDING" = "true" ]; then
+            options+=(--reupload-pending)
           fi
 
           .venv/bin/python -u Tools/upload_creative_assets.py ${options[@]+"${options[@]}"} | tee "$RUNNER_TEMP/upload.log"

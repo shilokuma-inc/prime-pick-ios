@@ -22,6 +22,23 @@ xcodebuild test -project PrimePickApp.xcodeproj -scheme PrimePickApp -destinatio
 - Simulator 名は OS 更新で改名されることがある。解決できない場合は `xcrun simctl list devices available` で UDID を調べて `id=` で指定する
 - CI（`.github/workflows/build-*.yml`）は `generic/platform=iOS Simulator` で `build-for-testing` する
 
+## QuizKit（共通のクイズ基盤）
+
+出題の進行・スコア・コンボ・タイムアタックの記録・デイリーの日付とストリーク・シード付き乱数は [shilokuma-inc/quiz-kit](https://github.com/shilokuma-inc/quiz-kit) の `QuizCore` を使う（`upToNextMinorVersion` で固定）。画面（`QuizView` 以下）はこのアプリ独自のまま。
+
+| このリポジトリ | QuizKit |
+| --- | --- |
+| `QuizView` / `QuizButtonView`（画面・効果音・ポップアップ・計測） | `QuizSession`（解答の受付・次の問題への切り替え・誤答のロックと時間ペナルティ・カウントダウン・補充・終わりの判定） |
+| `QuizView.rules(for:)`（モード → `QuizRules`） | `QuizRules` |
+| `Difficulty.scoreFactor` と `ScoreCalculator` の難易度で呼ぶ窓口 | `ScoreCalculator` / `ScoreBreakdown` / `ScoringRule`（係数の既定値はこのアプリで調整した値） |
+| `ComboStage` の振動と読み上げ | `ComboStage`（3 / 6 / 11 コンボの区切り） |
+| `TimeAttackRecordStore`（枠のキー） | `LocalLeaderboard`（上位 10 件の保存。形式は `timeAttackRecords.v1.*` のまま） |
+| `DailyChallengeDay` / `DailyChallengeStreak`（`QuizDay` / `QuizStreak` の別名と、公開日） | `QuizDay` / `QuizStreak` / `DayKeyedRecordStore` / `SplitMix64` / `StableSeed` |
+
+- 進行のルールそのもの（例: 解答の受け付け方・補充の条件）を変えたいときは、ほかのアプリにも効くので quiz-kit に PR を出し、リリースしてからこのリポジトリのバージョンを上げる
+- このアプリだけの見せ方・演出・計測は、`QuizSession.onEvent` と `QuizSession` の状態を見てこのリポジトリで書く
+- デイリーの出題（`DailyChallengeGeneratorV1`）は `SplitMix64` のメソッドだけを使う。標準ライブラリの `shuffled(using:)` などは OS の更新で引き方が変わりうる
+
 ## App Store の掲載情報
 
 手動で発火する GitHub Actions で、編集中のバージョンに反映する（審査中・配信済みのバージョンには触らない）。認証は Organization secrets の App Store Connect API Key（`APPLE_API_KEY_BASE64` / `APPLE_API_KEY_ID` / `APPLE_API_ISSUER_ID`）。
@@ -31,7 +48,7 @@ xcodebuild test -project PrimePickApp.xcodeproj -scheme PrimePickApp -destinatio
 | --- | --- | --- |
 | `Screenshots/App Store` | スクリーンショット（iPhone 6.3 inch / iPhone Duo / iPhone 6.9 inch / iPad 13 inch × `AppStore/languages.json` の言語）。**`release/**` を選んで実行したときだけ撮る** | `AppStore/screenshots.json` / `AppStore/languages.json` / `AppStore/app.json` |
 | `Metadata/App Store` | 説明文・キーワード・プロモーションテキスト・最新情報・URL。`mode` は `dry-run`（既定・差分表示）/ `upload` / `export`（現在値を JSON に書き出す） | `AppStore/metadata/*.json` |
-| `Creative assets/App Store` | iOS 27 以降の App Store のプロダクトページのヘッダー（3840x1646）と検索結果（3840x2560）。`mode` は `dry-run`（既定）/ `upload` / `ref-data` | `AppStore/creative_assets.json` / `AppStore/creative/<言語>/` |
+| `Creative assets/App Store` | iOS 27 以降の App Store のプロダクトページのヘッダー（3840x1646）と検索結果（3840x2560）。`mode` は `dry-run`（既定）/ `upload` / `ref-data` / `cleanup-dry-run` / `cleanup`（配置していない古い画像を消す） | `AppStore/creative_assets.json` / `AppStore/creative/<言語>/` |
 | `Verify/App Store metadata` | PR で `AppStore/**` / `Tools/**` を変えたとき、文字数と設定ファイルの整合を検査する | 同上 |
 
 - 撮る画面・枚数・並び順は Issue #201 で決めた（ホーム / 練習モードの出題中 / タイムアタック / 結果 / 遊び方）。変えるときは `AppStore/screenshots.json` と `ScreenshotDemo.Scene` を合わせて直す。
@@ -41,6 +58,8 @@ xcodebuild test -project PrimePickApp.xcodeproj -scheme PrimePickApp -destinatio
 - 説明文は App Store Connect の現在値が正。書き換えるときは `mode: export` で取り込んだ JSON を直して PR にし、`dry-run` で差分を確かめてから `upload` する。`python3 Tools/upload_metadata.py --check` で文字数の上限を手元でも確かめられる。
 - 「このバージョンの最新情報」は `AppStore/metadata/ja.json` の `whatsNew` に `{"version": "1.3.0", "text": "…"}` の形で書く。`version` が反映先のバージョンと一致するときだけ書き込むので、リリースごとに両方を書き換える。
 - クリエイティブアセットの元は `AppStore/creative/src/creative.html`。6.9 inch のスクリーンショットを撮ってから `Tools/render_creative_assets.sh build/screenshots/APP_IPHONE_67 "Prime Pick"` で書き出し（Google Chrome を使う）、画像もコミットする。`ref-data` → `dry-run` → `upload` の順に流し、App Store Connect のプレビューで iPhone / iPad の見え方を確かめてから審査に出す。
+  Apple 側の処理が遅い日は、`upload` が処理の待ち（30 分）で切れることがある。そのまま流し直せば、上げ直さずに続きから待つ（参照名に画像のハッシュを入れている）。何時間たっても終わらないときは、入力 `reupload_pending` をオンにして、処理中のまま止まった画像を上げ直す。
+  描き直して `upload` すると、外した古い画像は Asset Library に残る。`mode: cleanup-dry-run` で消す画像の一覧を確かめてから `mode: cleanup` で消す。消すのは、参照名が `creative_assets.json` の `referenceName` ＋ 半角スペースで始まり、どのバージョンにも配置しておらず、処理中・審査中でない画像だけ。消した画像は戻せないので、一覧に配置中の画像や手で上げた画像が出ていたら消さない（#502）。
 - App Store Connect に登録している言語は日本語（ja）だけ（2026-10 時点）。アプリ自体は en にも対応しているが、App Store に英語を足すには英語の説明文・キーワードが要る。足すときは `AppStore/metadata/en.json` と `creative.html` の `copy` の `en` を用意してから `AppStore/languages.json` に `en`（storeLocale `en-US`）を加え、`Metadata/App Store` を `missing_locales: create` で実行する（言語の追加と説明文の書き込みを同時に行う。先に Screenshots で `create` すると説明文が空の言語ができる）。
 - PR 本文のスクリーンショットは `gh pr create --attach`（gh v2.99.0 以上）で添付する（assets ブランチは使わない）。本文は Markdown の表に `![Before](./before.png)` の形で書き、作成後に `<img width="300">` に置き換える（手順は shilokuma-inc/template-app-ios の README の「PR 本文のスクリーンショット」）。
 

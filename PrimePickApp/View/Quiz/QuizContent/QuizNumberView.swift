@@ -5,6 +5,7 @@
 //  Created by 村石 拓海 on 2024/05/17.
 //
 
+import QuizCore
 import SwiftUI
 
 struct QuizNumberView: View {

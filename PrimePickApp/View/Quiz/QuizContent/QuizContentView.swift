@@ -5,6 +5,7 @@
 //  Created by 村石 拓海 on 2024/05/31.
 //
 
+import QuizCore
 import SwiftUI
 
 struct QuizContentView: View {
@@ -12,6 +13,8 @@ struct QuizContentView: View {
     let difficulty: Difficulty
     var gameMode: GameMode = .practice
     var remainingSeconds: Int = 0
+    /// タイムアタックのカウントダウンが最後に進んだ時刻。まだ始めていなければ nil
+    var countdownAdvancedAt: Date?
     let quizData: [QuizEntity]
     let currentCombo: Int
     /// 現在の合計スコア。タイムアタックで左上に表示する
@@ -83,6 +86,7 @@ struct QuizContentView: View {
                     difficulty: difficulty,
                     gameMode: gameMode,
                     remainingSeconds: remainingSeconds,
+                    countdownAdvancedAt: countdownAdvancedAt,
                     timePenaltyPopup: timePenaltyPopup
                 )
                 .frame(height: quizTimeLimitAreaHeight)

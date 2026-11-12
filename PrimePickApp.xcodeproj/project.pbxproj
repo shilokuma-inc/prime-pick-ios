@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A1B2C3D4E5F60718293A4B5E /* QuizCore in Frameworks */ = {isa = PBXBuildFile; productRef = A1B2C3D4E5F60718293A4B5D /* QuizCore */; };
 		B7528572BEDF03439A16F358 /* AdSlotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F797DA8F6B9FDFC8BA3E13D3 /* AdSlotTests.swift */; };
 		A5C1D7E93B2F40816A7D2E11 /* AdNativeAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C1D7E93B2F40816A7D2E12 /* AdNativeAdView.swift */; };
 		A5C1D7E93B2F40816A7D2E13 /* NativeAdCardLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C1D7E93B2F40816A7D2E14 /* NativeAdCardLayout.swift */; };
@@ -39,6 +40,7 @@
 		CECA78B77589CE8D115EDA1D /* DailyChallengeRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115EDA1D3D182B12FFA8D68E /* DailyChallengeRecord.swift */; };
 		0E2623A1589F58BCF0706E89 /* AnswerFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC127C55EF579E3557CC6E8 /* AnswerFeedback.swift */; };
 		0EE0BB1AB88CC6D4826E576F /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC5CD22C7A2079467B43E12 /* GameMode.swift */; };
+		8F71951F7D0EF8BE92DF6AB8 /* TimeAttackCountdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7078F3C78AD72E35A73C6E /* TimeAttackCountdown.swift */; };
 		C9BF644ED966A6C88B7E46F5 /* DailyChallengePlayFinisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E46F5A08BD6E4177E69D5 /* DailyChallengePlayFinisher.swift */; };
 		0FF167277C302A94580CF40A /* stage_great.caf in Resources */ = {isa = PBXBuildFile; fileRef = 990B335403D124B08CCA76C1 /* stage_great.caf */; };
 		181E9FAD828642A92C85EA51 /* correct_5.caf in Resources */ = {isa = PBXBuildFile; fileRef = E6A2E75FE01B895750131D46 /* correct_5.caf */; };
@@ -58,6 +60,7 @@
 		2AC96767B5F2678C52C4C89C /* DailyChallengeDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C4C89C7BA5971AD860B28F /* DailyChallengeDay.swift */; };
 		7B2D1F304C7E9BAD1F203B4C /* QuizPlayFinisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2D1F304C7E9BAD1F203B4D /* QuizPlayFinisher.swift */; };
 		2FE99BB3CC809E27B4B0FCD9 /* GameModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C0E8EC6B6A4C521CD4F234 /* GameModeTests.swift */; };
+		DB7F3EFC21F77071FBF72A71 /* TimeAttackCountdownTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DDD42687FF41FFF17E7E0B /* TimeAttackCountdownTests.swift */; };
 		0A6646145696972DE81A0EB6 /* DailyChallengePlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81A0EB6633EC75BF89B16BF /* DailyChallengePlayTests.swift */; };
 		323BE4CCFDD0906F666F8204 /* ScoreCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC15F88A46D15524FCE751A /* ScoreCalculatorTests.swift */; };
 		3B08953A0C22F9FB696E70CD /* correct_6.caf in Resources */ = {isa = PBXBuildFile; fileRef = A835819C26975EA8BD8A1FD3 /* correct_6.caf */; };
@@ -91,7 +94,9 @@
 		D409B1000000000000000001 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = D409B1000000000000000002 /* AppFont.swift */; };
 		4FEC65B42C01184E00A8B731 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEC65B32C01184E00A8B731 /* Text+Extension.swift */; };
 		52ADC9B6E462E7791E44704D /* time_up.caf in Resources */ = {isa = PBXBuildFile; fileRef = E9770179F192CFC3E23473F6 /* time_up.caf */; };
-		5B7A1C2E9D4F6A8B3C0E1D2F /* button_press.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6C8B2D3F0E5A7B9C4D1F2E3A /* button_press.caf */; };
+		5B7A1C2E9D4F6A8B3C0E1D2F /* button_press_back.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6C8B2D3F0E5A7B9C4D1F2E3A /* button_press_back.caf */; };
+		35564DEE80934E08514F8B03 /* button_press_forward.caf in Resources */ = {isa = PBXBuildFile; fileRef = 908F9E7D0F9EF869942A48E9 /* button_press_forward.caf */; };
+		05A85E2D5544DA621E7BDA52 /* button_press_neutral.caf in Resources */ = {isa = PBXBuildFile; fileRef = C7E303F94BADD86DF587ACD0 /* button_press_neutral.caf */; };
 		5445BD0E65813C76907E63B2 /* stage_good.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9C994C763CA183700CF82598 /* stage_good.caf */; };
 		0E8A040B62DE7086FBD62164 /* TimeAttackRecordStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C9B59A5BCDF3D76AAD9333 /* TimeAttackRecordStoreTests.swift */; };
 		5DCD1C6FE87124B5F6E145F5 /* DailyChallengeDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E145F517236FCAF0FA950A /* DailyChallengeDayTests.swift */; };
@@ -197,6 +202,7 @@
 		52C4C89C7BA5971AD860B28F /* DailyChallengeDay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeDay.swift; sourceTree = "<group>"; };
 		7B2D1F304C7E9BAD1F203B4D /* QuizPlayFinisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizPlayFinisher.swift; sourceTree = "<group>"; };
 		3EC5CD22C7A2079467B43E12 /* GameMode.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GameMode.swift; sourceTree = "<group>"; };
+		9A7078F3C78AD72E35A73C6E /* TimeAttackCountdown.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackCountdown.swift; sourceTree = "<group>"; };
 		8B7E46F5A08BD6E4177E69D5 /* DailyChallengePlayFinisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengePlayFinisher.swift; sourceTree = "<group>"; };
 		94C9B59A5BCDF3D76AAD9333 /* TimeAttackRecordStoreTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordStoreTests.swift; sourceTree = "<group>"; };
 		F6E145F517236FCAF0FA950A /* DailyChallengeDayTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeDayTests.swift; sourceTree = "<group>"; };
@@ -257,6 +263,7 @@
 		A4999EB2C38AE3538FF3FBB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		A78976578BC5E117682B4EE5 /* PrimeFactorizationTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrimeFactorizationTests.swift; sourceTree = "<group>"; };
 		A7C0E8EC6B6A4C521CD4F234 /* GameModeTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GameModeTests.swift; sourceTree = "<group>"; };
+		C8DDD42687FF41FFF17E7E0B /* TimeAttackCountdownTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackCountdownTests.swift; sourceTree = "<group>"; };
 		E81A0EB6633EC75BF89B16BF /* DailyChallengePlayTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengePlayTests.swift; sourceTree = "<group>"; };
 		A835819C26975EA8BD8A1FD3 /* correct_6.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = correct_6.caf; sourceTree = "<group>"; };
 		AB1B2CC849127DD0088DB2B6 /* ScorePopupTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScorePopupTests.swift; sourceTree = "<group>"; };
@@ -286,7 +293,9 @@
 		9B0C928E378BBE12786E399F /* DailyChallengeStreak.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeStreak.swift; sourceTree = "<group>"; };
 		E6A2E75FE01B895750131D46 /* correct_5.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = correct_5.caf; sourceTree = "<group>"; };
 		E9770179F192CFC3E23473F6 /* time_up.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = time_up.caf; sourceTree = "<group>"; };
-		6C8B2D3F0E5A7B9C4D1F2E3A /* button_press.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = button_press.caf; sourceTree = "<group>"; };
+		6C8B2D3F0E5A7B9C4D1F2E3A /* button_press_back.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = button_press_back.caf; sourceTree = "<group>"; };
+		908F9E7D0F9EF869942A48E9 /* button_press_forward.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = button_press_forward.caf; sourceTree = "<group>"; };
+		C7E303F94BADD86DF587ACD0 /* button_press_neutral.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = button_press_neutral.caf; sourceTree = "<group>"; };
 		F69D0DED6D686DD9038FF63A /* PrimeFactorization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrimeFactorization.swift; sourceTree = "<group>"; };
 		F76BFBF1481763F2E727A1BC /* NumberExplanation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NumberExplanation.swift; sourceTree = "<group>"; };
 		F930AB2B5D1237FCE31F2CAD /* QuizDataManagerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizDataManagerTests.swift; sourceTree = "<group>"; };
@@ -315,6 +324,7 @@
 				193A97532DEDA1148EE0A2C9 /* FirebaseAnalytics in Frameworks */,
 				02FF4F352DD9D0D2B2CD889C /* LicenseList in Frameworks */,
 				990565BDA5A61E48BCB9E7E6 /* GoogleMobileAds in Frameworks */,
+				A1B2C3D4E5F60718293A4B5E /* QuizCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +517,7 @@
 				A09E49B4E6A0B372138AAF28 /* DailyChallengeStore.swift */,
 				115EDA1D3D182B12FFA8D68E /* DailyChallengeRecord.swift */,
 				3EC5CD22C7A2079467B43E12 /* GameMode.swift */,
+				9A7078F3C78AD72E35A73C6E /* TimeAttackCountdown.swift */,
 				8B7E46F5A08BD6E4177E69D5 /* DailyChallengePlayFinisher.swift */,
 				76D9CBC2B3380EC6F674FC12 /* ScoreCalculator.swift */,
 				A59994082E74A0B472A71FF4 /* DailyChallengeResult.swift */,
@@ -533,6 +544,7 @@
 			children = (
 				3BC15F88A46D15524FCE751A /* ScoreCalculatorTests.swift */,
 				A7C0E8EC6B6A4C521CD4F234 /* GameModeTests.swift */,
+				C8DDD42687FF41FFF17E7E0B /* TimeAttackCountdownTests.swift */,
 				E81A0EB6633EC75BF89B16BF /* DailyChallengePlayTests.swift */,
 				88ACE46B8B4D82A012D16A83 /* AdConfigurationTests.swift */,
 				BDE64915B5E4245D0082E82D /* PrivacyOptionsModelTests.swift */,
@@ -591,7 +603,9 @@
 				D7B0FEAF8D6377ED1DEB0949 /* stage_max.caf */,
 				8AF06039D8694AABFA88063B /* countdown_tick.caf */,
 				E9770179F192CFC3E23473F6 /* time_up.caf */,
-				6C8B2D3F0E5A7B9C4D1F2E3A /* button_press.caf */,
+				6C8B2D3F0E5A7B9C4D1F2E3A /* button_press_back.caf */,
+				908F9E7D0F9EF869942A48E9 /* button_press_forward.caf */,
+				C7E303F94BADD86DF587ACD0 /* button_press_neutral.caf */,
 				A3BCE0229018567C771B0404 /* combo_break.caf */,
 			);
 			name = Sounds;
@@ -642,6 +656,7 @@
 				2E8881254652FCE64BDC5E49 /* FirebaseAnalytics */,
 				32790AB93D445A009671FE20 /* LicenseList */,
 				3F32C332EEE42B0581D9CD99 /* GoogleMobileAds */,
+				A1B2C3D4E5F60718293A4B5D /* QuizCore */,
 			);
 			productName = PrimePickApp;
 			productReference = 4F0C827E2BC8247500E1480E /* PrimePickApp.app */;
@@ -694,6 +709,7 @@
 				7BA07D0A663503931EA1B7A1 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				A46CBE12B5749BF9BA814536 /* XCRemoteSwiftPackageReference "LicenseList" */,
 				D6FAEDB532A7EAA3CE407A49 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				A1B2C3D4E5F60718293A4B5C /* XCRemoteSwiftPackageReference "quiz-kit" */,
 			);
 			productRefGroup = 4F0C827F2BC8247500E1480E /* Products */;
 			projectDirPath = "";
@@ -736,7 +752,9 @@
 				8F5EC1BBC1DCF1E5F5000095 /* stage_max.caf in Resources */,
 				68604C12440CA322FF1CB992 /* countdown_tick.caf in Resources */,
 				52ADC9B6E462E7791E44704D /* time_up.caf in Resources */,
-				5B7A1C2E9D4F6A8B3C0E1D2F /* button_press.caf in Resources */,
+				5B7A1C2E9D4F6A8B3C0E1D2F /* button_press_back.caf in Resources */,
+				35564DEE80934E08514F8B03 /* button_press_forward.caf in Resources */,
+				05A85E2D5544DA621E7BDA52 /* button_press_neutral.caf in Resources */,
 				0ABA00425788CD356A6D8B87 /* combo_break.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -790,6 +808,7 @@
 				185D5F76D5812CA38E8E31AC /* AnswerFeedbackEffect.swift in Sources */,
 				A8191F214974F68FF5C5E60C /* SoundFeedback.swift in Sources */,
 				0EE0BB1AB88CC6D4826E576F /* GameMode.swift in Sources */,
+				8F71951F7D0EF8BE92DF6AB8 /* TimeAttackCountdown.swift in Sources */,
 				C9BF644ED966A6C88B7E46F5 /* DailyChallengePlayFinisher.swift in Sources */,
 				AE356B45DDA1A9D8063C6C18 /* ScoreCalculator.swift in Sources */,
 				270F080447FCA4D8A5999408 /* DailyChallengeResult.swift in Sources */,
@@ -830,6 +849,7 @@
 			files = (
 				323BE4CCFDD0906F666F8204 /* ScoreCalculatorTests.swift in Sources */,
 				2FE99BB3CC809E27B4B0FCD9 /* GameModeTests.swift in Sources */,
+				DB7F3EFC21F77071FBF72A71 /* TimeAttackCountdownTests.swift in Sources */,
 				0A6646145696972DE81A0EB6 /* DailyChallengePlayTests.swift in Sources */,
 				4B8DE98570E12C357BF6FFE2 /* AppVersionTests.swift in Sources */,
 				DC2D7056852A08FE77A1F443 /* AdsStartupTests.swift in Sources */,
@@ -1164,6 +1184,14 @@
 				minimumVersion = 13.11.0;
 			};
 		};
+		A1B2C3D4E5F60718293A4B5C /* XCRemoteSwiftPackageReference "quiz-kit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/shilokuma-inc/quiz-kit";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1181,6 +1209,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D6FAEDB532A7EAA3CE407A49 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
+		};
+		A1B2C3D4E5F60718293A4B5D /* QuizCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1B2C3D4E5F60718293A4B5C /* XCRemoteSwiftPackageReference "quiz-kit" */;
+			productName = QuizCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

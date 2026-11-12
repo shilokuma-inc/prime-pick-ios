@@ -3,6 +3,7 @@
 //  PrimePickApp
 //
 
+import QuizCore
 import Foundation
 
 /// デイリーチャレンジ 1 問分の結果

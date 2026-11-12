@@ -80,7 +80,8 @@ struct DailyChallengeCardView: View {
             }
             .buttonStyle(
                 GameButtonStyle(
-                    appearance: .neutral(shape: .roundedRectangle(cornerRadius: DailyChallengeCardView.cornerRadius), depth: 4)
+                    appearance: .neutral(shape: .roundedRectangle(cornerRadius: DailyChallengeCardView.cornerRadius), depth: 4),
+                    pressSound: MainView.dailyChallengeCardPressSound
                 )
             )
         }

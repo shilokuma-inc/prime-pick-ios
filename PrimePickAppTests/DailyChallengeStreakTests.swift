@@ -4,6 +4,7 @@
 //
 
 import XCTest
+import QuizCore
 @testable import PrimePickApp
 
 final class DailyChallengeStreakTests: XCTestCase {

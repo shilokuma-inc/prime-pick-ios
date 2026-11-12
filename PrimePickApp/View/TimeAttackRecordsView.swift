@@ -3,6 +3,7 @@
 //  PrimePickApp
 //
 
+import QuizCore
 import SwiftUI
 
 /// タイムアタックの記録画面（Discussion #270）

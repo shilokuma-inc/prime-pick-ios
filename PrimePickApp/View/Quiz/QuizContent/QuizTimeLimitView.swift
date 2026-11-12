@@ -11,6 +11,8 @@ struct QuizTimeLimitView: View {
     let difficulty: Difficulty
     var gameMode: GameMode = .practice
     var remainingSeconds: Int = 0
+    /// タイムアタックのカウントダウンが最後に進んだ時刻（`session.start()` か最後の `.tick`）。まだ始めていなければ nil
+    var countdownAdvancedAt: Date?
     /// 残り時間の近くに出す時間ペナルティのポップアップ
     var timePenaltyPopup: ScorePopup?
 
@@ -19,6 +21,11 @@ struct QuizTimeLimitView: View {
     /// 残り 5 秒以下か。残り時間とバーを赤くし、1 秒ごとにパルスさせる
     private var isInFinalCountdown: Bool {
         gameMode.isInFinalCountdown(remainingSeconds: remainingSeconds)
+    }
+
+    /// 実時間の残り時間。残り 5 秒未満を小数 2 桁で出すのに使う（Discussion #484）
+    private var countdown: TimeAttackCountdown {
+        TimeAttackCountdown(gameMode: gameMode, remainingSeconds: remainingSeconds, lastAdvancedAt: countdownAdvancedAt)
     }
 
     var borderColor: Color {
@@ -32,14 +39,6 @@ struct QuizTimeLimitView: View {
         case .expert:
             return Color.indigo
         }
-    }
-    
-    /// 残り時間の割合。練習モードは従来どおり僅かに進んだ見た目を維持する
-    private var progress: Double {
-        guard let timeLimitSeconds = gameMode.timeLimitSeconds, timeLimitSeconds > 0 else {
-            return 0.01
-        }
-        return Double(remainingSeconds) / Double(timeLimitSeconds)
     }
     
     var body: some View {
@@ -63,18 +62,28 @@ struct QuizTimeLimitView: View {
                     .edgesIgnoringSafeArea(.all)
             }
             
-            ProgressView(value: progress)
-                .progressViewStyle(LinearProgressViewStyle(tint: isInFinalCountdown ? .red : .gray))
-                .scaleEffect(x: 1, y: 4, anchor: .center)
-                .padding(.horizontal, 20)
-                .animation(.linear(duration: 1), value: progress)
+            // 残り時間の割合を実時間で求め、1 秒ごとの段差ではなく滑らかに減らす（Discussion #484）。
+            // 練習モードは従来どおり僅かに進んだ見た目を維持する。誤答のペナルティで減った分は一気に減らす
+            TimelineView(.animation(
+                minimumInterval: TimeAttackCountdown.progressUpdateInterval,
+                paused: !countdown.updatesProgressContinuously
+            )) { context in
+                ProgressView(value: countdown.progress(at: context.date))
+                    .progressViewStyle(LinearProgressViewStyle(tint: isInFinalCountdown ? .red : .gray))
+                    .scaleEffect(x: 1, y: 4, anchor: .center)
+                    .padding(.horizontal, 20)
+            }
             
             switch gameMode {
             case .practice, .dailyChallenge:
                 outlinedTitle("No Timelimit!")
             case .timeAttack:
-                outlinedTitle("\(remainingSeconds) sec", color: isInFinalCountdown ? .red : .white)
-                    .modifier(FinalCountdownPulse(isActive: isInFinalCountdown && !reduceMotion, trigger: remainingSeconds))
+                // 小数で表示する間（残り 5 秒以下）だけ毎フレーム描き直す。それ以外とタイムアップの後は止める。
+                // パルスと tick 音は今どおり整数の残り秒が変わるたびに出す
+                TimelineView(.animation(paused: !countdown.updatesEveryFrame)) { context in
+                    remainingTimeTitle(countdown.displayValue(at: context.date))
+                }
+                .modifier(FinalCountdownPulse(isActive: isInFinalCountdown && !reduceMotion, trigger: remainingSeconds))
             }
         }
         .overlay(alignment: .trailing) {
@@ -93,6 +102,17 @@ private extension QuizTimeLimitView {
     /// `CGSize` の `Hashable` 準拠は iOS 18 以降のため、タプルの配列で保持する
     static var outlineOffsets: [(x: CGFloat, y: CGFloat)] {
         [(1, 1), (1, -1), (-1, 1), (-1, -1)]
+    }
+
+    /// 残り時間のタイトル。5 秒以上は今どおり整数、5 秒未満は小数 2 桁
+    func remainingTimeTitle(_ display: TimeAttackRemainingTimeDisplay) -> some View {
+        let color: Color = isInFinalCountdown ? .red : .white
+        switch display {
+        case .wholeSeconds(let seconds):
+            return outlinedTitle("\(seconds) sec", color: color)
+        case .fractionalSeconds(let text):
+            return outlinedTitle("\(text) sec", color: color)
+        }
     }
 
     /// 背景に紛れないよう黒い縁取りを付けたタイトル
@@ -114,7 +134,9 @@ private extension QuizTimeLimitView {
     }
 
     func titleText(_ key: LocalizedStringKey) -> some View {
+        // 数字が変わっても幅が揺れないよう、数字の幅をそろえる。縁取りの 4 枚にも同じ指定が効くよう、ここで付ける
         Text(key)
+            .monospacedDigit()
             .appFont(.heading(.largeTitle, weight: .heavy))
             .minimumScaleFactor(0.5)
             .lineLimit(1)
@@ -148,6 +170,6 @@ private struct FinalCountdownPulse: ViewModifier {
 
         QuizTimeLimitView(difficulty: .hard, gameMode: .timeAttack(.sixtySeconds), remainingSeconds: 42)
 
-        QuizTimeLimitView(difficulty: .normal, gameMode: .timeAttack(.fifteenSeconds), remainingSeconds: 4)
+        QuizTimeLimitView(difficulty: .normal, gameMode: .timeAttack(.fifteenSeconds), remainingSeconds: 4, countdownAdvancedAt: .now)
     }
 }

@@ -108,7 +108,7 @@ struct DailyChallengeResultView: View {
                         .foregroundStyle(.white)
                         .frame(maxWidth: .infinity, minHeight: 56)
                 }
-                .buttonStyle(GameButtonStyle(appearance: GameButtonAppearance(color: .accentColor)))
+                .buttonStyle(GameButtonStyle(appearance: GameButtonAppearance(color: .accentColor), pressSound: Self.playTimeAttackPressSound))
             }
 
             Button {
@@ -119,9 +119,14 @@ struct DailyChallengeResultView: View {
                     .foregroundStyle(Color.accentColor)
                     .frame(maxWidth: .infinity, minHeight: 56)
             }
-            .buttonStyle(GameButtonStyle(appearance: .neutral()))
+            .buttonStyle(GameButtonStyle(appearance: .neutral(), pressSound: Self.returnToTitlePressSound))
         }
     }
+
+    /// 「タイムアタックで遊ぶ」の押下音。次のゲームへ進むボタンなので、進む押下音にする
+    static let playTimeAttackPressSound: SoundEffect = .buttonPressForward
+    /// 「タイトルに戻る」の押下音。戻るボタンなので、戻る押下音にする
+    static let returnToTitlePressSound: SoundEffect = .buttonPressBack
 }
 
 /// 次のデイリーまでの残り時間。毎秒更新し、撮影モードでは止める

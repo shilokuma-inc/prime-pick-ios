@@ -3,6 +3,7 @@
 //  PrimePickApp
 //
 
+import QuizCore
 import AudioToolbox
 import AVFoundation
 
@@ -24,8 +25,19 @@ enum SoundEffect: Equatable {
     case countdownTick
     /// タイムアップのホイッスル
     case timeUp
-    /// ゲーム内のボタンを押した（短く控えめな音）
-    case buttonPress
+    /// 戻るボタンを押した（短く控えめな、音程が下がる音）
+    ///
+    /// 押下音は 3 種類あり、`GameButtonStyle` の呼び出し側がボタンの役割に合わせて必ず選ぶ。
+    /// 戻るボタン（確認カードの「Quit」など）はこの音、進むボタンは `buttonPressForward`、進むでも戻るでもないボタンは `buttonPressNeutral`
+    case buttonPressBack
+    /// 進むボタン（確認カードの「Start」など）を押した
+    ///
+    /// `buttonPressBack` と対になる、音程が上がる明るい音。進むボタンだけをこの音にして、戻るボタンと聞き分けられるようにする
+    case buttonPressForward
+    /// 進むでも戻るでもないボタン（遊び方など）を押した
+    ///
+    /// 音程が上がりも下がりもしない短い音。`buttonPressBack`・`buttonPressForward` と聞き分けられるようにする
+    case buttonPressNeutral
 
     /// 正解音の音階の数
     static let correctNoteCount = 8
@@ -66,8 +78,12 @@ enum SoundEffect: Equatable {
             return "countdown_tick"
         case .timeUp:
             return "time_up"
-        case .buttonPress:
-            return "button_press"
+        case .buttonPressBack:
+            return "button_press_back"
+        case .buttonPressForward:
+            return "button_press_forward"
+        case .buttonPressNeutral:
+            return "button_press_neutral"
         }
     }
 
@@ -76,7 +92,8 @@ enum SoundEffect: Equatable {
         switch self {
         case .incorrect:
             return 1053
-        case .correct, .comboStageUp, .comboBreak, .countdownTick, .timeUp, .buttonPress:
+        case .correct, .comboStageUp, .comboBreak, .countdownTick, .timeUp, .buttonPressBack, .buttonPressForward,
+             .buttonPressNeutral:
             return nil
         }
     }
