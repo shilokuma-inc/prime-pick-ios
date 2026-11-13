@@ -13,9 +13,13 @@ final class PrivacyManifestTests: XCTestCase {
         return try XCTUnwrap(PropertyListSerialization.propertyList(from: data, format: nil) as? [String: Any])
     }
 
-    /// ATT で許可した人にパーソナライズ広告を出すので、トラッキングありと宣言する
-    func testDeclaresTracking() throws {
-        XCTAssertEqual(try manifest()["NSPrivacyTracking"] as? Bool, true)
+    /// アプリのコード自身はトラッキングしない（IDFA は Google Mobile Ads が扱い、SDK 側のマニフェストが宣言する）。
+    /// true にするならトラッキングのドメインを 1 つ以上並べないと App Store Connect で ITMS-91064 になる。
+    /// 空の配列でもキーを残すと同じ指摘になることがあるので、ドメインのキーは書かない（#508）
+    func testDoesNotDeclareTrackingForAppCode() throws {
+        let manifest = try manifest()
+        XCTAssertEqual(manifest["NSPrivacyTracking"] as? Bool, false)
+        XCTAssertNil(manifest["NSPrivacyTrackingDomains"])
     }
 
     /// 自己ベストなどをアプリ自身の UserDefaults に保存する（理由 CA92.1）
