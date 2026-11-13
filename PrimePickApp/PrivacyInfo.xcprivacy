@@ -2,9 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<!-- ATT で許可した人にパーソナライズ広告を出す（Google Mobile Ads が IDFA を使う）ため、トラッキングあり -->
+	<!-- アプリのコード自身はトラッキングしない。ATT で許可した人へのパーソナライズ広告（IDFA）は Google Mobile Ads が扱い、
+	     Device ID の「トラッキングあり」は SDK 側のマニフェストが宣言する。true にするとドメインを 1 つ以上並べる必要があり、
+	     空のままだと App Store Connect で ITMS-91064 になる（#508） -->
 	<key>NSPrivacyTracking</key>
-	<true/>
+	<false/>
 	<!-- アプリ自身はトラッキングのためのドメインに通信しない。広告の通信は Google Mobile Ads が行う -->
 	<key>NSPrivacyTrackingDomains</key>
 	<array/>
