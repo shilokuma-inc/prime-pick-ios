@@ -2,6 +2,10 @@
 
 このリポジトリだけに当てはまる知見。全リポジトリ共通のものは `~/.agents/LEARNINGS.md` に書く。
 
+## リリース
+
+- リポジトリの設定で「マージしたら head ブランチを自動で消す」（`delete_branch_on_merge`）がオンになっている。`release/<バージョン>` を head にした PR（`develop` に戻す・`main` に反映する）をマージすると、`gh pr merge` に `--delete-branch` を付けなくても release ブランチが消える。消えたら同じコミットで作り直す（`gh api -X POST repos/shilokuma-inc/prime-pick-ios/git/refs -f ref=refs/heads/release/<バージョン> -f sha=<コミット>`）。作り直しは push 扱いで `Upload` が動くので、同じ中身のビルドを上げ直さないよう取り消す。タグ `v<バージョン>` を先に打っておけば、ブランチが消えてもコミットは残る（2026-11-14、#510）
+
 ## App Store の掲載情報（スクリーンショット / メタデータ）
 
 - `PrimePickApp.xcodeproj/project.pbxproj` には `PRODUCT_BUNDLE_IDENTIFIER` がアプリ（`ml.mrs1669.PrimePickApp`）とテスト（`…Tests`）の 2 種類ある。`Tools/app_store_config.py` の `bundle_id()` は productType が application のターゲットの build configuration だけをたどる（ninjacord 由来の「全部集めて 1 つ」の実装だとテストの値が混ざって止まる）（2026-10-05）
