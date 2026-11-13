@@ -121,15 +121,16 @@ ID は build setting から `PrimePickApp/Info.plist` に差し込んでいま�
   - 入力の手順: Apple のヘルプ Manage app privacy <https://developer.apple.com/help/app-store-connect/manage-app-information/manage-app-privacy/>
   - 回答案には「要確認」（Firebase Analytics の分など）が残っている。入力の前に決める
 
-### `PrivacyInfo.xcprivacy` の宣言と、審査で指摘されたときの方針
+### `PrivacyInfo.xcprivacy` の宣言 — `NSPrivacyTracking` = false（#508）
 
-アプリのマニフェスト `PrimePickApp/PrivacyInfo.xcprivacy` は、`NSPrivacyTracking` = true・`NSPrivacyTrackingDomains` は空で出しています（#367 の ask の回答「案1: true・ドメインは空（今のまま）」）。
+アプリのマニフェスト `PrimePickApp/PrivacyInfo.xcprivacy` は、`NSPrivacyTracking` = false・`NSPrivacyTrackingDomains` は空で出しています。
 
-- Apple のドキュメントでは、`NSPrivacyTracking` を true にしたら `NSPrivacyTrackingDomains` にトラッキングに使うドメインを並べることになっていて、並べたドメインへの通信は ATT で許可していない利用者では失敗する（#367 の ask の説明）
-- 審査でドメインが空であることを指摘されたときの方針（#367 の ask の選択肢。どれにするかは指摘の内容を見て人間が決める）:
-  1. `NSPrivacyTracking` を false にする（アプリのコード自身はトラッキングしない。IDFA は Google Mobile Ads が扱い、SDK 側のマニフェストが Device ID を「トラッキングあり」と宣言している。「App のプライバシー」は「トラッキングに使用」のまま）
-  2. Google の広告ドメインを並べる（ATT を拒否した人には広告そのものが出なくなるおそれがあり、「拒否しても広告は出る」という決定と合わなくなる。Google はトラッキング専用のドメインの一覧を公開していない）
-- 変えたら、[ads-privacy-drafts.md](ads-privacy-drafts.md) の回答案の該当の記述も直す
+- 最初は `NSPrivacyTracking` = true・ドメインは空で出していた（#367 の ask の回答「案1: true・ドメインは空（今のまま）」）。1.3.0（ビルド 20261112.172034）を提出したところ、App Store Connect の処理で **ITMS-91064**（Invalid tracking information）になり、バイナリが無効になった（2026-11-14）
+  - Apple のドキュメントでは、`NSPrivacyTracking` を true にしたら `NSPrivacyTrackingDomains` にトラッキングに使うドメインを 1 つ以上並べることになっている。メールの文面は「NSPrivacyTracking must be true if NSPrivacyTrackingDomains isn't empty」と逆向きに書かれているが、true・空でも出る
+- 指摘されたときのために用意していた 2 つの方針（#367 の ask の選択肢）から、依頼者が「false にする」を選んだ（#508）:
+  1. **（採用）** `NSPrivacyTracking` を false にする。アプリのコード自身はトラッキングしない。IDFA は Google Mobile Ads が扱い、SDK 側のマニフェストが Device ID を「トラッキングあり」と宣言している。ATT の許可を求める処理と「App のプライバシー」の「トラッキングに使用」はそのまま
+  2. Google の広告ドメインを並べる。並べたドメインへの通信は ATT で許可していない利用者では失敗するので、ATT を拒否した人には広告そのものが出なくなるおそれがあり、「拒否しても広告は出る」という決定と合わなくなる。Google はトラッキング専用のドメインの一覧を公開していない
+- `PrimePickAppTests/PrivacyManifestTests.swift` が false・ドメインが空であることを確かめている。true に戻すなら、ドメインも並べる
 
 ## 5. プライバシーポリシー — ページは済み・App Store Connect の URL はまだ
 

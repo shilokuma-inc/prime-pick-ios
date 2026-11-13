@@ -153,7 +153,7 @@ App Store Connect では、データの種類ごとに「目的」「ユーザ�
 
 上の表に無いもの（Contact Info・Health & Fitness・Financial Info・Precise Location・Sensitive Info・Contacts・User Content・Browsing History・Search History・User ID・Purchases など）は、アプリも SDK のマニフェストも集めると宣言していないので「集めない」の案です。
 
-- 「トラッキング」の定義: アプリで集めたデータを、ほかの会社のアプリ・Web サイトなどのデータと、ターゲティング広告や広告の測定のために結び付けること、またはデータブローカーと共有すること（Apple「User privacy and data use」<https://developer.apple.com/app-store/user-privacy-and-data-use/>）。Device ID を「トラッキングに使う」と答えるので、ATT の許可を求める今の実装と、アプリのマニフェスト `PrimePickApp/PrivacyInfo.xcprivacy` の `NSPrivacyTracking` = true（SDK のマニフェストにはこのキーは無い）と合う
+- 「トラッキング」の定義: アプリで集めたデータを、ほかの会社のアプリ・Web サイトなどのデータと、ターゲティング広告や広告の測定のために結び付けること、またはデータブローカーと共有すること（Apple「User privacy and data use」<https://developer.apple.com/app-store/user-privacy-and-data-use/>）。Device ID を「トラッキングに使う」と答えるので、ATT の許可を求める今の実装と合う。アプリのマニフェスト `PrimePickApp/PrivacyInfo.xcprivacy` の `NSPrivacyTracking` は false にしている（アプリのコード自身はトラッキングしない。Device ID のトラッキングは Google Mobile Ads のマニフェストが宣言する。true・ドメインが空のままでは ITMS-91064 になった。#508）。「App のプライバシー」はアプリ全体の答えなので、マニフェストが false でも「トラッキングに使う」のまま
 
 ### 要確認（人間が決めること・確かめること）
 
