@@ -123,14 +123,14 @@ ID は build setting から `PrimePickApp/Info.plist` に差し込んでいま�
 
 ### `PrivacyInfo.xcprivacy` の宣言 — `NSPrivacyTracking` = false（#508）
 
-アプリのマニフェスト `PrimePickApp/PrivacyInfo.xcprivacy` は、`NSPrivacyTracking` = false・`NSPrivacyTrackingDomains` は空で出しています。
+アプリのマニフェスト `PrimePickApp/PrivacyInfo.xcprivacy` は、`NSPrivacyTracking` = false で出し、`NSPrivacyTrackingDomains` のキーは書いていません。
 
 - 最初は `NSPrivacyTracking` = true・ドメインは空で出していた（#367 の ask の回答「案1: true・ドメインは空（今のまま）」）。1.3.0（ビルド 20261112.172034）を提出したところ、App Store Connect の処理で **ITMS-91064**（Invalid tracking information）になり、バイナリが無効になった（2026-11-14）
   - Apple のドキュメントでは、`NSPrivacyTracking` を true にしたら `NSPrivacyTrackingDomains` にトラッキングに使うドメインを 1 つ以上並べることになっている。メールの文面は「NSPrivacyTracking must be true if NSPrivacyTrackingDomains isn't empty」と逆向きに書かれているが、true・空でも出る
 - 指摘されたときのために用意していた 2 つの方針（#367 の ask の選択肢）から、依頼者が「false にする」を選んだ（#508）:
-  1. **（採用）** `NSPrivacyTracking` を false にする。アプリのコード自身はトラッキングしない。IDFA は Google Mobile Ads が扱い、SDK 側のマニフェストが Device ID を「トラッキングあり」と宣言している。ATT の許可を求める処理と「App のプライバシー」の「トラッキングに使用」はそのまま
+  1. **（採用）** `NSPrivacyTracking` を false にし、`NSPrivacyTrackingDomains` のキーを外す（空の配列でキーを残すと、false でも ITMS-91064 になることがある。Apple の DTS の回答 <https://developer.apple.com/forums/thread/842856> で、キーごと消したら通ったと確かめられている）。アプリのコード自身はトラッキングしない。IDFA は Google Mobile Ads が扱い、SDK 側のマニフェストが Device ID を「トラッキングあり」と宣言している。ATT の許可を求める処理と「App のプライバシー」の「トラッキングに使用」はそのまま
   2. Google の広告ドメインを並べる。並べたドメインへの通信は ATT で許可していない利用者では失敗するので、ATT を拒否した人には広告そのものが出なくなるおそれがあり、「拒否しても広告は出る」という決定と合わなくなる。Google はトラッキング専用のドメインの一覧を公開していない
-- `PrimePickAppTests/PrivacyManifestTests.swift` が false・ドメインが空であることを確かめている。true に戻すなら、ドメインも並べる
+- `PrimePickAppTests/PrivacyManifestTests.swift` が false・ドメインのキーが無いことを確かめている。true に戻すなら、ドメインも並べる
 
 ## 5. プライバシーポリシー — ページは済み・App Store Connect の URL はまだ
 
