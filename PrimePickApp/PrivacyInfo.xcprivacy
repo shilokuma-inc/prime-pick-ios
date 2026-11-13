@@ -7,9 +7,8 @@
 	     空のままだと App Store Connect で ITMS-91064 になる（#508） -->
 	<key>NSPrivacyTracking</key>
 	<false/>
-	<!-- アプリ自身はトラッキングのためのドメインに通信しない。広告の通信は Google Mobile Ads が行う -->
-	<key>NSPrivacyTrackingDomains</key>
-	<array/>
+	<!-- NSPrivacyTrackingDomains は書かない。アプリ自身はトラッキングのためのドメインに通信せず（広告の通信は Google Mobile Ads が行う）、
+	     空の配列でキーを残すと ITMS-91064 になることがあるので、キーごと外す（#508） -->
 	<!-- 収集するデータは Google Mobile Ads・UMP・Firebase のマニフェストが SDK 側で宣言する。アプリ自身が集めるものは無い -->
 	<key>NSPrivacyCollectedDataTypes</key>
 	<array/>
