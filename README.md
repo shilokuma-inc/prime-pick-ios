@@ -7,10 +7,10 @@
 
 ## Status
 
-| branch \ workflow | Build | Archive | Upload |
-| --- | --- | --- | --- |
-| main | [![Build/main](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/build-main.yml/badge.svg)](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/build-main.yml) | [![Archive/main](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/archive-main.yml/badge.svg)](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/archive-main.yml) | |
-| develop | [![Build/develop](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/build-develop.yml/badge.svg)](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/build-develop.yml) | | [![Upload](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/upload.yml/badge.svg?branch=develop)](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/upload.yml?query=branch%3Adevelop) |
+| branch \ workflow | Build | Upload |
+| --- | --- | --- |
+| main | [![Build/main](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/build-main.yml/badge.svg)](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/build-main.yml) | |
+| develop | [![Build/develop](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/build-develop.yml/badge.svg)](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/build-develop.yml) | [![Upload](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/upload.yml/badge.svg?branch=develop)](https://github.com/shilokuma-inc/prime-pick-ios/actions/workflows/upload.yml?query=branch%3Adevelop) |
 
 ## App Store の掲載情報
 

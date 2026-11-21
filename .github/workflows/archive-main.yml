@@ -1,8 +1,10 @@
 name: Archive/main
 
+# main への push では Build（build-main.yml）だけを動かすため、自動では実行しない。
+# Release の Archive を確かめたいときは、手動実行（workflow_dispatch）でブランチを選ぶ。
+
 on:
-  push:
-    branches: main
+  workflow_dispatch:
 
 jobs:
   build:
