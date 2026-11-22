@@ -1233,6 +1233,54 @@
         }
       }
     },
+    "Prime Pick Daily Challenge #%lld (%@)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prime Pick Daily Challenge #%1$lld (%2$@)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prime Pick 今日のチャレンジ #%1$lld (%2$@)"
+          }
+        }
+      }
+    },
+    "%lld/%lld correct · %@ sec": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld/%2$lld correct · %3$@ sec"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正解 %1$lld/%2$lld · %3$@ 秒"
+          }
+        }
+      }
+    },
+    "🔥 %lld-day streak": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🔥 %lld-day streak"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🔥 %lld 日連続"
+          }
+        }
+      }
+    },
     "Next challenge in %@": {
       "localizations": {
         "en": {
