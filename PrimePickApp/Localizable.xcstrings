@@ -1313,6 +1313,38 @@
         }
       }
     },
+    "Share Result": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share Result"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "結果をシェア"
+          }
+        }
+      }
+    },
+    "Share today's Daily Challenge result": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share today's Daily Challenge result"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日のチャレンジの結果をシェアする"
+          }
+        }
+      }
+    },
     "Correct %lld / %lld": {
       "localizations": {
         "en": {

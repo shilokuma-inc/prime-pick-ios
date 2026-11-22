@@ -3,6 +3,7 @@
 //  PrimePickAppTests
 //
 
+import UIKit
 import XCTest
 import QuizCore
 @testable import PrimePickApp
@@ -64,6 +65,62 @@ final class DailyChallengeShareContentTests: XCTestCase {
         let queryItems = URLComponents(url: content.url, resolvingAgainstBaseURL: false)?.queryItems ?? []
         XCTAssertEqual(queryItems.first { $0.name == "ct" }?.value, "daily_share")
         XCTAssertFalse(content.text.contains("http"), content.text)
+    }
+
+    // MARK: - 共有シートの項目
+
+    /// 文・リンク・画像を別々の項目として渡す
+    func testActivityItemsAreTextURLAndImageSeparately() throws {
+        let content = try XCTUnwrap(makeContent())
+        let image = UIGraphicsImageRenderer(size: CGSize(width: 10, height: 10)).image { _ in }
+        let items = content.activityItems(image: image)
+
+        XCTAssertEqual(items.count, 3)
+        XCTAssertEqual(items[0] as? String, content.text)
+        XCTAssertEqual(items[1] as? URL, DailyChallengeShareContent.appStoreURL)
+        XCTAssertTrue((items[2] as? UIImage) === image)
+    }
+
+    /// 画像を作れなかったときも、文とリンクは渡す
+    func testActivityItemsWithoutImageAreTextAndURL() throws {
+        let content = try XCTUnwrap(makeContent())
+        let items = content.activityItems(image: nil)
+
+        XCTAssertEqual(items.count, 2)
+        XCTAssertEqual(items[0] as? String, content.text)
+        XCTAssertEqual(items[1] as? URL, DailyChallengeShareContent.appStoreURL)
+    }
+
+    // MARK: - 計測
+
+    func testTapEvent() throws {
+        let content = try XCTUnwrap(makeContent())
+        XCTAssertEqual(content.tapEvent, .shareTap(dayNumber: 12, correctCount: 8, streak: 2))
+        XCTAssertEqual(content.tapEvent.name, "daily_share_tap")
+    }
+
+    /// 送り終えたときだけ、共有先付きの完了のイベントを返す
+    func testCompleteEventWhenCompleted() throws {
+        let content = try XCTUnwrap(makeContent())
+        let event = content.completeEvent(activityType: .message, completed: true)
+        XCTAssertEqual(event, .shareComplete(dayNumber: 12, activityType: UIActivity.ActivityType.message.rawValue))
+        XCTAssertEqual(event?.name, "daily_share_complete")
+    }
+
+    /// 共有シートを閉じただけのときは、完了のイベントを送らない
+    func testNoCompleteEventWhenDismissed() throws {
+        let content = try XCTUnwrap(makeContent())
+        XCTAssertNil(content.completeEvent(activityType: nil, completed: false))
+        XCTAssertNil(content.completeEvent(activityType: .message, completed: false))
+    }
+
+    /// 送り終えたが共有先が分からないときは "unknown" を送る
+    func testCompleteEventWithUnknownActivityType() throws {
+        let content = try XCTUnwrap(makeContent())
+        XCTAssertEqual(
+            content.completeEvent(activityType: nil, completed: true),
+            .shareComplete(dayNumber: 12, activityType: "unknown")
+        )
     }
 
     // MARK: - 未完了
