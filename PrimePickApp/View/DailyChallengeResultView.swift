@@ -15,8 +15,11 @@ struct DailyChallengeResultView: View {
     var onPlayTimeAttack: (() -> Void)?
 
     @Environment(\.dismiss) private var dismiss
+    /// 共有シートに渡す項目。値が入っている間だけ共有シートを出す
+    @State private var shareItems: [Any]?
 
     private var record: DailyChallengeRecord { result.record }
+    private var shareContent: DailyChallengeShareContent? { DailyChallengeShareContent(result: result) }
 
     var body: some View {
         ZStack {
@@ -38,6 +41,11 @@ struct DailyChallengeResultView: View {
                     summary
 
                     streakAndCountdown
+
+                    // シェアできるのは最後まで解いた日だけ（途中でやめた日はボタンを出さない）
+                    if let shareContent {
+                        shareButton(content: shareContent)
+                    }
 
                     QuizReviewList(answerRecords: result.answerRecords, isComplete: record.isCompleted)
 
@@ -98,17 +106,40 @@ struct DailyChallengeResultView: View {
         }
     }
 
+    /// シェアボタン。この画面の主ボタンなのでアクセント色で塗る
+    private func shareButton(content: DailyChallengeShareContent) -> some View {
+        Button {
+            FirebaseAnalytics().sendDailyChallenge(content.tapEvent)
+            shareItems = content.activityItems(image: DailyChallengeShareCardView.renderImage(content: content))
+        } label: {
+            Label("Share Result", systemImage: "square.and.arrow.up")
+                .appFont(.number(size: 22))
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity, minHeight: 56)
+        }
+        .buttonStyle(GameButtonStyle(appearance: GameButtonAppearance(color: .accentColor), pressSound: Self.sharePressSound))
+        .accessibilityLabel(Text("Share today's Daily Challenge result"))
+        // iPad では共有シートのポップオーバーをこのボタンから出す
+        .background(
+            ActivityShareSheet(items: $shareItems) { activityType, completed in
+                if let event = content.completeEvent(activityType: activityType, completed: completed) {
+                    FirebaseAnalytics().sendDailyChallenge(event)
+                }
+            }
+        )
+    }
+
     private var buttons: some View {
         VStack(spacing: 12) {
-            // 主ボタンはアクセント色で塗り、副ボタンは色の付いていない neutral にして主従を分ける
+            // 主ボタンはシェアボタン（アクセント色）。ここのボタンは色の付いていない neutral にして主従を分ける
             if let onPlayTimeAttack {
                 Button(action: onPlayTimeAttack) {
                     Text("Play Time Attack")
                         .appFont(.number(size: 22))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(Color.accentColor)
                         .frame(maxWidth: .infinity, minHeight: 56)
                 }
-                .buttonStyle(GameButtonStyle(appearance: GameButtonAppearance(color: .accentColor), pressSound: Self.playTimeAttackPressSound))
+                .buttonStyle(GameButtonStyle(appearance: .neutral(), pressSound: Self.playTimeAttackPressSound))
             }
 
             Button {
@@ -123,6 +154,8 @@ struct DailyChallengeResultView: View {
         }
     }
 
+    /// シェアボタンの押下音。画面を進めも戻しもしないので、どちらでもない押下音にする
+    static let sharePressSound: SoundEffect = .buttonPressNeutral
     /// 「タイムアタックで遊ぶ」の押下音。次のゲームへ進むボタンなので、進む押下音にする
     static let playTimeAttackPressSound: SoundEffect = .buttonPressForward
     /// 「タイトルに戻る」の押下音。戻るボタンなので、戻る押下音にする

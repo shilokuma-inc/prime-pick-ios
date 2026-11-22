@@ -37,6 +37,30 @@ final class DailyChallengeAnalyticsEventTests: XCTestCase {
         XCTAssertEqual(event.parameters["question_number"] as? Int, 4)
     }
 
+    func testShareTapEvent() {
+        let event = DailyChallengeAnalyticsEvent.shareTap(dayNumber: 12, correctCount: 8, streak: 5)
+        XCTAssertEqual(event.name, "daily_share_tap")
+        XCTAssertEqual(event.parameters.count, 3)
+        XCTAssertEqual(event.parameters["day_number"] as? Int, 12)
+        XCTAssertEqual(event.parameters["correct_count"] as? Int, 8)
+        XCTAssertEqual(event.parameters["streak"] as? Int, 5)
+    }
+
+    func testShareCompleteEvent() {
+        let event = DailyChallengeAnalyticsEvent.shareComplete(dayNumber: 12, activityType: "com.apple.UIKit.activity.Message")
+        XCTAssertEqual(event.name, "daily_share_complete")
+        XCTAssertEqual(event.parameters.count, 2)
+        XCTAssertEqual(event.parameters["day_number"] as? Int, 12)
+        XCTAssertEqual(event.parameters["activity_type"] as? String, "com.apple.UIKit.activity.Message")
+    }
+
+    /// Firebase のパラメータ値の上限（100 文字）を超える共有先は切り詰めて送る
+    func testShareCompleteEventTruncatesLongActivityType() {
+        let longType = String(repeating: "a", count: 150)
+        let event = DailyChallengeAnalyticsEvent.shareComplete(dayNumber: 12, activityType: longType)
+        XCTAssertEqual(event.parameters["activity_type"] as? String, String(repeating: "a", count: 100))
+    }
+
     func testQuizStartEvent() {
         let event = QuizStartAnalyticsEvent(
             gameMode: .timeAttack(.sixtySeconds),

@@ -74,7 +74,8 @@ final class GameButtonStyleTests: XCTestCase {
             ("デイリーの結果のタイトルに戻る", DailyChallengeResultView.returnToTitlePressSound)
         ]
         let neutral: [(button: String, sound: SoundEffect)] = [
-            ("遊び方", MainView.howToPlayPressSound)
+            ("遊び方", MainView.howToPlayPressSound),
+            ("デイリーの結果のシェア", DailyChallengeResultView.sharePressSound)
         ]
         for (button, sound) in forward {
             XCTAssertEqual(sound, .buttonPressForward, button)
