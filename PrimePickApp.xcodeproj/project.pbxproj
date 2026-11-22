@@ -139,6 +139,7 @@
 		5A4E0C0A1D2B3C4D5E6F7081 /* DailyChallengeShareContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E0C0A1D2B3C4D5E6F7082 /* DailyChallengeShareContent.swift */; };
 		5A4E0C0A1D2B3C4D5E6F7083 /* DailyChallengeShareContentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E0C0A1D2B3C4D5E6F7084 /* DailyChallengeShareContentTests.swift */; };
 		5A4E0C0A1D2B3C4D5E6F7085 /* DailyChallengeShareCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E0C0A1D2B3C4D5E6F7086 /* DailyChallengeShareCardView.swift */; };
+		5A4E0C0A1D2B3C4D5E6F7089 /* ActivityShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E0C0A1D2B3C4D5E6F708A /* ActivityShareSheet.swift */; };
 		5A4E0C0A1D2B3C4D5E6F7087 /* DailyChallengeShareCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E0C0A1D2B3C4D5E6F7088 /* DailyChallengeShareCardTests.swift */; };
 		B853E00CAD79F741F17D11F0 /* correct_4.caf in Resources */ = {isa = PBXBuildFile; fileRef = 59C1DEF2D29ECF3BDA30C719 /* correct_4.caf */; };
 		D8F10E898E4249C723420664 /* AnswerExplanationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C76017D6EBB8FED91D5B447 /* AnswerExplanationView.swift */; };
@@ -251,6 +252,7 @@
 		5A4E0C0A1D2B3C4D5E6F7082 /* DailyChallengeShareContent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeShareContent.swift; sourceTree = "<group>"; };
 		5A4E0C0A1D2B3C4D5E6F7084 /* DailyChallengeShareContentTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeShareContentTests.swift; sourceTree = "<group>"; };
 		5A4E0C0A1D2B3C4D5E6F7086 /* DailyChallengeShareCardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeShareCardView.swift; sourceTree = "<group>"; };
+		5A4E0C0A1D2B3C4D5E6F708A /* ActivityShareSheet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityShareSheet.swift; sourceTree = "<group>"; };
 		5A4E0C0A1D2B3C4D5E6F7088 /* DailyChallengeShareCardTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeShareCardTests.swift; sourceTree = "<group>"; };
 		7C36F4F283E4470B1B885ED0 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		ADB7720F52BBF1F60ACB6688 /* DailyChallengeCardState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeCardState.swift; sourceTree = "<group>"; };
@@ -488,6 +490,7 @@
 				A2D21351F7D654F07CF96CC8 /* SelectQuizSettingView.swift */,
 				5E6C543FD57F8474461FBE96 /* DailyChallengeResultView.swift */,
 				5A4E0C0A1D2B3C4D5E6F7086 /* DailyChallengeShareCardView.swift */,
+				5A4E0C0A1D2B3C4D5E6F708A /* ActivityShareSheet.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -830,6 +833,7 @@
 				3C54996A77FAB4264847E0C5 /* SelectQuizSettingView.swift in Sources */,
 				757AD413C0CE3A115E6C543F /* DailyChallengeResultView.swift in Sources */,
 				5A4E0C0A1D2B3C4D5E6F7085 /* DailyChallengeShareCardView.swift in Sources */,
+				5A4E0C0A1D2B3C4D5E6F7089 /* ActivityShareSheet.swift in Sources */,
 				83D3EA8A9559063A4A7E29E4 /* AnswerChoice.swift in Sources */,
 				67303872FE1D62B6C6EBEE16 /* AnswerAnalyticsEvent.swift in Sources */,
 				EE5A17A338C2998EC00041D0 /* QuizStartAnalyticsEvent.swift in Sources */,

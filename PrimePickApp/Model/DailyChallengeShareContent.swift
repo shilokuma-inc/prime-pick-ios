@@ -3,7 +3,7 @@
 //  PrimePickApp
 //
 
-import Foundation
+import UIKit
 
 /// デイリーの結果のシェアで渡す中身（Wordle 風）
 ///
@@ -61,4 +61,29 @@ struct DailyChallengeShareContent: Equatable {
 
     /// 共有シートに渡すリンク
     var url: URL { Self.appStoreURL }
+
+    // MARK: - 共有シートと計測
+
+    /// 共有先が分からないときに送る値
+    static let unknownActivityType = "unknown"
+
+    /// 共有シートに渡す項目。文・リンク・画像カードを別々の項目にする（画像にリンクを焼き込まない）
+    func activityItems(image: UIImage?) -> [Any] {
+        var items: [Any] = [text, url]
+        if let image {
+            items.append(image)
+        }
+        return items
+    }
+
+    /// シェアボタンを押したときのイベント
+    var tapEvent: DailyChallengeAnalyticsEvent {
+        .shareTap(dayNumber: dayNumber, correctCount: correctCount, streak: streak)
+    }
+
+    /// 共有シートを閉じたときのイベント。送り終えたときだけ返し、閉じただけなら nil
+    func completeEvent(activityType: UIActivity.ActivityType?, completed: Bool) -> DailyChallengeAnalyticsEvent? {
+        guard completed else { return nil }
+        return .shareComplete(dayNumber: dayNumber, activityType: activityType?.rawValue ?? Self.unknownActivityType)
+    }
 }
