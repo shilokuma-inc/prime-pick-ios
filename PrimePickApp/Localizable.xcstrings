@@ -1648,6 +1648,38 @@
           }
         }
       }
+    },
+    "🔥 %lld-day streak! Keep it going with today's challenge.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🔥 %lld-day streak! Keep it going with today's challenge."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🔥 %lld 日連続中！今日のチャレンジで記録を伸ばそう"
+          }
+        }
+      }
+    },
+    "Today's challenge is ready. Can you spot the primes?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today's challenge is ready. Can you spot the primes?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日のチャレンジが届いています。素数を見抜けるかな？"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
