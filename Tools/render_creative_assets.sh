@@ -3,12 +3,13 @@ set -euo pipefail
 
 # App Store のクリエイティブアセット（プロダクトページのヘッダー / 検索結果）を書き出す。
 #
-#   Tools/render_creative_assets.sh [6.9 inch のスクリーンショットのフォルダ] [アプリ名]
+#   Tools/render_creative_assets.sh [6.9 inch のスクリーンショットのフォルダ] [アプリ名（全言語で同じ名前にするとき）]
 #
 # 元は AppStore/creative/src/creative.html。画面の画像には 6.9 inch のスクリーンショット
 # （Tools/capture_screenshots.sh APP_IPHONE_67 の出力か、Screenshots/App Store ワークフローの artifact。
 #  既定は build/screenshots/APP_IPHONE_67）を、AppStore/screenshots.json の scenes の順に使う。
-# アプリアイコンは AppStore/app.json の appIcon。アプリ名は省略すると .xcodeproj の名前を使う。
+# アプリアイコンは AppStore/app.json の appIcon。アプリ名は省略すると、言語ごとのホーム画面の名前
+# （app.json の displayNameStrings の CFBundleDisplayName）を使い、それも無ければ Scheme の名前を使う。
 # Google Chrome をヘッドレスで開いて実寸で撮り、アルファを落として AppStore/creative/<言語>/ に保存する。
 # 書き出したら差分を見てコミットし、Creative assets/App Store ワークフローで反映する。
 
@@ -17,7 +18,7 @@ cd "$ROOT_DIR"
 
 CONFIG="python3 Tools/app_store_config.py"
 SCREENSHOTS="${1:-build/screenshots/APP_IPHONE_67}"
-APP_NAME="${2:-$($CONFIG app scheme)}"
+APP_NAME="${2:-}"
 APP_ICON="$($CONFIG app appIcon)"
 CHROME="${CHROME:-/Applications/Google Chrome.app/Contents/MacOS/Google Chrome}"
 SOURCE="AppStore/creative/src/creative.html"
@@ -52,7 +53,8 @@ search search_results.png 3840 2560"
 
 while IFS=$'\t' read -r -u 3 language _ _ _; do
     # creative.html の copy に、その言語の文言が無いと崩れた画像になる
-    if ! grep -Eq "^    ${language}: \{" "$SOURCE"; then
+    # キーは zh-Hans のように引用符で囲むこともある
+    if ! grep -Eq "^    (${language}|\"${language}\"): \{" "$SOURCE"; then
         echo "$SOURCE の copy に $language の文言がありません。" >&2
         exit 1
     fi
@@ -67,12 +69,14 @@ while IFS=$'\t' read -r -u 3 language _ _ _; do
             exit 1
         fi
     done
+    name="${APP_NAME:-$($CONFIG display-name "$language")}"
+    name="${name:-$($CONFIG app scheme)}"
     mkdir -p "$WORK/screens/$language" "$OUTPUT_DIR/$language"
     cp "$SCREENSHOTS/$language"/*.png "$WORK/screens/$language/"
 
     while read -r type file width height; do
         output="$OUTPUT_DIR/$language/$file"
-        query="type=$type&lang=$language&screens=$SCREENS&name=$(python3 -c 'import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1]))' "$APP_NAME")"
+        query="type=$type&lang=$language&screens=$SCREENS&name=$(python3 -c 'import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1]))' "$name")"
         "$CHROME" --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=1 \
             --allow-file-access-from-files --virtual-time-budget=3000 \
             --window-size="$width,$height" --screenshot="$ROOT_DIR/$output" \

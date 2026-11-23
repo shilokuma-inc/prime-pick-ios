@@ -30,15 +30,22 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { width: 100%; height: 100%; overflow: hidden; }
+  /* 本文の書体（--sans）と、見出しで Didot に組み合わせる書体（--heading）を言語ごとに決める。
+     アプリは日本語のときだけ和文の書体（ヒラギノ明朝）を組み合わせ、中国語・韓国語は端末の書体
+     （PingFang・Apple SD Gothic Neo）に落ちる（AppFont.cascadesJapanese）ので、ここも合わせる */
+  body { --sans: "SF Pro Display"; --heading: "Didot"; }
+  body[data-lang="ja"] { --sans: "Hiragino Sans"; --heading: "Hiragino Mincho ProN"; }
+  body[data-lang="zh-Hans"] { --sans: "PingFang SC"; --heading: "PingFang SC"; }
+  body[data-lang="zh-Hant"] { --sans: "PingFang TC"; --heading: "PingFang TC"; }
+  body[data-lang="ko"] { --sans: "Apple SD Gothic Neo"; --heading: "Apple SD Gothic Neo"; }
   body {
     background: var(--background);
     color: var(--text);
-    font-family: "Hiragino Sans", "SF Pro Display", system-ui, sans-serif;
+    font-family: var(--sans), "SF Pro Display", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
-  body[data-lang="en"] { font-family: "SF Pro Display", system-ui, "Hiragino Sans", sans-serif; }
-  /* 見出しはアプリの見出しと同じ書体（数字・英字は Didot、日本語はヒラギノ明朝） */
-  .headline, .copy .title, .brand { font-family: "Didot", "Hiragino Mincho ProN", serif; }
+  /* 見出しはアプリの見出しと同じ書体（数字・英字は Didot） */
+  .headline, .copy .title, .brand { font-family: "Didot", var(--heading), serif; }
 
   .canvas { position: relative; width: 100vw; height: 100vh; overflow: hidden;
     background:
@@ -89,15 +96,51 @@
   const screens = (params.get("screens") || "").split(",").filter(Boolean);
   document.body.dataset.lang = lang;
 
-  // <em> で囲んだところが強調色になる。App Store に載せているのは ja だけ（en は languages.json に足すときのため）
+  // <em> で囲んだところが強調色になる。言語は AppStore/languages.json と同じ（キーは language）
   const copy = {
     ja: {
       header: { title: "その数、<em>素数</em>？", sub: "「素数」か「ちがう」か。2 択で答えて、数に強くなる。" },
       search: { title: "素数か、<br><em>ちがう</em>か。", chips: ["15〜60 秒のタイムアタック", "1 日 1 回の今日のチャレンジ", "間違えた数は素因数分解で復習"] },
     },
     en: {
-      header: { title: "Is it <em>prime</em>?", sub: "Prime or not — answer in one tap and get sharper with numbers." },
-      search: { title: "Prime,<br>or <em>not</em>?", chips: ["15, 30 and 60 sec Time Attack", "A new Daily Challenge every day", "Review misses with prime factors"] },
+      header: { title: "Is it <em>prime</em>?", sub: "Tap PRIME or NOT PRIME, and sharpen your number sense." },
+      search: { title: "Prime,<br>or <em>not</em>?", chips: ["15–60 second Time Attack", "A new Daily Challenge every day", "Review misses, factor by factor"] },
+    },
+    "zh-Hans": {
+      header: { title: "这个数，是<em>质数</em>吗？", sub: "“质数”还是“不是”？二选一作答，越玩数感越强。" },
+      search: { title: "是质数，<br>还是<em>不是</em>？", chips: ["15～60 秒限时挑战", "每天 10 题的每日挑战", "答错的数用分解质因数复习"] },
+    },
+    "zh-Hant": {
+      header: { title: "這個數，是<em>質數</em>嗎？", sub: "「質數」還是「不是」？二選一作答，越玩越有數感。" },
+      search: { title: "是質數，<br>還是<em>不是</em>？", chips: ["15～60 秒限時挑戰", "每天 10 題的每日挑戰", "答錯的數用質因數分解複習"] },
+    },
+    ko: {
+      header: { title: "이 수, <em>소수</em>일까?", sub: "두 버튼 중 하나로 답하고, 수 감각을 키우세요." },
+      search: { title: "소수냐,<br><em>아니냐</em>.", chips: ["15~60초 타임어택", "하루 한 번 오늘의 챌린지", "틀린 수는 소인수분해로 복습"] },
+    },
+    es: {
+      header: { title: "¿Este número es <em>primo</em>?", sub: "¿Primo o no? Responde con un toque y domina los números." },
+      search: { title: "¿Primo<br>o <em>no</em>?", chips: ["Contrarreloj de 15, 30 y 60 s", "Un Reto del día nuevo cada día", "Repasa errores con factorización"] },
+    },
+    "es-ES": {
+      header: { title: "¿Este número es <em>primo</em>?", sub: "¿Primo o no? Responde con un toque y domina los números." },
+      search: { title: "¿Primo<br>o <em>no</em>?", chips: ["Contrarreloj de 15, 30 y 60 s", "Un Reto del día nuevo cada día", "Repasa errores con factorización"] },
+    },
+    fr: {
+      header: { title: "Est-il <em>premier</em> ?", sub: "Premier ou pas ? Répondez d’un geste et progressez en calcul." },
+      search: { title: "Premier<br>ou <em>pas</em> ?", chips: ["Contre-la-montre de 15 à 60 s", "Un nouveau défi chaque jour", "Vos erreurs en facteurs premiers"] },
+    },
+    de: {
+      header: { title: "Ist die Zahl <em>prim</em>?", sub: "Prim oder nicht? Ein Fingertipp – und dein Zahlengefühl wächst." },
+      search: { title: "Prim –<br>oder <em>nicht</em>?", chips: ["Blitzrunde: 15, 30 oder 60 Sek.", "Jeden Tag ein neues Tagesquiz", "Fehler mit Primfaktoren erklärt"] },
+    },
+    it: {
+      header: { title: "È <em>primo</em>?", sub: "Primo o no? Rispondi con un tocco e diventa un asso dei numeri." },
+      search: { title: "Primo<br>o <em>no</em>?", chips: ["Contro il tempo: 15, 30 o 60 s", "Una nuova sfida ogni giorno", "Ripassa con i fattori primi"] },
+    },
+    "pt-BR": {
+      header: { title: "Esse número é <em>primo</em>?", sub: "Primo ou não? Responda com um toque e fique craque em números." },
+      search: { title: "Primo<br>ou <em>não</em>?", chips: ["Contra o Tempo de 15, 30 e 60 s", "Um Desafio do dia novo todo dia", "Revise erros com fatores primos"] },
     },
   }[lang];
   // 文言の無い言語は、背景だけの画像を書き出さないようここで止める（render_creative_assets.sh でも先に確かめる）

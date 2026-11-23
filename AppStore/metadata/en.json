@@ -1,0 +1,29 @@
+{
+  "_comment": [
+    "App Store の英語（en-US）の名前・サブタイトル・説明文など（#524）。上限と書き方は ja.json の _comment を参照。",
+    "サブタイトルは、旧名で探す人のために「Prime Pick」を頭に付ける（全言語共通の方針）。名前・サブタイトルの語は検索対象なので keywords に重ねない。"
+  ],
+  "name": "Prime or Not? Number Quiz",
+  "subtitle": "Prime Pick · Math brain game",
+  "promotionalText": "Prime or not? One tap decides. Take on today's Daily Challenge, share your result with friends, and beat your Time Attack best. Now in 10 languages!",
+  "description": "Is 91 prime? It sure looks like one, but 91 = 7 × 13.\nEach question shows a single number. Tap PRIME or NOT PRIME, and that's all there is to it. It's easy to learn, quick to play, and every answer sharpens your number sense.\n\n■ THREE WAYS TO PLAY\n• Practice: Pick 5, 10 or 20 questions and take your time. There's no time limit, and every answer comes with a quick explanation like \"51 = 3 × 17\".\n• Time Attack: Score as high as you can in 15, 30 or 60 seconds. A wrong answer costs you points and seconds.\n• Daily Challenge: 10 new questions once a day, and everyone gets the same set. Keep your streak going and share your result with friends.\n\n■ FOUR DIFFICULTY LEVELS\n• Easy: 1–99\n• Normal: 100–999\n• Hard: 100–999 (no multiples of 2, 3 or 5)\n• Expert: 1000–9999 (no multiples of 2, 3 or 5)\n\n■ SCORES & RECORDS\n• Every correct answer earns points. Harder levels, longer combos and faster answers earn more.\n• The results screen shows your accuracy, max combo and a score breakdown. Look back at the numbers you missed, with their prime factorization.\n• Your top 10 Time Attack scores are saved for each time limit and difficulty.\n\n■ ALSO\n• Haptics, sound effects and animations for every right and wrong answer\n• Light, Dark or System theme\n• Available in 10 languages: English, Japanese, Simplified Chinese, Traditional Chinese, Korean, Spanish, French, German, Italian and Portuguese (Brazil)\n\nThis app contains ads.",
+  "keywords": [
+    "maths",
+    "mental",
+    "arithmetic",
+    "factorization",
+    "composite",
+    "puzzle",
+    "teaser",
+    "challenge",
+    "speed",
+    "logic",
+    "kids",
+    "learn",
+    "iq"
+  ],
+  "whatsNew": {
+    "version": "1.4.0",
+    "text": "• Prime Pick has a new name: “Prime or Not?” It's the same app, and your records and streaks carry over.\n• Now in 10 languages: English, Japanese, Simplified Chinese, Traditional Chinese, Korean, Spanish, French, German, Italian and Portuguese (Brazil).\n• Share your Daily Challenge result as an emoji grid and an image card. The day's numbers stay hidden, so there are no spoilers for your friends."
+  }
+}

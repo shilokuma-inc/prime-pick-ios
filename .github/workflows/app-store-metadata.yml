@@ -1,6 +1,6 @@
 name: Metadata/App Store
 
-# App Store の説明文・キーワード・プロモーションテキスト・最新情報・URL を App Store Connect に反映する。手動実行のみ。
+# App Store の名前・サブタイトル・説明文・キーワード・プロモーションテキスト・最新情報・URL を App Store Connect に反映する。手動実行のみ。
 #
 # 元ネタは AppStore/metadata/<言語>.json と shared.json。欠損と文字数超過は
 # Verify/App Store metadata が PR の時点で落とすので、ここまで来たものは通る前提。
@@ -27,7 +27,7 @@ on:
           - export
         default: dry-run
       languages:
-        description: '対象の言語（カンマ区切り）。空なら languages.json の全言語（いまは ja だけ）'
+        description: '対象の言語（カンマ区切り）。空なら languages.json の全言語'
         required: false
         default: ''
       app_version:

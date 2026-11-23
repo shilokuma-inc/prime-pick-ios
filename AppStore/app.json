@@ -6,12 +6,14 @@
     "simulatorPrefix: 撮影で作る Simulator と DerivedData の名前の頭。",
     "Bundle ID は PrimePickApp.xcodeproj/project.pbxproj のアプリターゲットの PRODUCT_BUNDLE_IDENTIFIER から読む（ここに bundleId を書けばそちらを使う）。",
     "screenshotDemoSource: 撮影モードの Swift ファイル。screenshots.json の scene が ScreenshotDemo.Scene にあるかを突き合わせる。",
-    "appIcon: クリエイティブアセットに載せるアプリアイコン。"
+    "appIcon: クリエイティブアセットに載せるアプリアイコン。",
+    "displayNameStrings: 言語ごとのホーム画面のアプリ名（CFBundleDisplayName）を持つ xcstrings。クリエイティブアセットに載せるアプリ名に使う（Tools/render_creative_assets.sh）。"
   ],
   "project": "PrimePickApp.xcodeproj",
   "scheme": "PrimePickApp",
   "configuration": "Release",
   "simulatorPrefix": "PrimePick",
   "screenshotDemoSource": "PrimePickApp/Screenshot/ScreenshotDemo.swift",
-  "appIcon": "PrimePickApp/Assets.xcassets/AppIcon.appiconset/AppIcon.png"
+  "appIcon": "PrimePickApp/Assets.xcassets/AppIcon.appiconset/AppIcon.png",
+  "displayNameStrings": "PrimePickApp/InfoPlist.xcstrings"
 }

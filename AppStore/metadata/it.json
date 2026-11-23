@@ -1,0 +1,28 @@
+{
+  "_comment": [
+    "App Store のイタリア語（it）の名前・サブタイトル・説明文など（#524）。上限と書き方は ja.json の _comment を参照。",
+    "サブタイトルは、旧名で探す人のために「Prime Pick」を頭に付ける（全言語共通の方針）。名前・サブタイトルの語は検索対象なので keywords に重ねない。"
+  ],
+  "name": "Primo o no?",
+  "subtitle": "Prime Pick · Quiz numeri primi",
+  "promotionalText": "Primo o no? Il quiz dei numeri primi ora parla italiano! Modalità contro il tempo, sfida del giorno da condividere e livello Esperto: batti il tuo record.",
+  "description": "Il numero sullo schermo è primo? Rispondi «Primo» o «Non primo»: un quiz semplicissimo a due scelte per allenare il tuo senso dei numeri.\nRispondi a ritmo e diventa più veloce nel calcolo a mente.\n\n■ 3 modalità di gioco\n• Allenamento: scegli quante domande fare (5, 10 o 20) e gioca senza limiti di tempo. Dopo ogni risposta compare una breve spiegazione, come «91 = 7 × 13».\n• Contro il tempo: in 15, 30 o 60 secondi, fai più punti che puoi. Ogni errore ti costa punti e tempo.\n• Sfida del giorno: ogni giorno 10 nuove domande e un solo tentativo. Nello stesso giorno le domande sono uguali per tutti. La tua serie di giorni consecutivi viene salvata e puoi condividere il risultato (testo con emoji e immagine).\n\n■ 4 livelli di difficoltà\n• Facile: da 1 a 99\n• Normale: da 100 a 999\n• Difficile: da 100 a 999 (esclusi i multipli di 2, 3 e 5)\n• Esperto: da 1000 a 9999 (esclusi i multipli di 2, 3 e 5)\n\n■ Punteggio e record\n• Ogni risposta giusta vale punti: più alta è la difficoltà, più lunga è la combo e più rispondi in fretta, più punti fai.\n• Nella schermata dei risultati vedi precisione, combo massima e dettaglio dei punti. Gli errori vengono spiegati con la scomposizione in fattori primi.\n• Nella modalità contro il tempo vengono salvati i 10 migliori punteggi per ogni durata e difficoltà.\n\n■ E inoltre\n• Vibrazioni, effetti sonori e animazioni in base alle risposte\n• Tema chiaro, scuro o come il sistema\n• Disponibile in 10 lingue: italiano, inglese, giapponese, cinese (semplificato e tradizionale), coreano, spagnolo, francese, tedesco e portoghese (Brasile)\n\nL’app contiene pubblicità.",
+  "keywords": [
+    "numero",
+    "matematica",
+    "calcolo mentale",
+    "cifre",
+    "fattori",
+    "divisori",
+    "gioco",
+    "cervello",
+    "logica",
+    "scuola",
+    "sfida",
+    "math"
+  ],
+  "whatsNew": {
+    "version": "1.4.0",
+    "text": "Grande aggiornamento:\n• L’app ora è disponibile in 10 lingue, tra cui l’italiano\n• In italiano, Prime Pick diventa «Primo o no?»\n• Condividi il risultato della sfida del giorno, come testo (griglia di emoji) o come immagine"
+  }
+}
