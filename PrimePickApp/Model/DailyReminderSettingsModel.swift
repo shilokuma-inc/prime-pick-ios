@@ -68,15 +68,18 @@ final class DailyReminderSettingsModel: ObservableObject {
     private let settingsStore: DailyReminderSettingsStore
     private let scheduler: DailyReminderScheduler
     private let authorizer: any DailyReminderAuthorizing
+    private let sendAnalytics: (DailyReminderAnalyticsEvent) -> Void
 
     init(
         settingsStore: DailyReminderSettingsStore = DailyReminderSettingsStore(),
         scheduler: DailyReminderScheduler = .shared,
-        authorizer: any DailyReminderAuthorizing = SystemDailyReminderAuthorizer()
+        authorizer: any DailyReminderAuthorizing = SystemDailyReminderAuthorizer(),
+        sendAnalytics: @escaping (DailyReminderAnalyticsEvent) -> Void = FirebaseAnalytics().sendDailyReminder
     ) {
         self.settingsStore = settingsStore
         self.scheduler = scheduler
         self.authorizer = authorizer
+        self.sendAnalytics = sendAnalytics
         let settings = settingsStore.load()
         isEnabled = settings.isEnabled
         time = settings.time
@@ -96,16 +99,16 @@ final class DailyReminderSettingsModel: ObservableObject {
         let settings = settingsStore.load()
         time = settings.time
         if settings.isEnabled, status == .denied {
-            await apply { $0.isEnabled = false }
+            await apply(source: .systemSettings) { $0.isEnabled = false }
         } else {
             isEnabled = settings.isEnabled
         }
     }
 
-    /// トグルを切り替えたとき
-    func setEnabled(_ enabled: Bool) async {
+    /// トグルを切り替えたとき。`source` は計測に使う、どこから切り替えたか
+    func setEnabled(_ enabled: Bool, source: DailyReminderAnalyticsEvent.Source = .settings) async {
         guard enabled else {
-            await apply { $0.isEnabled = false }
+            await apply(source: source) { $0.isEnabled = false }
             return
         }
         guard !isRequestingAuthorization else { return }
@@ -119,23 +122,33 @@ final class DailyReminderSettingsModel: ObservableObject {
             settingsStore.update { $0.hasRequestedAuthorization = true }
             _ = await authorizer.requestAuthorization()
             status = await authorizer.authorizationStatus()
+            sendAnalytics(.permissionResult(granted: status == .authorized, source: source))
         }
         authorizationStatus = status
-        await apply { $0.isEnabled = status == .authorized }
+        await apply(source: source) { $0.isEnabled = status == .authorized }
     }
 
     /// 時刻を変えたとき
     func setTime(_ newTime: DailyReminderTime) async {
         guard newTime != time else { return }
-        await apply { $0.time = newTime }
+        await apply(source: .settings) { $0.time = newTime }
     }
 
     /// 設定を保存して予約を組み直し、画面の値を保存した値にそろえる
-    private func apply(_ change: (inout DailyReminderSettings) -> Void) async {
+    ///
+    /// 保存した値が前と変わったときだけ、オン／オフ（`source` から）と時刻の変更を計測する。
+    private func apply(source: DailyReminderAnalyticsEvent.Source, _ change: (inout DailyReminderSettings) -> Void) async {
+        let before = settingsStore.load()
         let task = scheduler.updateSettings(change)
         let settings = settingsStore.load()
         isEnabled = settings.isEnabled
         time = settings.time
+        if settings.isEnabled != before.isEnabled {
+            sendAnalytics(.toggle(isEnabled: settings.isEnabled, source: source))
+        }
+        if settings.time != before.time {
+            sendAnalytics(.timeChange(hour: settings.time.hour, minute: settings.time.minute))
+        }
         await task.value
     }
 }

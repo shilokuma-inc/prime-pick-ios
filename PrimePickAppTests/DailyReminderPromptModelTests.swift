@@ -203,7 +203,8 @@ final class DailyReminderPromptModelTests: XCTestCase {
             settingsStore: settingsStore,
             scheduler: scheduler,
             authorizer: authorizer,
-            isScreenshotDemo: isScreenshotDemo
+            isScreenshotDemo: isScreenshotDemo,
+            sendAnalytics: { _ in }
         )
     }
 }
