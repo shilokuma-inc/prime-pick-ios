@@ -1,0 +1,29 @@
+{
+  "_comment": [
+    "App Store のポルトガル語（pt-BR）の名前・サブタイトル・説明文など（#524）。上限と書き方は ja.json の _comment を参照。",
+    "サブタイトルは、旧名で探す人のために「Prime Pick」を頭に付ける（全言語共通の方針）。名前・サブタイトルの語は検索対象なので keywords に重ねない。"
+  ],
+  "name": "Será primo? Números primos",
+  "subtitle": "Prime Pick · Quiz matemático",
+  "promotionalText": "Primo ou não? Responda com um toque. Agora em português e com nome novo: jogue o Desafio do dia, bata seu recorde no Contra o Tempo e compartilhe o resultado.",
+  "description": "Veja o número e responda: é primo ou não? Um quiz de números primos simples, com só duas opções: “PRIMO” ou “NÃO PRIMO”.\nResponda no ritmo e fique craque em números.\n\n■ 3 modos de jogo\n・Treino: escolha quantas perguntas quer responder (5, 10 ou 20) e jogue sem limite de tempo. A cada resposta, aparece uma miniexplicação, como “91 = 7 × 13”.\n・Contra o Tempo: faça o máximo de pontos que puder em 15, 30 ou 60 segundos. Cada erro tira pontos e também tempo.\n・Desafio do dia: 10 perguntas novas, uma vez por dia. No mesmo dia, todo mundo recebe as mesmas perguntas. Os dias seguidos em que você joga também são contados.\n\n■ 4 níveis de dificuldade\n・Fácil: de 1 a 99\n・Normal: de 100 a 999\n・Difícil: de 100 a 999 (sem múltiplos de 2, 3 e 5)\n・Especialista: de 1000 a 9999 (sem múltiplos de 2, 3 e 5)\n\n■ Pontos e recordes\n・Cada acerto vale pontos. Quanto mais alta a dificuldade, mais longo o combo e mais rápida a resposta, mais pontos você ganha.\n・Na tela de resultados, você vê sua taxa de acerto, seu combo máximo e o detalhamento dos pontos. Dá para revisar as perguntas que você errou com a decomposição em fatores primos.\n・No Contra o Tempo, seus 10 melhores recordes ficam salvos para cada limite de tempo e dificuldade.\n\n■ E mais\n・Compartilhe o resultado do Desafio do dia com um texto de quadradinhos e uma imagem, sem revelar os números das perguntas\n・Vibração, efeitos sonoros e animações para acertos e erros\n・Tema à sua escolha: padrão do sistema, claro ou escuro\n・Disponível em 10 idiomas: português (Brasil), inglês, japonês, chinês simplificado, chinês tradicional, coreano, espanhol, francês, alemão e italiano\n\n* O app exibe anúncios.",
+  "keywords": [
+    "número",
+    "fatoração",
+    "divisores",
+    "cálculo",
+    "mental",
+    "jogo",
+    "cérebro",
+    "raciocínio",
+    "lógica",
+    "escola",
+    "desafio",
+    "treino",
+    "math"
+  ],
+  "whatsNew": {
+    "version": "1.4.0",
+    "text": "・Agora em português! O app está disponível em 10 idiomas\n・Nome novo: Será primo?\n・Agora você pode compartilhar o resultado do Desafio do dia com um texto de quadradinhos (🟩🟥) e uma imagem. Os números não aparecem, então as respostas não são reveladas"
+  }
+}

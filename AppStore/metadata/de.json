@@ -1,0 +1,26 @@
+{
+  "_comment": [
+    "App Store のドイツ語（de-DE）の名前・サブタイトル・説明文など（#524）。上限と書き方は ja.json の _comment を参照。",
+    "サブタイトルは、旧名で探す人のために「Prime Pick」を頭に付ける（全言語共通の方針）。名前・サブタイトルの語は検索対象なので keywords に重ねない。"
+  ],
+  "name": "Echt prim? Das Primzahl-Quiz",
+  "subtitle": "Prime Pick · Prim oder nicht?",
+  "promotionalText": "Jetzt auf Deutsch! Prim oder nicht? Tippe schnell, sammle Combos und knack deinen Rekord in der Blitzrunde. Dein Tagesquiz-Ergebnis teilst du mit einem Fingertipp.",
+  "description": "Ist die Zahl eine Primzahl – oder nicht? Bei „Echt prim?“ entscheidest du mit einem Fingertipp: PRIM oder NICHT PRIM.\nAntworte schnell und trainiere dein Gefühl für Zahlen.\n\n■ 3 Spielmodi\n• Üben: Wähle 5, 10 oder 20 Fragen und spiel ganz ohne Zeitlimit. Nach jeder Antwort gibt es eine kurze Erklärung wie „91 = 7 × 13“.\n• Blitzrunde: In 15, 30 oder 60 Sekunden so viele Punkte wie möglich holen. Falsche Antworten kosten Punkte und Zeit.\n• Tagesquiz: Einmal am Tag 10 neue Fragen – für alle die gleichen. Deine Tage in Folge werden gezählt, und dein Ergebnis kannst du mit Freunden teilen.\n\n■ 4 Schwierigkeitsstufen\n• Leicht: 1–99\n• Normal: 100–999\n• Schwer: 100–999 (ohne Vielfache von 2, 3 und 5)\n• Experte: 1000–9999 (ohne Vielfache von 2, 3 und 5)\n\n■ Punkte und Rekorde\n• Jede richtige Antwort bringt Punkte. Je höher die Schwierigkeit, je länger die Combo und je schneller deine Antwort, desto mehr.\n• Im Ergebnis siehst du Trefferquote, beste Combo und alle Punkte im Detail. Falsch beantwortete Zahlen gehst du mit ihrer Primfaktorzerlegung noch einmal durch.\n• In der Blitzrunde bleiben die 10 besten Ergebnisse je Zeitlimit und Schwierigkeit gespeichert.\n\n■ Außerdem\n• Vibration, Soundeffekte und Animationen für richtige und falsche Antworten\n• Design: System, Hell oder Dunkel\n• In 10 Sprachen, darunter Deutsch, Englisch und Japanisch\n\nDie App enthält Werbung.",
+  "keywords": [
+    "Kopfrechnen",
+    "Primfaktoren",
+    "Mathematik",
+    "Gehirnjogging",
+    "Zahlen",
+    "Teiler",
+    "Denksport",
+    "Lernspiel",
+    "Rechnen",
+    "Mathe"
+  ],
+  "whatsNew": {
+    "version": "1.4.0",
+    "text": "• Jetzt in 10 Sprachen: Deutsch, Englisch, Japanisch, Chinesisch (vereinfacht und traditionell), Koreanisch, Spanisch, Französisch, Italienisch und Portugiesisch (Brasilien)\n• Neuer Name in jeder Sprache – auf Deutsch heißt die App jetzt „Echt prim?“\n• Tagesquiz: Teile dein Ergebnis als kurzen Text mit Emojis oder als Bildkarte"
+  }
+}
