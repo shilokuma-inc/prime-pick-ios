@@ -145,6 +145,8 @@
 		D7A1E0C0FFEE00000000000B /* DailyReminderSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1E0C0FFEE00000000000C /* DailyReminderSchedulerTests.swift */; };
 		D7A1E0C0FFEE00000000000D /* DailyReminderSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1E0C0FFEE00000000000E /* DailyReminderSettingsModel.swift */; };
 		D7A1E0C0FFEE00000000000F /* DailyReminderSettingsModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1E0C0FFEE000000000010 /* DailyReminderSettingsModelTests.swift */; };
+		D7A1E0C0FFEE000000000011 /* DailyReminderPromptModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1E0C0FFEE000000000012 /* DailyReminderPromptModel.swift */; };
+		D7A1E0C0FFEE000000000013 /* DailyReminderPromptModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A1E0C0FFEE000000000014 /* DailyReminderPromptModelTests.swift */; };
 		5A4E0C0A1D2B3C4D5E6F7083 /* DailyChallengeShareContentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E0C0A1D2B3C4D5E6F7084 /* DailyChallengeShareContentTests.swift */; };
 		5A4E0C0A1D2B3C4D5E6F7085 /* DailyChallengeShareCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E0C0A1D2B3C4D5E6F7086 /* DailyChallengeShareCardView.swift */; };
 		5A4E0C0A1D2B3C4D5E6F7089 /* ActivityShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4E0C0A1D2B3C4D5E6F708A /* ActivityShareSheet.swift */; };
@@ -266,6 +268,8 @@
 		D7A1E0C0FFEE00000000000C /* DailyReminderSchedulerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyReminderSchedulerTests.swift; sourceTree = "<group>"; };
 		D7A1E0C0FFEE00000000000E /* DailyReminderSettingsModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyReminderSettingsModel.swift; sourceTree = "<group>"; };
 		D7A1E0C0FFEE000000000010 /* DailyReminderSettingsModelTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyReminderSettingsModelTests.swift; sourceTree = "<group>"; };
+		D7A1E0C0FFEE000000000012 /* DailyReminderPromptModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyReminderPromptModel.swift; sourceTree = "<group>"; };
+		D7A1E0C0FFEE000000000014 /* DailyReminderPromptModelTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyReminderPromptModelTests.swift; sourceTree = "<group>"; };
 		5A4E0C0A1D2B3C4D5E6F7084 /* DailyChallengeShareContentTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeShareContentTests.swift; sourceTree = "<group>"; };
 		5A4E0C0A1D2B3C4D5E6F7086 /* DailyChallengeShareCardView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeShareCardView.swift; sourceTree = "<group>"; };
 		5A4E0C0A1D2B3C4D5E6F708A /* ActivityShareSheet.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityShareSheet.swift; sourceTree = "<group>"; };
@@ -554,6 +558,7 @@
 				D7A1E0C0FFEE000000000004 /* DailyReminderPlanner.swift */,
 				D7A1E0C0FFEE00000000000A /* DailyReminderScheduler.swift */,
 				D7A1E0C0FFEE00000000000E /* DailyReminderSettingsModel.swift */,
+				D7A1E0C0FFEE000000000012 /* DailyReminderPromptModel.swift */,
 				3B8CA0B16FB2CCFDE804B75F /* TimeAttackRecordStore.swift */,
 				52C4C89C7BA5971AD860B28F /* DailyChallengeDay.swift */,
 				7B2D1F304C7E9BAD1F203B4D /* QuizPlayFinisher.swift */,
@@ -591,6 +596,7 @@
 				D7A1E0C0FFEE000000000008 /* DailyReminderPlannerTests.swift */,
 				D7A1E0C0FFEE00000000000C /* DailyReminderSchedulerTests.swift */,
 				D7A1E0C0FFEE000000000010 /* DailyReminderSettingsModelTests.swift */,
+				D7A1E0C0FFEE000000000014 /* DailyReminderPromptModelTests.swift */,
 				2AEE8470B88092E2D6CBD065 /* PrivacyPolicyViewTests.swift */,
 				A61BC1372AE1CDE17FEC3FCC /* PrivacyManifestTests.swift */,
 				5531D63288F0DA73C439CF78 /* LicenseListTests.swift */,
@@ -856,6 +862,7 @@
 				D7A1E0C0FFEE000000000003 /* DailyReminderPlanner.swift in Sources */,
 				D7A1E0C0FFEE000000000009 /* DailyReminderScheduler.swift in Sources */,
 				D7A1E0C0FFEE00000000000D /* DailyReminderSettingsModel.swift in Sources */,
+				D7A1E0C0FFEE000000000011 /* DailyReminderPromptModel.swift in Sources */,
 				94FD550E249A186DC1FD7354 /* QuizRange.swift in Sources */,
 				4AAA2C561C89776B38328E85 /* QuizQuestionCount.swift in Sources */,
 				3C54996A77FAB4264847E0C5 /* SelectQuizSettingView.swift in Sources */,
@@ -909,6 +916,7 @@
 				D7A1E0C0FFEE000000000007 /* DailyReminderPlannerTests.swift in Sources */,
 				D7A1E0C0FFEE00000000000B /* DailyReminderSchedulerTests.swift in Sources */,
 				D7A1E0C0FFEE00000000000F /* DailyReminderSettingsModelTests.swift in Sources */,
+				D7A1E0C0FFEE000000000013 /* DailyReminderPromptModelTests.swift in Sources */,
 				2FBA23985914BFF764B17FAF /* PrivacyPolicyViewTests.swift in Sources */,
 				1AC1BB646ED2BA2E8DC40DFC /* PrivacyManifestTests.swift in Sources */,
 				8D70626D6AB962C21A1BDCCD /* LicenseListTests.swift in Sources */,

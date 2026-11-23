@@ -817,6 +817,102 @@
         }
       }
     },
+    "Get a reminder?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get a reminder?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "お知らせを受け取りますか？"
+          }
+        }
+      }
+    },
+    "We'll remind you at %@ on days you haven't played the Daily Challenge yet.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We'll remind you at %@ on days you haven't played the Daily Challenge yet."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日のチャレンジをまだ解いていない日の %@ にお知らせします。"
+          }
+        }
+      }
+    },
+    "Turn On": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn On"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オンにする"
+          }
+        }
+      }
+    },
+    "Not Now": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not Now"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今はしない"
+          }
+        }
+      }
+    },
+    "Reminders are on. We'll remind you at %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reminders are on. We'll remind you at %@."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リマインドをオンにしました。%@ にお知らせします。"
+          }
+        }
+      }
+    },
+    "Notifications aren't allowed. You can turn reminders on later in Settings.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications aren't allowed. You can turn reminders on later in Settings."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通知が許可されませんでした。リマインドは、あとから設定画面でオンにできます。"
+          }
+        }
+      }
+    },
     "App Info": {
       "localizations": {
         "en": {

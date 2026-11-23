@@ -20,6 +20,8 @@ struct DailyChallengeView: View {
     var onPlayTimeAttack: (() -> Void)?
 
     @State private var phase: Phase = .loading
+    /// この画面で解き終えたか（結果画面でリマインドの案内を出すのは解き終えた直後だけ）
+    @State private var isJustFinished = false
 
     var body: some View {
         Group {
@@ -36,12 +38,16 @@ struct DailyChallengeView: View {
                     finisher: DailyChallengePlayFinisher(
                         startedRecord: startedRecord,
                         store: store,
-                        onFinish: { record in phase = .alreadyPlayed(record) }
+                        onFinish: { record in
+                            isJustFinished = true
+                            phase = .alreadyPlayed(record)
+                        }
                     )
                 )
             case .alreadyPlayed(let record):
                 DailyChallengeResultView(
                     result: DailyChallengeResult(record: record, records: store.allRecords(), today: DailyChallengeDay.today()),
+                    isJustFinished: isJustFinished,
                     onPlayTimeAttack: onPlayTimeAttack
                 )
             }

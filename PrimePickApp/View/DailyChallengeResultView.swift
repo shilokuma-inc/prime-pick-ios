@@ -17,6 +17,15 @@ struct DailyChallengeResultView: View {
     @Environment(\.dismiss) private var dismiss
     /// 共有シートに渡す項目。値が入っている間だけ共有シートを出す
     @State private var shareItems: [Any]?
+    /// リマインドの案内。解き終えた直後にだけ出す
+    @StateObject private var reminderPrompt: DailyReminderPromptModel
+
+    /// - Parameter isJustFinished: 解き終えた直後か（挑戦済みの日に開き直したときは false）。true のときだけリマインドの案内を出しうる
+    init(result: DailyChallengeResult, isJustFinished: Bool = false, onPlayTimeAttack: (() -> Void)? = nil) {
+        self.result = result
+        self.onPlayTimeAttack = onPlayTimeAttack
+        _reminderPrompt = StateObject(wrappedValue: DailyReminderPromptModel(isJustFinished: isJustFinished))
+    }
 
     private var record: DailyChallengeRecord { result.record }
     private var shareContent: DailyChallengeShareContent? { DailyChallengeShareContent(result: result) }
@@ -45,6 +54,11 @@ struct DailyChallengeResultView: View {
                     // シェアできるのは最後まで解いた日だけ（途中でやめた日はボタンを出さない）
                     if let shareContent {
                         shareButton(content: shareContent)
+                    }
+
+                    // シェアボタンの下に置き、主ボタンより目立たせない
+                    if reminderPrompt.state != .hidden {
+                        DailyReminderPromptCard(model: reminderPrompt)
                     }
 
                     QuizReviewList(answerRecords: result.answerRecords, isComplete: record.isCompleted)
@@ -160,6 +174,100 @@ struct DailyChallengeResultView: View {
     static let playTimeAttackPressSound: SoundEffect = .buttonPressForward
     /// 「タイトルに戻る」の押下音。戻るボタンなので、戻る押下音にする
     static let returnToTitlePressSound: SoundEffect = .buttonPressBack
+    /// リマインドの案内の「オンにする」の押下音。画面を進めも戻しもしないので、どちらでもない押下音にする
+    static let reminderTurnOnPressSound: SoundEffect = .buttonPressNeutral
+    /// リマインドの案内の「今はしない」の押下音。同上
+    static let reminderNotNowPressSound: SoundEffect = .buttonPressNeutral
+}
+
+/// 結果画面のリマインドの案内（「オンにする」「今はしない」）。選んだ後は結果を短く伝える
+private struct DailyReminderPromptCard: View {
+    @ObservedObject var model: DailyReminderPromptModel
+
+    var body: some View {
+        VStack(spacing: 12) {
+            switch model.state {
+            case .hidden:
+                EmptyView()
+            case .asking, .requesting:
+                asking
+            case .enabled(let time):
+                message(
+                    Text("Reminders are on. We'll remind you at \(Self.timeText(time)).")
+                )
+            case .denied:
+                message(
+                    Text("Notifications aren't allowed. You can turn reminders on later in Settings.")
+                )
+            }
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity)
+        .overlay(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .strokeBorder(Color.primary.opacity(0.2), lineWidth: 2)
+        )
+        .onAppear { model.didAppear() }
+    }
+
+    private var asking: some View {
+        VStack(spacing: 12) {
+            VStack(spacing: 4) {
+                Text("Get a reminder?")
+                    .appFont(.heading(size: 20, weight: .bold))
+                Text("We'll remind you at \(Self.timeText(model.time)) on days you haven't played the Daily Challenge yet.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+            }
+
+            HStack(spacing: 12) {
+                Button {
+                    model.decline()
+                } label: {
+                    Text("Not Now")
+                        .appFont(.number(size: 18))
+                        .foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity, minHeight: 48)
+                }
+                .buttonStyle(GameButtonStyle(appearance: .neutral(), pressSound: DailyChallengeResultView.reminderNotNowPressSound))
+
+                Button {
+                    Task { await model.enable() }
+                } label: {
+                    Group {
+                        if model.state == .requesting {
+                            ProgressView()
+                        } else {
+                            Text("Turn On")
+                                .appFont(.number(size: 18))
+                                .foregroundStyle(Color.accentColor)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, minHeight: 48)
+                }
+                .buttonStyle(GameButtonStyle(appearance: .neutral(), pressSound: DailyChallengeResultView.reminderTurnOnPressSound))
+            }
+            .disabled(model.state == .requesting)
+        }
+    }
+
+    private func message(_ text: Text) -> some View {
+        Label {
+            text
+                .font(.subheadline)
+                .multilineTextAlignment(.leading)
+        } icon: {
+            Image(systemName: "bell")
+                .foregroundStyle(Color.accentColor)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    /// 端末の言語と 12/24 時間制に合わせた時刻（例: 20:00 / 8:00 PM）
+    private static func timeText(_ time: DailyReminderTime) -> String {
+        time.date().formatted(date: .omitted, time: .shortened)
+    }
 }
 
 /// 次のデイリーまでの残り時間。毎秒更新し、撮影モードでは止める
