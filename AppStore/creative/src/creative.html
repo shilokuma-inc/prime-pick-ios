@@ -30,15 +30,22 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { width: 100%; height: 100%; overflow: hidden; }
+  /* 本文の書体（--sans）と、見出しで Didot に組み合わせる書体（--heading）を言語ごとに決める。
+     アプリは日本語のときだけ和文の書体（ヒラギノ明朝）を組み合わせ、中国語・韓国語は端末の書体
+     （PingFang・Apple SD Gothic Neo）に落ちる（AppFont.cascadesJapanese）ので、ここも合わせる */
+  body { --sans: "SF Pro Display"; --heading: "Didot"; }
+  body[data-lang="ja"] { --sans: "Hiragino Sans"; --heading: "Hiragino Mincho ProN"; }
+  body[data-lang="zh-Hans"] { --sans: "PingFang SC"; --heading: "PingFang SC"; }
+  body[data-lang="zh-Hant"] { --sans: "PingFang TC"; --heading: "PingFang TC"; }
+  body[data-lang="ko"] { --sans: "Apple SD Gothic Neo"; --heading: "Apple SD Gothic Neo"; }
   body {
     background: var(--background);
     color: var(--text);
-    font-family: "Hiragino Sans", "SF Pro Display", system-ui, sans-serif;
+    font-family: var(--sans), "SF Pro Display", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
-  body[data-lang="en"] { font-family: "SF Pro Display", system-ui, "Hiragino Sans", sans-serif; }
-  /* 見出しはアプリの見出しと同じ書体（数字・英字は Didot、日本語はヒラギノ明朝） */
-  .headline, .copy .title, .brand { font-family: "Didot", "Hiragino Mincho ProN", serif; }
+  /* 見出しはアプリの見出しと同じ書体（数字・英字は Didot） */
+  .headline, .copy .title, .brand { font-family: "Didot", var(--heading), serif; }
 
   .canvas { position: relative; width: 100vw; height: 100vh; overflow: hidden;
     background:

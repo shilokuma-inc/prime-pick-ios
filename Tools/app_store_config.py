@@ -106,7 +106,23 @@ def app_value(key: str) -> str:
         return "true" if config.get("xcodegen") else "false"
     if key == "appIcon":
         return config.get("appIcon") or ""
+    if key == "displayNameStrings":
+        return config.get("displayNameStrings") or ""
     raise SystemExit(f"app.json の {key} は読めません")
+
+
+def display_name(language: str) -> str:
+    """その言語のホーム画面のアプリ名（app.json の displayNameStrings の `CFBundleDisplayName`）。無ければ空。
+
+    クリエイティブアセットに載せるアプリ名に使う。言語は languages.json の language で、appleLanguage の訳を引く。
+    """
+    source = app_value("displayNameStrings")
+    if not source:
+        return ""
+    target = languages([language])[0]
+    strings = _read_json(ROOT / source).get("strings", {})
+    localization = strings.get("CFBundleDisplayName", {}).get("localizations", {}).get(target.apple_language, {})
+    return localization.get("stringUnit", {}).get("value", "")
 
 
 # MARK: - languages.json
@@ -345,7 +361,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument(
         "command",
-        choices=("app", "languages", "scenes", "devices", "sizes", "derive-from", "display-types", "bundle-id"),
+        choices=("app", "languages", "scenes", "devices", "sizes", "derive-from", "display-types", "bundle-id",
+                 "display-name"),
     )
     parser.add_argument("argument", nargs="?", default=None)
     args = parser.parse_args()
@@ -371,6 +388,10 @@ def main() -> int:
         print(display_type(args.argument).get("deriveFrom") or "")
     elif args.command == "bundle-id":
         print(bundle_id())
+    elif args.command == "display-name":
+        if not args.argument:
+            raise SystemExit("言語（例: ja）を指定してください")
+        print(display_name(args.argument))
     else:
         print(json.dumps(matrix(parse_list(args.argument)), ensure_ascii=False))
     return 0
