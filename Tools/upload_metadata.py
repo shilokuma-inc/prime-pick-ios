@@ -113,6 +113,9 @@ def load(directory: Path, target: Language, shared: dict[str, str]) -> tuple[dic
             problems.append(f"{path}: {field} が空です（使わないなら項目ごと消す）")
         elif value != value.strip():
             problems.append(f"{path}: {field} の前後に空白があります")
+        elif any(character.isspace() and character != " " for character in value):
+            # フランス語の「?」の前の細い空白（U+202F）など。App Store Connect が INVALID_CHARACTERS で弾く（#540）
+            problems.append(f"{path}: {field} に普通の空白（U+0020）以外の空白があります")
         elif len(value) > limit:
             problems.append(f"{path}: {field} が {len(value)} 字あります（上限 {limit} 字）")
         else:
@@ -454,6 +457,13 @@ def main() -> int:
     # App Store Connect がアプリ情報の言語を今の名前（主言語の名前）で作ろうとし、その名前がその言語で
     # ほかのアプリに使われていると、言語そのものを足せずに 409（DUPLICATE_NAME）で弾かれる（#538）
     failures, info_failed = write_app_info(client, args, app, app_info, info_available, info_entries, plan)
+
+    if not args.dry_run:
+        # アプリ情報の言語を作ると、App Store Connect がバージョンの言語も（中身が空のまま）作る。
+        # 作り直すと 409（locale already exists）になるので、読み直して更新に回す（#540）
+        available = client.localization_entries(version["id"])
+        plan = [(target, attributes, localization or available.get(target.store_locale))
+                for target, attributes, localization in plan]
 
     for target, attributes, localization in plan:
         label = f"{target.language} → {target.store_locale}"
