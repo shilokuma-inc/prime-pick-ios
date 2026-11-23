@@ -219,7 +219,7 @@ final class DailyReminderSettingsModelTests: XCTestCase {
             timeZone: { [tokyo] in tokyo },
             isActive: true
         )
-        return DailyReminderSettingsModel(settingsStore: settingsStore, scheduler: scheduler, authorizer: authorizer)
+        return DailyReminderSettingsModel(settingsStore: settingsStore, scheduler: scheduler, authorizer: authorizer, sendAnalytics: { _ in })
     }
 }
 

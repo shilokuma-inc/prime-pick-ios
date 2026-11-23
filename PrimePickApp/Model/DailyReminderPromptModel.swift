@@ -29,16 +29,24 @@ final class DailyReminderPromptModel: ObservableObject {
 
     private let settingsStore: DailyReminderSettingsStore
     private let settingsModel: DailyReminderSettingsModel
+    private let sendAnalytics: (DailyReminderAnalyticsEvent) -> Void
 
     init(
         isJustFinished: Bool,
         settingsStore: DailyReminderSettingsStore = DailyReminderSettingsStore(),
         scheduler: DailyReminderScheduler = .shared,
         authorizer: any DailyReminderAuthorizing = SystemDailyReminderAuthorizer(),
-        isScreenshotDemo: Bool = ScreenshotDemo.isEnabled
+        isScreenshotDemo: Bool = ScreenshotDemo.isEnabled,
+        sendAnalytics: @escaping (DailyReminderAnalyticsEvent) -> Void = FirebaseAnalytics().sendDailyReminder
     ) {
         self.settingsStore = settingsStore
-        settingsModel = DailyReminderSettingsModel(settingsStore: settingsStore, scheduler: scheduler, authorizer: authorizer)
+        self.sendAnalytics = sendAnalytics
+        settingsModel = DailyReminderSettingsModel(
+            settingsStore: settingsStore,
+            scheduler: scheduler,
+            authorizer: authorizer,
+            sendAnalytics: sendAnalytics
+        )
         let shows = Self.shouldShow(
             isJustFinished: isJustFinished,
             settings: settingsStore.load(),
@@ -61,14 +69,19 @@ final class DailyReminderPromptModel: ObservableObject {
     func didAppear() {
         guard state == .asking else { return }
         recordShown()
+        // 画面に出し直されても（onAppear が何度呼ばれても）1 回だけ送る
+        guard !hasSentShowEvent else { return }
+        hasSentShowEvent = true
+        sendAnalytics(.promptShow)
     }
 
     /// 「オンにする」を押したとき
     func enable() async {
         guard state == .asking else { return }
         recordShown()
+        sendAnalytics(.promptAction(.turnOn))
         state = .requesting
-        await settingsModel.setEnabled(true)
+        await settingsModel.setEnabled(true, source: .dailyResult)
         state = settingsModel.isEnabled ? .enabled(settingsModel.time) : .denied
     }
 
@@ -76,8 +89,11 @@ final class DailyReminderPromptModel: ObservableObject {
     func decline() {
         guard state == .asking else { return }
         recordShown()
+        sendAnalytics(.promptAction(.notNow))
         state = .hidden
     }
+
+    private var hasSentShowEvent = false
 
     private func recordShown() {
         settingsStore.update { $0.hasShownResultPrompt = true }

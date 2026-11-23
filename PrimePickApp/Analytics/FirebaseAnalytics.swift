@@ -31,4 +31,9 @@ final class FirebaseAnalytics {
         guard !ScreenshotDemo.isEnabled else { return }
         Analytics.logEvent(event.name, parameters: event.parameters)
     }
+
+    func sendDailyReminder(_ event: DailyReminderAnalyticsEvent) {
+        guard !ScreenshotDemo.isEnabled else { return }
+        Analytics.logEvent(event.name, parameters: event.parameters.isEmpty ? nil : event.parameters)
+    }
 }

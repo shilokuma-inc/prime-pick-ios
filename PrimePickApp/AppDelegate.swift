@@ -56,6 +56,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             return
         }
         Task { @MainActor in
+            FirebaseAnalytics().sendDailyReminder(DailyReminderAnalyticsEvent(tap: tap))
             DailyReminderRouter.shared.open(tap)
             completionHandler()
         }
