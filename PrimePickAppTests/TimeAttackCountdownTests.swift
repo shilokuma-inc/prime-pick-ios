@@ -9,6 +9,8 @@ import XCTest
 final class TimeAttackCountdownTests: XCTestCase {
     private let advancedAt = Date(timeIntervalSinceReferenceDate: 1_000_000)
     private let timeAttack = GameMode.timeAttack(.fifteenSeconds)
+    /// 小数点が `.` の地域（表示の整形のテストで、端末の地域によらず結果を決めるため）
+    private let us = Locale(identifier: "en_US")
 
     private func countdown(_ remainingSeconds: Int, gameMode: GameMode? = nil) -> TimeAttackCountdown {
         TimeAttackCountdown(gameMode: gameMode ?? timeAttack, remainingSeconds: remainingSeconds, lastAdvancedAt: advancedAt)
@@ -180,25 +182,32 @@ final class TimeAttackCountdownTests: XCTestCase {
     // MARK: - 表示の整形
 
     func testFractionalTextTruncatesToTwoDigits() {
-        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 4.999), "4.99")
-        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 0.004), "0.00")
-        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 2.678), "2.67")
+        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 4.999, locale: us), "4.99")
+        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 0.004, locale: us), "0.00")
+        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 2.678, locale: us), "2.67")
     }
 
     func testFractionalTextKeepsTrailingZeros() {
-        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 4.9), "4.90")
-        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 2), "2.00")
-        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 0), "0.00")
+        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 4.9, locale: us), "4.90")
+        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 2, locale: us), "2.00")
+        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 0, locale: us), "0.00")
     }
 
     func testFractionalTextDoesNotTruncateBinaryRoundingErrors() {
         // 4.99 や 0.29 は 2 進数でわずかに小さく表されるが、1 つ下（4.98・0.28）に切り捨てない
-        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 4.99), "4.99")
-        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 0.29), "0.29")
-        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 5 - 0.01), "4.99")
+        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 4.99, locale: us), "4.99")
+        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 0.29, locale: us), "0.29")
+        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 5 - 0.01, locale: us), "4.99")
     }
 
     func testFractionalTextNeverReachesThreshold() {
-        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 5.0.nextDown), "4.99")
+        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 5.0.nextDown, locale: us), "4.99")
+    }
+
+    /// 小数点は地域の記号にする（#532）
+    func testFractionalTextUsesRegionDecimalSeparator() {
+        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 4.99, locale: Locale(identifier: "de_DE")), "4,99")
+        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 2, locale: Locale(identifier: "fr_FR")), "2,00")
+        XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 2, locale: Locale(identifier: "ja_JP")), "2.00")
     }
 }

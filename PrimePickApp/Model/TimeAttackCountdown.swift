@@ -91,12 +91,13 @@ enum TimeAttackRemainingTimeDisplay: Equatable {
     /// 残り時間を小数 2 桁の文字列にする
     ///
     /// 切り捨てる。四捨五入だと `4.995` 以上で `5.00` を出してから整数表示へ戻って見えるため。
-    /// 小数点は端末の地域によらず `.` に固定する（依頼の例が `2.00秒` のため）。
-    static func fractionalText(for remainingTime: TimeInterval) -> String {
+    /// 小数点は `locale`（既定は端末の地域）の記号にする。日本・米国などの地域では依頼の例どおり `2.00`、
+    /// ドイツ・フランスなどの地域では `2,00` になる（#532）。
+    static func fractionalText(for remainingTime: TimeInterval, locale: Locale = .current) -> String {
         // `4.99 * 100` が `498.999…` になって 1 つ下に切り捨てないよう、ごくわずかに足してから切り捨てる
         let hundredths = Int((max(0, remainingTime) * 100 + 1e-6).rounded(.down))
         // 足した分でしきい値ちょうど（`5.00`）にならないよう、しきい値の直前で止める
         let clamped = min(hundredths, GameMode.timeAttackFractionalDisplayThresholdSeconds * 100 - 1)
-        return String(format: "%d.%02d", clamped / 100, clamped % 100)
+        return "\(clamped / 100)\(locale.decimalSeparator ?? ".")" + String(format: "%02d", clamped % 100)
     }
 }

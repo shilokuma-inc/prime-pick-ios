@@ -81,9 +81,13 @@ struct DailyChallengeResult {
         }
     }
 
-    /// 合計解答時間の表示（小数第 1 位まで。例: `42.5`）。言語によらず同じ表記にする
-    static func totalSecondsText(_ seconds: TimeInterval) -> String {
-        String(format: "%.1f", max(0, seconds))
+    /// 合計解答時間の表示（小数第 1 位まで四捨五入。例: `42.5`）
+    ///
+    /// 小数点は `locale`（既定は端末の地域）の書式にする（ドイツ・フランスなどの地域では `42,5`。#532）
+    static func totalSecondsText(_ seconds: TimeInterval, locale: Locale = .current) -> String {
+        max(0, seconds).formatted(
+            .number.precision(.fractionLength(1)).rounded(rule: .toNearestOrAwayFromZero).grouping(.never).locale(locale)
+        )
     }
 
     /// 次のデイリーまでの残り秒数。`today` の翌日 0 時（`timeZone` の地域）までを数える
