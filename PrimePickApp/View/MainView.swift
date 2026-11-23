@@ -24,6 +24,8 @@ struct MainView: View {
     @State private var selectedQuestionCount: QuizQuestionCount = .default
     /// 確認のカードを出しているタイムアタックの設定。nil ならカードを出していない（Discussion #394）
     @State private var pendingTimeAttack: QuizSetting?
+    /// タップされたリマインド。受け取ったらデイリーチャレンジの画面を開く
+    @ObservedObject private var reminderRouter = DailyReminderRouter.shared
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -59,8 +61,10 @@ struct MainView: View {
                 }
             }
             .animation(Self.confirmationAnimation, value: pendingTimeAttack)
-            .navigationDestination(for: DailyChallengeRoute.self) { _ in
+            .navigationDestination(for: DailyChallengeRoute.self) { route in
                 DailyChallengeView(onPlayTimeAttack: playTimeAttackFromDailyChallenge)
+                    // リマインドから開き直したときは、前の日の画面を残さず作り直して今日の分を読み直す
+                    .id(route)
             }
             .navigationDestination(for: QuizSetting.self) { setting in
                 QuizView(
@@ -103,6 +107,13 @@ struct MainView: View {
                     refreshDailyChallengeCard()
                 }
             }
+            // 停止中からの起動では、この画面ができる前にタップが届いていることがあるので、最初にも見る
+            .onChange(of: reminderRouter.pendingTap, initial: true) { _, tap in
+                if tap != nil {
+                    reminderRouter.consume()
+                    openDailyChallengeFromReminder()
+                }
+            }
         }
     }
 }
@@ -118,7 +129,11 @@ private enum MainSheet: Identifiable {
 }
 
 /// カードからデイリーチャレンジへ遷移するときの `NavigationPath` の値
-struct DailyChallengeRoute: Hashable {}
+///
+/// `token` はリマインドから開くたびに新しくする。前の日のデイリーを積んだままでも別の経路になり、画面が作り直される
+struct DailyChallengeRoute: Hashable {
+    var token: UUID?
+}
 
 /// タイトル画面の背景に重ねる、選んでいるモードの色の柔らかい光（Discussion #330）
 ///
@@ -355,6 +370,13 @@ private extension MainView {
         pendingTimeAttack = setting
     }
 
+    /// リマインドのタップでデイリーチャレンジの画面を開く。開いているシートと確認のカードは閉じ、積んでいる画面はデイリーだけにする
+    func openDailyChallengeFromReminder() {
+        presentedSheet = nil
+        pendingTimeAttack = nil
+        path = Self.reminderPath(for: Self.reminderRoute())
+    }
+
     func refreshDailyChallengeCard() {
         dailyChallengeCard = DailyChallengeCardState(
             records: UserDefaultsDailyChallengeStore().allRecords(),
@@ -419,6 +441,15 @@ extension MainView {
     static let dailyChallengeCardPressSound: SoundEffect = .buttonPressForward
     /// 遊び方のボタンの押下音。進むでも戻るでもない（説明のシートを開くだけの）ボタンなので、どちらでもない押下音にする
     static let howToPlayPressSound: SoundEffect = .buttonPressNeutral
+    /// リマインドをタップしたときの `path`。タイトルの上にデイリーチャレンジを 1 枚だけ積む
+    static func reminderPath(for route: DailyChallengeRoute) -> NavigationPath {
+        NavigationPath([route])
+    }
+
+    /// リマインドから開くときの経路。開くたびに別の値にする
+    static func reminderRoute() -> DailyChallengeRoute {
+        DailyChallengeRoute(token: UUID())
+    }
 }
 
 extension Difficulty {

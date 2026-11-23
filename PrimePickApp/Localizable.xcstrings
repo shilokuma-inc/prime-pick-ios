@@ -3223,6 +3223,198 @@
         }
       }
     },
+    "Reminder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reminder"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リマインド"
+          }
+        }
+      }
+    },
+    "Daily Challenge Reminder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daily Challenge Reminder"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日のチャレンジのお知らせ"
+          }
+        }
+      }
+    },
+    "Reminder Time": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reminder Time"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "お知らせの時刻"
+          }
+        }
+      }
+    },
+    "We'll remind you on days you haven't played the Daily Challenge yet.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We'll remind you on days you haven't played the Daily Challenge yet."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日のチャレンジをまだ解いていない日にお知らせします。"
+          }
+        }
+      }
+    },
+    "Notifications are turned off for this app. To get reminders, allow notifications in the Settings app.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications are turned off for this app. To get reminders, allow notifications in the Settings app."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このアプリの通知が許可されていません。リマインドを受け取るには、設定アプリで通知を許可してください。"
+          }
+        }
+      }
+    },
+    "Open Settings": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Settings"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定アプリを開く"
+          }
+        }
+      }
+    },
+    "Get a reminder?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get a reminder?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "お知らせを受け取りますか？"
+          }
+        }
+      }
+    },
+    "We'll remind you at %@ on days you haven't played the Daily Challenge yet.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We'll remind you at %@ on days you haven't played the Daily Challenge yet."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日のチャレンジをまだ解いていない日の %@ にお知らせします。"
+          }
+        }
+      }
+    },
+    "Turn On": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn On"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オンにする"
+          }
+        }
+      }
+    },
+    "Not Now": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not Now"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今はしない"
+          }
+        }
+      }
+    },
+    "Reminders are on. We'll remind you at %@.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reminders are on. We'll remind you at %@."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リマインドをオンにしました。%@ にお知らせします。"
+          }
+        }
+      }
+    },
+    "Notifications aren't allowed. You can turn reminders on later in Settings.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications aren't allowed. You can turn reminders on later in Settings."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通知が許可されませんでした。リマインドは、あとから設定画面でオンにできます。"
+          }
+        }
+      }
+    },
     "App Info": {
       "localizations": {
         "de": {
@@ -7542,6 +7734,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "是不是\n質數？"
+          }
+        }
+      }
+    },
+    "🔥 %lld-day streak! Keep it going with today's challenge.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🔥 %lld-day streak! Keep it going with today's challenge."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🔥 %lld 日連続中！今日のチャレンジで記録を伸ばそう"
+          }
+        }
+      }
+    },
+    "Today's challenge is ready. Can you spot the primes?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today's challenge is ready. Can you spot the primes?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日のチャレンジが届いています。素数を見抜けるかな？"
           }
         }
       }
