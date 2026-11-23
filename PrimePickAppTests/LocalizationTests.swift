@@ -37,4 +37,27 @@ final class LocalizationTests: XCTestCase {
     func testUnsupportedLanguageFallsBackToEnglish() {
         XCTAssertEqual(localization(for: ["ru-RU"]), "en")
     }
+
+    /// 画面の文字列（`Localizable.xcstrings`）は、英語にあるものがどの言語にもある（#535）
+    ///
+    /// 訳の無い文字列は、その言語の端末で黙って英語のまま出る。機能を足すときに訳し漏れても気づけるよう、
+    /// 書き出された `Localizable.strings`（単数・複数で形が変わるものは `Localizable.stringsdict`）のキーを比べる
+    func testEveryLanguageHasEveryString() throws {
+        let english = try stringKeys(in: "en")
+        XCTAssertFalse(english.isEmpty)
+        for localization in Bundle.main.localizations where localization != "Base" && localization != "en" {
+            let missing = english.subtracting(try stringKeys(in: localization)).sorted()
+            XCTAssertEqual(missing, [], "\(localization) に訳がありません")
+        }
+    }
+
+    private func stringKeys(in localization: String) throws -> Set<String> {
+        let path = try XCTUnwrap(Bundle.main.path(forResource: localization, ofType: "lproj"), localization)
+        let bundle = try XCTUnwrap(Bundle(path: path), localization)
+        return ["strings", "stringsdict"].reduce(into: Set<String>()) { keys, type in
+            guard let file = bundle.path(forResource: "Localizable", ofType: type),
+                  let table = NSDictionary(contentsOfFile: file) as? [String: Any] else { return }
+            keys.formUnion(table.keys)
+        }
+    }
 }
