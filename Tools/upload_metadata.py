@@ -499,16 +499,21 @@ def main() -> int:
         for line in changes:
             print(line)
         if not args.dry_run:
-            client.patch(
-                f"/v1/appStoreVersionLocalizations/{localization['id']}",
-                {
-                    "data": {
-                        "type": "appStoreVersionLocalizations",
-                        "id": localization["id"],
-                        "attributes": attributes,
-                    }
-                },
-            )
+            try:
+                client.patch(
+                    f"/v1/appStoreVersionLocalizations/{localization['id']}",
+                    {
+                        "data": {
+                            "type": "appStoreVersionLocalizations",
+                            "id": localization["id"],
+                            "attributes": attributes,
+                        }
+                    },
+                )
+            except ApiError as error:
+                # 1 言語の失敗で止めずに残りを書く（#542）
+                print(f"    失敗: {error}")
+                failures.append(label)
 
     print(f"完了: {len(plan)} 言語")
     if skipped:
