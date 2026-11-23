@@ -458,6 +458,13 @@ def main() -> int:
     # ほかのアプリに使われていると、言語そのものを足せずに 409（DUPLICATE_NAME）で弾かれる（#538）
     failures, info_failed = write_app_info(client, args, app, app_info, info_available, info_entries, plan)
 
+    if not args.dry_run:
+        # アプリ情報の言語を作ると、App Store Connect がバージョンの言語も（中身が空のまま）作る。
+        # 作り直すと 409（locale already exists）になるので、読み直して更新に回す（#540）
+        available = client.localization_entries(version["id"])
+        plan = [(target, attributes, localization or available.get(target.store_locale))
+                for target, attributes, localization in plan]
+
     for target, attributes, localization in plan:
         label = f"{target.language} → {target.store_locale}"
         if localization is None:
