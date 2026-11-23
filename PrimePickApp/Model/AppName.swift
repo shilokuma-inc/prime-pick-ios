@@ -10,8 +10,8 @@ import Foundation
 /// 名前は言語ごとに違い（Issue #524）、`InfoPlist.xcstrings` の `CFBundleDisplayName` にだけ書く。
 /// シェアの文・画像カードなど、アプリの中でアプリ名を出すところはこれを使い、名前を文字列に直接書かない
 enum AppName {
-    /// Info.plist から名前を読めなかったときの名前
-    static let fallback = "Prime Pick"
+    /// Info.plist から名前を読めなかったときの名前（英語の名前。`INFOPLIST_KEY_CFBundleDisplayName` と同じ）
+    static let fallback = "Prime or Not?"
 
     /// 表示している言語のアプリ名
     static var current: String {
