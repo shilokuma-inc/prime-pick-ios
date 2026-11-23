@@ -97,6 +97,33 @@ final class AppFontTests: XCTestCase {
         XCTAssertEqual(cascade?.first?.postscriptName, "HiraginoSans-W6")
     }
 
+    /// 和文の書体を渡さなければ組み合わせない（欧文の書体に無い文字は、表示している言語に合った書体に落ちる）
+    func testCascadedFontWithoutJapaneseHasNoCascade() {
+        let font = AppFont.cascadedUIFont(name: "Didot-Bold", japanese: nil, size: .fixed(24))
+        XCTAssertEqual(font.fontName, "Didot-Bold")
+        XCTAssertEqual(font.pointSize, 24)
+        XCTAssertNil(font.fontDescriptor.fontAttributes[.cascadeList])
+    }
+
+    /// 和文の書体を組み合わせるのは日本語のときだけ。中国語で組み合わせると漢字が日本の字形で出るので、中国語・韓国語はその言語の書体にする
+    func testCJKFontFollowsDisplayLanguage() {
+        XCTAssertEqual(AppFont.cjkFont(language: "ja", japanese: "HiraMinProN-W6"), "HiraMinProN-W6")
+        XCTAssertEqual(AppFont.cjkFont(language: "zh-Hans", japanese: "HiraMinProN-W6"), "PingFangSC-Semibold")
+        XCTAssertEqual(AppFont.cjkFont(language: "zh-Hant", japanese: "HiraMinProN-W6"), "PingFangTC-Semibold")
+        XCTAssertEqual(AppFont.cjkFont(language: "ko", japanese: "HiraMinProN-W6"), "AppleSDGothicNeo-Bold")
+        for language in ["en", "es", "fr", "de", "it", "pt-BR"] {
+            XCTAssertNil(AppFont.cjkFont(language: language, japanese: "HiraMinProN-W6"), language)
+        }
+        XCTAssertNil(AppFont.cjkFont(language: nil, japanese: "HiraMinProN-W6"))
+    }
+
+    /// 中国語・韓国語の書体も、名前を間違えるとシステムの書体に黙って落ちるので、iOS に入っていることを確かめる
+    func testOtherCJKFontsAreInstalled() {
+        for name in AppFont.otherCJKFonts {
+            XCTAssertEqual(UIFont(name: name, size: 20)?.fontName, name)
+        }
+    }
+
     /// Dynamic Type で拡大する大きさは、今の文字の大きさの設定で拡大した値になる
     func testCascadedFontScalesWithDynamicType() {
         let scaled = AppFont.cascadedUIFont(name: "Futura-Bold", japanese: "HiraginoSans-W6", size: .scaled(22))

@@ -26,6 +26,7 @@
 		05FD77E7B67946DC3D47BA84 /* correct_0.caf in Resources */ = {isa = PBXBuildFile; fileRef = 7CE8537A8423A0BDBFDB5608 /* correct_0.caf */; };
 		0ABA00425788CD356A6D8B87 /* combo_break.caf in Resources */ = {isa = PBXBuildFile; fileRef = A3BCE0229018567C771B0404 /* combo_break.caf */; };
 		4B8DE98570E12C357BF6FFE2 /* AppVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */; };
+		C41E7B49DEF456EB4B6DBA11 /* AppNameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47E8FBFCE1EF52893B655CD /* AppNameTests.swift */; };
 		91C49A5C699AE56C381D9304 /* DailyChallengeStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 381D93040954B28CB32EDDEC /* DailyChallengeStoreTests.swift */; };
 		2FBA23985914BFF764B17FAF /* PrivacyPolicyViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AEE8470B88092E2D6CBD065 /* PrivacyPolicyViewTests.swift */; };
 		8D70626D6AB962C21A1BDCCD /* LicenseListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5531D63288F0DA73C439CF78 /* LicenseListTests.swift */; };
@@ -36,6 +37,7 @@
 		3E601F1C429455E505634061 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617AFABB66DC358B87EE635D /* PrivacyPolicyView.swift */; };
 		95F85BAA652B07425C1A3294 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6AC1A46353BC6E8ADCDD6C /* LicenseView.swift */; };
 		B513D613BACFE920CCD79666 /* AppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB3345B71E99C1E6FD54E8F /* AppVersion.swift */; };
+		AEAB5778862F81E9158BAB4C /* AppName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21EE881D06B8C8B5F8D8D3B7 /* AppName.swift */; };
 		E301EFBC806FAFD6A09E49B4 /* DailyChallengeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09E49B4E6A0B372138AAF28 /* DailyChallengeStore.swift */; };
 		CECA78B77589CE8D115EDA1D /* DailyChallengeRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115EDA1D3D182B12FFA8D68E /* DailyChallengeRecord.swift */; };
 		0E2623A1589F58BCF0706E89 /* AnswerFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC127C55EF579E3557CC6E8 /* AnswerFeedback.swift */; };
@@ -183,6 +185,7 @@
 		88ACE46B8B4D82A012D16A83 /* AdConfigurationTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AdConfigurationTests.swift; sourceTree = "<group>"; };
 		050610A18A4CF90F7C5FDF14 /* correct_2.caf */ = {isa = PBXFileReference; includeInIndex = 1; path = correct_2.caf; sourceTree = "<group>"; };
 		7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppVersionTests.swift; sourceTree = "<group>"; };
+		D47E8FBFCE1EF52893B655CD /* AppNameTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppNameTests.swift; sourceTree = "<group>"; };
 		381D93040954B28CB32EDDEC /* DailyChallengeStoreTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeStoreTests.swift; sourceTree = "<group>"; };
 		2AEE8470B88092E2D6CBD065 /* PrivacyPolicyViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewTests.swift; sourceTree = "<group>"; };
 		5531D63288F0DA73C439CF78 /* LicenseListTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LicenseListTests.swift; sourceTree = "<group>"; };
@@ -193,6 +196,7 @@
 		617AFABB66DC358B87EE635D /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		2D6AC1A46353BC6E8ADCDD6C /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
 		4DB3345B71E99C1E6FD54E8F /* AppVersion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersion.swift; sourceTree = "<group>"; };
+		21EE881D06B8C8B5F8D8D3B7 /* AppName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppName.swift; sourceTree = "<group>"; };
 		A09E49B4E6A0B372138AAF28 /* DailyChallengeStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeStore.swift; sourceTree = "<group>"; };
 		115EDA1D3D182B12FFA8D68E /* DailyChallengeRecord.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeRecord.swift; sourceTree = "<group>"; };
 		0C76017D6EBB8FED91D5B447 /* AnswerExplanationView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerExplanationView.swift; sourceTree = "<group>"; };
@@ -526,6 +530,7 @@
 				7C36F4F283E4470B1B885ED0 /* AppTheme.swift */,
 				ADB7720F52BBF1F60ACB6688 /* DailyChallengeCardState.swift */,
 				4DB3345B71E99C1E6FD54E8F /* AppVersion.swift */,
+				21EE881D06B8C8B5F8D8D3B7 /* AppName.swift */,
 				A09E49B4E6A0B372138AAF28 /* DailyChallengeStore.swift */,
 				115EDA1D3D182B12FFA8D68E /* DailyChallengeRecord.swift */,
 				3EC5CD22C7A2079467B43E12 /* GameMode.swift */,
@@ -566,6 +571,7 @@
 				F797DA8F6B9FDFC8BA3E13D3 /* AdSlotTests.swift */,
 				A5C1D7E93B2F40816A7D2E15 /* NativeAdCardLayoutTests.swift */,
 				7D46E34E800BB8CBE59B88EF /* AppVersionTests.swift */,
+				D47E8FBFCE1EF52893B655CD /* AppNameTests.swift */,
 				381D93040954B28CB32EDDEC /* DailyChallengeStoreTests.swift */,
 				2AEE8470B88092E2D6CBD065 /* PrivacyPolicyViewTests.swift */,
 				A61BC1372AE1CDE17FEC3FCC /* PrivacyManifestTests.swift */,
@@ -718,6 +724,14 @@
 				en,
 				Base,
 				ja,
+				"zh-Hans",
+				"zh-Hant",
+				ko,
+				es,
+				fr,
+				de,
+				it,
+				"pt-BR",
 			);
 			mainGroup = 4F0C82752BC8247500E1480E;
 			packageReferences = (
@@ -794,6 +808,7 @@
 				3E601F1C429455E505634061 /* PrivacyPolicyView.swift in Sources */,
 				95F85BAA652B07425C1A3294 /* LicenseView.swift in Sources */,
 				B513D613BACFE920CCD79666 /* AppVersion.swift in Sources */,
+				AEAB5778862F81E9158BAB4C /* AppName.swift in Sources */,
 				E301EFBC806FAFD6A09E49B4 /* DailyChallengeStore.swift in Sources */,
 				CECA78B77589CE8D115EDA1D /* DailyChallengeRecord.swift in Sources */,
 				4F42C7A42BF76E7700F92FBB /* QuizNumberView.swift in Sources */,
@@ -870,6 +885,7 @@
 				DB7F3EFC21F77071FBF72A71 /* TimeAttackCountdownTests.swift in Sources */,
 				0A6646145696972DE81A0EB6 /* DailyChallengePlayTests.swift in Sources */,
 				4B8DE98570E12C357BF6FFE2 /* AppVersionTests.swift in Sources */,
+				C41E7B49DEF456EB4B6DBA11 /* AppNameTests.swift in Sources */,
 				DC2D7056852A08FE77A1F443 /* AdsStartupTests.swift in Sources */,
 				A5C1D7E93B2F40816A7D2E16 /* NativeAdCardLayoutTests.swift in Sources */,
 				B7528572BEDF03439A16F358 /* AdSlotTests.swift in Sources */,
@@ -1073,7 +1089,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PrimePickApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Prime Pick";
+				INFOPLIST_KEY_CFBundleDisplayName = "Prime or Not?";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1107,7 +1123,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PrimePickApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Prime Pick";
+				INFOPLIST_KEY_CFBundleDisplayName = "Prime or Not?";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

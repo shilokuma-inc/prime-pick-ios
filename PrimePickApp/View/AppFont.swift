@@ -20,6 +20,9 @@ struct AppTypeface: Equatable {
         ///
         /// 欧文の書体だけを指定すると、日本語の文字はシステムの和文（ヒラギノ角ゴシック）に落ちるため。
         /// `UIFont` を組み立てて使うので、`AppFont.weight` は効かない（太さは PostScript 名で選ぶ）
+        ///
+        /// 和文の書体を組み合わせるのは、アプリを日本語で表示しているときだけ。中国語・韓国語では、その言語の書体を
+        /// 組み合わせる（`AppFont.cjkFont(language:japanese:)`）
         case namedWithJapanese(String, japanese: String)
 
         /// この書体で使う PostScript 名（システムの書体なら空）
@@ -113,19 +116,45 @@ struct AppFont: Equatable {
         case let (.named(name), .textStyle(style)):
             Font.custom(name, size: Self.defaultPointSize(of: style), relativeTo: style).applyingWeight(weight)
         case let (.namedWithJapanese(name, japanese), size):
-            Font(Self.cascadedUIFont(name: name, japanese: japanese, size: size, traits: traits))
+            Font(Self.cascadedUIFont(
+                name: name,
+                japanese: Self.cjkFont(language: Self.displayLanguage, japanese: japanese),
+                size: size,
+                traits: traits
+            ))
         }
     }
+
+    /// アプリを表示している言語（`Localizable.xcstrings` の言語コード）
+    static var displayLanguage: String? { Bundle.main.preferredLocalizations.first }
+
+    /// 欧文の書体に組み合わせる、表示している言語の書体（PostScript 名）。中国語・日本語・韓国語でなければ nil（組み合わせない）
+    ///
+    /// 日本語は `japanese`（ヒラギノ明朝）。中国語に和文の書体を組み合わせると、漢字が日本の字形で出てしまう（簡体字には
+    /// 和文の書体に無い字もあり、1 つの語の中で書体が混ざる）ので、中国語・韓国語はその言語のゴシックを組み合わせる。
+    /// iOS には中国語・韓国語の明朝体が標準で入っていない。太さは Didot Bold に負けないものにする
+    static func cjkFont(language: String?, japanese: String) -> String? {
+        switch language {
+        case "ja": japanese
+        case "zh-Hans": "PingFangSC-Semibold"
+        case "zh-Hant": "PingFangTC-Semibold"
+        case "ko": "AppleSDGothicNeo-Bold"
+        default: nil
+        }
+    }
+
+    /// `cjkFont(language:japanese:)` が返しうる、日本語以外の書体
+    static let otherCJKFonts = ["PingFangSC-Semibold", "PingFangTC-Semibold", "AppleSDGothicNeo-Bold"]
 
     /// SwiftUI の文字の大きさを、`UIFontMetrics` に渡す `UITraitCollection` にする。nil なら端末の設定に従う（nil を返す）
     static func traits(for dynamicTypeSize: DynamicTypeSize?) -> UITraitCollection? {
         dynamicTypeSize.map { UITraitCollection(preferredContentSizeCategory: UIContentSizeCategory($0)) }
     }
 
-    /// 欧文の書体に和文の書体を組み合わせた `UIFont`
+    /// 欧文の書体に和文の書体を組み合わせた `UIFont`。`japanese` が nil なら組み合わせない（欧文の書体だけ）
     ///
     /// Dynamic Type で拡大する大きさは `traits` の文字の大きさで決まる（nil なら組み立てた時点の端末の設定）
-    static func cascadedUIFont(name: String, japanese: String, size: Size, traits: UITraitCollection? = nil) -> UIFont {
+    static func cascadedUIFont(name: String, japanese: String?, size: Size, traits: UITraitCollection? = nil) -> UIFont {
         let pointSize: CGFloat
         let metrics: UIFontMetrics?
         switch size {
@@ -139,8 +168,10 @@ struct AppFont: Equatable {
             pointSize = defaultPointSize(of: style)
             metrics = UIFontMetrics(forTextStyle: uiTextStyle(of: style))
         }
-        let descriptor = UIFontDescriptor(name: name, size: pointSize)
-            .addingAttributes([.cascadeList: [UIFontDescriptor(name: japanese, size: pointSize)]])
+        var descriptor = UIFontDescriptor(name: name, size: pointSize)
+        if let japanese {
+            descriptor = descriptor.addingAttributes([.cascadeList: [UIFontDescriptor(name: japanese, size: pointSize)]])
+        }
         let font = UIFont(descriptor: descriptor, size: pointSize)
         return metrics?.scaledFont(for: font, compatibleWith: traits) ?? font
     }

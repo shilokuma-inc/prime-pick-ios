@@ -28,7 +28,7 @@ struct DailyChallengeShareCardView: View {
 
     var body: some View {
         VStack(spacing: 14) {
-            Text(verbatim: "Prime Pick")
+            Text(verbatim: AppName.current)
                 .appFont(.heading(size: 30, weight: .bold))
                 .foregroundStyle(Self.foreground)
 

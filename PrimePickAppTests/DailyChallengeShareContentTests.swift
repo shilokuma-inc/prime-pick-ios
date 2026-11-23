@@ -26,7 +26,7 @@ final class DailyChallengeShareContentTests: XCTestCase {
         XCTAssertTrue(text.contains("8/10"), text)
         XCTAssertTrue(text.contains("42.5"), text)
         XCTAssertTrue(text.contains("🔥 2"), text)
-        XCTAssertTrue(text.contains("Prime Pick"), text)
+        XCTAssertTrue(text.contains(AppName.current), text)
     }
 
     func testValues() throws {
