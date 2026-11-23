@@ -3480,7 +3480,7 @@
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "오늘의 챌린지를 아직 풀지 않은 날에 알려 드립니다."
+            "value": "오늘의 챌린지를 아직 하지 않은 날에 알려 드립니다."
           }
         },
         "pt-BR": {
@@ -3492,13 +3492,13 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "当天还没完成每日挑战时，我们会提醒你。"
+            "value": "当天还没玩每日挑战时，我们会提醒你。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "當天還沒完成每日挑戰時，我們會提醒你。"
+            "value": "當天還沒玩每日挑戰時，我們會提醒你。"
           }
         }
       }
@@ -3760,7 +3760,7 @@
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "오늘의 챌린지를 아직 풀지 않은 날 %@에 알려 드립니다."
+            "value": "오늘의 챌린지를 아직 하지 않은 날 %@에 알려 드립니다."
           }
         },
         "pt-BR": {
@@ -3772,13 +3772,13 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "当天还没完成每日挑战时，我们会在 %@ 提醒你。"
+            "value": "当天还没玩每日挑战时，我们会在 %@ 提醒你。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "當天還沒完成每日挑戰時，我們會在 %@ 提醒你。"
+            "value": "當天還沒玩每日挑戰時，我們會在 %@ 提醒你。"
           }
         }
       }
