@@ -163,6 +163,13 @@ def load(directory: Path, target: Language, shared: dict[str, str]) -> tuple[dic
         if len(value) > limit:
             problems.append(f"{path}: {field} が {len(value)} 字あります（上限 {limit} 字）")
 
+    # 絵文字（U+10000 以降の文字。🟩 など）は App Store Connect が INVALID_CHARACTERS で弾く（#542）。
+    # ■（U+25A0）のような記号は通る
+    for field, value in {**info_attributes, **attributes}.items():
+        emoji = sorted({character for character in value if ord(character) > 0xFFFF})
+        if emoji:
+            problems.append(f"{path}: {field} に絵文字があります（{' '.join(emoji)}）")
+
     if problems:
         return None, {}, None, problems
     return {**attributes, **shared}, info_attributes, whats_new_version, []
