@@ -97,6 +97,23 @@ final class AppFontTests: XCTestCase {
         XCTAssertEqual(cascade?.first?.postscriptName, "HiraginoSans-W6")
     }
 
+    /// 和文の書体を渡さなければ組み合わせない（欧文の書体に無い文字は、表示している言語に合った書体に落ちる）
+    func testCascadedFontWithoutJapaneseHasNoCascade() {
+        let font = AppFont.cascadedUIFont(name: "Didot-Bold", japanese: nil, size: .fixed(24))
+        XCTAssertEqual(font.fontName, "Didot-Bold")
+        XCTAssertEqual(font.pointSize, 24)
+        XCTAssertNil(font.fontDescriptor.fontAttributes[.cascadeList])
+    }
+
+    /// 和文の書体を組み合わせるのは日本語のときだけ。中国語で組み合わせると漢字が日本の字形で出る
+    func testCascadesJapaneseOnlyForJapanese() {
+        XCTAssertTrue(AppFont.cascadesJapanese(language: "ja"))
+        for language in ["en", "zh-Hans", "zh-Hant", "ko", "es", "fr", "de", "it", "pt-BR"] {
+            XCTAssertFalse(AppFont.cascadesJapanese(language: language), language)
+        }
+        XCTAssertFalse(AppFont.cascadesJapanese(language: nil))
+    }
+
     /// Dynamic Type で拡大する大きさは、今の文字の大きさの設定で拡大した値になる
     func testCascadedFontScalesWithDynamicType() {
         let scaled = AppFont.cascadedUIFont(name: "Futura-Bold", japanese: "HiraginoSans-W6", size: .scaled(22))

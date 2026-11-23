@@ -20,6 +20,8 @@ struct AppTypeface: Equatable {
         ///
         /// 欧文の書体だけを指定すると、日本語の文字はシステムの和文（ヒラギノ角ゴシック）に落ちるため。
         /// `UIFont` を組み立てて使うので、`AppFont.weight` は効かない（太さは PostScript 名で選ぶ）
+        ///
+        /// 和文の書体を組み合わせるのは、アプリを日本語で表示しているときだけ（`AppFont.cascadesJapanese(language:)`）
         case namedWithJapanese(String, japanese: String)
 
         /// この書体で使う PostScript 名（システムの書体なら空）
@@ -113,8 +115,25 @@ struct AppFont: Equatable {
         case let (.named(name), .textStyle(style)):
             Font.custom(name, size: Self.defaultPointSize(of: style), relativeTo: style).applyingWeight(weight)
         case let (.namedWithJapanese(name, japanese), size):
-            Font(Self.cascadedUIFont(name: name, japanese: japanese, size: size, traits: traits))
+            Font(Self.cascadedUIFont(
+                name: name,
+                japanese: Self.cascadesJapanese(language: Self.displayLanguage) ? japanese : nil,
+                size: size,
+                traits: traits
+            ))
         }
+    }
+
+    /// アプリを表示している言語（`Localizable.xcstrings` の言語コード）
+    static var displayLanguage: String? { Bundle.main.preferredLocalizations.first }
+
+    /// 和文の書体を組み合わせる言語か。日本語のときだけ組み合わせる
+    ///
+    /// 中国語で和文の書体（ヒラギノ明朝）を組み合わせると、漢字が日本の字形で出てしまう（簡体字には和文の書体に無い字もあり、
+    /// 1 つの語の中で書体が混ざる）。組み合わせなければ、欧文の書体に無い文字は表示している言語に合った書体
+    /// （中国語は PingFang、韓国語は Apple SD Gothic Neo）に落ちる。iOS には中国語・韓国語の明朝体が標準で入っていない
+    static func cascadesJapanese(language: String?) -> Bool {
+        language == "ja"
     }
 
     /// SwiftUI の文字の大きさを、`UIFontMetrics` に渡す `UITraitCollection` にする。nil なら端末の設定に従う（nil を返す）
@@ -122,10 +141,10 @@ struct AppFont: Equatable {
         dynamicTypeSize.map { UITraitCollection(preferredContentSizeCategory: UIContentSizeCategory($0)) }
     }
 
-    /// 欧文の書体に和文の書体を組み合わせた `UIFont`
+    /// 欧文の書体に和文の書体を組み合わせた `UIFont`。`japanese` が nil なら組み合わせない（欧文の書体だけ）
     ///
     /// Dynamic Type で拡大する大きさは `traits` の文字の大きさで決まる（nil なら組み立てた時点の端末の設定）
-    static func cascadedUIFont(name: String, japanese: String, size: Size, traits: UITraitCollection? = nil) -> UIFont {
+    static func cascadedUIFont(name: String, japanese: String?, size: Size, traits: UITraitCollection? = nil) -> UIFont {
         let pointSize: CGFloat
         let metrics: UIFontMetrics?
         switch size {
@@ -139,8 +158,10 @@ struct AppFont: Equatable {
             pointSize = defaultPointSize(of: style)
             metrics = UIFontMetrics(forTextStyle: uiTextStyle(of: style))
         }
-        let descriptor = UIFontDescriptor(name: name, size: pointSize)
-            .addingAttributes([.cascadeList: [UIFontDescriptor(name: japanese, size: pointSize)]])
+        var descriptor = UIFontDescriptor(name: name, size: pointSize)
+        if let japanese {
+            descriptor = descriptor.addingAttributes([.cascadeList: [UIFontDescriptor(name: japanese, size: pointSize)]])
+        }
         let font = UIFont(descriptor: descriptor, size: pointSize)
         return metrics?.scaledFont(for: font, compatibleWith: traits) ?? font
     }
