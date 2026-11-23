@@ -20,6 +20,8 @@ struct DailyChallengePlayFinisher: QuizPlayFinishing {
     var onFinish: ((DailyChallengeRecord) -> Void)?
     /// 計測イベントの送り先。テストのために差し替えられる
     var sendAnalytics: (DailyChallengeAnalyticsEvent) -> Void = FirebaseAnalytics().sendDailyChallenge
+    /// 解き終えた記録を保存したあとに、リマインドを予約し直す（その日の分を取り消す）。テストのために差し替えられる
+    var rescheduleReminders: () -> Void = { _ = DailyReminderScheduler.shared.reschedule() }
 
     func recordProgress(_ outcome: QuizPlayOutcome) {
         store.save(startedRecord.applying(answerRecords: outcome.answerRecords))
@@ -45,6 +47,7 @@ struct DailyChallengePlayFinisher: QuizPlayFinishing {
         var record = startedRecord.applying(answerRecords: outcome.answerRecords)
         record.completedAt = now()
         store.save(record)
+        rescheduleReminders()
         sendAnalytics(
             .complete(
                 dayNumber: dayNumber,

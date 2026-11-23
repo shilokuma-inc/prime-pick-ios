@@ -34,6 +34,8 @@ struct PrimePickApp: App {
                 .onChange(of: scenePhase, initial: true) { _, phase in
                     if phase == .active {
                         Task { await adsStartup.startIfNeeded() }
+                        // 最後に開いた日を今日にし、そこから 7 日先までのリマインドを予約し直す
+                        DailyReminderScheduler.shared.appDidBecomeActive()
                     }
                 }
         }
