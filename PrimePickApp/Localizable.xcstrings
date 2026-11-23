@@ -1100,7 +1100,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No Timelimit!"
+            "value": "No Time Limit!"
           }
         },
         "es": {
@@ -1292,7 +1292,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Perfect! All questions correct!"
+            "value": "Perfect! You got them all right!"
           }
         },
         "es": {
@@ -1494,9 +1494,21 @@
           }
         },
         "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your Score is %lld points!"
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "You scored %lld point!"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "You scored %lld points!"
+                }
+              }
+            }
           }
         },
         "es": {
@@ -1596,7 +1608,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tap PRIME on the right if you think it is a prime number, or NOT PRIME on the left if you do not."
+            "value": "Tap PRIME on the right if you think it's prime, or NOT PRIME on the left if you don't."
           }
         },
         "es": {
@@ -4540,7 +4552,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "A wrong answer costs points (Easy %1$lld / Normal %2$lld / Hard %3$lld / Expert %4$lld) and %5$lld seconds of time. Your score never drops below 0."
+            "value": "A wrong answer costs points (Easy %1$lld / Normal %2$lld / Hard %3$lld / Expert %4$lld) and %5$lld seconds. Your score never drops below 0."
           }
         },
         "es": {
@@ -4796,7 +4808,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Total Time %@ sec"
+            "value": "Total time: %@ sec"
           }
         },
         "es": {
@@ -4872,7 +4884,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Streak %lld days"
+            "value": "%lld-day streak"
           }
         },
         "es": {
