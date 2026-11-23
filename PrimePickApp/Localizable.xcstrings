@@ -3225,10 +3225,40 @@
     },
     "Reminder": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erinnerung"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Reminder"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recordatorio"
+          }
+        },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recordatorio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rappel"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Promemoria"
           }
         },
         "ja": {
@@ -3236,15 +3266,69 @@
             "state": "translated",
             "value": "リマインド"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "알림"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lembrete"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "提醒"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "提醒"
+          }
         }
       }
     },
     "Daily Challenge Reminder": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erinnerung ans Tagesquiz"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Daily Challenge Reminder"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recordatorio del reto del día"
+          }
+        },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recordatorio del reto del día"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rappel du défi du jour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Promemoria della sfida del giorno"
           }
         },
         "ja": {
@@ -3252,15 +3336,69 @@
             "state": "translated",
             "value": "今日のチャレンジのお知らせ"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오늘의 챌린지 알림"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lembrete do desafio do dia"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每日挑战提醒"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每日挑戰提醒"
+          }
         }
       }
     },
     "Reminder Time": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uhrzeit"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Reminder Time"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hora del recordatorio"
+          }
+        },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hora del recordatorio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heure du rappel"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orario del promemoria"
           }
         },
         "ja": {
@@ -3268,15 +3406,69 @@
             "state": "translated",
             "value": "お知らせの時刻"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "알림 시간"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Horário do lembrete"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "提醒时间"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "提醒時間"
+          }
         }
       }
     },
     "We'll remind you on days you haven't played the Daily Challenge yet.": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wir erinnern dich an Tagen, an denen du das Tagesquiz noch nicht gespielt hast."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "We'll remind you on days you haven't played the Daily Challenge yet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Te avisaremos los días que aún no hayas jugado el reto del día."
+          }
+        },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Te avisaremos los días que aún no hayas jugado el reto del día."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nous vous le rappellerons les jours où vous n’avez pas encore joué au défi du jour."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ti avviseremo nei giorni in cui non hai ancora giocato la sfida del giorno."
           }
         },
         "ja": {
@@ -3284,15 +3476,69 @@
             "state": "translated",
             "value": "今日のチャレンジをまだ解いていない日にお知らせします。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오늘의 챌린지를 아직 풀지 않은 날에 알려 드립니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vamos te lembrar nos dias em que você ainda não jogou o desafio do dia."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当天还没完成每日挑战时，我们会提醒你。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "當天還沒完成每日挑戰時，我們會提醒你。"
+          }
         }
       }
     },
     "Notifications are turned off for this app. To get reminders, allow notifications in the Settings app.": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mitteilungen sind für diese App deaktiviert. Um Erinnerungen zu erhalten, erlaube Mitteilungen in der App „Einstellungen“."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Notifications are turned off for this app. To get reminders, allow notifications in the Settings app."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las notificaciones de esta app están desactivadas. Para recibir recordatorios, permite las notificaciones en la app Configuración."
+          }
+        },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las notificaciones de esta app están desactivadas. Para recibir recordatorios, permite las notificaciones en la app Ajustes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les notifications sont désactivées pour cette app. Pour recevoir des rappels, autorisez les notifications dans l’app Réglages."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le notifiche per questa app sono disattivate. Per ricevere i promemoria, consenti le notifiche nell’app Impostazioni."
           }
         },
         "ja": {
@@ -3300,15 +3546,69 @@
             "state": "translated",
             "value": "このアプリの通知が許可されていません。リマインドを受け取るには、設定アプリで通知を許可してください。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 앱의 알림이 꺼져 있습니다. 알림을 받으려면 설정 앱에서 알림을 허용해 주세요."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As notificações deste app estão desativadas. Para receber lembretes, permita as notificações no app Ajustes."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此 App 的通知已关闭。要接收提醒，请在“设置”App 中允许通知。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此 App 的通知已關閉。若要接收提醒，請在「設定」App 中允許通知。"
+          }
         }
       }
     },
     "Open Settings": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einstellungen öffnen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Open Settings"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir Configuración"
+          }
+        },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir Ajustes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir Réglages"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri Impostazioni"
           }
         },
         "ja": {
@@ -3316,15 +3616,69 @@
             "state": "translated",
             "value": "設定アプリを開く"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정 열기"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir Ajustes"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开设置"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開啟設定"
+          }
         }
       }
     },
     "Get a reminder?": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Möchtest du erinnert werden?"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Get a reminder?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Quieres un recordatorio?"
+          }
+        },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Quieres un recordatorio?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recevoir un rappel ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vuoi un promemoria?"
           }
         },
         "ja": {
@@ -3332,15 +3686,69 @@
             "state": "translated",
             "value": "お知らせを受け取りますか？"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "알림을 받으시겠습니까?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quer receber um lembrete?"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要接收提醒吗？"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要接收提醒嗎？"
+          }
         }
       }
     },
     "We'll remind you at %@ on days you haven't played the Daily Challenge yet.": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wir erinnern dich um %@ an Tagen, an denen du das Tagesquiz noch nicht gespielt hast."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "We'll remind you at %@ on days you haven't played the Daily Challenge yet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Te avisaremos a las %@ los días que aún no hayas jugado el reto del día."
+          }
+        },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Te avisaremos a las %@ los días que aún no hayas jugado el reto del día."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nous vous le rappellerons à %@ les jours où vous n’avez pas encore joué au défi du jour."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ti avviseremo alle %@ nei giorni in cui non hai ancora giocato la sfida del giorno."
           }
         },
         "ja": {
@@ -3348,15 +3756,69 @@
             "state": "translated",
             "value": "今日のチャレンジをまだ解いていない日の %@ にお知らせします。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오늘의 챌린지를 아직 풀지 않은 날 %@에 알려 드립니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vamos te lembrar às %@ nos dias em que você ainda não jogou o desafio do dia."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当天还没完成每日挑战时，我们会在 %@ 提醒你。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "當天還沒完成每日挑戰時，我們會在 %@ 提醒你。"
+          }
         }
       }
     },
     "Turn On": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktivieren"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Turn On"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar"
+          }
+        },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attiva"
           }
         },
         "ja": {
@@ -3364,15 +3826,69 @@
             "state": "translated",
             "value": "オンにする"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "켜기"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ativar"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开启"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開啟"
+          }
         }
       }
     },
     "Not Now": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jetzt nicht"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Not Now"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ahora no"
+          }
+        },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ahora no"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus tard"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non ora"
           }
         },
         "ja": {
@@ -3380,15 +3896,69 @@
             "state": "translated",
             "value": "今はしない"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "나중에"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agora não"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "以后再说"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "以後再說"
+          }
         }
       }
     },
     "Reminders are on. We'll remind you at %@.": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erinnerungen sind aktiviert. Wir erinnern dich um %@."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Reminders are on. We'll remind you at %@."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recordatorios activados. Te avisaremos a las %@."
+          }
+        },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recordatorios activados. Te avisaremos a las %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rappels activés. Nous vous le rappellerons à %@."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Promemoria attivati. Ti avviseremo alle %@."
           }
         },
         "ja": {
@@ -3396,21 +3966,99 @@
             "state": "translated",
             "value": "リマインドをオンにしました。%@ にお知らせします。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "알림을 켰습니다. %@에 알려 드립니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lembretes ativados. Vamos te lembrar às %@."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已开启提醒，我们会在 %@ 提醒你。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已開啟提醒，我們會在 %@ 提醒你。"
+          }
         }
       }
     },
     "Notifications aren't allowed. You can turn reminders on later in Settings.": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mitteilungen wurden nicht erlaubt. Du kannst Erinnerungen später in den Einstellungen aktivieren."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Notifications aren't allowed. You can turn reminders on later in Settings."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se permitieron las notificaciones. Puedes activar los recordatorios más tarde en Configuración."
+          }
+        },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se permitieron las notificaciones. Puedes activar los recordatorios más tarde en Ajustes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les notifications n’ont pas été autorisées. Vous pourrez activer les rappels plus tard dans les Réglages."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le notifiche non sono state consentite. Puoi attivare i promemoria più tardi nelle Impostazioni."
+          }
+        },
         "ja": {
           "stringUnit": {
             "state": "translated",
             "value": "通知が許可されませんでした。リマインドは、あとから設定画面でオンにできます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "알림이 허용되지 않았습니다. 나중에 설정 화면에서 알림을 켤 수 있습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As notificações não foram permitidas. Você pode ativar os lembretes depois em Ajustes."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未允许通知。你可以稍后在设置中开启提醒。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未允許通知。你可以稍後在設定中開啟提醒。"
           }
         }
       }
@@ -7740,10 +8388,100 @@
     },
     "🔥 %lld-day streak! Keep it going with today's challenge.": {
       "localizations": {
+        "de": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 %lld Tag in Folge! Bleib mit dem heutigen Tagesquiz dran."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 %lld Tage in Folge! Bleib mit dem heutigen Tagesquiz dran."
+                }
+              }
+            }
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "🔥 %lld-day streak! Keep it going with today's challenge."
+          }
+        },
+        "es": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 ¡Racha de %lld día! Sigue con el reto de hoy."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 ¡Racha de %lld días! Sigue con el reto de hoy."
+                }
+              }
+            }
+          }
+        },
+        "es-ES": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 ¡Racha de %lld día! Sigue con el reto de hoy."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 ¡Racha de %lld días! Sigue con el reto de hoy."
+                }
+              }
+            }
+          }
+        },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 Série de %lld jour ! Continuez avec le défi du jour."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 Série de %lld jours ! Continuez avec le défi du jour."
+                }
+              }
+            }
+          }
+        },
+        "it": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 Serie di %lld giorno! Continua con la sfida di oggi."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 Serie di %lld giorni! Continua con la sfida di oggi."
+                }
+              }
+            }
           }
         },
         "ja": {
@@ -7751,21 +8489,111 @@
             "state": "translated",
             "value": "🔥 %lld 日連続中！今日のチャレンジで記録を伸ばそう"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🔥 %lld일 연속! 오늘의 챌린지로 기록을 이어 가세요."
+          }
+        },
+        "pt-BR": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 %lld dia seguido! Continue com o desafio de hoje."
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 %lld dias seguidos! Continue com o desafio de hoje."
+                }
+              }
+            }
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🔥 已连续 %lld 天！完成今天的挑战，继续保持吧"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🔥 已連續 %lld 天！完成今天的挑戰，繼續保持吧"
+          }
         }
       }
     },
     "Today's challenge is ready. Can you spot the primes?": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das heutige Tagesquiz ist da. Erkennst du die Primzahlen?"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Today's challenge is ready. Can you spot the primes?"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El reto de hoy ya está listo. ¿Sabrás reconocer los primos?"
+          }
+        },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El reto de hoy ya está listo. ¿Sabrás reconocer los primos?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le défi du jour est prêt. Saurez-vous repérer les nombres premiers ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La sfida di oggi è pronta. Riesci a riconoscere i numeri primi?"
+          }
+        },
         "ja": {
           "stringUnit": {
             "state": "translated",
             "value": "今日のチャレンジが届いています。素数を見抜けるかな？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오늘의 챌린지가 준비되었습니다. 소수를 알아볼 수 있을까요?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O desafio de hoje está pronto. Você consegue identificar os primos?"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今天的挑战已就绪。你能认出哪些是质数吗？"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今天的挑戰已準備好。你能認出哪些是質數嗎？"
           }
         }
       }
