@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""App Store の説明文・キーワード・プロモーションテキスト・最新情報・URL を App Store Connect に反映する。
+"""App Store の名前・サブタイトル・説明文・キーワード・プロモーションテキスト・最新情報・URL を App Store Connect に反映する。
 
 `AppStore/metadata/<言語>.json` と `AppStore/metadata/shared.json` を読み、
-対象バージョンの言語ごとに書き込む。
+対象バージョンの言語ごとに書き込む。名前とサブタイトルはバージョンではなくアプリ情報（`appInfoLocalizations`）に
+書き込む（どちらも編集できるのは、次のバージョンを準備している間だけ）。
 
     python3 Tools/upload_metadata.py            # 反映する
     python3 Tools/upload_metadata.py --dry-run  # 現在値との差分だけ出す
@@ -52,6 +53,15 @@ LIMITS = {
     "whatsNew": 4000,
 }
 
+#: アプリ情報（`appInfoLocalizations`）に書く項目と上限。どちらも省略できる（省略すると App Store Connect 側の値を残す）
+INFO_LIMITS = {
+    "name": 30,
+    "subtitle": 30,
+}
+
+#: 言語を追加したアプリ情報に、主言語から写す項目（空のままだと審査に出せない）
+INFO_COPIED_FROM_PRIMARY = ("privacyPolicyUrl", "privacyChoicesUrl")
+
 
 def load_shared(directory: Path) -> tuple[dict[str, str], list[str]]:
     path = directory / SHARED_FILE
@@ -80,18 +90,33 @@ def load_shared(directory: Path) -> tuple[dict[str, str], list[str]]:
     return attributes, problems
 
 
-def load(directory: Path, target: Language, shared: dict[str, str]) -> tuple[dict[str, str] | None, str | None, list[str]]:
-    """1 言語ぶんの書き込む値と、最新情報の対象バージョンを読む。問題があれば値の代わりに理由を返す。"""
+def load(directory: Path, target: Language, shared: dict[str, str]) -> tuple[dict[str, str] | None, dict[str, str], str | None, list[str]]:
+    """1 言語ぶんの書き込む値（バージョン・アプリ情報）と、最新情報の対象バージョンを読む。問題があれば値の代わりに理由を返す。"""
     path = directory / f"{target.language}.json"
     if not path.is_file():
-        return None, None, [f"{path} がありません"]
+        return None, {}, None, [f"{path} がありません"]
     try:
         raw = json.loads(path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as error:
-        return None, None, [f"{path} が JSON として読めません: {error}"]
+        return None, {}, None, [f"{path} が JSON として読めません: {error}"]
 
     problems: list[str] = []
     attributes: dict[str, str] = {}
+
+    # 名前・サブタイトルは省略できる。null や空文字は書き損じなので、省略と同じには扱わない
+    info_attributes: dict[str, str] = {}
+    for field, limit in INFO_LIMITS.items():
+        if field not in raw:
+            continue
+        value = raw[field]
+        if not (isinstance(value, str) and value.strip()):
+            problems.append(f"{path}: {field} が空です（使わないなら項目ごと消す）")
+        elif value != value.strip():
+            problems.append(f"{path}: {field} の前後に空白があります")
+        elif len(value) > limit:
+            problems.append(f"{path}: {field} が {len(value)} 字あります（上限 {limit} 字）")
+        else:
+            info_attributes[field] = value
 
     description = raw.get("description")
     if isinstance(description, str) and description.strip():
@@ -136,8 +161,8 @@ def load(directory: Path, target: Language, shared: dict[str, str]) -> tuple[dic
             problems.append(f"{path}: {field} が {len(value)} 字あります（上限 {limit} 字）")
 
     if problems:
-        return None, None, problems
-    return {**attributes, **shared}, whats_new_version, []
+        return None, {}, None, problems
+    return {**attributes, **shared}, info_attributes, whats_new_version, []
 
 
 def describe_changes(current: dict, new: dict[str, str]) -> list[str]:
@@ -183,8 +208,11 @@ def _exported_length(field: str, value: object) -> int:
     return len(value) if isinstance(value, str) else 0
 
 
-def export(directory: Path, targets: list[Language], available: dict[str, dict], version_string: str) -> int:
+def export(directory: Path, targets: list[Language], available: dict[str, dict], version_string: str,
+           info_available: dict[str, dict] | None = None) -> int:
     """App Store Connect の現在値を `<言語>.json` と `shared.json` に書き出す。
+
+    `info_available` はアプリ情報（`appInfoLocalizations`）のロケール → 現在値で、名前・サブタイトルを書き出すのに使う。
 
     書き出した言語の数を返す。現在値が無い言語・項目は書かずに報告だけする。
     """
@@ -202,6 +230,11 @@ def export(directory: Path, targets: list[Language], available: dict[str, dict],
         attributes = localization["attributes"]
 
         body: dict[str, object] = {}
+        info = (info_available or {}).get(target.store_locale, {}).get("attributes", {})
+        for field in INFO_LIMITS:
+            value = info.get(field) or ""
+            if value.strip():
+                body[field] = value
         description = attributes.get("description") or ""
         keywords = attributes.get("keywords") or ""
         promotional_text = attributes.get("promotionalText") or ""
@@ -308,18 +341,25 @@ def main() -> int:
         version_string = version["attributes"]["versionString"]
         print(f"取り込み元: {app['attributes']['name']} {version_string} "
               f"({version['attributes']['appStoreState']})")
-        written = export(args.metadata_dir, targets, client.localization_entries(version["id"]), version_string)
+        app_info = client.find_app_info(app["id"], editable=False)
+        info_available = client.app_info_localization_entries(app_info["id"]) if app_info else {}
+        written = export(args.metadata_dir, targets, client.localization_entries(version["id"]), version_string,
+                         info_available)
         print(f"書き出し: {written} 言語")
         return 0
 
     shared, problems = load_shared(args.metadata_dir)
     entries: list[tuple[Language, dict[str, str]]] = []
+    #: 言語 → アプリ情報に書く名前・サブタイトル（書いてある言語だけ）
+    info_entries: dict[str, dict[str, str]] = {}
     whats_new_versions: dict[str, str] = {}
     for target in targets:
-        attributes, whats_new_version, issues = load(args.metadata_dir, target, shared)
+        attributes, info_attributes, whats_new_version, issues = load(args.metadata_dir, target, shared)
         problems.extend(issues)
         if attributes:
             entries.append((target, attributes))
+        if info_attributes:
+            info_entries[target.language] = info_attributes
         if whats_new_version:
             whats_new_versions[target.language] = whats_new_version
     if problems:
@@ -328,7 +368,7 @@ def main() -> int:
     # テンプレートの仮の文言（TODO:）が残ったまま App Store Connect に書き込まない
     placeholders = [
         f"{target.language}.{field}" for target, attributes in entries
-        for field, value in attributes.items() if "TODO:" in value
+        for field, value in {**info_entries.get(target.language, {}), **attributes}.items() if "TODO:" in value
     ] + [
         f"{language}.whatsNew.version" for language, version in whats_new_versions.items() if "TODO:" in version
     ]
@@ -339,8 +379,9 @@ def main() -> int:
         if placeholders:
             print(f"注意: テンプレートの仮の文言（TODO:）が残っています: {', '.join(placeholders)}")
         for target, attributes in entries:
+            values = {**info_entries.get(target.language, {}), **attributes}
             counts = " / ".join(
-                f"{field} {len(attributes[field])} 字" for field in LIMITS if field in attributes
+                f"{field} {len(values[field])} 字" for field in (*INFO_LIMITS, *LIMITS) if field in values
             )
             version_note = (f"（whatsNew は {whats_new_versions[target.language]} 向け）"
                             if target.language in whats_new_versions else "")
@@ -367,26 +408,41 @@ def main() -> int:
 
     available = client.localization_entries(version["id"])
 
+    # 名前・サブタイトルはアプリ情報に書く。バージョンと同じく、次のバージョンを準備している間だけ編集できる
+    app_info: dict | None = None
+    info_available: dict[str, dict] = {}
+    if info_entries:
+        app_info = client.find_app_info(app["id"])
+        if app_info is None:
+            raise SystemExit(
+                "名前・サブタイトルを編集できるアプリ情報がありません。"
+                "App Store Connect で次のバージョンを作ってから実行してください。"
+            )
+        info_available = client.app_info_localization_entries(app_info["id"])
+
     # スクリーンショットのときと同じく、書き込む前に全言語ぶんの前提を確かめる
     plan: list[tuple[Language, dict[str, str], dict | None]] = []
     skipped: list[str] = []
     missing_locales: list[str] = []
     for target, attributes in entries:
         localization = available.get(target.store_locale)
-        if localization is None:
+        # 名前・サブタイトルを書く言語は、アプリ情報にもその言語が要る
+        info_missing = target.language in info_entries and target.store_locale not in info_available
+        if localization is None or info_missing:
+            where = f"{version_string}" if localization is None else "アプリ情報"
             if args.missing_locales == "create":
-                plan.append((target, attributes, None))
+                plan.append((target, attributes, localization))
             elif args.missing_locales == "skip":
-                print(f"  飛ばす — {target.language}: {target.store_locale} が {version_string} にありません")
+                print(f"  飛ばす — {target.language}: {target.store_locale} が {where} にありません")
                 skipped.append(target.language)
             else:
-                missing_locales.append(f"{target.language} → {target.store_locale}")
+                missing_locales.append(f"{target.language} → {target.store_locale}（{where}）")
             continue
         plan.append((target, attributes, localization))
 
     if missing_locales:
         raise SystemExit(
-            f"App Store Connect の {version_string} に無い言語: {', '.join(missing_locales)}\n"
+            f"App Store Connect に無い言語: {', '.join(missing_locales)}\n"
             "App Store Connect でこれらの言語を追加してから実行するか、"
             "--missing-locales create（追加してから反映）か "
             "--missing-locales skip（飛ばす）を付けてください。"
@@ -420,10 +476,76 @@ def main() -> int:
                 },
             )
 
+    failures = write_app_info(client, args, app, app_info, info_available, info_entries, plan)
+
     print(f"完了: {len(plan)} 言語")
     if skipped:
         print(f"飛ばした言語: {', '.join(skipped)}")
+    if failures:
+        print("名前・サブタイトルを書き込めなかった言語:")
+        for line in failures:
+            print(f"  - {line}")
+        return 1
     return 0
+
+
+def write_app_info(client, args: argparse.Namespace, app: dict, app_info: dict | None,
+                   info_available: dict[str, dict], info_entries: dict[str, dict[str, str]],
+                   plan: list[tuple[Language, dict[str, str], dict | None]]) -> list[str]:
+    """名前・サブタイトルをアプリ情報（`appInfoLocalizations`）に書く。書き込めなかった言語と理由を返す。
+
+    言語を足すときは、バージョンの言語を作ってからアプリ情報の言語を作る（fastlane の deliver と同じ順）。
+    足した言語のプライバシーポリシーの URL などは、主言語の値を写す（空のままだと審査に出せない）。
+    名前は App Store 全体で一意なので、ほかのアプリが使っていると 409 で弾かれる。1 言語の失敗で止めずに残りを書く。
+    """
+    if app_info is None:
+        return []
+    from app_store_connect import ApiError
+
+    if not args.dry_run:
+        # バージョンの言語を作ると、App Store Connect がアプリ情報の言語も作ることがあるので読み直す
+        info_available = client.app_info_localization_entries(app_info["id"])
+    primary_locale = app["attributes"].get("primaryLocale") or ""
+    primary = info_available.get(primary_locale, {}).get("attributes", {})
+
+    failures: list[str] = []
+    for target, _, _ in plan:
+        info = info_entries.get(target.language)
+        if not info:
+            continue
+        label = f"{target.language} → {target.store_locale}（名前・サブタイトル）"
+        existing = info_available.get(target.store_locale)
+        current = existing["attributes"] if existing else {}
+        values = dict(info)
+        for field in INFO_COPIED_FROM_PRIMARY:
+            if not current.get(field) and primary.get(field):
+                values[field] = primary[field]
+
+        changes = describe_changes(current, values)
+        if existing is not None and not changes:
+            print(f"  {label}: 変更なし")
+            continue
+        if existing is None:
+            print(f"  {label}: {'言語を追加して書き込む予定' if args.dry_run else '言語を追加して書き込み'}")
+        else:
+            print(f"  {label}: {'書き込む予定' if args.dry_run else '書き込み'}")
+        for line in changes:
+            print(line)
+        if args.dry_run:
+            continue
+        try:
+            if existing is None:
+                client.create_app_info_localization(app_info["id"], target.store_locale, values)
+            else:
+                client.patch(
+                    f"/v1/appInfoLocalizations/{existing['id']}",
+                    {"data": {"type": "appInfoLocalizations", "id": existing["id"], "attributes": values}},
+                )
+        except ApiError as error:
+            hint = "（名前がほかのアプリで使われている可能性があります）" if error.status == 409 else ""
+            print(f"    失敗{hint}: {error}")
+            failures.append(f"{label}{hint}")
+    return failures
 
 
 if __name__ == "__main__":

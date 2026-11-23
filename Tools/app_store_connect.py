@@ -224,6 +224,51 @@ class AppStoreConnect:
         )
         return response["data"]["id"]
 
+    # MARK: アプリ情報（名前・サブタイトル）
+
+    def find_app_info(self, app_id: str, editable: bool = True) -> dict | None:
+        """アプリ名・サブタイトルを持つ `appInfos` を返す。
+
+        `appInfos` は配信中のものと、次のバージョンに向けて編集できるものの 2 つになることがある。
+        `editable` なら編集できる状態のものだけ（無ければ None）、そうでなければ編集できるものを優先して、
+        無ければ配信中のものを返す（書き出し用）。
+        """
+        infos = self.get_all(f"/v1/apps/{app_id}/appInfos", {"limit": 50})
+
+        def state(info: dict) -> str:
+            # appStoreState は非推奨。新しい state を優先する
+            attributes = info["attributes"]
+            return attributes.get("state") or attributes.get("appStoreState") or ""
+
+        editable_infos = [info for info in infos if state(info) in EDITABLE_STATES]
+        if editable_infos or editable:
+            return editable_infos[0] if editable_infos else None
+        live = [info for info in infos if state(info) in {"READY_FOR_DISTRIBUTION", "READY_FOR_SALE"}]
+        return (live or infos or [None])[0]
+
+    def app_info_localization_entries(self, app_info_id: str) -> dict[str, dict]:
+        """ロケール → そのロケールの `appInfoLocalizations`（名前・サブタイトル・プライバシーポリシーの URL を含む）。"""
+        entries = self.get_all(f"/v1/appInfos/{app_info_id}/appInfoLocalizations")
+        return {entry["attributes"]["locale"]: entry for entry in entries}
+
+    def create_app_info_localization(self, app_info_id: str, locale: str, attributes: dict) -> str:
+        """アプリ情報に言語を追加する（名前は必須）。"""
+        if self.dry_run:
+            return "dry-run"
+        response = self.post(
+            "/v1/appInfoLocalizations",
+            {
+                "data": {
+                    "type": "appInfoLocalizations",
+                    "attributes": {**attributes, "locale": locale},
+                    "relationships": {
+                        "appInfo": {"data": {"type": "appInfos", "id": app_info_id}}
+                    },
+                }
+            },
+        )
+        return response["data"]["id"]
+
     # MARK: スクリーンショット
 
     def existing_set(self, localization_id: str, display_type: str) -> str | None:
