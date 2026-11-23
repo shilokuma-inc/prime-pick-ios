@@ -190,7 +190,7 @@ struct TitleLogoArtwork: View {
     private func letterFont(_ size: CGFloat) -> Font {
         Font(AppFont.cascadedUIFont(
             name: TitleLogoLayout.fontName,
-            japanese: AppFont.cjkFont(language: AppFont.displayLanguage, japanese: TitleLogoLayout.japaneseFontName),
+            cjk: AppFont.cjkFont(language: AppFont.displayLanguage, japanese: TitleLogoLayout.japaneseFontName),
             size: .fixed(s(size))
         ))
     }

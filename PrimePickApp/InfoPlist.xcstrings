@@ -23,6 +23,12 @@
             "value" : "¿Será primo?"
           }
         },
+        "es-ES" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Será primo?"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -84,6 +90,12 @@
           }
         },
         "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si lo permites, te mostraremos anuncios más acordes con tus intereses, según tu actividad en otras apps y sitios web. Si no lo permites, seguirás viendo anuncios."
+          }
+        },
+        "es-ES" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Si lo permites, te mostraremos anuncios más acordes con tus intereses, según tu actividad en otras apps y sitios web. Si no lo permites, seguirás viendo anuncios."

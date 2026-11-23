@@ -21,6 +21,12 @@
             "value": "%lld es un número primo"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld es un número primo"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -80,6 +86,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld no es un número primo"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld no es un número primo"
@@ -149,6 +161,12 @@
             "value": "%lld."
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -208,6 +226,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparecen números del 100 al 999."
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Aparecen números del 100 al 999."
@@ -277,6 +301,12 @@
             "value": "Aparecen números del 1000 al 9999, sin contar los múltiplos de 2, 3 y 5."
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparecen números del 1000 al 9999, sin contar los múltiplos de 2, 3 y 5."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -336,6 +366,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparecen números del 100 al 999, sin contar los múltiplos de 2, 3 y 5."
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Aparecen números del 100 al 999, sin contar los múltiplos de 2, 3 y 5."
@@ -405,6 +441,12 @@
             "value": "Aparecen números del 1 al 99."
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparecen números del 1 al 99."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -464,6 +506,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerrar"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Cerrar"
@@ -533,6 +581,12 @@
             "value": "Combo %lld"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combo %lld"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -592,6 +646,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aciertos: %lld"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Aciertos: %lld"
@@ -661,6 +721,12 @@
             "value": "Dificultad"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dificultad"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -720,6 +786,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fácil"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Fácil"
@@ -789,6 +861,12 @@
             "value": "Experto"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Experto"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -848,6 +926,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Difícil"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Difícil"
@@ -917,6 +1001,12 @@
             "value": "Cómo jugar"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cómo jugar"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -976,6 +1066,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combo máximo: %lld"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Combo máximo: %lld"
@@ -1045,6 +1141,12 @@
             "value": "Preguntas falladas"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preguntas falladas"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -1104,6 +1206,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Sin límite de tiempo!"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "¡Sin límite de tiempo!"
@@ -1173,6 +1281,12 @@
             "value": "N.º %lld"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "N.º %lld"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -1232,6 +1346,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normal"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Normal"
@@ -1301,6 +1421,12 @@
             "value": "¡Perfecto! ¡Todas correctas!"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Perfecto! ¡Todas correctas!"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -1365,6 +1491,12 @@
             "value": "Volver al inicio"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volver al inicio"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -1424,6 +1556,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reglas"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Reglas"
@@ -1529,6 +1667,24 @@
             }
           }
         },
+        "es-ES": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "¡Has conseguido %lld punto!"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "¡Has conseguido %lld puntos!"
+                }
+              }
+            }
+          }
+        },
         "fr": {
           "variations": {
             "plural": {
@@ -1617,6 +1773,12 @@
             "value": "Si crees que es primo, toca PRIMO a la derecha; si no, toca NO PRIMO a la izquierda."
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si crees que es primo, toca PRIMO a la derecha; si no, toca NO PRIMO a la izquierda."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -1676,6 +1838,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Responde si el número que aparece es primo o no."
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Responde si el número que aparece es primo o no."
@@ -1745,6 +1913,12 @@
             "value": "Preguntas"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preguntas"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -1804,6 +1978,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige el modo de juego y el número de preguntas. Luego elige la dificultad y el quiz empieza."
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Elige el modo de juego y el número de preguntas. Luego elige la dificultad y el quiz empieza."
@@ -1873,6 +2053,12 @@
             "value": "Al responder todas las preguntas, verás tus puntos. Cada acierto suma puntos, y ganas más cuanto más alta es la dificultad, cuanto más largo es tu combo (aciertos seguidos) y cuanto más rápido respondes."
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al responder todas las preguntas, verás tus puntos. Cada acierto suma puntos, y ganas más cuanto más alta es la dificultad, cuanto más largo es tu combo (aciertos seguidos) y cuanto más rápido respondes."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -1932,6 +2118,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Práctica"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Práctica"
@@ -2001,6 +2193,12 @@
             "value": "Modo"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -2060,6 +2258,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld s"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld s"
@@ -2129,6 +2333,12 @@
             "value": "%@ s"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ s"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -2188,6 +2398,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aciertos: %1$lld / Respondidas: %2$lld"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Aciertos: %1$lld / Respondidas: %2$lld"
@@ -2257,6 +2473,12 @@
             "value": "En Contrarreloj, las preguntas siguen hasta que se acabe el tiempo."
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En Contrarreloj, las preguntas siguen hasta que se acabe el tiempo."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -2316,6 +2538,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld s"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld s"
@@ -2385,6 +2613,12 @@
             "value": "PRIMO"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PRIMO"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -2444,6 +2678,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NO PRIMO"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "NO PRIMO"
@@ -2513,6 +2753,12 @@
             "value": "Responder primo"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Responder primo"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -2572,6 +2818,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Responder no primo"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Responder no primo"
@@ -2641,6 +2893,12 @@
             "value": "¿Es primo?"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Es primo?"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -2705,6 +2963,12 @@
             "value": "Configuración"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -2764,6 +3028,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anuncios"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Anuncios"
@@ -2833,6 +3103,12 @@
             "value": "Configuración de privacidad"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes de privacidad"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -2892,6 +3168,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puedes cambiar tu consentimiento sobre cómo los anuncios usan tus datos."
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Puedes cambiar tu consentimiento sobre cómo los anuncios usan tus datos."
@@ -2961,6 +3243,12 @@
             "value": "Información de la app"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Información de la app"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -3020,6 +3308,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versión de la app"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Versión de la app"
@@ -3089,6 +3383,12 @@
             "value": "Tema"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -3148,6 +3448,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema de la app"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Tema de la app"
@@ -3217,6 +3523,12 @@
             "value": "Según el sistema"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Según el sistema"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -3276,6 +3588,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claro"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Claro"
@@ -3345,6 +3663,12 @@
             "value": "Oscuro"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oscuro"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -3404,6 +3728,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Política de privacidad"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Política de privacidad"
@@ -3473,6 +3803,12 @@
             "value": "Licencias"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Licencias"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -3532,6 +3868,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontró el texto de la licencia"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "No se encontró el texto de la licencia"
@@ -3601,6 +3943,12 @@
             "value": "Puntos: %lld"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puntos: %lld"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -3660,6 +4008,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡NUEVO RÉCORD!"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "¡NUEVO RÉCORD!"
@@ -3729,6 +4083,12 @@
             "value": "Precisión: %lld %%"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Precisión: %lld %%"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -3788,6 +4148,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puntos base"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Puntos base"
@@ -3857,6 +4223,12 @@
             "value": "Extra por combo"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extra por combo"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -3916,6 +4288,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extra por rapidez"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Extra por rapidez"
@@ -3985,6 +4363,12 @@
             "value": "Penalización"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penalización"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -4044,6 +4428,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Buen combo!"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "¡Buen combo!"
@@ -4113,6 +4503,12 @@
             "value": "¡Gran combo!"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Gran combo!"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -4172,6 +4568,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Combo MÁXIMO!"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "¡Combo MÁXIMO!"
@@ -4241,6 +4643,12 @@
             "value": "Contrarreloj"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contrarreloj"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -4300,6 +4708,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consigue todos los puntos que puedas antes de que se acabe el tiempo. Los aciertos seguidos forman un combo y suman más puntos."
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Consigue todos los puntos que puedas antes de que se acabe el tiempo. Los aciertos seguidos forman un combo y suman más puntos."
@@ -4369,6 +4783,12 @@
             "value": "Con un combo de %lld o más, cuanto más rápido respondas, más extra por rapidez ganas."
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con un combo de %lld o más, cuanto más rápido respondas, más extra por rapidez ganas."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -4428,6 +4848,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tras un error, los botones se bloquean durante medio segundo."
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Tras un error, los botones se bloquean durante medio segundo."
@@ -4497,6 +4923,12 @@
             "value": "Se guarda tu mejor marca para cada dificultad y límite de tiempo."
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se guarda tu mejor marca para cada dificultad y límite de tiempo."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -4556,6 +4988,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cada error resta puntos (Fácil %1$lld / Normal %2$lld / Difícil %3$lld / Experto %4$lld) y te quita %5$lld s del tiempo. Tus puntos nunca bajan de 0."
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Cada error resta puntos (Fácil %1$lld / Normal %2$lld / Difícil %3$lld / Experto %4$lld) y te quita %5$lld s del tiempo. Tus puntos nunca bajan de 0."
@@ -4625,6 +5063,12 @@
             "value": "Reto del día"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reto del día"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -4684,6 +5128,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld / %2$lld correctas"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "%1$lld / %2$lld correctas"
@@ -4753,6 +5203,12 @@
             "value": "Sin terminar: %1$lld / %2$lld"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin terminar: %1$lld / %2$lld"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -4812,6 +5268,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiempo total: %@ s"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Tiempo total: %@ s"
@@ -4888,6 +5350,24 @@
           }
         },
         "es": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Racha de %lld día"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Racha de %lld días"
+                }
+              }
+            }
+          }
+        },
+        "es-ES": {
           "variations": {
             "plural": {
               "one": {
@@ -4993,6 +5473,12 @@
             "value": "Récord: %lld"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récord: %lld"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -5057,6 +5543,12 @@
             "value": "%1$@ Reto del día #%2$lld (%3$@)"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ Reto del día #%2$lld (%3$@)"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -5116,6 +5608,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld/%2$lld correctas · %3$@ s"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "%1$lld/%2$lld correctas · %3$@ s"
@@ -5192,6 +5690,24 @@
           }
         },
         "es": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 Racha de %lld día"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 Racha de %lld días"
+                }
+              }
+            }
+          }
+        },
+        "es-ES": {
           "variations": {
             "plural": {
               "one": {
@@ -5309,6 +5825,12 @@
             "value": "Próximo reto en %@"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Próximo reto en %@"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -5368,6 +5890,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jugar Contrarreloj"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Jugar Contrarreloj"
@@ -5437,6 +5965,12 @@
             "value": "Compartir resultado"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compartir resultado"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -5496,6 +6030,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compartir el resultado del Reto del día"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Compartir el resultado del Reto del día"
@@ -5565,6 +6105,12 @@
             "value": "Aciertos: %1$lld / %2$lld"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aciertos: %1$lld / %2$lld"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -5624,6 +6170,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salir"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Salir"
@@ -5693,6 +6245,12 @@
             "value": "Seguir jugando"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seguir jugando"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -5752,6 +6310,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Salir del Reto del día?"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "¿Salir del Reto del día?"
@@ -5821,6 +6385,12 @@
             "value": "Las preguntas sin responder quedarán en blanco y tu resultado será definitivo. No podrás volver a jugar el reto de hoy."
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las preguntas sin responder quedarán en blanco y tu resultado será definitivo. No podrás volver a jugar el reto de hoy."
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -5880,6 +6450,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pregunta %lld: correcta"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Pregunta %lld: correcta"
@@ -5949,6 +6525,12 @@
             "value": "Pregunta %lld: incorrecta"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pregunta %lld: incorrecta"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -6008,6 +6590,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pregunta %lld: sin responder"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Pregunta %lld: sin responder"
@@ -6077,6 +6665,12 @@
             "value": "Sin errores por ahora"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin errores por ahora"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -6141,6 +6735,12 @@
             "value": "Dificultad: %@"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dificultad: %@"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -6200,6 +6800,24 @@
           }
         },
         "es": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Límite de tiempo: %lld segundo"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Límite de tiempo: %lld segundos"
+                }
+              }
+            }
+          }
+        },
+        "es-ES": {
           "variations": {
             "plural": {
               "one": {
@@ -6317,6 +6935,12 @@
             "value": "Empezar"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empezar"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -6376,6 +7000,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Empezar Contrarreloj?"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "¿Empezar Contrarreloj?"
@@ -6445,6 +7075,12 @@
             "value": "Juega las 10 preguntas de hoy"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Juega las 10 preguntas de hoy"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -6504,6 +7140,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récords"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Récords"
@@ -6573,6 +7215,12 @@
             "value": "Mejor marca"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mejor marca"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -6632,6 +7280,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no hay récords"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Aún no hay récords"
@@ -6701,6 +7355,12 @@
             "value": "Récords de Contrarreloj"
           }
         },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récords de Contrarreloj"
+          }
+        },
         "fr": {
           "stringUnit": {
             "state": "translated",
@@ -6760,6 +7420,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anuncio"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "Anuncio"
@@ -6825,6 +7491,12 @@
           }
         },
         "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿SERÁ\nPRIMO?"
+          }
+        },
+        "es-ES": {
           "stringUnit": {
             "state": "translated",
             "value": "¿SERÁ\nPRIMO?"

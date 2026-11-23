@@ -6,7 +6,7 @@
     "appleLocale:   撮影時にアプリへ渡す -AppleLocale の値（日付や数値の書式）",
     "storeLocale:   App Store Connect のロケール（アプリの言語コードとは別物）",
     "1.4.0 で 10 言語にした（Issue #524）。App Store Connect にまだ無い言語は、Metadata/App Store を missing_locales: create で実行して足す（説明文と名前を同時に書き込む）。",
-    "スペイン語は、アプリの訳は es の 1 つだけで、App Store にはメキシコ（es-MX。中南米と米国のスペイン語）とスペイン（es-ES）の 2 つに載せる。掲載文は metadata/es.json と metadata/es-ES.json（中身はほぼ同じ）。"
+    "スペイン語は App Store のメキシコ（es-MX。中南米と米国のスペイン語）とスペイン（es-ES）の 2 つに載せる。アプリの訳は es（メキシコなど）と es-ES（スペイン。Ajustes などスペインの言い方だけ替えたもの）。掲載文は metadata/es.json と metadata/es-ES.json（中身はほぼ同じ）。"
   ],
   "languages": [
     {
@@ -47,7 +47,7 @@
     },
     {
       "language": "es-ES",
-      "appleLanguage": "es",
+      "appleLanguage": "es-ES",
       "appleLocale": "es_ES",
       "storeLocale": "es-ES"
     },

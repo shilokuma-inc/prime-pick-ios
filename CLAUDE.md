@@ -41,7 +41,7 @@ xcodebuild test -project PrimePickApp.xcodeproj -scheme PrimePickApp -destinatio
 
 ## ローカライズ
 
-1.4.0 から 10 言語（`ja` / `en` / `zh-Hans` / `zh-Hant` / `ko` / `es` / `fr` / `de` / `it` / `pt-BR`）に対応し、アプリ名も言語ごとに違う（#524）。
+1.4.0 から 10 言語（`ja` / `en` / `zh-Hans` / `zh-Hant` / `ko` / `es` / `fr` / `de` / `it` / `pt-BR`）に対応し、アプリ名も言語ごとに違う（#524）。スペイン語は、メキシコ・中南米向けの `es` と、スペイン向けの `es-ES`（`es` を写して、Ajustes などスペインの言い方だけ替えたもの。#532）の 2 つ。`es` を直したら `es-ES` もそろえる。
 
 | もの | 置き場所 |
 | --- | --- |
@@ -51,9 +51,10 @@ xcodebuild test -project PrimePickApp.xcodeproj -scheme PrimePickApp -destinatio
 | ホームのロゴ（ふるい）の文字 | `Localizable.xcstrings` の `TitleLogoLines`（改行で行を分ける。欧文は大文字）。長い名前は `TitleLogoLayout.fittingScale` で縮む |
 
 - アプリ名を変えるときは `CFBundleDisplayName` と `TitleLogoLines` を両方直す（`TitleLogoTests` が全言語で一致を確かめる）。App Store の名前は別（`AppStore/metadata/<言語>.json` の `name`）
-- 言語を足すときは、`project.pbxproj` の `knownRegions`・2 つの xcstrings・`TitleLogoLines`・`AppFont.cjkFont(language:japanese:)`（漢字・かな・ハングルを使う言語だけ）をそろえる。`TitleLogoTests.testAppHasTenLocalizations` も直す
+- 言語を足すときは、`project.pbxproj` の `knownRegions`・2 つの xcstrings・`TitleLogoLines`・`AppFont.cjkFont(language:japanese:)`（漢字・かな・ハングルを使う言語だけ）をそろえる。`TitleLogoTests.testAppHasTenLanguagesAndSpainSpanish` も直す
 - 書体: 見出しの Didot に組み合わせる書体は言語で変える（日本語はヒラギノ明朝、中国語は PingFang、韓国語は Apple SD Gothic Neo）。中国語に和文の書体を組み合わせると、漢字が日本の字形で出る
 - 画面の崩れは、撮影モードを言語を変えて起動して確かめる（`xcrun simctl launch <udid> ml.mrs1669.PrimePickApp -AppleLanguages "(fr)" -AppleLocale fr_FR -screenshot-demo -screenshot-scene main`）。ドイツ語・フランス語・イタリア語は長くなりやすく、モードの選択肢（`Practice` など）は 8 文字程度までにしないと小さく縮む
+- 小数は端末の地域の書式で出す（ドイツ・フランスなどは `42,5`。#532）。`String(format: "%.1f")` で書かず、`formatted(.number…locale:)` か `Locale.decimalSeparator` を使う
 - xcstrings を Python で書き換えるときは、元の書式を保つ（`Localizable.xcstrings` は `": "`、`InfoPlist.xcstrings` は Xcode の `" : "`）。`xcodebuild` のビルドではカタログは書き換わらない
 
 ## App Store の掲載情報
@@ -77,7 +78,7 @@ xcodebuild test -project PrimePickApp.xcodeproj -scheme PrimePickApp -destinatio
 - クリエイティブアセットの元は `AppStore/creative/src/creative.html`。6.9 inch のスクリーンショットを撮ってから `Tools/render_creative_assets.sh build/screenshots/APP_IPHONE_67` で書き出し（Google Chrome を使う。アプリ名は言語ごとのホーム画面の名前を `InfoPlist.xcstrings` から読む）、画像もコミットする。`ref-data` → `dry-run` → `upload` の順に流し、App Store Connect のプレビューで iPhone / iPad の見え方を確かめてから審査に出す。
   Apple 側の処理が遅い日は、`upload` が処理の待ち（30 分）で切れることがある。そのまま流し直せば、上げ直さずに続きから待つ（参照名に画像のハッシュを入れている）。何時間たっても終わらないときは、入力 `reupload_pending` をオンにして、処理中のまま止まった画像を上げ直す。
   描き直して `upload` すると、外した古い画像は Asset Library に残る。`mode: cleanup-dry-run` で消す画像の一覧を確かめてから `mode: cleanup` で消す。消すのは、参照名が `creative_assets.json` の `referenceName` ＋ 半角スペースで始まり、どのバージョンにも配置しておらず、処理中・審査中でない画像だけ。消した画像は戻せないので、一覧に配置中の画像や手で上げた画像が出ていたら消さない（#502）。
-- App Store に載せる言語は `AppStore/languages.json` の 10 言語（1.4.0 から。#524）。スペイン語は、アプリの訳は `es` の 1 つで、App Store には `es-MX`（メキシコ）と `es-ES`（スペイン）の 2 つに載せる（掲載文は `es.json` と `es-ES.json`）。App Store Connect にまだ無い言語は、`Metadata/App Store` を `missing_locales: create` で実行して足す（言語の追加と名前・説明文の書き込みを同時に行う。先に Screenshots で `create` すると説明文が空の言語ができる）。Metadata → Screenshots → Creative assets の順に流す。
+- App Store に載せる言語は `AppStore/languages.json` の 10 言語（1.4.0 から。#524）。スペイン語は App Store の `es-MX`（メキシコ）と `es-ES`（スペイン）の 2 つに載せる（掲載文は `es.json` と `es-ES.json`。撮影はそれぞれアプリの `es` と `es-ES` の訳で行う）。App Store Connect にまだ無い言語は、`Metadata/App Store` を `missing_locales: create` で実行して足す（言語の追加と名前・説明文の書き込みを同時に行う。先に Screenshots で `create` すると説明文が空の言語ができる）。Metadata → Screenshots → Creative assets の順に流す。
 - 名前・サブタイトルは `AppStore/metadata/<言語>.json` の `name` / `subtitle`（上限 30 字。省略すると App Store Connect の値を残す）。名前は App Store 全体で一意なので、ほかのアプリが使っていると 409 で弾かれる（その言語だけ失敗として報告し、ほかの言語は書く）。言語を足したアプリ情報には、主言語のプライバシーポリシーの URL を写す。サブタイトルの頭の「Prime Pick」は旧名で探す人のため（全言語共通）。
 - ホーム画面の名前（`InfoPlist.xcstrings` の `CFBundleDisplayName`）は App Store の名前とは別で、短い形にしている（例: 日本語は App Store が「素数なの？ - 2択の数学クイズ」、ホーム画面が「素数なの？」）
 - PR 本文のスクリーンショットは `gh pr create --attach`（gh v2.99.0 以上）で添付する（assets ブランチは使わない）。本文は Markdown の表に `![Before](./before.png)` の形で書き、作成後に `<img width="300">` に置き換える（手順は shilokuma-inc/template-app-ios の README の「PR 本文のスクリーンショット」）。

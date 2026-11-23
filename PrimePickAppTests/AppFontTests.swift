@@ -90,7 +90,7 @@ final class AppFontTests: XCTestCase {
     }
 
     func testCascadedFontUsesGivenSizeAndLatinFace() {
-        let font = AppFont.cascadedUIFont(name: "Futura-Bold", japanese: "HiraginoSans-W6", size: .fixed(24))
+        let font = AppFont.cascadedUIFont(name: "Futura-Bold", cjk: "HiraginoSans-W6", size: .fixed(24))
         XCTAssertEqual(font.fontName, "Futura-Bold")
         XCTAssertEqual(font.pointSize, 24)
         let cascade = font.fontDescriptor.fontAttributes[.cascadeList] as? [UIFontDescriptor]
@@ -99,7 +99,7 @@ final class AppFontTests: XCTestCase {
 
     /// 和文の書体を渡さなければ組み合わせない（欧文の書体に無い文字は、表示している言語に合った書体に落ちる）
     func testCascadedFontWithoutJapaneseHasNoCascade() {
-        let font = AppFont.cascadedUIFont(name: "Didot-Bold", japanese: nil, size: .fixed(24))
+        let font = AppFont.cascadedUIFont(name: "Didot-Bold", cjk: nil, size: .fixed(24))
         XCTAssertEqual(font.fontName, "Didot-Bold")
         XCTAssertEqual(font.pointSize, 24)
         XCTAssertNil(font.fontDescriptor.fontAttributes[.cascadeList])
@@ -126,11 +126,11 @@ final class AppFontTests: XCTestCase {
 
     /// Dynamic Type で拡大する大きさは、今の文字の大きさの設定で拡大した値になる
     func testCascadedFontScalesWithDynamicType() {
-        let scaled = AppFont.cascadedUIFont(name: "Futura-Bold", japanese: "HiraginoSans-W6", size: .scaled(22))
+        let scaled = AppFont.cascadedUIFont(name: "Futura-Bold", cjk: "HiraginoSans-W6", size: .scaled(22))
         XCTAssertEqual(scaled.pointSize, UIFontMetrics(forTextStyle: .body).scaledValue(for: 22), accuracy: 0.01)
         XCTAssertEqual(scaled.fontName, "Futura-Bold")
 
-        let textStyle = AppFont.cascadedUIFont(name: "Futura-Bold", japanese: "HiraginoSans-W6", size: .textStyle(.subheadline))
+        let textStyle = AppFont.cascadedUIFont(name: "Futura-Bold", cjk: "HiraginoSans-W6", size: .textStyle(.subheadline))
         XCTAssertEqual(textStyle.pointSize, UIFontMetrics(forTextStyle: .subheadline).scaledValue(for: 15), accuracy: 0.01)
     }
 
@@ -139,15 +139,15 @@ final class AppFontTests: XCTestCase {
         let large = UITraitCollection(preferredContentSizeCategory: UIContentSizeCategory(DynamicTypeSize.large))
         let huge = UITraitCollection(preferredContentSizeCategory: UIContentSizeCategory(DynamicTypeSize.accessibility3))
 
-        let scaledLarge = AppFont.cascadedUIFont(name: "Didot-Bold", japanese: "HiraMinProN-W6", size: .scaled(22), traits: large)
-        let scaledHuge = AppFont.cascadedUIFont(name: "Didot-Bold", japanese: "HiraMinProN-W6", size: .scaled(22), traits: huge)
+        let scaledLarge = AppFont.cascadedUIFont(name: "Didot-Bold", cjk: "HiraMinProN-W6", size: .scaled(22), traits: large)
+        let scaledHuge = AppFont.cascadedUIFont(name: "Didot-Bold", cjk: "HiraMinProN-W6", size: .scaled(22), traits: huge)
         XCTAssertEqual(scaledLarge.pointSize, 22, accuracy: 0.01)
         XCTAssertGreaterThan(scaledHuge.pointSize, scaledLarge.pointSize)
 
-        let fixedHuge = AppFont.cascadedUIFont(name: "Didot-Bold", japanese: "HiraMinProN-W6", size: .fixed(22), traits: huge)
+        let fixedHuge = AppFont.cascadedUIFont(name: "Didot-Bold", cjk: "HiraMinProN-W6", size: .fixed(22), traits: huge)
         XCTAssertEqual(fixedHuge.pointSize, 22)
 
-        let styleHuge = AppFont.cascadedUIFont(name: "Didot-Bold", japanese: "HiraMinProN-W6", size: .textStyle(.headline), traits: huge)
+        let styleHuge = AppFont.cascadedUIFont(name: "Didot-Bold", cjk: "HiraMinProN-W6", size: .textStyle(.headline), traits: huge)
         XCTAssertEqual(styleHuge.pointSize, UIFontMetrics(forTextStyle: .headline).scaledValue(for: 17, compatibleWith: huge), accuracy: 0.01)
     }
 
@@ -171,8 +171,8 @@ final class AppFontTests: XCTestCase {
         XCTAssertEqual(AppFont.traits(for: .accessibility3)?.preferredContentSizeCategory, .accessibilityExtraLarge)
         XCTAssertEqual(AppFont.traits(for: .large)?.preferredContentSizeCategory, .large)
 
-        let huge = AppFont.cascadedUIFont(name: "Didot-Bold", japanese: "HiraMinProN-W6", size: .scaled(22), traits: AppFont.traits(for: .accessibility3))
-        let large = AppFont.cascadedUIFont(name: "Didot-Bold", japanese: "HiraMinProN-W6", size: .scaled(22), traits: AppFont.traits(for: .large))
+        let huge = AppFont.cascadedUIFont(name: "Didot-Bold", cjk: "HiraMinProN-W6", size: .scaled(22), traits: AppFont.traits(for: .accessibility3))
+        let large = AppFont.cascadedUIFont(name: "Didot-Bold", cjk: "HiraMinProN-W6", size: .scaled(22), traits: AppFont.traits(for: .large))
         XCTAssertGreaterThan(huge.pointSize, large.pointSize)
     }
 
@@ -181,7 +181,7 @@ final class AppFontTests: XCTestCase {
         guard case let .namedWithJapanese(name, japanese) = AppTypeface.sieve.heading else {
             return XCTFail("和文を組み合わせた書体になっていない")
         }
-        let font = AppFont.cascadedUIFont(name: name, japanese: japanese, size: .fixed(22))
+        let font = AppFont.cascadedUIFont(name: name, cjk: japanese, size: .fixed(22))
         XCTAssertEqual(font.fontName, "Didot-Bold")
         let cascade = font.fontDescriptor.fontAttributes[.cascadeList] as? [UIFontDescriptor]
         XCTAssertEqual(cascade?.map(\.postscriptName), ["HiraMinProN-W6"])

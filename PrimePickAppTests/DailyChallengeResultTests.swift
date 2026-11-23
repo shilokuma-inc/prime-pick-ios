@@ -62,9 +62,20 @@ final class DailyChallengeResultTests: XCTestCase {
     // MARK: - 時間
 
     func testTotalSecondsText() {
-        XCTAssertEqual(DailyChallengeResult.totalSecondsText(42.46), "42.5")
-        XCTAssertEqual(DailyChallengeResult.totalSecondsText(0), "0.0")
-        XCTAssertEqual(DailyChallengeResult.totalSecondsText(-1), "0.0")
+        let us = Locale(identifier: "en_US")
+        XCTAssertEqual(DailyChallengeResult.totalSecondsText(42.46, locale: us), "42.5")
+        XCTAssertEqual(DailyChallengeResult.totalSecondsText(42.45, locale: us), "42.5")
+        XCTAssertEqual(DailyChallengeResult.totalSecondsText(0, locale: us), "0.0")
+        XCTAssertEqual(DailyChallengeResult.totalSecondsText(-1, locale: us), "0.0")
+        // 1000 秒以上でも桁区切りを入れない
+        XCTAssertEqual(DailyChallengeResult.totalSecondsText(1234.5, locale: us), "1234.5")
+    }
+
+    /// 小数点は地域の書式にする（#532）
+    func testTotalSecondsTextUsesRegionDecimalSeparator() {
+        XCTAssertEqual(DailyChallengeResult.totalSecondsText(42.46, locale: Locale(identifier: "de_DE")), "42,5")
+        XCTAssertEqual(DailyChallengeResult.totalSecondsText(1234.5, locale: Locale(identifier: "fr_FR")), "1234,5")
+        XCTAssertEqual(DailyChallengeResult.totalSecondsText(42.46, locale: Locale(identifier: "ja_JP")), "42.5")
     }
 
     func testSecondsUntilNextChallengeCountsToLocalMidnight() {

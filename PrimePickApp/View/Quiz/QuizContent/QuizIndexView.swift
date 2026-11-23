@@ -103,9 +103,9 @@ struct QuizIndexView: View {
         }
     }
 
-    /// コンボ倍率の表示文言（例: `×1.6`）
-    static func multiplierText(combo: Int) -> String {
-        String(format: "×%.1f", ScoreCalculator.comboMultiplier(combo: combo))
+    /// コンボ倍率の表示文言（例: `×1.6`）。小数点は `locale`（既定は端末の地域）の書式にする（#532）
+    static func multiplierText(combo: Int, locale: Locale = .current) -> String {
+        "×" + ScoreCalculator.comboMultiplier(combo: combo).formatted(.number.precision(.fractionLength(1)).locale(locale))
     }
 }
 
