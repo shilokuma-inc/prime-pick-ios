@@ -32,7 +32,7 @@ final class TimeAttackCountdownTests: XCTestCase {
         let remaining = countdown(4).remainingTime(at: date(after: 30))
         XCTAssertGreaterThan(remaining, 3)
         XCTAssertLessThan(remaining, 4)
-        XCTAssertEqual(countdown(4).displayValue(at: date(after: 30)), .fractionalSeconds("3.00"))
+        XCTAssertEqual(countdown(4).displayValue(at: date(after: 30), locale: us), .fractionalSeconds("3.00"))
     }
 
     func testRemainingTimeStaysAboveOneSecondLessForEveryWholeSecond() {
@@ -46,10 +46,10 @@ final class TimeAttackCountdownTests: XCTestCase {
     func testDisplayWhenElapsedExceedsOneSecond() {
         // 残り 1 秒で .tick が遅れても 0.00 を出し、0 にはしない（タイムアップは QuizSession が決める）
         XCTAssertGreaterThan(countdown(1).remainingTime(at: date(after: 1.5)), 0)
-        XCTAssertEqual(countdown(1).displayValue(at: date(after: 1.5)), .fractionalSeconds("0.00"))
-        XCTAssertEqual(countdown(5).displayValue(at: date(after: 1.5)), .fractionalSeconds("4.00"))
+        XCTAssertEqual(countdown(1).displayValue(at: date(after: 1.5), locale: us), .fractionalSeconds("0.00"))
+        XCTAssertEqual(countdown(5).displayValue(at: date(after: 1.5), locale: us), .fractionalSeconds("4.00"))
         // 残り 6 秒は 5 秒より下に減らないので、整数のまま
-        XCTAssertEqual(countdown(6).displayValue(at: date(after: 1.5)), .wholeSeconds(6))
+        XCTAssertEqual(countdown(6).displayValue(at: date(after: 1.5), locale: us), .wholeSeconds(6))
     }
 
     func testRemainingTimeIgnoresDateBeforeLastAdvance() {
@@ -60,13 +60,13 @@ final class TimeAttackCountdownTests: XCTestCase {
         // 誤答で整数の残り秒が 6 → 4 に減っても、最後の .tick からの経過はそのまま数える
         XCTAssertEqual(countdown(6).remainingTime(at: date(after: 0.3)), 5.7, accuracy: 1e-9)
         XCTAssertEqual(countdown(4).remainingTime(at: date(after: 0.3)), 3.7, accuracy: 1e-9)
-        XCTAssertEqual(countdown(4).displayValue(at: date(after: 0.3)), .fractionalSeconds("3.70"))
+        XCTAssertEqual(countdown(4).displayValue(at: date(after: 0.3), locale: us), .fractionalSeconds("3.70"))
     }
 
     func testRemainingTimeIsWholeSecondsBeforeStart() {
         let notStarted = TimeAttackCountdown(gameMode: timeAttack, remainingSeconds: 42, lastAdvancedAt: nil)
         XCTAssertEqual(notStarted.remainingTime(at: date(after: 0.5)), 42)
-        XCTAssertEqual(notStarted.displayValue(at: date(after: 0.5)), .wholeSeconds(42))
+        XCTAssertEqual(notStarted.displayValue(at: date(after: 0.5), locale: us), .wholeSeconds(42))
     }
 
     func testRemainingTimeIsZeroAfterTimeUp() {
@@ -78,15 +78,15 @@ final class TimeAttackCountdownTests: XCTestCase {
     func testSwitchesToFractionalJustBelowThreshold() {
         XCTAssertEqual(GameMode.timeAttackFractionalDisplayThresholdSeconds, 5)
         XCTAssertFalse(countdown(5).showsFractionalSeconds(at: date(after: 0)))
-        XCTAssertEqual(countdown(5).displayValue(at: date(after: 0)), .wholeSeconds(5))
+        XCTAssertEqual(countdown(5).displayValue(at: date(after: 0), locale: us), .wholeSeconds(5))
         XCTAssertTrue(countdown(5).showsFractionalSeconds(at: date(after: 0.01)))
-        XCTAssertEqual(countdown(5).displayValue(at: date(after: 0.01)), .fractionalSeconds("4.99"))
+        XCTAssertEqual(countdown(5).displayValue(at: date(after: 0.01), locale: us), .fractionalSeconds("4.99"))
     }
 
     func testKeepsWholeSecondsAboveThreshold() {
         XCTAssertFalse(countdown(6).showsFractionalSeconds(at: date(after: 0.99)))
-        XCTAssertEqual(countdown(6).displayValue(at: date(after: 0.99)), .wholeSeconds(6))
-        XCTAssertEqual(countdown(15).displayValue(at: date(after: 0.5)), .wholeSeconds(15))
+        XCTAssertEqual(countdown(6).displayValue(at: date(after: 0.99), locale: us), .wholeSeconds(6))
+        XCTAssertEqual(countdown(15).displayValue(at: date(after: 0.5), locale: us), .wholeSeconds(15))
     }
 
     func testThresholdBoundaryForGameMode() {
@@ -102,7 +102,7 @@ final class TimeAttackCountdownTests: XCTestCase {
             for remainingSeconds in [0, 3] {
                 let practice = countdown(remainingSeconds, gameMode: gameMode)
                 XCTAssertFalse(practice.showsFractionalSeconds(at: date(after: 0.5)), "\(gameMode)")
-                XCTAssertEqual(practice.displayValue(at: date(after: 0.5)), .wholeSeconds(remainingSeconds), "\(gameMode)")
+                XCTAssertEqual(practice.displayValue(at: date(after: 0.5), locale: us), .wholeSeconds(remainingSeconds), "\(gameMode)")
             }
         }
     }
@@ -202,6 +202,12 @@ final class TimeAttackCountdownTests: XCTestCase {
 
     func testFractionalTextNeverReachesThreshold() {
         XCTAssertEqual(TimeAttackRemainingTimeDisplay.fractionalText(for: 5.0.nextDown, locale: us), "4.99")
+    }
+
+    /// 画面に出す残り時間も、小数点は地域の記号にする（#532）
+    func testDisplayValueUsesRegionDecimalSeparator() {
+        XCTAssertEqual(countdown(4).displayValue(at: date(after: 30), locale: Locale(identifier: "de_DE")), .fractionalSeconds("3,00"))
+        XCTAssertEqual(countdown(6).displayValue(at: date(after: 1.5), locale: Locale(identifier: "de_DE")), .wholeSeconds(6))
     }
 
     /// 小数点は地域の記号にする（#532）

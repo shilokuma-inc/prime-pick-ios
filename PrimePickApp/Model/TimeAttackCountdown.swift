@@ -71,13 +71,13 @@ struct TimeAttackCountdown: Equatable {
         gameMode.showsFractionalRemainingTime(remainingTime(at: date))
     }
 
-    /// `date` の時点で画面に出す残り時間
-    func displayValue(at date: Date) -> TimeAttackRemainingTimeDisplay {
+    /// `date` の時点で画面に出す残り時間。小数点は `locale`（既定は端末の地域）の記号にする
+    func displayValue(at date: Date, locale: Locale = .current) -> TimeAttackRemainingTimeDisplay {
         let remainingTime = remainingTime(at: date)
         guard gameMode.showsFractionalRemainingTime(remainingTime) else {
             return .wholeSeconds(remainingSeconds)
         }
-        return .fractionalSeconds(TimeAttackRemainingTimeDisplay.fractionalText(for: remainingTime))
+        return .fractionalSeconds(TimeAttackRemainingTimeDisplay.fractionalText(for: remainingTime, locale: locale))
     }
 }
 
