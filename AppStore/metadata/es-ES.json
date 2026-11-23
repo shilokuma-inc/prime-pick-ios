@@ -1,0 +1,30 @@
+{
+  "_comment": [
+    "App Store のスペイン語（スペイン。es-ES）の名前・サブタイトル・説明文など（#524）。上限と書き方は ja.json の _comment を参照。",
+    "中身は es.json（メキシコ。es-MX）と同じで、スペインで不自然な語だけ替えている（cuadritos → cuadraditos）。es.json を直したらこちらもそろえる。",
+    "サブタイトルは、旧名で探す人のために「Prime Pick」を頭に付ける（全言語共通の方針）。名前・サブタイトルの語は検索対象なので keywords に重ねない。"
+  ],
+  "name": "¿Será primo? Números primos",
+  "subtitle": "Prime Pick · Quiz matemático",
+  "promotionalText": "¿Primo o no? Responde con un toque. Ahora en español y con nuevo nombre: juega el Reto del día, supera tu récord en Contrarreloj y comparte tu resultado.",
+  "description": "Mira el número y responde: ¿es primo o no? Un quiz de números primos sencillo, con solo dos opciones: «PRIMO» o «NO PRIMO».\nResponde a buen ritmo y entrena tu sentido de los números.\n\n■ 3 formas de jugar\n・Práctica: elige cuántas preguntas quieres (5, 10 o 20) y juega sin límite de tiempo. Tras cada respuesta verás una mini explicación, como «91 = 7 × 13».\n・Contrarreloj: consigue todos los puntos que puedas en 15, 30 o 60 segundos. Cada error resta puntos y también tiempo.\n・Reto del día: 10 preguntas nuevas cada día, una vez al día. Ese día, todos reciben las mismas preguntas. También se cuentan los días seguidos que juegas.\n\n■ 4 niveles de dificultad\n・Fácil: del 1 al 99\n・Normal: del 100 al 999\n・Difícil: del 100 al 999 (sin múltiplos de 2, 3 y 5)\n・Experto: del 1000 al 9999 (sin múltiplos de 2, 3 y 5)\n\n■ Puntos y récords\n・Cada acierto suma puntos. Cuanto más alta es la dificultad, más largo el combo y más rápida la respuesta, más puntos ganas.\n・En los resultados verás tu precisión, tu combo máximo y el detalle de tus puntos. Puedes repasar las preguntas falladas con su descomposición en factores primos.\n・En Contrarreloj se guardan tus 10 mejores récords para cada límite de tiempo y dificultad.\n\n■ Además\n・Comparte el resultado del Reto del día con un texto de cuadraditos y una imagen, sin revelar los números de las preguntas\n・Vibración, efectos de sonido y animaciones al acertar y al fallar\n・Tema a elegir: según el sistema, claro u oscuro\n・Disponible en 10 idiomas: español, inglés, japonés, chino simplificado, chino tradicional, coreano, francés, alemán, italiano y portugués (Brasil)\n\n* La app muestra anuncios.",
+  "keywords": [
+    "número",
+    "factorización",
+    "divisores",
+    "cálculo",
+    "mental",
+    "mate",
+    "mates",
+    "juego",
+    "cerebro",
+    "lógica",
+    "escuela",
+    "math",
+    "reto"
+  ],
+  "whatsNew": {
+    "version": "1.4.0",
+    "text": "・¡Ahora en español! La app está disponible en 10 idiomas\n・Nuevo nombre: ¿Será primo?\n・Ya puedes compartir el resultado del Reto del día con un texto de cuadraditos (🟩🟥) y una imagen. No incluye los números, así que no revela las respuestas"
+  }
+}
