@@ -724,6 +724,14 @@
 				en,
 				Base,
 				ja,
+				"zh-Hans",
+				"zh-Hant",
+				ko,
+				es,
+				fr,
+				de,
+				it,
+				"pt-BR",
 			);
 			mainGroup = 4F0C82752BC8247500E1480E;
 			packageReferences = (

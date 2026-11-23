@@ -3,10 +3,34 @@
   "strings": {
     "%lld is a prime number": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld ist eine Primzahl"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld is a prime number"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld es un número primo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld est un nombre premier"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld è un numero primo"
           }
         },
         "ja": {
@@ -14,15 +38,63 @@
             "state": "translated",
             "value": "%lld は素数"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld: 소수입니다"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld é um número primo"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 是质数"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 是質數"
+          }
         }
       }
     },
     "%lld is not a prime number": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld ist keine Primzahl"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld is not a prime number"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld no es un número primo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld n’est pas un nombre premier"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld non è un numero primo"
           }
         },
         "ja": {
@@ -30,18 +102,90 @@
             "state": "translated",
             "value": "%lld は素数ではありません"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld: 소수가 아닙니다"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld não é um número primo"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 不是质数"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 不是質數"
+          }
         }
       }
     },
     "%lld.": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld."
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld."
+          }
+        },
         "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld."
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld."
@@ -51,10 +195,34 @@
     },
     "100 〜 999 から出題されます。": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gefragt werden Zahlen von 100 bis 999."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Questions are drawn from 100 to 999."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparecen números del 100 al 999."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les nombres vont de 100 à 999."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I numeri vanno da 100 a 999."
           }
         },
         "ja": {
@@ -62,15 +230,63 @@
             "state": "translated",
             "value": "100 〜 999 から出題されます。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "100~999 사이의 수가 출제됩니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparecem números de 100 a 999."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从 100～999 里出题。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "從 100～999 之間出題。"
+          }
         }
       }
     },
     "1000 〜 9999 のうち、2・3・5 の倍数を除いた数から出題されます。": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gefragt werden Zahlen von 1000 bis 9999, ohne Vielfache von 2, 3 und 5."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Questions are drawn from 1000 to 9999, excluding multiples of 2, 3 and 5."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparecen números del 1000 al 9999, sin contar los múltiplos de 2, 3 y 5."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les nombres vont de 1000 à 9999, sans les multiples de 2, 3 et 5."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I numeri vanno da 1000 a 9999, esclusi i multipli di 2, 3 e 5."
           }
         },
         "ja": {
@@ -78,15 +294,63 @@
             "state": "translated",
             "value": "1000 〜 9999 のうち、2・3・5 の倍数を除いた数から出題されます。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1000~9999 중 2·3·5의 배수를 뺀 수가 출제됩니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparecem números de 1000 a 9999, sem os múltiplos de 2, 3 e 5."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从 1000～9999 里出题，但不会出 2、3、5 的倍数。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "從 1000～9999 之間出題，但不會出現 2、3、5 的倍數。"
+          }
         }
       }
     },
     "100 〜 999 のうち、2・3・5 の倍数を除いた数から出題されます。": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gefragt werden Zahlen von 100 bis 999, ohne Vielfache von 2, 3 und 5."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Questions are drawn from 100 to 999, excluding multiples of 2, 3 and 5."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparecen números del 100 al 999, sin contar los múltiplos de 2, 3 y 5."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les nombres vont de 100 à 999, sans les multiples de 2, 3 et 5."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I numeri vanno da 100 a 999, esclusi i multipli di 2, 3 e 5."
           }
         },
         "ja": {
@@ -94,15 +358,63 @@
             "state": "translated",
             "value": "100 〜 999 のうち、2・3・5 の倍数を除いた数から出題されます。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "100~999 중 2·3·5의 배수를 뺀 수가 출제됩니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparecem números de 100 a 999, sem os múltiplos de 2, 3 e 5."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从 100～999 里出题，但不会出 2、3、5 的倍数。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "從 100～999 之間出題，但不會出現 2、3、5 的倍數。"
+          }
         }
       }
     },
     "1 〜 99 から出題されます。": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gefragt werden Zahlen von 1 bis 99."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Questions are drawn from 1 to 99."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparecen números del 1 al 99."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les nombres vont de 1 à 99."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I numeri vanno da 1 a 99."
           }
         },
         "ja": {
@@ -110,15 +422,63 @@
             "state": "translated",
             "value": "1 〜 99 から出題されます。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1~99 사이의 수가 출제됩니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparecem números de 1 a 99."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "从 1～99 里出题。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "從 1～99 之間出題。"
+          }
         }
       }
     },
     "Close": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schließen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Close"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerrar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fermer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chiudi"
           }
         },
         "ja": {
@@ -126,12 +486,60 @@
             "state": "translated",
             "value": "閉じる"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "닫기"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fechar"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "關閉"
+          }
         }
       }
     },
     "Combo %lld": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combo %lld"
+          }
+        },
         "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combo %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combo %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combo %lld"
+          }
+        },
+        "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Combo %lld"
@@ -142,15 +550,63 @@
             "state": "translated",
             "value": "%lld コンボ"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 콤보"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combo %lld"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 连击"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 連擊"
+          }
         }
       }
     },
     "Correct %lld": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Richtig: %lld"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Correct %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aciertos: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bonnes réponses : %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Risposte giuste: %lld"
           }
         },
         "ja": {
@@ -158,15 +614,63 @@
             "state": "translated",
             "value": "正解数 %lld"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "정답 수 %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acertos: %lld"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答对 %lld 题"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答對 %lld 題"
+          }
         }
       }
     },
     "Difficulty": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schwierigkeit"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Difficulty"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dificultad"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Difficulté"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Difficoltà"
           }
         },
         "ja": {
@@ -174,15 +678,63 @@
             "state": "translated",
             "value": "難易度"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "난이도"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dificuldade"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "难度"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "難度"
+          }
         }
       }
     },
     "Easy": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leicht"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Easy"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fácil"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Facile"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Facile"
           }
         },
         "ja": {
@@ -190,15 +742,63 @@
             "state": "translated",
             "value": "かんたん"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "쉬움"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fácil"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "简单"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "簡單"
+          }
         }
       }
     },
     "Expert": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Experte"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Expert"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Experto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expert"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esperto"
           }
         },
         "ja": {
@@ -206,15 +806,63 @@
             "state": "translated",
             "value": "エキスパート"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "전문가"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Especialista"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "专家"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "專家"
+          }
         }
       }
     },
     "Hard": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schwer"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Hard"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Difícil"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Difficile"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Difficile"
           }
         },
         "ja": {
@@ -222,15 +870,63 @@
             "state": "translated",
             "value": "むずかしい"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "어려움"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Difícil"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "困难"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "困難"
+          }
         }
       }
     },
     "How to Play": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "So geht’s"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "How to Play"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cómo jugar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comment jouer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Come si gioca"
           }
         },
         "ja": {
@@ -238,15 +934,63 @@
             "state": "translated",
             "value": "遊び方"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "게임 방법"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Como jogar"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "玩法说明"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "玩法說明"
+          }
         }
       }
     },
     "Max Combo %lld": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Max. Combo: %lld"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Max Combo %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combo máximo: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combo max : %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combo max: %lld"
           }
         },
         "ja": {
@@ -254,15 +998,63 @@
             "state": "translated",
             "value": "最大コンボ %lld"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "최대 콤보 %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combo máximo: %lld"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最高连击 %lld"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最高連擊 %lld"
+          }
         }
       }
     },
     "Missed Questions": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Falsche Antworten"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Missed Questions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preguntas falladas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questions ratées"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Domande sbagliate"
           }
         },
         "ja": {
@@ -270,15 +1062,63 @@
             "state": "translated",
             "value": "間違えた問題"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "틀린 문제"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perguntas erradas"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答错的题"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答錯的題目"
+          }
         }
       }
     },
     "No Timelimit!": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohne Zeitlimit!"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "No Timelimit!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Sin límite de tiempo!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sans chrono !"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tempo illimitato!"
           }
         },
         "ja": {
@@ -286,15 +1126,63 @@
             "state": "translated",
             "value": "制限時間なし！"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "제한 시간 없음!"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem limite de tempo!"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不限时间！"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不限時間！"
+          }
         }
       }
     },
     "No.%lld": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nr. %lld"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "No.%lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "N.º %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "N° %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "N. %lld"
           }
         },
         "ja": {
@@ -302,15 +1190,63 @@
             "state": "translated",
             "value": "No.%lld"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld번"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nº %lld"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "第 %lld 题"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "第 %lld 題"
+          }
         }
       }
     },
     "Normal": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normal"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Normal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normal"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normale"
           }
         },
         "ja": {
@@ -318,15 +1254,63 @@
             "state": "translated",
             "value": "ふつう"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보통"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normal"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "普通"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "普通"
+          }
         }
       }
     },
     "Perfect! All questions correct!": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perfekt! Alles richtig!"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Perfect! All questions correct!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Perfecto! ¡Todas correctas!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parfait ! Sans faute !"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perfetto! Tutte giuste!"
           }
         },
         "ja": {
@@ -334,15 +1318,63 @@
             "state": "translated",
             "value": "全問正解！すばらしい！"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "퍼펙트! 모두 맞혔습니다!"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perfeito! Acertou todas!"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部答对！太棒了！"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部答對！太厲害了！"
+          }
         }
       }
     },
     "Return to Title": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zurück zum Start"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Return to Title"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volver al inicio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retour au menu"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Torna al menu"
           }
         },
         "ja": {
@@ -350,15 +1382,63 @@
             "state": "translated",
             "value": "タイトルへ戻る"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "타이틀로 돌아가기"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voltar ao início"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "返回首页"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "回到首頁"
+          }
         }
       }
     },
     "Rules": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regeln"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Rules"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reglas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Règles"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regole"
           }
         },
         "ja": {
@@ -366,15 +1446,111 @@
             "state": "translated",
             "value": "ルール"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "규칙"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regras"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "规则"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "規則"
+          }
         }
       }
     },
     "Your Score is %lld points!": {
       "localizations": {
+        "de": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Du hast %lld Punkt!"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Du hast %lld Punkte!"
+                }
+              }
+            }
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Your Score is %lld points!"
+          }
+        },
+        "es": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "¡Conseguiste %lld punto!"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "¡Conseguiste %lld puntos!"
+                }
+              }
+            }
+          }
+        },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Votre score : %lld point !"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Votre score : %lld points !"
+                }
+              }
+            }
+          }
+        },
+        "it": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Hai fatto %lld punto!"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Hai fatto %lld punti!"
+                }
+              }
+            }
           }
         },
         "ja": {
@@ -382,15 +1558,63 @@
             "state": "translated",
             "value": "スコアは %lld 点です！"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "점수는 %lld점입니다!"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sua pontuação foi %lld!"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你的得分是 %lld 分！"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你的分數是 %lld 分！"
+          }
         }
       }
     },
     "素数だと思ったら右の「素数」、素数ではないと思ったら左の「ちがう」を選びます。": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ist es eine Primzahl, tippst du rechts auf „PRIM“. Wenn nicht, tippst du links auf „NICHT PRIM“."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Tap PRIME on the right if you think it is a prime number, or NOT PRIME on the left if you do not."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si crees que es primo, toca PRIMO a la derecha; si no, toca NO PRIMO a la izquierda."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez « PREMIER » à droite si vous pensez que c’est un nombre premier, sinon « PAS PREMIER » à gauche."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tocca «PRIMO» a destra se pensi che sia un numero primo, altrimenti «NON PRIMO» a sinistra."
           }
         },
         "ja": {
@@ -398,15 +1622,63 @@
             "state": "translated",
             "value": "素数だと思ったら右の「素数」、素数ではないと思ったら左の「ちがう」を選びます。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "소수라고 생각하면 오른쪽의 ‘소수’를, 소수가 아니라고 생각하면 왼쪽의 ‘아님’을 누릅니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se achar que é primo, toque em PRIMO à direita; se não, toque em NÃO PRIMO à esquerda."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "认为是质数就选右边的“质数”，认为不是质数就选左边的“不是”。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "覺得是質數就選右邊的「質數」，覺得不是質數就選左邊的「不是」。"
+          }
         }
       }
     },
     "表示された数が素数かどうかを答えます。": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entscheide, ob die angezeigte Zahl eine Primzahl ist."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Answer whether the number shown is a prime number."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Responde si el número que aparece es primo o no."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dites si le nombre affiché est premier ou non."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indica se il numero mostrato è primo oppure no."
           }
         },
         "ja": {
@@ -414,15 +1686,63 @@
             "state": "translated",
             "value": "表示された数が素数かどうかを答えます。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "화면에 나온 수가 소수인지 아닌지 답합니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Responda se o número que aparece é primo ou não."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "判断屏幕上的数是不是质数。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "判斷畫面上的數是不是質數。"
+          }
         }
       }
     },
     "Questions": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fragen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Questions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preguntas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questions"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Domande"
           }
         },
         "ja": {
@@ -430,15 +1750,63 @@
             "state": "translated",
             "value": "問題数"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "문제 수"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perguntas"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "题数"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "題數"
+          }
         }
       }
     },
     "ゲームモードと問題数を選び、難易度を選ぶとクイズが始まります。": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle einen Modus und die Anzahl der Fragen. Sobald du eine Schwierigkeit wählst, geht das Quiz los."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Pick a game mode and the number of questions, then choose a difficulty to start the quiz."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige el modo de juego y el número de preguntas. Luego elige la dificultad y el quiz empieza."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez un mode de jeu et le nombre de questions, puis touchez une difficulté pour lancer le quiz."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli una modalità e il numero di domande, poi tocca una difficoltà per iniziare il quiz."
           }
         },
         "ja": {
@@ -446,15 +1814,63 @@
             "state": "translated",
             "value": "ゲームモードと問題数を選び、難易度を選ぶとクイズが始まります。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "게임 모드와 문제 수를 고른 뒤 난이도를 선택하면 퀴즈가 시작됩니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha o modo de jogo e o número de perguntas. Depois, escolha a dificuldade e o quiz começa."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选好模式和题数，再选择难度，就会开始答题。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選好模式和題數，再選擇難度，就會開始作答。"
+          }
         }
       }
     },
     "選んだ問題数に答えるとスコアが表示されます。正解すると点が入り、難易度が高いほど、連続で正解する（コンボ）ほど、早く答えるほど点が増えます。": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hast du alle Fragen beantwortet, siehst du deine Punktzahl. Jede richtige Antwort bringt Punkte – noch mehr gibt es bei höherer Schwierigkeit, für richtige Antworten in Folge (Combo) und für schnelle Antworten."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Once you answer the chosen number of questions, your score is shown. Each correct answer earns points, and you earn more on harder difficulties, with combos, and by answering quickly."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al responder todas las preguntas, verás tus puntos. Cada acierto suma puntos, y ganas más cuanto más alta es la dificultad, cuanto más largo es tu combo (aciertos seguidos) y cuanto más rápido respondes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre score s’affiche après la dernière question. Chaque bonne réponse rapporte des points, et vous en gagnez davantage en difficulté élevée, en enchaînant les bonnes réponses (combo) et en répondant vite."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dopo l’ultima domanda vedrai il tuo punteggio. Ogni risposta giusta vale punti, e ne ottieni di più con le difficoltà più alte, con le risposte giuste di fila (combo) e rispondendo in fretta."
           }
         },
         "ja": {
@@ -462,18 +1878,90 @@
             "state": "translated",
             "value": "選んだ問題数に答えるとスコアが表示されます。正解すると点が入り、難易度が高いほど、連続で正解する（コンボ）ほど、早く答えるほど点が増えます。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "고른 문제 수만큼 답하면 점수가 표시됩니다. 정답을 맞히면 점수를 얻고, 난이도가 높을수록, 연속으로 맞힐수록(콤보), 빨리 답할수록 점수가 더 올라갑니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ao responder todas as perguntas, você vê sua pontuação. Cada acerto vale pontos, e você ganha mais quanto mais alta for a dificuldade, quanto maior for o combo (acertos seguidos) e quanto mais rápido responder."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答完选好的题数后会显示得分。答对就能得分，难度越高、连续答对（连击）越多、答得越快，得分就越高。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答完選好的題數後會顯示分數。答對就能得分，難度越高、連續答對（連擊）越多、答得越快，分數就越高。"
+          }
         }
       }
     },
     "Practice": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Üben"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Practice"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Práctica"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entraînement"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allenamento"
+          }
+        },
         "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "練習"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "연습"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Treino"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "练习"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "練習"
@@ -483,10 +1971,34 @@
     },
     "Game Mode": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modus"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Game Mode"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modalità"
           }
         },
         "ja": {
@@ -494,15 +2006,63 @@
             "state": "translated",
             "value": "モード"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "게임 모드"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "模式"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "模式"
+          }
         }
       }
     },
     "%lld sec": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Sek."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld sec"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld s"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld s"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld s"
           }
         },
         "ja": {
@@ -510,15 +2070,63 @@
             "state": "translated",
             "value": "残り %lld 秒"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld초 남음"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld s"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "剩余 %lld 秒"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "剩餘 %lld 秒"
+          }
         }
       }
     },
     "%@ sec": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Sek."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "%@ sec"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ s"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ s"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ s"
           }
         },
         "ja": {
@@ -526,15 +2134,63 @@
             "state": "translated",
             "value": "残り %@ 秒"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@초 남음"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ s"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "剩余 %@ 秒"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "剩餘 %@ 秒"
+          }
         }
       }
     },
     "Correct %lld / Answered %lld": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Richtig: %lld / Beantwortet: %lld"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Correct %lld / Answered %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aciertos: %1$lld / Respondidas: %2$lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bonnes réponses : %1$lld / %2$lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Risposte giuste: %1$lld / %2$lld"
           }
         },
         "ja": {
@@ -542,15 +2198,63 @@
             "state": "translated",
             "value": "正解 %lld 問 / 解答 %lld 問"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "정답 %lld개 / 푼 문제 %lld개"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acertos: %1$lld / Respondidas: %2$lld"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答对 %lld 题 / 已答 %lld 题"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答對 %lld 題 / 作答 %lld 題"
+          }
         }
       }
     },
     "タイムアタックでは制限時間まで出題が続きます。": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In der Blitzrunde kommen so lange Fragen, bis die Zeit um ist."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "In Time Attack, questions keep coming until time runs out."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En Contrarreloj, las preguntas siguen hasta que se acabe el tiempo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En contre-la-montre, les questions s’enchaînent jusqu’à la fin du temps."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nella modalità contro il tempo, le domande continuano finché il tempo non scade."
           }
         },
         "ja": {
@@ -558,18 +2262,90 @@
             "state": "translated",
             "value": "タイムアタックでは制限時間まで出題が続きます。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "타임어택에서는 제한 시간이 끝날 때까지 문제가 계속 나옵니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No modo Contra o Tempo, as perguntas continuam até o tempo acabar."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "限时挑战会一直出题，直到时间用完。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "限時挑戰會一直出題，直到時間結束為止。"
+          }
         }
       }
     },
     "%lld seconds": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Sek."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld sec"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld s"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld s"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld s"
+          }
+        },
         "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 秒"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld초"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld s"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 秒"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "%lld 秒"
@@ -579,10 +2355,34 @@
     },
     "PRIME": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PRIM"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "PRIME"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PRIMO"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PREMIER"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PRIMO"
           }
         },
         "ja": {
@@ -590,15 +2390,63 @@
             "state": "translated",
             "value": "素数"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "소수"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PRIMO"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "质数"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "質數"
+          }
         }
       }
     },
     "NOT PRIME": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NICHT PRIM"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "NOT PRIME"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NO PRIMO"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PAS PREMIER"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NON PRIMO"
           }
         },
         "ja": {
@@ -606,15 +2454,63 @@
             "state": "translated",
             "value": "ちがう"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아님"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NÃO PRIMO"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不是"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不是"
+          }
         }
       }
     },
     "Answer prime": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ist eine Primzahl"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Answer prime"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Responder primo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Répondre « premier »"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rispondi «primo»"
           }
         },
         "ja": {
@@ -622,15 +2518,63 @@
             "state": "translated",
             "value": "素数と答える"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "소수라고 답하기"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Responder primo"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "回答是质数"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "回答是質數"
+          }
         }
       }
     },
     "Answer not prime": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ist keine Primzahl"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Answer not prime"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Responder no primo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Répondre « pas premier »"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rispondi «non primo»"
           }
         },
         "ja": {
@@ -638,15 +2582,63 @@
             "state": "translated",
             "value": "素数ではないと答える"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "소수가 아니라고 답하기"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Responder não primo"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "回答不是质数"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "回答不是質數"
+          }
         }
       }
     },
     "Is it prime?": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ist das eine Primzahl?"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Is it prime?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Es primo?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Est-il premier ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "È primo?"
           }
         },
         "ja": {
@@ -654,18 +2646,90 @@
             "state": "translated",
             "value": "この数は素数？"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 수는 소수?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "É primo?"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "是质数吗？"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "是質數嗎？"
+          }
         }
       }
     },
     "Settings": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einstellungen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Settings"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Configuración"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impostazioni"
+          }
+        },
         "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "设置"
+          }
+        },
+        "zh-Hant": {
           "stringUnit": {
             "state": "translated",
             "value": "設定"
@@ -675,10 +2739,34 @@
     },
     "Ads": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Werbung"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Ads"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anuncios"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Publicités"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pubblicità"
           }
         },
         "ja": {
@@ -686,15 +2774,63 @@
             "state": "translated",
             "value": "広告"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "광고"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anúncios"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "广告"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "廣告"
+          }
         }
       }
     },
     "Privacy Settings": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datenschutzeinstellungen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Privacy Settings"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Configuración de privacidad"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages de confidentialité"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impostazioni privacy"
           }
         },
         "ja": {
@@ -702,15 +2838,63 @@
             "state": "translated",
             "value": "プライバシー設定"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "개인정보 보호 설정"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes de privacidade"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "隐私设置"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "隱私權設定"
+          }
         }
       }
     },
     "You can change your consent to how ads use your data.": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hier kannst du deine Einwilligung zur Nutzung deiner Daten für Werbung ändern."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "You can change your consent to how ads use your data."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puedes cambiar tu consentimiento sobre cómo los anuncios usan tus datos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous pouvez modifier votre consentement à l’utilisation de vos données pour la publicité."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puoi modificare il consenso all’uso dei tuoi dati per la pubblicità."
           }
         },
         "ja": {
@@ -718,15 +2902,63 @@
             "state": "translated",
             "value": "広告でのデータの利用について、同意の内容を変更できます。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "광고의 데이터 사용에 대한 동의 내용을 변경할 수 있습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Você pode mudar seu consentimento sobre como os anúncios usam seus dados."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你可以更改是否同意广告使用你的数据。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你可以變更是否同意廣告使用你的資料。"
+          }
         }
       }
     },
     "App Info": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Über die App"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "App Info"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Información de la app"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Infos sur l’app"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Info sull’app"
           }
         },
         "ja": {
@@ -734,15 +2966,63 @@
             "state": "translated",
             "value": "アプリ情報"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱 정보"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Informações do app"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "应用信息"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App 資訊"
+          }
         }
       }
     },
     "App Version": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App-Version"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "App Version"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versión de la app"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version de l’app"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versione dell’app"
           }
         },
         "ja": {
@@ -750,15 +3030,63 @@
             "state": "translated",
             "value": "アプリバージョン"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱 버전"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versão do app"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "应用版本"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App 版本"
+          }
         }
       }
     },
     "Theme": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Design"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Theme"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thème"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema"
           }
         },
         "ja": {
@@ -766,15 +3094,63 @@
             "state": "translated",
             "value": "テーマ"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "테마"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "主题"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "主題"
+          }
         }
       }
     },
     "App Theme": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App-Design"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "App Theme"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema de la app"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thème de l’app"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema dell’app"
           }
         },
         "ja": {
@@ -782,15 +3158,63 @@
             "state": "translated",
             "value": "アプリのテーマ"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱 테마"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema do app"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "应用主题"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App 主題"
+          }
         }
       }
     },
     "端末設定に従う": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "System"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "System"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Según el sistema"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Système"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistema"
           }
         },
         "ja": {
@@ -798,15 +3222,63 @@
             "state": "translated",
             "value": "端末設定に従う"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시스템 설정에 따름"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Padrão do sistema"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "跟随系统"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "依系統設定"
+          }
         }
       }
     },
     "ライト": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hell"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Light"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claro"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clair"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chiaro"
           }
         },
         "ja": {
@@ -814,15 +3286,63 @@
             "state": "translated",
             "value": "ライト"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "라이트"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claro"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "浅色"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "淺色"
+          }
         }
       }
     },
     "ダーク": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dunkel"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Dark"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oscuro"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sombre"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scuro"
           }
         },
         "ja": {
@@ -830,15 +3350,63 @@
             "state": "translated",
             "value": "ダーク"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다크"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escuro"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "深色"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "深色"
+          }
         }
       }
     },
     "Privacy Policy": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datenschutzerklärung"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Privacy Policy"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Política de privacidad"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Politique de confidentialité"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Informativa sulla privacy"
           }
         },
         "ja": {
@@ -846,15 +3414,63 @@
             "state": "translated",
             "value": "プライバシーポリシー"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "개인정보 처리방침"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Política de privacidade"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "隐私政策"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "隱私權政策"
+          }
         }
       }
     },
     "Licenses": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lizenzen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Licenses"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Licencias"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Licences"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Licenze"
           }
         },
         "ja": {
@@ -862,15 +3478,63 @@
             "state": "translated",
             "value": "ライセンス"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "라이선스"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Licenças"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开源许可"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開源授權"
+          }
         }
       }
     },
     "License text not found": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lizenztext nicht gefunden"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "License text not found"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontró el texto de la licencia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Texte de licence introuvable"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Testo della licenza non trovato"
           }
         },
         "ja": {
@@ -878,15 +3542,63 @@
             "state": "translated",
             "value": "ライセンス本文が見つかりませんでした"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "라이선스 내용을 찾을 수 없습니다"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Texto da licença não encontrado"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未找到许可文本"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "找不到授權內容"
+          }
         }
       }
     },
     "Score %lld": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Punkte: %lld"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Score %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puntos: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Score : %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Punteggio: %lld"
           }
         },
         "ja": {
@@ -894,15 +3606,63 @@
             "state": "translated",
             "value": "スコア %lld"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "점수 %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pontos: %lld"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "得分 %lld"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分數 %lld"
+          }
         }
       }
     },
     "NEW RECORD!": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NEUER REKORD!"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "NEW RECORD!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡NUEVO RÉCORD!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NOUVEAU RECORD !"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NUOVO RECORD!"
           }
         },
         "ja": {
@@ -910,15 +3670,63 @@
             "state": "translated",
             "value": "NEW RECORD!"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "신기록!"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NOVO RECORDE!"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新纪录！"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新紀錄！"
+          }
         }
       }
     },
     "Accuracy %lld%%": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trefferquote: %lld %%"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Accuracy %lld%%"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Precisión: %lld %%"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Précision : %lld %%"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Precisione: %lld%%"
           }
         },
         "ja": {
@@ -926,15 +3734,63 @@
             "state": "translated",
             "value": "正答率 %lld%%"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "정답률 %lld%%"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taxa de acerto: %lld%%"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正确率 %lld%%"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正確率 %lld%%"
+          }
         }
       }
     },
     "Base Points": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grundpunkte"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Base Points"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puntos base"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Points de base"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Punti base"
           }
         },
         "ja": {
@@ -942,15 +3798,63 @@
             "state": "translated",
             "value": "正解点"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "정답 점수"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pontos base"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答对得分"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答對得分"
+          }
         }
       }
     },
     "Combo Bonus": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combo-Bonus"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Combo Bonus"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extra por combo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bonus combo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bonus combo"
           }
         },
         "ja": {
@@ -958,15 +3862,63 @@
             "state": "translated",
             "value": "コンボボーナス"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "콤보 보너스"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bônus de combo"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "连击加分"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連擊加分"
+          }
         }
       }
     },
     "Speed Bonus": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tempo-Bonus"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Speed Bonus"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extra por rapidez"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bonus rapidité"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bonus velocità"
           }
         },
         "ja": {
@@ -974,15 +3926,63 @@
             "state": "translated",
             "value": "速度ボーナス"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스피드 보너스"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bônus de velocidade"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "速度加分"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "速度加分"
+          }
         }
       }
     },
     "Penalty": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abzug"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Penalty"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penalización"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pénalité"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penalità"
           }
         },
         "ja": {
@@ -990,15 +3990,63 @@
             "state": "translated",
             "value": "減点"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "감점"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penalidade"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扣分"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "扣分"
+          }
         }
       }
     },
     "Good combo!": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gute Combo!"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Good combo!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Buen combo!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Joli combo !"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bella combo!"
           }
         },
         "ja": {
@@ -1006,15 +4054,63 @@
             "state": "translated",
             "value": "Good コンボ！"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Good 콤보!"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bom combo!"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "漂亮连击！"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "漂亮連擊！"
+          }
         }
       }
     },
     "Great combo!": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Super-Combo!"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Great combo!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Gran combo!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Super combo !"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Super combo!"
           }
         },
         "ja": {
@@ -1022,15 +4118,63 @@
             "state": "translated",
             "value": "Great コンボ！"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Great 콤보!"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ótimo combo!"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "超强连击！"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "超強連擊！"
+          }
         }
       }
     },
     "MAX combo!": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MAX-Combo!"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "MAX combo!"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¡Combo MÁXIMO!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combo MAX !"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combo MAX!"
           }
         },
         "ja": {
@@ -1038,15 +4182,63 @@
             "state": "translated",
             "value": "MAX コンボ！"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MAX 콤보!"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combo MÁXIMO!"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MAX 连击！"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MAX 連擊！"
+          }
         }
       }
     },
     "Time Attack": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blitzrunde"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Time Attack"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contrarreloj"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contre-la-montre"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contro il tempo"
           }
         },
         "ja": {
@@ -1054,15 +4246,63 @@
             "state": "translated",
             "value": "タイムアタック"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "타임어택"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contra o Tempo"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "限时挑战"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "限時挑戰"
+          }
         }
       }
     },
     "制限時間内にできるだけ高いスコアを目指します。連続で正解するとコンボになり、点が増えます。": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hol so viele Punkte wie möglich, bevor die Zeit abläuft. Richtige Antworten in Folge ergeben eine Combo und bringen mehr Punkte."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Aim for the highest score you can before time runs out. Consecutive correct answers build a combo and earn more points."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consigue todos los puntos que puedas antes de que se acabe el tiempo. Los aciertos seguidos forman un combo y suman más puntos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marquez un maximum de points avant la fin du temps. Enchaînez les bonnes réponses pour faire un combo et gagner plus de points."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fai più punti che puoi prima che scada il tempo. Le risposte giuste di fila formano una combo e valgono più punti."
           }
         },
         "ja": {
@@ -1070,15 +4310,63 @@
             "state": "translated",
             "value": "制限時間内にできるだけ高いスコアを目指します。連続で正解するとコンボになり、点が増えます。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "제한 시간 안에 최대한 높은 점수를 노립니다. 연속으로 맞히면 콤보가 되어 점수가 더 올라갑니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faça o máximo de pontos que puder antes de o tempo acabar. Acertos seguidos formam um combo e valem mais pontos."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在时间用完前尽量拿到高分。连续答对会形成连击，得分更多。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在時間結束前盡量拿到高分。連續答對就會形成連擊，分數更多。"
+          }
         }
       }
     },
     "コンボが %lld 以上のときは、早く答えるほど速度ボーナスが付きます。": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ab einer Combo von %lld gibt es für schnelle Antworten einen Tempo-Bonus."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "While your combo is %lld or more, faster answers earn a speed bonus."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con un combo de %lld o más, cuanto más rápido respondas, más extra por rapidez ganas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À partir d’un combo de %lld, plus vous répondez vite, plus votre bonus de rapidité est élevé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con una combo di %lld o più, più rispondi in fretta, più bonus velocità ottieni."
           }
         },
         "ja": {
@@ -1086,15 +4374,63 @@
             "state": "translated",
             "value": "コンボが %lld 以上のときは、早く答えるほど速度ボーナスが付きます。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "콤보가 %lld 이상일 때는 빨리 답할수록 스피드 보너스를 받습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Com um combo de %lld ou mais, quanto mais rápido você responder, maior o bônus de velocidade."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "连击达到 %lld 以上时，答得越快，速度加分越多。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連擊達到 %lld 以上時，答得越快，速度加分越多。"
+          }
         }
       }
     },
     "間違えた直後の 0.5 秒はボタンを押せません。": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach einer falschen Antwort sind die Tasten 0,5 Sekunden lang gesperrt."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "The buttons are locked for 0.5 seconds after a wrong answer."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tras un error, los botones se bloquean durante medio segundo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Après une erreur, les boutons sont bloqués pendant une demi-seconde."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dopo una risposta sbagliata, i pulsanti si bloccano per mezzo secondo."
           }
         },
         "ja": {
@@ -1102,15 +4438,63 @@
             "state": "translated",
             "value": "間違えた直後の 0.5 秒はボタンを押せません。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "틀린 직후 0.5초 동안은 버튼을 누를 수 없습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depois de um erro, os botões ficam travados por meio segundo."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答错后的 0.5 秒内无法点按按钮。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答錯後的 0.5 秒內無法點按按鈕。"
+          }
         }
       }
     },
     "難易度と制限時間ごとに自己ベストが記録されます。": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Bestleistung wird für jede Schwierigkeit und jedes Zeitlimit gespeichert."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Your personal best is saved for each difficulty and time limit."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se guarda tu mejor marca para cada dificultad y límite de tiempo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre record personnel est enregistré pour chaque difficulté et chaque durée."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo record personale viene salvato per ogni difficoltà e limite di tempo."
           }
         },
         "ja": {
@@ -1118,15 +4502,63 @@
             "state": "translated",
             "value": "難易度と制限時間ごとに自己ベストが記録されます。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "난이도와 제한 시간별로 최고 기록이 저장됩니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu recorde pessoal fica salvo para cada dificuldade e limite de tempo."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每种难度和时间限制都会分别记录个人最佳。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每種難度和時間限制都會分別保存個人最佳紀錄。"
+          }
         }
       }
     },
     "間違えると点が減り（Easy %lld / Normal %lld / Hard %lld / Expert %lld）、残り時間も %lld 秒減ります。スコアは 0 点より下にはなりません。": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine falsche Antwort kostet Punkte (Leicht %1$lld / Normal %2$lld / Schwer %3$lld / Experte %4$lld) und Zeit (%5$lld Sek.). Deine Punktzahl fällt nie unter 0."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "A wrong answer costs points (Easy %1$lld / Normal %2$lld / Hard %3$lld / Expert %4$lld) and %5$lld seconds of time. Your score never drops below 0."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cada error resta puntos (Fácil %1$lld / Normal %2$lld / Difícil %3$lld / Experto %4$lld) y te quita %5$lld s del tiempo. Tus puntos nunca bajan de 0."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une erreur fait perdre des points (Facile %1$lld / Normal %2$lld / Difficile %3$lld / Expert %4$lld) et retire %5$lld s au chrono. Le score ne descend jamais sous 0."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una risposta sbagliata costa punti (Facile %1$lld / Normale %2$lld / Difficile %3$lld / Esperto %4$lld) e toglie %5$lld s al tempo. Il punteggio non scende mai sotto 0."
           }
         },
         "ja": {
@@ -1134,15 +4566,63 @@
             "state": "translated",
             "value": "間違えると点が減り（Easy %1$lld / Normal %2$lld / Hard %3$lld / Expert %4$lld）、残り時間も %5$lld 秒減ります。スコアは 0 点より下にはなりません。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "틀리면 점수가 깎이고(쉬움 %1$lld / 보통 %2$lld / 어려움 %3$lld / 전문가 %4$lld), 남은 시간도 %5$lld초 줄어듭니다. 점수는 0점 아래로 내려가지 않습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cada erro tira pontos (Fácil %1$lld / Normal %2$lld / Difícil %3$lld / Especialista %4$lld) e %5$lld s do tempo. Sua pontuação nunca fica abaixo de 0."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答错会扣分（简单 %1$lld / 普通 %2$lld / 困难 %3$lld / 专家 %4$lld），剩余时间也会减少 %5$lld 秒。得分不会低于 0 分。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答錯會扣分（簡單 %1$lld / 普通 %2$lld / 困難 %3$lld / 專家 %4$lld），剩餘時間也會減少 %5$lld 秒。分數不會低於 0 分。"
+          }
         }
       }
     },
     "Daily Challenge": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tagesquiz"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Daily Challenge"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reto del día"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Défi du jour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sfida del giorno"
           }
         },
         "ja": {
@@ -1150,15 +4630,63 @@
             "state": "translated",
             "value": "今日のチャレンジ"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오늘의 챌린지"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desafio do dia"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每日挑战"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每日挑戰"
+          }
         }
       }
     },
     "%lld / %lld correct": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld / %2$lld richtig"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "%1$lld / %2$lld correct"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld / %2$lld correctas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld / %2$lld bonnes réponses"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld / %2$lld risposte giuste"
           }
         },
         "ja": {
@@ -1166,15 +4694,63 @@
             "state": "translated",
             "value": "%2$lld 問中 %1$lld 問正解"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$lld문제 중 %1$lld개 정답"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld / %2$lld certas"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答对 %1$lld / %2$lld 题"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答對 %1$lld / %2$lld 題"
+          }
         }
       }
     },
     "Incomplete %lld / %lld": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unvollständig: %1$lld / %2$lld"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Incomplete %1$lld / %2$lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin terminar: %1$lld / %2$lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non terminé : %1$lld / %2$lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incompleta: %1$lld / %2$lld"
           }
         },
         "ja": {
@@ -1182,15 +4758,63 @@
             "state": "translated",
             "value": "未完了 %1$lld / %2$lld"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "미완료 %1$lld / %2$lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incompleto: %1$lld / %2$lld"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未完成 %1$lld / %2$lld"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未完成 %1$lld / %2$lld"
+          }
         }
       }
     },
     "Total Time %@ sec": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gesamtzeit: %@ Sek."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Total Time %@ sec"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiempo total: %@ s"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temps total : %@ s"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tempo totale: %@ s"
           }
         },
         "ja": {
@@ -1198,15 +4822,111 @@
             "state": "translated",
             "value": "合計時間 %@ 秒"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "총 시간 %@초"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tempo total: %@ s"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "总用时 %@ 秒"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "總時間 %@ 秒"
+          }
         }
       }
     },
     "Streak %lld days": {
       "localizations": {
+        "de": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld Tag in Folge"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld Tage in Folge"
+                }
+              }
+            }
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Streak %lld days"
+          }
+        },
+        "es": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Racha de %lld día"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Racha de %lld días"
+                }
+              }
+            }
+          }
+        },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Série de %lld jour"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Série de %lld jours"
+                }
+              }
+            }
+          }
+        },
+        "it": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Serie di %lld giorno"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Serie di %lld giorni"
+                }
+              }
+            }
           }
         },
         "ja": {
@@ -1214,15 +4934,63 @@
             "state": "translated",
             "value": "%lld 日連続"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld일 연속"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dias seguidos: %lld"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "连续 %lld 天"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連續 %lld 天"
+          }
         }
       }
     },
     "Best %lld": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rekord: %lld"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Best %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récord: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Record : %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Record: %lld"
           }
         },
         "ja": {
@@ -1230,15 +4998,63 @@
             "state": "translated",
             "value": "最長 %lld"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "최장 %lld일"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recorde: %lld"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最长 %lld 天"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最長 %lld 天"
+          }
         }
       }
     },
     "%@ Daily Challenge #%lld (%@)": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ Tagesquiz #%2$lld (%3$@)"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "%1$@ Daily Challenge #%2$lld (%3$@)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ Reto del día #%2$lld (%3$@)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ – Défi du jour #%2$lld (%3$@)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ – Sfida del giorno #%2$lld (%3$@)"
           }
         },
         "ja": {
@@ -1246,15 +5062,63 @@
             "state": "translated",
             "value": "%1$@ 今日のチャレンジ #%2$lld (%3$@)"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ 오늘의 챌린지 #%2$lld (%3$@)"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ Desafio do dia #%2$lld (%3$@)"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@每日挑战 #%2$lld (%3$@)"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@每日挑戰 #%2$lld (%3$@)"
+          }
         }
       }
     },
     "%lld/%lld correct · %@ sec": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld/%2$lld richtig · %3$@ Sek."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "%1$lld/%2$lld correct · %3$@ sec"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld/%2$lld correctas · %3$@ s"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld/%2$lld bonnes réponses · %3$@ s"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld/%2$lld risposte giuste · %3$@ s"
           }
         },
         "ja": {
@@ -1262,15 +5126,111 @@
             "state": "translated",
             "value": "正解 %1$lld/%2$lld · %3$@ 秒"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "정답 %1$lld/%2$lld · %3$@초"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$lld/%2$lld certas · %3$@ s"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答对 %1$lld/%2$lld · %3$@ 秒"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答對 %1$lld/%2$lld · %3$@ 秒"
+          }
         }
       }
     },
     "🔥 %lld-day streak": {
       "localizations": {
+        "de": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 %lld Tag in Folge"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 %lld Tage in Folge"
+                }
+              }
+            }
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "🔥 %lld-day streak"
+          }
+        },
+        "es": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 Racha de %lld día"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 Racha de %lld días"
+                }
+              }
+            }
+          }
+        },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 Série de %lld jour"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 Série de %lld jours"
+                }
+              }
+            }
+          }
+        },
+        "it": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 Serie di %lld giorno"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 Serie di %lld giorni"
+                }
+              }
+            }
           }
         },
         "ja": {
@@ -1278,15 +5238,75 @@
             "state": "translated",
             "value": "🔥 %lld 日連続"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🔥 %lld일 연속"
+          }
+        },
+        "pt-BR": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 %lld dia seguido"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "🔥 %lld dias seguidos"
+                }
+              }
+            }
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🔥 连续 %lld 天"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "🔥 連續 %lld 天"
+          }
         }
       }
     },
     "Next challenge in %@": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nächstes Tagesquiz in %@"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Next challenge in %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Próximo reto en %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prochain défi dans %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prossima sfida tra %@"
           }
         },
         "ja": {
@@ -1294,15 +5314,63 @@
             "state": "translated",
             "value": "次のチャレンジまで %@"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다음 챌린지까지 %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Próximo desafio em %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "距离下次挑战还有 %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "距離下次挑戰還有 %@"
+          }
         }
       }
     },
     "Play Time Attack": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blitzrunde spielen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Play Time Attack"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jugar Contrarreloj"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jouer en contre-la-montre"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gioca contro il tempo"
           }
         },
         "ja": {
@@ -1310,15 +5378,63 @@
             "state": "translated",
             "value": "タイムアタックで遊ぶ"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "타임어택 도전하기"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jogar Contra o Tempo"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "去玩限时挑战"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "去玩限時挑戰"
+          }
         }
       }
     },
     "Share Result": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ergebnis teilen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Share Result"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compartir resultado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Partager le résultat"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Condividi il risultato"
           }
         },
         "ja": {
@@ -1326,15 +5442,63 @@
             "state": "translated",
             "value": "結果をシェア"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "결과 공유"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compartilhar resultado"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分享成绩"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分享成績"
+          }
         }
       }
     },
     "Share today's Daily Challenge result": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ergebnis des heutigen Tagesquiz teilen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Share today's Daily Challenge result"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compartir el resultado del Reto del día"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Partager le résultat du défi du jour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Condividi il risultato della sfida del giorno"
           }
         },
         "ja": {
@@ -1342,15 +5506,63 @@
             "state": "translated",
             "value": "今日のチャレンジの結果をシェアする"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오늘의 챌린지 결과 공유하기"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compartilhar o resultado do Desafio do dia"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分享今天的每日挑战成绩"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分享今天的每日挑戰成績"
+          }
         }
       }
     },
     "Correct %lld / %lld": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Richtig: %1$lld / %2$lld"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Correct %1$lld / %2$lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aciertos: %1$lld / %2$lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bonnes réponses : %1$lld / %2$lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Risposte giuste: %1$lld / %2$lld"
           }
         },
         "ja": {
@@ -1358,15 +5570,63 @@
             "state": "translated",
             "value": "%2$lld 問中 %1$lld 問正解"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$lld문제 중 %1$lld개 정답"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acertos: %1$lld / %2$lld"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答对 %1$lld / %2$lld 题"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "答對 %1$lld / %2$lld 題"
+          }
         }
       }
     },
     "Quit": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beenden"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Quit"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salir"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitter"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esci"
           }
         },
         "ja": {
@@ -1374,15 +5634,63 @@
             "state": "translated",
             "value": "やめる"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그만하기"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sair"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "退出"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "離開"
+          }
         }
       }
     },
     "Keep Playing": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weiterspielen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Keep Playing"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seguir jugando"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continuer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continua"
           }
         },
         "ja": {
@@ -1390,15 +5698,63 @@
             "state": "translated",
             "value": "続ける"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "계속하기"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continuar jogando"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "继续挑战"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "繼續挑戰"
+          }
         }
       }
     },
     "Quit today's challenge?": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tagesquiz beenden?"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Quit today's challenge?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Salir del Reto del día?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitter le défi du jour ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uscire dalla sfida del giorno?"
           }
         },
         "ja": {
@@ -1406,15 +5762,63 @@
             "state": "translated",
             "value": "今日のチャレンジをやめますか？"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오늘의 챌린지를 그만하시겠습니까?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sair do Desafio do dia?"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要退出今天的挑战吗？"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要離開今天的挑戰嗎？"
+          }
         }
       }
     },
     "Unanswered questions will be left blank and your result will be final. You can't try today's challenge again.": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offene Fragen bleiben unbeantwortet und dein Ergebnis steht fest. Das heutige Tagesquiz kannst du nicht noch einmal spielen."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Unanswered questions will be left blank and your result will be final. You can't try today's challenge again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las preguntas sin responder quedarán en blanco y tu resultado será definitivo. No podrás volver a jugar el reto de hoy."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les questions sans réponse resteront vides et votre résultat sera définitif. Vous ne pourrez pas retenter le défi du jour."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le domande senza risposta resteranno vuote e il risultato sarà definitivo. Non potrai riprovare la sfida del giorno."
           }
         },
         "ja": {
@@ -1422,15 +5826,63 @@
             "state": "translated",
             "value": "まだ解いていない問題は未解答のまま結果が確定し、今日のチャレンジにはもう挑戦できません。"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아직 풀지 않은 문제는 미응답으로 처리되어 결과가 확정되며, 오늘의 챌린지에는 다시 도전할 수 없습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As perguntas não respondidas ficarão em branco e seu resultado será definitivo. Você não poderá jogar o desafio de hoje de novo."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "还没答的题会按未作答处理，成绩随即确定，今天不能再挑战了。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "還沒作答的題目會視為未作答並確定成績，今天就不能再挑戰了。"
+          }
         }
       }
     },
     "Question %lld: Correct": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frage %lld: richtig"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Question %lld: Correct"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pregunta %lld: correcta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Question %lld : bonne réponse"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Domanda %lld: giusta"
           }
         },
         "ja": {
@@ -1438,15 +5890,63 @@
             "state": "translated",
             "value": "%lld 問目 正解"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld번 문제 정답"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pergunta %lld: certa"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "第 %lld 题：答对"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "第 %lld 題：答對"
+          }
         }
       }
     },
     "Question %lld: Incorrect": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frage %lld: falsch"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Question %lld: Incorrect"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pregunta %lld: incorrecta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Question %lld : mauvaise réponse"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Domanda %lld: sbagliata"
           }
         },
         "ja": {
@@ -1454,15 +5954,63 @@
             "state": "translated",
             "value": "%lld 問目 不正解"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld번 문제 오답"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pergunta %lld: errada"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "第 %lld 题：答错"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "第 %lld 題：答錯"
+          }
         }
       }
     },
     "Question %lld: Unanswered": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frage %lld: nicht beantwortet"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Question %lld: Unanswered"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pregunta %lld: sin responder"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Question %lld : sans réponse"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Domanda %lld: senza risposta"
           }
         },
         "ja": {
@@ -1470,15 +6018,63 @@
             "state": "translated",
             "value": "%lld 問目 未解答"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld번 문제 미응답"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pergunta %lld: sem resposta"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "第 %lld 题：未作答"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "第 %lld 題：未作答"
+          }
         }
       }
     },
     "No missed questions so far": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bisher keine Fehler"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "No missed questions so far"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin errores por ahora"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune erreur pour l’instant"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessun errore finora"
           }
         },
         "ja": {
@@ -1486,15 +6082,63 @@
             "state": "translated",
             "value": "解いた問題に間違いはありません"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지금까지 틀린 문제가 없습니다"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhum erro até agora"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目前还没有答错的题"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目前沒有答錯的題目"
+          }
         }
       }
     },
     "Difficulty: %@": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schwierigkeit: %@"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Difficulty: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dificultad: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Difficulté : %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Difficoltà: %@"
           }
         },
         "ja": {
@@ -1502,15 +6146,99 @@
             "state": "translated",
             "value": "難易度 %@"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "난이도 %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dificuldade: %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "难度：%@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "難度：%@"
+          }
         }
       }
     },
     "Time limit: %lld sec": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zeitlimit: %lld Sek."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Time limit: %lld sec"
+          }
+        },
+        "es": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Límite de tiempo: %lld segundo"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Límite de tiempo: %lld segundos"
+                }
+              }
+            }
+          }
+        },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Limite de temps : %lld seconde"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Limite de temps : %lld secondes"
+                }
+              }
+            }
+          }
+        },
+        "it": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Limite di tempo: %lld secondo"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Limite di tempo: %lld secondi"
+                }
+              }
+            }
           }
         },
         "ja": {
@@ -1518,15 +6246,75 @@
             "state": "translated",
             "value": "制限時間 %lld 秒"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "제한 시간 %lld초"
+          }
+        },
+        "pt-BR": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Limite de tempo: %lld segundo"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Limite de tempo: %lld segundos"
+                }
+              }
+            }
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "时间限制：%lld 秒"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "時間限制：%lld 秒"
+          }
         }
       }
     },
     "Start": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Start"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empezar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commencer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inizia"
           }
         },
         "ja": {
@@ -1534,15 +6322,63 @@
             "state": "translated",
             "value": "スタート"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시작"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Começar"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开始"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開始"
+          }
         }
       }
     },
     "Start Time Attack?": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blitzrunde starten?"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Start Time Attack?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Empezar Contrarreloj?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lancer le contre-la-montre ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iniziare la sfida contro il tempo?"
           }
         },
         "ja": {
@@ -1550,15 +6386,63 @@
             "state": "translated",
             "value": "タイムアタックを始めますか？"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "타임어택을 시작하시겠습니까?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Começar o Contra o Tempo?"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要开始限时挑战吗？"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要開始限時挑戰嗎？"
+          }
         }
       }
     },
     "Start today's 10 questions": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die 10 Fragen von heute starten"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Start today's 10 questions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Juega las 10 preguntas de hoy"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jouer les 10 questions du jour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Affronta le 10 domande di oggi"
           }
         },
         "ja": {
@@ -1566,15 +6450,63 @@
             "state": "translated",
             "value": "今日の 10 問に挑戦"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오늘의 10문제 도전하기"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jogue as 10 perguntas de hoje"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "挑战今天的 10 道题"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "挑戰今天的 10 題"
+          }
         }
       }
     },
     "Records": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rekorde"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Records"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récords"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Records"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Record"
           }
         },
         "ja": {
@@ -1582,15 +6514,63 @@
             "state": "translated",
             "value": "記録"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기록"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recordes"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "记录"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "紀錄"
+          }
         }
       }
     },
     "Personal Best": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bestleistung"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Personal Best"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mejor marca"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Record personnel"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Record personale"
           }
         },
         "ja": {
@@ -1598,15 +6578,63 @@
             "state": "translated",
             "value": "自己ベスト"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "최고 기록"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recorde pessoal"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "个人最佳"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "個人最佳"
+          }
         }
       }
     },
     "No records yet": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch keine Rekorde"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "No records yet"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no hay récords"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun record pour l’instant"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ancora nessun record"
           }
         },
         "ja": {
@@ -1614,15 +6642,63 @@
             "state": "translated",
             "value": "まだ記録がありません"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아직 기록이 없습니다"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhum recorde ainda"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暂无记录"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "還沒有紀錄"
+          }
         }
       }
     },
     "Time Attack Records": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blitzrunden-Rekorde"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Time Attack Records"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récords de Contrarreloj"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Records du contre-la-montre"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Record della modalità contro il tempo"
           }
         },
         "ja": {
@@ -1630,21 +6706,93 @@
             "state": "translated",
             "value": "タイムアタックの記録"
           }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "타임어택 기록"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recordes do Contra o Tempo"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "限时挑战记录"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "限時挑戰紀錄"
+          }
         }
       }
     },
     "Ad": {
       "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anzeige"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Ad"
           }
         },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anuncio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annonce"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuncio"
+          }
+        },
         "ja": {
           "stringUnit": {
             "state": "translated",
             "value": "広告"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "광고"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anúncio"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "广告"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "廣告"
           }
         }
       }
