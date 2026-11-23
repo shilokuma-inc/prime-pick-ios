@@ -163,6 +163,13 @@ def load(directory: Path, target: Language, shared: dict[str, str]) -> tuple[dic
         if len(value) > limit:
             problems.append(f"{path}: {field} が {len(value)} 字あります（上限 {limit} 字）")
 
+    # 絵文字（U+10000 以降の文字。🟩 など）は App Store Connect が INVALID_CHARACTERS で弾く（#542）。
+    # ■（U+25A0）のような記号は通る
+    for field, value in {**info_attributes, **attributes}.items():
+        emoji = sorted({character for character in value if ord(character) > 0xFFFF})
+        if emoji:
+            problems.append(f"{path}: {field} に絵文字があります（{' '.join(emoji)}）")
+
     if problems:
         return None, {}, None, problems
     return {**attributes, **shared}, info_attributes, whats_new_version, []
@@ -492,16 +499,21 @@ def main() -> int:
         for line in changes:
             print(line)
         if not args.dry_run:
-            client.patch(
-                f"/v1/appStoreVersionLocalizations/{localization['id']}",
-                {
-                    "data": {
-                        "type": "appStoreVersionLocalizations",
-                        "id": localization["id"],
-                        "attributes": attributes,
-                    }
-                },
-            )
+            try:
+                client.patch(
+                    f"/v1/appStoreVersionLocalizations/{localization['id']}",
+                    {
+                        "data": {
+                            "type": "appStoreVersionLocalizations",
+                            "id": localization["id"],
+                            "attributes": attributes,
+                        }
+                    },
+                )
+            except ApiError as error:
+                # 1 言語の失敗で止めずに残りを書く（#542）
+                print(f"    失敗: {error}")
+                failures.append(label)
 
     print(f"完了: {len(plan)} 言語")
     if skipped:
