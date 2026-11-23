@@ -39,6 +39,23 @@ xcodebuild test -project PrimePickApp.xcodeproj -scheme PrimePickApp -destinatio
 - このアプリだけの見せ方・演出・計測は、`QuizSession.onEvent` と `QuizSession` の状態を見てこのリポジトリで書く
 - デイリーの出題（`DailyChallengeGeneratorV1`）は `SplitMix64` のメソッドだけを使う。標準ライブラリの `shuffled(using:)` などは OS の更新で引き方が変わりうる
 
+## ローカライズ
+
+1.4.0 から 10 言語（`ja` / `en` / `zh-Hans` / `zh-Hant` / `ko` / `es` / `fr` / `de` / `it` / `pt-BR`）に対応し、アプリ名も言語ごとに違う（#524）。
+
+| もの | 置き場所 |
+| --- | --- |
+| 画面の文字列 | `PrimePickApp/Localizable.xcstrings`（開発言語は en。キーは英語か日本語の原文） |
+| ホーム画面のアプリ名・ATT の説明文 | `PrimePickApp/InfoPlist.xcstrings` の `CFBundleDisplayName` / `NSUserTrackingUsageDescription`。言語の無い端末では `INFOPLIST_KEY_CFBundleDisplayName`（英語の名前）が出る |
+| アプリの中のアプリ名（シェアの文・画像カード・ロゴの読み上げ） | `AppName.current`（`CFBundleDisplayName` を読む。名前を文字列に直接書かない） |
+| ホームのロゴ（ふるい）の文字 | `Localizable.xcstrings` の `TitleLogoLines`（改行で行を分ける。欧文は大文字）。長い名前は `TitleLogoLayout.fittingScale` で縮む |
+
+- アプリ名を変えるときは `CFBundleDisplayName` と `TitleLogoLines` を両方直す（`TitleLogoTests` が全言語で一致を確かめる）。App Store の名前は別（`AppStore/metadata/<言語>.json` の `name`）
+- 言語を足すときは、`project.pbxproj` の `knownRegions`・2 つの xcstrings・`TitleLogoLines`・`AppFont.cjkFont(language:japanese:)`（漢字・かな・ハングルを使う言語だけ）をそろえる。`TitleLogoTests.testAppHasTenLocalizations` も直す
+- 書体: 見出しの Didot に組み合わせる書体は言語で変える（日本語はヒラギノ明朝、中国語は PingFang、韓国語は Apple SD Gothic Neo）。中国語に和文の書体を組み合わせると、漢字が日本の字形で出る
+- 画面の崩れは、撮影モードを言語を変えて起動して確かめる（`xcrun simctl launch <udid> ml.mrs1669.PrimePickApp -AppleLanguages "(fr)" -AppleLocale fr_FR -screenshot-demo -screenshot-scene main`）。ドイツ語・フランス語・イタリア語は長くなりやすく、モードの選択肢（`Practice` など）は 8 文字程度までにしないと小さく縮む
+- xcstrings を Python で書き換えるときは、元の書式を保つ（`Localizable.xcstrings` は `": "`、`InfoPlist.xcstrings` は Xcode の `" : "`）。`xcodebuild` のビルドではカタログは書き換わらない
+
 ## App Store の掲載情報
 
 手動で発火する GitHub Actions で、編集中のバージョンに反映する（審査中・配信済みのバージョンには触らない）。認証は Organization secrets の App Store Connect API Key（`APPLE_API_KEY_BASE64` / `APPLE_API_KEY_ID` / `APPLE_API_ISSUER_ID`）。
