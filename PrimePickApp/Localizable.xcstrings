@@ -6796,6 +6796,71 @@
           }
         }
       }
+    },
+    "TitleLogoLines": {
+      "comment": "ホームのロゴ（ふるい）に並べるアプリ名。改行で行を分ける。欧文は大文字。CFBundleDisplayName と同じ文字にする",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ECHT\nPRIM?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PRIME\nOR\nNOT?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿SERÁ\nPRIMO?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PREMIER ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PRIMO\nO\nNO?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "素数なの？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "소수냐\n아니냐"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SERÁ\nPRIMO?"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "是不是\n质数？"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "是不是\n質數？"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
