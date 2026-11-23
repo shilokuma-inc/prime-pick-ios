@@ -105,13 +105,23 @@ final class AppFontTests: XCTestCase {
         XCTAssertNil(font.fontDescriptor.fontAttributes[.cascadeList])
     }
 
-    /// 和文の書体を組み合わせるのは日本語のときだけ。中国語で組み合わせると漢字が日本の字形で出る
-    func testCascadesJapaneseOnlyForJapanese() {
-        XCTAssertTrue(AppFont.cascadesJapanese(language: "ja"))
-        for language in ["en", "zh-Hans", "zh-Hant", "ko", "es", "fr", "de", "it", "pt-BR"] {
-            XCTAssertFalse(AppFont.cascadesJapanese(language: language), language)
+    /// 和文の書体を組み合わせるのは日本語のときだけ。中国語で組み合わせると漢字が日本の字形で出るので、中国語・韓国語はその言語の書体にする
+    func testCJKFontFollowsDisplayLanguage() {
+        XCTAssertEqual(AppFont.cjkFont(language: "ja", japanese: "HiraMinProN-W6"), "HiraMinProN-W6")
+        XCTAssertEqual(AppFont.cjkFont(language: "zh-Hans", japanese: "HiraMinProN-W6"), "PingFangSC-Semibold")
+        XCTAssertEqual(AppFont.cjkFont(language: "zh-Hant", japanese: "HiraMinProN-W6"), "PingFangTC-Semibold")
+        XCTAssertEqual(AppFont.cjkFont(language: "ko", japanese: "HiraMinProN-W6"), "AppleSDGothicNeo-Bold")
+        for language in ["en", "es", "fr", "de", "it", "pt-BR"] {
+            XCTAssertNil(AppFont.cjkFont(language: language, japanese: "HiraMinProN-W6"), language)
         }
-        XCTAssertFalse(AppFont.cascadesJapanese(language: nil))
+        XCTAssertNil(AppFont.cjkFont(language: nil, japanese: "HiraMinProN-W6"))
+    }
+
+    /// 中国語・韓国語の書体も、名前を間違えるとシステムの書体に黙って落ちるので、iOS に入っていることを確かめる
+    func testOtherCJKFontsAreInstalled() {
+        for name in AppFont.otherCJKFonts {
+            XCTAssertEqual(UIFont(name: name, size: 20)?.fontName, name)
+        }
     }
 
     /// Dynamic Type で拡大する大きさは、今の文字の大きさの設定で拡大した値になる

@@ -21,7 +21,8 @@ struct AppTypeface: Equatable {
         /// 欧文の書体だけを指定すると、日本語の文字はシステムの和文（ヒラギノ角ゴシック）に落ちるため。
         /// `UIFont` を組み立てて使うので、`AppFont.weight` は効かない（太さは PostScript 名で選ぶ）
         ///
-        /// 和文の書体を組み合わせるのは、アプリを日本語で表示しているときだけ（`AppFont.cascadesJapanese(language:)`）
+        /// 和文の書体を組み合わせるのは、アプリを日本語で表示しているときだけ。中国語・韓国語では、その言語の書体を
+        /// 組み合わせる（`AppFont.cjkFont(language:japanese:)`）
         case namedWithJapanese(String, japanese: String)
 
         /// この書体で使う PostScript 名（システムの書体なら空）
@@ -117,7 +118,7 @@ struct AppFont: Equatable {
         case let (.namedWithJapanese(name, japanese), size):
             Font(Self.cascadedUIFont(
                 name: name,
-                japanese: Self.cascadesJapanese(language: Self.displayLanguage) ? japanese : nil,
+                japanese: Self.cjkFont(language: Self.displayLanguage, japanese: japanese),
                 size: size,
                 traits: traits
             ))
@@ -127,14 +128,23 @@ struct AppFont: Equatable {
     /// アプリを表示している言語（`Localizable.xcstrings` の言語コード）
     static var displayLanguage: String? { Bundle.main.preferredLocalizations.first }
 
-    /// 和文の書体を組み合わせる言語か。日本語のときだけ組み合わせる
+    /// 欧文の書体に組み合わせる、表示している言語の書体（PostScript 名）。中国語・日本語・韓国語でなければ nil（組み合わせない）
     ///
-    /// 中国語で和文の書体（ヒラギノ明朝）を組み合わせると、漢字が日本の字形で出てしまう（簡体字には和文の書体に無い字もあり、
-    /// 1 つの語の中で書体が混ざる）。組み合わせなければ、欧文の書体に無い文字は表示している言語に合った書体
-    /// （中国語は PingFang、韓国語は Apple SD Gothic Neo）に落ちる。iOS には中国語・韓国語の明朝体が標準で入っていない
-    static func cascadesJapanese(language: String?) -> Bool {
-        language == "ja"
+    /// 日本語は `japanese`（ヒラギノ明朝）。中国語に和文の書体を組み合わせると、漢字が日本の字形で出てしまう（簡体字には
+    /// 和文の書体に無い字もあり、1 つの語の中で書体が混ざる）ので、中国語・韓国語はその言語のゴシックを組み合わせる。
+    /// iOS には中国語・韓国語の明朝体が標準で入っていない。太さは Didot Bold に負けないものにする
+    static func cjkFont(language: String?, japanese: String) -> String? {
+        switch language {
+        case "ja": japanese
+        case "zh-Hans": "PingFangSC-Semibold"
+        case "zh-Hant": "PingFangTC-Semibold"
+        case "ko": "AppleSDGothicNeo-Bold"
+        default: nil
+        }
     }
+
+    /// `cjkFont(language:japanese:)` が返しうる、日本語以外の書体
+    static let otherCJKFonts = ["PingFangSC-Semibold", "PingFangTC-Semibold", "AppleSDGothicNeo-Bold"]
 
     /// SwiftUI の文字の大きさを、`UIFontMetrics` に渡す `UITraitCollection` にする。nil なら端末の設定に従う（nil を返す）
     static func traits(for dynamicTypeSize: DynamicTypeSize?) -> UITraitCollection? {
