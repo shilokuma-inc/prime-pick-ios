@@ -721,6 +721,102 @@
         }
       }
     },
+    "Reminder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reminder"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リマインド"
+          }
+        }
+      }
+    },
+    "Daily Challenge Reminder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daily Challenge Reminder"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日のチャレンジのお知らせ"
+          }
+        }
+      }
+    },
+    "Reminder Time": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reminder Time"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "お知らせの時刻"
+          }
+        }
+      }
+    },
+    "We'll remind you on days you haven't played the Daily Challenge yet.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We'll remind you on days you haven't played the Daily Challenge yet."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日のチャレンジをまだ解いていない日にお知らせします。"
+          }
+        }
+      }
+    },
+    "Notifications are turned off for this app. To get reminders, allow notifications in the Settings app.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications are turned off for this app. To get reminders, allow notifications in the Settings app."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このアプリの通知が許可されていません。リマインドを受け取るには、設定アプリで通知を許可してください。"
+          }
+        }
+      }
+    },
+    "Open Settings": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Settings"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定アプリを開く"
+          }
+        }
+      }
+    },
     "App Info": {
       "localizations": {
         "en": {

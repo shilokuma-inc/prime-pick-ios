@@ -9,7 +9,10 @@ import SwiftUI
 struct SettingView: View {
     @Environment(\.dismiss) private var dismiss
     @AppStorage(AppTheme.userDefaultsKey) private var appTheme = AppTheme.system.rawValue
+    @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.openURL) private var openURL
     @StateObject private var privacyOptions = PrivacyOptionsModel.live()
+    @StateObject private var reminder = DailyReminderSettingsModel()
 
     private let appVersion = AppVersion.current
 
@@ -21,6 +24,7 @@ struct SettingView: View {
 
                 List {
                     themeSection
+                    reminderSection
                     if privacyOptions.isVisible {
                         adsSection
                     }
@@ -35,6 +39,12 @@ struct SettingView: View {
             }
             .sendAnalyticsScreen(.settings)
             .onAppear(perform: privacyOptions.refresh)
+            // 許可は設定アプリで変えられるので、開いたとき・前面に戻ったときに読み直す
+            .task { await reminder.refresh() }
+            .onChange(of: scenePhase) { _, phase in
+                guard phase == .active else { return }
+                Task { await reminder.refresh() }
+            }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -61,6 +71,46 @@ private extension SettingView {
             .accessibilityLabel("App Theme")
         } header: {
             Text("Theme")
+        }
+    }
+
+    /// デイリーのリマインドのオン／オフと時刻。時刻はオンのときだけ出す
+    var reminderSection: some View {
+        Section {
+            Toggle(
+                "Daily Challenge Reminder",
+                isOn: Binding(
+                    get: { reminder.isEnabled },
+                    set: { isOn in Task { await reminder.setEnabled(isOn) } }
+                )
+            )
+            .disabled(reminder.isRequestingAuthorization)
+
+            if reminder.isEnabled {
+                DatePicker(
+                    "Reminder Time",
+                    selection: Binding(
+                        get: { reminder.time.date() },
+                        set: { date in Task { await reminder.setTime(DailyReminderTime(date: date)) } }
+                    ),
+                    displayedComponents: .hourAndMinute
+                )
+            }
+
+            if reminder.isAuthorizationDenied {
+                Button("Open Settings") {
+                    guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                    openURL(url)
+                }
+            }
+        } header: {
+            Text("Reminder")
+        } footer: {
+            if reminder.isAuthorizationDenied {
+                Text("Notifications are turned off for this app. To get reminders, allow notifications in the Settings app.")
+            } else {
+                Text("We'll remind you on days you haven't played the Daily Challenge yet.")
+            }
         }
     }
 
