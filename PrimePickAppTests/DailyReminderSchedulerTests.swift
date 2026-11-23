@@ -209,8 +209,19 @@ final class DailyReminderSchedulerTests: XCTestCase {
 
     @MainActor
     func testReminderPathOpensDailyChallengeOnly() {
-        XCTAssertEqual(MainView.reminderPath, NavigationPath([DailyChallengeRoute()]))
-        XCTAssertEqual(MainView.reminderPath.count, 1)
+        let route = MainView.reminderRoute()
+        XCTAssertEqual(MainView.reminderPath(for: route), NavigationPath([route]))
+        XCTAssertEqual(MainView.reminderPath(for: route).count, 1)
+    }
+
+    /// 前の日のデイリーを積んだままタップしても、経路が変わって画面が作り直される
+    @MainActor
+    func testReminderRouteDiffersEachTimeAndFromCardRoute() {
+        let first = MainView.reminderRoute()
+        let second = MainView.reminderRoute()
+        XCTAssertNotEqual(first, second)
+        XCTAssertNotEqual(first, DailyChallengeRoute())
+        XCTAssertNotEqual(MainView.reminderPath(for: first), MainView.reminderPath(for: second))
     }
 
     // MARK: - ヘルパー

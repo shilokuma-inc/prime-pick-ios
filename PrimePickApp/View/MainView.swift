@@ -61,8 +61,10 @@ struct MainView: View {
                 }
             }
             .animation(Self.confirmationAnimation, value: pendingTimeAttack)
-            .navigationDestination(for: DailyChallengeRoute.self) { _ in
+            .navigationDestination(for: DailyChallengeRoute.self) { route in
                 DailyChallengeView(onPlayTimeAttack: playTimeAttackFromDailyChallenge)
+                    // リマインドから開き直したときは、前の日の画面を残さず作り直して今日の分を読み直す
+                    .id(route)
             }
             .navigationDestination(for: QuizSetting.self) { setting in
                 QuizView(
@@ -127,7 +129,11 @@ private enum MainSheet: Identifiable {
 }
 
 /// カードからデイリーチャレンジへ遷移するときの `NavigationPath` の値
-struct DailyChallengeRoute: Hashable {}
+///
+/// `token` はリマインドから開くたびに新しくする。前の日のデイリーを積んだままでも別の経路になり、画面が作り直される
+struct DailyChallengeRoute: Hashable {
+    var token: UUID?
+}
 
 /// タイトル画面の背景に重ねる、選んでいるモードの色の柔らかい光（Discussion #330）
 ///
@@ -368,7 +374,7 @@ private extension MainView {
     func openDailyChallengeFromReminder() {
         presentedSheet = nil
         pendingTimeAttack = nil
-        path = Self.reminderPath
+        path = Self.reminderPath(for: Self.reminderRoute())
     }
 
     func refreshDailyChallengeCard() {
@@ -436,8 +442,13 @@ extension MainView {
     /// 遊び方のボタンの押下音。進むでも戻るでもない（説明のシートを開くだけの）ボタンなので、どちらでもない押下音にする
     static let howToPlayPressSound: SoundEffect = .buttonPressNeutral
     /// リマインドをタップしたときの `path`。タイトルの上にデイリーチャレンジを 1 枚だけ積む
-    static var reminderPath: NavigationPath {
-        NavigationPath([DailyChallengeRoute()])
+    static func reminderPath(for route: DailyChallengeRoute) -> NavigationPath {
+        NavigationPath([route])
+    }
+
+    /// リマインドから開くときの経路。開くたびに別の値にする
+    static func reminderRoute() -> DailyChallengeRoute {
+        DailyChallengeRoute(token: UUID())
     }
 }
 

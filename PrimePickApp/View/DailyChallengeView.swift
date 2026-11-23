@@ -63,6 +63,8 @@ struct DailyChallengeView: View {
         let streakBefore = DailyChallengeStreak(records: store.allRecords(), today: today).current
         phase = Self.phase(for: today, now: Date(), store: store, generator: generator)
         if case .playing = phase {
+            // 始めた日は挑戦権を使ったので、途中でやめても今日のリマインドが届かないよう組み直す
+            DailyReminderScheduler.shared.reschedule()
             FirebaseAnalytics().sendDailyChallenge(.start(dayNumber: today.dayNumber, streakBefore: streakBefore))
         }
     }

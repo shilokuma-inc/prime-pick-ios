@@ -45,7 +45,7 @@ struct SystemDailyReminderNotificationCenter: DailyReminderNotificationCenter {
 
 /// デイリーのリマインドを予約し直す
 ///
-/// 予約し直すのは、アプリが前面に戻ったとき（最後に開いた日も今日にする）・デイリーを解き終えたとき・設定を変えたとき。
+/// 予約し直すのは、アプリが前面に戻ったとき（最後に開いた日も今日にする）・デイリーを始めたとき・解き終えたとき・設定を変えたとき。
 /// 予約し直すときは、このアプリが予約したリマインド（`DailyReminderNotification.identifierPrefix` で始まるもの）を全部消してから
 /// `DailyReminderPlanner` の求めた分を入れ直すので、前の予約が残って二重に届くことはない。
 /// 続けて呼ばれても前の組み直しが終わってから次を始め、古い予約が後から入り込まないようにする。撮影モードでは予約しない。
