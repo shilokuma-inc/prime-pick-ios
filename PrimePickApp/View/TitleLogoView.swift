@@ -56,7 +56,7 @@ enum TitleLogoLayout {
     /// 倍率 1 のときに収める横幅（iPhone SE の幅 375pt から左右の余白を引いた幅）
     static let maxWidth: CGFloat = 327
 
-    /// 素数のマス・合成数のマスの幅と、マスの間隔（倍率 1 のとき）
+    /// 素数のマス・合成数のマスの幅と、マスの間隔（倍率 1 のとき）。描くとき（`TitleLogoArtwork`）もこの値を使う
     static let primeCellWidth: CGFloat = 40
     static let compositeCellWidth: CGFloat = 13
     static let cellSpacing: CGFloat = 2
@@ -167,7 +167,7 @@ struct TitleLogoArtwork: View {
     var body: some View {
         VStack(spacing: s(6)) {
             ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
-                HStack(spacing: s(2)) {
+                HStack(spacing: s(TitleLogoLayout.cellSpacing)) {
                     ForEach(row, id: \.number) { cell in
                         if let character = cell.letter {
                             primeCell(number: cell.number, letter: character)
@@ -213,7 +213,7 @@ struct TitleLogoArtwork: View {
                 .offset(y: s(3))
                 .opacity(isDecoration ? 0 : 1)
         }
-        .frame(width: s(40), height: s(50))
+        .frame(width: s(TitleLogoLayout.primeCellWidth), height: s(50))
     }
 
     /// 合成数（と 1）のマス。細くして斜線で消す
@@ -227,11 +227,11 @@ struct TitleLogoArtwork: View {
                 .minimumScaleFactor(0.5)
             Path { path in
                 path.move(to: CGPoint(x: 0, y: s(50)))
-                path.addLine(to: CGPoint(x: s(13), y: 0))
+                path.addLine(to: CGPoint(x: s(TitleLogoLayout.compositeCellWidth), y: 0))
             }
             .stroke(ink.opacity(0.6), lineWidth: s(1))
         }
-        .frame(width: s(13), height: s(50))
+        .frame(width: s(TitleLogoLayout.compositeCellWidth), height: s(50))
         .opacity(isDecoration ? 1 : 0)
     }
 }
