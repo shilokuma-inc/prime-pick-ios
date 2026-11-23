@@ -24,6 +24,8 @@ struct MainView: View {
     @State private var selectedQuestionCount: QuizQuestionCount = .default
     /// 確認のカードを出しているタイムアタックの設定。nil ならカードを出していない（Discussion #394）
     @State private var pendingTimeAttack: QuizSetting?
+    /// タップされたリマインド。受け取ったらデイリーチャレンジの画面を開く
+    @ObservedObject private var reminderRouter = DailyReminderRouter.shared
 
     var body: some View {
         NavigationStack(path: $path) {
@@ -101,6 +103,13 @@ struct MainView: View {
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active {
                     refreshDailyChallengeCard()
+                }
+            }
+            // 停止中からの起動では、この画面ができる前にタップが届いていることがあるので、最初にも見る
+            .onChange(of: reminderRouter.pendingTap, initial: true) { _, tap in
+                if tap != nil {
+                    reminderRouter.consume()
+                    openDailyChallengeFromReminder()
                 }
             }
         }
@@ -355,6 +364,13 @@ private extension MainView {
         pendingTimeAttack = setting
     }
 
+    /// リマインドのタップでデイリーチャレンジの画面を開く。開いているシートと確認のカードは閉じ、積んでいる画面はデイリーだけにする
+    func openDailyChallengeFromReminder() {
+        presentedSheet = nil
+        pendingTimeAttack = nil
+        path = Self.reminderPath
+    }
+
     func refreshDailyChallengeCard() {
         dailyChallengeCard = DailyChallengeCardState(
             records: UserDefaultsDailyChallengeStore().allRecords(),
@@ -419,6 +435,10 @@ extension MainView {
     static let dailyChallengeCardPressSound: SoundEffect = .buttonPressForward
     /// 遊び方のボタンの押下音。進むでも戻るでもない（説明のシートを開くだけの）ボタンなので、どちらでもない押下音にする
     static let howToPlayPressSound: SoundEffect = .buttonPressNeutral
+    /// リマインドをタップしたときの `path`。タイトルの上にデイリーチャレンジを 1 枚だけ積む
+    static var reminderPath: NavigationPath {
+        NavigationPath([DailyChallengeRoute()])
+    }
 }
 
 extension Difficulty {
