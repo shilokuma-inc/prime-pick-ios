@@ -118,7 +118,7 @@ struct AppFont: Equatable {
         case let (.namedWithJapanese(name, japanese), size):
             Font(Self.cascadedUIFont(
                 name: name,
-                japanese: Self.cjkFont(language: Self.displayLanguage, japanese: japanese),
+                cjk: Self.cjkFont(language: Self.displayLanguage, japanese: japanese),
                 size: size,
                 traits: traits
             ))
@@ -151,10 +151,10 @@ struct AppFont: Equatable {
         dynamicTypeSize.map { UITraitCollection(preferredContentSizeCategory: UIContentSizeCategory($0)) }
     }
 
-    /// 欧文の書体に和文の書体を組み合わせた `UIFont`。`japanese` が nil なら組み合わせない（欧文の書体だけ）
+    /// 欧文の書体に、和文・中国語・韓国語の書体（`cjk`）を組み合わせた `UIFont`。`cjk` が nil なら組み合わせない（欧文の書体だけ）
     ///
     /// Dynamic Type で拡大する大きさは `traits` の文字の大きさで決まる（nil なら組み立てた時点の端末の設定）
-    static func cascadedUIFont(name: String, japanese: String?, size: Size, traits: UITraitCollection? = nil) -> UIFont {
+    static func cascadedUIFont(name: String, cjk: String?, size: Size, traits: UITraitCollection? = nil) -> UIFont {
         let pointSize: CGFloat
         let metrics: UIFontMetrics?
         switch size {
@@ -169,8 +169,8 @@ struct AppFont: Equatable {
             metrics = UIFontMetrics(forTextStyle: uiTextStyle(of: style))
         }
         var descriptor = UIFontDescriptor(name: name, size: pointSize)
-        if let japanese {
-            descriptor = descriptor.addingAttributes([.cascadeList: [UIFontDescriptor(name: japanese, size: pointSize)]])
+        if let cjk {
+            descriptor = descriptor.addingAttributes([.cascadeList: [UIFontDescriptor(name: cjk, size: pointSize)]])
         }
         let font = UIFont(descriptor: descriptor, size: pointSize)
         return metrics?.scaledFont(for: font, compatibleWith: traits) ?? font
