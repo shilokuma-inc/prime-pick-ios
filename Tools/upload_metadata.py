@@ -113,6 +113,9 @@ def load(directory: Path, target: Language, shared: dict[str, str]) -> tuple[dic
             problems.append(f"{path}: {field} が空です（使わないなら項目ごと消す）")
         elif value != value.strip():
             problems.append(f"{path}: {field} の前後に空白があります")
+        elif any(character.isspace() and character != " " for character in value):
+            # フランス語の「?」の前の細い空白（U+202F）など。App Store Connect が INVALID_CHARACTERS で弾く（#540）
+            problems.append(f"{path}: {field} に普通の空白（U+0020）以外の空白があります")
         elif len(value) > limit:
             problems.append(f"{path}: {field} が {len(value)} 字あります（上限 {limit} 字）")
         else:
