@@ -65,7 +65,7 @@ final class TitleLogoTests: XCTestCase {
 
     // MARK: - 言語ごとのアプリ名
 
-    /// アプリに入っている言語（Base 以外）。knownRegions の 10 言語
+    /// アプリに入っている言語（Base 以外）。knownRegions の 10 言語と、スペインのスペイン語（es-ES）
     private var localizations: [String] {
         Bundle.main.localizations.filter { $0 != "Base" }.sorted()
     }
@@ -75,8 +75,8 @@ final class TitleLogoTests: XCTestCase {
         return try XCTUnwrap(Bundle(path: path), localization)
     }
 
-    func testAppHasTenLocalizations() {
-        XCTAssertEqual(localizations, ["de", "en", "es", "fr", "it", "ja", "ko", "pt-BR", "zh-Hans", "zh-Hant"])
+    func testAppHasTenLanguagesAndSpainSpanish() {
+        XCTAssertEqual(localizations, ["de", "en", "es", "es-ES", "fr", "it", "ja", "ko", "pt-BR", "zh-Hans", "zh-Hant"])
     }
 
     /// ロゴの文字は、その言語のホーム画面のアプリ名（CFBundleDisplayName）を大文字にして空白を除いたものと同じ
