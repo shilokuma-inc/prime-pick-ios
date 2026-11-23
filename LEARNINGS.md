@@ -14,6 +14,7 @@
 - App Store Connect のスクリーンショットの取り込みは、同じ画像でもときどき `assetDeliveryState.errors` が `ASSET_FAILED` になる（2026-10-22 の 1.3.0 では、4 サイズとも 3 回続けて、毎回違う画像が失敗した。画像の形式は前回通ったときと同じで、Apple のシステム状況にも障害は出ていなかった）。セットごとやり直すと別の画像がまた失敗するので、`Tools/upload_screenshots.py` は失敗した画像だけを消して上げ直す（#445）。fastlane の deliver も同じやり方をしている
 - App Asset Library の画像の参照名（`referenceName`）はライブラリの中で一意。「置き場所 言語 バージョン」だけで名前を付けていたら、同じバージョン（1.3.0）にクリエイティブアセットを上げ直したときに `409 ENTITY_ERROR.ATTRIBUTE.INVALID.DUPLICATE` で止まった。参照名に画像の MD5 の先頭 8 文字を入れ、同じ名前の画像があれば上げ直さずに使う（#500、idfa-vault-ios から移植）（2026-11-11）
 - App Store Connect で言語を足すとき、バージョンの言語（`appStoreVersionLocalizations`）を先に作ると、App Store Connect がアプリ情報の言語を今の名前（主言語の名前）で作ろうとする。1.4.0 で en-US を足したとき、今の名前「Prime Pick」が en-US でほかのアプリに使われていて `409 STATE_ERROR.DUPLICATE_NAME.DIFFERENT_ACCOUNT`（Cannot add localization due to app name）で止まった。fastlane の deliver と同じ「バージョン → アプリ情報」の順は、名前を変えるときに通らない。新しい名前でアプリ情報の言語（`appInfoLocalizations`）を先に作る（#538）（2026-11-23）
+- 逆に、アプリ情報の言語（`appInfoLocalizations`）を POST すると、App Store Connect はバージョンの言語（`appStoreVersionLocalizations`）も空のまま自動で作る。続けてバージョンの言語を POST すると `409 ENTITY_ERROR.ATTRIBUTE.INVALID.DUPLICATE`（locale already exists. Try updating.）になるので、読み直して PATCH する。また名前は普通の空白以外（フランス語の「?」の前の U+202F など）を `409 ENTITY_ERROR.ATTRIBUTE.INVALID.INVALID_CHARACTERS` で弾く（#540）（2026-11-23）
 - プロジェクトは objectVersion 56（ファイル同期グループ無し）。Swift ファイルを足したら `project.pbxproj` の PBXBuildFile / PBXFileReference / PBXGroup / PBXSourcesBuildPhase に手で登録する（2026-10-05）
 
 ## 広告（AdMob）
