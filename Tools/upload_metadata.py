@@ -448,10 +448,27 @@ def main() -> int:
             "--missing-locales skip（飛ばす）を付けてください。"
         )
 
+    from app_store_connect import ApiError
+
+    # 名前・サブタイトル（アプリ情報）を先に書く。アプリ情報にその言語が無いままバージョンの言語を作ると、
+    # App Store Connect がアプリ情報の言語を今の名前（主言語の名前）で作ろうとし、その名前がその言語で
+    # ほかのアプリに使われていると、言語そのものを足せずに 409（DUPLICATE_NAME）で弾かれる（#538）
+    failures, info_failed = write_app_info(client, args, app, app_info, info_available, info_entries, plan)
+
     for target, attributes, localization in plan:
         label = f"{target.language} → {target.store_locale}"
         if localization is None:
-            client.create_localization(version["id"], target.store_locale, attributes)
+            if target.language in info_failed:
+                # 今の名前で作られて同じ 409 になるので、バージョンの言語も作らない
+                print(f"  飛ばす — {label}: アプリ情報の言語を作れなかったので、バージョンの言語も作りません")
+                continue
+            try:
+                client.create_localization(version["id"], target.store_locale, attributes)
+            except ApiError as error:
+                hint = "（今の名前がその言語でほかのアプリに使われている可能性があります）" if error.status == 409 else ""
+                print(f"  {label}: 言語を追加できませんでした{hint}: {error}")
+                failures.append(f"{label}（バージョンの言語）{hint}")
+                continue
             print(f"  {label}: {'言語を追加して書き込む予定' if args.dry_run else '言語を追加して書き込み'}")
             for line in describe_changes({}, attributes):
                 print(line)
@@ -476,13 +493,11 @@ def main() -> int:
                 },
             )
 
-    failures = write_app_info(client, args, app, app_info, info_available, info_entries, plan)
-
     print(f"完了: {len(plan)} 言語")
     if skipped:
         print(f"飛ばした言語: {', '.join(skipped)}")
     if failures:
-        print("名前・サブタイトルを書き込めなかった言語:")
+        print("書き込めなかった言語:")
         for line in failures:
             print(f"  - {line}")
         return 1
@@ -491,24 +506,24 @@ def main() -> int:
 
 def write_app_info(client, args: argparse.Namespace, app: dict, app_info: dict | None,
                    info_available: dict[str, dict], info_entries: dict[str, dict[str, str]],
-                   plan: list[tuple[Language, dict[str, str], dict | None]]) -> list[str]:
-    """名前・サブタイトルをアプリ情報（`appInfoLocalizations`）に書く。書き込めなかった言語と理由を返す。
+                   plan: list[tuple[Language, dict[str, str], dict | None]]) -> tuple[list[str], set[str]]:
+    """名前・サブタイトルをアプリ情報（`appInfoLocalizations`）に書く。
+    書き込めなかった言語と理由・アプリ情報の言語を作れなかった言語（`Language.language`）を返す。
 
-    言語を足すときは、バージョンの言語を作ってからアプリ情報の言語を作る（fastlane の deliver と同じ順）。
+    バージョンの言語より先に呼ぶ。言語を足すときは、新しい名前でアプリ情報の言語を作ってから
+    バージョンの言語を作る（逆の順だと、今の名前がその言語でほかのアプリに使われているときに 409 で弾かれる。#538）。
     足した言語のプライバシーポリシーの URL などは、主言語の値を写す（空のままだと審査に出せない）。
     名前は App Store 全体で一意なので、ほかのアプリが使っていると 409 で弾かれる。1 言語の失敗で止めずに残りを書く。
     """
     if app_info is None:
-        return []
+        return [], set()
     from app_store_connect import ApiError
 
-    if not args.dry_run:
-        # バージョンの言語を作ると、App Store Connect がアプリ情報の言語も作ることがあるので読み直す
-        info_available = client.app_info_localization_entries(app_info["id"])
     primary_locale = app["attributes"].get("primaryLocale") or ""
     primary = info_available.get(primary_locale, {}).get("attributes", {})
 
     failures: list[str] = []
+    create_failed: set[str] = set()
     for target, _, _ in plan:
         info = info_entries.get(target.language)
         if not info:
@@ -545,7 +560,9 @@ def write_app_info(client, args: argparse.Namespace, app: dict, app_info: dict |
             hint = "（名前がほかのアプリで使われている可能性があります）" if error.status == 409 else ""
             print(f"    失敗{hint}: {error}")
             failures.append(f"{label}{hint}")
-    return failures
+            if existing is None:
+                create_failed.add(target.language)
+    return failures, create_failed
 
 
 if __name__ == "__main__":
