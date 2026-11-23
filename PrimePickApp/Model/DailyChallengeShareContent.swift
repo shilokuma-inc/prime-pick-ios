@@ -39,9 +39,9 @@ struct DailyChallengeShareContent: Equatable {
         self.streak = result.streak.current
     }
 
-    /// 1 行目: アプリ名・通し番号・日付
+    /// 1 行目: アプリ名（表示している言語の名前）・通し番号・日付
     var headline: String {
-        String(localized: "Prime Pick Daily Challenge #\(dayNumber) (\(dateText))")
+        String(localized: "\(AppName.current) Daily Challenge #\(dayNumber) (\(dateText))")
     }
 
     /// 正解数と合計解答時間（`8/10 correct · 42.5 sec`）

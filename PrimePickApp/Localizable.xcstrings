@@ -1233,18 +1233,18 @@
         }
       }
     },
-    "Prime Pick Daily Challenge #%lld (%@)": {
+    "%@ Daily Challenge #%lld (%@)": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Prime Pick Daily Challenge #%1$lld (%2$@)"
+            "value": "%1$@ Daily Challenge #%2$lld (%3$@)"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "Prime Pick 今日のチャレンジ #%1$lld (%2$@)"
+            "value": "%1$@ 今日のチャレンジ #%2$lld (%3$@)"
           }
         }
       }
