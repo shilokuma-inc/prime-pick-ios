@@ -9,15 +9,18 @@ import SwiftUI
 /// タイムアタックの記録画面（Discussion #270）
 ///
 /// 難易度をセグメントで切り替え、制限時間ごとに上位 10 件をスコアと達成日つきで並べる。1 位が自己ベスト。
+/// 各制限時間の頭には、直近のプレイのスコアの推移を折れ線で出す（#550）。
 /// 記録は開いた時点の値を出す（シートで開き、開いている間にプレイは終わらないため）。
 struct TimeAttackRecordsView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var difficulty: Difficulty = .easy
 
     private let store: TimeAttackRecordStore
+    private let history: TimeAttackPlayHistoryStore
 
-    init(store: TimeAttackRecordStore = TimeAttackRecordStore()) {
+    init(store: TimeAttackRecordStore = TimeAttackRecordStore(), history: TimeAttackPlayHistoryStore = TimeAttackPlayHistoryStore()) {
         self.store = store
+        self.history = history
     }
 
     var body: some View {
@@ -39,7 +42,7 @@ struct TimeAttackRecordsView: View {
                         .listRowInsets(EdgeInsets())
                     }
 
-                    ForEach(Self.sections(store: store, difficulty: difficulty), id: \.duration) { section in
+                    ForEach(Self.sections(store: store, history: history, difficulty: difficulty), id: \.duration) { section in
                         recordSection(section)
                     }
 
@@ -63,18 +66,41 @@ struct TimeAttackRecordsView: View {
         }
     }
 
+    /// 推移に出す回数（直近から数える）
+    static let trendPlayCount = 20
+
     /// 制限時間ごとの記録（15 / 30 / 60 秒の順）
     struct RecordSection: Equatable {
         let duration: TimeAttackDuration
         /// スコアの高い順。先頭が自己ベスト
         let records: [ScoreRecord]
+        /// 直近のプレイのスコア（古い順、最大 `trendPlayCount` 回）。1.5.0 より前のプレイは無い
+        var trendScores: [Int] = []
+
+        /// 推移の折れ線を出すか。2 回以上遊んでいないと線にならない
+        var showsTrend: Bool {
+            trendScores.count >= 2
+        }
+
+        /// 折れ線の代わりに「2 回以上遊ぶと出る」案内を出すか。まだ一度も遊んでいない枠は「—」だけにする
+        var showsTrendHint: Bool {
+            !showsTrend && !(records.isEmpty && trendScores.isEmpty)
+        }
     }
 
-    static func sections(store: TimeAttackRecordStore, difficulty: Difficulty) -> [RecordSection] {
+    static func sections(
+        store: TimeAttackRecordStore,
+        history: TimeAttackPlayHistoryStore,
+        difficulty: Difficulty
+    ) -> [RecordSection] {
         TimeAttackDuration.allCases.map { duration in
-            RecordSection(
+            let gameMode = GameMode.timeAttack(duration)
+            return RecordSection(
                 duration: duration,
-                records: store.records(gameMode: .timeAttack(duration), difficulty: difficulty)
+                records: store.records(gameMode: gameMode, difficulty: difficulty),
+                trendScores: history.entries(gameMode: gameMode, difficulty: difficulty)
+                    .suffix(trendPlayCount)
+                    .map(\.score)
             )
         }
     }
@@ -83,6 +109,19 @@ struct TimeAttackRecordsView: View {
 private extension TimeAttackRecordsView {
     func recordSection(_ section: RecordSection) -> some View {
         Section {
+            if section.showsTrend {
+                ScoreTrendChart(
+                    scores: section.trendScores,
+                    bestScore: section.records.first?.score,
+                    tint: difficulty.gradientColors.first ?? .accentColor
+                )
+                .padding(.vertical, 8)
+            } else if section.showsTrendHint {
+                Text("Play at least twice to see your score trend.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
+
             if section.records.isEmpty {
                 Text(verbatim: "—")
                     .foregroundStyle(.secondary)

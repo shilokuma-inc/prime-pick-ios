@@ -1177,6 +1177,76 @@
         }
       }
     },
+    "Best": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rekord"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Best"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récord"
+          }
+        },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Récord"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Record"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Record"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ベスト"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "최고"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recorde"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最佳"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最佳"
+          }
+        }
+      }
+    },
     "Best score: %lld": {
       "localizations": {
         "de": {
@@ -1807,6 +1877,76 @@
         }
       }
     },
+    "Latest %lld, highest %lld, lowest %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zuletzt %1$lld, höchstens %2$lld, mindestens %3$lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Latest %1$lld, highest %2$lld, lowest %3$lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Última %1$lld, máxima %2$lld, mínima %3$lld"
+          }
+        },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Última %1$lld, máxima %2$lld, mínima %3$lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dernier %1$lld, meilleur %2$lld, plus bas %3$lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ultimo %1$lld, massimo %2$lld, minimo %3$lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最新 %1$lld 点、最高 %2$lld 点、最低 %3$lld 点"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "최근 %1$lld점, 최고 %2$lld점, 최저 %3$lld점"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Última %1$lld, máxima %2$lld, mínima %3$lld"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最新 %1$lld 分，最高 %2$lld 分，最低 %3$lld 分"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最新 %1$lld 分，最高 %2$lld 分，最低 %3$lld 分"
+          }
+        }
+      }
+    },
     "Max Combo %lld": {
       "localizations": {
         "de": {
@@ -2297,6 +2437,76 @@
         }
       }
     },
+    "Play at least twice to see your score trend.": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spiele mindestens zweimal, um den Verlauf deiner Punktzahl zu sehen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Play at least twice to see your score trend."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Juega al menos dos veces para ver la evolución de tu puntuación."
+          }
+        },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Juega al menos dos veces para ver la evolución de tu puntuación."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jouez au moins deux fois pour voir l'évolution de votre score."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gioca almeno due volte per vedere l'andamento del punteggio."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 回以上遊ぶと、スコアの推移が表示されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "두 번 이상 플레이하면 점수 추이가 표시됩니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jogue pelo menos duas vezes para ver a evolução da sua pontuação."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "玩两次以上即可查看得分趋势。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "玩兩次以上即可查看分數趨勢。"
+          }
+        }
+      }
+    },
     "Return to Title": {
       "localizations": {
         "de": {
@@ -2503,6 +2713,76 @@
           "stringUnit": {
             "state": "translated",
             "value": "與上次分數相同"
+          }
+        }
+      }
+    },
+    "Score trend of the last %lld plays": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Punkteverlauf der letzten %lld Runden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Score trend of the last %lld plays"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Evolución de la puntuación de las últimas %lld partidas"
+          }
+        },
+        "es-ES": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Evolución de la puntuación de las últimas %lld partidas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Évolution du score sur les %lld dernières parties"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Andamento del punteggio nelle ultime %lld partite"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "直近 %lld 回のスコアの推移"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "최근 %lld회 점수 추이"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Evolução da pontuação nas últimas %lld partidas"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最近 %lld 次的得分趋势"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最近 %lld 次的分數趨勢"
           }
         }
       }

@@ -122,6 +122,7 @@
 		72358C22F4980C53ADB7720F /* DailyChallengeCardState.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB7720F52BBF1F60ACB6688 /* DailyChallengeCardState.swift */; };
 		58D00C0E23DFBA64A9924780 /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348F9B9700F6A15141CCA545 /* HowToPlayView.swift */; };
 		F8F0324447519C0B975985D0 /* TimeAttackRecordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397301C948163DCF61CB29B8 /* TimeAttackRecordsView.swift */; };
+		736C7ADF75F21820AEDEE746 /* ScoreTrendChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88160B9B09166268B55B8E78 /* ScoreTrendChart.swift */; };
 		01BCD3887C95781987A9BEB9 /* DailyChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9BEB9C37A62F499B13B7B /* DailyChallengeView.swift */; };
 		624168433780D0B8FD63B8D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53375860F98A49A23F4CF3D /* AppDelegate.swift */; };
 		67303872FE1D62B6C6EBEE16 /* AnswerAnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA57796E7BB0A77899DAC236 /* AnswerAnalyticsEvent.swift */; };
@@ -233,6 +234,7 @@
 		33E203857ADC476B86DF92C1 /* AnswerFeedbackEffect.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AnswerFeedbackEffect.swift; sourceTree = "<group>"; };
 		348F9B9700F6A15141CCA545 /* HowToPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
 		397301C948163DCF61CB29B8 /* TimeAttackRecordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordsView.swift; sourceTree = "<group>"; };
+		88160B9B09166268B55B8E78 /* ScoreTrendChart.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScoreTrendChart.swift; sourceTree = "<group>"; };
 		87A9BEB9C37A62F499B13B7B /* DailyChallengeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeView.swift; sourceTree = "<group>"; };
 		3BC15F88A46D15524FCE751A /* ScoreCalculatorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ScoreCalculatorTests.swift; sourceTree = "<group>"; };
 		3B8CA0B16FB2CCFDE804B75F /* TimeAttackRecordStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordStore.swift; sourceTree = "<group>"; };
@@ -535,6 +537,7 @@
 			children = (
 				348F9B9700F6A15141CCA545 /* HowToPlayView.swift */,
 				397301C948163DCF61CB29B8 /* TimeAttackRecordsView.swift */,
+				88160B9B09166268B55B8E78 /* ScoreTrendChart.swift */,
 				87A9BEB9C37A62F499B13B7B /* DailyChallengeView.swift */,
 				4F0C82832BC8247500E1480E /* MainView.swift */,
 				D409A1000000000000000002 /* TitleLogoView.swift */,
@@ -882,6 +885,7 @@
 				624168433780D0B8FD63B8D4 /* AppDelegate.swift in Sources */,
 				58D00C0E23DFBA64A9924780 /* HowToPlayView.swift in Sources */,
 				F8F0324447519C0B975985D0 /* TimeAttackRecordsView.swift in Sources */,
+				736C7ADF75F21820AEDEE746 /* ScoreTrendChart.swift in Sources */,
 				01BCD3887C95781987A9BEB9 /* DailyChallengeView.swift in Sources */,
 				54D69EBDCDA4A3DBECB1740A /* AppTheme.swift in Sources */,
 				72358C22F4980C53ADB7720F /* DailyChallengeCardState.swift in Sources */,
