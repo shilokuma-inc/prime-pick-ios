@@ -1,10 +1,11 @@
 name: Metadata/App Store
 
-# App Store の名前・サブタイトル・説明文・キーワード・プロモーションテキスト・最新情報・URL を App Store Connect に反映する。手動実行のみ。
+# App Store の名前・サブタイトル・説明文・キーワード・プロモーションテキスト・最新情報・URL・審査メモを App Store Connect に反映する。手動実行のみ。
 #
-# 元ネタは AppStore/metadata/<言語>.json と shared.json。欠損と文字数超過は
+# 元ネタは AppStore/metadata/<言語>.json と shared.json、review.json（審査メモ）。欠損と文字数超過は
 # Verify/App Store metadata が PR の時点で落とすので、ここまで来たものは通る前提。
 # 最新情報（whatsNew）は、JSON の whatsNew.version が反映先のバージョンと一致するときだけ書き込む。
+# 審査メモ（App Review に関する情報のメモ）は、どの言語を選んでも書き込む。連絡先とデモアカウントは読まず書かない。
 # 仮の文言（TODO:）が残っているあいだは、dry-run でも止まる。
 #
 # 反映先は「編集できる状態のバージョン」だけ。審査中・配信済みのバージョンには触らない。
