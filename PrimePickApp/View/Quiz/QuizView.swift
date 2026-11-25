@@ -56,23 +56,28 @@ struct QuizView: View {
     private let source: QuizStartSource
     /// `quiz_start` を送ったか。画面が出直しても 1 プレイで 1 回だけ送る
     @State private var hasSentQuizStart = false
+    /// 結果画面の「もう一度」で呼ぶ。nil なら結果画面にボタンを出さない
+    private let onPlayAgain: (() -> Void)?
 
     /// - Parameters:
     ///   - quizData: 外で作った出題（デイリーチャレンジなど）。`nil` か空なら `QuizDataManager` で作る
     ///   - finisher: プレイの終わりの処理。既定は自己ベストの記録
+    ///   - onPlayAgain: 結果画面の「もう一度」で呼ぶ。nil なら結果画面にボタンを出さない
     init(
         difficulty: Difficulty,
         gameMode: GameMode = .practice,
         questionCount: QuizQuestionCount = .default,
         quizData providedQuizData: [QuizEntity]? = nil,
         finisher: any QuizPlayFinishing = BestScorePlayFinisher(),
-        source: QuizStartSource = .title
+        source: QuizStartSource = .title,
+        onPlayAgain: (() -> Void)? = nil
     ) {
         self.difficulty = difficulty
         self.gameMode = gameMode
         self.questionCount = questionCount
         self.finisher = finisher
         self.source = source
+        self.onPlayAgain = onPlayAgain
         // 1 プレイの間は同じ素数の出現確率を使い続けるため、補充でも同じインスタンスを使う
         let manager = QuizDataManager()
         let rules = Self.rules(for: gameMode)
@@ -152,7 +157,8 @@ struct QuizView: View {
                         answerRecords: answerRecords,
                         gameMode: gameMode,
                         isNewRecord: finishState.isNewRecord,
-                        breakdown: session.score.breakdown
+                        breakdown: session.score.breakdown,
+                        onPlayAgain: onPlayAgain
                     )
                 }
             }

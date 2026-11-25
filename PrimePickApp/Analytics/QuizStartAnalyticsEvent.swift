@@ -11,6 +11,8 @@ enum QuizStartSource: String, Hashable {
     case title
     /// デイリーの結果画面の「タイムアタックで遊ぶ」
     case dailyResult = "daily_result"
+    /// 練習・タイムアタックの結果画面の「もう一度」（#547）
+    case playAgain = "play_again"
 }
 
 /// 練習・タイムアタックを始めたときに送る `quiz_start` イベント
