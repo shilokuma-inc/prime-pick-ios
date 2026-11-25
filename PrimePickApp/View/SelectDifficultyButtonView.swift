@@ -124,7 +124,10 @@ extension SelectDifficultyButtonView {
     /// 難易度名と自己ベストの行の間隔
     static let bestScoreSpacing: CGFloat = 2
     /// 自己ベストの行を出すときの上下の余白（練習モードは 16）
-    static let verticalPaddingWithBestScore: CGFloat = 8
+    ///
+    /// 自己ベストの行（約 17pt）と間隔の分だけ詰め、標準の文字の大きさでは練習モードのボタンと同じ高さにする。
+    /// モードを切り替えても、下に並ぶ遊び方のボタンなどが上下に動かない
+    static let verticalPaddingWithBestScore: CGFloat = 6.5
 }
 
 extension Difficulty {
