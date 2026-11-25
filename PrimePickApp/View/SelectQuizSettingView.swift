@@ -89,7 +89,9 @@ private struct CapsuleChoicePicker<Option: Hashable & Identifiable, Label: View>
             }
         }
         .animation(reduceMotion ? nil : .snappy(duration: 0.25), value: selection)
-        .sensoryFeedback(.selection, trigger: selection)
+        .sensoryFeedback(.selection, trigger: selection) { _, _ in
+            FeedbackSettings.current.isHapticsEnabled
+        }
     }
 
     func chip(_ option: Option) -> some View {
