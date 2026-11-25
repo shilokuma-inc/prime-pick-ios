@@ -89,6 +89,7 @@ xcodebuild test -project PrimePickApp.xcodeproj -scheme PrimePickApp -destinatio
 1. `develop` の `MARKETING_VERSION`（`project.pbxproj`）がリリースするバージョンか確かめ、`AppStore/metadata/ja.json` の説明文・`whatsNew` と審査メモ（`review.json`）を PR で直す
 2. `develop` から `release/<バージョン>` を切って push する（`Upload` が TestFlight にビルドを上げる。ビルド番号は `upload.yml` が日時で決める）
 3. `release/<バージョン>` を選んで `Screenshots/App Store` → `Metadata/App Store`（`dry-run` → `upload`）→ `Creative assets/App Store`（`dry-run` → `upload`）を流す
+   - `Metadata/App Store` は審査メモも書くので、そのバージョンに「App Review に関する情報」（連絡先）が保存されている必要がある。ふつうは前のバージョンから引き継がれる。`dry-run` で「App Review に関する情報がまだありません」と出たら、先に App Store Connect で連絡先を入れて保存する
 4. 人が App Store Connect でする: 「App のプライバシー」などの手入力・ビルドの選択・審査への提出（広告まわりは `docs/ads-release-checklist.md`）
 5. 配信されたら、`release/<バージョン>` の先頭（提出したビルドのコミット）にタグ `v<バージョン>` を打って GitHub Release を作り、`release/<バージョン>` を `main` に反映する PR を出す（#391・#392）。`develop` に無い変更があれば `develop` にも戻す
 
