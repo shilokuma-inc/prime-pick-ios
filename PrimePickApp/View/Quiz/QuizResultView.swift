@@ -13,6 +13,7 @@ struct QuizResultView: View {
     static let scoreCountUpDuration: TimeInterval = 1.2
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var rainbowColor: Color = .red
     /// 数え上げ中のスコア
     @State private var displayedScore: Double = 0
@@ -43,10 +44,13 @@ struct QuizResultView: View {
         }
         .sendAnalyticsScreen(.quizResult)
         .onAppear {
-            startColorAnimation()
             withAnimation(.easeOut(duration: Self.scoreCountUpDuration)) {
                 displayedScore = Double(score)
             }
+        }
+        // 枠の色を回す。画面を閉じると `task` ごと止まる
+        .task {
+            await cycleRainbowColor()
         }
     }
 
@@ -244,19 +248,26 @@ struct QuizResultView: View {
         value < 0 ? "\u{2212}\(-value)" : "+\(value)"
     }
 
-    private func startColorAnimation() {
-        // 撮影モードでは枠の色を変えずに止めておく
-        guard !ScreenshotDemo.isEnabled else { return }
-        let colors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple]
-        var currentIndex = 0
-
-        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { timer in
+    /// 枠の色を 0.5 秒ごとに虹の色へ切り替える。`task` から呼び、画面を閉じて取り消されたら止まる
+    ///
+    /// 以前は止めない `Timer` で回していて、画面を閉じても動き続けていた（遊ぶたびに増えていた）。
+    /// 撮影モードと Reduce Motion のときは色を変えずに止めておく。
+    private func cycleRainbowColor() async {
+        guard !ScreenshotDemo.isEnabled, !reduceMotion else { return }
+        var index = 0
+        while !Task.isCancelled {
             withAnimation {
-                rainbowColor = colors[currentIndex]
+                rainbowColor = Self.rainbowColors[index]
             }
-            currentIndex = (currentIndex + 1) % colors.count
+            index = (index + 1) % Self.rainbowColors.count
+            try? await Task.sleep(for: Self.rainbowInterval)
         }
     }
+
+    /// 枠の色の順番
+    static let rainbowColors: [Color] = [.red, .orange, .yellow, .green, .blue, .purple]
+    /// 枠の色を切り替える間隔
+    static let rainbowInterval: Duration = .milliseconds(500)
 
     /// 自己ベストとの差・記録の順位・前回との差（タイムアタックのみ。#549）
     ///
