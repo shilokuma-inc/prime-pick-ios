@@ -108,8 +108,10 @@ enum SoundFeedback {
     ///
     /// どちらの再生方法も呼び出し後すぐに制御を返し、再生は非同期に行われるため、クイズの進行をブロックしない。
     /// `AVAudioSession` を `.ambient` にしているので、マナーモードでは鳴らず、他のアプリの音楽も止めない。
+    /// 設定で効果音をオフにしているときは何もしない（#546）。
     @MainActor
     static func play(_ effect: SoundEffect) {
+        guard FeedbackSettings.current.isSoundEnabled else { return }
         if let resourceName = effect.resourceName {
             BundledSoundPlayer.shared.play(resourceName)
         } else if let systemSoundID = effect.systemSoundID {

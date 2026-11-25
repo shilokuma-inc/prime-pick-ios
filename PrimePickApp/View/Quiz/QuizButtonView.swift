@@ -58,7 +58,8 @@ struct QuizButtonView: View {
         .animation(.easeInOut(duration: 0.1), value: isInputLocked)
         .answerFeedbackEffect(trigger: trigger)
         .sensoryFeedback(trigger: trigger) { _, trigger in
-            trigger?.sensoryFeedback
+            // 設定で振動をオフにしていれば返さない（#546）
+            FeedbackSettings.current.isHapticsEnabled ? trigger?.sensoryFeedback : nil
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(choice.accessibilityLabel)

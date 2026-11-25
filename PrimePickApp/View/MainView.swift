@@ -20,8 +20,9 @@ struct MainView: View {
     /// How to Play・設定・記録の画面が同時に出ないよう、表示中のシートを 1 つの状態で持つ。
     /// 撮影モードでは最初から遊び方のシートを開いておく
     @State private var presentedSheet: MainSheet? = ScreenshotDemo.scene == .howToPlay ? .howToPlay : nil
-    @State private var gameMode: GameMode = .practice
-    @State private var selectedQuestionCount: QuizQuestionCount = .default
+    /// モードと問題数は前回の選択から始め、選び直したら保存する（#545）
+    @State private var gameMode: GameMode = HomeSelectionStore().gameMode
+    @State private var selectedQuestionCount: QuizQuestionCount = HomeSelectionStore().questionCount
     /// 確認のカードを出しているタイムアタックの設定。nil ならカードを出していない（Discussion #394）
     @State private var pendingTimeAttack: QuizSetting?
     /// タップされたリマインド。受け取ったらデイリーチャレンジの画面を開く
@@ -101,6 +102,12 @@ struct MainView: View {
                 if phase == .active {
                     refreshDailyChallengeCard()
                 }
+            }
+            .onChange(of: gameMode) { _, gameMode in
+                HomeSelectionStore().save(gameMode: gameMode)
+            }
+            .onChange(of: selectedQuestionCount) { _, questionCount in
+                HomeSelectionStore().save(questionCount: questionCount)
             }
             // 停止中からの起動では、この画面ができる前にタップが届いていることがあるので、最初にも見る
             .onChange(of: reminderRouter.pendingTap, initial: true) { _, tap in
