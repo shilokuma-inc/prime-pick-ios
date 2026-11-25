@@ -157,6 +157,7 @@ struct QuizView: View {
                         answerRecords: answerRecords,
                         gameMode: gameMode,
                         isNewRecord: finishResult.isNewRecord,
+                        timeAttackComparison: finishResult.timeAttackComparison,
                         breakdown: session.score.breakdown,
                         onPlayAgain: onPlayAgain
                     )

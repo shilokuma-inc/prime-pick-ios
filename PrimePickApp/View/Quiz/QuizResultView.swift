@@ -23,6 +23,8 @@ struct QuizResultView: View {
     var gameMode: GameMode = .practice
     /// 自己ベストを更新したか（タイムアタックのみ）
     var isNewRecord: Bool = false
+    /// それまでの記録との比べ（タイムアタックのみ。#549）
+    var timeAttackComparison: TimeAttackComparison?
     /// 獲得点・減点の内訳
     var breakdown = ScoreBreakdown()
     /// 「もう一度」で同じ設定のプレイを始める。nil ならボタンを出さない（#547）
@@ -104,6 +106,10 @@ struct QuizResultView: View {
                 .minimumScaleFactor(0.6)
                 // 数え上げ途中の値ではなく、最終スコアを読み上げる
                 .accessibilityLabel(Text("Your Score is \(score) points!"))
+
+            if let timeAttackComparison {
+                comparisonSection(timeAttackComparison)
+            }
 
             summarySection
 
@@ -251,6 +257,65 @@ struct QuizResultView: View {
             currentIndex = (currentIndex + 1) % colors.count
         }
     }
+
+    /// 自己ベストとの差・記録の順位・前回との差（タイムアタックのみ。#549）
+    ///
+    /// 初めての記録は自己ベストとの差を、上位 10 件に入らなければ順位を、前回の履歴が無ければ前回との差を出さない。
+    @ViewBuilder
+    private func comparisonSection(_ comparison: TimeAttackComparison) -> some View {
+        let details = [
+            comparison.rank.map { Text("#\($0) in your records") },
+            comparison.previousDifference.map(Self.previousDifferenceText)
+        ].compactMap { $0 }
+
+        if comparison.best != nil || !details.isEmpty {
+            VStack(spacing: 4) {
+                if let best = comparison.best {
+                    Self.bestDifferenceText(best)
+                        .appFont(.heading(.headline, weight: .bold))
+                        .foregroundStyle(Self.isBestUpdated(best) ? Color.primary : Color.secondary)
+                }
+
+                // 順位と前回との差は 1 行に並べる。収まらなければ縮める
+                if !details.isEmpty {
+                    details.dropFirst().reduce(details[0]) { $0 + Text(verbatim: "  ·  ") + $1 }
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .multilineTextAlignment(.center)
+            .lineLimit(1)
+            .minimumScaleFactor(0.6)
+            .accessibilityElement(children: .combine)
+        }
+    }
+
+    /// 自己ベストとの差の文言
+    static func bestDifferenceText(_ best: TimeAttackComparison.BestDifference) -> Text {
+        switch best {
+        case .updated(let points):
+            return Text("Beat your best by \(points) points")
+        case .tied:
+            return Text("Tied your best")
+        case .short(let points):
+            return Text("\(points) points short of your best")
+        }
+    }
+
+    /// 前回との差の文言
+    static func previousDifferenceText(_ difference: Int) -> Text {
+        if difference > 0 {
+            return Text("\(difference) points higher than last time")
+        } else if difference < 0 {
+            return Text("\(-difference) points lower than last time")
+        }
+        return Text("Same score as last time")
+    }
+
+    private static func isBestUpdated(_ best: TimeAttackComparison.BestDifference) -> Bool {
+        if case .updated = best { return true }
+        return false
+    }
 }
 
 #Preview("自己ベスト更新") {
@@ -261,6 +326,11 @@ struct QuizResultView: View {
         answerRecords: [],
         gameMode: .timeAttack(.thirtySeconds),
         isNewRecord: true,
+        timeAttackComparison: TimeAttackComparison(
+            score: 2_480,
+            recordsBefore: [ScoreRecord(score: 2_160, achievedAt: .now)],
+            previousScore: 1_900
+        ),
         breakdown: ScoreBreakdown(correctPoints: 1_400, comboBonus: 780, speedBonus: 600, penalty: 300),
         onPlayAgain: {}
     )
