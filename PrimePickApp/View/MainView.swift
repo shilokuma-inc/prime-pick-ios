@@ -22,6 +22,8 @@ struct MainView: View {
     @State private var presentedSheet: MainSheet? = ScreenshotDemo.scene == .howToPlay ? .howToPlay : nil
     @State private var gameMode: GameMode = .practice
     @State private var selectedQuestionCount: QuizQuestionCount = .default
+    /// タイムアタックの難易度ボタンに出す自己ベスト（#548）。タイトルに戻るたびに記録から読み直す
+    @State private var timeAttackBestScores = TimeAttackBestScores.load()
     /// 確認のカードを出しているタイムアタックの設定。nil ならカードを出していない（Discussion #394）
     @State private var pendingTimeAttack: QuizSetting?
     /// タップされたリマインド。受け取ったらデイリーチャレンジの画面を開く
@@ -100,6 +102,8 @@ struct MainView: View {
             .onChange(of: path.count) { _, count in
                 if count == 0 {
                     refreshDailyChallengeCard()
+                    // プレイを終えて戻ったときは、自己ベストが変わっているかもしれない
+                    timeAttackBestScores = TimeAttackBestScores.load()
                 }
             }
             .onChange(of: scenePhase) { _, phase in
@@ -290,7 +294,8 @@ private extension MainView {
             SelectDifficultyButtonView(
                 gameMode: gameMode,
                 questionCount: selectedQuestionCount,
-                onRequestStartConfirmation: { pendingTimeAttack = $0 }
+                onRequestStartConfirmation: { pendingTimeAttack = $0 },
+                bestScores: timeAttackBestScores.bestScores(for: gameMode)
             )
 
             howToPlayButton
