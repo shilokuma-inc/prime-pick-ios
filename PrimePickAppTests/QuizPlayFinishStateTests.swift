@@ -22,11 +22,11 @@ final class QuizPlayFinishStateTests: XCTestCase {
 
         state.finishOnce {
             finishCount += 1
-            return true
+            return QuizPlayFinishResult(isNewRecord: true)
         }
         state.finishOnce {
             finishCount += 1
-            return false
+            return QuizPlayFinishResult(isNewRecord: false)
         }
 
         XCTAssertEqual(finishCount, 1)
@@ -39,9 +39,11 @@ final class QuizPlayFinishStateTests: XCTestCase {
         let state = QuizPlayFinishState()
         let capturedByEventHandler = state
 
-        capturedByEventHandler.finishOnce { true }
+        let comparison = TimeAttackComparison(score: 500, recordsBefore: [], previousScore: 300)
+        capturedByEventHandler.finishOnce { QuizPlayFinishResult(isNewRecord: true, timeAttackComparison: comparison) }
 
         XCTAssertTrue(state.hasFinishedPlay)
         XCTAssertTrue(state.isNewRecord)
+        XCTAssertEqual(state.result.timeAttackComparison, comparison)
     }
 }

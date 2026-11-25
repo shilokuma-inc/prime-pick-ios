@@ -43,7 +43,8 @@ struct DailyChallengePlayFinisher: QuizPlayFinishing {
     }
 
     /// 解き終えた記録を保存する。デイリーには自己ベストが無いので NEW RECORD! は出さない
-    func finish(_ outcome: QuizPlayOutcome) -> Bool {
+    @discardableResult
+    func finish(_ outcome: QuizPlayOutcome) -> QuizPlayFinishResult {
         var record = startedRecord.applying(answerRecords: outcome.answerRecords)
         record.completedAt = now()
         store.save(record)
@@ -57,7 +58,7 @@ struct DailyChallengePlayFinisher: QuizPlayFinishing {
             )
         )
         onFinish?(record)
-        return false
+        return QuizPlayFinishResult()
     }
 
     /// 記録した日の通し番号。`dayKey` が読めなければ 0

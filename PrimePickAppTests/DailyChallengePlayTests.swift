@@ -81,7 +81,7 @@ final class DailyChallengePlayTests: XCTestCase {
         let completedAt = startedAt.addingTimeInterval(80)
         let finisher = DailyChallengePlayFinisher(startedRecord: startedRecord(), store: store, now: { completedAt })
         let answers = [true, true, false, true, true, true, false, true, true, true]
-        XCTAssertFalse(finisher.finish(outcome(answers: answers, elapsedSeconds: 1.5)))
+        XCTAssertEqual(finisher.finish(outcome(answers: answers, elapsedSeconds: 1.5)), QuizPlayFinishResult())
 
         let saved = store.record(dayKey: "2026-10-01")
         XCTAssertEqual(saved?.completedAt, completedAt)
