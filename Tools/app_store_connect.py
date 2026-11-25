@@ -269,6 +269,25 @@ class AppStoreConnect:
         )
         return response["data"]["id"]
 
+    # MARK: App Review に関する情報（審査メモ）
+
+    def review_detail(self, version_id: str) -> dict | None:
+        """バージョンの `appStoreReviewDetails` を、審査メモ（`notes`）だけ読んで返す。まだ無ければ None。
+
+        連絡先（氏名・電話番号・メールアドレス）とデモアカウントは `fields` で取らない。
+        ログや書き出した JSON に載せないため（リポジトリは public）。
+        """
+        try:
+            response = self.get(
+                f"/v1/appStoreVersions/{version_id}/appStoreReviewDetail",
+                {"fields[appStoreReviewDetails]": "notes"},
+            )
+        except ApiError as error:
+            if error.status == 404:
+                return None
+            raise
+        return response.get("data")
+
     # MARK: スクリーンショット
 
     def existing_set(self, localization_id: str, display_type: str) -> str | None:
