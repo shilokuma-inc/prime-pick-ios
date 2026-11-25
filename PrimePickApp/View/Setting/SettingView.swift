@@ -9,6 +9,8 @@ import SwiftUI
 struct SettingView: View {
     @Environment(\.dismiss) private var dismiss
     @AppStorage(AppTheme.userDefaultsKey) private var appTheme = AppTheme.system.rawValue
+    @AppStorage(FeedbackSettings.isSoundEnabledKey) private var isSoundEnabled = true
+    @AppStorage(FeedbackSettings.isHapticsEnabledKey) private var isHapticsEnabled = true
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.openURL) private var openURL
     @StateObject private var privacyOptions = PrivacyOptionsModel.live()
@@ -24,6 +26,7 @@ struct SettingView: View {
 
                 List {
                     themeSection
+                    feedbackSection
                     reminderSection
                     if privacyOptions.isVisible {
                         adsSection
@@ -71,6 +74,19 @@ private extension SettingView {
             .accessibilityLabel("App Theme")
         } header: {
             Text("Theme")
+        }
+    }
+
+    /// 効果音と振動のオン／オフ（#546）。鳴らす・振動させる直前に `FeedbackSettings` が同じキーを読む
+    var feedbackSection: some View {
+        Section {
+            Toggle("Sound Effects", isOn: $isSoundEnabled)
+
+            Toggle("Vibration", isOn: $isHapticsEnabled)
+        } header: {
+            Text("Sound & Vibration")
+        } footer: {
+            Text("Sound effects don't play in Silent Mode.")
         }
     }
 
