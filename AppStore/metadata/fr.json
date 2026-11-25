@@ -22,7 +22,7 @@
     "chrono"
   ],
   "whatsNew": {
-    "version": "1.4.0",
-    "text": "Grosse mise à jour :\n• L’app est disponible en 10 langues, dont le français\n• En français, Prime Pick devient « Premier ou pas ? »\n• Partagez votre résultat du défi du jour, en texte (grille d’émojis) ou en image\n• Rappel du défi du jour : recevez une notification les jours où vous n’avez pas encore joué. À activer, avec l’heure de votre choix, dans les Réglages"
+    "version": "1.5.0",
+    "text": "• Nouveau bouton « Rejouer » sur l’écran des résultats : relancez une partie avec les mêmes réglages en un instant\n• En Contre-la-montre, les résultats indiquent l’écart avec votre record personnel, votre rang dans vos records et l’écart avec la partie précédente\n• Sur l’écran Records, un graphique montre l’évolution de votre score pour chaque durée\n• En Contre-la-montre, chaque bouton de difficulté affiche votre record personnel\n• L’app retient le dernier mode et le nombre de questions choisis\n• Dans Réglages, vous pouvez couper séparément les effets sonores et les vibrations\n• Correction d’un problème : « NOUVEAU RECORD ! » ne s’affichait parfois pas après avoir battu votre record personnel en Contre-la-montre"
   }
 }
