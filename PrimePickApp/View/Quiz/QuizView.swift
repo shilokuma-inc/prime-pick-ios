@@ -38,7 +38,7 @@ struct QuizView: View {
     @State private var timePenaltyPopup: ScorePopup?
     /// コンボが切れた回数。変わるたびに画面を短く揺らす
     @State private var comboBreakCount: Int = 0
-    /// プレイの終わりの処理を済ませたかと、自己ベストを更新したか（リザルトの NEW RECORD!）
+    /// プレイの終わりの処理を済ませたかと、その結果（リザルトの NEW RECORD! と、タイムアタックのそれまでの記録との比べ）
     ///
     /// 時間切れの `onEvent` から値型の `@State` に書くと、結果画面に届かなかった（#554）。`QuizSession` と同じく参照型にして持つ
     @State private var finishState = QuizPlayFinishState()
@@ -157,6 +157,7 @@ struct QuizView: View {
                         answerRecords: answerRecords,
                         gameMode: gameMode,
                         isNewRecord: finishState.isNewRecord,
+                        timeAttackComparison: finishState.result.timeAttackComparison,
                         breakdown: session.score.breakdown,
                         onPlayAgain: onPlayAgain
                     )
@@ -295,7 +296,7 @@ private extension QuizView {
     /// 解き終えた・時間切れのどちらで終わっても、結果画面を出す時点でここを通る。
     /// 撮影モードの結果画面は最初から表示した状態で始まるため、ここを通らず記録もしない。
     func finishPlay() {
-        finishState.finishOnce { finisher.finish(currentOutcome).isNewRecord }
+        finishState.finishOnce { finisher.finish(currentOutcome) }
     }
 
     /// 練習・タイムアタックを始めたことを 1 回だけ送る。デイリーは `daily_challenge_start` で測るので送らない

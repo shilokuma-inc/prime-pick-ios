@@ -6,7 +6,7 @@
 import Foundation
 import Observation
 
-/// 1 プレイの終わりの処理を済ませたかと、その結果（自己ベストを更新したか）
+/// 1 プレイの終わりの処理を済ませたかと、その結果（自己ベストを更新したか・タイムアタックのそれまでの記録との比べ）
 ///
 /// `QuizView` はプレイの終わりの処理を `QuizSession.onEvent`（時間切れは Timer から届く）の中で行う。
 /// そこで値型の `@State` に書いた `isNewRecord` が結果画面に届かず、タイムアタックで自己ベストを更新しても
@@ -16,13 +16,18 @@ import Observation
 final class QuizPlayFinishState {
     /// プレイの終わりの処理を済ませたか。1 プレイで 2 回記録しないために使う
     private(set) var hasFinishedPlay = false
-    /// このプレイで自己ベストを更新したか。リザルトで NEW RECORD! を出すために使う
-    private(set) var isNewRecord = false
+    /// プレイの終わりの処理の結果。リザルトで NEW RECORD! と、タイムアタックのそれまでの記録との比べ（#549）を出すために使う
+    private(set) var result = QuizPlayFinishResult()
 
-    /// プレイの終わりの処理（`finish`）を 1 回だけ行い、自己ベストを更新したかを残す
-    func finishOnce(_ finish: () -> Bool) {
+    /// このプレイで自己ベストを更新したか
+    var isNewRecord: Bool {
+        result.isNewRecord
+    }
+
+    /// プレイの終わりの処理（`finish`）を 1 回だけ行い、その結果を残す
+    func finishOnce(_ finish: () -> QuizPlayFinishResult) {
         guard !hasFinishedPlay else { return }
         hasFinishedPlay = true
-        isNewRecord = finish()
+        result = finish()
     }
 }
