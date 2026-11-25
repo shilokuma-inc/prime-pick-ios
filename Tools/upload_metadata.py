@@ -653,7 +653,12 @@ def write_review_notes(client, args: argparse.Namespace, version: dict, notes: s
     from app_store_connect import ApiError
 
     label = "審査メモ"
-    detail = client.review_detail(version["id"])
+    try:
+        detail = client.review_detail(version["id"])
+    except ApiError as error:
+        # 言語の書き込みは済んでいるので、止めずにほかの失敗と一緒に報告する
+        print(f"  {label}: 現在値を読めませんでした: {error}")
+        return [label]
     if detail is None:
         print(f"  {label}: このバージョンには App Review に関する情報がまだありません。"
               "App Store Connect で連絡先を入れて保存してから実行してください")
