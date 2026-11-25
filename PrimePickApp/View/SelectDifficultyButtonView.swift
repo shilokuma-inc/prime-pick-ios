@@ -13,6 +13,10 @@ struct SelectDifficultyButtonView: View {
     var questionCount: QuizQuestionCount = .default
     /// 始める前に確認を挟むモード（タイムアタック）で難易度を押したときに呼ぶ。nil ならどのモードでもすぐ遷移する
     var onRequestStartConfirmation: ((QuizSetting) -> Void)?
+    /// 難易度ごとの、選んでいる制限時間の自己ベスト（#548）。nil ならボタンに自己ベストの行を出さない（練習・撮影モード）
+    ///
+    /// タイムアタックでは、記録の無い難易度にも「—」の行を出し、4 つのボタンの高さをそろえる。
+    var bestScores: [Difficulty: Int]?
     @Environment(\.colorScheme) private var colorScheme
 
     /// 難易度ボタンの押下音。出題（タイムアタックでは確認カード）へ進むボタンなので、進む押下音にする。
@@ -63,21 +67,64 @@ extension SelectDifficultyButtonView {
                 pressSound: Self.pressSound
             )
         )
+        // 自己ベストは難易度名に続けて読み上げる（行そのものは読み上げから外している）
+        .accessibilityValue(bestScores.map { Self.bestScoreAccessibilityValue($0[difficulty]) } ?? Text(verbatim: ""))
         .padding(.horizontal, 50)
         .padding(.bottom, 10)
     }
 
     private func difficultyLabel(_ difficulty: Difficulty) -> some View {
-        Text(difficulty.localizedTitle)
-            .appFont(.heading(size: 24, weight: .bold))
-            .padding()
-            .frame(maxWidth: .infinity)
-            .foregroundColor(.white)
-            .overlay(
-                RoundedRectangle(cornerRadius: GameButtonAppearance.defaultCornerRadius, style: .continuous)
-                    .strokeBorder(Color.white.opacity(0.7), lineWidth: 2)
-            )
+        VStack(spacing: Self.bestScoreSpacing) {
+            Text(difficulty.localizedTitle)
+                .appFont(.heading(size: 24, weight: .bold))
+
+            if let bestScores {
+                bestScoreLine(bestScores[difficulty])
+            }
+        }
+        // 自己ベストの行を出すときは上下の余白を詰め、練習モードのボタンとほぼ同じ高さに収める
+        .padding(.horizontal)
+        .padding(.vertical, bestScores == nil ? 16 : Self.verticalPaddingWithBestScore)
+        .frame(maxWidth: .infinity)
+        .foregroundColor(.white)
+        .overlay(
+            RoundedRectangle(cornerRadius: GameButtonAppearance.defaultCornerRadius, style: .continuous)
+                .strokeBorder(Color.white.opacity(0.7), lineWidth: 2)
+        )
     }
+
+    /// 難易度名の下に出す自己ベスト（トロフィーと点数）。記録が無ければ「—」
+    private func bestScoreLine(_ score: Int?) -> some View {
+        HStack(spacing: 4) {
+            Image(systemName: "trophy.fill")
+                .imageScale(.small)
+
+            if let score {
+                Text(score, format: .number)
+                    .monospacedDigit()
+            } else {
+                Text(verbatim: "—")
+            }
+        }
+        .appFont(.number(size: 13))
+        .foregroundStyle(Color.white.opacity(0.9))
+        .lineLimit(1)
+        // 読み上げは難易度のボタンの値（`accessibilityValue`）にまとめる
+        .accessibilityHidden(true)
+    }
+
+    /// 自己ベストの読み上げ。記録が無ければ「記録なし」
+    static func bestScoreAccessibilityValue(_ score: Int?) -> Text {
+        if let score {
+            return Text("Best score: \(score)")
+        }
+        return Text("No records yet")
+    }
+
+    /// 難易度名と自己ベストの行の間隔
+    static let bestScoreSpacing: CGFloat = 2
+    /// 自己ベストの行を出すときの上下の余白（練習モードは 16）
+    static let verticalPaddingWithBestScore: CGFloat = 8
 }
 
 extension Difficulty {
