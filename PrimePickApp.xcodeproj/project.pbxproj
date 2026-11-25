@@ -64,6 +64,7 @@
 		9476AC6CD951A0C610B44E8D /* TimeAttackRecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8CA0B16FB2CCFDE804B75F /* TimeAttackRecordStore.swift */; };
 		CBF99127AD8FB4BB1E484BB7 /* TimeAttackComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C34E222BF2EF9BDF535D5D1 /* TimeAttackComparison.swift */; };
 		9D91F3108967B5372ABF1BA7 /* TimeAttackPlayHistoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7E2776099B3618B8CAE556 /* TimeAttackPlayHistoryStore.swift */; };
+		ABB4F70E73F4EA41FEA06AB0 /* TimeAttackBestScores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E82C4DBE2D223520B217172 /* TimeAttackBestScores.swift */; };
 		DF76744B95D4296AADB90DF5 /* FeedbackSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2255FA19A0D762B98983840 /* FeedbackSettings.swift */; };
 		9C1DAE096C31A691502E2D63 /* HomeSelectionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE167AFD95E29852CC9EE39 /* HomeSelectionStore.swift */; };
 		2AC96767B5F2678C52C4C89C /* DailyChallengeDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C4C89C7BA5971AD860B28F /* DailyChallengeDay.swift */; };
@@ -112,6 +113,7 @@
 		0E8A040B62DE7086FBD62164 /* TimeAttackRecordStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C9B59A5BCDF3D76AAD9333 /* TimeAttackRecordStoreTests.swift */; };
 		A398C6586D4E77D7CEAACF1B /* TimeAttackComparisonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697D825FE06B0AD17CEF4FC4 /* TimeAttackComparisonTests.swift */; };
 		E57193B0462099B586DA2CE7 /* TimeAttackPlayHistoryStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966B83241F2754A19AD62167 /* TimeAttackPlayHistoryStoreTests.swift */; };
+		BE855544802389B7AEC27CAB /* TimeAttackBestScoresTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D305BE696D7EFC7BEE27081 /* TimeAttackBestScoresTests.swift */; };
 		117BE4DF958A398773294A04 /* FeedbackSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831199D9D869DE1A3736E7C9 /* FeedbackSettingsTests.swift */; };
 		1DD9AD91139356853A96A10E /* HomeSelectionStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763679E8AEF9F4C00C9370AA /* HomeSelectionStoreTests.swift */; };
 		5DCD1C6FE87124B5F6E145F5 /* DailyChallengeDayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E145F517236FCAF0FA950A /* DailyChallengeDayTests.swift */; };
@@ -236,6 +238,7 @@
 		3B8CA0B16FB2CCFDE804B75F /* TimeAttackRecordStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordStore.swift; sourceTree = "<group>"; };
 		3C34E222BF2EF9BDF535D5D1 /* TimeAttackComparison.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackComparison.swift; sourceTree = "<group>"; };
 		AB7E2776099B3618B8CAE556 /* TimeAttackPlayHistoryStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackPlayHistoryStore.swift; sourceTree = "<group>"; };
+		5E82C4DBE2D223520B217172 /* TimeAttackBestScores.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackBestScores.swift; sourceTree = "<group>"; };
 		C2255FA19A0D762B98983840 /* FeedbackSettings.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackSettings.swift; sourceTree = "<group>"; };
 		1BE167AFD95E29852CC9EE39 /* HomeSelectionStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeSelectionStore.swift; sourceTree = "<group>"; };
 		52C4C89C7BA5971AD860B28F /* DailyChallengeDay.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeDay.swift; sourceTree = "<group>"; };
@@ -246,6 +249,7 @@
 		94C9B59A5BCDF3D76AAD9333 /* TimeAttackRecordStoreTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordStoreTests.swift; sourceTree = "<group>"; };
 		697D825FE06B0AD17CEF4FC4 /* TimeAttackComparisonTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackComparisonTests.swift; sourceTree = "<group>"; };
 		966B83241F2754A19AD62167 /* TimeAttackPlayHistoryStoreTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackPlayHistoryStoreTests.swift; sourceTree = "<group>"; };
+		9D305BE696D7EFC7BEE27081 /* TimeAttackBestScoresTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackBestScoresTests.swift; sourceTree = "<group>"; };
 		831199D9D869DE1A3736E7C9 /* FeedbackSettingsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackSettingsTests.swift; sourceTree = "<group>"; };
 		763679E8AEF9F4C00C9370AA /* HomeSelectionStoreTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HomeSelectionStoreTests.swift; sourceTree = "<group>"; };
 		F6E145F517236FCAF0FA950A /* DailyChallengeDayTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeDayTests.swift; sourceTree = "<group>"; };
@@ -600,6 +604,7 @@
 				3B8CA0B16FB2CCFDE804B75F /* TimeAttackRecordStore.swift */,
 				3C34E222BF2EF9BDF535D5D1 /* TimeAttackComparison.swift */,
 				AB7E2776099B3618B8CAE556 /* TimeAttackPlayHistoryStore.swift */,
+				5E82C4DBE2D223520B217172 /* TimeAttackBestScores.swift */,
 				C2255FA19A0D762B98983840 /* FeedbackSettings.swift */,
 				1BE167AFD95E29852CC9EE39 /* HomeSelectionStore.swift */,
 				52C4C89C7BA5971AD860B28F /* DailyChallengeDay.swift */,
@@ -659,6 +664,7 @@
 				94C9B59A5BCDF3D76AAD9333 /* TimeAttackRecordStoreTests.swift */,
 				697D825FE06B0AD17CEF4FC4 /* TimeAttackComparisonTests.swift */,
 				966B83241F2754A19AD62167 /* TimeAttackPlayHistoryStoreTests.swift */,
+				9D305BE696D7EFC7BEE27081 /* TimeAttackBestScoresTests.swift */,
 				831199D9D869DE1A3736E7C9 /* FeedbackSettingsTests.swift */,
 				763679E8AEF9F4C00C9370AA /* HomeSelectionStoreTests.swift */,
 				F6E145F517236FCAF0FA950A /* DailyChallengeDayTests.swift */,
@@ -943,6 +949,7 @@
 				9476AC6CD951A0C610B44E8D /* TimeAttackRecordStore.swift in Sources */,
 				CBF99127AD8FB4BB1E484BB7 /* TimeAttackComparison.swift in Sources */,
 				9D91F3108967B5372ABF1BA7 /* TimeAttackPlayHistoryStore.swift in Sources */,
+				ABB4F70E73F4EA41FEA06AB0 /* TimeAttackBestScores.swift in Sources */,
 				DF76744B95D4296AADB90DF5 /* FeedbackSettings.swift in Sources */,
 				9C1DAE096C31A691502E2D63 /* HomeSelectionStore.swift in Sources */,
 				2AC96767B5F2678C52C4C89C /* DailyChallengeDay.swift in Sources */,
@@ -1005,6 +1012,7 @@
 				0E8A040B62DE7086FBD62164 /* TimeAttackRecordStoreTests.swift in Sources */,
 				A398C6586D4E77D7CEAACF1B /* TimeAttackComparisonTests.swift in Sources */,
 				E57193B0462099B586DA2CE7 /* TimeAttackPlayHistoryStoreTests.swift in Sources */,
+				BE855544802389B7AEC27CAB /* TimeAttackBestScoresTests.swift in Sources */,
 				117BE4DF958A398773294A04 /* FeedbackSettingsTests.swift in Sources */,
 				1DD9AD91139356853A96A10E /* HomeSelectionStoreTests.swift in Sources */,
 				5DCD1C6FE87124B5F6E145F5 /* DailyChallengeDayTests.swift in Sources */,
