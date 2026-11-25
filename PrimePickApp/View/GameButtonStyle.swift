@@ -155,7 +155,7 @@ extension View {
 /// 進むボタンは `SoundEffect.buttonPressForward`、戻るボタンは `SoundEffect.buttonPressBack`、
 /// どちらでもないボタンは `SoundEffect.buttonPressNeutral`。触覚はどのボタンでも同じ。
 /// `NavigationLink` にも `.buttonStyle(GameButtonStyle(...))` で当てられ、画面遷移の仕組みは変えない。
-/// 撮影モード（`ScreenshotDemo`）では効果音と触覚を止める。
+/// 撮影モード（`ScreenshotDemo`）では効果音と触覚を止める。設定で振動をオフにしたときも触覚を返さない（効果音は `SoundFeedback` が止める）。
 struct GameButtonStyle: ButtonStyle {
     var appearance: GameButtonAppearance
     /// 押したときに鳴らす押下音。nil なら鳴らさない（触覚は返す）
@@ -189,7 +189,7 @@ private struct GameButtonStyleBody: View {
                     wasPressed: wasPressed,
                     isPressed: isPressed,
                     isScreenshotDemo: ScreenshotDemo.isEnabled
-                )
+                ) && FeedbackSettings.current.isHapticsEnabled
             }
             .onChange(of: configuration.isPressed) { wasPressed, isPressed in
                 guard let pressSound,

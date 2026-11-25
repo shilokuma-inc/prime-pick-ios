@@ -24,3 +24,12 @@
 - xcconfig では `//` から後ろがコメントになる。AdMob の広告ユニット ID（`ca-app-pub-…/…`）は `/` が 1 つなので切れないが、URL などを値に入れるときは注意する（2026-10-21）
 - `Tools/capture_screenshots.sh` の既定の構成は Release で、Simulator で起動する。撮影モードでは `AdEligibility` が広告 SDK を動かさないので本番の広告は読み込まないが、撮影モードを外して Release を起動しない（2026-10-21）
 - ATT ダイアログを Simulator で撮るとき、ふつうに起動すると先に UMP の説明メッセージ（Continue）が出て、タップできない環境では先に進めない。コミットしない一時的なテストで `ATTrackingManager.requestTrackingAuthorization` を呼ぶと、テストホストのアプリにダイアログが出る。ダイアログはテストが終わっても残るので、撮るたびに Simulator を再起動する。見出しは端末の言語で出るので、`simctl spawn <udid> defaults write 'Apple Global Domain' AppleLanguages` で端末の言語も切り替える（2026-10-21、PR #424）
+
+## 出題画面（QuizView）
+
+- `QuizView` で、`QuizSession.onEvent`（時間切れの `.finished(.timeUp)` は Timer から届く）の中から値型の `@State`（`isNewRecord`・`hasFinishedPlay`）に書いた値が、結果画面の `body` に届かなかった。タイムアタックで自己ベストを更新しても NEW RECORD! が出ず、記録の保存だけはできていた（iOS 26 の Simulator。develop でも同じ）。同じ `handle` から書く `timePenaltyPopup`（解答のタップから届く）と `countdownAdvancedAt`（`.tick`）は届いていて、仕組みは特定できていない。`onEvent` から結果画面に出す値は、`QuizPlayFinishState` のように参照型（`@Observable`）にまとめて `@State` で持ち、Simulator で表示まで確かめる（#554）（2026-11-26）
+
+## Simulator での確認
+
+- 撮影モードを使わずに通常の起動で画面を確かめるときは、`SIMCTL_CHILD_XCTestConfigurationFilePath=/dev/null xcrun simctl launch <udid> ml.mrs1669.PrimePickApp` で起動すると、`AdEligibility` がテスト実行中と判定し、広告の同意画面（UMP）と広告を出さない。タップは `axe`（`axe tap --label かんたん --udid <udid>`）で送れる（2026-11-26）
+- アプリが書いた UserDefaults は、アプリのデータコンテナの plist（`xcrun simctl get_app_container <udid> ml.mrs1669.PrimePickApp data` の `Library/Preferences/ml.mrs1669.PrimePickApp.plist`）にある。`xcrun simctl spawn <udid> defaults read` は別の場所を読むことがあり、アプリが書いた記録が見えなかった。記録や履歴を確かめるときはコンテナの plist を読む（2026-11-26）
