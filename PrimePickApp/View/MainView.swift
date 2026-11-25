@@ -70,12 +70,7 @@ struct MainView: View {
                     .id(route)
             }
             .navigationDestination(for: QuizSetting.self) { setting in
-                QuizView(
-                    difficulty: setting.difficulty,
-                    gameMode: setting.gameMode,
-                    questionCount: setting.questionCount,
-                    source: setting.source
-                )
+                ReplayableQuizView(setting: setting)
             }
             .toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {
