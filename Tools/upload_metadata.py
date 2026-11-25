@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""App Store の名前・サブタイトル・説明文・キーワード・プロモーションテキスト・最新情報・URL を App Store Connect に反映する。
+"""App Store の名前・サブタイトル・説明文・キーワード・プロモーションテキスト・最新情報・URL・審査メモを App Store Connect に反映する。
 
 `AppStore/metadata/<言語>.json` と `AppStore/metadata/shared.json` を読み、
 対象バージョンの言語ごとに書き込む。名前とサブタイトルはバージョンではなくアプリ情報（`appInfoLocalizations`）に
 書き込む（どちらも編集できるのは、次のバージョンを準備している間だけ）。
+審査メモ（App Review に関する情報のメモ）は言語によらない 1 つの文面で、`AppStore/metadata/review.json` から
+対象バージョンの `appStoreReviewDetails` に書き込む。連絡先とデモアカウントは扱わない（リポジトリが public なので）。
 
     python3 Tools/upload_metadata.py            # 反映する
     python3 Tools/upload_metadata.py --dry-run  # 現在値との差分だけ出す
@@ -22,7 +24,7 @@ JSON に書いていない項目（例: 省略した promotionalText）は App S
 `--export` は逆向きで、App Store Connect の現在値を JSON に書き出す。公開中の文言を正として
 リポジトリに取り込むとき（初回）や、App Store Connect 側で直接編集した内容を取り込むときに使う。
 現在値が無い言語・項目は書かず、その旨を出力する（勝手に説明文を作らない）。
-最新情報は、書き出し元のバージョンの番号を `whatsNew.version` に入れて書く。
+最新情報は、書き出し元のバージョンの番号を `whatsNew.version` に入れて書く。審査メモは `review.json` に書く。
 
 PyJWT が要る（--check では不要）: `python3 -m pip install pyjwt cryptography`
 """
@@ -61,6 +63,18 @@ INFO_LIMITS = {
 
 #: 言語を追加したアプリ情報に、主言語から写す項目（空のままだと審査に出せない）
 INFO_COPIED_FROM_PRIMARY = ("privacyPolicyUrl", "privacyChoicesUrl")
+
+#: 審査メモ（App Review に関する情報のメモ）のファイル。言語によらない 1 つの文面を `notes` に書く
+REVIEW_FILE = "review.json"
+
+#: 審査メモの上限（App Store Connect の画面の上限）
+REVIEW_NOTES_LIMIT = 4000
+
+
+def find_emoji(value: str) -> list[str]:
+    """絵文字（U+10000 以降の文字。🟩 など）。App Store Connect が INVALID_CHARACTERS で弾く（#542）。
+    ■（U+25A0）のような記号は通る"""
+    return sorted({character for character in value if ord(character) > 0xFFFF})
 
 
 def load_shared(directory: Path) -> tuple[dict[str, str], list[str]]:
@@ -163,16 +177,37 @@ def load(directory: Path, target: Language, shared: dict[str, str]) -> tuple[dic
         if len(value) > limit:
             problems.append(f"{path}: {field} が {len(value)} 字あります（上限 {limit} 字）")
 
-    # 絵文字（U+10000 以降の文字。🟩 など）は App Store Connect が INVALID_CHARACTERS で弾く（#542）。
-    # ■（U+25A0）のような記号は通る
     for field, value in {**info_attributes, **attributes}.items():
-        emoji = sorted({character for character in value if ord(character) > 0xFFFF})
+        emoji = find_emoji(value)
         if emoji:
             problems.append(f"{path}: {field} に絵文字があります（{' '.join(emoji)}）")
 
     if problems:
         return None, {}, None, problems
     return {**attributes, **shared}, info_attributes, whats_new_version, []
+
+
+def load_review(directory: Path) -> tuple[str | None, list[str]]:
+    """審査メモ（`review.json` の `notes`）を読む。ファイルが無ければ None（App Store Connect 側の値を残す）。"""
+    path = directory / REVIEW_FILE
+    if not path.is_file():
+        return None, []
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as error:
+        return None, [f"{path} が JSON として読めません: {error}"]
+    notes = raw.get("notes") if isinstance(raw, dict) else None
+    if not (isinstance(notes, str) and notes.strip()):
+        return None, [f"{path}: notes が空です（使わないならファイルごと消す）"]
+
+    problems = []
+    if len(notes) > REVIEW_NOTES_LIMIT:
+        problems.append(f"{path}: notes が {len(notes)} 字あります（上限 {REVIEW_NOTES_LIMIT} 字）")
+    # 審査メモで弾かれるかは確かめていないが、掲載文と同じく絵文字は使わない
+    emoji = find_emoji(notes)
+    if emoji:
+        problems.append(f"{path}: notes に絵文字があります（{' '.join(emoji)}）")
+    return (None, problems) if problems else (notes, [])
 
 
 def describe_changes(current: dict, new: dict[str, str]) -> list[str]:
@@ -295,6 +330,17 @@ def export(directory: Path, targets: list[Language], available: dict[str, dict],
     return written
 
 
+def export_review_notes(directory: Path, detail: dict | None) -> None:
+    """審査メモの現在値を `review.json` に書き出す。現在値が無ければ書かずに報告する。"""
+    notes = ((detail or {}).get("attributes") or {}).get("notes") or ""
+    if not notes.strip():
+        print("  審査メモ: 現在値が無いので書き出しません")
+        return
+    path = directory / REVIEW_FILE
+    _write_json(path, {"notes": notes})
+    print(f"  審査メモ: {path} に書き出し（notes {len(notes)} 字）")
+
+
 def make_client(args: argparse.Namespace, dry_run: bool):
     """認証情報がそろっているか確かめてから App Store Connect のクライアントを作る。"""
     missing_key = [
@@ -355,10 +401,13 @@ def main() -> int:
         info_available = client.app_info_localization_entries(app_info["id"]) if app_info else {}
         written = export(args.metadata_dir, targets, client.localization_entries(version["id"]), version_string,
                          info_available)
+        export_review_notes(args.metadata_dir, client.review_detail(version["id"]))
         print(f"書き出し: {written} 言語")
         return 0
 
     shared, problems = load_shared(args.metadata_dir)
+    review_notes, review_problems = load_review(args.metadata_dir)
+    problems.extend(review_problems)
     entries: list[tuple[Language, dict[str, str]]] = []
     #: 言語 → アプリ情報に書く名前・サブタイトル（書いてある言語だけ）
     info_entries: dict[str, dict[str, str]] = {}
@@ -382,6 +431,8 @@ def main() -> int:
     ] + [
         f"{language}.whatsNew.version" for language, version in whats_new_versions.items() if "TODO:" in version
     ]
+    if review_notes and "TODO:" in review_notes:
+        placeholders.append(f"{REVIEW_FILE} の notes")
     if placeholders and not args.check:
         raise SystemExit(f"テンプレートの仮の文言（TODO:）が残っています: {', '.join(placeholders)}")
 
@@ -396,6 +447,8 @@ def main() -> int:
             version_note = (f"（whatsNew は {whats_new_versions[target.language]} 向け）"
                             if target.language in whats_new_versions else "")
             print(f"  {target.language}: {counts}{version_note}")
+        if review_notes is not None:
+            print(f"  審査メモ: notes {len(review_notes)} 字")
         print(f"問題なし: {len(entries)} 言語")
         return 0
 
@@ -515,11 +568,14 @@ def main() -> int:
                 print(f"    失敗: {error}")
                 failures.append(label)
 
+    if review_notes is not None:
+        failures.extend(write_review_notes(client, args, version, review_notes))
+
     print(f"完了: {len(plan)} 言語")
     if skipped:
         print(f"飛ばした言語: {', '.join(skipped)}")
     if failures:
-        print("書き込めなかった言語:")
+        print("書き込めなかったもの:")
         for line in failures:
             print(f"  - {line}")
         return 1
@@ -585,6 +641,47 @@ def write_app_info(client, args: argparse.Namespace, app: dict, app_info: dict |
             if existing is None:
                 create_failed.add(target.language)
     return failures, create_failed
+
+
+def write_review_notes(client, args: argparse.Namespace, version: dict, notes: str) -> list[str]:
+    """審査メモを、反映先のバージョンの App Review に関する情報（`appStoreReviewDetails`）に書く。
+    書き込めなかったものを返す。
+
+    App Review に関する情報がまだ無いバージョンでは作らない。連絡先が空のまま作ると、
+    App Store Connect の画面で連絡先を入れ直すまで審査に出せないため。
+    """
+    from app_store_connect import ApiError
+
+    label = "審査メモ"
+    try:
+        detail = client.review_detail(version["id"])
+    except ApiError as error:
+        # 言語の書き込みは済んでいるので、止めずにほかの失敗と一緒に報告する
+        print(f"  {label}: 現在値を読めませんでした: {error}")
+        return [label]
+    if detail is None:
+        print(f"  {label}: このバージョンには App Review に関する情報がまだありません。"
+              "App Store Connect で連絡先を入れて保存してから実行してください")
+        return [f"{label}（App Review に関する情報がありません）"]
+
+    changes = describe_changes(detail.get("attributes") or {}, {"notes": notes})
+    if not changes:
+        print(f"  {label}: 変更なし")
+        return []
+    print(f"  {label}: {'書き込む予定' if args.dry_run else '書き込み'}")
+    for line in changes:
+        print(line)
+    if args.dry_run:
+        return []
+    try:
+        client.patch(
+            f"/v1/appStoreReviewDetails/{detail['id']}",
+            {"data": {"type": "appStoreReviewDetails", "id": detail["id"], "attributes": {"notes": notes}}},
+        )
+    except ApiError as error:
+        print(f"    失敗: {error}")
+        return [label]
+    return []
 
 
 if __name__ == "__main__":

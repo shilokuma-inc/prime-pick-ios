@@ -65,7 +65,7 @@ xcodebuild test -project PrimePickApp.xcodeproj -scheme PrimePickApp -destinatio
 | ワークフロー | 反映するもの | 元ネタ |
 | --- | --- | --- |
 | `Screenshots/App Store` | スクリーンショット（iPhone 6.3 inch / iPhone Duo / iPhone 6.9 inch / iPad 13 inch × `AppStore/languages.json` の言語）。**`release/**` を選んで実行したときだけ撮る** | `AppStore/screenshots.json` / `AppStore/languages.json` / `AppStore/app.json` |
-| `Metadata/App Store` | 名前・サブタイトル（アプリ情報）・説明文・キーワード・プロモーションテキスト・最新情報・URL。`mode` は `dry-run`（既定・差分表示）/ `upload` / `export`（現在値を JSON に書き出す） | `AppStore/metadata/*.json` |
+| `Metadata/App Store` | 名前・サブタイトル（アプリ情報）・説明文・キーワード・プロモーションテキスト・最新情報・URL・審査メモ。`mode` は `dry-run`（既定・差分表示）/ `upload` / `export`（現在値を JSON に書き出す） | `AppStore/metadata/*.json` |
 | `Creative assets/App Store` | iOS 27 以降の App Store のプロダクトページのヘッダー（3840x1646）と検索結果（3840x2560）。`mode` は `dry-run`（既定）/ `upload` / `ref-data` / `cleanup-dry-run` / `cleanup`（配置していない古い画像を消す） | `AppStore/creative_assets.json` / `AppStore/creative/<言語>/` |
 | `Verify/App Store metadata` | PR で `AppStore/**` / `Tools/**` を変えたとき、文字数と設定ファイルの整合を検査する | 同上 |
 
@@ -75,6 +75,7 @@ xcodebuild test -project PrimePickApp.xcodeproj -scheme PrimePickApp -destinatio
 - 手元で撮るなら `Tools/capture_screenshots.sh APP_IPHONE_67 [ja,en]`（出力は `build/screenshots/`）。寸法検証（`Tools/verify_screenshots.py`）まで通る。6.3 inch は `python3 Tools/derive_screenshots.py --display-type APP_IPHONE_61 --screenshots-dir build/screenshots`（Pillow が要る）。
 - 説明文は App Store Connect の現在値が正。書き換えるときは `mode: export` で取り込んだ JSON を直して PR にし、`dry-run` で差分を確かめてから `upload` する。`python3 Tools/upload_metadata.py --check` で文字数の上限を手元でも確かめられる。
 - 「このバージョンの最新情報」は `AppStore/metadata/<言語>.json`（10 言語とも）の `whatsNew` に `{"version": "1.3.0", "text": "…"}` の形で書く。`version` が反映先のバージョンと一致するときだけ書き込むので、リリースごとに両方を書き換える。
+- 審査メモ（「App Review に関する情報」の「メモ」）は `AppStore/metadata/review.json` の `notes`（言語によらない 1 つの文面・上限 4000 字）。バージョンを問わず書き込むので、リリースのたびに中身が今のアプリに合っているか見直す。リポジトリが public なので、連絡先（氏名・電話番号・メールアドレス）とデモアカウントはツールで扱わず、App Store Connect で手で入れる。App Review に関する情報がまだ無いバージョン（連絡先を一度も保存していない）には書き込まない（#562）。
 - クリエイティブアセットの元は `AppStore/creative/src/creative.html`。6.9 inch のスクリーンショットを撮ってから `Tools/render_creative_assets.sh build/screenshots/APP_IPHONE_67` で書き出し（Google Chrome を使う。アプリ名は言語ごとのホーム画面の名前を `InfoPlist.xcstrings` から読む）、画像もコミットする。`ref-data` → `dry-run` → `upload` の順に流し、App Store Connect のプレビューで iPhone / iPad の見え方を確かめてから審査に出す。
   Apple 側の処理が遅い日は、`upload` が処理の待ち（30 分）で切れることがある。そのまま流し直せば、上げ直さずに続きから待つ（参照名に画像のハッシュを入れている）。何時間たっても終わらないときは、入力 `reupload_pending` をオンにして、処理中のまま止まった画像を上げ直す。
   描き直して `upload` すると、外した古い画像は Asset Library に残る。`mode: cleanup-dry-run` で消す画像の一覧を確かめてから `mode: cleanup` で消す。消すのは、参照名が `creative_assets.json` の `referenceName` ＋ 半角スペースで始まり、どのバージョンにも配置しておらず、処理中・審査中でない画像だけ。消した画像は戻せないので、一覧に配置中の画像や手で上げた画像が出ていたら消さない（#502）。
@@ -85,9 +86,10 @@ xcodebuild test -project PrimePickApp.xcodeproj -scheme PrimePickApp -destinatio
 
 ## リリース
 
-1. `develop` の `MARKETING_VERSION`（`project.pbxproj`）がリリースするバージョンか確かめ、`AppStore/metadata/ja.json` の説明文・`whatsNew` を PR で直す
+1. `develop` の `MARKETING_VERSION`（`project.pbxproj`）がリリースするバージョンか確かめ、`AppStore/metadata/ja.json` の説明文・`whatsNew` と審査メモ（`review.json`）を PR で直す
 2. `develop` から `release/<バージョン>` を切って push する（`Upload` が TestFlight にビルドを上げる。ビルド番号は `upload.yml` が日時で決める）
 3. `release/<バージョン>` を選んで `Screenshots/App Store` → `Metadata/App Store`（`dry-run` → `upload`）→ `Creative assets/App Store`（`dry-run` → `upload`）を流す
+   - `Metadata/App Store` は審査メモも書くので、そのバージョンに「App Review に関する情報」（連絡先）が保存されている必要がある。ふつうは前のバージョンから引き継がれる。`dry-run` で「App Review に関する情報がまだありません」と出たら、先に App Store Connect で連絡先を入れて保存する
 4. 人が App Store Connect でする: 「App のプライバシー」などの手入力・ビルドの選択・審査への提出（広告まわりは `docs/ads-release-checklist.md`）
 5. 配信されたら、`release/<バージョン>` の先頭（提出したビルドのコミット）にタグ `v<バージョン>` を打って GitHub Release を作り、`release/<バージョン>` を `main` に反映する PR を出す（#391・#392）。`develop` に無い変更があれば `develop` にも戻す
 
