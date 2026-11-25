@@ -25,6 +25,8 @@ struct QuizResultView: View {
     var isNewRecord: Bool = false
     /// 獲得点・減点の内訳
     var breakdown = ScoreBreakdown()
+    /// 「もう一度」で同じ設定のプレイを始める。nil ならボタンを出さない（#547）
+    var onPlayAgain: (() -> Void)?
 
     var body: some View {
         // 広告はカードの下に並べ、カードに重ねない。撮影モードなどで広告が無いときは今までと同じ全画面のレイアウトになる
@@ -60,7 +62,7 @@ struct QuizResultView: View {
                     }
                     .scrollBounceBehavior(.basedOnSize)
 
-                    returnToTitleButton
+                    buttons
                 }
                 .padding(20)
                 .frame(width: geometry.size.width * 5 / 6)
@@ -162,23 +164,66 @@ struct QuizResultView: View {
         }
     }
 
+    /// 「もう一度」と「タイトルに戻る」。「もう一度」があるときはそちらを主ボタンにし、「タイトルに戻る」は低く控えめにする
+    private var buttons: some View {
+        VStack(spacing: 12) {
+            if let onPlayAgain {
+                playAgainButton(action: onPlayAgain)
+            }
+
+            returnToTitleButton
+        }
+    }
+
+    /// 同じ設定でもう一度遊ぶ主ボタン。モードの色（練習は緑〜水色、タイムアタックはオレンジ〜赤）で塗る
+    private func playAgainButton(action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Label("Play Again", systemImage: "arrow.counterclockwise")
+                .appFont(.number(size: 24))
+                .foregroundStyle(Color.white)
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
+                .frame(maxWidth: .infinity)
+                .frame(height: Self.primaryButtonHeight)
+                .overlay(
+                    RoundedRectangle(cornerRadius: GameButtonAppearance.defaultCornerRadius, style: .continuous)
+                        .strokeBorder(Color.white.opacity(0.7), lineWidth: 2)
+                )
+        }
+        .buttonStyle(
+            GameButtonStyle(
+                appearance: GameButtonAppearance(colors: gameMode.themeColors),
+                pressSound: Self.playAgainPressSound
+            )
+        )
+    }
+
     private var returnToTitleButton: some View {
         Button {
             dismiss()
         } label: {
             Text("Return to Title")
-                .appFont(.number(size: 24))
+                .appFont(.number(size: onPlayAgain == nil ? 24 : 20))
                 .foregroundStyle(Color.primary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
                 .frame(maxWidth: .infinity)
-                .frame(height: 60)
+                .frame(height: onPlayAgain == nil ? Self.primaryButtonHeight : Self.secondaryButtonHeight)
                 .overlay(
                     RoundedRectangle(cornerRadius: GameButtonAppearance.defaultCornerRadius, style: .continuous)
-                        .strokeBorder(Color.primary, lineWidth: 3)
+                        .strokeBorder(Color.primary, lineWidth: onPlayAgain == nil ? 3 : 2)
                 )
         }
         .buttonStyle(GameButtonStyle(appearance: .neutral(), pressSound: Self.returnToTitlePressSound))
     }
 
+    /// 主ボタンの高さ（「もう一度」。無いときの「タイトルに戻る」）
+    static let primaryButtonHeight: CGFloat = 60
+    /// 「もう一度」の下に置く「タイトルに戻る」の高さ。主ボタンより低くし、2 つ並べても結果を読む場所を狭めすぎない
+    static let secondaryButtonHeight: CGFloat = 48
+
+    /// 「もう一度」の押下音。新しいプレイへ進むボタンなので、進む押下音にする
+    static let playAgainPressSound: SoundEffect = .buttonPressForward
     /// 「タイトルに戻る」の押下音。戻るボタンなので、戻る押下音にする
     static let returnToTitlePressSound: SoundEffect = .buttonPressBack
 
@@ -216,7 +261,8 @@ struct QuizResultView: View {
         answerRecords: [],
         gameMode: .timeAttack(.thirtySeconds),
         isNewRecord: true,
-        breakdown: ScoreBreakdown(correctPoints: 1_400, comboBonus: 780, speedBonus: 600, penalty: 300)
+        breakdown: ScoreBreakdown(correctPoints: 1_400, comboBonus: 780, speedBonus: 600, penalty: 300),
+        onPlayAgain: {}
     )
 }
 
