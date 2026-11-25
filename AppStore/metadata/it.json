@@ -22,7 +22,7 @@
     "math"
   ],
   "whatsNew": {
-    "version": "1.4.0",
-    "text": "Grande aggiornamento:\n• L’app ora è disponibile in 10 lingue, tra cui l’italiano\n• In italiano, Prime Pick diventa «Primo o no?»\n• Condividi il risultato della sfida del giorno, come testo (griglia di emoji) o come immagine\n• Promemoria della sfida del giorno: ricevi una notifica nei giorni in cui non hai ancora giocato. Attivalo e scegli l’orario nelle Impostazioni"
+    "version": "1.5.0",
+    "text": "• Nuovo pulsante «Gioca ancora» nella schermata dei risultati: inizia subito un’altra partita con le stesse impostazioni\n• In Contro il tempo, i risultati mostrano quanto manca al tuo record personale, la tua posizione nei record e la differenza con la partita precedente\n• Nella schermata Record puoi vedere in un grafico l’andamento del punteggio per ogni limite di tempo\n• Se scegli Contro il tempo, ogni pulsante di difficoltà mostra il tuo record personale\n• L’app ricorda l’ultima modalità e il numero di domande che hai scelto\n• Nelle Impostazioni puoi disattivare separatamente gli effetti sonori e la vibrazione\n• Risolto un problema per cui a volte «NUOVO RECORD!» non compariva dopo aver battuto il record personale in Contro il tempo"
   }
 }

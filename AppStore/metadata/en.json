@@ -23,7 +23,7 @@
     "iq"
   ],
   "whatsNew": {
-    "version": "1.4.0",
-    "text": "• Prime Pick has a new name: “Prime or Not?” It's the same app, and your records and streaks carry over.\n• Now in 10 languages: English, Japanese, Simplified Chinese, Traditional Chinese, Korean, Spanish, French, German, Italian and Portuguese (Brazil).\n• Share your Daily Challenge result as an emoji grid and an image card. The day's numbers stay hidden, so there are no spoilers for your friends.\n• Get a reminder on days you haven't played the Daily Challenge yet. Turn it on and pick the time in Settings."
+    "version": "1.5.0",
+    "text": "• New “Play Again” button on the results screen: start the next round with the same settings right away.\n• Time Attack results now show how far you are from your personal best, your rank in your records, and the change from your last play.\n• See your score trend for each time limit as a graph on the Records screen.\n• With Time Attack selected, each difficulty button shows your personal best.\n• The app now remembers your last mode and number of questions.\n• Turn sound effects and vibration off separately in Settings.\n• Fixed an issue where “NEW RECORD!” sometimes didn't appear after beating your personal best in Time Attack."
   }
 }

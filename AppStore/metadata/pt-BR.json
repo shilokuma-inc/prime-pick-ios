@@ -23,7 +23,7 @@
     "math"
   ],
   "whatsNew": {
-    "version": "1.4.0",
-    "text": "・Agora em português! O app está disponível em 10 idiomas\n・Nome novo: Será primo?\n・Agora você pode compartilhar o resultado do Desafio do dia com um texto de quadradinhos coloridos e uma imagem. Os números não aparecem, então as respostas não são reveladas\n・Lembrete do Desafio do dia: avisamos nos dias em que você ainda não jogou. Ative e escolha o horário em Ajustes"
+    "version": "1.5.0",
+    "text": "・Novo botão “Jogar de novo” na tela de resultados: comece outra partida com as mesmas configurações na hora\n・No Contra o Tempo, o resultado mostra quanto falta para o seu recorde pessoal, sua posição nos recordes e a diferença em relação à partida anterior\n・Na tela Recordes, veja em um gráfico a evolução da sua pontuação em cada limite de tempo\n・Ao escolher Contra o Tempo, cada botão de dificuldade mostra o seu recorde pessoal\n・O app lembra o último modo e o número de perguntas que você escolheu\n・Agora dá para desligar os efeitos sonoros e a vibração separadamente em Ajustes\n・Corrigimos um problema em que “NOVO RECORDE!” às vezes não aparecia ao bater o seu recorde pessoal no Contra o Tempo"
   }
 }

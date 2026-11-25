@@ -20,7 +20,7 @@
     "Mathe"
   ],
   "whatsNew": {
-    "version": "1.4.0",
-    "text": "• Jetzt in 10 Sprachen: Deutsch, Englisch, Japanisch, Chinesisch (vereinfacht und traditionell), Koreanisch, Spanisch, Französisch, Italienisch und Portugiesisch (Brasilien)\n• Neuer Name in jeder Sprache – auf Deutsch heißt die App jetzt „Echt prim?“\n• Tagesquiz: Teile dein Ergebnis als kurzen Text mit Emojis oder als Bildkarte\n• Erinnerung ans Tagesquiz: Auf Wunsch erinnern wir dich an Tagen, an denen du noch nicht gespielt hast. Einschalten und Uhrzeit wählen in den Einstellungen"
+    "version": "1.5.0",
+    "text": "• Neue Schaltfläche „Nochmal spielen“ auf dem Ergebnisbildschirm: Starte sofort eine neue Runde mit denselben Einstellungen\n• In der Blitzrunde zeigt das Ergebnis den Abstand zu deiner Bestleistung, deinen Platz in deinen Rekorden und den Unterschied zur letzten Runde\n• Unter „Rekorde“ siehst du den Verlauf deiner Punktzahl für jedes Zeitlimit als Diagramm\n• Wenn du die Blitzrunde wählst, zeigt jede Schwierigkeitsstufe deine Bestleistung\n• Die App merkt sich den zuletzt gewählten Modus und die Anzahl der Fragen\n• In den Einstellungen kannst du Soundeffekte und Vibration getrennt ausschalten\n• Behoben: „NEUER REKORD!“ wurde in der Blitzrunde manchmal nicht angezeigt, obwohl du deine Bestleistung übertroffen hattest"
   }
 }
