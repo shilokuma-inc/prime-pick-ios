@@ -88,6 +88,7 @@
 		4F42C7A62BF7756200F92FBB /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F42C7A52BF7756200F92FBB /* ColorAssets.xcassets */; };
 		4F65A3992C01019000065A53 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F65A3982C01019000065A53 /* Difficulty.swift */; };
 		4F8BE16E2BF504BB00D7CF0E /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8BE16D2BF504BB00D7CF0E /* QuizView.swift */; };
+		4C6A7AECD6249FF77778B98C /* QuizPlayFinishState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8274696B30E8B825B4D2741F /* QuizPlayFinishState.swift */; };
 		4F8DC1842C08D66200247F62 /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8DC1832C08D66200247F62 /* QuizResultView.swift */; };
 		4EF440389EF9BC773340586D /* QuizReviewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3340586D257B5D85E915175C /* QuizReviewList.swift */; };
 		4F8DC1872C08F56000247F62 /* QuizContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8DC1862C08F56000247F62 /* QuizContentView.swift */; };
@@ -248,6 +249,7 @@
 		4F42C7A52BF7756200F92FBB /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
 		4F65A3982C01019000065A53 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
 		4F8BE16D2BF504BB00D7CF0E /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
+		8274696B30E8B825B4D2741F /* QuizPlayFinishState.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizPlayFinishState.swift; sourceTree = "<group>"; };
 		4F8DC1832C08D66200247F62 /* QuizResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultView.swift; sourceTree = "<group>"; };
 		3340586D257B5D85E915175C /* QuizReviewList.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizReviewList.swift; sourceTree = "<group>"; };
 		4F8DC1862C08F56000247F62 /* QuizContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizContentView.swift; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 			isa = PBXGroup;
 			children = (
 				4F8BE16D2BF504BB00D7CF0E /* QuizView.swift */,
+				8274696B30E8B825B4D2741F /* QuizPlayFinishState.swift */,
 				4F8DC1852C08F53D00247F62 /* QuizContent */,
 				4F2239232BFCEEF0004C71A6 /* QuizButtonView.swift */,
 				4F8DC1832C08D66200247F62 /* QuizResultView.swift */,
@@ -866,6 +869,7 @@
 				7D9C3E4A1F6B8C0D5E2A3F4B /* GameButtonStyle.swift in Sources */,
 				D409B1000000000000000001 /* AppFont.swift in Sources */,
 				4F8BE16E2BF504BB00D7CF0E /* QuizView.swift in Sources */,
+				4C6A7AECD6249FF77778B98C /* QuizPlayFinishState.swift in Sources */,
 				4F8DC1872C08F56000247F62 /* QuizContentView.swift in Sources */,
 				4F2239222BFC9DEB004C71A6 /* QuizTimeLimitView.swift in Sources */,
 				4F0C82822BC8247500E1480E /* PrimePickApp.swift in Sources */,
