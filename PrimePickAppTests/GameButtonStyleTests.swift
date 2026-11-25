@@ -66,7 +66,8 @@ final class GameButtonStyleTests: XCTestCase {
             ("難易度ボタン", SelectDifficultyButtonView.pressSound),
             ("今日のチャレンジのカード", MainView.dailyChallengeCardPressSound),
             ("確認カードの Start", TimeAttackStartConfirmationView.startPressSound),
-            ("デイリーの結果のタイムアタックで遊ぶ", DailyChallengeResultView.playTimeAttackPressSound)
+            ("デイリーの結果のタイムアタックで遊ぶ", DailyChallengeResultView.playTimeAttackPressSound),
+            ("結果画面のもう一度", QuizResultView.playAgainPressSound)
         ]
         let back: [(button: String, sound: SoundEffect)] = [
             ("確認カードの Quit", TimeAttackStartConfirmationView.quitPressSound),

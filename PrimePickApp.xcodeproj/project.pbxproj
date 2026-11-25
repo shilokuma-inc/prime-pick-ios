@@ -59,6 +59,7 @@
 		E94D74D7DDEA78066B95053C /* TimeAttackRecordsViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F277C050F57E0DCBAE1F7DF /* TimeAttackRecordsViewTests.swift */; };
 		59C78DD84ADBF76145796C47 /* DailyChallengeResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45796C471F1DF917DFC6B1F0 /* DailyChallengeResultTests.swift */; };
 		7A1C0E2F4B6D8A9C0E1F2A3B /* QuizViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1C0E2F4B6D8A9C0E1F2A3C /* QuizViewTests.swift */; };
+		1B2B634D59E595A36D7BF91A /* ReplayableQuizViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD695AF82392026760D05125 /* ReplayableQuizViewTests.swift */; };
 		9476AC6CD951A0C610B44E8D /* TimeAttackRecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8CA0B16FB2CCFDE804B75F /* TimeAttackRecordStore.swift */; };
 		9C1DAE096C31A691502E2D63 /* HomeSelectionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE167AFD95E29852CC9EE39 /* HomeSelectionStore.swift */; };
 		2AC96767B5F2678C52C4C89C /* DailyChallengeDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C4C89C7BA5971AD860B28F /* DailyChallengeDay.swift */; };
@@ -89,6 +90,7 @@
 		4F42C7A62BF7756200F92FBB /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F42C7A52BF7756200F92FBB /* ColorAssets.xcassets */; };
 		4F65A3992C01019000065A53 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F65A3982C01019000065A53 /* Difficulty.swift */; };
 		4F8BE16E2BF504BB00D7CF0E /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8BE16D2BF504BB00D7CF0E /* QuizView.swift */; };
+		7966995ADC42DDF97599A441 /* ReplayableQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BAFE8B5A883C5F6CB0D10E /* ReplayableQuizView.swift */; };
 		4F8DC1842C08D66200247F62 /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8DC1832C08D66200247F62 /* QuizResultView.swift */; };
 		4EF440389EF9BC773340586D /* QuizReviewList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3340586D257B5D85E915175C /* QuizReviewList.swift */; };
 		4F8DC1872C08F56000247F62 /* QuizContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8DC1862C08F56000247F62 /* QuizContentView.swift */; };
@@ -252,6 +254,7 @@
 		4F42C7A52BF7756200F92FBB /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
 		4F65A3982C01019000065A53 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
 		4F8BE16D2BF504BB00D7CF0E /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
+		B4BAFE8B5A883C5F6CB0D10E /* ReplayableQuizView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReplayableQuizView.swift; sourceTree = "<group>"; };
 		4F8DC1832C08D66200247F62 /* QuizResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultView.swift; sourceTree = "<group>"; };
 		3340586D257B5D85E915175C /* QuizReviewList.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizReviewList.swift; sourceTree = "<group>"; };
 		4F8DC1862C08F56000247F62 /* QuizContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizContentView.swift; sourceTree = "<group>"; };
@@ -325,6 +328,7 @@
 		4F277C050F57E0DCBAE1F7DF /* TimeAttackRecordsViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TimeAttackRecordsViewTests.swift; sourceTree = "<group>"; };
 		45796C471F1DF917DFC6B1F0 /* DailyChallengeResultTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DailyChallengeResultTests.swift; sourceTree = "<group>"; };
 		7A1C0E2F4B6D8A9C0E1F2A3C /* QuizViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = QuizViewTests.swift; sourceTree = "<group>"; };
+		AD695AF82392026760D05125 /* ReplayableQuizViewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReplayableQuizViewTests.swift; sourceTree = "<group>"; };
 		D381C1E2175A9F05AAB45505 /* ComboStageTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ComboStageTests.swift; sourceTree = "<group>"; };
 		D394A1000000000000000002 /* GamingHueTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GamingHueTests.swift; sourceTree = "<group>"; };
 		D409B1000000000000000004 /* AppFontTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AppFontTests.swift; sourceTree = "<group>"; };
@@ -533,6 +537,7 @@
 			isa = PBXGroup;
 			children = (
 				4F8BE16D2BF504BB00D7CF0E /* QuizView.swift */,
+				B4BAFE8B5A883C5F6CB0D10E /* ReplayableQuizView.swift */,
 				4F8DC1852C08F53D00247F62 /* QuizContent */,
 				4F2239232BFCEEF0004C71A6 /* QuizButtonView.swift */,
 				4F8DC1832C08D66200247F62 /* QuizResultView.swift */,
@@ -641,6 +646,7 @@
 				5A4E0C0A1D2B3C4D5E6F7084 /* DailyChallengeShareContentTests.swift */,
 				5A4E0C0A1D2B3C4D5E6F7088 /* DailyChallengeShareCardTests.swift */,
 				7A1C0E2F4B6D8A9C0E1F2A3C /* QuizViewTests.swift */,
+				AD695AF82392026760D05125 /* ReplayableQuizViewTests.swift */,
 				D381C1E2175A9F05AAB45505 /* ComboStageTests.swift */,
 				D394A1000000000000000002 /* GamingHueTests.swift */,
 				D409B1000000000000000004 /* AppFontTests.swift */,
@@ -872,6 +878,7 @@
 				7D9C3E4A1F6B8C0D5E2A3F4B /* GameButtonStyle.swift in Sources */,
 				D409B1000000000000000001 /* AppFont.swift in Sources */,
 				4F8BE16E2BF504BB00D7CF0E /* QuizView.swift in Sources */,
+				7966995ADC42DDF97599A441 /* ReplayableQuizView.swift in Sources */,
 				4F8DC1872C08F56000247F62 /* QuizContentView.swift in Sources */,
 				4F2239222BFC9DEB004C71A6 /* QuizTimeLimitView.swift in Sources */,
 				4F0C82822BC8247500E1480E /* PrimePickApp.swift in Sources */,
@@ -977,6 +984,7 @@
 				5A4E0C0A1D2B3C4D5E6F7083 /* DailyChallengeShareContentTests.swift in Sources */,
 				5A4E0C0A1D2B3C4D5E6F7087 /* DailyChallengeShareCardTests.swift in Sources */,
 				7A1C0E2F4B6D8A9C0E1F2A3B /* QuizViewTests.swift in Sources */,
+				1B2B634D59E595A36D7BF91A /* ReplayableQuizViewTests.swift in Sources */,
 				92E7336F125333D17ED42F74 /* ComboStageTests.swift in Sources */,
 				D394A1000000000000000001 /* GamingHueTests.swift in Sources */,
 				D409B1000000000000000003 /* AppFontTests.swift in Sources */,
