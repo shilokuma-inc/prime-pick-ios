@@ -11,6 +11,7 @@ final class TimeAttackRecordsViewTests: XCTestCase {
     private var suiteName: String!
     private var userDefaults: UserDefaults!
     private var store: TimeAttackRecordStore!
+    private var history: TimeAttackPlayHistoryStore!
 
     override func setUp() {
         super.setUp()
@@ -18,6 +19,7 @@ final class TimeAttackRecordsViewTests: XCTestCase {
         suiteName = "TimeAttackRecordsViewTests.\(UUID().uuidString)"
         userDefaults = UserDefaults(suiteName: suiteName)
         store = TimeAttackRecordStore(userDefaults: userDefaults, now: { Date(timeIntervalSince1970: 1_790_000_000) })
+        history = TimeAttackPlayHistoryStore(userDefaults: userDefaults, now: { Date(timeIntervalSince1970: 1_790_000_000) })
     }
 
     override func tearDown() {
@@ -27,7 +29,7 @@ final class TimeAttackRecordsViewTests: XCTestCase {
 
     /// 記録が無くても 15 / 30 / 60 秒の 3 枠を並べる（記録の無い枠は「—」で示す）
     func testSectionsListAllDurationsEvenWithoutRecords() {
-        let sections = TimeAttackRecordsView.sections(store: store, difficulty: .easy)
+        let sections = TimeAttackRecordsView.sections(store: store, history: history, difficulty: .easy)
 
         XCTAssertEqual(sections.map(\.duration), [.fifteenSeconds, .thirtySeconds, .sixtySeconds])
         XCTAssertTrue(sections.allSatisfy { $0.records.isEmpty })
@@ -39,12 +41,12 @@ final class TimeAttackRecordsViewTests: XCTestCase {
         store.record(score: 900, gameMode: .timeAttack(.thirtySeconds), difficulty: .hard)
         store.record(score: 1_200, gameMode: .timeAttack(.sixtySeconds), difficulty: .easy)
 
-        let hard = TimeAttackRecordsView.sections(store: store, difficulty: .hard)
+        let hard = TimeAttackRecordsView.sections(store: store, history: history, difficulty: .hard)
         XCTAssertEqual(hard[0].records, [])
         XCTAssertEqual(hard[1].records.map(\.score), [900, 500])
         XCTAssertEqual(hard[2].records, [])
 
-        let easy = TimeAttackRecordsView.sections(store: store, difficulty: .easy)
+        let easy = TimeAttackRecordsView.sections(store: store, history: history, difficulty: .easy)
         XCTAssertEqual(easy[2].records.map(\.score), [1_200])
     }
 }
